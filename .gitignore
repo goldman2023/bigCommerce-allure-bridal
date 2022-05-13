@@ -1,0 +1,8 @@
+node_modules/
+config.stencil.json
+secrets.stencil.json
+.DS_Store
+assets/dist
+*.zip
+parsed/
+meta/
