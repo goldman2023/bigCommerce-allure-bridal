@@ -6,7 +6,7 @@ import ProductDetails from '../common/product-details';
 import { defaultModal, ModalEvents } from './modal';
 import 'slick-carousel';
 import { setCarouselState, onSlickCarouselChange, onUserCarouselChange } from '../common/carousel';
-
+ 
 export default function (context) {
     const modal = defaultModal();
 

@@ -1,5 +1,5 @@
 {
-  "name": "Cornerstone",
+  "name": "Cornerstone_July_12_2022",
   "version": "6.3.0",
   "template_engine": "handlebars_v4",
   "meta": {
@@ -45,6 +45,8 @@
     "Firefox ESR"
   ],
   "settings": {
+    "workato_api_path": "https://apim.workato.com/allure/test/wedding-studio",
+    "workato_api_token": "c0bce025e1792e283cfbd229321ecc423ae60257cf462c8d262d7b10fd9e41f9",
     "hide_breadcrumbs": false,
     "hide_page_heading": false,
     "hide_category_page_heading": false,
@@ -351,7 +353,16 @@
     "checkout-paymentbuttons-paypal-color": "black",
     "checkout-paymentbuttons-paypal-shape": "rect",
     "checkout-paymentbuttons-paypal-size": "large",
-    "checkout-paymentbuttons-paypal-label": "pay"
+    "checkout-paymentbuttons-paypal-label": "pay",
+    "color-theme": "#BC8372",
+    "color-primary-button-hover": "#D0B2A9",
+    "color-border": "#D0B2A9",
+    "color-placeholder": "#D0B2A9",
+    "color-input-focus": "#695C5C",
+    "color-input-active": "#695C5C",
+    "color-text": "#282828",
+    "color-alert": "#D0B2A9",
+    "color-alert2": "#695C5C"
   },
   "read_only_files": [
     "/assets/scss/components/citadel",

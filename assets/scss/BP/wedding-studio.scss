@@ -1,0 +1,146 @@
+.page-header {
+    grid-area: header;
+    ul {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+        margin: 0;
+        gap: 20px;
+        li {
+            a {
+                text-decoration: none;
+            }
+        }
+    }
+    
+}
+.page-asidebar {
+    grid-area: asidebar;
+    ul {
+        display: flex;
+        flex-direction: column;
+        list-style-type: none;
+        margin: 0;
+        gap: 10px;
+        li {
+            a {
+                text-decoration: none;
+            }
+        }
+    }
+}
+.page-content {
+    grid-area: content;
+}
+.dressing-room--page, .manageMembers--page {
+    display: grid;
+    grid-template-areas: "asidebar header"
+    "asidebar content";
+    grid-template-columns: 1fr 3fr;
+}
+
+.manageMembers--list {
+    list-style-type: none;
+    margin: 0;
+    li {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        background: #F1EFEF;
+        padding: 30px;
+        font-size: remCalc(16px);
+        .left {
+            flex: 2;
+            .member-name {
+                font-weight: 700;
+            }
+        }
+        .right {
+            display: flex;
+        }
+    }
+    &.manageMembers--add {
+        li {
+            &:first-child {
+                position: relative;
+                cursor: pointer;
+                line-height: remCalc(40px);
+                width: 100%;
+                span {
+                    margin-left: 30px;
+                }
+                &::before {
+                    content: '+';
+                    font-size: remCalc(40px);
+                    position: absolute;
+                    top: 27px;
+                }
+                &.open {
+                    margin-bottom: 0;
+                    padding: 30px 30px 0;
+                    &::before {
+                        content: '-';
+                    }
+                }
+            }
+            &:nth-child(2) {
+                display: none;
+                padding: 0 30px 30px;
+                &.show {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+.addMember, .editMember {
+    .addMember--container, .editMember--container {
+        padding: 20px 0;
+        .addMember--inner, .editMember--inner {
+            display: flex;
+            align-items: baseline;
+            gap: 20px;
+            .form-field {
+                flex: 1;
+                input, select, button {
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
+.editMemberModal {
+    display: none;
+}
+.modal-content {
+    .editMemberModal {
+        display: block;
+        .alertBox {
+            display: none;
+        }
+    }
+}
+.manageMembers--page {
+    .alertBox {
+        display: none;
+    }
+}
+.editMember { 
+    .editMember--container {
+        max-width: 80%;
+        margin: auto;
+        .editMember--header {
+            border-bottom: 1px solid stencilColor('color-theme');
+            margin-bottom: 40px;
+            h2 {
+                color: stencilColor('color-theme');
+                font-weight: 700;
+                text-transform: uppercase;
+                margin-bottom: 10px;
+            }
+        }   
+        
+    }
+}

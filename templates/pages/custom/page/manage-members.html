@@ -1,0 +1,85 @@
+{{#partial "page"}}
+{{inject 'memberFirstName' (lang 'forms.validate.member.first_name')}}
+{{inject 'memberLastName' (lang 'forms.validate.member.last_name')}}
+{{inject 'memberEmail' (lang 'forms.validate.member.email')}}
+{{inject 'memberPhone' (lang 'forms.validate.member.phone')}}
+{{inject 'memberRole' (lang 'forms.validate.member.role')}}
+{{inject 'confirmDeleteMember' (lang 'member_management.confirm_delete')}}
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+{{~inject 'customer' customer}}
+<section class="page manageMembers--page">
+    <div class="loadingOverlay" style="display: block;"></div>
+    {{> components/pages/header page_name='manageMembers'}}
+    {{> components/pages/sidebar page_name='manageMembers'}}
+    <div class="page-content">
+        {{> components/common/alert/alert-success ''}}
+        <div class="manageMembers">
+            <h2>Manage Members</h2>
+            <div class="manageMembers--inner">
+                <ul class="manageMembers--list manageMembers--add">
+                    <li>
+                        <span>Add additional members</span>
+                    </li>
+                    <li>
+                        <div class="addMember">
+                            <div class="addMember--container">
+                                <form 
+                                    action="" 
+                                    method="post" 
+                                    name="addMember--form" 
+                                    id="addMember--form" 
+                                    class="form" 
+                                    data-member-add-form
+                                >
+                                    <div class="addMember--inner">
+                                        <div class="form-field">
+                                            <label for="first_name" class="form-label">First Name</label>
+                                            <input type="text" class="form-input" name="first_name" minlength="2">
+                                        </div>
+                                        <div class="form-field">
+                                            <label for="last_name" class="form-label">Last Name</label>
+                                            <input type="text" class="form-input" name="last_name" minlength="2">
+                                        </div>
+                                    </div>
+                                    <div class="addMember--inner">
+                                        <div class="form-field">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" class="form-input" name="email">
+                                        </div>
+                                        <div class="form-field">
+                                            <label for="phone" class="form-label">Phone</label>
+                                            <input type="number" class="form-input" name="phone" minlength="10" maxlength="10">
+                                        </div>
+                                    </div>
+    
+                                    <div class="addMember--inner">
+                                        <div class="form-field">
+                                            <label for="role" class="form-label">Role</label>
+                                            <select class="form-select" name="role" >
+                                                <option value="Member">Member</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-field">
+                                            <button type="submit" class="button button--primary"> Add Member </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="manageMembers--list manageMembers--members">
+
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+</section>
+<div class="editMemberModal">
+    {{> components/pages/manage-member/edit  }}
+</div>
+
+{{/partial}}
+
+{{> layout/base}}

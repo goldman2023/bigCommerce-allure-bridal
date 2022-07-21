@@ -1,0 +1,53 @@
+<div class="editMember">
+    <div class="loadingOverlay" style="display: block;"></div>
+    <div class="editMember--container">
+        <div class="editMember--header">
+            <h2>Edit Member</h2>
+        </div>
+        <div class="editMember--body">
+            <form 
+                action="" 
+                method="post" 
+                name="editMember--form" 
+                id="editMember--form" 
+                class="form" 
+                data-member-edit-form
+            >
+                <input type="hidden" name="bc_customer_id">
+                <div class="editMember--inner">
+                    <div class="form-field">
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input type="text" class="form-input" name="first_name" minlength="2">
+                    </div>
+                    <div class="form-field">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input type="text" class="form-input" name="last_name" minlength="2">
+                    </div>
+                </div>
+                <div class="editMember--inner">
+                    <div class="form-field">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-input" name="email">
+                    </div>
+                    <div class="form-field">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="number" class="form-input" name="phone" minlength="10" maxlength="10">
+                    </div>
+                </div>
+
+                <div class="editMember--inner">
+                    <div class="form-field">
+                        <label for="role" class="form-label">Role</label>
+                        <select class="form-select" name="role">
+                            <option value="Member">Member</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <button type="submit" class="button button--primary"> Edit Member </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</div>
