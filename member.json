@@ -1,0 +1,18 @@
+[
+    {
+        "customer_id": 2,
+        "name": "Laurie Smith",
+        "email": "L.Smith620@gmail.com",
+        "phone": "(123) 456 7890",
+        "role": "Bridesmaid",
+        "account_status": "Pending invitation"
+    },
+    {
+        "customer_id": 1,
+        "name": "Emma Bailey",
+        "email": "emma.bailey@gmail.com",
+        "phone": "(123) 456 7890",
+        "role": "Bridesmaid",
+        "account_status": "Accepted invitation"
+    }
+]

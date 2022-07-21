@@ -1,0 +1,225 @@
+body {
+    .button {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: 0.1em;
+        width: 100%;
+        max-width: 264px;
+        height: 47px;
+        background: stencilColor('color-white');
+        color: stencilColor('color-theme');
+        border: 1px solid stencilColor('color-theme');
+        &:before {
+            position: absolute;
+            display: block;
+            content: '';
+            border: 1px solid #F0EBE6;
+            border-radius: 3px;
+            height: 39px;
+            width: calc(100% - 8px);;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+        }
+        &:hover {
+            background: stencilColor('color-theme');
+            border: 1px solid stencilColor('color-theme');
+            color: stencilColor('color-white');
+        }
+        &.button--primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: stencilColor('color-theme');
+            color: stencilColor('color-white');
+            border: 1px solid stencilColor('color-theme');
+            text-align: center;
+            width: 100%;
+            height: 47px;
+            &:before {
+                border: 1px solid rgba(255, 255, 255, 0.6);
+            }
+            &:hover {
+                background: stencilColor('color-primary-button-hover');
+                border: 1px solid stencilColor('color-primary-button-hover');
+                &:before {
+                    border: 1px solid rgba(255, 255, 255, 0.6);
+                }
+            }
+        }
+    }
+}
+
+.swal2-container {
+    .swal2-actions {
+        .button {
+            width: auto;
+            background: stencilColor('color-theme');
+            border: 1px solid stencilColor('color-theme');
+            color: stencilColor('color-white');
+            &:hover, &.focus {
+                background: stencilColor('color-white');
+                border: 1px solid stencilColor('color-theme');
+                color: stencilColor('color-theme');
+            }
+            &.swal2-cancel {
+                background: stencilColor('color-white');
+                border: 1px solid stencilColor('color-theme');
+                color: stencilColor('color-theme');
+                &:hover, &.focus {
+                    background: stencilColor('color-theme');
+                    border: 1px solid stencilColor('color-theme');
+                    color: stencilColor('color-white');
+                }
+            }
+        }
+    }
+}
+
+.form {
+    .form-field {
+        position: relative;
+        padding: 10px 15px 10px 0;
+        .form-label {
+            text-transform: uppercase;
+            color: stencilColor('color-theme');
+            background: stencilColor('color-white');
+            position: absolute;
+            padding: 0 5px;
+            top: 0;
+            left: 13px;
+            small {
+                display: none;
+            }
+        }
+        .form-input, .form-select {
+            min-height: 45px;
+            background-image: stencilColor('color-white');
+            border: 1px solid stencilColor('color-border');
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 15px;
+            &::placeholder { 
+                color: stencilColor('color-placeholder');
+                border-color: stencilColor('color-input-placeholder');
+            }
+            &:focus { 
+                color: stencilColor('color-input-focus');
+                border-color: stencilColor('color-input-focus');
+            }
+            &:active { 
+                color: stencilColor('color-input-active');
+                border-color: stencilColor('color-input-focus');
+            }
+        }
+        .form-select {
+            color: stencilColor('color-placeholder');
+            background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMTJweCIgeT0iMHB4IiB3aWR0aD0iMjRweCIgaGVpZ2h0PSIzcHgiIHZpZXdCb3g9IjAgMCA2IDMiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDYgMyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHBvbHlnb24gcG9pbnRzPSI1Ljk5MiwwIDIuOTkyLDMgLTAuMDA4LDAgIi8+PC9zdmc+");
+            background-position: right 1rem top 1.2rem;
+            background-size: 10px 8px;
+            
+            &:active { 
+                border-color: stencilColor('color-text');
+            }
+        }
+        select > option[value=''] {
+            color: stencilColor('color-placeholder');
+        }
+    }
+    .form-field--checkbox {
+        margin-top: 10px;
+        .form-label {
+            padding-left: 25px;
+            color: stencilColor('color-text');
+            &::before {
+                border: 1px solid stencilColor('color-theme');
+                background-color: stencilColor('color-white');
+                border-radius: 3px;
+            }
+        }
+        input[type="checkbox"]:checked + .form-label {
+            &::before {
+                background-color: stencilColor('color-theme');
+                color: stencilColor('color-white');
+            }
+            &::after {
+                background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z' fill='rgba(255, 255, 255, 0.999)' /%3E%3C/svg%3E");
+            }
+        }
+    }
+}
+.navList-action--checkbox {
+    color: stencilColor('color-text');
+    &::before {
+        border: 1px solid stencilColor('color-theme');
+        background-color: stencilColor('color-white');
+        border-radius: 3px;
+    }
+    &.is-selected {
+        &::before {
+            background-color: stencilColor('color-theme');
+            color: stencilColor('color-white');
+        }
+        &::after {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z' fill='rgba(255, 255, 255, 0.999)' /%3E%3C/svg%3E");
+        }
+    }
+}
+.b {
+    font-weight: 700;
+}
+.new-customer {
+    a {
+        text-decoration: none;
+    }
+}
+.alertBox {
+    display: flex;
+    &.alertBox--error, &.alertBox--info {
+        background: stencilColor('color-alert');
+        .alertBox-column {
+            span {
+                color: stencilColor('color-alert2');
+            }
+        }
+        .icon {
+            svg {
+                fill: stencilColor('color-alert2');
+            }
+        }
+        .close {
+            .icon {
+                cursor: pointer;
+            }
+        }
+    }
+    &.alertBox--success {
+        background: stencilColor('color-white');
+        .alertBox-column {
+            span {
+                color: stencilColor('color-alert');
+            }
+        }
+        .icon {
+            svg {
+                fill: stencilColor('color-alert');
+            }
+        }
+        .close {
+            .icon {
+                cursor: pointer;
+            }
+        }
+    }
+}

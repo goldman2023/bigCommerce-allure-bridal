@@ -1,0 +1,35 @@
+.productView-details {
+    .form {
+        [data-product-attribute="swatch"] {
+            .form-label {
+                position: unset;
+                padding: 0;
+            }
+        }
+    }
+    .add-to-cart-wrapper {
+        .form-field {
+            .form-label {
+                position: unset;
+                padding: 0;
+            }
+            .form-increment {
+                button {
+                    max-width: 50px;
+                }
+                .form-input {
+                    margin: 0 5px;
+                }
+            }
+        }
+    }
+    .form-wishlist {
+        #wishlist-dropdown {
+            .button {
+                &:hover {
+                    background-color: stencilColor('color-theme');
+                }
+            }
+        }
+    }
+}

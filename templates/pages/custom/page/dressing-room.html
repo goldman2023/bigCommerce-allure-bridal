@@ -1,0 +1,13 @@
+{{#partial "page"}}
+
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+{{~inject 'customer' customer}}
+<section class="page dressing-room--page">
+    {{> components/pages/header page_name='dressingRoom'}}
+    {{> components/pages/sidebar page_name='dressingRoom'}}
+    <div class="page-content"></div>
+</section>
+
+{{/partial}}
+
+{{> layout/base}}
