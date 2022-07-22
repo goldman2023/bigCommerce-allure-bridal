@@ -1,4 +1,4 @@
-import PageManager from './page-manager';
+import PageManager from '../page-manager';
 
 export default class DressingRoom extends PageManager {
     constructor(context) {

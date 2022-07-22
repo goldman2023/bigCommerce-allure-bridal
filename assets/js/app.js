@@ -53,8 +53,8 @@ const pageClasses = {
 };
 
 const customClasses = {
-    'pages/custom/page/dressing-room': () => import('./theme/dressing-room'),
-    'pages/custom/page/manage-members': () => import('./theme/manage-members') 
+    'pages/custom/page/dressing-room': () => import('./theme/BP/dressing-room'),
+    'pages/custom/page/manage-members': () => import('./theme/BP/manage-members') 
 };
 
 /**
