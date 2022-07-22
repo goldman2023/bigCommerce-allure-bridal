@@ -1,9 +1,9 @@
-import PageManager from './page-manager';
-import nod from './common/nod';
-import forms from './common/models/forms';
-import { announceInputErrorMessage } from './common/utils/form-utils';
-import swal from './global/sweet-alert';
-import { defaultModal } from './global/modal';
+import PageManager from '../page-manager';
+import nod from '../common/nod';
+import forms from '../common/models/forms';
+import { announceInputErrorMessage } from '../common/utils/form-utils';
+import swal from '../global/sweet-alert';
+import { defaultModal } from '../global/modal';
 
 export default class ManageMembers extends PageManager {
     constructor(context) {
@@ -51,7 +51,7 @@ export default class ManageMembers extends PageManager {
                             }).then((result) => {
                                 if (result.value) {
                                     let formData = {
-                                        bc_customer_id: event.target.getAttribute('data-bc-customer-id'),
+                                        customer_email: event.target.getAttribute('data-bc-customer-email'),
                                         customer_event: "remove"
                                     };
                                     self.deleteMember(formData);
@@ -63,14 +63,12 @@ export default class ManageMembers extends PageManager {
                 if (editElements.length > 0) {
                     for (const ele of editElements) {
                         ele.addEventListener('click', function onClick(event) {
-                            const bcCustomerIdEl = document.querySelector('.editMemberModal input[name="bc_customer_id"]');
-                            bcCustomerIdEl.value = event.target.getAttribute('data-bc-customer-id');
                             const editMemberModal = document.querySelector('.editMemberModal');
                             self.$modal.open({ size: 'large' });
                             self.$modal.updateContent(editMemberModal);
                             $('#modal .loadingOverlay').show();
                             self.editMemberValidations();
-                            self.fetchCustomerDetailsById(event.target.getAttribute('data-bc-customer-id')).then(response => {
+                            self.fetchCustomerDetailsByEmail(event.target.getAttribute('data-bc-customer-email')).then(response => {
                                 if (response.length > 0) {
                                     let data = response[0];
                                     document.querySelector("#editMember--form input[name='first_name']").value = data.first_name;
@@ -158,8 +156,8 @@ export default class ManageMembers extends PageManager {
                 };
                 console.log(formData);
                 this.addMember(formData).then(members => {
-                    const alertBoxEl = document.querySelector('.addMember .alertBox');
-                    const alertBoxMessgeEl = document.querySelector('.addMember .alertBox .alertBox-message #alertBox-message-text');
+                    const alertBoxEl = document.querySelector('.alertBox');
+                    const alertBoxMessgeEl = document.querySelector('.alertBox .alertBox-message #alertBox-message-text');
                     alertBoxEl.style.display = 'flex';
                     alertBoxMessgeEl.innerText = 'Member has been added successfully!';
                 }).catch(error => {
@@ -241,7 +239,6 @@ export default class ManageMembers extends PageManager {
                     customer_email: $("#editMember--form input[name='email']").val(),
                     role: $("#editMember--form select[name='role']").val(), 
                     wedding_party_id: 2,
-                    bc_customer_id: $("#editMember--form input[name='bc_customer_id']").val(),
                     customer_event: "update"
                 };
                 this.updateMember(formData).then(members => {
@@ -278,7 +275,9 @@ export default class ManageMembers extends PageManager {
                         reject(error.rstatusText);
                     } else if (error.responseJSON.error) {
                         reject(error.responseJSON.error);
-                    } else {
+                    } else if (error.message) {
+                        reject(error.message);
+                    }else {
                         reject(error);
                     }
                 }
@@ -313,7 +312,7 @@ export default class ManageMembers extends PageManager {
         return new Promise((resolve, reject) => {
             this.fetchCustomerDetails().then(customers => {
                 customers.forEach((customer, index) => {
-                    this.manageMembersHtml += `<li id="member-${customer.bc_customer_id}">
+                    this.manageMembersHtml += `<li id="member-${customer.customer_email}">
                         <div class="left">
                             <div class="member-name"> ${customer.first_name ? customer.first_name : ''} ${customer.last_name ? customer.last_name : ''}</div>
                             <div class="member-email"> ${customer.customer_email}</div>
@@ -322,8 +321,8 @@ export default class ManageMembers extends PageManager {
                             <div class="member-role"> ${customer.wedding_party_role}</div>
                         </div>
                         <div class="right">
-                            <button type="button" class="button button--primary button-edit-member" data-bc-customer-id="${customer.bc_customer_id}" data-edit-member> Edit </button>
-                            <button type="button" class="button button--primary button-delete-member" data-bc-customer-id="${customer.bc_customer_id}" data-delete-member> Delete </button>
+                            <button type="button" class="button button--primary button-edit-member" data-bc-customer-email="${customer.customer_email}" data-edit-member> Edit </button>
+                            <button type="button" class="button button--primary button-delete-member" data-bc-customer-email="${customer.customer_email}" data-delete-member> Delete </button>
                         </div>
                     </li>`;
                 });
@@ -388,11 +387,11 @@ export default class ManageMembers extends PageManager {
         });
     }
 
-    fetchCustomerDetailsById (bc_customer_id) {
+    fetchCustomerDetailsByEmail (customer_email) {
         return new Promise((resolve, reject) => {
             $.ajax({
                 type: "GET",
-                url: `${this.context.workatoApiPath}/members?wedding_party_id=2&bc_customer_id=${bc_customer_id}`,
+                url: `${this.context.workatoApiPath}/members?wedding_party_id=2&customer_email=${customer_email}`,
                 headers: {"API-TOKEN": this.context.workatoApiToken},
                 success: response => {
                     console.log(response);

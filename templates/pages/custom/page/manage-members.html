@@ -9,8 +9,8 @@
 {{~inject 'customer' customer}}
 <section class="page manageMembers--page">
     <div class="loadingOverlay" style="display: block;"></div>
-    {{> components/pages/header page_name='manageMembers'}}
-    {{> components/pages/sidebar page_name='manageMembers'}}
+    {{> BP/pages/header page_name='manageMembers'}}
+    {{> BP/pages/sidebar page_name='manageMembers'}}
     <div class="page-content">
         {{> components/common/alert/alert-success ''}}
         <div class="manageMembers">
@@ -77,7 +77,7 @@
     </div>
 </section>
 <div class="editMemberModal">
-    {{> components/pages/manage-member/edit  }}
+    {{> BP/pages/manage-member/edit  }}
 </div>
 
 {{/partial}}

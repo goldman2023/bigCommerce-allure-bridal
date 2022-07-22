@@ -33,5 +33,10 @@ export default class Global extends PageManager {
         adminBar(secureBaseUrl, channelId, maintenanceModeSettings, JSON.parse(adminBarLanguage), productId, categoryId);
         loadingProgressBar();
         svgInjector();
+
+        $('.alertBox .close').on('click', e => {
+            e.target.closest('.alertBox').style.display = 'none';
+            console.log(e);
+        });
     }
 }
