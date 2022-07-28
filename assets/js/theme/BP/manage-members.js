@@ -54,7 +54,19 @@ export default class ManageMembers extends PageManager {
                                         customer_email: event.target.getAttribute('data-bc-customer-email'),
                                         customer_event: "remove"
                                     };
-                                    self.deleteMember(formData);
+                                    self.$overlay.show();
+                                    self.deleteMember(formData)
+                                    .then(response => {
+                                        self.renderAllmembers();
+                                        this.showAlertMessage('Member has been deleted successfully!');
+                                    })
+                                    .catch(error => {
+                                        swal.fire({
+                                            text: error,
+                                            icon: 'error',
+                                            showCancelButton: false
+                                        })
+                                    });
                                 }
                             });
                         });
@@ -155,11 +167,12 @@ export default class ManageMembers extends PageManager {
                     customer_event: "create"
                 };
                 console.log(formData);
+                this.$overlay.show();
                 this.addMember(formData).then(members => {
-                    const alertBoxEl = document.querySelector('.alertBox');
-                    const alertBoxMessgeEl = document.querySelector('.alertBox .alertBox-message #alertBox-message-text');
-                    alertBoxEl.style.display = 'flex';
-                    alertBoxMessgeEl.innerText = 'Member has been added successfully!';
+                    this.showAlertMessage('Member has been added successfully!');
+                    document.querySelector('.manageMembers--add li:first-child').classList.remove('open');
+                    document.querySelector('.manageMembers--add li:last-child').classList.remove('show');
+                    this.renderAllmembers();
                 }).catch(error => {
                     swal.fire({
                         text: error,
@@ -244,10 +257,7 @@ export default class ManageMembers extends PageManager {
                 this.updateMember(formData).then(members => {
                     this.renderAllmembers();
                     this.$modal.close();
-                    const alertBoxEl = document.querySelector('.page .alertBox');
-                    const alertBoxMessgeEl = document.querySelector('.page .alertBox .alertBox-message #alertBox-message-text');
-                    alertBoxEl.style.display = 'flex';
-                    alertBoxMessgeEl.innerText = 'Member has been updated successfully!';
+                    this.showAlertMessage('Member has been updated successfully!');
                 }).catch(error => {
                     swal.fire({
                         text: error,
@@ -264,7 +274,7 @@ export default class ManageMembers extends PageManager {
         return new Promise((resolve, reject) => {
             $.ajax({
                 type: "POST",
-                url: `${this.context.workatoApiPath}/members/create`,
+                url: `${this.context.workatoApiPath}/wedding-studio/members/create`,
                 headers: {"API-TOKEN": this.context.workatoApiToken},
                 data: JSON.stringify(formData),
                 success: response => {
@@ -289,7 +299,7 @@ export default class ManageMembers extends PageManager {
         return new Promise((resolve, reject) => {
             $.ajax({
                 type: "POST",
-                url: `${this.context.workatoApiPath}/members/update`,
+                url: `${this.context.workatoApiPath}/wedding-studio/members/update`,
                 headers: {"API-TOKEN": this.context.workatoApiToken},
                 data: JSON.stringify(formData),
                 success: response => {
@@ -345,7 +355,7 @@ export default class ManageMembers extends PageManager {
         return new Promise((resolve, reject) => {
             $.ajax({
                 type: "GET",
-                url: `${this.context.workatoApiPath}/members?wedding_party_id=2`,
+                url: `${this.context.workatoApiPath}/wedding-studio/members?wedding_party_id=2`,
                 headers: {"API-TOKEN": this.context.workatoApiToken},
                 success: response => {
                     console.log(response);
@@ -368,7 +378,7 @@ export default class ManageMembers extends PageManager {
         return new Promise((resolve, reject) => {
             $.ajax({
                 type: "POST",
-                url: `${this.context.workatoApiPath}/members/remove`,
+                url: `${this.context.workatoApiPath}/wedding-studio/members/remove`,
                 headers: {"API-TOKEN": this.context.workatoApiToken},
                 data: JSON.stringify(formData),
                 success: response => {
@@ -391,7 +401,7 @@ export default class ManageMembers extends PageManager {
         return new Promise((resolve, reject) => {
             $.ajax({
                 type: "GET",
-                url: `${this.context.workatoApiPath}/members?wedding_party_id=2&customer_email=${customer_email}`,
+                url: `${this.context.workatoApiPath}/wedding-studio/members?wedding_party_id=2&customer_email=${customer_email}`,
                 headers: {"API-TOKEN": this.context.workatoApiToken},
                 success: response => {
                     console.log(response);
@@ -408,5 +418,12 @@ export default class ManageMembers extends PageManager {
                 }
             });
         });
+    }
+
+    showAlertMessage(message) {
+        const alertBoxEl = document.querySelector('.alertBox');
+        const alertBoxMessgeEl = document.querySelector('.alertBox .alertBox-message #alertBox-message-text');
+        alertBoxEl.style.display = 'flex';
+        alertBoxMessgeEl.innerText = message;
     }
 }

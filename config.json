@@ -45,7 +45,7 @@
     "Firefox ESR"
   ],
   "settings": {
-    "workato_api_path": "https://apim.workato.com/allure/test/wedding-studio",
+    "workato_api_path": "https://apim.workato.com/allure/test",
     "workato_api_token": "c0bce025e1792e283cfbd229321ecc423ae60257cf462c8d262d7b10fd9e41f9",
     "hide_breadcrumbs": false,
     "hide_page_heading": false,
