@@ -205,7 +205,8 @@ body {
         }
     }
     &.alertBox--success {
-        background: stencilColor('color-white');
+        margin-top: 20px;
+        background: stencilColor('color-greyLightest');
         .alertBox-column {
             span {
                 color: stencilColor('color-alert');
@@ -222,4 +223,16 @@ body {
             }
         }
     }
+}
+.f {
+    display: flex;
+}
+.jcsb {
+    justify-content: space-between;
+}
+.f10 {
+    gap: 10px;
+}
+.f3 {
+    gap: 3px;
 }
