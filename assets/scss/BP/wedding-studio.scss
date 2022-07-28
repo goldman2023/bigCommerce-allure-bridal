@@ -144,3 +144,26 @@
         
     }
 }
+
+.up-votes, .down-votes {
+    text-decoration: none;
+    cursor: pointer;
+    svg {
+        width: 16px;
+        height: 16px;
+        &.done {
+            stroke: stencilColor('color-greyDarker');
+        }
+    }
+}
+[data-test-info-type="down_votes"] {
+    display: inline-flex;
+    justify-content: center;
+    gap: 3px;
+    .down-votes {
+        svg {
+            margin-top: 5px;
+            transform: rotate(180deg);
+        }
+    }
+}
