@@ -1,0 +1,102 @@
+<div id="modal-assign-look" class="modal modal--medium" data-reveal>
+    {{> components/common/modal/modal-close-btn}}
+    <div class="modal-body">
+        <form action="" class="form" method="post" data-assign-look-form>
+            <fieldset class="form-fieldset">
+                <div class="modal--inner">
+                    <div class="left">
+                        <img 
+                            data-src="" 
+                            alt=""
+                            class="lazyload"
+                        />
+                    </div>
+                    <div class="right">
+                        <h3 class="product-title"></h3>
+                        <div class="product-sku hide"></div>
+                        <hr>
+                        <h4>Which Members would you like to assign this look to?</h4>
+                        
+                        <ul class="members">
+                            
+                        </ul>
+                        <h4>This look is:</h4>
+                        <div class="form-field">
+                            <input
+                                class="form-radio"
+                                type="radio"
+                                id="required-assign"
+                                name="lookType"
+                                value="required"
+                                checked
+                            >
+                            <label 
+                                class="form-label" 
+                                for="required-assign"
+                            >
+                                Required
+                            </label>
+                        </div>
+                        <div class="form-field">
+                            <input
+                                class="form-radio"
+                                type="radio"
+                                id="optional-assign"
+                                name="lookType"
+                                value="optional"
+                            >
+                            <label 
+                                class="form-label" 
+                                for="optional-assign"
+                            >
+                                Optional
+                            </label>
+                        </div>
+                        <h4>Would you like to help pay these looks?</h4>
+                        <div class="form-field">
+                            <input
+                                class="form-radio"
+                                type="radio"
+                                id="help-yes"
+                                name="isHelp"
+                                value="yes"
+                                checked
+                            >
+                            <label 
+                                class="form-label" 
+                                for="help-yes"
+                            >
+                                Yes
+                            </label>
+                        </div>
+                        <div class="form-field">
+                            <input
+                                class="form-radio"
+                                type="radio"
+                                id="help-no"
+                                name="isHelp"
+                                value="no"
+                            >
+                            <label 
+                                class="form-label" 
+                                for="help-no"
+                            >
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="look-footer">
+                    <button 
+                        type="submit" 
+                        class="button button--primary"
+                        name="assign_look"
+                        id="assign-look-button"
+                    >
+                        Assign Look
+                    </button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

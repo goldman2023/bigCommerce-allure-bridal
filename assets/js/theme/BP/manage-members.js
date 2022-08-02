@@ -15,6 +15,7 @@ export default class ManageMembers extends PageManager {
         this.$formEl = $('#addMember--form');
         this.$overlay = $('.page-type .manageMembers--page .loadingOverlay');
         this.$modal = defaultModal();
+        this.$weddingPartyId = '';
     } 
     
     onReady() {
@@ -28,6 +29,68 @@ export default class ManageMembers extends PageManager {
         this.$addMemberEl.on('click', event => {
             $(event.currentTarget).toggleClass('open');
             $(event.currentTarget).context.nextElementSibling.classList.toggle('show');
+        });
+
+        /* this.fetchFormFields(response => {
+            const customerAccountFields = response.customerAccount;
+            if (customerAccountFields.length > 0) {
+                for (const formField of customerAccountFields) {
+                    if (formField.label === 'Wedding Party Id') {
+                        console.log(formField);
+                    }
+                }
+            }
+        }); */
+    }
+
+    fetchFormFields (callback) {
+        fetch('/graphql', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.context.graphQlToken}`
+            },
+            body: JSON.stringify({
+                query: `
+                    query CustomerQuery {
+                        customer {
+                            email
+                            attributeCount
+                            attributes {
+                                weddingPartyId : attribute(entityId:29) {
+                                    entityId
+                                    value
+                                    name
+                                }
+                            }
+                        }
+                    }
+                `
+            })
+        })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(res) {
+            console.log(res);
+        })
+        .catch(error => console.log(error));
+
+        fetch("/api/storefront/form-fields", {
+            "method": "GET",
+            "headers": {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(res) {
+            console.log(res);
+        })
+        .catch(err => {
+            console.error(err);
         });
     }
 
@@ -58,7 +121,7 @@ export default class ManageMembers extends PageManager {
                                     self.deleteMember(formData)
                                     .then(response => {
                                         self.renderAllmembers();
-                                        this.showAlertMessage('Member has been deleted successfully!');
+                                        self.showAlertMessage('Member has been deleted successfully!');
                                     })
                                     .catch(error => {
                                         swal.fire({
@@ -166,7 +229,6 @@ export default class ManageMembers extends PageManager {
                     wedding_party_id: 2,
                     customer_event: "create"
                 };
-                console.log(formData);
                 this.$overlay.show();
                 this.addMember(formData).then(members => {
                     this.showAlertMessage('Member has been added successfully!');
@@ -421,9 +483,12 @@ export default class ManageMembers extends PageManager {
     }
 
     showAlertMessage(message) {
-        const alertBoxEl = document.querySelector('.alertBox');
-        const alertBoxMessgeEl = document.querySelector('.alertBox .alertBox-message #alertBox-message-text');
-        alertBoxEl.style.display = 'flex';
-        alertBoxMessgeEl.innerText = message;
+        setTimeout(() => {
+            const alertBoxEl = document.querySelector('.alertBox');
+            const alertBoxMessgeEl = document.querySelector('.alertBox .alertBox-message #alertBox-message-text');
+            alertBoxEl.style.display = 'flex';
+            alertBoxMessgeEl.innerText = message;
+            window.scroll({ top: 500, left: 0, behavior: 'smooth' });
+        }, 300);
     }
 }
