@@ -6,13 +6,14 @@
     {{> BP/pages/header page_name='dressingRoom'}}
     {{> BP/pages/sidebar page_name='dressingRoom'}}
     <div class="page-content">
+        <div class="loadingOverlay" style="display: block;"></div>
         {{> components/common/alert/alert-success ''}}
         <div class="page--inner">
-            
+
         </div>
     </div>
 </section>
-
+{{> BP/pages/dressing-room/assign-look-modal }}
 {{/partial}}
 
 {{> layout/base}}

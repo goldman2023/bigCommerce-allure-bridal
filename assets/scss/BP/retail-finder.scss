@@ -3,12 +3,8 @@
     // text-align: center;
 }
 
-.select-container {
-    margin-bottom: 1rem;
-}
-
 .selector-dropdown {
-    width: 10%;
+    width: 25%;
 }
 
 .buttons-container {
@@ -16,11 +12,20 @@
 }
 
 .results-divider {
-    background-color: lightgrey;
+    background-color: #F7F4F0;
     padding: 1rem;
 }
 
 #retail-finder-results {
-    background-color: #e3d8d8;
     margin: 1rem;
+    border: 1px solid lightgrey;
+    display: flex;
+    flex-direction: row;
 }
+
+#map {
+    height: 400px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
+  }

@@ -5,58 +5,58 @@ export default class RetailFinder extends PageManager {
     constructor(context) {
         super(context);
         this.pageContent = document.querySelector('.content');
-        this.retailFinderHtml = '';
         this.pageContent.innerHTML = `
-            <h2 class="retail-finder-title"><strong>Where to Buy</strong></h2>
-            <div class="select-container">
-                <span>Within</span>
-                <select class="selector-dropdown">
-                    <option>50 Miles</option>
-                    <option>100 Miles</option>
-                    <option>150 Miles</option>
-                </select>
-            </div>
-            <div class="select-container">
-                <span>of</span>
-                <input type="text" />
-            </div>
-            <div class="select-container">
-            <span>carrying</sapn>
-                <select class="selector-dropdown">
-                    <option selected>Any Collection</option>
-                    <option>100</option>
-                    <option>150</option>
-                </select>
-            </div>
-            <div class="buttons-container">
-                <button class="button">SEARCH</button>
-                <button class="button">Reset</button>
-            </div>
-            <br />
-            <div class="results-divider">
-                <span>Results</span>
+        <form class="form">
+                <h2 class="blog-title retail-finder-title"><strong>Try It On</strong></h2>
+                <div class="form-field">
+                    <span class="form-label">Within</span>
+                    <select class="form-select selector-dropdown">
+                        <option>50 Miles</option>
+                        <option>100 Miles</option>
+                        <option>150 Miles</option>
+                    </select>
                 </div>
-            <div id="retail-finder-results"></div>
+                <div class="form-field">
+                    <span class="form-label">of</span>
+                    <input class="form-input selector-dropdown" type="text" />
+                </div>
+                <div class="form-field">
+                    <span class="form-label">carrying</span>
+                    <select class="form-select selector-dropdown">
+                        <option selected>Any Collection</option>
+                        <option>100</option>
+                        <option>150</option>
+                    </select>
+                </div>
+                <div class="form-field--checkbox">
+                    <span>View Map</span>
+                    <input class="form-label" type="checkbox" />
+                </div>
+                <div class="buttons-container">
+                    <button class="button">SEARCH</button>
+                    <button class="button">Reset</button>
+                </div>
+                <br />
+                <div class="results-divider">
+                    <span>Results</span>
+                    </div>
+                <div id="retail-finder-results"></div>
+        </form>
         `;
     }
 
     onReady() {    
+        const retailFinderResults = document.getElementById('retail-finder-results');
         
         const showGraphQlData = () => {
             const query = `
                 query {
                     retailersCollection {
-                        items{
-                            retailerName,
-                            retailerStreet,
-                            retailerCity,
-                            state,
-                            zipCode,
-                            location{
-                                lat,
-                                lon
-                            }
-                        }
+                    items{
+                        retailerName,
+                        retailerCity,
+                        state
+                    }
                     }
                 }
             `;
@@ -91,11 +91,29 @@ export default class RetailFinder extends PageManager {
             console.log(characters.data);
             // let display = characters.data.retailersCollection.items[0].retailerName;
             let display = characters.data.retailersCollection.items;
-            display.forEach(element => {
-                for (let key in element) {
-                    let results = `<p><strong>${key}: ${element[key]}</strong></p>`;
-                    document.getElementById('retail-finder-results').insertAdjacentHTML('afterbegin', results);
-                }
+            // let retailerList = display.forEach(element => {
+            //     for (let key in element) {
+            //         let results = `${key}: ${element[key]}`;
+            //         letFilteredResults = results.
+            //         console.log(results);
+            //         document.getElementById('retail-finder-results').insertAdjacentHTML('afterbegin', results);
+            //     }
+            // });
+            let retailerList = display.forEach(element => {
+                let results = Object.values(element).join("\n");
+                console.log(results);
+                console.log(element.retailerName);
+                let retailer = document.createElement('h3');
+                retailer.classList.add('retailer-name');
+                retailer.innerText = element.retailerName;
+                retailFinderResults.append(retailer);
+                let retailerAddy = document.getElementsByClassName('retailer-name');
+                let retailerCity = document.createElement('span');
+                retailerCity.innerText = element.retailerCity;
+                retailFinderResults.append(retailerCity);
+                let retailerState = document.createElement('span');
+                retailerState.innerText =', ' + element.state;
+                retailFinderResults.append(retailerState);
             });
         }
     
