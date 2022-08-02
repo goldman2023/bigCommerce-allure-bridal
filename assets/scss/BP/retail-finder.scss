@@ -1,0 +1,31 @@
+.retail-finder-title {
+    font-weight: 800;
+    // text-align: center;
+}
+
+.selector-dropdown {
+    width: 25%;
+}
+
+.buttons-container {
+    margin: 1rem;
+}
+
+.results-divider {
+    background-color: #F7F4F0;
+    padding: 1rem;
+}
+
+#retail-finder-results {
+    margin: 1rem;
+    border: 1px solid lightgrey;
+    display: flex;
+    flex-direction: row;
+}
+
+#map {
+    height: 400px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
+  }
