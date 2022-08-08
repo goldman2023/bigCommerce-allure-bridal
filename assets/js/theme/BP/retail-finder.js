@@ -4,7 +4,7 @@ import regeneratorRuntime from "regenerator-runtime";
 export default class RetailFinder extends PageManager {
     constructor(context) {
         super(context);
-        this.pageContent = document.querySelector('.content');
+        this.pageContent = document.querySelector('.page-content');
         this.pageContent.innerHTML = `
         <form class="form">
                 <h2 class="blog-title retail-finder-title"><strong>Try It On</strong></h2>
@@ -34,13 +34,7 @@ export default class RetailFinder extends PageManager {
                 </div>
                 <div class="buttons-container">
                     <button class="button">SEARCH</button>
-                    <button class="button">Reset</button>
                 </div>
-                <br />
-                <div class="results-divider">
-                    <span>Results</span>
-                    </div>
-                <div id="retail-finder-results"></div>
         </form>
         `;
     }

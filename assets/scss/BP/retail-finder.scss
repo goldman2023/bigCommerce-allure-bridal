@@ -1,10 +1,14 @@
+.content {
+    display: flex;
+}
+
 .retail-finder-title {
     font-weight: 800;
     // text-align: center;
 }
 
 .selector-dropdown {
-    width: 25%;
+    width: 50%;
 }
 
 .buttons-container {
@@ -26,6 +30,6 @@
 #map {
     height: 400px;
     /* The height is 400 pixels */
-    width: 100%;
+    width: 200%;
     /* The width is the width of the web page */
   }
