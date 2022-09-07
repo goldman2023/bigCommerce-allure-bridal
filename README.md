@@ -90,7 +90,7 @@ Cornerstone implements [this strategy](https://philipwalton.com/articles/loading
 
 In `templates/components/common/polyfill-script.html` there is a simple feature detection script which can be extended to detect any recent JS features you intend to use in your theme code.
 
-If any one of the conditions is not met, an additional blocking JS bundle configured in `assets/js/polyfills.js` will be loaded to polyfill modern JS features before the main bundle executes. 
+If any one of the conditions is not met, an additional blocking JS bundle configured in `assets/js/polyfills.js` will be loaded to polyfill modern JS features before the main bundle executes.
 
 This intentionally prioritizes the experience of the 90%+ of shoppers who are on modern browsers in terms of performance, while maintaining compatibility (at the expense of additional JS download+parse for the polyfills) for users on legacy browsers.
 
@@ -104,7 +104,7 @@ First make sure you have Grunt installed globally on your machine:
 npm install -g grunt-cli
 ```
 
-and run:
+and then run:
 
 ```
 npm install
