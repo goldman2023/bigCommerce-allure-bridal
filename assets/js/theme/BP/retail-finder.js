@@ -1,4 +1,5 @@
 import { MarkerClusterer } from '@googlemaps/markerclusterer'
+import regeneratorRuntime from 'regenerator-runtime'
 import PageManager from '../page-manager'
 
 export default class RetailFinder extends PageManager {
