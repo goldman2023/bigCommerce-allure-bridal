@@ -1,7 +1,6 @@
 <div class="form-field" data-product-attribute="swatch" role="radiogroup" aria-labelledby="swatchGroup_{{id}}">
     <label class="form-label form-label--alternate form-label--inlineSmall" id="swatchGroup_{{id}}">
-        {{this.display_name}}:
-        <span data-option-value></span>
+        {{this.display_name}}
 
         {{> components/common/requireness-msg}}
     </label>
@@ -62,4 +61,6 @@
         </label>
     </div>
     {{/each}}
+
+    <div data-option-value></div>
 </div>

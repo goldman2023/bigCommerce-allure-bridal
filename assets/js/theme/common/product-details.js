@@ -275,8 +275,9 @@ export default class ProductDetails extends ProductDetailsBase {
         const swatchName = $swatch.attr('aria-label');
         const activeSwatchGroupId = $swatchGroup.attr('aria-labelledby');
         const $swatchOptionMessage = $(`#${activeSwatchGroupId} ~ .swatch-option-message`);
-
+        console.log($swatchGroup);
         $('[data-option-value]', $swatchGroup).text(swatchName);
+        $('[data-option-value]', $swatchGroup).addClass('color-selected-value');
         $swatchOptionMessage.text(`${this.swatchInitMessageStorage[activeSwatchGroupId]} ${swatchName}`);
         this.setLiveRegionAttributes($swatchOptionMessage, 'status', 'assertive');
     }
