@@ -47,6 +47,7 @@
   "settings": {
     "workato_api_path": "https://apim.workato.com/allure/test",
     "workato_api_token": "c0bce025e1792e283cfbd229321ecc423ae60257cf462c8d262d7b10fd9e41f9",
+    "contentful_api_token": "gfV8uz8VRPcukDWe6Xf22_vlvkfz5-w83Bo7JRDpAUY",
     "hide_breadcrumbs": false,
     "hide_page_heading": false,
     "hide_category_page_heading": false,

@@ -64,9 +64,9 @@
             window.lazySizesConfig.loadMode = 1;
         </script>
         <script async src="{{cdn 'assets/dist/theme-bundle.head_async.js'}}"></script>
-        
+
         {{getFontsCollection font-display='block'}}
-        
+
         <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.font.js'}}" as="script">
         <script async src="{{cdn 'assets/dist/theme-bundle.font.js'}}"></script>
 
@@ -77,6 +77,7 @@
         {{~inject 'workatoApiToken' theme_settings.workato_api_token}}
         {{~inject 'zoomSize' theme_settings.zoom_size}}
         {{~inject 'productSize' theme_settings.product_size}}
+        {{~inject 'contentfulApiToken' theme_settings.contentful_api_token}}
         {{~inject 'genericError' (lang 'common.generic_error')}}
         {{~inject 'maintenanceModeSettings' settings.maintenance}}
         {{~inject 'adminBarLanguage' (langJson 'admin')}}
