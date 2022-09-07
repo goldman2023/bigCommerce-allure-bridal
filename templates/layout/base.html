@@ -10,6 +10,45 @@
         <link href="{{ head.favicon }}" rel="shortcut icon">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <style type="text/css" media="screen, print">
+            @font-face {
+                font-family: "Inter Bold";
+                font-style: normal;
+                font-weight: 700;
+                src: url("{{cdn 'webdav:fonts/Inter-Bold.ttf'}}");
+            }
+            @font-face {
+                font-family: "Inter Regular";
+                font-style: normal;
+                font-weight: 500;
+                src: url("{{cdn 'webdav:fonts/Inter-Regular.ttf'}}");
+            }
+            @font-face {
+                font-family: "Inter Light";
+                font-style: normal;
+                font-weight: 300;
+                src: url("{{cdn 'webdav:fonts/Inter-Light.ttf'}}");
+            }
+            @font-face {
+                font-family: "Prata";
+                font-style: normal;
+                font-weight: 400;
+                src: url("{{cdn 'webdav:fonts/Prata-Regular.ttf'}}");
+            }
+            @font-face {
+                font-family: "Stay Classy Duo Script Brush";
+                font-style: normal;
+                font-weight: 400;
+                src: url("{{cdn 'webdav:fonts/StayClassyDuoScript_Brush.ttf'}}");
+            }
+            @font-face {
+                font-family: "Avenir";
+                font-style: normal;
+                font-weight: 500;
+                src: url("{{cdn 'webdav:fonts//AvenirNextLTPro-Regular.otf'}}");
+            }
+        </style>
+
         <script>
             {{!-- Change document class from no-js to js so we can detect this in css --}}
             document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
