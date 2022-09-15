@@ -1,0 +1,59 @@
+ol.breadcrumbs {
+    text-align: left;
+    margin-bottom: 20px;
+    .breadcrumb a {
+        font-family: stencilFontFamily('default-font-regular');
+        font-style: normal;
+        font-weight: 300;
+        font-size: remCalc(10px);
+        line-height: 12px;
+        text-transform: capitalize;
+        color: stencilColor('color-default-neutral-1');
+        text-decoration: none;
+    }
+}
+.breadcrumbs {
+    text-align: left;
+    border-bottom: 1px solid stencilColor('color-default-neutral-4');
+    margin: 0;
+    .breadcrumb {
+        position: relative;
+        padding-right: 12px;
+        padding-bottom: 8px;
+        margin: 0 8px 0 0;
+        &::after {
+            position: absolute;
+            content: "";
+            right: 0;
+            top: 8px;
+            width: 4px;
+            height: 4px;
+            background: stencilColor("color-default-neutral-1");
+            transform: rotate(45deg);
+        }
+        &::before {
+            display: none;
+        }
+        .breadcrumb-label {
+            text-decoration: none;
+            span {
+                font-family: stencilFontFamily('default-font-light');
+                font-size: remCalc(10px);
+                line-height: remCalc(12px);
+                color: stencilColor('color-default-neutral-1');
+            }
+        }
+        &:last-child {
+            &::after {
+                display: none;
+            }
+            .breadcrumb-label {
+                span {
+                    font-family: stencilFontFamily('default-font-regular');
+                    color: stencilColor('color-default-primary-1');
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}

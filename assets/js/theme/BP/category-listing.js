@@ -34,6 +34,7 @@ export default class CategoryListing extends PageManager {
                                         edges {
                                         node {
                                             id
+                                            entityId
                                             name
                                             sku
                                             path
@@ -64,7 +65,7 @@ export default class CategoryListing extends PageManager {
                                         srcset="${item.node.defaultImage.url} 80w, ${item.node.defaultImage.url} 160w, ${item.node.defaultImage.url} 320w, ${item.node.defaultImage.url} 640w, ${item.node.defaultImage.url} 960w, ${item.node.defaultImage.url} 1280w, ${item.node.defaultImage.url} 1920w, ${item.node.defaultImage.url} 2560w" 
                                         data-srcset="${item.node.defaultImage.url} 80w, ${item.node.defaultImage.url} 160w, ${item.node.defaultImage.url} 320w, ${item.node.defaultImage.url} 640w, ${item.node.defaultImage.url} 960w, ${item.node.defaultImage.url} 1280w, ${item.node.defaultImage.url} 1920w,${item.node.defaultImage.url} 2560w" class="card-image lazyautosizes lazyloaded" sizes="257px">
                                     </div></a><div class="card-body"><h3 class="card-title"><a aria-label="${item.node.name}" "="" href="${item.node.path}" class="name">Style ${item.node.name}</a>
-                                <a href="" class="titleIcon"></a></h3><div class="card-text" data-test-info-type="price">${item.node.description}</div></article>
+                                <a href="/wishlist.php?action=addwishlist&product_id=${item.node.entityId}" class="titleIcon"></a></h3><div class="card-text" data-test-info-type="price">${item.node.description}</div></article>
                             </li>`;
                 });
                 block.querySelector('.sub-products').innerHTML = `<ul class="productGrid" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>${prdlist.join('')}</ul>`;
