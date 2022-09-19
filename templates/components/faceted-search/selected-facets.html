@@ -26,13 +26,17 @@
             {{/each}}
         </ul>
     {{else}}
-        <p>{{lang 'search.faceted.selected.no-filters'}}</p>
+        <p class="nofilters">{{lang 'search.faceted.selected.no-filters'}}</p>
     {{/if}}
+    <div class="filtersButton">
+        <button type="button" class="button button--primary apply" id="fillterApply" data-href="">Apply</button>
+        {{#if remove_all_url}}
+            <a href="{{remove_all_url}}"
+            class="clearBtn"
+            data-faceted-search-facet>
+                {{lang 'search.faceted.selected.clear-all'}}
+            </a>
+        {{/if}}
+    </div>
 
-    {{#if remove_all_url}}
-        <a href="{{remove_all_url}}"                        class="clearBtn"
-         data-faceted-search-facet>
-            {{lang 'search.faceted.selected.clear-all'}}
-        </a>
-    {{/if}}
 </div>

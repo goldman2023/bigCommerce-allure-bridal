@@ -3,7 +3,7 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        margin-bottom: 30px;
+        margin-bottom: 70px;
         @media screen and (max-width: 550px){
             display: block;
             margin-bottom: 20px;;
@@ -134,6 +134,7 @@
 }
 .facetedSearch {
     .facetedSearch-refineFilters {
+        margin-top: -40px;
         .sidebarBlock-heading {
             font-family: stencilFontFamily('default-font-regular');
             font-style: normal;
@@ -168,6 +169,20 @@
             text-decoration-line: underline;
             text-transform: uppercase;
             color: #BC8372;
+        }
+        ul.inlineList,.nofilters {
+            display: none;
+        }
+        .filtersButton {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-top: 32px;
+            .apply {
+                width: 76px;
+                margin-right: 20px;
+                margin-bottom: 0;
+            }
         }
     }
     .facetedSearch-navList {

@@ -92,6 +92,7 @@ class FacetedSearch {
         this.onAccordionToggle = this.onAccordionToggle.bind(this);
         this.onClearFacet = this.onClearFacet.bind(this);
         this.onFacetClick = this.onFacetClick.bind(this);
+        this.onApply = this.onApply.bind(this);
         this.onRangeSubmit = this.onRangeSubmit.bind(this);
         this.onSortBySubmit = this.onSortBySubmit.bind(this);
         this.filterFacetItems = this.filterFacetItems.bind(this);
@@ -307,6 +308,7 @@ class FacetedSearch {
 
         // Hooks
         hooks.on('facetedSearch-facet-clicked', this.onFacetClick);
+        hooks.on('apply', this.onApply);
         hooks.on('facetedSearch-range-submitted', this.onRangeSubmit);
         hooks.on('sortBy-submitted', this.onSortBySubmit);
     }
@@ -322,6 +324,7 @@ class FacetedSearch {
 
         // Hooks
         hooks.off('facetedSearch-facet-clicked', this.onFacetClick);
+        hooks.off('apply', this.onApply);
         hooks.off('facetedSearch-range-submitted', this.onRangeSubmit);
         hooks.off('sortBy-submitted', this.onSortBySubmit);
     }
@@ -347,7 +350,21 @@ class FacetedSearch {
         // Toggle visible items
         this.toggleFacetItems($navList);
     }
+    onApply(event,currentTarget) {
+        const $link = $(currentTarget);
+        const url = $link.attr('data-href');
 
+        event.preventDefault();
+
+        $link.toggleClass('is-selected');
+
+        // Update URL
+        urlUtils.goToUrl(url);
+
+        if (this.options.modalOpen) {
+            this.options.modal.close();
+        }
+    }
     onFacetClick(event, currentTarget) {
         const $link = $(currentTarget);
         const url = $link.attr('href');
@@ -356,8 +373,9 @@ class FacetedSearch {
 
         $link.toggleClass('is-selected');
 
-        // Update URL
+        Update URL
         urlUtils.goToUrl(url);
+        $("#fillterApply").attr("data-href",url);
 
         if (this.options.modalOpen) {
             this.options.modal.close();
