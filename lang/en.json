@@ -859,10 +859,10 @@
         },
         "faceted": {
             "selected": {
-                "title": "Refine by",
+                "title": "Filter",
                 "rating-label": "Rated {rating, plural, one {# Star} other {# Stars}} Or More",
                 "no-filters": "No filters applied",
-                "clear-all": "Clear all"
+                "clear-all": "Reset"
             },
             "range": {
                 "update": "Update",

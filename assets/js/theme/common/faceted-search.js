@@ -347,7 +347,6 @@ class FacetedSearch {
         // Toggle visible items
         this.toggleFacetItems($navList);
     }
-
     onFacetClick(event, currentTarget) {
         const $link = $(currentTarget);
         const url = $link.attr('href');
@@ -356,7 +355,7 @@ class FacetedSearch {
 
         $link.toggleClass('is-selected');
 
-        // Update URL
+        //Update URL
         urlUtils.goToUrl(url);
 
         if (this.options.modalOpen) {
