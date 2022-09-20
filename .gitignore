@@ -6,3 +6,4 @@ assets/dist
 *.zip
 parsed/
 meta/
+settings.json
