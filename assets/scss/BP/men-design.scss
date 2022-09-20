@@ -1,0 +1,239 @@
+body {
+    .men-design {
+        .border {
+            border-color: stencilColor('color-men-design-primary-2');
+            &::after {
+                background-color: stencilColor('color-men-design-primary-1');
+            }
+        }
+        .button {
+            background: stencilColor('color-white');
+            color: stencilColor('color-men-design-primary-1');
+            border-color: stencilColor('color-men-design-primary-1');
+            font-family: stencilFontFamily('avenir-font');
+            font-size: remCalc(12px);
+            line-height: remCalc(18px);
+            font-weight: 600;
+            .icon {
+                svg use {
+                    fill: stencilColor("color-men-design-primary-1");                
+                }
+            }
+            &:before {
+                border-color: stencilColor('color-men-design-primary-5');
+            }
+            &:hover {
+                background: stencilColor('color-men-design-primary-1');
+                border-color: stencilColor('color-men-design-primary-1');
+                color: stencilColor('color-white');
+                .icon {
+                    svg use {
+                        fill: stencilColor("color-white");                
+                    }
+                }
+            }
+            &.button--primary {
+                background: stencilColor('color-men-design-primary-1');
+                border-color: stencilColor('color-men-design-primary-1');
+                color: stencilColor('color-white');
+                &:before {
+                    border-color: rgba(255, 255, 255, 0.6);
+                }
+                &:hover {
+                    background: stencilColor('color-men-design-primary-2');
+                    border-color: stencilColor('color-men-design-primary-2');
+                    &:before {
+                        border-color: rgba(255, 255, 255, 0.6);
+                    }
+                }
+            }
+            &:disabled {
+                background: stencilColor('color-men-design-primary-2');
+                border-color: stencilColor('color-men-design-primary-2');
+                color: stencilColor('color-white');
+                &:before {
+                    border-color: rgba(255, 255, 255, 0.4);
+                }
+            }
+        }
+        .breadcrumbs {
+            .breadcrumb {
+                &::after {
+                    width: 2.5px;
+                    height: 2.5px;
+                    background-color: stencilColor('color-men-design-neutral-1');
+                }
+                .breadcrumb-label {
+                    span {
+                        color: stencilColor('color-men-design-neutral-1');
+                    }
+                }
+                &:last-child {
+                    .breadcrumb-label {
+                        span {
+                            color: stencilColor('color-men-design-primary-1');
+                        }
+                    }
+                }
+            }
+        }
+        .form {
+            .form-field {
+                .form-label {
+                    color: stencilColor('color-men-design-primary-1');
+                }
+                .form-radio, .form-checkbox {
+                    &~.form-label {
+                        color: stencilColor('color-men-design-neutral-1');
+                    }
+                }
+                .form-radio {
+                    &~.form-label {
+                        &::before {
+                            border-color: stencilColor('color-men-design-primary-1');
+                        }
+                    }
+                    &:disabled {
+                        &~.form-label {
+                            &::before {
+                                border-color: stencilColor('color-men-design-primary-2');
+                                background-color: stencilColor('color-men-design-primary-4');
+                            }
+                        }
+                    }
+                }
+                .form-checkbox {
+                    &~.form-label {
+                        &::before {
+                            border-color: stencilColor('color-men-design-primary-2');
+                        }
+                    }
+                    &:disabled {
+                        &~.form-label {
+                            &::before {
+                                border-color: stencilColor('color-men-design-primary-2');
+                                background-color: stencilColor('color-men-design-primary-4');
+                            }
+                        }
+                    }
+                }
+                input[type="checkbox"]:checked {
+                    &~.form-label {
+                        &::before {
+                            background-color: stencilColor('color-men-design-neutral-1');
+                        }
+                    }
+                    &:disabled {
+                        &~.form-label {
+                            &::before {
+                                border-color: stencilColor('color-men-design-primary-2');
+                                background-color: stencilColor('color-men-design-primary-2');
+                            }
+                        }
+                    }
+                }
+                input[type="radio"]:checked {
+                    &~.form-label {
+                        &::after {
+                            border-color: stencilColor('color-men-design-primary-2');
+                            background-color: stencilColor('color-white');
+                        }
+                    }
+                    &:disabled {
+                        &~.form-label {
+                            &::before {
+                                border-color: stencilColor('color-men-design-neutral-1');
+                            }
+                            &::after {
+                                background-color: stencilColor('color-men-design-neutral-1');
+                                border-color: stencilColor('color-men-design-neutral-1');
+                            }
+                        }
+                    }
+                }
+                .form-input, .form-select {
+                    background-color: stencilColor('color-white');
+                    border-color: stencilColor('color-men-design-primary-1');
+                    color: stencilColor('color-men-design-primary-1');
+                    &::placeholder { 
+                        color: stencilColor('color-men-design-primary-3');
+                        border-color: stencilColor('color-men-design-primary-1');
+                    }
+                    &:focus { 
+                        color: stencilColor('color-men-design-primary-1');
+                        border-color: stencilColor('color-men-design-primary-1');
+                    }
+                    &:active { 
+                        color: stencilColor('color-men-design-primary-1');
+                        border-color: stencilColor('color-men-design-primary-1');
+                    }
+                }
+                .form-select {
+                    color: stencilColor('color-men-design-primary-3');
+                    option {
+                        color: stencilColor("color-men-design-neutral-1");
+                    }
+                    &:active { 
+                        border-color: stencilColor('color-men-design-primary-1');
+                    }
+                    &:valid {
+                        color: stencilColor('color-men-design-primary-1');
+                    }
+                    &:focus {
+                        color: stencilColor("color-men-design-primary-1");
+                    }
+                }
+            }
+            .form-field--checkbox {
+                .form-label {
+                    color: stencilColor('color-men-design-neutral-1');
+                    &::before {
+                        border-color: stencilColor('color-men-design-primary-2');
+                        background-color: stencilColor('color-white');
+                    }
+                }
+                input[type="checkbox"]:checked + .form-label {
+                    &::before {
+                        background-color: stencilColor('color-men-design-primary-1');
+                        color: stencilColor('color-white');
+                    }
+                }
+            }
+        }
+        .productView {
+            .productView-customElements {
+                .productView-customElement {
+                    .productView-sizeGuide {
+                        a {
+                            color: stencilColor('color-men-design-primary-1');
+                            &::after {
+                                background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE0LjUwMDEgOS41MDA3M0gxOC41MDAxVjUuNTAwNzNINi4wMDAwOUM1LjE3MTY2IDUuNTAwNzMgNC41MDAwOSA2LjE3MjMxIDQuNTAwMDkgNy4wMDA3M1Y3LjAwMDczTTE0LjUwMDEgMTAuMDAwN1YxMC4wMDA3QzE0LjUwMDEgOS4xNzIzMSAxMy44Mjg1IDguNTAwNzMgMTMuMDAwMSA4LjUwMDczSDYuMDAwMDlDNS4xNzE2NiA4LjUwMDczIDQuNTAwMDkgNy44MjkxNiA0LjUwMDA5IDcuMDAwNzNWNy4wMDA3M00xNC41MDAxIDEwLjAwMDdWMTAuMDAwN0MxNC41MDAxIDEwLjgyOTIgMTMuODI4NSAxMS41MDA3IDEzLjAwMDEgMTEuNTAwN0g0LjUwMDA5TTE0LjUwMDEgMTAuMDAwN1YxMy41MDA3QzE0LjUwMDEgMTQuNjA1MyAxMy42MDQ3IDE1LjUwMDcgMTIuNTAwMSAxNS41MDA3SDEuNTAwMDlWMTEuNTAwN0g0LjUwMDA5TTQuNTAwMDkgMTEuNTAwN1Y3LjAwMDczIiBzdHJva2U9IiM2NjcwODkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNS41IDEyLjAwMDdWMTUuMDAwNyIgc3Ryb2tlPSIjNjY3MDg5IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTguNSAxMS41MDA3VjEzLjUwMDciIHN0cm9rZT0iIzY2NzA4OSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik0xMC41IDExLjUwMDdWMTIuNTAwNyIgc3Ryb2tlPSIjNjY3MDg5IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTE2LjUgNS41MDA3M1Y3LjUwMDczIiBzdHJva2U9IiM2NjcwODkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNMTQuNSA1LjUwMDczVjYuNTAwNzMiIHN0cm9rZT0iIzY2NzA4OSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik0xMi41IDUuNTAwNzNWNy41MDA3MyIgc3Ryb2tlPSIjNjY3MDg5IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTEwLjUgNS41MDA3M1Y2LjUwMDczIiBzdHJva2U9IiM2NjcwODkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNi41IDUuNTAwNzNWNi41MDA3MyIgc3Ryb2tlPSIjNjY3MDg5IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTguNSA1LjUwMDczVjcuNTAwNzMiIHN0cm9rZT0iIzY2NzA4OSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik0xMi41IDExLjUwMDdWMTMuNTAwNyIgc3Ryb2tlPSIjNjY3MDg5IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTMuNSAxMy41MDA3VjEzLjQ5MDciIHN0cm9rZT0iIzY2NzA4OSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=");
+                            }
+                        }
+                    }
+                }
+            }
+            .form-radio:checked + .form-option {
+                border-color: stencilColor('color-men-design-primary-1');;
+            }
+            .productView-description {
+                .tabs-contents {
+                    .tab-content {
+                        font-family: stencilFontFamily('default-font-regular');
+                        font-size: remCalc(16px);
+                        line-height: remCalc(22px);
+                        font-weight: 400;
+                        color: stencilColor('color-men-design-neutral-1');;
+                    }
+                }
+            }
+            .productView-subheading {
+                font-family: stencilFontFamily('default-font-regular');
+                font-size: remCalc(14px);
+                line-height: remCalc(22px);
+                font-weight: 400;
+                color: stencilColor('color-men-design-neutral-1');
+            }
+        }
+    }
+}

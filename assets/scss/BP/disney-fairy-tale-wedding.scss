@@ -1,210 +1,266 @@
-.disney-fairy-tale-wedding {
-    font-family: stencilFontFamily('avenir-font');
-    .button {
-        background: stencilColor('color-white');
-        color: stencilColor('color-disney-dark');
-        border-color: stencilColor('color-disney-dark');
+body {
+    .disney-fairy-tale-wedding {
         font-family: stencilFontFamily('avenir-font');
-        font-size: remCalc(14px);
-        line-height: remCalc(18px);
-        .icon {
-            svg use {
-                fill: stencilColor("color-disney-dark");                
-            }
-        }
-        &:before {
-            border-color: stencilColor('color-disney-regular');
-        }
-        &:hover {
-            background: stencilColor('color-disney-dark');
+        .button {
+            background: stencilColor('color-white');
+            color: stencilColor('color-disney-dark');
             border-color: stencilColor('color-disney-dark');
-            color: stencilColor('color-white');
+            font-family: stencilFontFamily('avenir-font');
+            font-size: remCalc(12px);
+            line-height: remCalc(18px);
+            font-weight: 600;
             .icon {
                 svg use {
-                    fill: stencilColor("color-white");                
+                    fill: stencilColor("color-disney-dark");                
                 }
             }
-        }
-        &.button--primary {
-            background: stencilColor('color-disney-dark');
-            color: stencilColor('color-white');
-            border-color: stencilColor('color-disney-dark');
             &:before {
-                border-color: stencilColor('color-disney-light');
+                border-color: stencilColor('color-disney-regular');
             }
             &:hover {
-                background: stencilColor('color-disney-normal');
-                border-color: stencilColor('color-disney-light');
+                background: stencilColor('color-disney-dark');
+                border-color: stencilColor('color-disney-dark');
+                color: stencilColor('color-white');
+                .icon {
+                    svg use {
+                        fill: stencilColor("color-white");                
+                    }
+                }
+            }
+            &.button--primary {
+                background: stencilColor('color-disney-dark');
+                color: stencilColor('color-white');
+                border-color: stencilColor('color-disney-dark');
                 &:before {
                     border-color: stencilColor('color-disney-light');
                 }
+                &:hover {
+                    background: stencilColor('color-disney-normal');
+                    border-color: stencilColor('color-disney-light');
+                    &:before {
+                        border-color: stencilColor('color-disney-light');
+                    }
+                }
+            }
+            &:disabled {
+                background: stencilColor('color-disney-light');
+                border-color: stencilColor('color-disney-light');
+                color: stencilColor('color-white');
+                &:before {
+                    border-color: stencilColor('color-white');
+                }
             }
         }
-        &:disabled {
-            background: stencilColor('color-disney-light');
-            border-color: stencilColor('color-disney-light');
-            color: stencilColor('color-white');
-            &:before {
-                border-color: stencilColor('color-white');
-            }
-        }
-    }
-    .form {
-        .form-field {
-            .form-label {
-                font-family: stencilFontFamily('avenir-font');
-                font-size: remCalc(14px);
-                line-height: remCalc(18px);
-                font-weight: 500;
-                color: stencilColor('color-disney-dark');
-                background-color: stencilColor('color-white');
-                top: 2px;
-            }
-            .form-radio, .form-checkbox {
-                &~.form-label {
+        .form {
+            .form-field {
+                .form-label {
+                    font-family: stencilFontFamily('avenir-font');
+                    font-size: remCalc(12px);
+                    line-height: remCalc(14px);
+                    font-weight: 600;
+                    color: stencilColor('color-disney-dark');
+                    background-color: stencilColor('color-white');
+                    top: 2px;
+                }
+                .form-radio, .form-checkbox {
+                    &~.form-label {
+                        color: stencilColor('color-text');
+                    }
+                }
+                .form-radio {
+                    &~.form-label {
+                        &::before {
+                            border-color: stencilColor('color-disney-dark');
+                        }
+                    }
+                    &:disabled {
+                        &~.form-label {
+                            &::before {
+                                border-color: stencilColor('color-disney-dark');
+                                background-color: stencilColor('color-disney-light');
+                            }
+                        }
+                    }
+                }
+                .form-checkbox {
+                    &~.form-label {
+                        &::before {
+                            border-color: stencilColor('color-disney-dark');
+                        }
+                    }
+                    &:disabled {
+                        &~.form-label {
+                            &::before {
+                                border-color: stencilColor('color-disney-dark');
+                                background-color: stencilColor('color-disney-normal');
+                            }
+                        }
+                    }
+                }
+                input[type="checkbox"]:checked {
+                    &~.form-label {
+                        &::before {
+                            background-color: stencilColor('color-disney-dark');
+                        }
+                    }
+                    &:disabled {
+                        &~.form-label {
+                            &::before {
+                                border-color: stencilColor('color-disney-dark');
+                                background-color: stencilColor('color-disney-light');
+                            }
+                        }
+                    }
+                }
+                input[type="radio"]:checked {
+                    &~.form-label {
+                        &::after {
+                            border-color: stencilColor('color-disney-dark');
+                            background-color: stencilColor('color-white');
+                        }
+                    }
+                    &:disabled {
+                        &~.form-label {
+                            &::before {
+                                border-color: stencilColor('color-disney-dark');
+                            }
+                            &::after {
+                                background-color: stencilColor('color-disney-dark');
+                                border-color: stencilColor('color-disney-light');
+                            }
+                        }
+                    }
+                }
+                .form-input, .form-select {
+                    background-color: stencilColor('color-white');
+                    border-color: stencilColor('color-disney-dark');
+                    color: stencilColor('color-disney-normal');
+                    &::placeholder { 
+                        color: stencilColor('color-disney-light');
+                        border-color: stencilColor('color-disney-dark');
+                    }
+                    &:focus { 
+                        color: stencilColor('color-text');
+                        border-color: stencilColor('color-disney-dark');
+                    }
+                    &:active { 
+                        color: stencilColor('color-disney-dark');
+                        border-color: stencilColor('color-disney-dark');
+                    }
+                }
+                .form-select {
                     color: stencilColor('color-text');
+                    option {
+                        color: stencilColor("color-disney-normal");
+                    }
+                    &:active { 
+                        border-color: stencilColor('color-text');
+                    }
+                    &:valid {
+                        color: stencilColor("color-text");
+                    }
+                    &:focus {
+                        color: stencilColor("color-disney-dark");
+                    }
                 }
             }
-            .form-radio {
-                &~.form-label {
+            .form-field--checkbox {
+                .form-label {
+                    color: stencilColor('color-text');
                     &::before {
-                        border-color: stencilColor('color-disney-dark');
-                    }
-                }
-                &:disabled {
-                    &~.form-label {
-                        &::before {
-                            border-color: stencilColor('color-disney-dark');
-                            background-color: stencilColor('color-disney-light');
-                        }
-                    }
-                }
-            }
-            .form-checkbox {
-                &~.form-label {
-                    &::before {
-                        border-color: stencilColor('color-disney-dark');
-                    }
-                }
-                &:disabled {
-                    &~.form-label {
-                        &::before {
-                            border-color: stencilColor('color-disney-dark');
-                            background-color: stencilColor('color-disney-normal');
-                        }
-                    }
-                }
-            }
-            input[type="checkbox"]:checked {
-                &~.form-label {
-                    &::before {
-                        background-color: stencilColor('color-disney-dark');
-                    }
-                }
-                &:disabled {
-                    &~.form-label {
-                        &::before {
-                            border-color: stencilColor('color-disney-dark');
-                            background-color: stencilColor('color-disney-light');
-                        }
-                    }
-                }
-            }
-            input[type="radio"]:checked {
-                &~.form-label {
-                    &::after {
                         border-color: stencilColor('color-disney-dark');
                         background-color: stencilColor('color-white');
                     }
                 }
-                &:disabled {
-                    &~.form-label {
-                        &::before {
-                            border-color: stencilColor('color-disney-dark');
-                        }
-                        &::after {
-                            background-color: stencilColor('color-disney-dark');
-                            border-color: stencilColor('color-disney-light');
+                input[type="checkbox"]:checked + .form-label {
+                    &::before {
+                        background-color: stencilColor('color-disney-dark');
+                        color: stencilColor('color-white');
+                    }
+                }
+            }
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: stencilFontFamily('avenir-font');
+        }
+        h1 {
+            font-size: remCalc(36px);
+            line-height: remCalc(49px);
+            text-transform: uppercase;
+        }
+        h2 {
+            font-family: stencilFontFamily('avenir-font');
+            font-size: remCalc(24px);
+            line-height: remCalc(33px);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        p {
+            font-family: stencilFontFamily('avenir-font');
+            font-size: remCalc(16px);
+            line-height: remCalc(22px);
+            font-weight: 400;
+        }
+        .productView-product {
+            border-bottom-color: stencilColor("color-disney-border");
+            &::after {
+                background:  url('/assets/icons/disney-diamond-accent.svg');
+                background-repeat: no-repeat;
+                background-size: 36px 24px;
+                width: 36px;
+                height: 24px;
+                left: calc(50% - 36px/2 + 2px);
+                transform: none;
+                border: none;
+                bottom: -12px;
+            }
+        }
+        .breadcrumbs {
+            .breadcrumb {
+                &:last-child {
+                    .breadcrumb-label {
+                        span {
+                            color: stencilColor('color-disney-dark');
                         }
                     }
                 }
             }
-            .form-input, .form-select {
-                background-color: stencilColor('color-white');
-                border-color: stencilColor('color-disney-dark');
-                color: stencilColor('color-disney-normal');
-                &::placeholder { 
-                    color: stencilColor('color-disney-light');
-                    border-color: stencilColor('color-disney-dark');
-                }
-                &:focus { 
-                    color: stencilColor('color-text');
-                    border-color: stencilColor('color-disney-dark');
-                }
-                &:active { 
-                    color: stencilColor('color-disney-dark');
-                    border-color: stencilColor('color-disney-dark');
+        }
+        .productView {
+            .productView-customElements {
+                .productView-customElement {
+                    .productView-sizeGuide {
+                        a {
+                            color: stencilColor('color-disney-dark');
+                            &::after {
+                                background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE0LjUwMDEgOS41MDA3M0gxOC41MDAxVjUuNTAwNzNINi4wMDAwOUM1LjE3MTY2IDUuNTAwNzMgNC41MDAwOSA2LjE3MjMxIDQuNTAwMDkgNy4wMDA3M1Y3LjAwMDczTTE0LjUwMDEgMTAuMDAwN1YxMC4wMDA3QzE0LjUwMDEgOS4xNzIzMSAxMy44Mjg1IDguNTAwNzMgMTMuMDAwMSA4LjUwMDczSDYuMDAwMDlDNS4xNzE2NiA4LjUwMDczIDQuNTAwMDkgNy44MjkxNiA0LjUwMDA5IDcuMDAwNzNWNy4wMDA3M00xNC41MDAxIDEwLjAwMDdWMTAuMDAwN0MxNC41MDAxIDEwLjgyOTIgMTMuODI4NSAxMS41MDA3IDEzLjAwMDEgMTEuNTAwN0g0LjUwMDA5TTE0LjUwMDEgMTAuMDAwN1YxMy41MDA3QzE0LjUwMDEgMTQuNjA1MyAxMy42MDQ3IDE1LjUwMDcgMTIuNTAwMSAxNS41MDA3SDEuNTAwMDlWMTEuNTAwN0g0LjUwMDA5TTQuNTAwMDkgMTEuNTAwN1Y3LjAwMDczIiBzdHJva2U9IiM0OTc3YmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNS41IDEyLjAwMDdWMTUuMDAwNyIgc3Ryb2tlPSIjNDk3N2JkIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTguNSAxMS41MDA3VjEzLjUwMDciIHN0cm9rZT0iIzQ5NzdiZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik0xMC41IDExLjUwMDdWMTIuNTAwNyIgc3Ryb2tlPSIjNDk3N2JkIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTE2LjUgNS41MDA3M1Y3LjUwMDczIiBzdHJva2U9IiM0OTc3YmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNMTQuNSA1LjUwMDczVjYuNTAwNzMiIHN0cm9rZT0iIzQ5NzdiZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik0xMi41IDUuNTAwNzNWNy41MDA3MyIgc3Ryb2tlPSIjNDk3N2JkIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTEwLjUgNS41MDA3M1Y2LjUwMDczIiBzdHJva2U9IiM0OTc3YmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNi41IDUuNTAwNzNWNi41MDA3MyIgc3Ryb2tlPSIjNDk3N2JkIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTguNSA1LjUwMDczVjcuNTAwNzMiIHN0cm9rZT0iIzQ5NzdiZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik0xMi41IDExLjUwMDdWMTMuNTAwNyIgc3Ryb2tlPSIjNDk3N2JkIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTMuNSAxMy41MDA3VjEzLjQ5MDciIHN0cm9rZT0iIzQ5NzdiZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=");
+                            }
+                        }
+                    }
                 }
             }
-            .form-select {
-                color: stencilColor('color-text');
-                option {
-                    color: stencilColor("color-disney-normal");
+            .form-radio:checked + .form-option {
+                border-color: stencilColor('color-disney-normal');;
+            }
+            .productView-description {
+                .tabs-contents {
+                    .tab-content {
+                        font-family: stencilFontFamily('avenir-font');
+                        font-size: remCalc(16px);
+                        line-height: remCalc(22px);
+                        font-weight: 400;
+                        color: stencilColor('color-black');
+                    }
                 }
-                &:active { 
-                    border-color: stencilColor('color-text');
-                }
-                &:valid {
-                    color: stencilColor("color-text");
-                }
-                &:focus {
-                    color: stencilColor("color-disney-dark");
-                }
+            }
+            .productView-subheading {
+                font-family: stencilFontFamily('avenir-font');
+                font-size: remCalc(16px);
+                line-height: remCalc(22px);
+                font-weight: 400;
+                color: stencilColor('color-black');
             }
         }
-        .form-field--checkbox {
-            .form-label {
-                color: stencilColor('color-text');
-                &::before {
-                    border-color: stencilColor('color-disney-dark');
-                    background-color: stencilColor('color-white');
-                }
-            }
-            input[type="checkbox"]:checked + .form-label {
-                &::before {
-                    background-color: stencilColor('color-disney-dark');
-                    color: stencilColor('color-white');
-                }
-            }
-        }
-    }
-    h1, h2, h3, h4, h5, h6 {
-        font-family: stencilFontFamily('avenir-font');
-    }
-    h1 {
-        font-size: remCalc(36px);
-        line-height: remCalc(49px);
-        text-transform: uppercase;
-    }
-    h2 {
-        font-family: stencilFontFamily('avenir-font');
-        font-size: remCalc(24px);
-        line-height: remCalc(33px);
-        text-transform: uppercase;
-        font-weight: 700;
-    }
-    .productView-product {
-        border-bottom-color: stencilColor("color-disney-border");
-        &::after {
-            background:  url('/assets/icons/disney-diamond-accent.svg');
-            background-repeat: no-repeat;
-            background-size: 36px 24px;
-            width: 36px;
-            height: 24px;
-            left: calc(50% - 36px/2 + 2px);
-            transform: none;
-            border: none;
-            bottom: -12px;
-        }
+        
     }
 }
