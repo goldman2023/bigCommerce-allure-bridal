@@ -357,7 +357,6 @@ class FacetedSearch {
 
         //Update URL
         urlUtils.goToUrl(url);
-        $("#fillterApply").attr("data-href",url);
 
         if (this.options.modalOpen) {
             this.options.modal.close();
