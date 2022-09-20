@@ -26,10 +26,10 @@
                 .background-rot {
                         position: absolute;
                         content: "";
-                        top: 1px;
-                        left: 0;
-                        width: 22px;
-                        height: 22px;
+                        top: 3px;
+                        left: 1px;
+                        width: 20px;
+                        height: 20px;
                         background: stencilColor('color-default-primary-1');
                         transform: rotate(45deg);
                         z-index: 0;

@@ -133,6 +133,42 @@
     display: none;
 }
 .facetedSearch {
+    .facetedSearch-toggle {
+        border: none;
+        padding: 20px 0;
+        &::before {
+            position: absolute;
+            left: 8px;
+            content: "";
+            width: 35px;
+            height: 35px;
+            background-repeat: no-repeat;
+            top: 8px;
+            background-repeat: no-repeat;
+            top: 8px;
+            background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEzLjg4ODcgNS40NjMyM0gxNS44MzMxIiBzdHJva2U9IiMyODI4MjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNC4xNjY1IDUuNDYzMjNIMTEuMjk2MSIgc3Ryb2tlPSIjMjgyODI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTguNzAzNjEgMTAuMDAwM0gxNS44MzMyIiBzdHJva2U9IiMyODI4MjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNC4xNjY1IDEwLjAwMDNINi4xMTA5NSIgc3Ryb2tlPSIjMjgyODI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTEzLjg4ODcgMTQuNTM3M0gxNS44MzMxIiBzdHJva2U9IiMyODI4MjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNC4xNjY1IDE0LjUzNzNIMTEuMjk2MSIgc3Ryb2tlPSIjMjgyODI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTEzLjUwODggNC41NDY2MUMxNC4wMTUxIDUuMDUyODQgMTQuMDE1MSA1Ljg3MzYxIDEzLjUwODggNi4zNzk4NUMxMy4wMDI2IDYuODg2MDkgMTIuMTgxOCA2Ljg4NjA5IDExLjY3NTYgNi4zNzk4NUMxMS4xNjkzIDUuODczNjEgMTEuMTY5MyA1LjA1Mjg0IDExLjY3NTYgNC41NDY2MUMxMi4xODE4IDQuMDQwMzcgMTMuMDAyNiA0LjA0MDM3IDEzLjUwODggNC41NDY2MSIgc3Ryb2tlPSIjMjgyODI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTguMzIzNzYgOS4wODM2NEM4LjgyOTk5IDkuNTg5ODggOC44Mjk5OSAxMC40MTA2IDguMzIzNzYgMTAuOTE2OUM3LjgxNzUyIDExLjQyMzEgNi45OTY3NSAxMS40MjMxIDYuNDkwNTIgMTAuOTE2OUM1Ljk4NDI4IDEwLjQxMDYgNS45ODQyOCA5LjU4OTg4IDYuNDkwNTIgOS4wODM2NEM2Ljk5Njc1IDguNTc3NDEgNy44MTc1MiA4LjU3NzQxIDguMzIzNzYgOS4wODM2NCIgc3Ryb2tlPSIjMjgyODI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTEzLjUwODggMTMuNjIwN0MxNC4wMTUxIDE0LjEyNjkgMTQuMDE1MSAxNC45NDc3IDEzLjUwODggMTUuNDUzOUMxMy4wMDI2IDE1Ljk2MDIgMTIuMTgxOCAxNS45NjAyIDExLjY3NTYgMTUuNDUzOUMxMS4xNjkzIDE0Ljk0NzcgMTEuMTY5MyAxNC4xMjY5IDExLjY3NTYgMTMuNjIwN0MxMi4xODE4IDEzLjExNDQgMTMuMDAyNiAxMy4xMTQ0IDEzLjUwODggMTMuNjIwNyIgc3Ryb2tlPSIjMjgyODI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==");
+        }
+        &::after {
+            position: absolute;
+            left: 30px;
+            content: "Filters";
+            width: 70px;
+            height: 20px;
+            top: 12px;
+            font-family: stencilFontFamily('default-font-regular');
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 1;
+            text-align: center;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #282828;
+        }
+        .facetedSearch-toggle-indicator,.facetedSearch-toggle-text {
+            display: none;
+        }
+    }
     .facetedSearch-refineFilters {
         margin-top: -40px;
         .sidebarBlock-heading {
@@ -170,19 +206,14 @@
             text-transform: uppercase;
             color: #BC8372;
         }
-        ul.inlineList,.nofilters {
-            display: none;
-        }
-        .filtersButton {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            margin-top: 32px;
-            .apply {
-                width: 76px;
-                margin-right: 20px;
-                margin-bottom: 0;
-            }
+        .nofilters {
+            font-family: stencilFontFamily('default-font-regular');
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 15px;
+            text-align: left;
+            color: #282828;
         }
     }
     .facetedSearch-navList {
