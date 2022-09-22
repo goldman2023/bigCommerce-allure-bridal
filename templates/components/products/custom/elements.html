@@ -4,10 +4,11 @@
             {{product.availability}}
         </div>
     </div>
-    <div class="productView-sizeGuide">
-        <a href="">
-            {{lang 'products.size_guide'}}
+    <div class="productView-sizeGuide" data-size-chart>
+        <a href="" id="sizeGuide">
+            {{lang 'products.size_guide'}} 
         </a>
+        {{> components/products/custom/size-chart}}
     </div>
 </div>
 <div class="productView-customElement productView-customElement--button">
