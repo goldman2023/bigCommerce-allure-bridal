@@ -1,0 +1,46 @@
+<div class="productSlider" data-category="{{category.name}}" >
+    <h2 class="heading" data-category-name></h2>
+    <div class="productGridSection">
+        {{#if category.products}}
+            <ul class="productGrid" data-products-slide>
+                {{#each category.products}}
+                <li class="product">
+                    <article class="card">
+                    <figure class="card-figure">
+                        <a href="{{url}}"
+                           class="card-figure__link"
+                           aria-label="{{> components/products/product-info}}"
+                           {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}}
+                        >
+                            <div class="card-img-container">
+                                {{> components/common/responsive-img
+                                    image=image
+                                    class="card-image"
+                                    fallback_size=theme_settings.productgallery_size
+                                    lazyload=theme_settings.lazyload_mode
+                                    default_image=theme_settings.default_image_product
+                                }}
+                            </div>
+                        </a>
+                    </figure>
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            <a aria-label="{{> components/products/product-info}}"
+                               href="{{url}}"
+                               {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}}
+                            >
+                                {{name}}
+                            </a>
+                        </h3>
+                        <div class="card-text" data-test-info-type="price">
+                            
+                        </div>
+                    </div>
+                </article>
+                </li>
+                {{/each}}
+            </ul>
+        {{/if}}
+    </div>
+</div>
+{{> BP/components/common/divider}}

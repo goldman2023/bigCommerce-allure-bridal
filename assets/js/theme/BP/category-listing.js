@@ -69,34 +69,6 @@ export default class CategoryListing extends PageManager {
                             </li>`;
                 });
                 block.querySelector('.sub-products').innerHTML = `<ul class="productGrid" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>${prdlist.join('')}</ul>`;
-                //     block.querySelector('.sub-products .productGrid').slick({
-                //         dots: false,
-                //         infinite: false,
-                //         speed: 300,
-                //         slidesToShow: 4,
-                //         slidesToScroll: 1,
-                //         responsive: [
-                //         {
-                //             breakpoint: 1024,
-                //             settings: {
-                //             slidesToShow: 3,
-                //             slidesToScroll: 1,
-                //             infinite: true,
-                //             dots: true
-                //             }
-                //         },
-                //         {
-                //             breakpoint: 600,
-                //             settings: {
-                //                 slidesToShow: 2,
-                //                 arrows: false,
-                //                 slidesToScroll: 1,
-                //                 infinite: false,
-                //                 dots: true
-                //             }
-                //         }
-                //         ]
-                //     });
             } else {
                 block.querySelector('.sub-products').innerHTML = `<p data-no-products-notification role="alert" aria-live="assertive"tabindex="-1">There are no products listed under this category.</p>`;
             }
