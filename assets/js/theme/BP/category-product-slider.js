@@ -56,8 +56,9 @@ export default class CategoryProductSlider extends PageManager {
             console.log(data.items[0]);
             data.items.forEach(element => {
               if(element.collectionName === cateName) {
-                // document.querySelector('.productSlider').setAttribute('data-ids',element.productsInCollection);
-                document.querySelector('.productSlider .heading').innerHTML= element.collectionHeadline;
+                let heading = element.collectionHeadline;
+                let lastword = heading.split(" ").reverse()[0];
+                document.querySelector('.productSlider .heading').innerHTML= `${heading.replace(lastword,'')} <span class="lastword">${lastword}</span>`
                 let stringArray = element.productsInCollection;
                 let numberArray = [];
                 length = stringArray.length;
@@ -71,7 +72,12 @@ export default class CategoryProductSlider extends PageManager {
         });
     };
     getProducts(prodList) {
+      console.log(typeof prodList);
       console.log(prodList);
+
+      let prodArray = [];
+      prodArray = prodList;
+      //prodArray = prodList.split(',');
       let autho = 'Bearer '+document.getElementById('gettheKey').value;
       fetch('/graphql', { 
          method: 'POST',
@@ -81,7 +87,7 @@ export default class CategoryProductSlider extends PageManager {
              Authorization: autho,
          },
          body: JSON.stringify({
-             query: `query productsById($productIds: [${prodList}]) { 
+             query: `query productsById($productIds: ${prodArray}) { 
                     site { 
                       products(entityIds: $productIds) { 
                         edges {
