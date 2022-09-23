@@ -3,6 +3,9 @@
     margin: 20px;
     border: 1px solid #E2E2E2;
     padding: 80px;
+    overflow: scroll;
+    height: 70vh;
+
     h2.title {
         font-family: stencilFontFamily('prata-font');
         font-style: normal;
@@ -33,7 +36,129 @@
                 color: #4D4D4D;
             }
         }
+        .caption {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 300;
+            font-size: 12px;
+            line-height: 20px;
+            color: #695C5C;
+        }
     }
+    .tabbed {
+        overflow-x: hidden; /* so we could easily hide the radio inputs */
+        margin: 32px 0;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #ccc;
+    }
+    
+    .tabbed [type="radio"] {
+        /* hiding the inputs */
+        display: none;
+    }
+    
+    .tabs {
+        display: flex;
+        align-items: stretch;
+        list-style: none;
+        padding: 0;
+        .tab {
+            width: 25%;
+        }
+    }
+
+    .tab > label {
+        display: block;
+        margin-bottom: -1px;
+        padding: 12px 15px;
+        font-family: stencilFontFamily('default-font-bold');
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #D9D3D3;
+        border-bottom: 1px solid #D9D3D3;
+    }
+    .tab:hover label {
+        color: #695C5C;
+        border-bottom: 1px solid #695C5C;
+        &::after {
+            position: absolute;
+            content: "";
+            right: 50%;
+            bottom: -2.5px;
+            width: 4px;
+            height: 4px;
+            background: #282828;
+            transform: rotate(45deg);
+            outline: 3px solid white;
+        }
+    }
+    
+    .tab-content {
+        display: none;
+        color: #777;
+    }
+    
+    /* As we cannot replace the numbers with variables or calls to element properties, the number of this selector parts is our tab count limit */
+    .tabbed [type="radio"]:nth-of-type(1):checked ~ .tabs .tab:nth-of-type(1) label,
+    .tabbed [type="radio"]:nth-of-type(2):checked ~ .tabs .tab:nth-of-type(2) label,
+    .tabbed [type="radio"]:nth-of-type(3):checked ~ .tabs .tab:nth-of-type(3) label,
+    .tabbed [type="radio"]:nth-of-type(4):checked ~ .tabs .tab:nth-of-type(4) label,
+    .tabbed [type="radio"]:nth-of-type(5):checked ~ .tabs .tab:nth-of-type(5) label,
+    .tabbed [type="radio"]:nth-of-type(6):checked ~ .tabs .tab:nth-of-type(6) label {
+        color: #695C5C;
+        border-bottom: 1px solid #695C5C;
+        &::after {
+            position: absolute;
+            content: "";
+            right: 50%;
+            bottom: -2.5px;
+            width: 4px;
+            height: 4px;
+            background: #282828;
+            transform: rotate(45deg);
+            outline: 3px solid white;
+        }
+    }
+    
+    .tabbed [type="radio"]:nth-of-type(1):checked ~ .tab-content:nth-of-type(1),
+    .tabbed [type="radio"]:nth-of-type(2):checked ~ .tab-content:nth-of-type(2),
+    .tabbed [type="radio"]:nth-of-type(3):checked ~ .tab-content:nth-of-type(3),
+    .tabbed [type="radio"]:nth-of-type(4):checked ~ .tab-content:nth-of-type(4),
+    .tabbed [type="radio"]:nth-of-type(5):checked ~ .tab-content:nth-of-type(5) {
+        display: block;
+    }
+    .tableheading {
+        font-family: stencilFontFamily('default-font-regular');
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+        color: #4D4D4D;
+    }
+    
+    .tablestructure {
+        border: 1px solid #695C5C;
+        .tb-row {
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            .tb-col {
+                text-align: center;
+                vertical-align: middle;
+                width: 25%;
+                padding: 10px 0;
+            }
+            &:first-child {
+                border-bottom: 1px solid #695C5C;
+            }
+        }
+    }
+    
 }
 #modal .sizeChart {
     display: block;

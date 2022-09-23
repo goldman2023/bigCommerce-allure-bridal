@@ -168,6 +168,16 @@ export default class ProductDetails extends ProductDetailsBase {
             const sizeGuide = prodData.sizeGuide;
             console.log(sizeGuide);
             document.querySelector('.sizeChart .description').innerHTML = sizeGuide.description;
+            let howtomesureimg = sizeGuide.howToMeasureBackgroundImage.url;
+            document.getElementById('howtomesureimg').setAttribute('src',howtomesureimg);
+            let sizes = sizeGuide.sizingData.replace(/[\r\n]/gm, '?').split('?');
+            let sizetable = sizes.map((element,i)=> {
+                    let eachrow = element.split(',').map((el)=>{
+                        return `<div class="tb-col">${el}</div>`;
+                    });
+                    return `<div class="tb-row">${eachrow.join("")}</div>`;
+            });
+            document.querySelector('.tabSection .tab-content').innerHTML =  `<p class="tableheading">For all styles Spring 2018 and previous</p><div class="tablestructure">${sizetable.join("")}</div>`;
         });
     }
 
