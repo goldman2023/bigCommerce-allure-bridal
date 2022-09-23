@@ -64,7 +64,9 @@ export default class CategoryProductSlider extends PageManager {
                 length = stringArray.length;
 
                 for (var i = 0; i < length; i++){
+                  if(stringArray[i] !== ""){
                     numberArray.push(parseInt(stringArray[i]));
+                  }
               }
                 this.getProducts(numberArray);
               }
