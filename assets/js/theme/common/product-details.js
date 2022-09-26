@@ -16,6 +16,7 @@ export default class ProductDetails extends ProductDetailsBase {
     constructor($scope, context, productAttributesData = {}) {
         super($scope, context);
         this.$modal = defaultModal();
+
         this.$overlay = $('[data-cart-item-add] .loadingOverlay');
         this.imageGallery = new ImageGallery($('[data-image-gallery]', this.$scope));
         this.imageGallery.init();
@@ -107,9 +108,20 @@ export default class ProductDetails extends ProductDetailsBase {
             this.$modal.open({ size: 'medium' });
             this.$modal.updateContent(sizeChart);
         });
+        document.querySelector('.buttonOnOff').addEventListener("click", this.viewVideoToggle);
     }
-
+    viewVideoToggle(){
+        let checkboxstatus = document.getElementById('viewvideocheckbox').checked;
+        if(checkboxstatus){
+            document.querySelector('.imageblock').style.display = "none";
+            document.querySelector('.videoblock').style.display = "block";
+        } else {
+            document.querySelector('.imageblock').style.display = "block";
+            document.querySelector('.videoblock').style.display = "none";
+        }
+      }
     getProductDetails() {
+        let prodid = document.querySelector('.productView').getAttribute('data-prod-id');
         fetch('/graphql', {
             method: 'POST',
             credentials: 'same-origin',
@@ -121,7 +133,7 @@ export default class ProductDetails extends ProductDetailsBase {
                 query: `
                     query ProductsQuery {
                         site {
-                            product(entityId: 170) {
+                            product(entityId: ${prodid}) {
                                 entityId
                                 name
                                 sku
@@ -170,6 +182,8 @@ export default class ProductDetails extends ProductDetailsBase {
             document.querySelector('.sizeChart .description').innerHTML = sizeGuide.description;
             let howtomesureimg = sizeGuide.howToMeasureBackgroundImage.url;
             document.getElementById('howtomesureimg').setAttribute('src',howtomesureimg);
+            document.getElementById('sizechatvideo').setAttribute('src',sizeGuide.videoUrl);
+
             let sizes = sizeGuide.sizingData.replace(/[\r\n]/gm, '?').split('?');
             let sizetable = sizes.map((element,i)=> {
                     let eachrow = element.split(',').map((el)=>{
