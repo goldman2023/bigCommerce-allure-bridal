@@ -100,15 +100,28 @@ export default class Global extends PageManager {
                         leftTextBlock(element);
                     }
                 });
-                
+            }
+            if(document.getElementById('main-content').classList.contains('pages-custom-category-category-landing')) {
+                metadata.contentBlocksCollection.items.forEach(element => {
+                    if(element.__typename === "BlockElementBigCarousel"){
+                        imageWithContentSlider(element);
+                    }
+                });
             }
         });
+
+        function imageWithContentSlider(blockData) {
+        //     document.querySelector('.imageWithContentSlider .title').innerHTML = blockData.bannerTitle;
+        //     document.querySelector('.imageWithContentSlider .content').innerHTML = blockData.bodyCopy;
+        //     document.querySelector('.imageWithContentSlider .buttonlink').innerHTML = blockData.linkText;
+        //     document.querySelector('.imageWithContentSlider .buttonlink').setAttribute('href',blockData.linkUrl);
+        };
 
         function leftTextBlock(blockData) {
             document.querySelector('.leftTextbanner .title').innerHTML = blockData.bannerTitle;
             document.querySelector('.leftTextbanner .content').innerHTML = blockData.bodyCopy;
             document.querySelector('.leftTextbanner .buttonlink').innerHTML = blockData.linkText;
-            document.querySelector('.leftTextbanner .title').setAttribute('href',blockData.linkUrl);
+            document.querySelector('.leftTextbanner .buttonlink').setAttribute('href',blockData.linkUrl);
         };
 
         $(window).on('load', function(){ 
