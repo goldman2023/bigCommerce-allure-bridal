@@ -190,6 +190,15 @@
             color: #BC8372;
         }
     }
+    .productGridSection {
+        @media screen and (max-width: 600px){
+            margin-left: -20px;
+            width: calc(100% + 40px);
+            .productSliderGrid {
+                margin: 0 !important;
+            }
+        }
+    }
     .product .card-title > a {
         font-family: 'Inter';
         font-style: normal;
@@ -220,11 +229,11 @@
         margin-right: 0;
      }
      .slick-next {
-         right: 0.73rem;
+         right: 0;
          @media screen and (max-width: 600px){
              right: -10px
          }
-         top: 33%;
+         top: 42%;
          width: 52px;
          height: 52px;
          padding: 0 14px;
@@ -233,11 +242,11 @@
          }
      }
      .slick-prev {
-         left: 0.73rem;
+         left: 0;
          @media screen and (max-width: 600px){
              left: -10px
          }
-         top: 33%;
+         top: 42%;
          width: 52px;
          height: 52px;
          padding: 0 14px;
