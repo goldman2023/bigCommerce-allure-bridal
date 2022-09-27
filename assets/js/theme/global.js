@@ -40,7 +40,7 @@ export default class Global extends PageManager {
         });
         $(window).on('load', function(){ 
             setTimeout(function(){
-                $('.productGrid').each(function(){
+                $('.productGridslider').each(function(){
                 $(this).slick({
                             dots: false,
                             infinite: false,
