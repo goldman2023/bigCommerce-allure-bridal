@@ -28,8 +28,8 @@
                 </div>
                 <div class="form-actions">
                     <div class="remember-me">
-                        <!-- <input type="checkbox" class="remember-me_checkbox">
-                        <p class="remember-me_text">Remeber Me</p> -->
+                        {{!-- <input type="checkbox" class="remember-me_checkbox">
+                        <p class="remember-me_text">Remeber Me</p> --}}
                         <a class="forgot-password" href="/login.php?action=reset_password">forgot password
                             <svg xmlns="http://www.w3.org/2000/svg" width="9" height="6" viewBox="0 0 9 6" fill="none">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0.146447 0.750267C0.341709 0.555005 0.658291 0.555005 0.853553 0.750267L4.5 4.39671L8.14645 0.750267C8.34171 0.555005 8.65829 0.555005 8.85355 0.750267C9.04882 0.94553 9.04882 1.26211 8.85355 1.45737L5.20711 5.10382C4.81658 5.49434 4.18342 5.49435 3.79289 5.10382L0.146447 1.45737C-0.0488155 1.26211 -0.0488155 0.94553 0.146447 0.750267Z" fill="#BC8372"/>
@@ -39,8 +39,10 @@
                     <button type="submit" class="button button--primary">{{lang 'login.submit_value' }}</button>
                 </div>
             </form>
-            <!-- {{inject 'recaptchaTitle' (lang 'forgot_password.recaptcha_title')}} -->
-            <!-- <div class="reset-account">
+
+            {{!-- inject 'recaptchaTitle' (lang 'forgot_password.recaptcha_title') --}}
+            {{!--  
+             <div class="reset-account">
                 <div class="reset-account__heading-container">
                     <h4 class="reset-account__title">Reset Password</h4>
                     <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
@@ -63,14 +65,15 @@
                         </button>
                     </div>
                 </form>
-            </div> -->
+            </div> 
+            --}}
         </div>
         <div class="new-login">
             <div class="register-form form">
                 <h2 class="form-heading">Register</h2>
                 <p class="form-sub_heading">If you don't have Allure Bridals account, use this option to create new account. Provide your details to make <strong class="sub_heading-site">Allurebridals.com</strong> purchase easier.</p>
                 <a href="/login.php?action=create_account"><button class="button">Create Account</button></a>
-                <!-- <div class="register-form__container">
+                {{!--  <div class="register-form__container">
                     <div class="form-field">
                         <label class="form-label" for="register_first">First Name</label>
                         <input class="form-input" name="register_first" id="login_email" type="email" placeholder="First Name">
@@ -102,25 +105,10 @@
                         </div>
                     </div>
                     <button type="submit" class="button button--primary">create account</button>
-                </div> -->
+                </div> --}}
             </div>
         </div>
     </div>
 </div>
 {{/partial}}
 {{> layout/base}}
-
-<!-- <script>
-    let fp = document.querySelector('a.forgot-password');
-
-    fp.onclick = (function(){
-        document.querySelector('.login-reset').classList.toggle("remember-me__active");
-    })
-
-    let ca = document.querySelector('.button.register-init');
-
-    ca.onclick = (function(){
-        document.querySelector('.register-form__container').classList.toggle("register-form__active");
-        document.querySelector('.button.register-init').classList.toggle("register-init__deactive");
-    })
-</script> -->

@@ -15,12 +15,28 @@ $inter: stencilFontFamily('default-font-regular');
 
 .account-login {
     display: flex;
-    gap: 160px;
+    flex-flow: column;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+@include breakpoint("medium") {
+    .account-login {
+        display: flex;
+        gap: 160px;
+        flex-flow: row;
+        justify-content: unset;
+        align-items: unset;
+    }
+    .login-reset, .new-login {
+        width: 50%;
+    }
 }
 
 .login-reset {
     display: flex;
-    width: 50%;
+    width: 100%;
     flex-direction: column;
     position: relative;
 
@@ -205,7 +221,7 @@ $inter: stencilFontFamily('default-font-regular');
 }
 
 .new-login {
-    width: 50%;
+    width: 100%;
 
     div {
         width: 100%;
@@ -343,17 +359,4 @@ svg.login-diamond {
     padding: 10px 7.5px 10px 7.5px !important;
 }
 
-}
-
-@media only screen and (max-width: 900px) {
-    .account-login {
-        flex-flow: column;
-        gap: 40px;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .login-reset, .new-login {
-        width: 100%;
-    }
 }
