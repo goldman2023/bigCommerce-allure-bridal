@@ -57,7 +57,9 @@ const customClasses = {
     'pages/custom/page/manage-members': () => import('./theme/BP/manage-members'),
     'pages/custom/page/retail-finder': () => import('./theme/BP/retail-finder'),
     'pages/custom/category/category-listing': () => import('./theme/BP/category-listing'), //mac
-    'pages\\custom\\category\\category-listing': () => import('./theme/BP/category-listing') // window
+    'pages\\custom\\category\\category-listing': () => import('./theme/BP/category-listing'), // window
+    'pages/custom/category/category-landing': () => import('./theme/BP/category-product-slider'), //mac
+    'pages\\custom\\category\\category-landing': () => import('./theme/BP/category-product-slider'), // window
 };
 
 /**

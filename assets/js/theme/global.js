@@ -38,5 +38,69 @@ export default class Global extends PageManager {
             e.target.closest('.alertBox').style.display = 'none';
             console.log(e);
         });
+        $(window).on('load', function(){ 
+            setTimeout(function(){
+                $('.productGrid').each(function(){
+                $(this).slick({
+                            dots: false,
+                            infinite: false,
+                            speed: 300,
+                            slidesToShow: 4,
+                            slidesToScroll: 1,
+                            responsive: [
+                            {
+                                breakpoint: 1024,
+                                settings: {
+                                slidesToShow: 3,
+                                slidesToScroll: 1,
+                                infinite: false,
+                                dots: false
+                                }
+                            },
+                            {
+                                breakpoint: 600,
+                                settings: {
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1,
+                                    centerMode: true,
+                                    infinite: false,
+                                    dots: false
+                                }
+                            }
+                            ]
+                        });
+            });
+            $('.productSliderGrid').each(function(){
+                $(this).slick({
+                            dots: false,
+                            infinite: false,
+                            speed: 300,
+                            slidesToShow: 3,
+                            slidesToScroll: 1,
+                            responsive: [
+                            {
+                                breakpoint: 1024,
+                                settings: {
+                                slidesToShow: 3,
+                                slidesToScroll: 1,
+                                infinite: false,
+                                dots: false
+                                }
+                            },
+                            {
+                                breakpoint: 600,
+                                settings: {
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1,
+                                    centerMode: true,
+                                    infinite: false,
+                                    dots: false
+                                }
+                            }
+                            ]
+                        });
+            });
+            },3000);
+            });
     }
 }
