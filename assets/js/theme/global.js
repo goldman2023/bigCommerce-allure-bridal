@@ -38,6 +38,79 @@ export default class Global extends PageManager {
             e.target.closest('.alertBox').style.display = 'none';
             console.log(e);
         });
+        fetch('/graphql', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.context.graphQlToken}`
+            },
+            body: JSON.stringify({
+                query: `
+                    query ProductsQuery {
+                        site {
+                            product(entityId: 170) {
+                                entityId
+                                name
+                                sku
+                                description
+                                path
+                                prices {
+                                    price {
+                                        currencyCode
+                                        value
+                                    }
+                                }
+                                defaultImage {
+                                    url (
+                                        width: 300
+                                        height: 300
+                                    )
+                                    altText
+                                }
+                                metafields (
+                                    namespace: "Contentful Data"
+                                    keys: ["Contentful Data"]
+                                    first: 1
+                                ) {
+                                    edges {
+                                        node {
+                                            entityId
+                                            id
+                                            key
+                                            value
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                `
+            })
+        })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(res) {
+            let metadata = JSON.parse(res.data.site.product.metafields.edges[0].node.value);
+            console.log(metadata);
+            if(document.getElementById('main-content').classList.contains('pages-custom-category-bp-category')) {
+                metadata.contentBlocksCollection.items.forEach(element => {
+                    if(element.__typename === "ReferencedBlockCategoryBanners"){
+                        leftTextBlock(element);
+                    }
+                });
+                
+            }
+        });
+
+        function leftTextBlock(blockData) {
+            document.querySelector('.leftTextbanner .title').innerHTML = blockData.bannerTitle;
+            document.querySelector('.leftTextbanner .content').innerHTML = blockData.bodyCopy;
+            document.querySelector('.leftTextbanner .buttonlink').innerHTML = blockData.linkText;
+            document.querySelector('.leftTextbanner .title').setAttribute('href',blockData.linkUrl);
+        };
+
         $(window).on('load', function(){ 
             setTimeout(function(){
                 $('.productGridslider').each(function(){
@@ -69,6 +142,7 @@ export default class Global extends PageManager {
                             }
                             ]
                         });
+                        
             });
             $('.productSliderGrid').each(function(){
                 $(this).slick({
@@ -103,4 +177,6 @@ export default class Global extends PageManager {
             },3000);
             });
     }
+
+     
 }
