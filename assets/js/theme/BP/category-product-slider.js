@@ -11,13 +11,12 @@ export default class CategoryProductSlider extends PageManager {
     }
     
      getCategory(categoryPath) {
-        let autho = 'Bearer '+document.getElementById('gettheKey').value;
          fetch('/graphql', { 
             method: 'POST',
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: autho,
+                'Authorization': `Bearer ${this.context.graphQlToken}`
             },
             body: JSON.stringify({
                 query: `query CategoryByUrl {
@@ -82,14 +81,13 @@ export default class CategoryProductSlider extends PageManager {
       prodArray = prodList;
       //prodArray = prodList.split(',');
       let products = ['170', '285', '274', '270'];
-      let autho = 'Bearer '+document.getElementById('gettheKey').value;
       fetch('/graphql', { 
          method: 'POST',
          credentials: 'same-origin',
          headers: {
              'Content-Type': 'application/json',
-             Authorization: autho,
-         },
+             'Authorization': `Bearer ${this.context.graphQlToken}`
+            },
          body: JSON.stringify({
              query: `query ProductsQuery {
               site { 
