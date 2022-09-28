@@ -19,6 +19,22 @@ $inter: stencilFontFamily('default-font-regular');
     gap: 40px;
     justify-content: center;
     align-items: center;
+
+    .form-field{
+        padding-right: 0px;
+        margin: 0px;
+    }
+    .form-actions{
+        margin-top: .5rem;
+    }
+
+    .form-row {
+        margin: 10px 0px;
+    }
+}
+
+form.form.forgot-password-form {
+    margin-top: 10px;
 }
 
 @include breakpoint("medium") {
@@ -30,14 +46,13 @@ $inter: stencilFontFamily('default-font-regular');
         align-items: unset;
     }
     .login-reset, .new-login {
-        width: 50%;
+        width: 50% !important;
     }
 }
 
 .login-reset {
     display: flex;
     width: 100%;
-    width: 50%;
     flex-direction: column;
     position: relative;
 
@@ -304,14 +319,13 @@ $inter: stencilFontFamily('default-font-regular');
     }
 
     input#email {
-        margin-top: 1rem;
-        margin: 1rem 0rem;
+        margin-top: 10px;
         width: 100%;
     }
 
     .form-field {
         margin: 0 !important;
-        padding: 10px 7.5px 10px 7.5px !important;
+        padding: 0 !important;
     }
 
 }

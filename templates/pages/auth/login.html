@@ -18,13 +18,15 @@
                 </svg>
                 {{inject 'useValidEmail' (lang 'forms.validate.common.email_address')}}
                 {{inject 'enterPass' (lang 'forms.validate.common.password')}}
-                <div class="form-field">
-                    <label class="form-label" for="login_email">{{lang 'login.field_email'}}</label>
-                    <input class="form-input" name="login_email" id="login_email" type="email" placeholder="{{lang 'login.field_email'}}">
-                </div>
-                <div class="form-field">
-                    <label class="form-label" for="login_pass">{{lang 'login.field_password'}}</label>
-                    <input class="form-input" id="login_pass" type="password" name="login_pass" autocomplete="off" placeholder="{{lang 'login.field_password'}}">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label class="form-label" for="login_email">{{lang 'login.field_email'}}</label>
+                        <input class="form-input" name="login_email" id="login_email" type="email" placeholder="{{lang 'login.field_email'}}">
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label" for="login_pass">{{lang 'login.field_password'}}</label>
+                        <input class="form-input" id="login_pass" type="password" name="login_pass" autocomplete="off" placeholder="{{lang 'login.field_password'}}">
+                    </div>
                 </div>
                 <div class="form-actions">
                     <div class="remember-me">
