@@ -178,7 +178,6 @@ export default class ProductDetails extends ProductDetailsBase {
         .then(function(res) {
             const prodData = JSON.parse(res.data.site.product.metafields.edges[0].node.value);
             const sizeGuide = prodData.sizeGuide;
-            console.log(sizeGuide);
             document.querySelector('.sizeChart .description').innerHTML = sizeGuide.description;
             let howtomesureimg = sizeGuide.howToMeasureBackgroundImage.url;
             document.getElementById('howtomesureimg').setAttribute('src',howtomesureimg);
@@ -192,8 +191,6 @@ export default class ProductDetails extends ProductDetailsBase {
                     return `<div class="tb-row">${eachrow.join("")}</div>`;
             });
             document.querySelector('.tabSection .tab-content').innerHTML =  `<p class="tableheading">For all styles Spring 2018 and previous</p><div class="tablestructure">${sizetable.join("")}</div>`;
-            console.log(sizeGuide.leftCopyBlock);
-            console.log(`<h6>${sizeGuide.leftCopyBlock.json.content[0].content[0].value}</h6><p>${sizeGuide.leftCopyBlock.json.content[1].content[0].value}</p>`);
             document.querySelector('.leftTop').innerHTML =  `<h6>${sizeGuide.leftCopyBlock.json.content[0].content[0].value}</h6><p>${sizeGuide.leftCopyBlock.json.content[1].content[0].value}</p>`;
             document.querySelector('.rightTop').innerHTML = `<h6>${sizeGuide.topRightCopyBlock.json.content[0].content[0].value}</h6><p>${sizeGuide.topRightCopyBlock.json.content[1].content[0].value}</p>`;
             document.querySelector('.rightBottom').innerHTML = `<h6>${sizeGuide.bottomRightCopyBlock.json.content[0].content[0].value}</h6><p>${sizeGuide.bottomRightCopyBlock.json.content[1].content[0].value}</p>`;
@@ -375,7 +372,6 @@ export default class ProductDetails extends ProductDetailsBase {
         const swatchName = $swatch.attr('aria-label');
         const activeSwatchGroupId = $swatchGroup.attr('aria-labelledby');
         const $swatchOptionMessage = $(`#${activeSwatchGroupId} ~ .swatch-option-message`);
-        console.log($swatchGroup);
         $('[data-option-value]', $swatchGroup).text(swatchName);
         $('[data-option-value]', $swatchGroup).addClass('color-selected-value');
         $swatchOptionMessage.text(`${this.swatchInitMessageStorage[activeSwatchGroupId]} ${swatchName}`);
