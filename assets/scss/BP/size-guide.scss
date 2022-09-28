@@ -58,6 +58,32 @@
                 color: #695C5C;
             }
         }
+        .imageblock {
+            position: relative;
+            .caption {
+                position: absolute;
+                color: #fff;
+                width: 125px;
+                h6,p {
+                    color: #fff;
+                }
+                h6 {
+                    font-weight: 600;
+                }
+            }
+            .leftTop {
+                top: 40%;
+                left: 10%;
+            }
+            .rightTop {
+                top: 15%;
+                right:5%;
+            }
+            .rightBottom {
+                bottom: 15%;
+                right: 5%;
+            }
+        }
         .videoblock {
             display: none;
             #sizechatvideo {

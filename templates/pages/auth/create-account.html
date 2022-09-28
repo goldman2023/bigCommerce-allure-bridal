@@ -2,10 +2,14 @@
 {{inject 'recaptchaTitle' (lang 'create_account.recaptcha_title')}}
 {{#partial "page"}}
     {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
-    <h1 class="page-heading">{{lang 'create_account.heading' }}</h1>
 
     <div class="account account--fixed">
-        <div class="account-body">
+        <div class="account-body register-page">
+            <h2 class="form-heading">Register</h2>
+            <p class="form-sub_heading">If you don't have Allure Bridals account, use this option to create new account. Provide your details to make <strong class="sub_heading-site">Allurebridal.com</strong> purchase easier.</p>
+            <svg class="login-diamond" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <rect x="5.99991" y="1.58603" width="6" height="6" transform="rotate(45 5.99991 1.58603)" fill="#695C5C" stroke="white" stroke-width="2"></rect>
+            </svg>
             {{#if forms.create_account.error}}
                 {{> components/common/alert/alert-error forms.create_account.error}}
             {{/if}}

@@ -192,6 +192,12 @@ export default class ProductDetails extends ProductDetailsBase {
                     return `<div class="tb-row">${eachrow.join("")}</div>`;
             });
             document.querySelector('.tabSection .tab-content').innerHTML =  `<p class="tableheading">For all styles Spring 2018 and previous</p><div class="tablestructure">${sizetable.join("")}</div>`;
+            console.log(sizeGuide.leftCopyBlock);
+            console.log(`<h6>${sizeGuide.leftCopyBlock.json.content[0].content[0].value}</h6><p>${sizeGuide.leftCopyBlock.json.content[1].content[0].value}</p>`);
+            document.querySelector('.leftTop').innerHTML =  `<h6>${sizeGuide.leftCopyBlock.json.content[0].content[0].value}</h6><p>${sizeGuide.leftCopyBlock.json.content[1].content[0].value}</p>`;
+            document.querySelector('.rightTop').innerHTML = `<h6>${sizeGuide.topRightCopyBlock.json.content[0].content[0].value}</h6><p>${sizeGuide.topRightCopyBlock.json.content[1].content[0].value}</p>`;
+            document.querySelector('.rightBottom').innerHTML = `<h6>${sizeGuide.bottomRightCopyBlock.json.content[0].content[0].value}</h6><p>${sizeGuide.bottomRightCopyBlock.json.content[1].content[0].value}</p>`;
+
         });
     }
 
