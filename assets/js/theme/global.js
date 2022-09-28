@@ -111,10 +111,10 @@ export default class Global extends PageManager {
         });
 
         function imageWithContentSlider(blockData) {
-        //     document.querySelector('.imageWithContentSlider .title').innerHTML = blockData.bannerTitle;
-        //     document.querySelector('.imageWithContentSlider .content').innerHTML = blockData.bodyCopy;
-        //     document.querySelector('.imageWithContentSlider .buttonlink').innerHTML = blockData.linkText;
-        //     document.querySelector('.imageWithContentSlider .buttonlink').setAttribute('href',blockData.linkUrl);
+            document.querySelector('.imageWithContentSlider .title').innerHTML = blockData.title;
+            document.querySelector('.imageWithContentSlider .content').innerHTML = blockData.bodyCopy;
+            document.querySelector('.imageWithContentSlider .buttonlink').innerHTML = blockData.linkText;
+            document.querySelector('.imageWithContentSlider .buttonlink').setAttribute('href',blockData.linkUrl);
         };
 
         function leftTextBlock(blockData) {
