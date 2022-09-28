@@ -1,0 +1,377 @@
+$color-default-neutral-2: stencilColor('color-default-neutral-2');
+$color-default-neutral-3: stencilColor('color-default-neutral-3');
+$color-default-neutral-5: stencilColor('color-default-neutral-5');
+$color-border: stencilColor('color-border');
+$color-default-primary-1: stencilColor('color-default-primary-1');
+
+$prata-font: stencilFontFamily('prata-font');
+$inter: stencilFontFamily('default-font-regular');
+
+
+.login {
+    display: flex;
+    flex-direction: column;
+}
+
+.account-login {
+    display: flex;
+    flex-flow: column;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+
+    .form-field{
+        padding-right: 0px;
+        margin: 0px;
+    }
+    .form-actions{
+        margin-top: .5rem;
+    }
+
+    .form-row {
+        margin: 10px 0px;
+    }
+}
+
+form.form.forgot-password-form {
+    margin-top: 10px;
+}
+
+@include breakpoint("medium") {
+    .account-login {
+        display: flex;
+        gap: 160px;
+        flex-flow: row;
+        justify-content: unset;
+        align-items: unset;
+    }
+    .login-reset, .new-login {
+        width: 50% !important;
+    }
+}
+
+.login-reset {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    position: relative;
+
+    .reset-account{
+        display: none;
+    }
+
+    a.forgot-password svg {
+        transform: rotate(270deg);
+    }
+
+    &.remember-me__active{
+        a.forgot-password svg {
+            transform: rotate(180deg);
+        }
+
+        .reset-account{
+            display: block;
+        }
+
+        // form.login-form.form button {
+        //     position: absolute;
+        //     left: 0;
+        //     bottom: 0;
+        // }
+
+        form.form.forgot-password-form .form-field {
+            margin: 0px !important;
+            padding-bottom: 0px;
+            padding-right: 0px;
+        }
+        
+        form.form.forgot-password-form {
+            margin: 0;
+        }
+        
+        .reset-account {
+            margin-bottom: 4.5rem;
+        }
+        
+    }
+
+    form.login-form.form {
+        width: 100%;
+        margin: 0;
+
+        h2.form-heading {
+            margin: 0px 0px 8px 0px;
+            font-family: $prata-font;
+            font-weight: 400;
+            font-size: 22px;
+            line-height: 30px;
+            color: $color-default-neutral-2;
+        }
+        
+        p.form-sub_heading {
+            font-family: $inter;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 20px;
+            color: $color-default-neutral-5;
+            border-bottom: solid 1px $color-border;
+            padding-bottom: 13.5px;
+            margin: 0;
+
+            strong {
+                color: $color-default-neutral-2;
+            }
+        }
+
+        svg.login-diamond {
+            width: 100%;
+            position: absolute;
+            margin-top: -6.5px;
+        }
+
+        .form-field.form-field--inputEmail{
+            margin-top: 1rem;
+            margin-bottom: 22px;
+            padding-bottom: 0px;
+            padding-right: 0px;
+        } 
+        
+        .form-field.form-field--inputPassword {
+            margin-bottom: 16px;
+            padding-bottom: 0px;
+            padding-right: 0px;
+        }
+        
+    }
+
+    .remember-me {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    p.remember-me_text {
+        padding-left: 8px;
+        font-family: $inter;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+        color: $color-default-neutral-3;
+        margin: 0;
+    }
+
+    a.forgot-password {
+        margin-left: auto;
+        font-family: $inter;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 12px;
+        text-align: center;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: $color-default-primary-1;
+    }
+
+    button.button.button--primary {
+        max-width: unset;
+        margin: 0;
+    }
+
+    .reset-account {
+        border: 1px solid $color-default-neutral-3;
+        border-radius: 4px;
+        padding: 18px;
+
+        h4.reset-account__title {
+            font-family: $inter;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 15px;
+            letter-spacing: 0.1em;
+            color: $color-default-neutral-3;
+            text-transform: uppercase;
+            margin: 0;
+        }
+        
+        .reset-account__heading-container {
+            display: flex;
+            justify-content: space-between;
+
+            svg{
+                cursor: pointer;
+            }
+        }
+        
+        p.reset-account_subheading {
+            font-family: $inter;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 20px;
+            color: $color-default-neutral-5;
+            margin: 5px 0px 0px 0px;
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            font-family: $inter;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 15px;
+            text-align: center;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: $color-default-primary-1;
+            margin-top: 15px;
+        }
+        
+    }
+}
+
+.new-login {
+    width: 100%;
+
+    div {
+        width: 100%;
+        margin: 0;
+
+        h2.form-heading {
+            margin: 0px 0px 8px 0px;
+            font-family: $prata-font;
+            font-weight: 400;
+            font-size: 22px;
+            line-height: 30px;
+            color: $color-default-neutral-2;
+        }
+        
+        p.form-sub_heading {
+            font-family: $inter;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 20px;
+            color: $color-default-neutral-5;
+            margin-bottom: 13.5px;
+
+            strong {
+                color: $color-default-neutral-2;
+            }
+        }
+
+        a {text-decoration: none;}
+
+        button, .register-init{
+            max-width: 100%;
+        }
+
+        .register-form__container, .register-init__deactive{
+            display:none;
+
+            &.register-form__active{
+                display: block !important;
+            }
+        }
+    }
+
+    .new-customer {
+        width: 100%;
+    }
+}
+
+.forgot-password__page {
+        display: flex;
+        flex-flow: column;
+
+    h2.form-heading {
+        margin: 0px 0px 8px 0px;
+        font-family: $prata-font;
+        font-weight: 400;
+        font-size: 22px;
+        line-height: 30px;
+        color: $color-default-neutral-2;
+    }
+
+    p.form-sub_heading {
+        font-family: $inter;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+        color: $color-default-neutral-5;
+        border-bottom: solid 1px $color-border;
+        padding-bottom: 13.5px;
+        margin: 0;
+
+        strong {
+            color: $color-default-neutral-2;
+        }
+    }
+
+    svg.login-diamond {
+        width: 100%;
+        margin-top: -6.5px;
+    }
+
+    input#email {
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .form-field {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+}
+
+.register-page {
+    display: flex;
+    flex-flow: column;
+
+h2.form-heading {
+    margin: 0px 0px 8px 0px;
+    font-family: $prata-font;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 30px;
+    color: $color-default-neutral-2;
+}
+
+p.form-sub_heading {
+    font-family: $inter;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    color: $color-default-neutral-5;
+    border-bottom: solid 1px $color-border;
+    padding-bottom: 13.5px;
+    margin: 0;
+
+    strong {
+        color: $color-default-neutral-2;
+    }
+}
+
+svg.login-diamond {
+    width: 100%;
+    margin-top: -6.5px;
+}
+
+.form-row.form-row--half {
+    margin-top: 1rem;
+    margin: 1rem 0rem;
+    width: 100%;
+}
+
+.form-field {
+    margin: 0 !important;
+    padding: 10px 7.5px 10px 7.5px !important;
+}
+
+}
