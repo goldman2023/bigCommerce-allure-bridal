@@ -108,13 +108,30 @@ export default class Global extends PageManager {
                     }
                 });
             }
+            if(document.getElementById('main-content').classList.contains('pages-product')) {
+                metadata.contentBlocksCollection.items.forEach(element => {
+                    if(element.__typename === "BlockElementStoryBlock"){
+                        blockElementStory(element);
+                    }
+                });
+            }
         });
 
+        function blockElementStory(blockData) {
+            console.log(blockData);
+            document.querySelector('.blockElementStory .title').innerHTML = blockData.blockname;
+            document.querySelector('.blockElementStory .content').innerHTML = blockData.bodyCopy;
+            document.querySelector('.blockElementStory .buttonlink').innerHTML = blockData.linkText;
+            document.querySelector('.blockElementStory .buttonlink').setAttribute('href',blockData.linkUrl);
+            document.querySelector('.blockElementStory .date').innerHTML = blockData.displayedate
+
+        }
+
         function imageWithContentSlider(blockData) {
-        //     document.querySelector('.imageWithContentSlider .title').innerHTML = blockData.bannerTitle;
-        //     document.querySelector('.imageWithContentSlider .content').innerHTML = blockData.bodyCopy;
-        //     document.querySelector('.imageWithContentSlider .buttonlink').innerHTML = blockData.linkText;
-        //     document.querySelector('.imageWithContentSlider .buttonlink').setAttribute('href',blockData.linkUrl);
+            document.querySelector('.imageWithContentSlider .title').innerHTML = blockData.title;
+            document.querySelector('.imageWithContentSlider .content').innerHTML = blockData.bodyCopy;
+            document.querySelector('.imageWithContentSlider .buttonlink').innerHTML = blockData.linkText;
+            document.querySelector('.imageWithContentSlider .buttonlink').setAttribute('href',blockData.linkUrl);
         };
 
         function leftTextBlock(blockData) {
