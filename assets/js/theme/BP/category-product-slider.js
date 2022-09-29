@@ -53,9 +53,12 @@ export default class CategoryProductSlider extends PageManager {
             const obj = categoryData.data.site.route.node.metafields.edges[0].node.value;
             const cateName = categoryData.data.site.route.node.name;
             const data = JSON.parse(obj.replace(/\\/g, ""));
-            console.log(data.items[0]);
+            console.log("product slider",data.items[0]);
             data.items.forEach(element => {
               if(element.collectionName === cateName) {
+                if(element.collectionBannerImage1) {
+                  this.blockElementFullscreenVideo(element.collectionBannerImage1);
+                }
                 let heading = element.collectionHeadline;
                 let lastword = heading.split(" ").reverse()[0];
                 document.querySelector('.productSlider .heading').innerHTML= `${heading.replace(lastword,'')} <span class="lastword">${lastword}</span>`
@@ -73,10 +76,18 @@ export default class CategoryProductSlider extends PageManager {
             });
         });
     };
+    blockElementFullscreenVideo(element) {
+      let videoURL = '';
+      let contentStructure = '';
+      if(element.videoUrl.includes('youtube')) {
+        videoURL = `https://www.youtube.com/embed/${element.videoUrl.split('=')[1]}`;
+        contentStructure = `<div><iframe type="text/html" src="${videoURL}"  frameborder="0" id="colbannerVideo" controls=0></iframe></div>`;
+      } else {
+        contentStructure = `<div><video controls id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div>`;
+      }
+      document.getElementById('blockElementFullscreenVideo').innerHTML = contentStructure;
+    }
     getProducts(prodList) {
-      console.log(typeof prodList);
-      console.log(prodList);
-
       let prodArray = [];
       prodArray = prodList;
       //prodArray = prodList.split(',');
