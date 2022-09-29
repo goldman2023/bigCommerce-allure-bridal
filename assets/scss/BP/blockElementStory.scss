@@ -1,0 +1,112 @@
+.blockElementStory {
+    display:flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin: 5% 0;
+    .heading-section {
+        width: 45%;
+        h2 {
+            font-family: stencilFontFamily('stay-classy-font');
+            font-size:  remCalc(50px);
+            line-height:  remCalc(60px);
+            text-align: center;
+            letter-spacing: -0.01em;
+            color: stencilColor("color-default-primary-1");
+            width: 360px;
+            margin: 40px auto 0 auto;
+        }
+        .date {
+            font-family: stencilFontFamily('default-font-regular');
+            font-style: normal;
+            font-weight: 500;
+            font-size:  remCalc(12px);
+            line-height:  remCalc(15px);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: stencilColor("color-default-neutral-3");
+            text-align: center;
+            margin-top: 20px;
+            position: relative;
+            &::before {
+                position: absolute;
+                left: 0;
+                content: "";
+                width: 25%;
+                height: 20px;
+                background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTg4IiBoZWlnaHQ9IjEzIiB2aWV3Qm94PSIwIDAgMTg4IDEzIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB4PSIxODIiIHk9IjEuOTgxMzIiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHRyYW5zZm9ybT0icm90YXRlKDQ1IDE4MiAxLjk4MTMyKSIgZmlsbD0iIzY5NUM1QyIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxyZWN0IHk9IjUuODk1NTEiIHdpZHRoPSIxODAiIGhlaWdodD0iMSIgZmlsbD0iI0M4QzZDNiIvPgo8L3N2Zz4K");
+                background-repeat: no-repeat;
+            }
+            &::after {
+                position: absolute;
+                content: "";
+                left: 25%;
+                top: 4px;
+                width: 4px;
+                height: 4px;
+                background: stencilColor("color-default-neutral-1");
+                transform: rotate(45deg);
+                outline: 3px solid stencilColor('color-secondary');
+            }
+        }
+    }
+    .rightside-section {
+        margin-left: 20px;
+        width: 55%;
+        position: relative;
+        display: inline-block;
+        .topleft {
+            max-width: 302px;
+        }
+        .topright {
+            width: 58%;
+            float: right;
+            img {
+                margin-top: 37px;
+                width: 100%;
+            }
+        }
+        .caption {
+            width: 78%;
+            padding: 30px 0;
+            .content {
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 400;
+                font-size:  remCalc(14px);
+                line-height:  remCalc(22px);
+                color: stencilColor("color-default-neutral-3");
+            }
+            .buttonlink {
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 600;
+                font-size:  remCalc(12px);
+                line-height:  remCalc(16px);
+                text-align: center;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: stencilColor("color-allure-bridals-primary-1");
+                max-width: 280px;
+                width:100%;
+                margin: 0 auto;
+                height: 42px;
+                border: 1px solid stencilColor("color-allure-bridals-primary-1");
+                text-decoration: none;
+                padding: 10px;
+                border-radius: 3px;
+                display: block;
+                position: relative;
+            }
+        }
+        .rightcol {
+            width: 48%;
+            float: left;
+            position: absolute;
+        }
+    }
+    .leftBottom {
+        img {
+            width: 100%;
+        }
+    }
+}
