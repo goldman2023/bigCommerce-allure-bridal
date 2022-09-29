@@ -1,0 +1,19 @@
+.blockElement3ImagesScreenWidth {
+    margin: 50px 0;
+    @media screen and (max-width: 800px){
+        margin: 20px 0;
+    }
+    .mainImage {
+        width: 100%;
+        display: block;
+        margin-bottom: 15px;
+    }
+    .thumbImg {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        .imageDiv {
+            width: 32.5%;
+        }
+    }
+}
