@@ -113,100 +113,91 @@ export default class Global extends PageManager {
                     if(element.__typename === "BlockElementStoryBlock"){
                         blockElementStory(element);
                     }
+                    if(element.__typename === "BlockElement3ImagesScreenWidth"){
+                        blockElement3ImagesScreenWidth(element);
+                    }
                 });
             }
         });
 
-        function blockElementStory(blockData) {
-            console.log(blockData);
-            document.querySelector('.blockElementStory .title').innerHTML = blockData.blockname;
-            document.querySelector('.blockElementStory .content').innerHTML = blockData.bodyCopy;
-            document.querySelector('.blockElementStory .buttonlink').innerHTML = blockData.linkText;
-            document.querySelector('.blockElementStory .buttonlink').setAttribute('href',blockData.linkUrl);
-            document.querySelector('.blockElementStory .date').innerHTML = blockData.displayedate
+        function blockElement3ImagesScreenWidth(blockData) {
+            let BlockItem = ``;
+        };
 
+        function blockElementStory(blockData) {
+            let storyBlockItem = `<div class="heading-section"><h2 class="title">${blockData.blockname}</h2><p class="date">${blockData.displayedate}</p>
+            <div class="leftBottom">
+                <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/storyblock-left-480.png" alt="" />
+            </div></div><div class="rightside-section"><div class="rightcol">
+                <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/storyblock-center.png" class="topleft" alt=""/>
+                <div class="caption">
+                    <p class="content">${blockData.bodyCopy}</p>
+                    <button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button>
+                </div></div><div class="topright">
+                <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/storyblock-right-480.png"  alt="" />
+            </div></div><div class="mobilecaption"><p class="content">${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
+            <div class="mobilebanner"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/storyblock-left-480.png" alt="" /></div>`;
+
+            document.getElementById('blockElementStory').innerHTML = storyBlockItem;
         }
 
         function imageWithContentSlider(blockData) {
-            document.querySelector('.imageWithContentSlider .title').innerHTML = blockData.title;
-            document.querySelector('.imageWithContentSlider .content').innerHTML = blockData.bodyCopy;
-            document.querySelector('.imageWithContentSlider .buttonlink').innerHTML = blockData.linkText;
-            document.querySelector('.imageWithContentSlider .buttonlink').setAttribute('href',blockData.linkUrl);
+            let  contentStructure = `<ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1}'><li><div class="blockrow"><div class="leftblock block">
+                        <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/blockcarousel.png" alt="image left block" />
+                    </div><div class="rightblock block"><div class="caption">
+                            <h2 class="title">${blockData.title}</h2><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a>
+                        </div></div></div></li></ul>`;
+
+            document.getElementById('imageWithContentSlider').innerHTML = contentStructure;
+            applySlider('.imageWithContentSlider ul',1);
+
         };
 
         function leftTextBlock(blockData) {
-            document.querySelector('.leftTextbanner .title').innerHTML = blockData.bannerTitle;
-            document.querySelector('.leftTextbanner .content').innerHTML = blockData.bodyCopy;
-            document.querySelector('.leftTextbanner .buttonlink').innerHTML = blockData.linkText;
-            document.querySelector('.leftTextbanner .buttonlink').setAttribute('href',blockData.linkUrl);
+            let contentStructure = `<img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/image2.png" alt="category banner" />
+            <div class="overlay"></div><div class="caption"><h2 class="title">${blockData.title}</h2><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div>`;
+
+            document.getElementById('leftTextbanner').innerHTML = contentStructure;
         };
 
         $(window).on('load', function(){ 
             setTimeout(function(){
+                applySlider('.productSliderGrid',3);
                 $('.productGridslider').each(function(){
-                $(this).slick({
-                            dots: false,
-                            infinite: false,
-                            speed: 300,
-                            slidesToShow: 4,
-                            slidesToScroll: 1,
-                            responsive: [
-                            {
-                                breakpoint: 1024,
-                                settings: {
-                                slidesToShow: 3,
-                                slidesToScroll: 1,
-                                infinite: false,
-                                dots: false
-                                }
-                            },
-                            {
-                                breakpoint: 600,
-                                settings: {
-                                    slidesToShow: 1,
-                                    slidesToScroll: 1,
-                                    centerMode: true,
-                                    infinite: false,
-                                    dots: false
-                                }
-                            }
-                            ]
-                        });
-                        
-            });
-            $('.productSliderGrid').each(function(){
-                $(this).slick({
-                            dots: false,
-                            infinite: false,
-                            speed: 300,
-                            slidesToShow: 3,
-                            slidesToScroll: 1,
-                            responsive: [
-                            {
-                                breakpoint: 1024,
-                                settings: {
-                                slidesToShow: 3,
-                                slidesToScroll: 1,
-                                infinite: false,
-                                dots: false
-                                }
-                            },
-                            {
-                                breakpoint: 600,
-                                settings: {
-                                    slidesToShow: 1,
-                                    slidesToScroll: 1,
-                                    centerMode: true,
-                                    infinite: false,
-                                    dots: false
-                                }
-                            }
-                            ]
-                        });
-            });
+                    applySlider('.productGridslider',4);
+                });
             },3000);
-            });
-    }
+        });
 
-     
+        function applySlider(selector,slide) {
+            $(selector).slick({
+                dots: false,
+                infinite: false,
+                speed: 300,
+                slidesToShow: slide,
+                slidesToScroll: 1,
+                responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                    slidesToShow: slide,
+                    slidesToScroll: 1,
+                    infinite: false,
+                    dots: false
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        centerMode: true,
+                        infinite: false,
+                        dots: false
+                    }
+                }
+                ]
+            });
+        };
+    }
 }
