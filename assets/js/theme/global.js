@@ -121,7 +121,17 @@ export default class Global extends PageManager {
         });
 
         function blockElement3ImagesScreenWidth(blockData) {
-            let BlockItem = ``;
+            let blockItem = `<div class="mainImage">
+                <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/mainimage.jpg" />
+                </div><div class="thumbImg"><div class="imageDiv">
+                <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/thumb1.jpg" />
+                </div><div class="imageDiv">
+                <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/thumb2.jpg" />
+                </div><div class="imageDiv">
+                <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/thumb3.jpg" />
+            </div></div>`;
+
+            document.getElementById('blockElement3ImagesScreenWidth').innerHTML = blockItem;
         };
 
         function blockElementStory(blockData) {
