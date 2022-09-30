@@ -15,6 +15,7 @@ import adminBar from './global/adminBar';
 import carousel from './common/carousel';
 import loadingProgressBar from './global/loading-progress-bar';
 import svgInjector from './global/svg-injector';
+import {headerFooterData} from './BP/universal-blocks';
 
 export default class Global extends PageManager {
     onReady() {
@@ -33,6 +34,11 @@ export default class Global extends PageManager {
         adminBar(secureBaseUrl, channelId, maintenanceModeSettings, JSON.parse(adminBarLanguage), productId, categoryId);
         loadingProgressBar();
         svgInjector();
+
+        //header footer data 
+        headerFooterData(this.context, response => {
+            console.log('response', response);
+        });
 
         $('.alertBox .close').on('click', e => {
             e.target.closest('.alertBox').style.display = 'none';
