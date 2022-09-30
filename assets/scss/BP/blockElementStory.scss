@@ -1,37 +1,38 @@
 .blockElementStory {
-    display:flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin: 5% 0;
-    @media screen and (max-width: 800px){
-        display: block;
-        margin: 5% -3rem;
+    display: block;
+    margin: 5% -3rem;
+    @include breakpoint("medium") { 
+        display:flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin: 5% 0;
     }
+
     .heading-section {
-        width: 45%;
-        @media screen and (max-width: 800px){
-            width: 100%;
+        width: 100%;
+        @include breakpoint("medium") { 
+            width: 45%;
         }
         h2 {
             font-family: stencilFontFamily('stay-classy-font');
-            font-size:  remCalc(50px);
-            line-height:  remCalc(60px);
+            width: 70%;
+            font-size:  remCalc(36px);
+            line-height:  remCalc(46px);
             text-align: center;
             letter-spacing: -0.01em;
             color: stencilColor("color-default-primary-1");
             width: 360px;
             margin: 40px auto 0 auto;
-            @media screen and (max-width: 800px){
-                width: 70%;
-                font-size:  remCalc(36px);
-                line-height:  remCalc(46px);
+            @include breakpoint("medium") { 
+                width: 360px;
+                font-size:  remCalc(50px);
+                line-height:  remCalc(60px);
             }
         }
         .date {
             font-family: stencilFontFamily('default-font-regular');
             font-style: normal;
             font-weight: 500;
-            font-size:  remCalc(12px);
             line-height:  remCalc(15px);
             letter-spacing: 0.1em;
             text-transform: uppercase;
@@ -39,8 +40,9 @@
             text-align: center;
             margin-top: 20px;
             position: relative;
-            @media screen and (max-width: 800px){
-                font-size:  remCalc(10px);
+            font-size:  remCalc(10px);
+            @include breakpoint("medium") { 
+                font-size:  remCalc(12px);
             }
             &::before {
                 position: absolute;
@@ -65,36 +67,38 @@
         }
     }
     .rightside-section {
-        margin-left: 20px;
-        width: 55%;
+        width: 100%;
+        margin-left: 0;
         position: relative;
         display: inline-block;
-        @media screen and (max-width: 800px){
-            width: 100%;
-            margin-left: 0;
+        @include breakpoint("medium") { 
+            width: 55%;
+            margin-left: 20px;
         }
         .topleft {
             max-width: 302px;
         }
         .topright {
-            width: 58%;
-            float: right;
-            @media screen and (max-width: 800px){
-                width: 60%;
+            @include breakpoint("medium") { 
+                width: 58%;
             }
+            width: 60%;
+            float: right;
+
             img {
-                margin-top: 37px;
-                width: 100%;
-                @media screen and (max-width: 800px){
-                    margin-top: 0;
+                @include breakpoint("medium") { 
+                    margin-top: 37px;
                 }
+                width: 100%;
+                margin-top: 0;
             }
         }
         .caption {
             width: 78%;
             padding: 30px 0;
-            @media screen and (max-width: 800px){
-                display: none;
+            display: none;
+            @include breakpoint("medium") {
+                display: block; 
             }
             .content {
                 font-family: 'Inter';
@@ -106,38 +110,38 @@
             }
         }
         .rightcol {
-            width: 48%;
-            float: left;
-            position: absolute;
-            @media screen and (max-width: 800px){
-                position: relative;
-                float: right;
-                margin-right: 0;
-                margin-top: 50px;
-                width: 40%;
-                img {
-                    width: 100%;
-                }
+            @include breakpoint("medium") {
+                width: 48%;
+                float: left;
+                position: absolute;
+                margin-top: 0;
+            }
+            position: relative;
+            float: right;
+            margin-right: 0;
+            width: 40%;
+            margin-top: 50px;
+            img {
+                width: 100%;
             }
         }
     }
     .leftBottom {
-        @media screen and (max-width: 800px){
-            display: none;
+        display: none;
+        @include breakpoint("medium") {
+            display: block;
         }
         img {
             width: 100%;
         }
     }
     .mobilecaption,.mobilebanner {
-        display: none;
-        @media screen and (max-width: 800px){
-            display: block;
+        display: block;
+        @include breakpoint("medium") {
+            display: none;
         }
     }
     .mobilecaption {
-        @media screen and (max-width: 800px){
             padding: 10px;
-        }
     }
 }

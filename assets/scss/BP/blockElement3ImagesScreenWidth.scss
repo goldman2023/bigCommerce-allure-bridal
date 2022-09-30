@@ -1,7 +1,8 @@
 .blockElement3ImagesScreenWidth {
-    margin: 50px 0;
-    @media screen and (max-width: 800px){
-        margin: 20px 0;
+    margin: 20px -3rem;
+    @include breakpoint("medium") { 
+        margin: 50px 0;
+
     }
     .mainImage {
         width: 100%;
