@@ -3,16 +3,16 @@
         margin: 0;
         padding: 0;
         li .blockrow {
-            display: flex;
-            align-items: center;
-            background: stencilColor("color-allure-bridals-primary-2");
-            @media screen and (max-width: 600px){
-                display: block;
+            @include breakpoint("medium") {
+                display: flex;
+                align-items: center;
             }
+            background: stencilColor("color-allure-bridals-primary-2");
+            display: block;
             .block { 
-                width: 50%;
-                @media screen and (max-width: 600px){
-                    width: 100%;
+                width: 100%;
+                @include breakpoint("medium") {
+                    width: 50%;
                 }
                 img {
                     width: 100%; 
