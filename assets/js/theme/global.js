@@ -16,7 +16,6 @@ import carousel from './common/carousel';
 import loadingProgressBar from './global/loading-progress-bar';
 import svgInjector from './global/svg-injector';
 import {headerFooterData} from './BP/universal-blocks';
-
 export default class Global extends PageManager {
     onReady() {
         const {
@@ -35,9 +34,9 @@ export default class Global extends PageManager {
         loadingProgressBar();
         svgInjector();
 
-        //header footer data 
-        headerFooterData(this.context, response => {
-            console.log('response', response);
+        //header footer data 	
+        headerFooterData(this.context, response => {	
+            console.log('response', response);	
         });
 
         $('.alertBox .close').on('click', e => {
@@ -112,6 +111,9 @@ export default class Global extends PageManager {
                     if(element.__typename === "BlockElementBigCarousel"){
                         imageWithContentSlider(element);
                     }
+                    if(element.__typename === "BlockElementStoryBlock"){
+                        blockElementStory(element);
+                    }
                 });
             }
             if(document.getElementById('main-content').classList.contains('pages-product')) {
@@ -122,9 +124,17 @@ export default class Global extends PageManager {
                     if(element.__typename === "BlockElement3ImagesScreenWidth"){
                         blockElement3ImagesScreenWidth(element);
                     }
+                    if(element.__typename === "BlockElementLookbook"){
+                        lookBook(element);
+                    }
                 });
             }
         });
+
+        function lookBook(blockData) {
+            let blockItem = `<div><h4 class="title">Lookbooks - ${blockData.subheadline}</h4><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData.subheadline}" /><div class="caption"><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div></div></div>`;
+            document.getElementById('blockElementLookbook').innerHTML = blockItem;
+        }
 
         function blockElement3ImagesScreenWidth(blockData) {
             let blockItem = `<div class="mainImage">
@@ -135,34 +145,31 @@ export default class Global extends PageManager {
                 <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/thumb2.jpg" />
                 </div><div class="imageDiv">
                 <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/thumb3.jpg" />
-            </div></div>`;
+                </div></div>`;
 
             document.getElementById('blockElement3ImagesScreenWidth').innerHTML = blockItem;
         };
 
         function blockElementStory(blockData) {
-            let storyBlockItem = `<div class="heading-section"><h2 class="title">${blockData.blockname}</h2><p class="date">${blockData.displayedate}</p>
-            <div class="leftBottom">
+            let storyBlockItem = `<div class="heading-section"><h2 class="title">${blockData.blockname}</h2><p class="date">${blockData.displayedate}</p><div class="leftBottom">
                 <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/storyblock-left-480.png" alt="" />
-            </div></div><div class="rightside-section"><div class="rightcol">
+                </div></div><div class="rightside-section"><div class="rightcol">
                 <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/storyblock-center.png" class="topleft" alt=""/>
-                <div class="caption">
-                    <p class="content">${blockData.bodyCopy}</p>
-                    <button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button>
-                </div></div><div class="topright">
+                <div class="caption"><p class="content">${blockData.bodyCopy}</p>
+                <button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div></div><div class="topright">
                 <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/storyblock-right-480.png"  alt="" />
-            </div></div><div class="mobilecaption"><p class="content">${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
-            <div class="mobilebanner"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/storyblock-left-480.png" alt="" /></div>`;
+                </div></div><div class="mobilecaption"><p class="content">${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
+                <div class="mobilebanner"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/storyblock-left-480.png" alt="" /></div>`;
 
             document.getElementById('blockElementStory').innerHTML = storyBlockItem;
         }
 
         function imageWithContentSlider(blockData) {
             let  contentStructure = `<ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1}'><li><div class="blockrow"><div class="leftblock block">
-                        <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/blockcarousel.png" alt="image left block" />
-                    </div><div class="rightblock block"><div class="caption">
-                            <h2 class="title">${blockData.title}</h2><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a>
-                        </div></div></div></li></ul>`;
+                <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/blockcarousel.png" alt="image left block" />
+                </div><div class="rightblock block"><div class="caption">
+                <h2 class="title">${blockData.title}</h2><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a>
+                </div></div></div></li></ul>`;
 
             document.getElementById('imageWithContentSlider').innerHTML = contentStructure;
             applySlider('.imageWithContentSlider ul',1);
@@ -171,7 +178,7 @@ export default class Global extends PageManager {
 
         function leftTextBlock(blockData) {
             let contentStructure = `<img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/image2.png" alt="category banner" />
-            <div class="overlay"></div><div class="caption"><h2 class="title">${blockData.title}</h2><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div>`;
+                <div class="overlay"></div><div class="caption"><h2 class="title">${blockData.title}</h2><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div>`;
 
             document.getElementById('leftTextbanner').innerHTML = contentStructure;
         };
