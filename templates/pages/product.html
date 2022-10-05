@@ -32,10 +32,18 @@ product:
             {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
         {{/all}}
 
-        {{> components/products/tabs}}
+        <!-- {{> components/products/tabs}} -->
+        <div class="youMightalsoLike" id="youMightalsoLike">
+            <h4 class="title">You Might Also Like</h4>
+            <div class="prodData"></div>
+        </div>
+        {{> BP/components/common/divider}}
+        <div class="thePerfectMatch" id="thePerfectMatch">
+            <h4 class="title">The Perfect Match</h4>
+            <div class="prodData"></div>
+        </div>
         {{> BP/components/common/divider}}
         <div class="blockElementLookbook" id="blockElementLookbook"></div>
-
     </div>
 
     {{> components/products/schema}}
