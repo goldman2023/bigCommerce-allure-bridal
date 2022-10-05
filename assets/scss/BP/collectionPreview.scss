@@ -1,0 +1,63 @@
+.blockElementCollectionPreview {
+    .previewblock {
+        display: block;
+        text-align: center;
+        @include breakpoint("medium") { 
+            display: flex;
+            text-align: left;
+        }
+        @include breakpoint("small") { 
+            text-align: left;
+        }
+        .caption {
+            width: 100%;
+            @include breakpoint("medium") { 
+                width: 60%;
+            }
+            h4 {
+                font-family: stencilFontFamily('prata-font');
+                font-style: normal;
+                font-weight: 400;
+                font-size: remCalc(34px);
+                line-height: remCalc(44px);
+                color: stencilColor("color-allure-bridals-neutral-1");
+            }
+            p {
+                font-family: stencilFontFamily('default-font-regular');
+                font-style: normal;
+                font-weight: 400;
+                font-size: remCalc(16px);
+                line-height: remCalc(26px);
+                color: stencilColor("color-allure-bridals-neutral-2");
+            }
+        }
+        .imagesection {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            @include breakpoint("medium") { 
+                width: 40%;
+                align-items: center;
+            }
+            .leftImg {
+                width: 38%;
+                float: left;
+                 img {
+                    width: calc(100% + 20px);
+                    right:-20px;
+                    position: relative;
+                 }
+                 .dateSection {
+                    margin-left: 20px;
+                    p {
+                        margin-bottom: 2px;
+                    }
+                 }
+            }
+            .rightImg {
+                width: 62%;
+                float: right;
+            }
+        }
+    }
+}
