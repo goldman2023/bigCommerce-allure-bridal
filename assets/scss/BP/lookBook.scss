@@ -4,12 +4,12 @@
         margin: 0;
     }
     h4 {
-        font-family: 'Prata';
+        font-family: stencilFontFamily('prata-font');
         font-style: normal;
         font-weight: 400;
-        font-size: 22px;
-        line-height: 30px;
-        color: #695C5C;
+        font-size: remCalc(22px);
+        line-height: remCalc(30px);
+        color: stencilColor("color-default-neutral-3");
         padding: 0 10px;
         @include breakpoint("medium") { 
             padding: 0;
@@ -20,7 +20,7 @@
         .caption {
             position: relative;
             width: 100%;
-            background: #AC634D;
+            background: stencilColor("color-allure-bridals-primary-1");
             padding: 15px;
             @include breakpoint("medium") { 
                 width: 315px;
@@ -32,7 +32,7 @@
                 margin-left: 0;
             }
             a,p {
-                color: #FFFFFF;
+                color: stencilColor("color-white");
             }
             .content {
                 font-family: stencilFontFamily('default-font-light');

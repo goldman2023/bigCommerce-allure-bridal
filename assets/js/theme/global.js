@@ -25,7 +25,9 @@ import {
     imageWithContentSlider,
     blockElementStory,
     blockElement3ImagesScreenWidth,
-    lookBook} from './BP/universal-blocks';
+    blockElementFullscreenImage,
+    lookBook,
+    collectionPreview} from './BP/universal-blocks';
 export default class Global extends PageManager {
     onReady() {
         const {
@@ -46,11 +48,11 @@ export default class Global extends PageManager {
         svgInjector();
 
         //header footer data 	
-        headerFooterData(this.context, response => {	
-            console.log('response', response);	
+        headerFooterData(this.context, response => {
+            console.log('response', response);
         });
 
-        contentFullmetaData(this.context, response => {	
+        contentFullmetaData(this.context, response => {
             console.log('contentFullmetaData', response);
             let metadata = response[0].value;
             if(document.getElementById('main-content').classList.contains('pages-custom-category-bp-category')) {
@@ -60,21 +62,13 @@ export default class Global extends PageManager {
                     }
                 });
             }
-            if(document.getElementById('main-content').classList.contains('pages-custom-category-category-landing')) {
-                metadata.contentBlocksCollection.items.forEach(element => {
-                    if(element.__typename === "BlockElementBigCarousel"){
-                        imageWithContentSlider('imageWithContentSlider',element);
-                        applySlider('.imageWithContentSlider ul',1);
-                    }
-                    if(element.__typename === "BlockElementStoryBlock"){
-                        blockElementStory('blockElementStory',element);
-                    }
-                });
-            }
             if(document.getElementById('main-content').classList.contains('pages-product')) {
                 metadata.contentBlocksCollection.items.forEach(element => {
                     if(element.__typename === "BlockElementStoryBlock"){
                         blockElementStory('blockElementStory',element);
+                    }
+                    if(element.__typename === "BlockElementFullscreenImage"){
+                        blockElementFullscreenImage('blockElementFullscreenImage',element);
                     }
                     if(element.__typename === "BlockElement3ImagesScreenWidth"){
                         blockElement3ImagesScreenWidth('blockElement3ImagesScreenWidth',element);
@@ -95,6 +89,7 @@ export default class Global extends PageManager {
         if(document.getElementById('main-content').classList.contains('pages-custom-category-category-landing')) {
             getCategoryMetaData(this.context, '/dresses/allure-romance/', response => {	
                 let categoryData = response[0].value;
+                console.log("category landing", categoryData);
                 categoryData.items.forEach(element => {
                     if(element.collectionName === document.getElementById('categoryLanding').getAttribute('data-id')) {
                       if(element.collectionBannerImage1) {
@@ -106,7 +101,6 @@ export default class Global extends PageManager {
                       let stringArray = element.productsInCollection;
                       let numberArray = [];
                       length = stringArray.length;
-      
                       for (var i = 0; i < length; i++){
                         if(stringArray[i] !== ""){
                           numberArray.push(parseInt(stringArray[i]));
@@ -114,6 +108,18 @@ export default class Global extends PageManager {
                       }
                       getProducts(this.context,'.productSlider .productGridSection',numberArray,3);
                     }
+                    element.contentBlocksCollection.items.forEach(ele => {
+                        if(ele.__typename === "BlockElementCollectionPreview"){
+                            collectionPreview('blockElementCollectionPreview',ele);
+                        }
+                        if(ele.__typename === "BlockElementBigCarousel"){
+                            imageWithContentSlider('imageWithContentSlider',ele);
+                            applySlider('.imageWithContentSlider ul',1);
+                        }
+                        if(ele.__typename === "BlockElementDiscover"){
+                            blockElementStory('blockElementDiscover',ele);
+                        }
+                    });
                   });
             });
         }

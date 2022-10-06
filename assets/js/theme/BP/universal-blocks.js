@@ -165,7 +165,6 @@ export function contentFullmetaData(context, callback) {
             const product = response.data.site.product;
             if (product.metafields.edges.length > 0) {
                 const metafields = product.metafields.edges;
-                console.log(metafields);
                 const metafieldData = [];
                 const noOfEntries = metafields.length;
                 for(const [index, metafield] of metafields.entries()) {
@@ -298,15 +297,19 @@ export function lookBook(selectorID,blockData) {
     document.getElementById(selectorID).innerHTML = blockItem;
 }
 
+export function blockElementFullscreenImage(selectorID,blockData) {
+    let blockItem = `<div class="mainImage"><img src="${blockData.backgroundImage.url}" style="width: 100%;"/></div>`;
+
+    document.getElementById(selectorID).innerHTML = blockItem;
+}
+
 export function blockElement3ImagesScreenWidth(selectorID,blockData) {
     let imgthum = blockData.imagesCollection.items.map((image) => {
         return `<div class="imageDiv">
         <img src="${image.url}" />
         </div>`;
     })
-    let blockItem = `<div class="mainImage">
-        <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/mainimage.jpg" />
-        </div><div class="thumbImg">${imgthum.join('')}</div>`;
+    let blockItem = `<div class="thumbImg">${imgthum.join('')}</div>`;
 
     document.getElementById(selectorID).innerHTML = blockItem;
 };
@@ -331,6 +334,14 @@ export function imageWithContentSlider(selectorID,blockData) {
         </div><div class="rightblock block"><div class="caption">
         <h2 class="title">${blockData.title}</h2><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a>
         </div></div></div></li></ul>`;
+
+    document.getElementById(selectorID).innerHTML = contentStructure;
+};
+
+export function collectionPreview(selectorID,blockData) {
+    let  contentStructure = `<div class="previewblock">
+        <div class="caption"><h4>${blockData.title}</h4><p>${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
+        <div class="imagesection"><div class="leftImg"><img src="${blockData.imagesCollection.items[0].url}"  alt="${blockData.imagesCollection.items[0].description}"/><div class="dateSection"><p>${blockData.photoCaption}</p><p>${blockData.photoCaptionDate}</p></div></div><div class="rightImg"><img src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].description}"/></div></div></div>`;
 
     document.getElementById(selectorID).innerHTML = contentStructure;
 };
