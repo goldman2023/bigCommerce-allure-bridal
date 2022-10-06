@@ -25,6 +25,7 @@ import {
     imageWithContentSlider,
     blockElementStory,
     blockElement3ImagesScreenWidth,
+    blockElementFullscreenImage,
     lookBook,
     collectionPreview} from './BP/universal-blocks';
 export default class Global extends PageManager {
@@ -65,6 +66,9 @@ export default class Global extends PageManager {
                 metadata.contentBlocksCollection.items.forEach(element => {
                     if(element.__typename === "BlockElementStoryBlock"){
                         blockElementStory('blockElementStory',element);
+                    }
+                    if(element.__typename === "BlockElementFullscreenImage"){
+                        blockElementFullscreenImage('blockElementFullscreenImage',element);
                     }
                     if(element.__typename === "BlockElement3ImagesScreenWidth"){
                         blockElement3ImagesScreenWidth('blockElement3ImagesScreenWidth',element);

@@ -297,15 +297,19 @@ export function lookBook(selectorID,blockData) {
     document.getElementById(selectorID).innerHTML = blockItem;
 }
 
+export function blockElementFullscreenImage(selectorID,blockData) {
+    let blockItem = `<div class="mainImage"><img src="${blockData.backgroundImage.url}" style="width: 100%;"/></div>`;
+
+    document.getElementById(selectorID).innerHTML = blockItem;
+}
+
 export function blockElement3ImagesScreenWidth(selectorID,blockData) {
     let imgthum = blockData.imagesCollection.items.map((image) => {
         return `<div class="imageDiv">
         <img src="${image.url}" />
         </div>`;
     })
-    let blockItem = `<div class="mainImage">
-        <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/mainimage.jpg" />
-        </div><div class="thumbImg">${imgthum.join('')}</div>`;
+    let blockItem = `<div class="thumbImg">${imgthum.join('')}</div>`;
 
     document.getElementById(selectorID).innerHTML = blockItem;
 };
