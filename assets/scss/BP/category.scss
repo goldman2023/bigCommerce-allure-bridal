@@ -1,47 +1,47 @@
 .bp-category {
     .bp-category-header {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        margin-bottom: 70px;
-        @media screen and (max-width: 550px){
-            display: block;
-            margin-bottom: 20px;;
+        @include breakpoint("medium") {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 70px;
         }
+        display: block;
+        margin-bottom: 20px;
         .bp-cat-content {
-            width: 70%;
-            padding-right: 30px;
-            @media screen and (max-width: 550px){
-                width: 100%;
-                padding-right: 0;
+            @include breakpoint("medium") {
+                width: 70%;
+                padding-right: 30px;
             }
+            width: 100%;
+            padding-right: 0;
             h3 {
-                font-family: 'Prata';
+                font-family: stencilFontFamily('prata-font');
                 font-style: normal;
                 font-weight: 400;
-                font-size: 28px;
-                line-height: 34px;
-                text-align: left;
-                color: #282828;
+                font-size: remCalc(28px);
+                line-height: remCalc(34px);
+                text-align: center;
+                color: stencilColor("color-default-neutral-1");
                 margin-bottom: 10px;
-                @media screen and (max-width: 550px){
-                    text-align: center;
+                @include breakpoint("medium") {
+                    text-align: left;
                 }
             }
             .description {
-                font-family: 'Inter';
+                font-family: stencilFontFamily('default-font-light');
                 font-style: normal;
                 font-weight: 300;
-                font-size: 14px;
-                line-height: 22px;
-                color: #4D4D4D;
+                font-size: remCalc(14px);
+                line-height: remCalc(22px);
+                color: stencilColor("color-default-neutral-2");
             }
         }
         .bp-cat-image {
-            width: 30%;
+            width: 100%;
             position: relative;
-            @media screen and (max-width: 550px){
-                width: 100%;
+            @include breakpoint("medium") {
+                width: 30%;
             }
             &::after, &::before {
                 position: absolute;
@@ -49,7 +49,7 @@
                 top: 50%;
                 width: 6px;
                 height: 6px;
-                background: #D1B3AB;
+                background: stencilColor("color-allure-bridals-primary-3");
                 outline: 3px solid white;
                 transform: rotate(45deg);
             }
@@ -67,7 +67,7 @@
         width: 100%;
     }
 }
-.product {
+.product,.productCarousel-slide {
     .card-body {
         padding: 10px 7px;
     }
@@ -80,7 +80,7 @@
         font-size: remCalc(22px);
         font-style: normal;
         font-weight: 400;
-        line-height: 30px;
+        line-height: remCalc(30px);
         color: stencilColor("color-default-neutral-1");
         &.name {
             width: calc(100% - 25px);
@@ -116,7 +116,7 @@
         font-size: remCalc(12px);
         font-style: normal;
         font-weight: 400;
-        line-height: 20px;
+        line-height: remCalc(20px);
         color: stencilColor("color-default-neutral-1");
         overflow: hidden;
         text-overflow: ellipsis;
@@ -158,12 +158,12 @@
             font-family: stencilFontFamily('default-font-regular');
             font-style: normal;
             font-weight: 500;
-            font-size: 12px;
+            font-size: remCalc(12px);
             line-height: 1;
             text-align: center;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: #282828;
+            color: stencilColor("color-default-neutral-1");
         }
         .facetedSearch-toggle-indicator,.facetedSearch-toggle-text {
             display: none;
@@ -175,12 +175,12 @@
             font-family: stencilFontFamily('default-font-regular');
             font-style: normal;
             font-weight: 500;
-            font-size: 12px;
-            line-height: 15px;
+            font-size: remCalc(12px);
+            line-height: remCalc(18px);
             text-align: left;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: #282828;
+            color: stencilColor("color-default-neutral-1");
             position: relative;
             padding-left: 25px;
             &::before {
@@ -198,22 +198,22 @@
             font-family: stencilFontFamily('default-font-bold');
             font-style: normal;
             font-weight: 600;
-            font-size: 12px;
-            line-height: 15px; 
+            font-size: remCalc(12px);
+            line-height: remCalc(15px); 
             text-align: center;
             letter-spacing: 0.1em;
             text-decoration-line: underline;
             text-transform: uppercase;
-            color: #BC8372;
+            color: stencilColor("color-default-primary-1");
         }
         .nofilters {
             font-family: stencilFontFamily('default-font-regular');
             font-style: normal;
             font-weight: 400;
-            font-size: 12px;
-            line-height: 15px;
+            font-size: remCalc(12px);
+            line-height: remCalc(15px);
             text-align: left;
-            color: #282828;
+            color: stencilColor("color-default-neutral-1");
         }
     }
     .facetedSearch-navList {
@@ -242,20 +242,20 @@
                 font-family: stencilFontFamily('default-font-regular');
                 font-style: normal;
                 font-weight: 500;
-                font-size: 12px;
-                line-height: 15px;
+                font-size: remCalc(12px);
+                line-height: remCalc(15px);
                 text-align: center;
                 letter-spacing: 0.1em;
                 text-transform: uppercase;
-                color: #282828;
+                color: stencilColor("color-default-neutral-1");
             }
             .navList-action--checkbox {
                 font-family:  stencilFontFamily('default-font-light');
                 font-style: normal;
                 font-weight: 400;
-                font-size: 12px;
-                line-height: 20px;
-                color: #282828;
+                font-size: remCalc(12px);
+                line-height: remCalc(20px);
+                color: stencilColor("color-default-neutral-1");
             }
         }
     }
