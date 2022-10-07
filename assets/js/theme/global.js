@@ -63,6 +63,13 @@ export default class Global extends PageManager {
                     }
                 });
             }
+            if(document.getElementById('main-content').classList.contains('pages-custom-category-category-listing')) {
+                metadata.contentBlocksCollection.items.forEach(element => {
+                    if(element.__typename === "ReferencedBlockCategoryBanners"){
+                        leftTextBlock('leftTextbanner',element);
+                    }
+                });
+            }
             if(document.getElementById('main-content').classList.contains('pages-product')) {
                 metadata.contentBlocksCollection.items.forEach(element => {
                     if(element.__typename === "BlockElementStoryBlock"){

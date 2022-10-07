@@ -17,6 +17,12 @@ category:
         {{#if category.subcategories}}
             <div>
                 {{#each category.subcategories}}
+                {{#if @index '===' 3}}
+                    <div class="customBanner">
+                        <div class="leftTextbanner" id="leftTextbanner"></div>
+                        {{> BP/components/common/divider}}
+                    </div> 
+                {{/if}}
                 <div class="sub-category-block" data-path="{{url}}">
                     <div class="sub-cat-header">
                         <h3>{{name}}</h3>
