@@ -229,7 +229,7 @@ export function getProducts(context,selector,prodList,slidescroll) {
     let prodArray = [];
     prodArray = prodList;
     //prodArray = prodList.split(',');
-    let products = ['170', '285', '274', '270'];
+    let products = ['170', '285', '274', '270','2242','2128','167'];
     fetch('/graphql', { 
        method: 'POST',
        credentials: 'same-origin',
@@ -271,11 +271,15 @@ export function getProducts(context,selector,prodList,slidescroll) {
                                 <img src="${item.node.defaultImage.url}" alt="${item.node.name}" title="${item.node.name}" data-sizes="auto" 
                                 srcset="${item.node.defaultImage.url} 80w, ${item.node.defaultImage.url} 160w, ${item.node.defaultImage.url} 320w, ${item.node.defaultImage.url} 640w, ${item.node.defaultImage.url} 960w, ${item.node.defaultImage.url} 1280w, ${item.node.defaultImage.url} 1920w, ${item.node.defaultImage.url} 2560w" 
                                 data-srcset="${item.node.defaultImage.url} 80w, ${item.node.defaultImage.url} 160w, ${item.node.defaultImage.url} 320w, ${item.node.defaultImage.url} 640w, ${item.node.defaultImage.url} 960w, ${item.node.defaultImage.url} 1280w, ${item.node.defaultImage.url} 1920w,${item.node.defaultImage.url} 2560w" class="card-image lazyautosizes lazyloaded" sizes="257px">
-                            </div></a><div class="card-body"><h3 class="card-title"><a aria-label="${item.node.name}" "="" href="${item.node.path}" class="name">Style ${item.node.name}</a>
+                            </div></a><div class="card-body"><h3 class="card-title"><a aria-label="${item.node.name}" "="" href="${item.node.path}" class="name">Style ${item.node.name}</a><a href="/wishlist.php?action=addwishlist&product_id=${item.node.entityId}" class="titleIcon"></a>
                         </h3><div class="card-text" data-test-info-type="price">${item.node.description}</div></article>
                     </li>`;
         });
-        document.querySelector(selector).innerHTML = `<ul class="productSliderGrid" data-slick='{"slidesToShow": ${slidescroll}, "slidesToScroll": 1}'>${prdlist.join('')}</ul>`;
+        if(slidescroll) {
+            document.querySelector(selector).innerHTML = `<ul class="productSliderGrid" data-slick='{"slidesToShow": ${slidescroll}, "slidesToScroll": 1}'>${prdlist.join('')}</ul>`;
+        } else {
+            document.querySelector(selector).innerHTML = `<ul class="productGrid" >${prdlist.join('')}</ul>`;
+        }
     } else {
       document.querySelector(selector).innerHTML =  `<p data-no-products-notification role="alert" aria-live="assertive"tabindex="-1">There are no products listed under this category.</p>`;
     }
@@ -329,11 +333,14 @@ export function blockElementStory(selectorID,blockData) {
 }
 
 export function imageWithContentSlider(selectorID,blockData) {
-    let  contentStructure = `<ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1}'><li><div class="blockrow"><div class="leftblock block">
-        <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/blockcarousel.png" alt="image left block" />
+    let sliderLi = blockData.imagesCollection.items.map((item) => {
+        return `<li><div class="blockrow"><div class="leftblock block">
+        <img src="${item.url}" alt="image left block" />
         </div><div class="rightblock block"><div class="caption">
         <h2 class="title">${blockData.title}</h2><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a>
-        </div></div></div></li></ul>`;
+        </div></div></div></li>`
+    });
+    let  contentStructure = `<ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1,"infinite": true}'>${sliderLi.join('')}</ul>`;
 
     document.getElementById(selectorID).innerHTML = contentStructure;
 };
@@ -350,5 +357,29 @@ export function leftTextBlock(selectorId,blockData) {
     let contentStructure = `<img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/image2.png" alt="category banner" />
         <div class="overlay"></div><div class="caption"><h2 class="title">${blockData.title}</h2><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div>`;
 
+    document.getElementById(selectorId).innerHTML = contentStructure;
+};
+
+export function blockElementVerticalGallery(selectorId,blockData) {
+    let leftData = blockData.imagesCollection.items.map((item,i) => {
+        if(i < 3) {
+            if(item.description === '') {
+                return `<div class="contentDiv"><img src="${item.url}" /></div>`;
+            } else {
+                return `<div class="contentDiv"><img src="${item.url}" /><p class="caption">${item.description}</p></div>`;
+            }
+        }
+    });
+    let rightData = blockData.imagesCollection.items.map((item,i) => {
+        if(i > 2) {
+            if(item.description === '') {
+                return `<div class="contentDiv"><img src="${item.url}" /></div>`;
+            } else {
+                return `<div class="contentDiv"><img src="${item.url}" /><p class="caption">${item.description}</p></div>`;
+            }
+        }
+    });
+
+    let contentStructure = `<div class="verticalBlock"><div class="verticalLeftCol">${leftData.join('')}</div><div class="verticalRightCol">${rightData.join('')}</div></div>`;
     document.getElementById(selectorId).innerHTML = contentStructure;
 };
