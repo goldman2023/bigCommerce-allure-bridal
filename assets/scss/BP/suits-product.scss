@@ -1,0 +1,55 @@
+.product-type {
+    .suits-product {
+        .productView {
+            .border::after {
+                position: absolute;
+                content: "";
+                left: calc(50% - 12px/2 - 1px);
+                bottom: -6px;
+                width: 12px;
+                height: 12px;
+                background: stencilColor("color-men-design-primary-1");
+                border: 2px solid white;
+                transform: rotate(45deg);
+            }
+            h1.productView-title {
+                font-family: stencilFontFamily('prata-font');
+                font-style: normal;
+                font-weight: 400;
+                font-size: remCalc(28px);
+                line-height: remCalc(34px);
+                color: stencilColor("color-default-neutral-1");
+            }
+            .productView-sizeGuide a {
+                color: stencilColor("color-men-design-primary-1");
+                &::after {
+                    top: 3px;
+                    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTMiIHZpZXdCb3g9IjAgMCAxNiAxMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTUuNSAyLjUwMDczQzUuNSAxLjM5NjE2IDYuNjE5MjkgMC41MDA3MzIgOCAwLjUwMDczMkM5LjM4MDcxIDAuNTAwNzMyIDEwLjUgMS41MDA3MyAxMC41IDIuNTAwNzNDMTAuNSA0LjAwMDczIDggNC41MDA3MyA4IDUuNTAwNzNDOCA2LjAwMDczIDggNi4zODYxIDggNi4zODYxTTggNi4zODYxQzguMzc5MjkgNi4zODYxIDguNzU4NTggNi40OTM4MSA5LjA4OTk4IDYuNzA5MjJMMTQuNDY0NSAxMC4yMDI3QzE1LjUwNzggMTAuODgwOCAxNS4wMjc2IDEyLjUwMDcgMTMuNzgzMyAxMi41MDA3SDIuMjE2N0MwLjk3MjQxNCAxMi41MDA3IDAuNDkyMjA0IDEwLjg4MDggMS41MzU0NyAxMC4yMDI3TDYuOTEwMDIgNi43MDkyMkM3LjI0MTQyIDYuNDkzODEgNy42MjA3MSA2LjM4NjEgOCA2LjM4NjFaIiBzdHJva2U9IiM2NjcwODkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K);
+                }
+            }
+            .button--primary {
+                background: stencilColor('color-men-design-primary-1');
+                border: 1px solid stencilColor('color-men-design-primary-1');
+                &:before {
+                    border: 1px solid rgba(255, 255, 255, 0.6);
+                }
+                &:hover {
+                    background: stencilColor('color-men-design-primary-2');
+                    border: 1px solid stencilColor('color-men-design-primary-2');
+                    &:before {
+                        border: 1px solid rgba(255, 255, 255, 0.6);
+                    }
+                }
+            }  
+            .button--secondary {
+                border: 1px solid stencilColor('color-men-design-primary-1');
+                color: stencilColor('color-men-design-primary-1'); 
+                &:hover {
+                    background: stencilColor('color-men-design-primary-1');
+                    border: 1px solid stencilColor('color-men-design-primary-1');
+                    color: stencilColor('color-white');
+                }
+            }
+        }
+    }
+}
