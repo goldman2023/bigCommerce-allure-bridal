@@ -180,8 +180,7 @@ export function contentFullmetaData(context, callback) {
         }
     });
 }
-
-export function headerFooterData(context, callback) {
+function headerFooterData(context, callback) {
     headerFooterQuery(context, response => {
         if (response.data.site.product !== undefined) {
             const product = response.data.site.product;
@@ -195,12 +194,39 @@ export function headerFooterData(context, callback) {
                         const metaFieldObj = {"key": metafield.node.key, "value": JSON.parse(metafield.node.value)};
                         metafieldData.push(metaFieldObj);
                         if (index+1 === noOfEntries) {
-                            callback.call(this, metafieldData);
+                            let footer = [];
+                            for (const data of metafieldData) {
+                                if (data.key == "Data for footer") {
+                                    for (const value of data.value) {
+                                        footer[value.section] = (footer[value.section]) ? [...footer[value.section], {"linkName": value.linkName, "url": value.url}] : [{"linkName": value.linkName, "url": value.url}];
+                                    }
+                                    callback.call(this, footer);
+                                }
+                            }
                         }
                     }
                 }
             }
         }
+    });
+}
+
+export function renderHeaderFooter (context) {
+    headerFooterData (context, response => {
+        console.log('footer', response);
+        const footerListContainer = document.querySelector('.footer-info');
+        let footerHtml = '';
+        for (const [key, value] of Object.entries(response)) {
+            const keyText = key.toLowerCase();
+            
+            footerHtml += `<article class="footer-info-col" data-section-type="footer-${keyText}"><h3 class="footer-info-heading">${key}</h3>
+            <ul class="footer-info-list">`;
+            for (const [innerKey, innerValue] of Object.entries(value)) {
+                footerHtml += `<li><a href="${innerValue.url}" class="footer-info__link">${innerValue.linkName}</a></li>`;
+            }
+            footerHtml += `</ul></article>`;
+        }
+        footerListContainer.insertAdjacentHTML('beforeend', footerHtml);
     });
 }
 

@@ -16,7 +16,7 @@ import carousel from './common/carousel';
 import loadingProgressBar from './global/loading-progress-bar';
 import svgInjector from './global/svg-injector';
 import {
-    headerFooterData,
+    renderHeaderFooter,
     contentFullmetaData,
     getCategoryMetaData,
     getProducts,
@@ -50,9 +50,7 @@ export default class Global extends PageManager {
         svgInjector();
 
         //header footer data 	
-        headerFooterData(this.context, response => {
-            console.log('response', response);
-        });
+        renderHeaderFooter(this.context);
 
         contentFullmetaData(this.context, response => {
             console.log('contentFullmetaData', response);
