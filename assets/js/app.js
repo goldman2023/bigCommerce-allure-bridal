@@ -58,6 +58,8 @@ const customClasses = {
     'pages/custom/page/retail-finder': () => import('./theme/BP/retail-finder'),
     'pages/custom/category/category-listing': () => import('./theme/BP/category-listing'), //mac
     'pages\\custom\\category\\category-listing': () => import('./theme/BP/category-listing'), // window
+    'pages/custom/category/suits-category-listing': () => import('./theme/BP/category-listing'), //mac
+    'pages\\custom\\category\\suits-category-listing': () => import('./theme/BP/category-listing'), // window
 };
 
 /**

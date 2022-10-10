@@ -354,8 +354,8 @@ export function collectionPreview(selectorID,blockData) {
 };
 
 export function leftTextBlock(selectorId,blockData) {
-    let contentStructure = `<img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/image2.png" alt="category banner" />
-        <div class="overlay"></div><div class="caption"><h2 class="title">${blockData.title}</h2><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div>`;
+    let contentStructure = `<img src="${blockData.backgroundImage.url}" alt="category banner" />
+        <div class="overlay"></div><div class="caption"><h2 class="title">${blockData.bannerTitle}</h2><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div>`;
 
     document.getElementById(selectorId).innerHTML = contentStructure;
 };
