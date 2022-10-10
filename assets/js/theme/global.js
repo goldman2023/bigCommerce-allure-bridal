@@ -23,6 +23,7 @@ import {
     blockElementFullscreenVideo,
     leftTextBlock,
     imageWithContentSlider,
+    blockElementVerticalGallery,
     blockElementStory,
     blockElement3ImagesScreenWidth,
     blockElementFullscreenImage,
@@ -62,6 +63,13 @@ export default class Global extends PageManager {
                     }
                 });
             }
+            if(document.getElementById('main-content').classList.contains('pages-custom-category-category-listing')) {
+                metadata.contentBlocksCollection.items.forEach(element => {
+                    if(element.__typename === "ReferencedBlockCategoryBanners"){
+                        leftTextBlock('leftTextbanner',element);
+                    }
+                });
+            }
             if(document.getElementById('main-content').classList.contains('pages-product')) {
                 metadata.contentBlocksCollection.items.forEach(element => {
                     if(element.__typename === "BlockElementStoryBlock"){
@@ -78,10 +86,10 @@ export default class Global extends PageManager {
                     }
                 });
                 if(metadata.thePerfectMatch.length > 0) {
-                    getProducts(contentId,'.thePerfectMatch .prodData',metadata.thePerfectMatch,4);
+                    getProducts(contentId,'.thePerfectMatch .prodData',metadata.thePerfectMatch);
                 }
                 if(metadata.youMightalsoLike.length > 0) {
-                    getProducts(contentId,'.youMightalsoLike .prodData',metadata.youMightalsoLike,4);
+                    getProducts(contentId,'.youMightalsoLike .prodData',metadata.youMightalsoLike);
                 }
             }
         });
@@ -116,8 +124,11 @@ export default class Global extends PageManager {
                             imageWithContentSlider('imageWithContentSlider',ele);
                             applySlider('.imageWithContentSlider ul',1);
                         }
-                        if(ele.__typename === "BlockElementDiscover"){
-                            blockElementStory('blockElementDiscover',ele);
+                        // if(ele.__typename === "BlockElementDiscover"){
+                        //     blockElementStory('blockElementDiscover',ele);
+                        // }
+                        if(ele.__typename === "BlockElementVerticalGallery"){
+                            blockElementVerticalGallery('blockElementVerticalGallery',ele);
                         }
                     });
                   });
@@ -131,27 +142,36 @@ export default class Global extends PageManager {
 
         $(window).on('load', function(){ 
             setTimeout(function(){
-                applySlider('.productSliderGrid',3);
+                applySlider('.productSliderGrid',3,true,true);
                 $('.productGridslider').each(function(){
                     applySlider('.productGridslider',4);
                 });
             },3000);
         });
 
-        function applySlider(selector,slide) {
+        function applySlider(selector,slide,centerM,infinity) {
+            let centermood = false;
+            let infinitymode = false;
+            if(centerM){
+                centermood = centerM;
+            }
+            if(infinity) {
+                infinitymode = infinity;
+            }
             $(selector).slick({
                 dots: false,
-                infinite: false,
+                infinite: infinitymode,
                 speed: 300,
                 slidesToShow: slide,
                 slidesToScroll: 1,
+                centerMode: centerM,
                 responsive: [
                 {
                     breakpoint: 1024,
                     settings: {
                     slidesToShow: slide,
                     slidesToScroll: 1,
-                    infinite: false,
+                    infinite: infinitymode,
                     dots: false
                     }
                 },
@@ -161,7 +181,7 @@ export default class Global extends PageManager {
                         slidesToShow: 1,
                         slidesToScroll: 1,
                         centerMode: true,
-                        infinite: false,
+                        infinite: infinitymode,
                         dots: false
                     }
                 }
