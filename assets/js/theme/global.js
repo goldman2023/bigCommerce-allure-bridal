@@ -28,6 +28,7 @@ import {
     blockElementFullscreenImage,
     lookBook,
     collectionPreview} from './BP/universal-blocks';
+
 export default class Global extends PageManager {
     onReady() {
         const {
