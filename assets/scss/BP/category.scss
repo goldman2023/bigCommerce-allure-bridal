@@ -61,6 +61,36 @@
             }
         }
     }
+    &.suits-plp {
+        .facetedSearch .facetedSearch-refineFilters a.clearBtn {
+            color: stencilColor("color-men-design-primary-1");
+        }
+        .navList-action--checkbox::before {
+            border: 1px solid stencilColor("color-men-design-primary-1");
+        }
+        .navList-action--checkbox.is-selected::before {
+            background-color: stencilColor("color-men-design-primary-1");
+        }
+        .bp-category-header .bp-cat-image::after, .bp-category-header .bp-cat-image::before {
+            background: stencilColor("color-men-design-primary-1");
+        }
+        .pagination .pagination-list .pagination-item.pagination-item--current a.pagination-link .background-rot {
+            background: stencilColor("color-men-design-primary-1");
+        }
+        .button {
+            color: stencilColor("color-men-design-primary-1");
+            border: 1px solid stencilColor("color-men-design-primary-1");
+            &:hover {
+                background: stencilColor("color-men-design-primary-1");
+                border: 1px solid stencilColor("color-men-design-primary-1");
+                color: white;
+            }
+        }
+        .form .form-field .form-input:active, .form .form-field .form-select:active,.form .form-field .form-input, .form .form-field .form-select  {
+            color: stencilColor("color-men-design-primary-1");
+            border-color: stencilColor("color-men-design-primary-1");
+        }
+    }
 }
 .productGrid .product {
     @media screen and (max-width: 550px){

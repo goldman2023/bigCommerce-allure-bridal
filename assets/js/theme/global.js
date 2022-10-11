@@ -56,10 +56,17 @@ export default class Global extends PageManager {
         contentFullmetaData(this.context, response => {
             console.log('contentFullmetaData', response);
             let metadata = response[0].value;
-            if(document.getElementById('main-content').classList.contains('pages-custom-category-bp-category')) {
+            if(document.getElementById('main-content').classList.contains('pages-custom-category-bp-category') ) {
                 metadata.contentBlocksCollection.items.forEach(element => {
                     if(element.__typename === "ReferencedBlockCategoryBanners"){
                         leftTextBlock('leftTextbanner',element);
+                    }
+                });
+            }
+            if(document.getElementById('main-content').classList.contains('pages-custom-category-suits-bp-category')) {
+                metadata.contentBlocksCollection.items.forEach(element => {
+                    if(element.__typename === "ReferencedBlockCategoryBanners" && element.layoutOrientation === "Image Right"){
+                        leftTextBlock('rightTextbanner',element);
                     }
                 });
             }
