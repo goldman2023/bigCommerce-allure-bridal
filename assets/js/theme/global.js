@@ -35,6 +35,7 @@ export default class Global extends PageManager {
             channelId, cartId, productId, categoryId, secureBaseUrl, maintenanceModeSettings, adminBarLanguage,
         } = this.context;
         let contentId = this.context;
+        let mainContent = document.getElementById('main-content').classList;
         cartPreview(secureBaseUrl, cartId);
         quickSearch();
         currencySelector(cartId);
@@ -56,35 +57,35 @@ export default class Global extends PageManager {
         contentFullmetaData(this.context, response => {
             console.log('contentFullmetaData', response);
             let metadata = response[0].value;
-            if(document.getElementById('main-content').classList.contains('pages-custom-category-bp-category') ) {
+            if(mainContent.contains('pages-custom-category-bp-category') ) {
                 metadata.contentBlocksCollection.items.forEach(element => {
                     if(element.__typename === "ReferencedBlockCategoryBanners"){
                         leftTextBlock('leftTextbanner',element);
                     }
                 });
             }
-            if(document.getElementById('main-content').classList.contains('pages-custom-category-suits-bp-category')) {
+            if(mainContent.contains('pages-custom-category-suits-bp-category')) {
                 metadata.contentBlocksCollection.items.forEach(element => {
                     if(element.__typename === "ReferencedBlockCategoryBanners" && element.layoutOrientation === "Image Right"){
                         leftTextBlock('rightTextbanner',element);
                     }
                 });
             }
-            if(document.getElementById('main-content').classList.contains('pages-custom-category-category-listing')) {
+            if(mainContent.contains('pages-custom-category-category-listing')) {
                 metadata.contentBlocksCollection.items.forEach(element => {
                     if(element.__typename === "ReferencedBlockCategoryBanners"){
                         leftTextBlock('leftTextbanner',element);
                     }
                 });
             }
-            if(document.getElementById('main-content').classList.contains('pages-custom-category-suits-category-listing')) {
+            if(mainContent.contains('pages-custom-category-suits-category-listing')) {
                 metadata.contentBlocksCollection.items.forEach(element => {
                     if(element.__typename === "ReferencedBlockCategoryBanners" && element.layoutOrientation === "Image Right"){
                         leftTextBlock('rightTextbanner',element);
                     }
                 });
             }
-            if(document.getElementById('main-content').classList.contains('pages-product')) {
+            if(mainContent.contains('pages-product') || mainContent.contains('suits-product')) {
                 metadata.contentBlocksCollection.items.forEach(element => {
                     if(element.__typename === "BlockElementStoryBlock"){
                         blockElementStory('blockElementStory',element);
@@ -108,7 +109,7 @@ export default class Global extends PageManager {
             }
         });
 
-        if(document.getElementById('main-content').classList.contains('pages-custom-category-category-landing')) {
+        if(mainContent.contains('pages-custom-category-category-landing')) {
             getCategoryMetaData(this.context, '/dresses/allure-romance/', response => {	
                 let categoryData = response[0].value;
                 console.log("category landing", categoryData);
