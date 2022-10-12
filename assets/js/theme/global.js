@@ -18,7 +18,10 @@ import svgInjector from './global/svg-injector';
 import {
     renderHeaderFooter,
     contentFullmetaData,
-    getCategoryMetaData,
+    productDeatilMetaData,
+    getCategorySpecificMetaData,
+    getProductsByCategoryPath,
+    createProductSlider,
     getProducts,
     blockElementFullscreenVideo,
     leftTextBlock,
@@ -53,38 +56,54 @@ export default class Global extends PageManager {
         //header footer data 	
         renderHeaderFooter(this.context);
 
-        contentFullmetaData(this.context, response => {
-            console.log('contentFullmetaData', response);
-            let metadata = response[0].value;
-            if(mainContent.contains('pages-custom-category-bp-category') ) {
+        //Product Listing page start
+        if(mainContent.contains('pages-custom-category-bp-category') || mainContent.contains('pages-custom-category-suits-bp-category')) {
+            contentFullmetaData(this.context, response => {
+                let metadata = response[0].value;
                 metadata.contentBlocksCollection.items.forEach(element => {
-                    if(element.__typename === "ReferencedBlockCategoryBanners"){
+                    if(mainContent.contains('pages-custom-category-bp-category') && element.__typename === "ReferencedBlockCategoryBanners"){
                         leftTextBlock('leftTextbanner',element);
                     }
-                });
-            }
-            if(mainContent.contains('pages-custom-category-suits-bp-category')) {
-                metadata.contentBlocksCollection.items.forEach(element => {
-                    if(element.__typename === "ReferencedBlockCategoryBanners" && element.layoutOrientation === "Image Right"){
+                    if(mainContent.contains('pages-custom-category-suits-bp-category') && element.__typename === "ReferencedBlockCategoryBanners" && element.layoutOrientation === "Image Right"){
                         leftTextBlock('rightTextbanner',element);
                     }
                 });
-            }
-            if(mainContent.contains('pages-custom-category-category-listing')) {
-                metadata.contentBlocksCollection.items.forEach(element => {
-                    if(element.__typename === "ReferencedBlockCategoryBanners"){
-                        leftTextBlock('leftTextbanner',element);
-                    }
+            });
+        }
+        //Product Listing page end
+
+        //Category Listing page start
+        if(mainContent.contains('pages-custom-category-category-listing') || mainContent.contains('pages-custom-category-suits-category-listing')) {
+            document.querySelectorAll('.sub-category-block').forEach((item)=> {
+                getProductsByCategoryPath(this.context,item.getAttribute('data-path'),response => {
+                    createProductSlider(item,response);
                 });
-            }
-            if(mainContent.contains('pages-custom-category-suits-category-listing')) {
-                metadata.contentBlocksCollection.items.forEach(element => {
-                    if(element.__typename === "ReferencedBlockCategoryBanners" && element.layoutOrientation === "Image Right"){
-                        leftTextBlock('rightTextbanner',element);
-                    }
-                });
-            }
-            if(mainContent.contains('pages-product') || mainContent.contains('suits-product')) {
+            });
+            contentFullmetaData(this.context, response => {
+                let metadata = response[0].value;
+                if(mainContent.contains('pages-custom-category-category-listing')) {
+                    metadata.contentBlocksCollection.items.forEach(element => {
+                        if(element.__typename === "ReferencedBlockCategoryBanners"){
+                            leftTextBlock('leftTextbanner',element);
+                        }
+                    });
+                }
+                if(mainContent.contains('pages-custom-category-suits-category-listing')) {
+                    metadata.contentBlocksCollection.items.forEach(element => {
+                        if(element.__typename === "ReferencedBlockCategoryBanners" && element.layoutOrientation === "Image Right"){
+                            leftTextBlock('rightTextbanner',element);
+                        }
+                    });
+                }
+            });
+        }
+        //Category Listing page end
+
+        //Product Detail page start
+        if(mainContent.contains('pages-product') || mainContent.contains('suits-product')) {
+            let productId = document.querySelector('.productView').getAttribute('data-prod-id');
+            productDeatilMetaData(this.context,productId, response => {
+                let metadata = response[0].value;
                 metadata.contentBlocksCollection.items.forEach(element => {
                     if(element.__typename === "BlockElementStoryBlock"){
                         blockElementStory('blockElementStory',element);
@@ -105,13 +124,15 @@ export default class Global extends PageManager {
                 if(metadata.youMightalsoLike.length > 0) {
                     getProducts(contentId,'.youMightalsoLike .prodData',metadata.youMightalsoLike);
                 }
-            }
-        });
+            });
+        }
+        //Product Detail page end
 
+        //category Landing page start
         if(mainContent.contains('pages-custom-category-category-landing')) {
-            getCategoryMetaData(this.context, '/dresses/allure-romance/', response => {	
+            let geturl = document.getElementById('categoryLanding').getAttribute('data-url')
+            getCategorySpecificMetaData(this.context, geturl, response => {	
                 let categoryData = response[0].value;
-                console.log("category landing", categoryData);
                 categoryData.items.forEach(element => {
                     if(element.collectionName === document.getElementById('categoryLanding').getAttribute('data-id')) {
                       if(element.collectionBannerImage1) {
@@ -148,13 +169,14 @@ export default class Global extends PageManager {
                   });
             });
         }
+        //category Landing page end
 
         $('.alertBox .close').on('click', e => {
             e.target.closest('.alertBox').style.display = 'none';
             console.log(e);
         });
 
-        $(window).on('load', function(){ 
+        $(window).on('load', function() {
             setTimeout(function(){
                 applySlider('.productSliderGrid',3,true,true);
                 $('.productGridslider').each(function(){

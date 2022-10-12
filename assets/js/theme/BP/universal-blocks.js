@@ -45,11 +45,18 @@ function headerFooterQuery (context, callback) {
     .catch(error => console.error(error));
 }
 
-function globalMetadata (context, callback) {
+function globalMetadata (context,prodID, callback) {
+    let prodductId = 170;
+    if(prodID) {
+        prodductId = prodID;
+    } 
+    console.log(prodID);
+    console.log(prodductId);
+
     let query = `
     query ProductsQuery {
         site {
-            product(entityId: 170) {
+            product(entityId: ${prodductId}) {
                 entityId
                 name
                 sku
@@ -158,9 +165,83 @@ function categoryQuery (context, categoryPath, callback) {
     })
     .catch(error => console.error(error));
 }
-
+function categoryQueryByPath (context, categoryPath, callback) {
+    let query = `
+    query CategoryByUrl {
+        site {
+            route(path: "${categoryPath}") {
+            node {
+                id
+                ... on Category {
+                name
+                entityId
+                description
+                products {
+                    edges {
+                    node {
+                        id
+                        entityId
+                        name
+                        sku
+                        path
+                        description
+                        defaultImage {
+                        url(width: 1200)
+                        }
+                    }
+                    }
+                }
+                }
+            }
+            }
+        }
+    }
+    `;
+    fetch('/graphql', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${context.graphQlToken}`
+        },
+        body: JSON.stringify({
+            query: query
+        })
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(res) {
+        if (typeof callback == 'function') {
+            callback.call(this, res);
+        }
+    })
+    .catch(error => console.error(error));
+}
 export function contentFullmetaData(context, callback) {
-    globalMetadata(context, response => {
+    globalMetadata(context,'', response => {
+        if (response.data.site.product !== undefined) {
+            const product = response.data.site.product;
+            if (product.metafields.edges.length > 0) {
+                const metafields = product.metafields.edges;
+                const metafieldData = [];
+                const noOfEntries = metafields.length;
+                for(const [index, metafield] of metafields.entries()) {
+                    if (typeof callback == 'function') {
+                        const metaFieldObj = {"key": metafield.node.key, "value": JSON.parse(metafield.node.value)};
+                        metafieldData.push(metaFieldObj);
+                        if (index+1 === noOfEntries) {
+                            callback.call(this, metafieldData);
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+export function productDeatilMetaData(context,prodID, callback) {
+    globalMetadata(context,prodID, response => {
         if (response.data.site.product !== undefined) {
             const product = response.data.site.product;
             if (product.metafields.edges.length > 0) {
@@ -229,8 +310,15 @@ export function renderHeaderFooter (context) {
         footerListContainer.insertAdjacentHTML('beforeend', footerHtml);
     });
 }
+export function getProductsByCategoryPath(context,path, callback) { 
+    categoryQueryByPath(context, path, response => {
+        if (response.data.site.route.node !== undefined) {
+            callback.call(this, response.data.site.route.node);
+        }
+    });
+}
 
-export function getCategoryMetaData(context,path, callback) { 
+export function getCategorySpecificMetaData(context,path, callback) { 
     categoryQuery(context, path, response => {
         if (response.data.site.route.node !== undefined) {
             const category = response.data.site.route.node;
@@ -413,4 +501,24 @@ export function blockElementVerticalGallery(selectorId,blockData) {
 
     let contentStructure = `<div class="verticalBlock"><div class="verticalLeftCol">${leftData.join('')}</div><div class="verticalRightCol">${rightData.join('')}</div></div>`;
     document.getElementById(selectorId).innerHTML = contentStructure;
+};
+
+export function createProductSlider(block,blockData) {
+    let prdlist = [];
+    if(blockData.products.edges.length > 0 ){
+        prdlist = blockData.products.edges.map((item) => {
+            return `<li class="product"><article class="card" data-test="card-271"><figure class="card-figure">
+                        <a href="${item.node.path}" class="card-figure__link"><div class="card-img-container">
+                                <img src="${item.node.defaultImage.url}" alt="${item.node.name}" title="${item.node.name}" data-sizes="auto" 
+                                srcset="${item.node.defaultImage.url} 80w, ${item.node.defaultImage.url} 160w, ${item.node.defaultImage.url} 320w, ${item.node.defaultImage.url} 640w, ${item.node.defaultImage.url} 960w, ${item.node.defaultImage.url} 1280w, ${item.node.defaultImage.url} 1920w, ${item.node.defaultImage.url} 2560w" 
+                                data-srcset="${item.node.defaultImage.url} 80w, ${item.node.defaultImage.url} 160w, ${item.node.defaultImage.url} 320w, ${item.node.defaultImage.url} 640w, ${item.node.defaultImage.url} 960w, ${item.node.defaultImage.url} 1280w, ${item.node.defaultImage.url} 1920w,${item.node.defaultImage.url} 2560w" class="card-image lazyautosizes lazyloaded" sizes="257px">
+                            </div></a><div class="card-body"><h3 class="card-title"><a aria-label="${item.node.name}" "="" href="${item.node.path}" class="name">Style ${item.node.name}</a>
+                        <a href="/wishlist.php?action=addwishlist&product_id=${item.node.entityId}" class="titleIcon"></a></h3><div class="card-text" data-test-info-type="price">${item.node.description}</div></article>
+                    </li>`;
+        });
+        block.querySelector('.sub-products').innerHTML = `<ul class="productGridslider" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>${prdlist.join('')}</ul>`;
+    } else {
+        block.querySelector('.sub-products').innerHTML = `<p data-no-products-notification role="alert" aria-live="assertive"tabindex="-1">There are no products listed under this category.</p>`;
+    }
+    block.querySelector('.sub-description').innerHTML = blockData.description;
 };
