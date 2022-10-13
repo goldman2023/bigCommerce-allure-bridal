@@ -1,7 +1,7 @@
 .blockElement3ImagesScreenWidth {
     margin: 20px -3rem;
     @include breakpoint("medium") { 
-        margin: 50px 0;
+        margin: 15px 0;
 
     }
     .mainImage {
@@ -16,5 +16,25 @@
         .imageDiv {
             width: 32.5%;
         }
+    }
+}
+.blockElementImages2ColumnRight {
+    margin: 20px -3rem;
+    display: flex;
+    justify-content: space-between;
+    @include breakpoint("medium") { 
+        margin: 15px 0;
+
+    }
+    .col1 {
+        width: 32.5%;
+    }
+    .col2 {
+        width: calc(67.5% - 15px);
+    }
+    img {
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
     }
 }
