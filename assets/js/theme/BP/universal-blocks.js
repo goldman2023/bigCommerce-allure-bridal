@@ -195,13 +195,22 @@ function headerFooterData(context, callback) {
                         metafieldData.push(metaFieldObj);
                         if (index+1 === noOfEntries) {
                             let footer = [];
+                            let navigation = [];
                             for (const data of metafieldData) {
-                                if (data.key == "Data for footer") {
+                                if (data.key === "Data for footer") {
                                     for (const value of data.value) {
                                         footer[value.section] = (footer[value.section]) ? [...footer[value.section], {"linkName": value.linkName, "url": value.url}] : [{"linkName": value.linkName, "url": value.url}];
                                     }
-                                    callback.call(this, footer);
                                 }
+                                if (data.key === "Data for navigation") {
+                                    console.log('navigation', data.value)
+                                    for (const value of data.value) {
+                                        navigation[value.topNavLink] = (navigation[value.topNavLink]) ? [...navigation[value.topNavLink], {"linkUrl": value.linkUrl, "linkName": value.linkName, "navigationSection": value.navigationSection}] : [{"linkUrl": value.linkUrl, "linkName": value.linkName, "navigationSection": value.navigationSection}];
+                                    }
+                                    console.log('navigation', navigation);
+                                }
+                                
+                                callback.call(this, {navigation, footer});
                             }
                         }
                     }
@@ -212,11 +221,11 @@ function headerFooterData(context, callback) {
 }
 
 export function renderHeaderFooter (context) {
-    headerFooterData (context, response => {
-        console.log('footer', response);
+    headerFooterData (context, globalData => {
+        console.log('global Data', globalData);
         const footerListContainer = document.querySelector('.footer-info');
         let footerHtml = '';
-        for (const [key, value] of Object.entries(response)) {
+        for (const [key, value] of Object.entries(globalData.footer)) {
             const keyText = key.toLowerCase();
             
             footerHtml += `<article class="footer-info-col" data-section-type="footer-${keyText}"><h3 class="footer-info-heading">${key}</h3>
@@ -227,6 +236,19 @@ export function renderHeaderFooter (context) {
             footerHtml += `</ul></article>`;
         }
         footerListContainer.insertAdjacentHTML('beforeend', footerHtml);
+        /*
+        let navigationHtml = '';
+        for (const [key, value] of Object.entries(globalData.navigation)) {
+            const keyText = key.toLowerCase();
+            
+            navigationHtml += `<article class="footer-info-col" data-section-type="footer-${keyText}"><h3 class="footer-info-heading">${key}</h3>
+            <ul class="footer-info-list">`;
+            for (const [innerKey, innerValue] of Object.entries(value)) {
+                navigationHtml += `<li><a href="${innerValue.url}" class="footer-info__link">${innerValue.linkName}</a></li>`;
+            }
+            navigationHtml += `</ul></article>`;
+        }
+        //footerListContainer.insertAdjacentHTML('beforeend', footerHtml);*/
     });
 }
 
