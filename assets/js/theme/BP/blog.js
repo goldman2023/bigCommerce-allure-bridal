@@ -6,9 +6,8 @@ export default class Blog extends PageManager {
     } 
     
     onReady() {
-        const blogPostEl = document.querySelector('#blog-desc > p');
-
-        console.log('Blog Data', JSON.parse(blogPostEl.innerHTML));
+        let blogJson = this.context.blogJson;
+        console.log('context', JSON.parse(blogJson.replace( /(<([^>]+)>)/ig, '')));
     }
 
 }
