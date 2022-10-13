@@ -97,7 +97,7 @@
         {{!-- Get this loading ASAP --}}
         <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.main.js'}}" as="script">
     </head>
-    <body class="{{ page_type }}-type">
+    <body class="{{ page_type }}-type {{#if template '===' 'pages\custom\product\suits-product'}}suitsProduct{{/if}}">
         <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>
 
         {{> components/common/header }}
