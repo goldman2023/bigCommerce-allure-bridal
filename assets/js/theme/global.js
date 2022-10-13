@@ -81,20 +81,18 @@ export default class Global extends PageManager {
             });
             contentFullmetaData(this.context, response => {
                 let metadata = response[0].value;
-                if(mainContent.contains('pages-custom-category-category-listing')) {
-                    metadata.contentBlocksCollection.items.forEach(element => {
+                metadata.contentBlocksCollection.items.forEach(element => {
+                    if(mainContent.contains('pages-custom-category-category-listing')) {
                         if(element.__typename === "ReferencedBlockCategoryBanners"){
                             leftTextBlock('leftTextbanner',element);
                         }
-                    });
-                }
-                if(mainContent.contains('pages-custom-category-suits-category-listing')) {
-                    metadata.contentBlocksCollection.items.forEach(element => {
+                    }
+                    if(mainContent.contains('pages-custom-category-suits-category-listing')) {
                         if(element.__typename === "ReferencedBlockCategoryBanners" && element.layoutOrientation === "Image Right"){
                             leftTextBlock('rightTextbanner',element);
                         }
-                    });
-                }
+                    }
+                });
             });
         }
         //Category Listing page end
@@ -131,7 +129,7 @@ export default class Global extends PageManager {
         //category Landing page start
         if(mainContent.contains('pages-custom-category-category-landing')) {
             let geturl = document.getElementById('categoryLanding').getAttribute('data-url')
-            getCategorySpecificMetaData(this.context, geturl, response => {	
+            getCategorySpecificMetaData(this.context, geturl, response => {
                 let categoryData = response[0].value;
                 categoryData.items.forEach(element => {
                     if(element.collectionName === document.getElementById('categoryLanding').getAttribute('data-id')) {
