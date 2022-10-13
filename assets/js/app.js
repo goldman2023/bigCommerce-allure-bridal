@@ -55,11 +55,7 @@ const pageClasses = {
 const customClasses = {
     'pages/custom/page/dressing-room': () => import('./theme/BP/dressing-room'),
     'pages/custom/page/manage-members': () => import('./theme/BP/manage-members'),
-    'pages/custom/page/retail-finder': () => import('./theme/BP/retail-finder'),
-    'pages/custom/category/category-listing': () => import('./theme/BP/category-listing'), //mac
-    'pages\\custom\\category\\category-listing': () => import('./theme/BP/category-listing'), // window
-    'pages/custom/category/suits-category-listing': () => import('./theme/BP/category-listing'), //mac
-    'pages\\custom\\category\\suits-category-listing': () => import('./theme/BP/category-listing'), // window
+    'pages/custom/page/retail-finder': () => import('./theme/BP/retail-finder')
 };
 
 /**
