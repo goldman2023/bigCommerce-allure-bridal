@@ -543,3 +543,14 @@ export function createProductSlider(block,blockData) {
     }
     block.querySelector('.sub-description').innerHTML = blockData.description;
 };
+
+export function blockElementImages2ColumnRight(selectorID,blockData) {
+    console.log("blockElementImageLeftCopyRight",blockData);
+    let  contentStructure = `<div class="col1"><img src="${blockData.image1Column.url}" /></div><div class="col2"><img src="${blockData.image2Column.url}" /></div>`;
+    document.getElementById(selectorID).innerHTML = contentStructure;
+};
+export function blockElementImageLeftCopyRight(selectorID,blockData) {
+    console.log("blockElementImageLeftCopyRight",blockData);
+    let  contentStructure = ``;
+    document.getElementById(selectorID).innerHTML = contentStructure;
+};
