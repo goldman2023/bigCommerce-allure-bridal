@@ -1,0 +1,42 @@
+.inspiration-page {
+    .header-section {
+        text-align: center;
+        h2 {
+            font-family: 'Prata';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 34px;
+            line-height: 44px;            
+            color: #695C5C;
+        }
+        p {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 26px;
+            text-align: center;            
+            color: #4D4D4D;
+        }
+    }
+    .filterbutton {
+        text-align: center;
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+    }
+    .blocks {
+        .block {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .image-block,.content-block{
+                width: 50%;
+            }
+        }
+    }
+}

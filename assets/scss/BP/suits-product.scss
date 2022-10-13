@@ -5,13 +5,13 @@
                 position: absolute;
                 content: "";
                 left: calc(50% - 12px/2 - 1px);
-                bottom: -6px;
-                width: 12px;
-                height: 12px;
+                bottom: -3px;
+                width: 4px;
+                height: 4px;
                 background: stencilColor("color-men-design-primary-1");
-                border: 2px solid white;
+                outline: 3px solid stencilColor('color-secondary');
                 transform: rotate(45deg);
-            }
+             }
             h1.productView-title {
                 font-family: stencilFontFamily('prata-font');
                 font-style: normal;

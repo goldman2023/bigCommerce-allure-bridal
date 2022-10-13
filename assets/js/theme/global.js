@@ -56,6 +56,18 @@ export default class Global extends PageManager {
         //header footer data 	
         renderHeaderFooter(this.context);
 
+        //inspiration
+        if(mainContent.contains('pages-custom-page-inspiration')) {
+            contentFullmetaData(this.context, response => {
+                let metadata = response[0].value;
+                metadata.contentBlocksCollection.items.forEach(element => {
+                    if(element.__typename === "BlockElementInspirationPage"){
+                        console.log("ins", element);
+                    }
+                });
+            });
+        }
+
         //Product Listing page start
         if(mainContent.contains('pages-custom-category-bp-category') || mainContent.contains('pages-custom-category-suits-bp-category')) {
             contentFullmetaData(this.context, response => {
