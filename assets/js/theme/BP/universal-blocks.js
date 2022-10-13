@@ -74,7 +74,7 @@ function globalMetadata (context,prodID, callback) {
                 }
                 metafields (
                     namespace: "Contentful Data"
-                    keys: ["Contentful Data"]
+                    keys: ["Contentful Data", "Related Product"]
                     first: 1
                 ) {
                     edges {
@@ -250,7 +250,18 @@ export function productDeatilMetaData(context,prodID, callback) {
                         const metaFieldObj = {"key": metafield.node.key, "value": JSON.parse(metafield.node.value)};
                         metafieldData.push(metaFieldObj);
                         if (index+1 === noOfEntries) {
-                            callback.call(this, metafieldData);
+                            let contentFul = {};
+                            let related = {};
+                            for (const data of metafieldData) {
+                                if (data.key === "Contentful Data") {
+                                        contentFul = data.value;
+                                }
+                                if (data.key === "Related Product") {
+                                    related = data.value;
+                                }
+                                
+                                callback.call(this, {contentFul, related});
+                            }
                         }
                     }
                 }

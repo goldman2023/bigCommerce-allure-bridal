@@ -101,7 +101,9 @@ export default class Global extends PageManager {
         if(mainContent.contains('pages-product') || mainContent.contains('suits-product')) {
             let productId = document.querySelector('.productView').getAttribute('data-prod-id');
             productDeatilMetaData(this.context,productId, response => {
-                let metadata = response[0].value;
+                console.log('pro',response.contentFul);
+
+                let metadata = response.contentFul;
                 metadata.contentBlocksCollection.items.forEach(element => {
                     if(element.__typename === "BlockElementStoryBlock"){
                         blockElementStory('blockElementStory',element);
