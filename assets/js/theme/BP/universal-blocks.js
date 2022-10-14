@@ -74,7 +74,7 @@ function globalMetadata (context,prodID, callback) {
                 }
                 metafields (
                     namespace: "Contentful Data"
-                    keys: ["Contentful Data"]
+                    keys: ["Contentful Data", "Related Product"]
                     first: 1
                 ) {
                     edges {
@@ -250,7 +250,18 @@ export function productDeatilMetaData(context,prodID, callback) {
                         const metaFieldObj = {"key": metafield.node.key, "value": JSON.parse(metafield.node.value)};
                         metafieldData.push(metaFieldObj);
                         if (index+1 === noOfEntries) {
-                            callback.call(this, metafieldData);
+                            let contentFul = {};
+                            let related = {};
+                            for (const data of metafieldData) {
+                                if (data.key === "Contentful Data") {
+                                        contentFul = data.value;
+                                }
+                                if (data.key === "Related Product") {
+                                    related = data.value;
+                                }
+                                
+                                callback.call(this, {contentFul, related});
+                            }
                         }
                     }
                 }
@@ -531,4 +542,15 @@ export function createProductSlider(block,blockData) {
         block.querySelector('.sub-products').innerHTML = `<p data-no-products-notification role="alert" aria-live="assertive"tabindex="-1">There are no products listed under this category.</p>`;
     }
     block.querySelector('.sub-description').innerHTML = blockData.description;
+};
+
+export function blockElementImages2ColumnRight(selectorID,blockData) {
+    console.log("blockElementImageLeftCopyRight",blockData);
+    let  contentStructure = `<div class="col1"><img src="${blockData.image1Column.url}" /></div><div class="col2"><img src="${blockData.image2Column.url}" /></div>`;
+    document.getElementById(selectorID).innerHTML = contentStructure;
+};
+export function blockElementImageLeftCopyRight(selectorID,blockData) {
+    console.log("blockElementImageLeftCopyRight",blockData);
+    let  contentStructure = ``;
+    document.getElementById(selectorID).innerHTML = contentStructure;
 };
