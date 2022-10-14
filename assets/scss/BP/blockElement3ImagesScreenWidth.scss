@@ -2,7 +2,6 @@
     margin: 20px -3rem;
     @include breakpoint("medium") { 
         margin: 15px 0;
-
     }
     .mainImage {
         width: 100%;
@@ -24,7 +23,6 @@
     justify-content: space-between;
     @include breakpoint("medium") { 
         margin: 15px 0;
-
     }
     .col1 {
         width: 32.5%;
@@ -36,5 +34,93 @@
         width: 100%;
         object-fit: cover;
         height: 100%;
+    }
+}
+.blockElementImageLeftCopyRight {
+    margin: 0 -3rem;
+    @include breakpoint("medium") { 
+        margin: 0;
+    }
+    .leftimageblock {
+        width: 100%;
+        display: inline-block;
+        .leftImg {
+            width: 100%;
+            display: inline-block;
+            @include breakpoint("medium") { 
+                width: 60%;
+            }
+            img {
+                width: 100%;
+            }
+        }
+        .textSection {
+            width: calc(100% - 30px);
+            margin: 0 15px 0 15px;
+            @include breakpoint("medium") { 
+                width: 40%;
+                display: inline-flex;
+                align-items: center;
+                margin: 0;
+            }
+            .caption {
+                padding: 5% 10%;
+                background: #ffffff;
+                margin-left: 20px;
+                margin-top: -60px;
+                z-index: 999999;
+                position: relative;
+                @include breakpoint("medium") { 
+                    margin-left: -15%;
+                    padding: 10%;
+                    margin-top: 0;
+                }
+                h3 {
+                    font-family: stencilFontFamily('stay-classy-font');
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: remCalc(60px);
+                    line-height: remCalc(65px);
+                    letter-spacing: -0.01em;
+                    color: stencilColor("color-default-primary-1");
+                }
+                p {
+                    font-family: stencilFontFamily('default-font-light');
+                    font-style: normal;
+                    font-weight: 300;
+                    font-size: remCalc(16px);
+                    line-height: remCalc(26px);
+                    text-align: justify;
+                    color: stencilColor("color-default-neutral-2");
+                    position: relative;
+                    &::before {
+                        position: absolute;
+                        left: -25px;
+                        content: "";
+                        width: 20px;
+                        height: 20px;
+                        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIiIGhlaWdodD0iMTkiIHZpZXdCb3g9IjAgMCAyMiAxOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTUuNzg4IDE4LjIxN0M0LjI0OCAxOC4yMTcgMy4wMTYgMTcuNjY3IDIuMDkyIDE2LjU2N0MxLjIxMiAxNS40MjMgMC43NzIgMTMuOTQ5IDAuNzcyIDEyLjE0NUMwLjc3MiA5LjY4MTAxIDEuNDMyIDcuNDU5MDEgMi43NTIgNS40NzkwMUM0LjExNiAzLjQ1NTAxIDYuMTg0IDEuNzYxMDEgOC45NTYgMC4zOTcwMTVMOS42ODIgMS40NTMwMUM4LjM2MiAyLjI0NTAxIDcuMTUyIDMuMzY3MDEgNi4wNTIgNC44MTkwMUM0Ljk5NiA2LjIyNzAxIDQuNDY4IDcuNjU3MDEgNC40NjggOS4xMDkwMUM0LjQ2OCA5LjUwNTAxIDQuNTc4IDkuODM1MDEgNC43OTggMTAuMDk5QzUuMDE4IDEwLjMxOSA1LjM0OCAxMC40MjkgNS43ODggMTAuNDI5QzYuODg4IDEwLjQyOSA3LjgxMiAxMC44MjUgOC41NiAxMS42MTdDOS4zNTIgMTIuMzY1IDkuNzQ4IDEzLjI4OSA5Ljc0OCAxNC4zODlDOS43NDggMTUuNDg5IDkuMzUyIDE2LjQxMyA4LjU2IDE3LjE2MUM3LjgxMiAxNy44NjUgNi44ODggMTguMjE3IDUuNzg4IDE4LjIxN1pNMTcuMjA2IDE4LjIxN0MxNS42NjYgMTguMjE3IDE0LjQzNCAxNy42NjcgMTMuNTEgMTYuNTY3QzEyLjYzIDE1LjQyMyAxMi4xOSAxMy45NDkgMTIuMTkgMTIuMTQ1QzEyLjE5IDkuNjgxMDEgMTIuODUgNy40NTkwMSAxNC4xNyA1LjQ3OTAxQzE1LjUzNCAzLjQ1NTAxIDE3LjYwMiAxLjc2MTAxIDIwLjM3NCAwLjM5NzAxNUwyMS4xIDEuNDUzMDFDMTkuNzggMi4yNDUwMSAxOC41NyAzLjM2NzAxIDE3LjQ3IDQuODE5MDFDMTYuNDE0IDYuMjI3MDEgMTUuODg2IDcuNjU3MDEgMTUuODg2IDkuMTA5MDFDMTUuODg2IDkuNTA1MDEgMTUuOTk2IDkuODM1MDEgMTYuMjE2IDEwLjA5OUMxNi40MzYgMTAuMzE5IDE2Ljc2NiAxMC40MjkgMTcuMjA2IDEwLjQyOUMxOC4zMDYgMTAuNDI5IDE5LjIzIDEwLjgyNSAxOS45NzggMTEuNjE3QzIwLjc3IDEyLjM2NSAyMS4xNjYgMTMuMjg5IDIxLjE2NiAxNC4zODlDMjEuMTY2IDE1LjQ4OSAyMC43NyAxNi40MTMgMTkuOTc4IDE3LjE2MUMxOS4yMyAxNy44NjUgMTguMzA2IDE4LjIxNyAxNy4yMDYgMTguMjE3WiIgZmlsbD0iI0YwRUJFNiIvPgo8L3N2Zz4K");
+                        background-repeat: no-repeat;
+                        top: 1px;
+                    }
+                    &::after {
+                        position: absolute;
+                        content: "";
+                        width: 20px;
+                        height: 20px;
+                        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIiIGhlaWdodD0iMTkiIHZpZXdCb3g9IjAgMCAyMiAxOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTUuNzg4IDE4LjIxN0M0LjI0OCAxOC4yMTcgMy4wMTYgMTcuNjY3IDIuMDkyIDE2LjU2N0MxLjIxMiAxNS40MjMgMC43NzIgMTMuOTQ5IDAuNzcyIDEyLjE0NUMwLjc3MiA5LjY4MTAxIDEuNDMyIDcuNDU5MDEgMi43NTIgNS40NzkwMUM0LjExNiAzLjQ1NTAxIDYuMTg0IDEuNzYxMDEgOC45NTYgMC4zOTcwMTVMOS42ODIgMS40NTMwMUM4LjM2MiAyLjI0NTAxIDcuMTUyIDMuMzY3MDEgNi4wNTIgNC44MTkwMUM0Ljk5NiA2LjIyNzAxIDQuNDY4IDcuNjU3MDEgNC40NjggOS4xMDkwMUM0LjQ2OCA5LjUwNTAxIDQuNTc4IDkuODM1MDEgNC43OTggMTAuMDk5QzUuMDE4IDEwLjMxOSA1LjM0OCAxMC40MjkgNS43ODggMTAuNDI5QzYuODg4IDEwLjQyOSA3LjgxMiAxMC44MjUgOC41NiAxMS42MTdDOS4zNTIgMTIuMzY1IDkuNzQ4IDEzLjI4OSA5Ljc0OCAxNC4zODlDOS43NDggMTUuNDg5IDkuMzUyIDE2LjQxMyA4LjU2IDE3LjE2MUM3LjgxMiAxNy44NjUgNi44ODggMTguMjE3IDUuNzg4IDE4LjIxN1pNMTcuMjA2IDE4LjIxN0MxNS42NjYgMTguMjE3IDE0LjQzNCAxNy42NjcgMTMuNTEgMTYuNTY3QzEyLjYzIDE1LjQyMyAxMi4xOSAxMy45NDkgMTIuMTkgMTIuMTQ1QzEyLjE5IDkuNjgxMDEgMTIuODUgNy40NTkwMSAxNC4xNyA1LjQ3OTAxQzE1LjUzNCAzLjQ1NTAxIDE3LjYwMiAxLjc2MTAxIDIwLjM3NCAwLjM5NzAxNUwyMS4xIDEuNDUzMDFDMTkuNzggMi4yNDUwMSAxOC41NyAzLjM2NzAxIDE3LjQ3IDQuODE5MDFDMTYuNDE0IDYuMjI3MDEgMTUuODg2IDcuNjU3MDEgMTUuODg2IDkuMTA5MDFDMTUuODg2IDkuNTA1MDEgMTUuOTk2IDkuODM1MDEgMTYuMjE2IDEwLjA5OUMxNi40MzYgMTAuMzE5IDE2Ljc2NiAxMC40MjkgMTcuMjA2IDEwLjQyOUMxOC4zMDYgMTAuNDI5IDE5LjIzIDEwLjgyNSAxOS45NzggMTEuNjE3QzIwLjc3IDEyLjM2NSAyMS4xNjYgMTMuMjg5IDIxLjE2NiAxNC4zODlDMjEuMTY2IDE1LjQ4OSAyMC43NyAxNi40MTMgMTkuOTc4IDE3LjE2MUMxOS4yMyAxNy44NjUgMTguMzA2IDE4LjIxNyAxNy4yMDYgMTguMjE3WiIgZmlsbD0iI0YwRUJFNiIvPgo8L3N2Zz4K");
+                        background-repeat: no-repeat;
+                        transform: rotate(180deg);
+                        margin-left: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+.blockElementFullscreenImage {
+    margin: 20px -3rem;
+    @include breakpoint("medium") { 
+        margin: 15px 0;
     }
 }
