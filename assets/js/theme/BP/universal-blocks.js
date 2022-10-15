@@ -545,12 +545,21 @@ export function createProductSlider(block,blockData) {
 };
 
 export function blockElementImages2ColumnRight(selectorID,blockData) {
-    console.log("blockElementImageLeftCopyRight",blockData);
     let  contentStructure = `<div class="col1"><img src="${blockData.image1Column.url}" /></div><div class="col2"><img src="${blockData.image2Column.url}" /></div>`;
     document.getElementById(selectorID).innerHTML = contentStructure;
 };
 export function blockElementImageLeftCopyRight(selectorID,blockData) {
-    console.log("blockElementImageLeftCopyRight",blockData);
-    let  contentStructure = ``;
+    let  contentStructure = `<div class="leftimageblock"><div class="leftImg"><img src="${blockData.image.url}" /></div><div class="textSection"><div class="caption"><h3>${blockData.blockName}</h3><p>${blockData.bodyCopy}</p><a  href="${blockData.linkUrl}" class="button button--secondary">${blockData.linkText}</a></div></div></div>`;
     document.getElementById(selectorID).innerHTML = contentStructure;
 };
+
+export function blogpostTopBanner(selectorID,imageHeading,subheading){
+    let  contentStructure = `<div class="topbannerSection"><img src="${imageHeading.url}" alt="${imageHeading.title}" /><div class="caption"><h2>${imageHeading.title}</h2><span class="date"><div class="divider"></div></span><p class="subheading">${subheading}</p></div></div>`;
+    document.getElementById(selectorID).innerHTML = contentStructure;
+}
+
+export function blogpostContentBlock(selectorID,blockData){
+    let paragraphs = blockData.json.content.map((p,i) =>  `<p class="para-${i}">${p.content[0].value}</p>`).join('');
+    let  contentStructure = `<div class="content-sections-block"><div class="leftblock">${paragraphs}</div><div class="rightblock"></div></div>`;
+    document.getElementById(selectorID).innerHTML = contentStructure;
+}
