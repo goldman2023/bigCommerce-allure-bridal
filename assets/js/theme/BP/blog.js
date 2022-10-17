@@ -15,7 +15,7 @@ export default class Blog extends PageManager {
     onReady() {
         let blogJson = this.context.blogJson;
         let metadata = JSON.parse(blogJson.replace( /(<([^>]+)>)/ig, ''));
-        console.log(metadata);
+        console.log("blog post data",metadata);
 
         blogpostTopBanner('topBanner',metadata.headlineImage,metadata.headline);
         blogpostContentBlock('content-section',metadata.bodyCopy);

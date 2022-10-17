@@ -1,6 +1,8 @@
 .inspiration-page {
     .header-section {
         text-align: center;
+        max-width: 400px;
+        margin: 0 auto;
         h2 {
             font-family: 'Prata';
             font-style: normal;
@@ -21,21 +23,103 @@
     }
     .filterbutton {
         text-align: center;
-        ul {
+        ul { 
             margin: 0;
             padding: 0;
             list-style: none;
             display: flex;
             justify-content: center;
+            li {
+                margin: 5px;
+                .button.button--primary,.button.button--secondary {
+                    padding: 15px;
+                    height: 34px;
+                    font-weight: 500;
+                    font-size: 10px;
+                    line-height: 12px;
+                }
+                .button:before {
+                    height: 27px;
+                    width: calc(100% - 6px);
+                }
+            }
         }
     }
     .blocks {
+        padding-top: 5%;
         .block {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: block;
+            @include breakpoint("medium") { 
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
             .image-block,.content-block{
-                width: 50%;
+                width: 100%;
+                @include breakpoint("medium") { 
+                    width: 50%;
+                }
+            }
+            .content-block {
+                padding: 5% 10%;
+                .caption {
+                    position: relative;
+                    .initials {
+                        font-family: 'Prata';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 60px;
+                        line-height: 70px;
+                        color: #F1E8E7;
+                        position: absolute;
+                        top: -23px;
+                        left: -15%;
+                        z-index: -1;
+                    }
+                    h3 {
+                        font-family: 'Stay Classy Duo Script Brush';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 55px;
+                        line-height: 70px;
+                        text-align: center;
+                        letter-spacing: -0.01em;
+                        color: #1D1B1B;
+                        @include breakpoint("medium") { 
+                            text-align: left;
+                        }
+                    }
+                    p {
+                        font-family: 'Inter';
+                        font-style: normal;
+                        font-weight: 300;
+                        font-size: 16px;
+                        line-height: 26px;
+                        color: #282828;
+                    }
+                }
+            }
+            .image-block {
+                position: relative;
+                .horizontal_image {
+                    width: 100%;
+                }
+                .vertical_image {
+                    width: 37%;
+                    position: absolute;
+                    right: -8px;
+                    background: white;
+                    padding: 10px;
+                    @include breakpoint("medium") { 
+                        bottom: 0;
+                        right: -50px;
+                    }
+                }
+                .postdate {
+                    text-align: right;
+                    margin: 0;
+                    padding: 10px 28% 10px 0;
+                }
             }
         }
     }
