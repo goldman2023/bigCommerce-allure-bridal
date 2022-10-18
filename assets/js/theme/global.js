@@ -57,15 +57,20 @@ export default class Global extends PageManager {
         renderHeaderFooter(this.context);
 
         //inspiration
-        if(mainContent.contains('pages-custom-page-inspiration')) {
-            contentFullmetaData(this.context, response => {
-                let metadata = response[0].value;
-                metadata.contentBlocksCollection.items.forEach(element => {
-                    if(element.__typename === "BlockElementInspirationPage"){
-                        console.log("ins", element);
-                    }
-                });
-            });
+        if(mainContent.contains('pages-blog')) {
+            let filters = document.getElementById('inspirationfilter').value.split(",");
+            var unique = filters.reduce(function (acc, curr) {
+                if (!acc.includes(curr))
+                    acc.push(curr);
+                return acc;
+            }, []);
+            if(unique.length > 0 ) {
+                document.getElementById('filterbuttons').innerHTML = `<li class="tag"><a href="/inspiration/" class="button button--primary">all</a></li>`+unique.map((item) => `<li class="tag"><a href="/inspiration/tag/${item}" class="button button--secondary">${item}</a></li>`).join('');
+            } else {
+                document.getElementById('filterbuttons').innerHTML = `<li class="tag"><a href="/inspiration/" class="button button--primary">all</a></li>`;
+            }
+
+            // document.querySelectorAll('.image-block .postdate').forEach((item) => item.innerHTML = new Date(item.getAttribute('data-date')))
         }
 
         //Product Listing page start
