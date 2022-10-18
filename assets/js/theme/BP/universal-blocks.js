@@ -134,7 +134,7 @@ function categoryQuery (context, categoryPath, callback) {
                           value
                       }
                   }
-              }
+                }
               }
             }
           }
@@ -275,7 +275,6 @@ function headerFooterData(context, callback) {
             const product = response.data.site.product;
             if (product.metafields.edges.length > 0) {
                 const metafields = product.metafields.edges;
-                console.log(metafields);
                 const metafieldData = [];
                 const noOfEntries = metafields.length;
                 for(const [index, metafield] of metafields.entries()) {
@@ -292,11 +291,7 @@ function headerFooterData(context, callback) {
                                     }
                                 }
                                 if (data.key === "Data for navigation") {
-                                    console.log('navigation', data.value)
-                                    for (const value of data.value) {
-                                        navigation[value.topNavLink] = (navigation[value.topNavLink]) ? [...navigation[value.topNavLink], {"linkUrl": value.linkUrl, "linkName": value.linkName, "navigationSection": value.navigationSection}] : [{"linkUrl": value.linkUrl, "linkName": value.linkName, "navigationSection": value.navigationSection}];
-                                    }
-                                    console.log('navigation', navigation);
+                                    navigation = data.value;
                                 }
                                 
                                 callback.call(this, {navigation, footer});
@@ -312,6 +307,7 @@ function headerFooterData(context, callback) {
 export function renderHeaderFooter (context) {
     headerFooterData (context, globalData => {
         console.log('global Data', globalData);
+        //footer implementation
         const footerListContainer = document.querySelector('.footer-info');
         let footerHtml = '';
         for (const [key, value] of Object.entries(globalData.footer)) {
@@ -325,19 +321,67 @@ export function renderHeaderFooter (context) {
             footerHtml += `</ul></article>`;
         }
         footerListContainer.insertAdjacentHTML('beforeend', footerHtml);
-        /*
-        let navigationHtml = '';
-        for (const [key, value] of Object.entries(globalData.navigation)) {
-            const keyText = key.toLowerCase();
-            
-            navigationHtml += `<article class="footer-info-col" data-section-type="footer-${keyText}"><h3 class="footer-info-heading">${key}</h3>
-            <ul class="footer-info-list">`;
-            for (const [innerKey, innerValue] of Object.entries(value)) {
-                navigationHtml += `<li><a href="${innerValue.url}" class="footer-info__link">${innerValue.linkName}</a></li>`;
+        
+        //navigation bar implementation
+        const navigationEl = document.querySelector('.site-navigation');
+        let navigationHtml = ``;
+        let index = 0;
+        for (const navigation of globalData.navigation) {
+            const topNavs = navigation.navEntriesCollection.items;
+            for (const topNav of topNavs) {
+                navigationHtml += `<li 
+                    class="site-navigation__link"
+                >
+                    <a href="${topNav.topNavLinkUrl}">${topNav.topNavLinkName}</a>`;
+                
+                if (topNav.sectionChildNavigationCollection.items.length > 0) {
+                    navigationHtml += `<div class="sub-site__navigation">`;
+                    for (const secondNav of topNav.sectionChildNavigationCollection.items) {
+                        navigationHtml += `<ul class="sub-site__navigation-${secondNav.navSectionName.toLowerCase()}">
+                                <li class="sub-site__title">
+                                    <a href="${secondNav.navSectionUrl}">
+                                        ${secondNav.navSectionName}
+                                    </a>
+                                </li>`;
+                        for (const thirdNav of secondNav.navItemsCollection.items) {       
+                            navigationHtml +=`<li class="sub-site__text"><a href="${thirdNav.navLinkUrl}">${thirdNav.navLinkName}</a></li>`;
+                        }   
+                        navigationHtml += `</ul>`;
+                    }
+                    navigationHtml += `
+                        <div class="sub-site__navigation-image">
+                            <img src="${topNav.megaMenuImage.url}">
+                        </div>
+                    </div>`;
+                }
+                
+                navigationHtml += `</li>`;
+                if (topNavs.length != index+1) {
+                    navigationHtml +=   `<svg 
+                            class="site-navigation_svg" 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            width="12" 
+                            height="12" 
+                            viewBox="0 0 12 12" 
+                            fill="none"
+                        >
+                            <rect 
+                                x="5.99991" 
+                                y="1.58603" 
+                                width="6" 
+                                height="6" 
+                                transform="rotate(45 5.99991 1.58603)" 
+                                fill="#695C5C" 
+                                stroke="white" 
+                                stroke-width="2"
+                            >
+                            </rect>
+                        </svg>`;
+                }
+                index++;
             }
-            navigationHtml += `</ul></article>`;
         }
-        //footerListContainer.insertAdjacentHTML('beforeend', footerHtml);*/
+        navigationEl.innerHTML = navigationHtml;
     });
 }
 export function getProductsByCategoryPath(context,path, callback) { 
