@@ -1,42 +1,53 @@
 .inspiration-page {
+    .desktoponly {
+        display: none;
+        @include breakpoint("medium") { 
+            display: block;
+        }
+    }
+    .mobileonly {
+        display: block;
+        @include breakpoint("medium") { 
+            display: none;
+        }
+    }
     .header-section {
         text-align: center;
         max-width: 400px;
         margin: 0 auto;
         h2 {
-            font-family: 'Prata';
+            font-family: stencilFontFamily('prata-font');
             font-style: normal;
             font-weight: 400;
-            font-size: 34px;
-            line-height: 44px;            
-            color: #695C5C;
+            font-size: remCalc(34px);
+            line-height: remCalc(44px);
+            color: stencilColor("color-default-neutral-3");;
         }
         p {
-            font-family: 'Inter';
+            font-family: stencilFontFamily('default-font-light');
             font-style: normal;
             font-weight: 300;
-            font-size: 16px;
-            line-height: 26px;
-            text-align: center;            
-            color: #4D4D4D;
+            font-size: remCalc(16px);
+            line-height: remCalc(26px);
+            text-align: center;
+            color: stencilColor('color-default-neutral-2');
         }
     }
     .filterbutton {
         text-align: center;
-        ul { 
+        ul {
             margin: 0;
             padding: 0;
             list-style: none;
-            display: flex;
-            justify-content: center;
             li {
                 margin: 5px;
                 .button.button--primary,.button.button--secondary {
                     padding: 15px;
                     height: 34px;
                     font-weight: 500;
-                    font-size: 10px;
-                    line-height: 12px;
+                    font-size: remCalc(10px);
+                    line-height: remCalc(12px);
+
                 }
                 .button:before {
                     height: 27px;
@@ -51,51 +62,59 @@
             display: block;
             @include breakpoint("medium") { 
                 display: flex;
-                justify-content: center;
+                justify-content: space-between;
                 align-items: center;
             }
             .image-block,.content-block{
                 width: 100%;
                 @include breakpoint("medium") { 
-                    width: 50%;
+                    width: calc(50% - 25px);
                 }
             }
             .content-block {
-                padding: 5% 10%;
+                padding: 5%;
+                @include breakpoint("medium") {
+                    padding: 5% 10%; 
+                }
                 .caption {
                     position: relative;
                     .initials {
-                        font-family: 'Prata';
+                        font-family: stencilFontFamily('prata-font');
                         font-style: normal;
                         font-weight: 400;
-                        font-size: 60px;
-                        line-height: 70px;
-                        color: #F1E8E7;
+                        font-size: remCalc(60px);
+                        line-height: remCalc(70px);
+                        color: stencilColor('color-allure-bridals-primary-5');
                         position: absolute;
                         top: -23px;
-                        left: -15%;
+                        left: -5%;
                         z-index: -1;
+                        @include breakpoint("medium") { 
+                            left: -15%;
+                        }
                     }
                     h3 {
-                        font-family: 'Stay Classy Duo Script Brush';
+                        font-family: stencilFontFamily('stay-classy-font');
                         font-style: normal;
                         font-weight: 400;
-                        font-size: 55px;
-                        line-height: 70px;
+                        font-size: remCalc(50px);
+                        line-height: remCalc(60px);
                         text-align: center;
                         letter-spacing: -0.01em;
-                        color: #1D1B1B;
+                        color: stencilColor('color-allure-bridals-neutral-1');
+                        padding: 0 7%;
                         @include breakpoint("medium") { 
                             text-align: left;
+                            padding: 0;
                         }
                     }
                     p {
-                        font-family: 'Inter';
+                        font-family: stencilFontFamily('default-font-light');
                         font-style: normal;
                         font-weight: 300;
-                        font-size: 16px;
-                        line-height: 26px;
-                        color: #282828;
+                        font-size: remCalc(14px);
+                        line-height: remCalc(24px);
+                        color: stencilColor('color-default-neutral-1');
                     }
                 }
             }
@@ -108,17 +127,86 @@
                     width: 37%;
                     position: absolute;
                     right: -8px;
-                    background: white;
+                    background: stencilColor('color-secondary');;
                     padding: 10px;
+                    top: 0;
                     @include breakpoint("medium") { 
                         bottom: 0;
+                        top: auto;
                         right: -50px;
                     }
                 }
                 .postdate {
                     text-align: right;
                     margin: 0;
-                    padding: 10px 28% 10px 0;
+                    padding: 10px 35% 10px 0;
+                    @include breakpoint("medium") { 
+                        padding: 10px 28% 10px 0;
+                    }
+                    position: relative;
+                    &::before {
+                        background: stencilColor("color-allure-bridals-neutral-4");
+                        height: 1px;
+                        width: 35%;
+                        position: absolute;
+                        content: "";
+                        left: 0;
+                        top: 19px;
+                        @include breakpoint("medium") { 
+                            width: 50%;
+                        }
+                    }
+                    &::after {
+                        position: absolute;
+                        content: "";
+                        right: 65%;
+                        top: 18px;
+                        width: 4px;
+                        height: 4px;
+                        background: stencilColor("color-default-neutral-3");
+                        transform: rotate(45deg);
+                        outline: 3px solid stencilColor('color-secondary');
+                        @include breakpoint("medium") { 
+                            right: 50%;
+                        }
+                    }
+                }
+            }
+            &:nth-child(even) {
+                .image-block {
+                    order: 1;
+                    .vertical_image {
+                        @include breakpoint("medium") { 
+                            left: -50px;
+                        }
+                    }
+                    .postdate {
+                        @include breakpoint("medium") { 
+                            text-align: left;
+                            margin: 0;
+                            padding: 10px 0 10px 28%;
+                            position: relative;
+                            &::before {
+                                right: 0px;
+                                left: auto;
+                            }
+                        }
+                    }
+                }
+                .content-block {
+                    @include breakpoint("medium") { 
+                        padding: 5% 6% 5% 8%;
+                    }
+                }
+            }
+            &:nth-child(odd) {
+                .image-block {
+                    order: 0;
+                }
+                .content-block {
+                    @include breakpoint("medium") { 
+                        padding: 5% 5% 5% 10%;
+                    }
                 }
             }
         }

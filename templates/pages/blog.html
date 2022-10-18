@@ -14,61 +14,44 @@ blog:
         {{/unless}}
     </div>
     <div class="filterbutton">
-        <input type="hidden" id="inspirationfilter" value="{{#each blog.posts}}{{#if @index '===' 1}}{{#JSONparse (sanitize this.summary)}}{{#each this}}{{tags}}{{/each}}{{/JSONparse}}{{/if}}{{/each}}" class="tags" />
+        <input type="hidden" id="inspirationfilter" value="{{#each blog.posts}}{{#each tags}}{{name}}|{{url}},{{/each}}{{/each}}" class="tags" />
         <ul id="filterbuttons" class="tags"></ul>
     </div>
     <div class="content">
         <div class="blocks">
             {{#each blog.posts}}
-                {{#if @index '===' 1}} 
-                {{#JSONparse (sanitize this.summary)}}
-                {{#each this}}
-                {{#if @index '===' 0}} 
                     <div class="block">
                         <div class="image-block">
-                            <img src="{{ horizontal_image }}" alt="" class="horizontal_image" />
-                            <img src="{{ vertical_image }}" alt="" class="vertical_image" />
-                            <p class="postdate" data-date="{{publish_date}}">{{publish_date}}</p>
+                            <p class="postdate mobileonly"><span class="datespan">{{date_published}}</span></p>
+                            {{#JSONparse (sanitize this.summary)}}
+                                {{#each this}}
+                                    {{#if @index '===' 0}}
+                                        <img src="{{ horizontal_image }}" alt="" class="horizontal_image" />
+                                        <img src="{{ vertical_image }}" alt="" class="vertical_image" />
+                                    {{/if}}
+                                {{/each}}
+                            {{/JSONparse}}
+                            <p class="postdate desktoponly"><span class="datespan">{{date_published}}</span></p>
                         </div>
                         <div class="content-block">
                             <div class="caption">
-                                <span class="initials">{{initials}}</span>
-                                <h3>{{blog_name}}</h3>
-                                <p>{{blog_short_description}}</p>
-                                <a href="{{blog_url}}" class="button button--secondary" >GEt Inspired</a>
+                                {{#JSONparse (sanitize this.summary)}}
+                                    {{#each this}}
+                                        {{#if @index '===' 0}}
+                                            <span class="initials">{{initials}}</span>
+                                            <h3>{{blog_name}}</h3>
+                                            <p>{{blog_short_description}}</p>
+                                        {{/if}}
+                                    {{/each}}
+                                {{/JSONparse}}
+                                <a href="{{url}}" class="button button--secondary" >GEt Inspired</a>
                             </div>
                         </div>
                     </div>
-                    {{/if}}
-                {{/each}}
-            {{/JSONparse}}
-        {{/if}}
-    {{/each}}
+        {{/each}}
         </div>
     </div>
     {{> components/common/paginator pagination.blog}}
 </div>
-<!-- {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}} 
-<section class="page">
-    {{#unless theme_settings.hide_blog_page_heading }}
-        <h1 class="page-heading">{{ blog.name }}</h1>
-    {{/unless}}
-    {{#each blog.posts}}
-        {{#if @index '===' 1}}
-            {{#JSONparse (sanitize this.summary)}}
-                {{#each this}}
-                    {{blog_name}}<br>
-                    {{blog_short_description}}<br>
-                    {{initials}}<br>
-                    {{publish_date}}<br>
-                    <img data-src="{{ horizontal_image }}" class="lazyload">
-                    <img data-src="{{ vertical_image }}" class="lazyload">
-                    {{tags}}
-                {{/each}}
-            {{/JSONparse}}
-        {{/if}}
-    {{/each}}
-    {{> components/common/paginator pagination.blog}}
-</section>-->
 {{/partial}}
 {{> layout/base}}

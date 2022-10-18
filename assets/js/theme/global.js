@@ -56,23 +56,6 @@ export default class Global extends PageManager {
         //header footer data 	
         renderHeaderFooter(this.context);
 
-        //inspiration
-        if(mainContent.contains('pages-blog')) {
-            let filters = document.getElementById('inspirationfilter').value.split(",");
-            var unique = filters.reduce(function (acc, curr) {
-                if (!acc.includes(curr))
-                    acc.push(curr);
-                return acc;
-            }, []);
-            if(unique.length > 0 ) {
-                document.getElementById('filterbuttons').innerHTML = `<li class="tag"><a href="/inspiration/" class="button button--primary">all</a></li>`+unique.map((item) => `<li class="tag"><a href="/inspiration/tag/${item}" class="button button--secondary">${item}</a></li>`).join('');
-            } else {
-                document.getElementById('filterbuttons').innerHTML = `<li class="tag"><a href="/inspiration/" class="button button--primary">all</a></li>`;
-            }
-
-            // document.querySelectorAll('.image-block .postdate').forEach((item) => item.innerHTML = new Date(item.getAttribute('data-date')))
-        }
-
         //Product Listing page start
         if(mainContent.contains('pages-custom-category-bp-category') || mainContent.contains('pages-custom-category-suits-bp-category')) {
             contentFullmetaData(this.context, response => {
