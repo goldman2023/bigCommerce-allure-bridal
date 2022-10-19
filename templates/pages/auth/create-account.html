@@ -15,7 +15,7 @@
             {{/if}}
             {{#if settings.account_creation_enabled}}
                 <form action="{{urls.auth.save_new_account}}" data-create-account-form method="post" class="form">
-                    <div class="form-row form-row--half">
+                    <div class="form-row form-row--half1">
                         {{#each forms.create_account.account_fields }}
                             {{{dynamicComponent 'components/common/forms'}}}
                         {{/each}}
@@ -27,7 +27,7 @@
                     </div>
                     {{{ forms.create_account.recaptcha.markup}}}
                     <div class="form-actions">
-                        <button type="submit" class="button button--primary">{{lang 'forms.create_account.submit_value' }}</button>
+                        <button type="submit" class="button button--seconday">{{lang 'forms.create_account.submit_value' }}</button>
                     </div>
                 </form>
             {{/if}}

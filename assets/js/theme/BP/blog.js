@@ -15,12 +15,12 @@ export default class Blog extends PageManager {
     onReady() {
         let blogJson = this.context.blogJson;
         let metadata = JSON.parse(blogJson.replace( /(<([^>]+)>)/ig, ''));
-        console.log("blog post data",metadata);
+        console.log("blog post data",metadata[1]);
 
-        blogpostTopBanner('topBanner',metadata.headlineImage,metadata.headline);
-        blogpostContentBlock('content-section',metadata.bodyCopy);
+        blogpostTopBanner('topBanner',metadata[1].headlineImage,metadata.headline);
+        blogpostContentBlock('content-section',metadata[1].bodyCopy);
 
-        metadata.contentBlocksCollection.items.forEach(element => {
+        metadata[1].contentBlocksCollection.items.forEach(element => {
             if(element.__typename === "BlockElementFullscreenImage"){
                 blockElementFullscreenImage('blockElementFullscreenImage',element); 
             }

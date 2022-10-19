@@ -375,3 +375,36 @@ svg.login-diamond {
 }
 
 }
+.createaccount-type {
+    .g-recaptcha {
+        margin: 40px 0 0;
+    }
+    .form .form-field .form-input, .form .form-field .form-select {
+        border: 1px solid #D0B2A9;
+        color: #D0B2A9;
+    }
+    .form .form-field .form-label {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #1D1B1B;
+    }
+    .form .form-field .form-radio ~ .form-label, .form .form-field .form-checkbox ~ .form-label {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+        color: #695C5C;
+        text-transform: inherit;
+    }
+    .account--fixed {
+        @include breakpoint("medium") { 
+            width: 40%;
+        }
+    }
+}
