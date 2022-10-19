@@ -27,7 +27,7 @@ const pageClasses = {
     createaccount: getLogin,
     getnewpassword: getLogin,
     forgotpassword: getLogin,
-    blog: noop,
+    blog: () => import('./theme/BP/inspiration'),
     blog_post: () => import('./theme/BP/blog'),
     brand: () => import('./theme/brand'),
     brands: noop,
