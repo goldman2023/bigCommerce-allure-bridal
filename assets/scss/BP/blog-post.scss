@@ -66,12 +66,45 @@
         display: block;
         @include breakpoint("medium") { 
             display: flex;
-            align-items: center;
+            align-items: baseline;
         }
         .leftblock,.rightblock {
             width: 100%;
             @include breakpoint("medium") { 
                 width: 50%;
+            }
+        }
+        .rightblock {
+            padding: 0 8%;
+            h6 {
+                font-family: stencilFontFamily('default-font-regular');
+                font-style: normal;
+                font-weight: 500;
+                font-size: 12px;
+                line-height: 15px;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: #282828;
+            }
+            .flexdiv {
+                display: table;
+                .row {
+                    display: table-row;
+                    div {
+                        width: 40%;
+                        font-family: stencilFontFamily('default-font-light');
+                        font-style: normal;
+                        font-weight: 300;
+                        font-size: 14px;
+                        line-height: 22px;
+                        color: #000000;
+                        display: table-cell;
+                        padding: 5px 0;
+                        span,a{
+                            color: #BC8372;
+                        }
+                    }
+                }
             }
         }
     }

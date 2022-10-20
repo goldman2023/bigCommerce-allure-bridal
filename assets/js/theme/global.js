@@ -28,6 +28,7 @@ import {
     imageWithContentSlider,
     blockElementVerticalGallery,
     blockElementStory,
+    blockElementDiscover,
     blockElement3ImagesScreenWidth,
     blockElementFullscreenImage,
     lookBook,
@@ -100,29 +101,39 @@ export default class Global extends PageManager {
         //Product Detail page start
         if(mainContent.contains('pages-product') || mainContent.contains('suits-product')) {
             let productId = document.querySelector('.productView').getAttribute('data-prod-id');
-            productDeatilMetaData(this.context,productId, response => {
-                console.log('pro',response.contentFul);
 
+            productDeatilMetaData(this.context,productId, response => {
                 let metadata = response.contentFul;
-                metadata.contentBlocksCollection.items.forEach(element => {
+                let relatedPro = response.related;
+                let blocksCollections = metadata.contentBlocksCollection.items.map(element => {
                     if(element.__typename === "BlockElementStoryBlock"){
-                        blockElementStory('blockElementStory',element);
+                        return blockElementStory(element);
                     }
                     if(element.__typename === "BlockElementFullscreenImage"){
-                        blockElementFullscreenImage('blockElementFullscreenImage',element);
+                        return blockElementFullscreenImage(element);
                     }
                     if(element.__typename === "BlockElement3ImagesScreenWidth"){
-                        blockElement3ImagesScreenWidth('blockElement3ImagesScreenWidth',element);
+                        return blockElement3ImagesScreenWidth(element);
                     }
+                }).join('');
+
+                document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;
+
+                metadata.contentBlocksCollection.items.forEach(element => {
                     if(element.__typename === "BlockElementLookbook"){
                         lookBook('blockElementLookbook',element);
                     }
                 });
-                if(metadata.thePerfectMatch.length > 0) {
-                    getProducts(contentId,'.thePerfectMatch .prodData',metadata.thePerfectMatch);
-                }
-                if(metadata.youMightalsoLike.length > 0) {
-                    getProducts(contentId,'.youMightalsoLike .prodData',metadata.youMightalsoLike);
+                if(Object.keys(relatedPro).length > 0) {
+
+                    if(relatedPro.thePerfectMatch.length > 0) {
+                        let perfectmatch = relatedPro.thePerfectMatch.map((item) => item.bc_product_id);
+                        getProducts(contentId,'.thePerfectMatch .prodData',perfectmatch);
+                    }
+                    if(relatedPro.youMightAlsoLike.length > 0) {
+                        let youmaylike = relatedPro.youMightAlsoLike.map((item) => item.bc_product_id);
+                        getProducts(contentId,'.youMightalsoLike .prodData',youmaylike);
+                    }
                 }
             });
         }
@@ -151,21 +162,27 @@ export default class Global extends PageManager {
                       }
                       getProducts(this.context,'.productSlider .productGridSection',numberArray,3);
                     }
-                    element.contentBlocksCollection.items.forEach(ele => {
+                    let blocksCollections = element.contentBlocksCollection.items.map(ele => {
                         if(ele.__typename === "BlockElementCollectionPreview"){
-                            collectionPreview('blockElementCollectionPreview',ele);
+                           return collectionPreview(ele);
                         }
-                        if(ele.__typename === "BlockElementBigCarousel"){
-                            imageWithContentSlider('imageWithContentSlider',ele);
-                            applySlider('.imageWithContentSlider ul',1);
+                        if(ele.__typename === "BlockElementBigCarouselSlider"){
+                            return imageWithContentSlider(ele);
                         }
-                        // if(ele.__typename === "BlockElementDiscover"){
-                        //     blockElementStory('blockElementDiscover',ele);
-                        // }
+                        if(ele.__typename === "BlockElementDiscover"){
+                            return blockElementDiscover(ele);
+                        }
                         if(ele.__typename === "BlockElementVerticalGallery"){
-                            blockElementVerticalGallery('blockElementVerticalGallery',ele);
+                            return blockElementVerticalGallery(ele);
+                        }
+                        if(ele.__typename === "BlockElementFullscreenImage"){
+                            return blockElementFullscreenImage(ele);
                         }
                     });
+
+                    document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;
+                    applySlider('.imageWithContentSlider ul',1);
+
                   });
             });
         }
