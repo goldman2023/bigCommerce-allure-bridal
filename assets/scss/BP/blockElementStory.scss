@@ -145,3 +145,31 @@
             padding: 10px;
     }
 }
+
+
+
+.blockElementDiscover {
+
+.header-section {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    h2 {
+        font-family: stencilFontFamily('prata-font');
+        font-style: normal;
+        font-weight: 400;
+        font-size: remCalc(34px);
+        line-height: remCalc(44px);
+        color: stencilColor("color-default-neutral-3");;
+    }
+    p {
+        font-family: stencilFontFamily('default-font-light');
+        font-style: normal;
+        font-weight: 300;
+        font-size: remCalc(16px);
+        line-height: remCalc(26px);
+        text-align: center;
+        color: stencilColor('color-default-neutral-2');
+    }
+}
+}

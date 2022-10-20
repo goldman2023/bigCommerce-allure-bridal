@@ -5,7 +5,8 @@ import {
     blockElementImages2ColumnRight,
     blockElementImageLeftCopyRight,
     blogpostTopBanner,
-    blogpostContentBlock
+    blogpostContentBlock,
+    blockElementStory 
     } from '../BP/universal-blocks';
 export default class Blog extends PageManager {
     constructor(context) {
@@ -17,23 +18,26 @@ export default class Blog extends PageManager {
         let metadata = JSON.parse(blogJson.replace( /(<([^>]+)>)/ig, ''));
         console.log("blog post data",metadata[1]);
 
-        blogpostTopBanner('topBanner',metadata[1].headlineImage,metadata.headline);
-        blogpostContentBlock('content-section',metadata[1].bodyCopy);
-
-        metadata[1].contentBlocksCollection.items.forEach(element => {
+        blogpostTopBanner('topBanner',metadata[1].title, metadata[1].headline,metadata[1].headlineImage);
+        blogpostContentBlock('content-section',metadata[1]);
+        let blocksCollections = metadata[1].contentBlocksCollection.items.map(element => {
             if(element.__typename === "BlockElementFullscreenImage"){
-                blockElementFullscreenImage('blockElementFullscreenImage',element); 
+                return blockElementFullscreenImage(element); 
             }
             if(element.__typename === "BlockElement3ImagesScreenWidth"){
-                blockElement3ImagesScreenWidth('blockElement3ImagesScreenWidth',element);
+                return blockElement3ImagesScreenWidth(element);
             }
             if(element.__typename === "BlockElementImages2ColumnRight"){
-                blockElementImages2ColumnRight('blockElementImages2ColumnRight',element);
+                return blockElementImages2ColumnRight(element);
             }
             if(element.__typename === "BlockElementImageLeftCopyRight"){
-                blockElementImageLeftCopyRight('blockElementImageLeftCopyRight',element);
+                return blockElementImageLeftCopyRight(element);
             }
-        });
+            if(element.__typename === "BlockElementStoryBlock"){
+                return blockElementStory(element); 
+            }
+        }).join('');
+        document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;
     }
 
 }

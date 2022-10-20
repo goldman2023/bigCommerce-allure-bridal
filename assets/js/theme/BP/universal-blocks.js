@@ -44,6 +44,72 @@ function headerFooterQuery (context, callback) {
     })
     .catch(error => console.error(error));
 }
+function productDetailMetadata (context,prodID, callback) {
+    let prodductId = 170;
+    if(prodID) {
+        prodductId = prodID;
+    }
+    let query = `
+    query ProductsQuery {
+        site {
+            product(entityId: ${prodductId}) {
+                entityId
+                name
+                sku
+                description
+                path
+                prices {
+                    price {
+                        currencyCode
+                        value
+                    }
+                }
+                defaultImage {
+                    url (
+                        width: 300
+                        height: 300
+                    )
+                    altText
+                }
+                metafields (
+                    namespace: "Contentful Data"
+                    keys: ["Contentful Data", "Related Products"]
+                    first: 2
+                ) {
+                    edges {
+                        node {
+                            entityId
+                            id
+                            key
+                            value
+                        }
+                    }
+                }
+            }
+        }
+    }
+    `;
+    fetch('/graphql', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${context.graphQlToken}`
+        },
+        body: JSON.stringify({
+            query: query
+        })
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(res) {
+        if (typeof callback == 'function') {
+            callback.call(this, res);
+        }
+    })
+    .catch(error => console.error(error));
+}
 
 function globalMetadata (context,prodID, callback) {
     let prodductId = 170;
@@ -74,7 +140,7 @@ function globalMetadata (context,prodID, callback) {
                 }
                 metafields (
                     namespace: "Contentful Data"
-                    keys: ["Contentful Data", "Related Product"]
+                    keys: ["Contentful Data"]
                     first: 1
                 ) {
                     edges {
@@ -238,7 +304,8 @@ export function contentFullmetaData(context, callback) {
 }
 
 export function productDeatilMetaData(context,prodID, callback) {
-    globalMetadata(context,prodID, response => {
+    productDetailMetadata(context,prodID, response => {
+        console.log("prod data", response);
         if (response.data.site.product !== undefined) {
             const product = response.data.site.product;
             if (product.metafields.edges.length > 0) {
@@ -256,10 +323,9 @@ export function productDeatilMetaData(context,prodID, callback) {
                                 if (data.key === "Contentful Data") {
                                         contentFul = data.value;
                                 }
-                                if (data.key === "Related Product") {
+                                if (data.key === "Related Products") {
                                     related = data.value;
                                 }
-                                
                                 callback.call(this, {contentFul, related});
                             }
                         }
@@ -419,7 +485,7 @@ export function getProducts(context,selector,prodList,slidescroll) {
     //prodArray = prodList.split(',');
     let products = [];
     if(selector === '.thePerfectMatch .prodData' || selector === '.youMightalsoLike .prodData') {
-        products = ['170', '285', '274', '270'];
+        products = prodArray;
     } else {
         products = ['170', '285', '274', '270','2242','2128','167'];
     }
@@ -485,21 +551,22 @@ export function lookBook(selectorID,blockData) {
     document.getElementById(selectorID).innerHTML = blockItem;
 }
 
-export function blockElementFullscreenImage(selectorID,blockData) {
-    let blockItem = `<div class="mainImage"><img src="${blockData.backgroundImage.url}" style="width: 100%;"/></div>`;
-
-    document.getElementById(selectorID).innerHTML = blockItem;
+export function blockElementFullscreenImage(blockData) {
+    return `<div class="blockElementFullscreenImage" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" style="width: 100%;"/></div></div>`;
 }
 
-export function blockElement3ImagesScreenWidth(selectorID,blockData) {
+export function blockElement3ImagesScreenWidth(blockData) {
     let imgthum = blockData.imagesCollection.items.map((image) => `<div class="imageDiv"><img src="${image.url}" /></div>`);
-    let blockItem = `<div class="thumbImg">${imgthum.join('')}</div>`;
-
-    document.getElementById(selectorID).innerHTML = blockItem;
+    return ` <div class="blockElement3ImagesScreenWidth" id="blockElement3ImagesScreenWidth"><div class="thumbImg">${imgthum.join('')}</div></div>`;
 };
 
-export function blockElementStory(selectorID,blockData) {
-    let storyBlockItem = `<div class="heading-section"><h2 class="title">${blockData.blockname}</h2><p class="date">${blockData.displayedate}</p><div class="leftBottom">
+export function blockElementDiscover(blockData) {
+    return `<div class="blockElementDiscover" id="blockElementDiscover">
+    <div class="header-section">
+        <h2>${blockData.blocktitle}</h2>
+        <p>${blockData.bodyCopy}</p>
+    </div>
+    <div class="blockElementStory" ><div class="heading-section"><h2 class="title">${blockData.blockname}</h2><p class="date">${blockData.displayedate}</p><div class="leftBottom">
         <img src="${blockData.imagesCollection.items[0].url}" alt="" />
         </div></div><div class="rightside-section"><div class="rightcol">
         <img src="${blockData.imagesCollection.items[1].url}" class="topleft" alt=""/>
@@ -507,30 +574,36 @@ export function blockElementStory(selectorID,blockData) {
         <button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div></div><div class="topright">
         <img src="${blockData.imagesCollection.items[2].url}"  alt="" />
         </div></div><div class="mobilecaption"><p class="content">${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
-        <div class="mobilebanner"><img src="${blockData.imagesCollection.items[0].url}" alt="" /></div>`;
-
-    document.getElementById(selectorID).innerHTML = storyBlockItem;
+        <div class="mobilebanner"><img src="${blockData.imagesCollection.items[0].url}" alt="" /></div></div></div>`;
 }
 
-export function imageWithContentSlider(selectorID,blockData) {
-    let sliderLi = blockData.imagesCollection.items.map((item) => {
+export function blockElementStory(blockData) {
+    return `<div class="blockElementStory" id="blockElementStory"><div class="heading-section"><h2 class="title">${blockData.blockname}</h2><p class="date">${blockData.displayedate}</p><div class="leftBottom">
+        <img src="${blockData.imagesCollection.items[0].url}" alt="" />
+        </div></div><div class="rightside-section"><div class="rightcol">
+        <img src="${blockData.imagesCollection.items[1].url}" class="topleft" alt=""/>
+        <div class="caption"><p class="content">${blockData.bodyCopy}</p>
+        <button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div></div><div class="topright">
+        <img src="${blockData.imagesCollection.items[2].url}"  alt="" />
+        </div></div><div class="mobilecaption"><p class="content">${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
+        <div class="mobilebanner"><img src="${blockData.imagesCollection.items[0].url}" alt="" /></div></div>`;
+}
+
+export function imageWithContentSlider(blockData) {
+    let sliderLi = blockData.bigCarouselImagesCollection.items.map((item) => {
         return `<li><div class="blockrow"><div class="leftblock block">
-        <img src="${item.url}" alt="image left block" />
+        <img src="${item.imagesCollection.items[0].url}" alt="image left block" />
         </div><div class="rightblock block"><div class="caption">
-        <h2 class="title">${blockData.title}</h2><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a>
+        <h2 class="title">${item.title}</h2><p class="content">${item.bodyCopy}</p><a href="${item.linkUrl}" class="buttonlink">${item.linkText}</a>
         </div></div></div></li>`
     });
-    let  contentStructure = `<ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1,"infinite": true}'>${sliderLi.join('')}</ul>`;
-
-    document.getElementById(selectorID).innerHTML = contentStructure;
+    return `<div class="imageWithContentSlider" id="imageWithContentSlider"><ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1,"infinite": true}'>${sliderLi.join('')}</ul></div>`;
 };
 
-export function collectionPreview(selectorID,blockData) {
-    let  contentStructure = `<div class="previewblock">
+export function collectionPreview(blockData) {
+    return `<div class="blockElementCollectionPreview" id="blockElementCollectionPreview"><div class="previewblock">
         <div class="caption"><h4>${blockData.title}</h4><p>${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
-        <div class="imagesection"><div class="leftImg"><img src="${blockData.imagesCollection.items[0].url}"  alt="${blockData.imagesCollection.items[0].description}"/><div class="dateSection"><p>${blockData.photoCaption}</p><p>${blockData.photoCaptionDate}</p></div></div><div class="rightImg"><img src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].description}"/></div></div></div>`;
-
-    document.getElementById(selectorID).innerHTML = contentStructure;
+        <div class="imagesection"><div class="leftImg"><img src="${blockData.imagesCollection.items[0].url}"  alt="${blockData.imagesCollection.items[0].description}"/><div class="dateSection"><p>${blockData.photoCaption}</p><p>${blockData.photoCaptionDate}</p></div></div><div class="rightImg"><img src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].description}"/></div></div></div></div>`;
 };
 
 export function leftTextBlock(selectorId,blockData) {
@@ -540,7 +613,7 @@ export function leftTextBlock(selectorId,blockData) {
     document.getElementById(selectorId).innerHTML = contentStructure;
 };
 
-export function blockElementVerticalGallery(selectorId,blockData) {
+export function blockElementVerticalGallery(blockData) {
     let leftData = blockData.imagesCollection.items.map((item,i) => {
         if(i < 3) {
             if(item.description === '') {
@@ -560,8 +633,7 @@ export function blockElementVerticalGallery(selectorId,blockData) {
         }
     });
 
-    let contentStructure = `<div class="verticalBlock"><div class="verticalLeftCol">${leftData.join('')}</div><div class="verticalRightCol">${rightData.join('')}</div></div>`;
-    document.getElementById(selectorId).innerHTML = contentStructure;
+    return `<div class="blockElementVerticalGallery" id="blockElementVerticalGallery"><div class="verticalBlock"><div class="verticalLeftCol">${leftData.join('')}</div><div class="verticalRightCol">${rightData.join('')}</div></div></div>`;
 };
 
 function productCard(products) {
@@ -588,22 +660,80 @@ export function createProductSlider(block,blockData) {
     block.querySelector('.sub-description').innerHTML = blockData.description;
 };
 
-export function blockElementImages2ColumnRight(selectorID,blockData) {
-    let  contentStructure = `<div class="col1"><img src="${blockData.image1Column.url}" /></div><div class="col2"><img src="${blockData.image2Column.url}" /></div>`;
-    document.getElementById(selectorID).innerHTML = contentStructure;
+export function blockElementImages2ColumnRight(blockData) {
+    let  contentStructure = `<div class="blockElementImages2ColumnRight" id="blockElementImages2ColumnRight"><div class="col1"><img src="${blockData.image1Column.url}" /></div><div class="col2"><img src="${blockData.image2Column.url}" /></div></div>`;
+    return contentStructure;
 };
-export function blockElementImageLeftCopyRight(selectorID,blockData) {
-    let  contentStructure = `<div class="leftimageblock"><div class="leftImg"><img src="${blockData.image.url}" /></div><div class="textSection"><div class="caption"><h3>${blockData.blockName}</h3><p>${blockData.bodyCopy}</p><a  href="${blockData.linkUrl}" class="button button--secondary">${blockData.linkText}</a></div></div></div>`;
-    document.getElementById(selectorID).innerHTML = contentStructure;
+export function blockElementImageLeftCopyRight(blockData) {
+    let  contentStructure = `<div class="blockElementImageLeftCopyRight" id="blockElementImageLeftCopyRight"><div class="leftimageblock"><div class="leftImg"><img src="${blockData.image.url}" /></div><div class="textSection"><div class="caption"><h3>${blockData.blockName}</h3><p>${blockData.bodyCopy}</p><a  href="${blockData.linkUrl}" class="button button--secondary">${blockData.linkText}</a></div></div></div></div>`;
+    return contentStructure;
 };
 
-export function blogpostTopBanner(selectorID,imageHeading,subheading){
-    let  contentStructure = `<div class="topbannerSection"><img src="${imageHeading.url}" alt="${imageHeading.title}" /><div class="caption"><h2>${imageHeading.title}</h2><span class="date"><div class="divider"></div></span><p class="subheading">${subheading}</p></div></div>`;
+export function blogpostTopBanner(selectorID,title,heading,imageHeading){
+    let  contentStructure = `<div class="topbannerSection"><img src="${imageHeading.url}" alt="${title}" /><div class="caption"><h2>${title ? title : ''}</h2><span class="date"><div class="divider"></div></span><p class="subheading">${heading ? heading : ''}</p></div></div>`;
     document.getElementById(selectorID).innerHTML = contentStructure;
 }
 
 export function blogpostContentBlock(selectorID,blockData){
-    let paragraphs = blockData.json.content.map((p,i) =>  `<p class="para-${i}">${p.content[0].value}</p>`).join('');
-    let  contentStructure = `<div class="content-sections-block"><div class="leftblock">${paragraphs}</div><div class="rightblock"></div></div>`;
+    let paragraphs = blockData.bodyCopy.json.content.map((p,i) =>  `<p class="para-${i}">${p.content[0].value}</p>`).join('');
+    let rightsideblock = `<h6>VENDORS</h6>
+        <div class="flexdiv">
+        ${blockData.gown !== null ?
+            `<div class="row">
+                <div>Gown</div>
+                <div><span>${blockData.gown.json.content.map((item)=> item.content[0].value).join(' ')}</span></div>
+            </div>`
+            : ''}
+            ${blockData.tuxedos !== null ?
+            `<div class="row">
+                <div>Tuxedos</div>
+                <div><span>${blockData.tuxedos.json.content.map((item)=> item.content[0].value).join(' ')}</span></div>
+            </div>`
+            : ''}
+            ${blockData.photographyVideography !== null ?
+            `<div class="row">
+                <div>Photographer/Videography</div>
+                <div>
+                ${blockData.photographyVideography.json.content[0].content[0].value}
+                ${blockData.photographyVideography.json.content[1].content.map((item)=> {
+                    if(item.nodeType == "hyperlink") {
+                        return `<a href="${item.data.url}" target="_blank">${item.content[0].value}</a>`;
+                    } else {
+                        return item.value;
+                    }
+                }).join(' ') }
+                </div>
+            </div>`
+            : ''}
+            ${blockData.florals !== null ?
+            `<div class="row">
+                <div>Florals</div>
+                <div>
+                ${blockData.florals.json.content[0].content[0].value}
+                ${blockData.florals.json.content[1].content.map((item)=> {
+                    if(item.nodeType == "hyperlink") {
+                        return `<a href="${item.data.url}" target="_blank">${item.content[0].value}</a>`;
+                    } else {
+                        return item.value;
+                    }
+                }).join(' ')}</div>
+            </div>`
+            : ''}
+            ${blockData.planningVenue !== null ?
+            `<div class="row">
+                <div>Planning & Venue</div>
+                <div>
+                ${blockData.planningVenue.json.content[0].content[0].value}
+                ${blockData.planningVenue.json.content[1].content.map((item)=> {
+                    if(item.nodeType == "hyperlink") {
+                        return `<a href="${item.data.url}" target="_blank">${item.content[0].value}</a>`;
+                    } else {
+                        return item.value;
+                    }
+                }).join(' ') }</div>
+            </div>`
+            : ''}
+        </div>`;
+    let  contentStructure = `<div class="content-sections-block"><div class="leftblock">${paragraphs}</div><div class="rightblock">${rightsideblock}</div></div>`;
     document.getElementById(selectorID).innerHTML = contentStructure;
 }
