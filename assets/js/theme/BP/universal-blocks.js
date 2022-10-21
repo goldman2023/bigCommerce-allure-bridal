@@ -562,19 +562,18 @@ export function blockElement3ImagesScreenWidth(blockData) {
 
 export function blockElementDiscover(blockData) {
     return `<div class="blockElementDiscover" id="blockElementDiscover">
-    <div class="header-section">
-        <h2>${blockData.blocktitle}</h2>
-        <p>${blockData.bodyCopy}</p>
-    </div>
-    <div class="blockElementStory" ><div class="heading-section"><h2 class="title">${blockData.blockname}</h2><p class="date">${blockData.displayedate}</p><div class="leftBottom">
-        <img src="${blockData.imagesCollection.items[0].url}" alt="" />
-        </div></div><div class="rightside-section"><div class="rightcol">
-        <img src="${blockData.imagesCollection.items[1].url}" class="topleft" alt=""/>
-        <div class="caption"><p class="content">${blockData.bodyCopy}</p>
-        <button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div></div><div class="topright">
-        <img src="${blockData.imagesCollection.items[2].url}"  alt="" />
-        </div></div><div class="mobilecaption"><p class="content">${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
-        <div class="mobilebanner"><img src="${blockData.imagesCollection.items[0].url}" alt="" /></div></div></div>`;
+                <div class="discovery-section">
+                    <div class="imageflex">
+                        <div><img class="first" src="${blockData.imagesCollection.items[0].url}" alt="" /><img class="second" src="${blockData.imagesCollection.items[1].url}" alt=""/></div>
+                        <div><img  src="${blockData.imagesCollection.items[2].url}"  alt="" /></div>
+                    </div>
+                    <div class="caption">
+                        <h2>${blockData.blocktitle}</h2>
+                        <p class="content">${blockData.bodyCopy}</p>
+                        <button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button>
+                    </div>
+                </div>
+            </div>`;
 }
 
 export function blockElementStory(blockData) {
