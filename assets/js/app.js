@@ -55,7 +55,9 @@ const pageClasses = {
 const customClasses = {
     'pages/custom/page/dressing-room': () => import('./theme/BP/dressing-room'),
     'pages/custom/page/manage-members': () => import('./theme/BP/manage-members'),
-    'pages/custom/page/retail-finder': () => import('./theme/BP/retail-finder')
+    'pages/custom/page/retail-finder': () => import('./theme/BP/retail-finder'),
+    'pages/custom/page/all-content-blocks': () => import('./theme/BP/all-content-blocks'), // Mac/Linux
+    'pages\\custom\\page\\all-content-blocks': () => import('./theme/BP/all-content-blocks'), // Windows
 };
 
 /**
