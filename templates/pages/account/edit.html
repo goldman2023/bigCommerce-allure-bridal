@@ -1,9 +1,13 @@
 {{inject 'passwordRequirements' settings.password_requirements}}
 {{#partial "page"}}
-<div class="account account--fixed">
-    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
-    <h2 class="page-heading">{{lang 'account.settings.heading' }}</h2>
+<!-- <div class="account account--fixedLarge"> -->
+    <div>
+    <!-- {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    <h2 class="page-heading">{{lang 'account.settings.heading' }}</h2> -->
+    <div class="account-section-page">
+
     {{> components/account/navigation account_page='settings'}}
+    <div class="rightaccountside">
     {{#if forms.edit_account.error}}
     {{> components/common/alert/alert-error forms.edit_account.error}}
     {{/if}}
@@ -11,6 +15,8 @@
     {{> components/common/alert/alert-success forms.edit_account.success}}
     {{/if}}
     {{> components/account/edit-account}}
+    </div>
+</div>
 </div>
 {{/partial}}
 {{> layout/base}}
