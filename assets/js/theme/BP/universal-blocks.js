@@ -549,10 +549,6 @@ export function blockElementFullscreenVideo(selectorID,element) {
 export function lookBookglobal(blockData) {
    return `<div class="blockElementLookbook" id="blockElementLookbook"><div><h4 class="title">Lookbooks - ${blockData.subheadline}</h4><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData.subheadline}" /><div class="caption"><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div></div></div></div>`;
 }
-export function lookBook(selectorID,blockData) {
-    let blockItem = `<div><h4 class="title">Lookbooks - ${blockData.subheadline}</h4><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData.subheadline}" /><div class="caption"><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div></div></div>`;
-    document.getElementById(selectorID).innerHTML = blockItem;
-}
 
 export function blockElementFullscreenImage(blockData) {
     return `<div class="blockElementFullscreenImage" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" style="width: 100%;"/></div></div>`;
@@ -612,12 +608,6 @@ export function leftTextBlockglobal(selectorId,blockData) {
     return `<div id="${selectorId}" class="${selectorId}"><img src="${blockData.backgroundImage.url}" alt="category banner" />
         <div class="overlay"></div><div class="caption"><h2 class="title">${blockData.bannerTitle}</h2><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div></div>`;
 };
-export function leftTextBlock(selectorId,blockData) {
-    let contentStructure = `<img src="${blockData.backgroundImage.url}" alt="category banner" />
-        <div class="overlay"></div><div class="caption"><h2 class="title">${blockData.bannerTitle}</h2><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div>`;
-
-    document.getElementById(selectorId).innerHTML = contentStructure;
-};
 
 export function blockElementVerticalGallery(blockData) {
     let leftData = blockData.imagesCollection.items.map((item,i) => {
@@ -653,7 +643,24 @@ function productCard(products) {
                     <a href="/wishlist.php?action=addwishlist&product_id=${item.node.entityId}" class="titleIcon"></a></h3><div class="card-text" data-test-info-type="price">${item.node.description}</div></article>
                 </li>`;
     });
-}
+};
+
+export function blockElementImages2ColumnRight(blockData) {
+    let  contentStructure = `<div class="blockElementImages2ColumnRight" id="blockElementImages2ColumnRight"><div class="col1"><img src="${blockData.image1Column.url}" /></div><div class="col2"><img src="${blockData.image2Column.url}" /></div></div>`;
+    return contentStructure;
+};
+
+export function blockElementImageLeftCopyRight(blockData) {
+    let  contentStructure = `<div class="blockElementImageLeftCopyRight" id="blockElementImageLeftCopyRight"><div class="leftimageblock"><div class="leftImg"><img src="${blockData.image.url}" /></div><div class="textSection"><div class="caption"><h3>${blockData.blockName}</h3><p>${blockData.bodyCopy}</p><a  href="${blockData.linkUrl}" class="button button--secondary">${blockData.linkText}</a></div></div></div></div>`;
+    return contentStructure;
+};
+
+export function leftTextBlock(selectorId,blockData) {
+    let contentStructure = `<img src="${blockData.backgroundImage.url}" alt="category banner" />
+        <div class="overlay"></div><div class="caption"><h2 class="title">${blockData.bannerTitle}</h2><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div>`;
+
+    document.getElementById(selectorId).innerHTML = contentStructure;
+};
 
 export function createProductSlider(block,blockData) {
     let prdlist = [];
@@ -666,19 +673,15 @@ export function createProductSlider(block,blockData) {
     block.querySelector('.sub-description').innerHTML = blockData.description;
 };
 
-export function blockElementImages2ColumnRight(blockData) {
-    let  contentStructure = `<div class="blockElementImages2ColumnRight" id="blockElementImages2ColumnRight"><div class="col1"><img src="${blockData.image1Column.url}" /></div><div class="col2"><img src="${blockData.image2Column.url}" /></div></div>`;
-    return contentStructure;
-};
-export function blockElementImageLeftCopyRight(blockData) {
-    let  contentStructure = `<div class="blockElementImageLeftCopyRight" id="blockElementImageLeftCopyRight"><div class="leftimageblock"><div class="leftImg"><img src="${blockData.image.url}" /></div><div class="textSection"><div class="caption"><h3>${blockData.blockName}</h3><p>${blockData.bodyCopy}</p><a  href="${blockData.linkUrl}" class="button button--secondary">${blockData.linkText}</a></div></div></div></div>`;
-    return contentStructure;
-};
-
 export function blogpostTopBanner(selectorID,title,heading,imageHeading){
     let  contentStructure = `<div class="topbannerSection"><img src="${imageHeading.url}" alt="${title}" /><div class="caption"><h2>${title ? title : ''}</h2><span class="date"><div class="divider"></div></span><p class="subheading">${heading ? heading : ''}</p></div></div>`;
     document.getElementById(selectorID).innerHTML = contentStructure;
-}
+};
+
+export function lookBook(selectorID,blockData) {
+    let blockItem = `<div><h4 class="title">Lookbooks - ${blockData.subheadline}</h4><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData.subheadline}" /><div class="caption"><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div></div></div>`;
+    document.getElementById(selectorID).innerHTML = blockItem;
+};
 
 export function blogpostContentBlock(selectorID,blockData){
     let paragraphs = blockData.bodyCopy.json.content.map((p,i) =>  `<p class="para-${i}">${p.content[0].value}</p>`).join('');
@@ -742,4 +745,4 @@ export function blogpostContentBlock(selectorID,blockData){
         </div>`;
     let  contentStructure = `<div class="content-sections-block"><div class="leftblock">${paragraphs}</div><div class="rightblock">${rightsideblock}</div></div>`;
     document.getElementById(selectorID).innerHTML = contentStructure;
-}
+};

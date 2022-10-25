@@ -1,7 +1,7 @@
 .blockElementLookbook {
     margin: 20px -3rem;
     @include breakpoint("medium") { 
-        margin: 0;
+        margin: 5% 0;
     }
     h4 {
         font-family: stencilFontFamily('prata-font');

@@ -39,7 +39,7 @@
 .blockElementImageLeftCopyRight {
     margin: 0 -3rem;
     @include breakpoint("medium") { 
-        margin: 0;
+        margin: 5% 0;
     }
     .leftimageblock {
         width: 100%;

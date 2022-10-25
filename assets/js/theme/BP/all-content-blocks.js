@@ -16,11 +16,10 @@ export default class AllContentBlocks extends PageManager {
     constructor(context) {
         super(context);
     } 
-
     onReady() {
-        var jsContext = JSON.parse(document.getElementById('allcontentdata').value);        
-        console.log("blog post data",jsContext);
-        let blocksCollections = jsContext[0].items[0].contentBlocksCollection.items.map(element => {
+        let jsContext = JSON.parse(document.getElementById('allcontentdata').value);  
+        console.log(jsContext[0].items[0].contentBlocksCollection);      
+        let blocksCollections = jsContext[0].items[0].contentBlocksCollection.items.map((element ,i)=> {
             if(element.__typename === "BlockElementVerticalGallery"){
                 return blockElementVerticalGallery(element);
             }
@@ -40,13 +39,13 @@ export default class AllContentBlocks extends PageManager {
                 return blockElementStory(element); 
             }
             if(element.__typename === "BlockElementLookbook"){
-                lookBookglobal(element);
+                return lookBookglobal(element);
             }
             if(element.__typename === "ReferencedBlockCategoryBanners"){
-                leftTextBlockglobal('leftTextbanner',element);
+                return leftTextBlockglobal('leftTextbanner',element);
             }
             if(element.__typename === "ReferencedBlockCategoryBanners" && element.layoutOrientation === "Image Right"){
-                leftTextBlockglobal('rightTextbanner',element);
+                return leftTextBlockglobal('rightTextbanner',element);
             }
             if(element.__typename === "BlockElementDiscover"){
                 return blockElementDiscover(element);
