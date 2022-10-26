@@ -1,7 +1,7 @@
 {{#partial "page"}}
     <div class="account">
         {{#if settings.show_wishlist}}
-            {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+            <!-- {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
             <h2 class="page-heading">
                 {{#if forms.wishlist.id}}
                     {{lang 'account.wishlists.edit'}}
@@ -12,9 +12,15 @@
                         {{lang 'account.wishlists.heading'}}
                     {{/if}}
                 {{/if}}
-            </h2>
+            </h2> -->
+            <div class="account-section-page">
+
             {{> components/account/navigation account_page='wishlists'}}
+            <div class="rightaccountside">
+
             {{> components/account/add-wishlist}}
+            </div>
+            </div>
         {{/if}}
     </div>
 {{/partial}}

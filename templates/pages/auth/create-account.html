@@ -14,7 +14,7 @@
                 {{> components/common/alert/alert-error forms.create_account.error}}
             {{/if}}
             {{#if settings.account_creation_enabled}}
-                <form action="{{urls.auth.save_new_account}}" data-create-account-form method="post" class="form">
+                <!-- <form action="{{urls.auth.save_new_account}}" data-create-account-form method="post" class="form">
                     <div class="form-row form-row--half1">
                         {{#each forms.create_account.account_fields }}
                             {{{dynamicComponent 'components/common/forms'}}}
@@ -29,7 +29,45 @@
                     <div class="form-actions">
                         <button type="submit" class="button button--seconday">{{lang 'forms.create_account.submit_value' }}</button>
                     </div>
-                </form>
+                </form> -->
+                <div class="register-form__container">
+                  <form method="post" class="form">
+
+                    <div class="form-field">
+                        <label class="form-label" for="register_first">First Name</label>
+                        <input class="form-input" name="register_first" id="login_email" type="email" placeholder="First Name">
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label" for="register_last">Last Name</label>
+                        <input class="form-input" id="register_last" type="password" name="login_pass" autocomplete="off" placeholder="Last Name">
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label" for="register_email">{{lang 'login.field_email'}}</label>
+                        <input class="form-input" name="register_email" id="login_email" type="email" placeholder="{{lang 'login.field_email'}}">
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label" for="register_pass">{{lang 'login.field_password'}}</label>
+                        <input class="form-input" id="register_pass" type="password" name="login_pass" autocomplete="off" placeholder="{{lang 'login.field_password'}}">
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label" for="register_pass-confirm">Confirm Password</label>
+                        <input class="form-input" id="register_pass-confirm" type="password" name="login_pass" autocomplete="off" placeholder="Confirm Password">
+                    </div>
+                    <div class="checkbox-fields">
+                        <div class="checkbox-field">
+                            <input type="checkbox" class="register_pass-news">
+                            <label for="register_pass-news">I wish to receive Allure Bridals News on my e-mail</label>
+                        </div>
+                        <div class="checkbox-field">
+                            <input type="checkbox" class="register_pass-policy">
+                            <label for="register_pass-policy">I accept the Privacy <a href="#">Policy</a></label>
+                        </div>
+                    </div>
+                    {{{ forms.create_account.recaptcha.markup}}}
+
+                    <button type="submit" class="button button--secondary">create account</button>
+                    </form>
+                </div>
             {{/if}}
         </div>
     </div>

@@ -1,9 +1,10 @@
 {{#partial "page"}}
-    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
-    <h2 class="page-heading">{{lang 'account.addresses.heading' }}</h2>
-    {{> components/account/navigation account_page='addresses'}}
+    <!-- {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    <h2 class="page-heading">{{lang 'account.addresses.heading' }}</h2> -->
+    <div class="account-section-page">
+    {{> components/account/navigation account_page='addresses' }}
 
-    <div class="account account--fixedLarge">
+    <div class="rightaccountside">
         <div class="account-body">
             {{#if customer.error}}
                 {{>components/common/alert/alert-error customer.error}}
@@ -13,6 +14,7 @@
             {{/if}}
             {{> components/account/address-list }}
         </div>
+    </div>
     </div>
 {{/partial}}
 {{> layout/base}}
