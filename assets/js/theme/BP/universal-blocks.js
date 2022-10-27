@@ -352,9 +352,7 @@ function headerFooterData(context, callback) {
                             let navigation = [];
                             for (const data of metafieldData) {
                                 if (data.key === "Data for footer") {
-                                    for (const value of data.value) {
-                                        footer[value.section] = (footer[value.section]) ? [...footer[value.section], {"linkName": value.linkName, "url": value.url}] : [{"linkName": value.linkName, "url": value.url}];
-                                    }
+                                    footer = data.value;
                                 }
                                 if (data.key === "Data for navigation") {
                                     navigation = data.value;
@@ -372,19 +370,21 @@ function headerFooterData(context, callback) {
 
 export function renderHeaderFooter (context) {
     headerFooterData (context, globalData => {
-        console.log('global Data', globalData);
         //footer implementation
         const footerListContainer = document.querySelector('.footer-info');
         let footerHtml = '';
-        for (const [key, value] of Object.entries(globalData.footer)) {
-            const keyText = key.toLowerCase();
-            
-            footerHtml += `<article class="footer-info-col" data-section-type="footer-${keyText}"><h3 class="footer-info-heading">${key}</h3>
-            <ul class="footer-info-list">`;
-            for (const [innerKey, innerValue] of Object.entries(value)) {
-                footerHtml += `<li><a href="${innerValue.url}" class="footer-info__link">${innerValue.linkName}</a></li>`;
+        for (const footer of globalData.footer) {
+            const footerObj = footer.footerSectionsCollection.items;
+            for (const [key, value] of Object.entries(footerObj)) {
+                const keyText = (value.sectionName).toLowerCase();
+                
+                footerHtml += `<article class="footer-info-col" data-section-type="footer-${keyText}"><h3 class="footer-info-heading">${value.sectionName}</h3>
+                <ul class="footer-info-list">`;
+                for (const [innerKey, innerValue] of Object.entries(value.sectionLinksCollection.items)) {
+                    footerHtml += `<li><a href="${innerValue.linkUrl}" class="footer-info__link">${innerValue.linkName}</a></li>`;
+                }
+                footerHtml += `</ul></article>`;
             }
-            footerHtml += `</ul></article>`;
         }
         footerListContainer.insertAdjacentHTML('beforeend', footerHtml);
         

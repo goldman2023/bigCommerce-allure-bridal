@@ -40,6 +40,7 @@ export default class Global extends PageManager {
             channelId, cartId, productId, categoryId, secureBaseUrl, maintenanceModeSettings, adminBarLanguage,
         } = this.context;
         let contentId = this.context;
+        console.log(this.context);
         let mainContent = document.getElementById('main-content').classList;
         cartPreview(secureBaseUrl, cartId);
         quickSearch();
@@ -53,7 +54,7 @@ export default class Global extends PageManager {
         adminBar(secureBaseUrl, channelId, maintenanceModeSettings, JSON.parse(adminBarLanguage), productId, categoryId);
         loadingProgressBar();
         svgInjector();
-
+        
         //header footer data 	
         renderHeaderFooter(this.context);
 
