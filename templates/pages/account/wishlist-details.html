@@ -1,15 +1,18 @@
 {{#partial "page"}}
 <div class="account" data-pagination-wishlist>
 
-    {{#if wishlist.is_editable}}
+    <!-- {{#if wishlist.is_editable}}
         {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
     {{/if}}
-    <h2 class="page-heading">{{lang 'account.wishlists.view_heading' name=wishlist.name}}</h2>
+    <h2 class="page-heading">{{lang 'account.wishlists.view_heading' name=wishlist.name}}</h2> -->
+    <div class="account-section-page">
+
     {{#if wishlist.is_editable}}
         {{> components/account/navigation account_page='wishlists'}}
     {{/if}}
-
-    {{#if wishlist.is_editable}}
+    <div class="rightaccountside">
+        <h2 class="section-title">My Dressing Room</h2>
+        {{#if wishlist.is_editable}}
         {{#if wishlist.is_public '>' 0}}
             <div class="panel share-wishlist">
                 <div class="panel-body">
@@ -25,7 +28,8 @@
     {{else}}
         {{> components/common/alert/alert-info (lang 'account.wishlists.empty_wishlist')}}
     {{/if}}
-
+    </div>
+</div>
 </div>
 {{/partial}}
 {{> layout/base}}
