@@ -7,7 +7,8 @@
     <div class="account-section-page">
 
     {{> components/account/navigation account_page='settings'}}
-    <div class="rightaccountside">
+    <div class="rightaccountside editaccount">
+    <h2 class="section-title">Update Profile</h2>
     {{#if forms.edit_account.error}}
     {{> components/common/alert/alert-error forms.edit_account.error}}
     {{/if}}
