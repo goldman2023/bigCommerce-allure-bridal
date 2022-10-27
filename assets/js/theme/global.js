@@ -241,5 +241,11 @@ export default class Global extends PageManager {
                 ]
             });
         };
+
+        if(document.getElementById('initials')) {
+            let customerName = document.getElementById('initials').getAttribute('data-name');
+            document.getElementById('initials').innerHTML = customerName.charAt(0);
+        }
+       
     }
 }

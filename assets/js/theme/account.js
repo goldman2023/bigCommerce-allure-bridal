@@ -84,6 +84,15 @@ export default class Account extends PageManager {
 
         this.bindDeleteAddress();
         this.bindDeletePaymentMethod();
+        $('.infocol .edit').on('click', function() {
+            $('#personalinfo').hide();
+            $('#updatePro').show();
+        });
+        $('#updatePro .back').on('click', function() {
+            $('#personalinfo').show();
+            $('#updatePro').hide();
+        });
+        
     }
 
     /**
