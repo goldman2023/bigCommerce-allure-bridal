@@ -1,48 +1,55 @@
 <nav class="navBar navBar--sub navBar--account">
     <h2><span id="initials" data-name="{{customer.name}}"></span>{{customer.name}}'s Account</h2>
     <ul class="navBar-section">
-        <!-- <li class="navBar-item {{#if account_page '===' 'orders'}}is-active{{/if}}">
+        <li class="navBar-item {{#if account_page '===' 'orders'}}is-active{{/if}}" style="display: none">
             <a class="navBar-action" href="{{urls.account.orders.all}}">{{lang 'account.nav.orders'}}</a>
         </li>
         {{#if settings.returns_enabled}}
-            <li class="navBar-item {{#if account_page '===' 'returns'}}is-active{{/if}}">
+            <li class="navBar-item {{#if account_page '===' 'returns'}}is-active{{/if}}" style="display: none">
                 <a class="navBar-action" href="{{urls.account.returns}}">{{lang 'account.nav.returns'}}</a>
             </li>
         {{/if}}
-        <li class="navBar-item {{#if account_page '===' 'messages'}}is-active{{/if}}">
+        <li class="navBar-item {{#if account_page '===' 'messages'}}is-active{{/if}}" style="display: none">
             <a class="navBar-action" href="{{urls.account.inbox}}">{{lang 'account.nav.messages' num_new_messages=customer.num_new_messages}}</a>
-        </li> -->
+        </li>
         
         {{#if settings.show_payment_methods}}
-            <!-- <li class="navBar-item {{#if account_page '===' 'payment_methods'}}is-active{{/if}}">
+            <li class="navBar-item {{#if account_page '===' 'payment_methods'}}is-active{{/if}}" style="display: none">
                 <a class="navBar-action" href="{{urls.account.payment_methods.all}}">{{lang 'account.nav.payment_methods'}}</a>
-            </li> -->
+            </li>
         {{/if}}
         {{#if settings.show_wishlist}}
             <li class="navBar-item {{#if account_page '===' 'wishlists'}}is-active{{/if}}">
                 <a class="navBar-action" href="{{urls.account.wishlists.all}}">
                     <!-- {{lang 'account.nav.wishlists'}} -->
-                    My Dressing Room
+                    <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.2085 6.50626L8.76777 9.94704C7.79146 10.9234 6.20854 10.9234 5.23223 9.94704L1.79146 6.50626C0.558627 5.27343 0.558628 3.27462 1.79146 2.0418C3.02428 0.808968 5.02309 0.808968 6.25592 2.0418L6.82492 2.6108C6.92162 2.70749 7.07838 2.70749 7.17508 2.6108L7.74408 2.0418C8.97691 0.808967 10.9757 0.808968 12.2085 2.0418C13.4414 3.27462 13.4414 5.27343 12.2085 6.50626Z" />
+                        </svg>My Dressing Room
                 </a>
             </li>
         {{/if}}
-        <li class="navBar-item {{#if account_page '===' 'addresses'}}is-active{{/if}}">
+        <li class="navBar-item {{#if account_page '===' 'addresses'}}is-active{{/if}}" style="display: none">
             <a class="navBar-action" href="{{urls.account.addresses}}">
-                <!-- {{lang 'account.nav.addresses'}} -->
-                Personal Info
+                {{lang 'account.nav.addresses'}}
             </a>
         </li>
-        <!-- <li class="navBar-item {{#if account_page '===' 'recent_items'}}is-active{{/if}}">
+        <li class="navBar-item {{#if account_page '===' 'recent_items'}}is-active{{/if}}" style="display: none">
             <a class="navBar-action" href="{{urls.account.recent_items}}">{{lang 'account.nav.recently_viewed'}}</a>
-        </li> -->
+        </li>
         <li class="navBar-item {{#if account_page '===' 'settings'}}is-active{{/if}}">
             <a class="navBar-action" href="{{urls.account.details}}">
                 <!-- {{lang 'account.nav.settings'}} -->
-                Update Profile
+                <svg id="person" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.4998 16.0636C12.4702 16.6592 11.2749 17 10 17C8.72507 17 7.52975 16.6592 6.50019 16.0636C6.5197 14.1474 8.07914 12.6 10 12.6C11.9209 12.6 13.4803 14.1474 13.4998 16.0636ZM14.4469 15.4063C14.1777 13.6665 12.9119 12.256 11.2512 11.7762C12.2965 11.3004 13.0232 10.2467 13.0232 9.02326C13.0232 7.35356 11.6697 6 9.99997 6C8.33027 6 6.97672 7.35356 6.97672 9.02326C6.97672 10.2467 7.70343 11.3004 8.74875 11.7763C7.08808 12.256 5.82234 13.6665 5.55314 15.4063C3.99408 14.1225 3 12.1773 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10C17 12.1773 16.0059 14.1225 14.4469 15.4063ZM18 10C18 14.4183 14.4183 18 10 18C5.58172 18 2 14.4183 2 10C2 5.58172 5.58172 2 10 2C14.4183 2 18 5.58172 18 10ZM9.99997 11.0465C11.1174 11.0465 12.0232 10.1407 12.0232 9.02326C12.0232 7.90584 11.1174 7 9.99997 7C8.88256 7 7.97672 7.90584 7.97672 9.02326C7.97672 10.1407 8.88256 11.0465 9.99997 11.0465Z" />
+                    </svg>Personal Info
             </a>
         </li>
         <li class="navBar-item {{#if account_page '===' 'settings'}}is-active{{/if}}">
             <a class="navBar-action" href="{{urls.auth.logout}}" aria-label="{{lang 'common.logout'}}">
+                                    <svg id="logout" width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.22243 0.777588H1.4443C0.707842 0.777588 0.110962 1.37447 0.110962 2.11092V4.77759C0.110962 5.02343 0.309922 5.22237 0.555748 5.22237C0.801055 5.22237 1.00002 5.02341 1.00002 4.77759V2.11092C1.00002 1.86561 1.19898 1.66665 1.44428 1.66665H7.22241C7.34012 1.66665 7.45315 1.71353 7.53648 1.79686C7.61981 1.8802 7.66669 1.99322 7.66669 2.11093V11.8891C7.66669 12.0068 7.61981 12.1198 7.53648 12.2031C7.45315 12.2865 7.34012 12.3333 7.22241 12.3333H1.44428C1.19898 12.3333 1.00002 12.1344 1.00002 11.8891V9.2224C1.00002 8.97656 0.801055 8.77762 0.555748 8.77762C0.309908 8.77762 0.110962 8.97658 0.110962 9.2224V11.8891C0.110962 12.6255 0.707842 13.2224 1.4443 13.2224H7.22243C7.95888 13.2224 8.55576 12.6255 8.55576 11.8891V2.11094C8.55576 1.37448 7.95888 0.777604 7.22243 0.777604V0.777588Z" />
+                        </svg>
+                        
                     {{lang 'common.logout'}}
             </a>
         </li>

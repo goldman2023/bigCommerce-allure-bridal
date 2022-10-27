@@ -13,6 +13,20 @@
             font-size: remCalc(20px);
             line-height: remCalc(25px);
             color: stencilColor("color-default-neutral-3");
+            #initials {
+                background: #695C5C;
+                font-family: stencilFontFamily('stay-classy-font');
+                text-transform: uppercase;
+                font-style: normal;
+                font-weight: 400;
+                width: 20px;
+                height: 20px;
+                color: white;
+                padding: 7px 11px 2px 11px;
+                margin-right: 6px;
+                border-radius: 50%;
+                font-size: 12px;
+            }
         }
         .navBar-item {
             display:block;
@@ -24,11 +38,36 @@
                 font-size: remCalc(14px);
                 line-height: remCalc(12px);
                 color: stencilColor("color-default-neutral-3");
+                display: flex;
+                align-items: center;
+                svg {
+                    width: 40px;
+                    path {
+                        stroke: stencilColor("color-default-neutral-3");
+                    }
+                    &#person,&#logout {
+                        path {
+                            fill: stencilColor("color-default-neutral-3");
+                            stroke: none;
+                        }
+                    }
+                }
             }
             &.is-active {
                 border-bottom: 0;
                 .navBar-action {
                     color: stencilColor("color-default-primary-1");
+                    svg {
+                        path {
+                            stroke: stencilColor("color-default-primary-1");
+                        }
+                        &#person,&#logout {
+                            path {
+                                fill: stencilColor("color-default-primary-1");
+                                stroke: none;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -45,7 +84,11 @@
             border-bottom: 1px solid stencilColor("color-allure-bridals-neutral-4");
             padding-bottom: 20px;
             margin-bottom: 20px;
+            margin-top: 0;
         }
+    }
+    .productGrid .product {
+        width: 33.33%;
     }
 }
 .editaccount {
@@ -61,5 +104,58 @@
         letter-spacing: 0.05em;
         text-transform: uppercase;
         color: stencilColor("color-allure-bridals-neutral-1");
+    }
+    #updatePro {
+        display: none;
+        .back {
+            float: right;
+            color: #695C5C;
+            cursor: pointer;
+            font-family: stencilFontFamily('default-font-regular');
+            font-style: normal;
+            font-weight: 500;
+            font-size: remCalc(12px);
+            line-height:remCalc(15px);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+    }
+    .infotable {
+        .inforow {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid stencilColor("color-allure-bridals-neutral-4");
+            padding: 20px 0;
+            .infocol {
+                width: 50%;
+                p {
+                    margin: 0;
+                    font-family: stencilFontFamily('default-font-regular');
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: remCalc(12px);
+                    line-height:remCalc(15px);
+                    letter-spacing: 0.1em;
+                    text-transform: uppercase;
+                    color: #282828;
+                    &.label {
+                        margin-bottom: 10px;
+                        font-family: stencilFontFamily('default-font-bold');
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: remCalc(14px);
+                        line-height: remCalc(17px);
+                    }
+                    &.edit {
+                        color: #695C5C;
+                        margin-top: 10px;
+                        cursor: pointer;
+                    }
+                }
+            }
+            &:last-child {
+                border-bottom: 0;
+            }
+        }
     }
 }
