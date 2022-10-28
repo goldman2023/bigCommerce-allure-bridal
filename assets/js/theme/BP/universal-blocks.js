@@ -743,6 +743,11 @@ export function blogpostContentBlock(selectorID,blockData){
             </div>`
             : ''}
         </div>`;
-    let  contentStructure = `<div class="content-sections-block"><div class="leftblock">${paragraphs}</div><div class="rightblock">${rightsideblock}</div></div>`;
+        let  contentStructure = '';
+        if(blockData.gown === null && blockData.tuxedos === null && blockData.photographyVideography === null && blockData.florals === null && blockData.planningVenue === null) {
+            contentStructure = `<div class="content-sections-block"><div class="leftblock fullwidth">${paragraphs}</div></div>`;
+        } else {
+            contentStructure = `<div class="content-sections-block"><div class="leftblock">${paragraphs}</div><div class="rightblock">${rightsideblock}</div></div>`;
+        }
     document.getElementById(selectorID).innerHTML = contentStructure;
 };
