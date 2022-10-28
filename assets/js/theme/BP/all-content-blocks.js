@@ -17,9 +17,9 @@ export default class AllContentBlocks extends PageManager {
         super(context);
     } 
     onReady() {
-        let jsContext = JSON.parse(document.getElementById('allcontentdata').value);  
-        console.log(jsContext[0].items[0].contentBlocksCollection);      
-        let blocksCollections = jsContext[0].items[0].contentBlocksCollection.items.map((element ,i)=> {
+        let allcontentData = document.getElementById('allcontentdata').value;
+        let jsContext = JSON.parse(allcontentData.replace( /(<([^>]+)>)/ig, ''));  
+        let blocksCollections = jsContext[0].contentBlocksCollection.items.map((element ,i)=> {
             if(element.__typename === "BlockElementVerticalGallery"){
                 return blockElementVerticalGallery(element);
             }

@@ -40,7 +40,6 @@ export default class Global extends PageManager {
             channelId, cartId, productId, categoryId, secureBaseUrl, maintenanceModeSettings, adminBarLanguage,
         } = this.context;
         let contentId = this.context;
-        console.log(this.context);
         let mainContent = document.getElementById('main-content').classList;
         cartPreview(secureBaseUrl, cartId);
         quickSearch();
