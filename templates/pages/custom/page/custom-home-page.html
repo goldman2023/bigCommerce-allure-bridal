@@ -1,0 +1,10 @@
+{{#partial "page"}}
+<section class="page">
+    {{{region name="page_builder_content"}}}
+    <div >
+       <input type="hidden"  value="{{page.content}}" id="homecontentdata" />
+       <div id="contentBlocksCollection"></div>
+    </div>
+</section>
+{{/partial}}
+{{> layout/base}}
