@@ -58,6 +58,8 @@ const customClasses = {
     'pages/custom/page/retail-finder': () => import('./theme/BP/retail-finder'),
     'pages/custom/page/all-content-blocks': () => import('./theme/BP/all-content-blocks'), // Mac/Linux
     'pages\\custom\\page\\all-content-blocks': () => import('./theme/BP/all-content-blocks'), // Windows
+    'pages/custom/page/custom-home-page': () => import('./theme/BP/homepage'), // Mac/Linux
+    'pages\\custom\\page\\custom-home-page': () => import('./theme/BP/homepage'), // Windows
 };
 
 /**

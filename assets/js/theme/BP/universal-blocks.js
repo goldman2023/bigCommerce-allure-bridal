@@ -547,20 +547,20 @@ export function blockElementFullscreenVideo(selectorID,element) {
 }
 
 export function lookBookglobal(blockData) {
-   return `<div class="blockElementLookbook" id="blockElementLookbook"><div><h4 class="title">Lookbooks - ${blockData.subheadline}</h4><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData.subheadline}" /><div class="caption"><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div></div></div></div>`;
+   return `<div class="blockElementLookbook block-item" id="blockElementLookbook"><div><h4 class="title">Lookbooks - ${blockData.subheadline}</h4><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData.subheadline}" /><div class="caption"><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div></div></div></div>`;
 }
 
 export function blockElementFullscreenImage(blockData) {
-    return `<div class="blockElementFullscreenImage" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" style="width: 100%;"/></div></div>`;
+    return `<div class="blockElementFullscreenImage block-item" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" style="width: 100%;"/></div></div>`;
 }
 
 export function blockElement3ImagesScreenWidth(blockData) {
     let imgthum = blockData.imagesCollection.items.map((image) => `<div class="imageDiv"><img src="${image.url}" /></div>`);
-    return ` <div class="blockElement3ImagesScreenWidth" id="blockElement3ImagesScreenWidth"><div class="thumbImg">${imgthum.join('')}</div></div>`;
+    return ` <div class="blockElement3ImagesScreenWidth block-item" id="blockElement3ImagesScreenWidth"><div class="thumbImg">${imgthum.join('')}</div></div>`;
 };
 
 export function blockElementDiscover(blockData) {
-    return `<div class="blockElementDiscover" id="blockElementDiscover">
+    return `<div class="blockElementDiscover block-item" id="blockElementDiscover">
                 <div class="discovery-section">
                     <div class="imageflex">
                         <div><img class="first" src="${blockData.imagesCollection.items[0].url}" alt="" /><img class="second" src="${blockData.imagesCollection.items[1].url}" alt=""/></div>
@@ -576,7 +576,7 @@ export function blockElementDiscover(blockData) {
 }
 
 export function blockElementStory(blockData) {
-    return `<div class="blockElementStory" id="blockElementStory"><div class="heading-section"><h2 class="title">${blockData.blockname}</h2><p class="date">${blockData.displayedate}</p><div class="leftBottom">
+    return `<div class="blockElementStory block-item" id="blockElementStory"><div class="heading-section"><h2 class="title">${blockData.blockname}</h2><p class="date">${blockData.displayedate}</p><div class="leftBottom">
         <img src="${blockData.imagesCollection.items[0].url}" alt="" />
         </div></div><div class="rightside-section"><div class="rightcol">
         <img src="${blockData.imagesCollection.items[1].url}" class="topleft" alt=""/>
@@ -595,17 +595,17 @@ export function imageWithContentSlider(blockData) {
         <h2 class="title">${item.title}</h2><p class="content">${item.bodyCopy}</p><a href="${item.linkUrl}" class="buttonlink">${item.linkText}</a>
         </div></div></div></li>`
     });
-    return `<div class="imageWithContentSlider" id="imageWithContentSlider"><ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1,"infinite": true}'>${sliderLi.join('')}</ul></div>`;
+    return `<div class="imageWithContentSlider block-item" id="imageWithContentSlider"><ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1,"infinite": true}'>${sliderLi.join('')}</ul></div>`;
 };
 
 export function collectionPreview(blockData) {
-    return `<div class="blockElementCollectionPreview" id="blockElementCollectionPreview"><div class="previewblock">
+    return `<div class="blockElementCollectionPreview block-item" id="blockElementCollectionPreview"><div class="previewblock">
         <div class="caption"><h4>${blockData.title}</h4><p>${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
         <div class="imagesection"><div class="leftImg"><img src="${blockData.imagesCollection.items[0].url}"  alt="${blockData.imagesCollection.items[0].description}"/><div class="dateSection"><p>${blockData.photoCaption}</p><p>${blockData.photoCaptionDate}</p></div></div><div class="rightImg"><img src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].description}"/></div></div></div></div>`;
 };
 
 export function leftTextBlockglobal(selectorId,blockData) {
-    return `<div id="${selectorId}" class="${selectorId}"><img src="${blockData.backgroundImage.url}" alt="category banner" />
+    return `<div id="${selectorId} block-item" class="${selectorId}"><img src="${blockData.backgroundImage.url}" alt="category banner" />
         <div class="overlay"></div><div class="caption"><h2 class="title">${blockData.bannerTitle}</h2><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div></div>`;
 };
 
@@ -629,7 +629,7 @@ export function blockElementVerticalGallery(blockData) {
         }
     });
 
-    return `<div class="blockElementVerticalGallery" id="blockElementVerticalGallery"><div class="verticalBlock"><div class="verticalLeftCol">${leftData.join('')}</div><div class="verticalRightCol">${rightData.join('')}</div></div></div>`;
+    return `<div class="blockElementVerticalGallery block-item" id="blockElementVerticalGallery"><div class="verticalBlock"><div class="verticalLeftCol">${leftData.join('')}</div><div class="verticalRightCol">${rightData.join('')}</div></div></div>`;
 };
 
 function productCard(products) {
@@ -646,12 +646,12 @@ function productCard(products) {
 };
 
 export function blockElementImages2ColumnRight(blockData) {
-    let  contentStructure = `<div class="blockElementImages2ColumnRight" id="blockElementImages2ColumnRight"><div class="col1"><img src="${blockData.image1Column.url}" /></div><div class="col2"><img src="${blockData.image2Column.url}" /></div></div>`;
+    let  contentStructure = `<div class="blockElementImages2ColumnRight block-item" id="blockElementImages2ColumnRight"><div class="col1"><img src="${blockData.image1Column.url}" /></div><div class="col2"><img src="${blockData.image2Column.url}" /></div></div>`;
     return contentStructure;
 };
 
 export function blockElementImageLeftCopyRight(blockData) {
-    let  contentStructure = `<div class="blockElementImageLeftCopyRight" id="blockElementImageLeftCopyRight"><div class="leftimageblock"><div class="leftImg"><img src="${blockData.image.url}" /></div><div class="textSection"><div class="caption"><h3>${blockData.blockName}</h3><p>${blockData.bodyCopy}</p><a  href="${blockData.linkUrl}" class="button button--secondary">${blockData.linkText}</a></div></div></div></div>`;
+    let  contentStructure = `<div class="blockElementImageLeftCopyRight block-item" id="blockElementImageLeftCopyRight"><div class="leftimageblock"><div class="leftImg"><img src="${blockData.image.url}" /></div><div class="textSection"><div class="caption"><h3>${blockData.blockName}</h3><p>${blockData.bodyCopy}</p><a  href="${blockData.linkUrl}" class="button button--secondary">${blockData.linkText}</a></div></div></div></div>`;
     return contentStructure;
 };
 
@@ -743,6 +743,11 @@ export function blogpostContentBlock(selectorID,blockData){
             </div>`
             : ''}
         </div>`;
-    let  contentStructure = `<div class="content-sections-block"><div class="leftblock">${paragraphs}</div><div class="rightblock">${rightsideblock}</div></div>`;
+        let  contentStructure = '';
+        if(blockData.gown === null && blockData.tuxedos === null && blockData.photographyVideography === null && blockData.florals === null && blockData.planningVenue === null) {
+            contentStructure = `<div class="content-sections-block"><div class="leftblock fullwidth">${paragraphs}</div></div>`;
+        } else {
+            contentStructure = `<div class="content-sections-block"><div class="leftblock">${paragraphs}</div><div class="rightblock">${rightsideblock}</div></div>`;
+        }
     document.getElementById(selectorID).innerHTML = contentStructure;
 };

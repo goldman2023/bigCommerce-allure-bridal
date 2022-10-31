@@ -1,0 +1,18 @@
+.pages-custom-page-custom-home-page {
+    margin: 0;
+    .container {
+        padding: 0 6rem;
+        max-width: 100%;
+    }
+    #contentBlocksCollection {
+        .blockElementFullscreenImage {
+            width: calc(100%+12rem);
+            margin: 0 -5rem;
+        }
+        .block-item {
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+    }
+}
