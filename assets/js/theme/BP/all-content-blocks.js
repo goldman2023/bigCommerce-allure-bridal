@@ -10,7 +10,9 @@ import {
     blockElementStory,
     leftTextBlockglobal,
     blockElementVerticalGallery,
-    imageWithContentSlider
+    imageWithContentSlider,
+    blockElementCopyBlock,
+    logoSliderBlock
     } from './universal-blocks';
 export default class AllContentBlocks extends PageManager {
     constructor(context) {
@@ -22,6 +24,12 @@ export default class AllContentBlocks extends PageManager {
         let blocksCollections = jsContext[0].contentBlocksCollection.items.map((element ,i)=> {
             if(element.__typename === "BlockElementVerticalGallery"){
                 return blockElementVerticalGallery(element);
+            }
+            if(element.__typename === "BlockElementCopyBlock"){
+                return blockElementCopyBlock(element);
+            }
+            if(element.__typename === "ReferencedBlockLogoRow"){
+                return logoSliderBlock(element);
             }
             if(element.__typename === "BlockElementFullscreenImage"){
                 return blockElementFullscreenImage(element); 
@@ -62,6 +70,40 @@ export default class AllContentBlocks extends PageManager {
         document.querySelectorAll('.imageWithContentSlider ul').forEach((item) => {
             applySlider(item,1);
         });
+
+        if(document.getElementById('logoSliderBlock')) {
+            $('.logoSliderBlock .imgslider').slick({
+                dots: false,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                centerMode: true,
+                responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                    slidesToShow: 6,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    centerMode: true,
+                    dots: false
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        centerMode: true,
+                        infinite: true,
+                        dots: false,
+                        arrows: false
+                    }
+                }
+                ]
+            });
+        }
 
         function applySlider(selector,slide,centerM,infinity) {
             let centermood = false;

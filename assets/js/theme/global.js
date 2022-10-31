@@ -105,6 +105,7 @@ export default class Global extends PageManager {
             productDeatilMetaData(this.context,productId, response => {
                 let metadata = response.contentFul;
                 let relatedPro = response.related;
+                console.log(metadata);
                 let blocksCollections = metadata.contentBlocksCollection.items.map(element => {
                     if(element.__typename === "BlockElementStoryBlock"){
                         return blockElementStory(element);

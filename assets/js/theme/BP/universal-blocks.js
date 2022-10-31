@@ -305,7 +305,6 @@ export function contentFullmetaData(context, callback) {
 
 export function productDeatilMetaData(context,prodID, callback) {
     productDetailMetadata(context,prodID, response => {
-        console.log("prod data", response);
         if (response.data.site.product !== undefined) {
             const product = response.data.site.product;
             if (product.metafields.edges.length > 0) {
@@ -551,7 +550,16 @@ export function lookBookglobal(blockData) {
 }
 
 export function blockElementFullscreenImage(blockData) {
-    return `<div class="blockElementFullscreenImage block-item" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" style="width: 100%;"/></div></div>`;
+    return `<div class="blockElementFullscreenImage block-item" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" style="width: 100%;"/>
+    ${blockData.bodyCopy !== null ? `<div class="homepageCaption"><h4>${blockData.subheadline}</h4><p>${blockData.bodyCopy}</p><a href="${blockData.linkUrl}">${blockData.linkText}</a></div>` : ''}</div></div>`;
+}
+
+export function blockElementCopyBlock(blockData) {
+    return `<div class="blockElementCopyBlock block-item" id="blockElementCopyBlock"><h2>${blockData.blockName}</h2><p>${blockData.bodyCopy}<p></div>`;
+}
+
+export function logoSliderBlock(blockData) {
+    return `<div class="logoSliderBlock block-item" id="logoSliderBlock"><div class="imgslider"> ${blockData.logosCollection.items.map((logo)=> `<img src="${logo.url}" alt="${logo.title}" />` ).join('')}</div></div>`;
 }
 
 export function blockElement3ImagesScreenWidth(blockData) {
@@ -599,9 +607,32 @@ export function imageWithContentSlider(blockData) {
 };
 
 export function collectionPreview(blockData) {
-    return `<div class="blockElementCollectionPreview block-item" id="blockElementCollectionPreview"><div class="previewblock">
+
+    if(blockData.imagesCollection.items.length > 2){
+        return `<div class="blockElementCollectionPreview block-item" id="blockElementCollectionPreview"><div class="previewblock">
         <div class="caption"><h4>${blockData.title}</h4><p>${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
-        <div class="imagesection"><div class="leftImg"><img src="${blockData.imagesCollection.items[0].url}"  alt="${blockData.imagesCollection.items[0].description}"/><div class="dateSection"><p>${blockData.photoCaption}</p><p>${blockData.photoCaptionDate}</p></div></div><div class="rightImg"><img src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].description}"/></div></div></div></div>`;
+        <div class="imagesection"><div class="leftImg half"><img src="${blockData.imagesCollection.items[0].url}"  alt="${blockData.imagesCollection.items[0].description}"/>
+        <div class="dateSection">
+        ${blockData.photoCaption !== null ? `<p>${blockData.photoCaption}</p>` : ''}
+        ${blockData.photoCaptionDate !== null ? `<p>${blockData.photoCaptionDate}</p>` : ''}
+        </div>
+        </div><div class="rightImg half">
+        <img src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].description}"/>
+        ${blockData.imagesCollection.items[2] ? `<img src="${blockData.imagesCollection.items[2].url}" alt="${blockData.imagesCollection.items[2].description}"/>` : ''}
+        </div></div></div></div>`;
+    } else {
+        return `<div class="blockElementCollectionPreview block-item" id="blockElementCollectionPreview"><div class="previewblock">
+        <div class="caption"><h4>${blockData.title}</h4><p>${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
+        <div class="imagesection"><div class="leftImg"><img src="${blockData.imagesCollection.items[0].url}"  alt="${blockData.imagesCollection.items[0].description}"/>
+        <div class="dateSection">
+        ${blockData.photoCaption !== null ? `<p>${blockData.photoCaption}</p>` : ''}
+        ${blockData.photoCaptionDate !== null ? `<p>${blockData.photoCaptionDate}</p>` : ''}
+        </div>
+        </div><div class="rightImg">
+        <img src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].description}"/>
+        </div></div></div></div>`;
+    }
+    
 };
 
 export function leftTextBlockglobal(selectorId,blockData) {
