@@ -112,3 +112,92 @@
         color: #615D5D;
     }
 }
+
+.events.block-item {
+    margin: 20px -3rem;
+    text-align: center;
+    @include breakpoint("medium") { 
+        margin: 5% 0;
+    }
+    h2 {
+        font-family: 'Prata';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 34px;
+        line-height: 44px;
+        color: #695C5C;
+        margin-bottom: 30px;
+    }
+    .eventsGrid {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        flex-wrap: wrap;
+        .eventsCard {
+            width: calc(50% - 20px);
+            padding: 20px;
+            border: 1px solid #D9D3D3;
+            margin-bottom: 40px;
+            .block {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                .col {
+                    width: calc(50% - 20px);
+                }
+                .imageblock {
+                    img {width: 100%;}
+                }
+                .contentBlock {
+                    text-align: left;
+                    font-family: 'Inter';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 22px;
+                    color: #282828;
+                    h4 {
+                        font-family: 'Prata';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 22px;
+                        line-height: 30px;
+                        color: #282828;
+                        margin-top: 0;
+                    }
+                    .addressp {
+                        font-family: 'Inter';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 12px;
+                        line-height: 20px;
+                        color: #4D4D4D;
+                    }
+                    label {
+                        font-family: 'Inter';
+                        font-style: normal;
+                        font-weight: 500;
+                        font-size: 10px;
+                        line-height: 12px;
+                        letter-spacing: 0.1em;
+                        text-transform: uppercase;
+                        color: #4D4D4D;
+                    }
+                    span,a {
+                        width: 100%;
+                        display: block;
+                    }
+                    .colored {
+                        font-family: 'Inter';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 14px;
+                        line-height: 22px;
+                        color: #BC8372;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}

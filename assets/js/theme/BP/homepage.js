@@ -12,7 +12,8 @@ import {
     blockElementVerticalGallery,
     imageWithContentSlider,
     blockElementCopyBlock,
-    logoSliderBlock
+    logoSliderBlock,
+    events
     } from './universal-blocks';
 export default class Homepage extends PageManager {
     constructor(context) {
@@ -38,6 +39,10 @@ export default class Homepage extends PageManager {
             if(element.__typename === "BlockElement3ImagesScreenWidth"){
                 return blockElement3ImagesScreenWidth(element);
             }
+            if(element.__typename === "ReferencedBlockTrunkShowContainer"){
+                return events(element);
+            }
+            
             if(element.__typename === "BlockElementImages2ColumnRight"){
                 return blockElementImages2ColumnRight(element);
             }

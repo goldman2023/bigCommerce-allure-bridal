@@ -551,8 +551,36 @@ export function lookBookglobal(blockData) {
 
 export function lookBookglobal2(blockData) {
     return `<div class="blockElementLookbook2 block-item" id="blockElementLookbook2"><div><div class="caption"><h2>${blockData.blocktitle}</h2><div class="divider"></div><h4>${blockData.subheadline}</h4><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="button button-secondary">${blockData.linkText}</a></div><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData.subheadline}" /></div></div></div>`;
- }
-
+}
+export function events(blockData) {
+    return `<div class="events block-item" id="events">
+    <h2>Upcoming Designer Events</h2>
+    <div class="eventsGrid">
+        ${blockData.trunkShowsCollection.items.map((item)=> 
+            `<div class="eventsCard">
+              <div class="block">
+                <div class="imageblock col"><img src="${item.eventImage.url}" /></div>
+                <div class="contentBlock col">
+                    <h4>${item.retailerName}</h4>
+                    <p class="addressp">${item.location}</p>
+                    <div class="divider"></div>
+                    <label>Date</label>
+                    <p class="colored">${item.eventStartDate} - ${item.eventEndDate}</p>
+                    <label>Collections</label>
+                    <p class="colored">${item.collectionsAvailable.map((col)=> `${col}`).join("  ")}</p>
+                    <label>address</label>
+                    <span>${item.locationAddressStreet}</span>
+                    <span>${item.locationAddressCityStateZip}</span>
+                    <p><a class="colored" href="${item.locationWebsiteUrl}">GET DIRECTION</a></p>
+                    <label>Phone</label>
+                    <p>${item.locationPhoneNumber}</p>
+                    <label>website</label>
+                    <p class="colored">${item.locationWebsiteUrl}</p>
+                </div>
+              </div>
+            </div>`).join('')}
+    </div></div>`;
+}
 export function blockElementFullscreenImage(blockData) {
     return `<div class="blockElementFullscreenImage block-item" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" style="width: 100%;"/>
     ${blockData.bodyCopy !== null ? `<div class="homepageCaption"><h4>${blockData.subheadline}</h4><p>${blockData.bodyCopy}</p><a href="${blockData.linkUrl}">${blockData.linkText}</a></div>` : ''}</div></div>`;
