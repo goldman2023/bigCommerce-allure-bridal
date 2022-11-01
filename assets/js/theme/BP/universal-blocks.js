@@ -549,6 +549,10 @@ export function lookBookglobal(blockData) {
    return `<div class="blockElementLookbook block-item" id="blockElementLookbook"><div><h4 class="title">Lookbooks - ${blockData.subheadline}</h4><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData.subheadline}" /><div class="caption"><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div></div></div></div>`;
 }
 
+export function lookBookglobal2(blockData) {
+    return `<div class="blockElementLookbook2 block-item" id="blockElementLookbook2"><div><div class="caption"><h2>${blockData.blocktitle}</h2><div class="divider"></div><h4>${blockData.subheadline}</h4><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="button button-secondary">${blockData.linkText}</a></div><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData.subheadline}" /></div></div></div>`;
+ }
+
 export function blockElementFullscreenImage(blockData) {
     return `<div class="blockElementFullscreenImage block-item" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" style="width: 100%;"/>
     ${blockData.bodyCopy !== null ? `<div class="homepageCaption"><h4>${blockData.subheadline}</h4><p>${blockData.bodyCopy}</p><a href="${blockData.linkUrl}">${blockData.linkText}</a></div>` : ''}</div></div>`;

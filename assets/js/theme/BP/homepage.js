@@ -6,7 +6,7 @@ import {
     blockElementImageLeftCopyRight,
     collectionPreview,
     blockElementDiscover,
-    lookBookglobal,
+    lookBookglobal2,
     blockElementStory,
     leftTextBlockglobal,
     blockElementVerticalGallery,
@@ -48,7 +48,7 @@ export default class Homepage extends PageManager {
                 return blockElementStory(element);
             }
             if(element.__typename === "BlockElementLookbook"){
-                return lookBookglobal(element);
+                return lookBookglobal2(element);
             }
             if(element.__typename === "ReferencedBlockCategoryBanners"){
                 return leftTextBlockglobal('leftTextbanner',element);

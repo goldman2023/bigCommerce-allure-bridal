@@ -76,3 +76,39 @@
         padding: 0;
     }
 }
+
+.blockElementLookbook2 {
+    margin: 20px -3rem;
+    text-align: center;
+    @include breakpoint("medium") { 
+        margin: 5% -5rem;
+    }
+    .caption {
+        max-width: 550px;
+        margin: 0 auto 30px auto;
+    }
+    h2 {
+        font-family: 'Prata';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 34px;
+        line-height: 44px;
+        color: #1D1B1B;
+    }
+    h4 {
+        font-family: 'Prata';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 22px;
+        line-height: 30px;
+        color: #1D1B1B;
+    }
+    .content {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 26px;
+        color: #615D5D;
+    }
+}
