@@ -88,20 +88,20 @@
         margin: 0 auto 30px auto;
     }
     h2 {
-        font-family: 'Prata';
+        font-family: stencilFontFamily('prata-font');
         font-style: normal;
         font-weight: 400;
         font-size: 34px;
         line-height: 44px;
-        color: #1D1B1B;
+        color: stencilColor("color-allure-bridals-neutral-1");
     }
     h4 {
-        font-family: 'Prata';
+        font-family: stencilFontFamily('prata-font');
         font-style: normal;
         font-weight: 400;
         font-size: 22px;
         line-height: 30px;
-        color: #1D1B1B;
+        color: stencilColor("color-allure-bridals-neutral-1");
     }
     .content {
         font-family: 'Inter';
@@ -109,7 +109,7 @@
         font-weight: 400;
         font-size: 16px;
         line-height: 26px;
-        color: #615D5D;
+        color: stencilColor("color-allure-bridals-neutral-2");
     }
 }
 
@@ -120,12 +120,12 @@
         margin: 5% 0;
     }
     h2 {
-        font-family: 'Prata';
+        font-family: stencilFontFamily('prata-font');
         font-style: normal;
         font-weight: 400;
         font-size: 34px;
         line-height: 44px;
-        color: #695C5C;
+        color: stencilColor("color-default-neutral-3");
         margin-bottom: 30px;
     }
     .eventsGrid {
@@ -136,7 +136,7 @@
         .eventsCard {
             width: calc(50% - 20px);
             padding: 20px;
-            border: 1px solid #D9D3D3;
+            border: 1px solid stencilColor("color-default-neutral-4");
             margin-bottom: 40px;
             .block {
                 display: flex;
@@ -150,50 +150,50 @@
                 }
                 .contentBlock {
                     text-align: left;
-                    font-family: 'Inter';
+                    font-family: stencilFontFamily('default-font-regular');
                     font-style: normal;
                     font-weight: 400;
                     font-size: 14px;
                     line-height: 22px;
-                    color: #282828;
+                    color: stencilColor("color-default-neutral-1");
                     h4 {
-                        font-family: 'Prata';
+                        font-family: stencilFontFamily('prata-font');
                         font-style: normal;
                         font-weight: 400;
                         font-size: 22px;
                         line-height: 30px;
-                        color: #282828;
+                        color: stencilColor("color-default-neutral-1");
                         margin-top: 0;
                     }
                     .addressp {
-                        font-family: 'Inter';
+                        font-family: stencilFontFamily('default-font-regular');
                         font-style: normal;
                         font-weight: 400;
                         font-size: 12px;
                         line-height: 20px;
-                        color: #4D4D4D;
+                        color: stencilColor("color-default-neutral-2");
                     }
                     label {
-                        font-family: 'Inter';
+                        font-family: stencilFontFamily('default-font-regular');
                         font-style: normal;
                         font-weight: 500;
                         font-size: 10px;
                         line-height: 12px;
                         letter-spacing: 0.1em;
                         text-transform: uppercase;
-                        color: #4D4D4D;
+                        color: stencilColor("color-default-neutral-2");
                     }
                     span,a {
                         width: 100%;
                         display: block;
                     }
                     .colored {
-                        font-family: 'Inter';
+                        font-family: stencilFontFamily('default-font-regular');
                         font-style: normal;
                         font-weight: 400;
                         font-size: 14px;
                         line-height: 22px;
-                        color: #BC8372;
+                        color: stencilColor("color-default-primary-1");
                         text-decoration: none;
                     }
                 }
