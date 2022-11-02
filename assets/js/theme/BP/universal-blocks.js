@@ -565,7 +565,7 @@ export function events(blockData) {
                     <p class="addressp">${item.location}</p>
                     <div class="divider"></div>
                     <label>Date</label>
-                    <p class="colored">${item.eventStartDate} - ${item.eventEndDate}</p>
+                    <p class="colored">${new Date(item.eventStartDate).toLocaleDateString().replaceAll('/','.')} - ${new Date(item.eventEndDate).toLocaleDateString().replaceAll('/','.')}</p>
                     <label>Collections</label>
                     <p class="colored">${item.collectionsAvailable.map((col)=> `${col}`).join("  ")}</p>
                     <label>address</label>
@@ -582,7 +582,7 @@ export function events(blockData) {
     </div></div>`;
 }
 export function blockElementFullscreenImage(blockData) {
-    return `<div class="blockElementFullscreenImage block-item" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" style="width: 100%;"/>
+    return `<div class="blockElementFullscreenImage block-item" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" />
     ${blockData.bodyCopy !== null ? `<div class="homepageCaption"><h4>${blockData.subheadline}</h4><p>${blockData.bodyCopy}</p><a href="${blockData.linkUrl}">${blockData.linkText}</a></div>` : ''}</div></div>`;
 }
 

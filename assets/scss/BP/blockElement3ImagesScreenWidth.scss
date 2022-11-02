@@ -119,7 +119,7 @@
     }
 }
 .blockElementFullscreenImage {
-    margin: 20px -3rem;
+    margin: 20px -1rem;
     @include breakpoint("medium") { 
         margin: 15px 0;
     }
@@ -129,30 +129,45 @@
             position: absolute;
             left: 5%;
             bottom: 10%;
-            width: 40%;
+            width: 90%;
+            @include breakpoint("medium") {
+                width: 40%;
+            }
             h4,p,a {
                 color: #ffffff;
             }
             h4 {
                 font-family: stencilFontFamily('stay-classy-font');
-                font-size: remCalc(66px);
-                line-height: remCalc(70px);
+                font-size: remCalc(35px);
+                line-height: remCalc(40px);
                 letter-spacing: -0.01em;
                 text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+                @include breakpoint("medium") {
+                    font-size: remCalc(66px);
+                    line-height: remCalc(70px);
+                }
             }
             p {
                 font-family: stencilFontFamily('default-font-light');
                 font-style: normal;
                 font-weight: 300;
-                font-size: remCalc(14px);
-                line-height: remCalc(22px);
+                font-size: remCalc(12px);
+                line-height: remCalc(18px);
+                @include breakpoint("medium") {
+                    font-size: remCalc(14px);
+                    line-height: remCalc(22px);
+                }
             }
             a {
                 font-family: stencilFontFamily('default-font-regular');
                 font-style: normal;
                 font-weight: 500;
-                font-size: remCalc(12px);
-                line-height: remCalc(15px);
+                font-size: remCalc(10px);
+                line-height: remCalc(13px);
+                @include breakpoint("medium") {
+                    font-size: remCalc(12px);
+                    line-height: remCalc(15px);
+                }
                 letter-spacing: 0.1em;
                 text-transform: uppercase;
                 text-decoration: none;
@@ -173,8 +188,11 @@
 }
 .blockElementCopyBlock {
     text-align: center;
-    max-width: 75%;
-    margin: 5% auto;
+    margin: 5% 0;
+    @include breakpoint("medium") { 
+        max-width: 75%;
+        margin: 5% auto;
+    }
     h2 {
         font-family: stencilFontFamily('prata-font');
         font-style: normal;
@@ -194,6 +212,11 @@
 }
 
 .logoSliderBlock {
+    display: block;
+    margin: 5% 0;
+    @include breakpoint("medium") { 
+        margin: 5% 0;
+    }
     .slick-track {
         margin-left: 0;
         margin-right: 0;
@@ -225,4 +248,20 @@
             background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAyMSAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0wLjYzNzAxNCA3LjY1MjE2QzAuMjgwMjg2IDcuNjUyMTYgMCA3LjM3MTg3IDAgNy4wMTUxNEMwIDYuNjcxMTYgMC4yODAyODYgNi4zNzgxMyAwLjYzNzAxNCA2LjM3ODEzSDE4LjIxODZMMTIuOTMxNCAxLjA5MDkyQzEyLjY4OTMgMC44MzYxMTEgMTIuNjg5MyAwLjQ0MTE2MyAxMi45MzE0IDAuMTg2MzU3QzEzLjE4NjIgLTAuMDY4NDQ4NCAxMy41ODExIC0wLjA1NTcwODEgMTMuODM1OSAwLjE4NjM1N0wyMC4xNjc5IDYuNTE4MjdDMjAuMzA4IDYuNjMyOTQgMjAuMzk3MiA2LjgxMTMgMjAuMzk3MiA3LjAwMjRDMjAuMzk3MiA3LjE4MDc3IDIwLjMyMDcgNy4zNTkxMyAyMC4xOTMzIDcuNDczNzlMMTMuODM1OSAxMy44MTg1QzEzLjU4MTEgMTQuMDYwNSAxMy4xODYyIDE0LjA2MDUgMTIuOTMxNCAxMy44MTg1QzEyLjY4OTMgMTMuNTc2NCAxMi42ODkzIDEzLjE2ODcgMTIuOTMxNCAxMi45MjY2TDE4LjIxODYgNy42NTIxNkgwLjYzNzAxNFoiIGZpbGw9IiMyODI4MjgiLz4KPC9zdmc+Cg==");
         }
      }
+}
+#eapps-instagram-feed-1 {
+    margin: 5% 0;
+    width: calc(100% + 6rem);
+    @include breakpoint("medium") { 
+        margin: 0 auto;
+        width: 100%;
+    }
+    .eapps-instagram-feed-title {
+        font-size: remCalc(14px);
+        line-height: remCalc(20px);
+        @include breakpoint("medium") { 
+            font-size: remCalc(22px);
+            line-height: remCalc(26px);
+        }
+    }
 }

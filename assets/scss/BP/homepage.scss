@@ -1,18 +1,47 @@
 .pages-custom-page-custom-home-page {
     margin: 0;
     .container {
-        padding: 0 6rem;
+        @include breakpoint("medium") {
+            padding: 0 6rem;
+        }
         max-width: 100%;
     }
     #contentBlocksCollection {
         .blockElementFullscreenImage {
-            width: calc(100%+12rem);
-            margin: 0 -5rem;
+            @include breakpoint("medium") {     
+                width: calc(100% + 10rem);
+                margin: 0 -5rem;
+            }
         }
         .block-item {
             &:first-child {
-                margin-top: 0;
+                margin-top: 95px;
+                @include breakpoint("medium") {     
+                    margin-top: 0;
+                }
             }
         }
+        .blockElementFullscreenImage .mainImage {
+            min-height: 300px;
+            @include breakpoint("medium") {
+                min-height: auto;
+            }
+            img {
+                height: 100%;
+                position: absolute;
+                @include breakpoint("medium") {
+                    width: 100%;
+                    height: auto;
+                    position: relative;
+                }
+            }
+        }
+        .blockElementDiscover,.events.block-item,.blockElementLookbook2,.blockElementStory,#eapps-instagram-feed-1 {
+            margin: 5% -1rem; 
+            @include breakpoint("medium") {
+                margin: 5% 0;
+            }
+        }
+        
     }
 }
