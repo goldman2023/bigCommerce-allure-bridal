@@ -133,6 +133,15 @@
             @include breakpoint("medium") {
                 width: 40%;
             }
+            @media only screen and (min-width: 1600px)  {
+                left: 10%;
+            }
+            @media only screen and (min-width: 2000px) {
+                left: 14%;
+            }
+            @media only screen and (min-width: 3000px) {
+                left: 20%;
+            }
             h4,p,a {
                 color: #ffffff;
             }
@@ -157,6 +166,14 @@
                     font-size: remCalc(14px);
                     line-height: remCalc(22px);
                 }
+                @media only screen and (min-width: 2000px) {
+                    font-size: remCalc(20px);
+                    line-height: remCalc(28px);
+                }
+                @media only screen and (min-width: 2800px) {
+                    font-size: remCalc(28px);
+                    line-height: remCalc(40px);
+                }
             }
             a {
                 font-family: stencilFontFamily('default-font-regular');
@@ -167,6 +184,14 @@
                 @include breakpoint("medium") {
                     font-size: remCalc(12px);
                     line-height: remCalc(15px);
+                }
+                @media only screen and (min-width: 2000px) {
+                    font-size: remCalc(18px);
+                    line-height: remCalc(22px);
+                }
+                @media only screen and (min-width: 2800px) {
+                    font-size: remCalc(24px);
+                    line-height: remCalc(34px);
                 }
                 letter-spacing: 0.1em;
                 text-transform: uppercase;
@@ -193,6 +218,21 @@
         max-width: 75%;
         margin: 5% auto;
     }
+    .heightwidth {
+        max-width: 1200px;
+        margin: 0 auto;
+        @include breakpoint("medium") { 
+            max-width: 900px;
+        }
+        @media only screen and (min-width: 2000px)  {
+            max-width: 1200px;
+            margin: 5% auto;
+        }
+        @media only screen and (min-width: 2800px) {
+            max-width: 1570px;
+            margin: 5% auto;
+        }
+    }
     h2 {
         font-family: stencilFontFamily('prata-font');
         font-style: normal;
@@ -200,6 +240,14 @@
         font-size: remCalc(34px);
         line-height: remCalc(44px);
         color: #695C5C;
+        @media only screen and (min-width: 2000px) {
+            font-size: remCalc(40px);
+            line-height: remCalc(50px);
+        }
+        @media only screen and (min-width: 2800px) {
+            font-size: remCalc(45px);
+            line-height: remCalc(65px);
+        }
     }
     p {
         font-family: stencilFontFamily('default-font-light');
@@ -208,6 +256,14 @@
         font-size: remCalc(16px);
         line-height: remCalc(26px);
         color: #695C5C;
+        @media only screen and (min-width: 2000px) {
+            font-size: remCalc(18px);
+            line-height: remCalc(30px);
+        }
+        @media only screen and (min-width: 2800px) {
+            font-size: remCalc(28px);
+            line-height: remCalc(50px);
+        }
     }
 }
 
@@ -216,6 +272,16 @@
     margin: 5% 0;
     @include breakpoint("medium") { 
         margin: 5% 0;
+    }
+    .slick-slide {
+        height: 52px;
+        @media only screen and (min-width: 2000px) {
+            height: 70px;
+        }
+        img {
+            width: auto;
+            height: 100%;
+        }
     }
     .slick-track {
         margin-left: 0;
@@ -251,10 +317,10 @@
 }
 #eapps-instagram-feed-1 {
     margin: 5% 0;
-    width: calc(100% + 6rem);
+    width: calc(100% + 1.5rem) !important;
     @include breakpoint("medium") { 
-        margin: 0 auto;
-        width: 100%;
+        margin-left: 5%;
+        width: 95% !important;
     }
     .eapps-instagram-feed-title {
         font-size: remCalc(14px);
