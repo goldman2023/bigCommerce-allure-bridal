@@ -1,5 +1,6 @@
 body {
     font-family: stencilFontFamily('default-font-regular');
+    line-height: unset;
     .button {
         font-family: stencilFontFamily('default-font-regular');
         position: relative;

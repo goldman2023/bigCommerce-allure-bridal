@@ -305,7 +305,6 @@
 }
 
 header.header-shadow {
-    height: 207.5px;
     display: block;
 }
 
@@ -326,9 +325,19 @@ header.header{
                 text-align: left;
                 width: 100%;
             }
-    
             li.sub-site__text {
-                width: 50%;
+                width: 55%;
+                &:nth-child(even) {
+                    width: calc(45% - 1rem);
+                    margin-right: 1rem;
+                }
+                @include breakpoint("large") {
+                    width: 55%;
+                    &:nth-child(even) {
+                        width: calc(45% - 2.5rem);
+                        margin-right: 2.5rem;
+                    }
+                }
             }
         }
         &.sub-site__navigation-styles, &.sub-site__navigation-accessories {
@@ -471,15 +480,8 @@ header.header{
         }
 
         .header-navigation__container {
-            margin: 10px 0px -1px 0px;
             display: block;
-        }
-
-        .header-svg__border {
-            width: 100%;
-            text-align: center;
-            margin-top: -9.5px;
-        }    
+        }   
 
         ul.site-navigation {
             display: flex;
@@ -495,10 +497,6 @@ header.header{
 
         li.site-navigation__link:hover > a {
             border-bottom: 2px solid #AC634D;
-        }
-
-        li.site-navigation__link, svg.site-navigation_svg {
-            padding-bottom: 30px;
         }
 
         li.site-navigation__link > a {
@@ -530,19 +528,6 @@ header.header{
             flex-flow: column;
             align-items: center;
             justify-content: space-between;
-        }
-
-        .header-navigation__cta.header-navigation__search,
-        h1.header-logo.header-logo--center,
-        .header-navigation__cta-links {
-            width: 25%;
-            margin: 0px 4.66666665%
-        }
-        
-        .header-navigation__cta-links {
-            display: flex;
-            justify-content: space-around;
-            padding: 0% 2%;
         }
         
         .header-navigation__cta-links a {
@@ -597,9 +582,9 @@ header.header{
             background-color: white;
             padding: 44px;
             z-index: 9999;
-            top: 207.5px;
+            top: 150px;
             left: 0px;
-
+            gap: 2.5rem;
             ul {
                 list-style: none;
             }
@@ -621,16 +606,9 @@ header.header{
                 font-size: 14px;
                 line-height: 22px;
                 color: #1D1B1B;
-                margin-bottom: 4px;
+                margin-bottom: 8px;
             }
-            
-        }
-
-        
-        
-        
-        
-            
+        } 
     }
 }
 
