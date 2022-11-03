@@ -1,8 +1,15 @@
 .pages-custom-page-custom-home-page {
     margin: 0;
+    .button {
+        @media only screen and (min-width: 2800px) {
+            font-size: remCalc(20px);
+            line-height: remCalc(20px);
+            max-width: 350px;
+        }
+    }
     .container {
         @include breakpoint("medium") {
-            padding: 0 6rem;
+            padding: 0;
         }
         max-width: 100%;
     }
@@ -14,10 +21,33 @@
             }
         }
         .block-item {
+            max-width: 91.71429rem;
+            margin: 0 auto;
+            @media only screen and (min-width: 1600px)  {
+                max-width: 100rem;
+            }
+            @media only screen and (min-width: 2000px) {
+                max-width: 120rem;
+            }
+            @media only screen and (min-width: 2600px) {
+                max-width: 140rem;
+            }
+            @media only screen and (min-width: 3000px) {
+                max-width: 170rem;
+            }
             &:first-child {
                 margin-top: 95px;
-                @include breakpoint("medium") {     
+                @include breakpoint("medium") {
                     margin-top: 0;
+                }
+            }
+            &.full-size {
+                width: calc(100% + 3rem);
+                margin-left: -1.5rem;
+                margin-right: -1.5rem;
+                @include breakpoint("medium") {
+                    width: 100%;
+                    max-width: 100%;
                 }
             }
         }
@@ -37,11 +67,10 @@
             }
         }
         .blockElementDiscover,.events.block-item,.blockElementLookbook2,.blockElementStory,#eapps-instagram-feed-1 {
-            margin: 5% -1rem; 
+            margin: 5% -1.5rem; 
             @include breakpoint("medium") {
-                margin: 5% 0;
+                margin: 5% auto;
             }
         }
-        
     }
 }

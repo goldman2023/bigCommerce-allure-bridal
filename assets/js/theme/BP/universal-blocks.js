@@ -550,7 +550,7 @@ export function lookBookglobal(blockData) {
 }
 
 export function lookBookglobal2(blockData) {
-    return `<div class="blockElementLookbook2 block-item" id="blockElementLookbook2"><div><div class="caption"><h2>${blockData.blocktitle}</h2><div class="divider"></div><h4>${blockData.subheadline}</h4><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="button button-secondary">${blockData.linkText}</a></div><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData.subheadline}" /></div></div></div>`;
+    return `<div class="blockElementLookbook2 block-item full-size" id="blockElementLookbook2"><div><div class="caption"><h2>${blockData.blocktitle}</h2><div class="divider"></div><h4>${blockData.subheadline}</h4><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="button button-secondary">${blockData.linkText}</a></div><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData.subheadline}" /></div></div></div>`;
 }
 export function events(blockData) {
     return `<div class="events block-item" id="events">
@@ -582,16 +582,16 @@ export function events(blockData) {
     </div></div>`;
 }
 export function blockElementFullscreenImage(blockData) {
-    return `<div class="blockElementFullscreenImage block-item" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" />
+    return `<div class="blockElementFullscreenImage block-item full-size" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" />
     ${blockData.bodyCopy !== null ? `<div class="homepageCaption"><h4>${blockData.subheadline}</h4><p>${blockData.bodyCopy}</p><a href="${blockData.linkUrl}">${blockData.linkText}</a></div>` : ''}</div></div>`;
 }
 
 export function blockElementCopyBlock(blockData) {
-    return `<div class="blockElementCopyBlock block-item" id="blockElementCopyBlock"><h2>${blockData.blockName}</h2><p>${blockData.bodyCopy}<p></div>`;
+    return `<div class="blockElementCopyBlock block-item" id="blockElementCopyBlock"><div class="heightwidth"><h2>${blockData.blockName}</h2><p>${blockData.bodyCopy}<p></div></div>`;
 }
 
 export function logoSliderBlock(blockData) {
-    return `<div class="logoSliderBlock block-item" id="logoSliderBlock"><div class="imgslider"> ${blockData.logosCollection.items.map((logo)=> `<img src="${logo.url}" alt="${logo.title}" />` ).join('')}</div></div>`;
+    return `<div class="logoSliderBlock block-item" id="logoSliderBlock"><div class="imgslider"> ${blockData.logosCollection.items.map((logo)=> `<div class="logo-item"><img src="${logo.url}" alt="${logo.title}" /></div>` ).join('')}</div></div>`;
 }
 
 export function blockElement3ImagesScreenWidth(blockData) {
@@ -604,7 +604,7 @@ export function blockElementDiscover(blockData) {
                 <div class="discovery-section">
                     <div class="imageflex">
                         <div><img class="first" src="${blockData.imagesCollection.items[0].url}" alt="" /><img class="second" src="${blockData.imagesCollection.items[1].url}" alt=""/></div>
-                        <div><img  src="${blockData.imagesCollection.items[2].url}"  alt="" /></div>
+                        <div><img  class="third" src="${blockData.imagesCollection.items[2].url}"  alt="" /></div>
                     </div>
                     <div class="caption">
                         <h2>${blockData.blocktitle}</h2>

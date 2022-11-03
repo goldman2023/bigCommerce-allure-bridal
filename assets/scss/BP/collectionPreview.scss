@@ -5,6 +5,7 @@
         @include breakpoint("medium") { 
             display: flex;
             text-align: left;
+            align-items: center;
         }
         @include breakpoint("small") { 
             text-align: left;
@@ -13,6 +14,7 @@
             width: 100%;
             @include breakpoint("medium") { 
                 width: 60%;
+                padding-right: 5%;
             }
             h4 {
                 font-family: stencilFontFamily('prata-font');
@@ -21,6 +23,14 @@
                 font-size: remCalc(34px);
                 line-height: remCalc(44px);
                 color: stencilColor("color-allure-bridals-neutral-1");
+                @media only screen and (min-width: 2000px) {
+                    font-size: remCalc(40px);
+                    line-height: remCalc(50px);
+                }
+                @media only screen and (min-width: 2800px) {
+                    font-size: remCalc(45px);
+                    line-height: remCalc(65px);
+                }
             }
             p {
                 font-family: stencilFontFamily('default-font-regular');
@@ -29,6 +39,14 @@
                 font-size: remCalc(16px);
                 line-height: remCalc(26px);
                 color: stencilColor("color-allure-bridals-neutral-2");
+                @media only screen and (min-width: 2000px) {
+                    font-size: remCalc(20px);
+                    line-height: remCalc(30px);
+                }
+                @media only screen and (min-width: 2800px) {
+                    font-size: remCalc(28px);
+                    line-height: remCalc(40px);
+                }
             }
         }
         .imagesection {
@@ -59,6 +77,14 @@
                     margin-left: 20px;
                     p {
                         margin-bottom: 2px;
+                        @media only screen and (min-width: 2000px) {
+                            font-size: remCalc(20px);
+                            line-height: remCalc(40px);
+                        }
+                        @media only screen and (min-width: 2800px) {
+                            font-size: remCalc(28px);
+                            line-height: remCalc(50px);
+                        }
                     }
                  }
             }
@@ -76,6 +102,9 @@
                         position: relative;
                         width: calc(100% + 40px);
                     }
+                }
+                img {
+                    width: 100%;
                 }
             }
         }
