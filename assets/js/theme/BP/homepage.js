@@ -42,7 +42,6 @@ export default class Homepage extends PageManager {
             if(element.__typename === "ReferencedBlockTrunkShowContainer"){
                 return events(element);
             }
-            
             if(element.__typename === "BlockElementImages2ColumnRight"){
                 return blockElementImages2ColumnRight(element);
             }
@@ -82,7 +81,7 @@ export default class Homepage extends PageManager {
                 dots: false,
                 infinite: true,
                 speed: 300,
-                slidesToShow: 5,
+                slidesToShow: 6,
                 slidesToScroll: 1,
                 centerMode: true,
                 responsive: [
@@ -109,6 +108,19 @@ export default class Homepage extends PageManager {
                 }
                 ]
             });
+        }
+        if(document.getElementById('events')) {
+            if ($(window).width() < 600 ) {
+                $('.events .eventsGrid').slick({
+                    dots: false,
+                    infinite: true,
+                    speed: 300,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    centerMode: true,
+                    arrows: false,
+                });
+            }
         }
 
         function applySlider(selector,slide,centerM,infinity) {

@@ -565,7 +565,7 @@ export function events(blockData) {
                     <p class="addressp">${item.location}</p>
                     <div class="divider"></div>
                     <label>Date</label>
-                    <p class="colored">${item.eventStartDate} - ${item.eventEndDate}</p>
+                    <p class="colored">${new Date(item.eventStartDate).toLocaleDateString().replaceAll('/','.')} - ${new Date(item.eventEndDate).toLocaleDateString().replaceAll('/','.')}</p>
                     <label>Collections</label>
                     <p class="colored">${item.collectionsAvailable.map((col)=> `${col}`).join("  ")}</p>
                     <label>address</label>
@@ -582,7 +582,7 @@ export function events(blockData) {
     </div></div>`;
 }
 export function blockElementFullscreenImage(blockData) {
-    return `<div class="blockElementFullscreenImage block-item" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" style="width: 100%;"/>
+    return `<div class="blockElementFullscreenImage block-item" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" />
     ${blockData.bodyCopy !== null ? `<div class="homepageCaption"><h4>${blockData.subheadline}</h4><p>${blockData.bodyCopy}</p><a href="${blockData.linkUrl}">${blockData.linkText}</a></div>` : ''}</div></div>`;
 }
 
@@ -736,8 +736,8 @@ export function createProductSlider(block,blockData) {
     block.querySelector('.sub-description').innerHTML = blockData.description;
 };
 
-export function blogpostTopBanner(selectorID,title,heading,imageHeading){
-    let  contentStructure = `<div class="topbannerSection"><img src="${imageHeading.url}" alt="${title}" /><div class="caption"><h2>${title ? title : ''}</h2><span class="date"><div class="divider"></div></span><p class="subheading">${heading ? heading : ''}</p></div></div>`;
+export function blogpostTopBanner(selectorID,title,heading,imageHeading,date){
+    let  contentStructure = `<div class="topbannerSection"><img src="${imageHeading.url}" alt="${title}" /><div class="caption"><h2>${title ? title : ''}</h2><span class="date">${date ? date : ''}<div class="divider"></div></span><p class="subheading">${heading ? heading : ''}</p></div></div>`;
     document.getElementById(selectorID).innerHTML = contentStructure;
 };
 
