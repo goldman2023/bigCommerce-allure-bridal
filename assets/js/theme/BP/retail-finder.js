@@ -9,6 +9,7 @@ export default class RetailFinder extends PageManager {
   }
 
   onReady() {
+    console.log("Blroo");
     this.showRetailerNameAddy()
     this.showRetailerLocation()
   }
@@ -97,6 +98,7 @@ export default class RetailFinder extends PageManager {
   }
 
   showRetailerLocation = () => {
+    console.log("showing ?")
     function initMap() {
       let array = []
       const query = `

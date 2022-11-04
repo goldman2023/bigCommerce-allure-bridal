@@ -1,35 +1,112 @@
-.content {
+.page {
+  margin-top: 40px;
+  min-height: 1200px;
+
+  .content {
     display: flex;
-}
 
-.retail-finder-title {
-    font-weight: 800;
-    // text-align: center;
-}
+    .left-content {
+      width: 20%;
+      margin-right: 40px;
+    }
 
-.selector-dropdown {
-    width: 50%;
-}
+    .right-content {
+      width: 80%;
 
-.buttons-container {
+      #map {
+        min-height: 600px;
+        margin-bottom: 40px;
+      }
+
+      .top {
+        width: 100%;
+        display: flex;
+
+        .sort-dropdown {
+          margin-left: auto;
+          display: flex;
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 15px;
+          /* identical to box height */
+
+          text-align: center;
+          letter-spacing: 0.1em;
+
+          .sort-label {
+            width: 100px;
+            display: flex;
+            align-items: center;
+          }
+
+          .sort-select {
+            border: none;
+
+            &:focus {
+              outline: none !important;
+            }
+          }
+        }
+      }
+    }
+
+    .buttons-container {
+      margin-left: 0;
+      margin-right: 0;
+
+      .button {
+        background: stencilColor('color-theme');
+        border: 1px solid stencilColor('color-theme');
+        color: stencilColor('color-white');
+
+        &:hover {
+          background: stencilColor('color-white');
+          color: stencilColor('color-theme');
+          border: 1px solid stencilColor('color-theme');
+
+        }
+      }
+    }
+
+    .form-field {
+      .form-label {
+        color: stencilColor("color-allure-bridals-neutral-1");
+        font-family: stencilFontFamily('default-font-regular');
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 16px;
+      }
+
+      padding-right: 0;
+
+    }
+  }
+
+  .header-title {
+    font-weight: 400;
+    font-family: 'Prata';
+    font-style: normal;
+    font-size: 22px;
+    line-height: 30px;
+    margin-top: 0;
+  }
+
+  .buttons-container {
     margin: 1rem;
-}
+  }
 
-.results-divider {
+  .results-divider {
     background-color: #F7F4F0;
     padding: 1rem;
-}
+  }
 
-#retail-finder-results {
+  #retail-finder-results {
     margin: 1rem;
     border: 1px solid lightgrey;
     display: flex;
     flex-direction: row;
-}
-
-#map {
-    height: 400px;
-    /* The height is 400 pixels */
-    width: 200%;
-    /* The width is the width of the web page */
   }
+}

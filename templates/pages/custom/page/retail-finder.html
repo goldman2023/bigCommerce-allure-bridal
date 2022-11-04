@@ -4,9 +4,9 @@
 </script>
 <section class="page">
     <div class="content">
-        <div class="page-content">
+        <div class="left-content">
             <form class="form">
-                <h2 class="blog-title retail-finder-title"><strong>Try It On</strong></h2>
+                <h2 class="header-title">Try It On</h2>
                 <div class="form-field">
                     <span class="form-label">Within</span>
                     <select class="form-select selector-dropdown">
@@ -27,47 +27,38 @@
                         <option>150</option>
                     </select>
                 </div>
-                <div class="form-field--checkbox">
+                <!-- <div class="form-field--checkbox">
                     <span>View Map</span>
                     <input class="form-label" type="checkbox" />
-                </div>
+                </div> -->
                 <div class="buttons-container">
                     <button class="button">SEARCH</button>
                 </div>
             </form>
         </div>
-        <div id="map"></div>
-        <script
-            async
-            defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA68nj5mHdkdbHs0O6JOVfzYoau2oeD-Gs&callback=initMap">
-        </script>
+        <div class="right-content">
+            <div id="map"></div>
+            <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA68nj5mHdkdbHs0O6JOVfzYoau2oeD-Gs&callback=initMap">
+                </script>
 
-        <!-- <script>
-            // Initialize and add the map
-        function initMap() {
-            // The location of Uluru
-            const uluru = { lat: 34.05223, lng: -118.243 };
-            // The map, centered at Uluru
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 6,
-                center: uluru,
-            });
-            // The marker, positioned at Uluru
-            const marker = new google.maps.Marker({
-                position: uluru,
-                map: map,
-            });
-        }
-
-        window.initMap = initMap;
-        </script> -->
-
+            <div class="available-retailers">
+                <div class="top">
+                    <h2 class="header-title">Wedding Retailers Near You</h2>
+                    <div class="sort-dropdown">
+                        <span class="sort-label">SORT BY:</span>
+                        <select class="sort-select">
+                            <option>STORE NAME</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="results-divider">
+                    <span>PRODUCT STYLES AND AVAILABILITY BY RETAILER</span>
+                </div>
+                <div id="retail-finder-results"></div>
+            </div>
+        </div>
     </div>
-    <div class="results-divider">
-        <span>PRODUCT STYLES AND AVAILABILITY BY RETAILER</span>
-    </div>
-    <div id="retail-finder-results"></div>
 </section>
 
 {{/partial}}
