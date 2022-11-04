@@ -583,7 +583,7 @@ export function events(blockData) {
 }
 export function blockElementFullscreenImage(blockData) {
     return `<div class="blockElementFullscreenImage block-item full-size" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" />
-    ${blockData.bodyCopy !== null ? `<div class="homepageCaption"><h4>${blockData.subheadline}</h4><p>${blockData.bodyCopy}</p><a href="${blockData.linkUrl}">${blockData.linkText}</a></div>` : ''}</div></div>`;
+    ${blockData.bodyCopy !== null ? `<div class="homepageCaption"><div class="content"><div class="bannercap"><h4>${blockData.subheadline}</h4><p>${blockData.bodyCopy}</p><a href="${blockData.linkUrl}">${blockData.linkText}</a></div>` : ''}</div></div></div></div>`;
 }
 
 export function blockElementCopyBlock(blockData) {
