@@ -9,20 +9,15 @@
     }
     .container {
         @include breakpoint("medium") {
-            padding: 0;
+           padding: 0;
         }
         max-width: 100%;
     }
     #contentBlocksCollection {
-        .blockElementFullscreenImage {
-            @include breakpoint("medium") {     
-                width: calc(100% + 10rem);
-                margin: 0 -5rem;
-            }
-        }
         .block-item {
             max-width: 91.71429rem;
             margin: 0 auto;
+            padding: 0 1.5rem;
             @media only screen and (min-width: 1600px)  {
                 max-width: 100rem;
             }
@@ -38,13 +33,12 @@
             &:first-child {
                 margin-top: 95px;
                 @include breakpoint("medium") {
-                    margin-top: 0;
+                    margin-top: 173px;
                 }
             }
             &.full-size {
-                width: calc(100% + 3rem);
-                margin-left: -1.5rem;
-                margin-right: -1.5rem;
+                width:100%;
+                padding: 0;
                 @include breakpoint("medium") {
                     width: 100%;
                     max-width: 100%;
@@ -69,7 +63,6 @@
             }
         }
         .blockElementDiscover,.events.block-item,.blockElementLookbook2,.blockElementStory,#eapps-instagram-feed-1 {
-            margin: 5% -1.5rem; 
             @include breakpoint("medium") {
                 margin: 5% auto;
             }
