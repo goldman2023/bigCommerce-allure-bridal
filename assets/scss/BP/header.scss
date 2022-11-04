@@ -11,7 +11,7 @@ header {
                     display: flex;
                     justify-content: flex-end;
                     gap: 10px;
-                    flex: auto;
+                    flex: 2;
                 }
                 .header-navigation__cta {
                     display: flex;
@@ -21,7 +21,7 @@ header {
                     gap: 8px;
                 }
                 .header-navigation__search {
-                    flex: auto;
+                    flex: 2;
                     justify-content: flex-start;
                     flex-direction: row;
                     .form {
@@ -40,6 +40,7 @@ header {
                     flex: 1;
                     display: flex;
                     justify-content: center;
+                    min-width: 230px;
                     .header-logo-image-container {
                         display: flex;
                     }

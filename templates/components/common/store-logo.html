@@ -2,14 +2,14 @@
     {{#if settings.store_logo.image}}
         {{#if theme_settings.logo_size '===' 'original'}}
         <img class="header-logo-image-unknown-size"
-             src="{{getImage settings.store_logo.image 'logo_size'}}"
+             src="{{cdn 'assets/icons/store-logo.svg'}}"
              alt="{{settings.store_logo.title}}"
              title="{{settings.store_logo.title}}">
         {{else}}
         <div class="header-logo-image-container">
             <img class="header-logo-image"
-                 src="{{getImage settings.store_logo.image 'logo_size'}}"
-                 srcset="{{getImageSrcset1x2x settings.store_logo.image theme_settings.logo_size}}"
+                 src="{{cdn 'assets/icons/store-logo.svg'}}"
+                 srcset="{{cdn 'assets/icons/store-logo.svg'}}"
                  alt="{{settings.store_logo.title}}"
                  title="{{settings.store_logo.title}}">
         </div>
