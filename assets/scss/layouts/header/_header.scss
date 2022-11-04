@@ -481,7 +481,7 @@ header.header{
 
         ul.site-navigation {
             display: flex;
-            width: 60%;
+            max-width: 800px;
             justify-content: space-around;
             list-style-type: none;
             margin: auto;
