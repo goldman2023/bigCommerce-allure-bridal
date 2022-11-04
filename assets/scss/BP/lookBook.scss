@@ -144,7 +144,6 @@
 }
 
 .events.block-item {
-    margin: 20px -3rem;
     text-align: center;
     @include breakpoint("medium") { 
         margin: 5% 0;
@@ -209,6 +208,7 @@
                     font-size: remCalc(14px);
                     line-height: remCalc(22px);
                     color: stencilColor("color-default-neutral-1");
+                    word-break: break-all;
                     @media only screen and (min-width: 2000px) {
                         font-size: remCalc(20px);
                         line-height: remCalc(28px);

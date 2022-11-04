@@ -64,7 +64,7 @@
                     width: 50%;
                     img {
                         width: 100%;
-                        right: 0;
+                        right: -11px;
                         position: relative;
                      }
                 }
@@ -94,11 +94,10 @@
                 &.half {
                     width: 50%;
                     img:first-child {
-                        padding: 0 20px 20px 20px;
+                        padding: 0 35px 30px 35px;
                     }
                     img:nth-child(2) {
                         z-index: 9;
-                        left: -20px;
                         position: relative;
                         width: calc(100% + 40px);
                     }

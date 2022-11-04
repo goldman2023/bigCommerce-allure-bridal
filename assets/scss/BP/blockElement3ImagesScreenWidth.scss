@@ -133,6 +133,7 @@
             .content {
                 max-width: 91.71429rem;
                 margin: 0 auto;
+                padding: 0 1.5rem;
                 @media only screen and (min-width: 1600px)  {
                     max-width: 100rem;
                 }
@@ -327,11 +328,9 @@
      }
 }
 #eapps-instagram-feed-1 {
-    margin: 5% 0;
-    width: calc(100% + 1.5rem) !important;
     @include breakpoint("medium") { 
-        margin-left: 5%;
-        width: 95% !important;
+        margin-left: 1.5rem;
+        width: calc(100% - 1.5rem) !important;
     }
     .eapps-instagram-feed-title {
         font-size: remCalc(14px);
