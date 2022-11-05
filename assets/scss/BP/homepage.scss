@@ -1,5 +1,4 @@
 .pages-custom-page-custom-home-page {
-    margin: 0;
     .button {
         @media only screen and (min-width: 2800px) {
             font-size: remCalc(20px);
@@ -27,12 +26,6 @@
             }
             @media only screen and (min-width: 3000px) {
                 max-width: 170rem;
-            }
-            &:first-child {
-                margin-top: 95px;
-                @include breakpoint("medium") {
-                    margin-top: 173px;
-                }
             }
             &.full-size {
                 width:100%;

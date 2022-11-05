@@ -474,3 +474,12 @@ ol {
         outline: 3px solid white;
     }
 }
+
+body {
+    .body {
+        margin-top: 95px;
+        @include breakpoint("medium") {
+            margin-top: 173px;
+        }
+    }
+}
