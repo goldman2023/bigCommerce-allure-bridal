@@ -2,6 +2,8 @@ import { MarkerClusterer } from '@googlemaps/markerclusterer'
 import regeneratorRuntime from 'regenerator-runtime'
 import PageManager from '../page-manager'
 
+
+
 export default class RetailFinder extends PageManager {
   constructor(context) {
     super(context)
@@ -9,13 +11,63 @@ export default class RetailFinder extends PageManager {
   }
 
   onReady() {
-    console.log("Blroo");
-    this.showRetailerNameAddy()
-    this.showRetailerLocation()
+    this.showRetailerNameAddy();
+    this.showRetailerLocation();
+
+    // this.showRetailerResults();
   }
 
+
+  createRetailerItem = (retailerData, total, idx) => {
+    const container = document.createElement('div');
+    container.classList.add('retailer-item');
+    // last three which would be in the last row doesnt need a border
+    if (idx < total - 3) {
+      container.classList.add('bordered');
+    }
+
+    const nameHeader = document.createElement('div');
+    nameHeader.classList.add('retailer-title');
+    nameHeader.innerText = retailerData.retailerName;
+    container.append(nameHeader);
+
+    const locationInfo = document.createElement('div');
+    locationInfo.classList.add('retailer-location');
+    const cityState = document.createElement('span');
+    cityState.classList.add('retailer-city-state');
+    cityState.innerText = `${retailerData.retailerCity}, ${retailerData.state}`;
+    locationInfo.append(cityState);
+    const distance = document.createElement('span');
+    distance.classList.add('retailer-distance');
+    //TODO figure out how to calculate this
+    distance.innerText = '3.2 miles away';
+    locationInfo.append(distance);
+    container.append(locationInfo);
+
+    const numCollections = document.createElement('span');
+    numCollections.classList.add('retailer-collection-count');
+    numCollections.innerHTML = `Carries ${retailerData.collectionsAvailableCollection.items.length} collections`;
+    container.append(numCollections)
+
+    // todo evaluate featured
+    if (true) {
+      const featuredCollections = document.createElement('svg');
+      const icon = document.createElement('use');
+      icon.setAttribute('xlink:href', '#icon-retailer-featured');
+      featuredCollections.append(icon);
+      container.append(featuredCollections);
+    }
+
+    // todo evaluate platinum collections
+    if (true) {
+
+    }
+
+    return container;
+  };
+
   showRetailerNameAddy = () => {
-    const retailFinderResults = document.getElementById('retail-finder-results')
+    const self = this;
     const query = `
             query {
                 retailersCollection {
@@ -27,7 +79,7 @@ export default class RetailFinder extends PageManager {
                             lat
                             lon
                         }
-                        collectionsCollection {
+                        collectionsAvailableCollection {
                             items {
                                 collectionName
                             }
@@ -49,56 +101,32 @@ export default class RetailFinder extends PageManager {
           body: JSON.stringify({ query }),
         }
       )
-      let {
-        data: {
-          retailersCollection: { items: display },
-        },
-      } = await results.json()
+      const resultJson = await results.json();
 
-      let retailerList = display.forEach((element) => {
-        let results = Object.values(element).join('\n')
+      const retailFinderResults = document.getElementById('retail-finder-results')
 
-        let retailer = document.createElement('h3')
-        retailer.classList.add('retailer-name')
-        retailer.innerText = element.retailerName
+      // TODO temp total remove
+      const total = 9 || resultJson.data.retailersCollection.items.length;
+      resultJson.data.retailersCollection.items.forEach((retailerData, idx) => {
+        const retailerItem = self.createRetailerItem(retailerData, total, idx);
+        retailFinderResults.append(retailerItem)
+      });
 
-        let resultsContainer = document.createElement('div')
-        resultsContainer.classList.add('results-container')
-        resultsContainer.style.cssText += 'padding: 0 15px'
-        resultsContainer.append(retailer)
-
-        let retailerAddy = document.getElementsByClassName('retailer-name')
-
-        let retailerLocation = document.createElement('p')
-        retailerLocation.classList.add('retailer-city')
-        retailerLocation.innerText = `${element.retailerCity}, ${element.state}`
-        resultsContainer.append(retailerLocation)
-
-        if (element.collectionsCollection.items.length > 0) {
-          const collectionsContainer = document.createElement('div')
-          let collectionsTitle = document.createElement('h5')
-          collectionsTitle.innerText = 'Collections:'
-          collectionsContainer.append(collectionsTitle)
-
-          element.collectionsCollection.items.map((col) => {
-            let collections = document.createElement('div')
-            collections.classList.add('collections')
-            collections.innerText = col.collectionName
-            collectionsContainer.append(collections)
-          })
-
-          resultsContainer.append(collectionsContainer)
-        }
-
-        retailFinderResults.append(resultsContainer)
-      })
+      // TODO remove, just duplicating to show multiple rows
+      resultJson.data.retailersCollection.items.forEach((retailerData, idx) => {
+        const retailerItem = self.createRetailerItem(retailerData, total, idx + 3);
+        retailFinderResults.append(retailerItem)
+      });
+      resultJson.data.retailersCollection.items.forEach((retailerData, idx) => {
+        const retailerItem = self.createRetailerItem(retailerData, total, idx + 6);
+        retailFinderResults.append(retailerItem)
+      });
     }
 
-    getRetailerInfo()
+    getRetailerInfo();
   }
 
   showRetailerLocation = () => {
-    console.log("showing ?")
     function initMap() {
       let array = []
       const query = `
@@ -126,10 +154,10 @@ export default class RetailFinder extends PageManager {
           Math.asin(
             Math.sqrt(
               Math.sin(diffLat / 2) * Math.sin(diffLat / 2) +
-                Math.cos(radianLat1) *
-                  Math.cos(radianLat2) *
-                  Math.sin(diffLon / 2) *
-                  Math.sin(diffLon / 2)
+              Math.cos(radianLat1) *
+              Math.cos(radianLat2) *
+              Math.sin(diffLon / 2) *
+              Math.sin(diffLon / 2)
             )
           )
         return distance // in miles
