@@ -635,7 +635,7 @@ export function imageWithContentSlider(blockData) {
         <h2 class="title">${item.title}</h2><p class="content">${item.bodyCopy}</p><a href="${item.linkUrl}" class="buttonlink">${item.linkText}</a>
         </div></div></div></li>`
     });
-    return `<div class="imageWithContentSlider block-item" id="imageWithContentSlider"><ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1,"infinite": true}'>${sliderLi.join('')}</ul></div>`;
+    return `<div class="imageWithContentSlider block-item full-size" id="imageWithContentSlider"><ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1,"infinite": true}'>${sliderLi.join('')}</ul></div>`;
 };
 
 export function collectionPreview(blockData) {
