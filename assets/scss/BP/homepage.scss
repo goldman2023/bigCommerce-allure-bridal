@@ -15,8 +15,11 @@
     }
     .block-item,.sub-category-block,.customBanner,.breadcrumbs {
         max-width: 91.71429rem;
-        margin: 0 auto;
+        margin: 20px auto;
         padding: 0 1.5rem;
+        @include breakpoint("medium") {
+            margin: 5% auto;
+        }
         @media only screen and (min-width: 1600px)  {
             max-width: 100rem;
         }
