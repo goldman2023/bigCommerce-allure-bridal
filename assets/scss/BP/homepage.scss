@@ -1,7 +1,9 @@
 .pages-custom-page-custom-home-page,
 .pages-custom-category-category-landing,
 .pages-custom-category-category-listing,
-.pages-custom-page-all-content-blocks {
+.pages-custom-page-all-content-blocks,
+.pages-product,
+.suits-product {
     .button {
         @media only screen and (min-width: 2800px) {
             font-size: remCalc(20px);
@@ -13,7 +15,7 @@
         padding: 0;
         max-width: 100%;
     }
-    .block-item,.sub-category-block,.customBanner,.breadcrumbs {
+    .block-item,.sub-category-block,.customBanner,.breadcrumbs,.custompro {
         max-width: 91.71429rem;
         margin: 20px auto;
         padding: 0 1.5rem;
