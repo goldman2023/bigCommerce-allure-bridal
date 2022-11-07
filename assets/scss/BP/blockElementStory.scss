@@ -1,6 +1,6 @@
 .blockElementStory {
     display: block;
-    margin: 5% -3rem;
+    margin: 5% 0;
     @include breakpoint("medium") { 
         display:flex;
         align-items: end;
@@ -185,7 +185,7 @@
 
 .blockElementDiscover {
     display: block;
-    margin: 5% -3rem;
+    margin: 5% 0;
     @include breakpoint("medium") { 
         margin: 5% 0;
     }

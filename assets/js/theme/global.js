@@ -181,9 +181,8 @@ export default class Global extends PageManager {
                         }
                     });
 
-                    document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;
-                    applySlider('.imageWithContentSlider ul',1);
-
+                    document.getElementById('contentBlocksCollection').innerHTML = blocksCollections.join('');
+                    applySlider('.imageWithContentSlider ul',1,true,true);
                   });
             });
         }
@@ -198,7 +197,7 @@ export default class Global extends PageManager {
             setTimeout(function(){
                 applySlider('.productSliderGrid',3,true,true);
                 $('.productGridslider').each(function(){
-                    applySlider('.productGridslider',4);
+                    applySlider('.productGridslider',4,false,true);
                 });
             },3000);
         });
@@ -247,6 +246,5 @@ export default class Global extends PageManager {
             let customerName = document.getElementById('initials').getAttribute('data-name');
             document.getElementById('initials').innerHTML = customerName.charAt(0);
         }
-       
     }
 }

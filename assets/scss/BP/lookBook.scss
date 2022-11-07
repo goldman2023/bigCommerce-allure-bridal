@@ -1,8 +1,6 @@
 .blockElementLookbook {
-    margin: 20px -3rem;
-    @include breakpoint("medium") { 
-        margin: 5% 0;
-    }
+    margin: 5% auto;
+
     h4 {
         font-family: stencilFontFamily('prata-font');
         font-style: normal;
@@ -17,6 +15,9 @@
     }
     .contentSection {
         position: relative;
+        img {
+            width: 100%;
+        }
         .caption {
             position: relative;
             width: 100%;
