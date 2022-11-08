@@ -57,6 +57,11 @@ export default class Global extends PageManager {
         //header footer data 	
         renderHeaderFooter(this.context);
 
+        $('.mobileMenu-icons.searchIcon').on('click', function(e){
+            e.preventDefault();
+            $('.navPages-quickSearch.mobile-only').toggle();
+        })
+
         //Product Listing page start
         if(mainContent.contains('pages-custom-category-bp-category') || mainContent.contains('pages-custom-category-suits-bp-category')) {
             contentFullmetaData(this.context, response => {
