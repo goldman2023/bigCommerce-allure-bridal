@@ -9,25 +9,23 @@
     {{> components/account/navigation account_page='settings'}}
     <div class="rightaccountside editaccount">
         <div id="personalinfo">
-            <h2 class="section-title">Personal Info</h2>
+            <h2 class="section-title">Personal Info   <span class="editdetails">Edit</span>
+            </h2>
             <div class="infotable">
                 <div class="inforow">
                     <div class="infocol">
                         <p class="label">Full Name</p>
                         <p>{{customer.name}}</p>
-                        <p class="edit">Edit</p>
                     </div>
                     <div class="infocol">
                         <p class="label">Mobile</p>
                         <p>{{customer.phone}}</p>
-                        <p class="edit">Edit</p>
                     </div>
                 </div>
                 <div class="inforow">
                     <div class="infocol">
                         <p class="label">Email</p>
                         <p>{{customer.email}}</p>
-                        <p class="edit">Edit</p>
                     </div>
                     <div class="infocol">
                         <p class="label">Password</p>
@@ -37,7 +35,6 @@
                                 </svg>
                                 
                         </p>
-                        <p class="edit">Edit</p>
                     </div>
                 </div>
             </div>
