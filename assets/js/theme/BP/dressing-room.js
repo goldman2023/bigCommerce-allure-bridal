@@ -276,7 +276,7 @@ export default class DressingRoom extends PageManager {
         return new Promise((resolve, reject) => {
             $.ajax({
                 type: "GET",
-                url: `${this.context.workatoApiPath}/wedding-studio/members?wedding_party_id=2`,
+                url: `${this.context.workatoApiPath}members?wedding_party_id=2`,
                 headers: {"API-TOKEN": this.context.workatoApiToken},
                 success: response => {
                     console.log(response);

@@ -218,13 +218,13 @@ export default class Auth extends PageManager {
         $('#customregistration').on('submit', function(e){
             e.preventDefault();
             const formData = {
-                "email": "kk@ggg.com",
+                "email": "kdddk@ggg.com",
                 "first_name": "dd1",
                 "last_name": "dd",
                 "phone": "1234567890",
                 "authentication": {
-                "force_password_reset": true,
-                "new_password": "Mind@123"
+                    "force_password_reset": true,
+                    "new_password": "Mind@123"
                 }
             };
             $.ajax({
