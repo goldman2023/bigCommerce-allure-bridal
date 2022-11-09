@@ -119,7 +119,6 @@
     }
 }
 .blockElementFullscreenImage {
-    margin: 20px -3rem;
     @include breakpoint("medium") { 
         margin: 15px 0;
     }
@@ -127,32 +126,83 @@
         position: relative;
         .homepageCaption {
             position: absolute;
-            left: 5%;
+            left: 0;
             bottom: 10%;
-            width: 40%;
+            width: 100%;
+            .content {
+                max-width: 91.71429rem;
+                margin: 0 auto;
+                padding: 0 1.5rem;
+                @media only screen and (min-width: 1600px)  {
+                    max-width: 100rem;
+                }
+                @media only screen and (min-width: 2000px) {
+                    max-width: 120rem;
+                }
+                @media only screen and (min-width: 2600px) {
+                    max-width: 140rem;
+                }
+                @media only screen and (min-width: 3000px) {
+                    max-width: 170rem;
+                }
+                .bannercap {
+                    @include breakpoint("medium") {
+                        width: 50%;
+                        margin-left: 0;
+                    }
+                }
+            }
             h4,p,a {
                 color: #ffffff;
             }
             h4 {
                 font-family: stencilFontFamily('stay-classy-font');
-                font-size: remCalc(66px);
-                line-height: remCalc(70px);
+                font-size: remCalc(35px);
+                line-height: remCalc(40px);
                 letter-spacing: -0.01em;
                 text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+                @include breakpoint("medium") {
+                    font-size: remCalc(66px);
+                    line-height: remCalc(70px);
+                }
             }
             p {
                 font-family: stencilFontFamily('default-font-light');
                 font-style: normal;
                 font-weight: 300;
-                font-size: remCalc(14px);
-                line-height: remCalc(22px);
+                font-size: remCalc(12px);
+                line-height: remCalc(18px);
+                @include breakpoint("medium") {
+                    font-size: remCalc(14px);
+                    line-height: remCalc(22px);
+                }
+                @media only screen and (min-width: 2000px) {
+                    font-size: remCalc(20px);
+                    line-height: remCalc(28px);
+                }
+                @media only screen and (min-width: 2800px) {
+                    font-size: remCalc(28px);
+                    line-height: remCalc(40px);
+                }
             }
             a {
                 font-family: stencilFontFamily('default-font-regular');
                 font-style: normal;
                 font-weight: 500;
-                font-size: remCalc(12px);
-                line-height: remCalc(15px);
+                font-size: remCalc(10px);
+                line-height: remCalc(13px);
+                @include breakpoint("medium") {
+                    font-size: remCalc(12px);
+                    line-height: remCalc(15px);
+                }
+                @media only screen and (min-width: 2000px) {
+                    font-size: remCalc(18px);
+                    line-height: remCalc(22px);
+                }
+                @media only screen and (min-width: 2800px) {
+                    font-size: remCalc(24px);
+                    line-height: remCalc(34px);
+                }
                 letter-spacing: 0.1em;
                 text-transform: uppercase;
                 text-decoration: none;
@@ -173,8 +223,26 @@
 }
 .blockElementCopyBlock {
     text-align: center;
-    max-width: 75%;
-    margin: 5% auto;
+    margin: 5% 0;
+    @include breakpoint("medium") { 
+        max-width: 75%;
+        margin: 5% auto;
+    }
+    .heightwidth {
+        max-width: 1200px;
+        margin: 0 auto;
+        @include breakpoint("medium") { 
+            max-width: 900px;
+        }
+        @media only screen and (min-width: 2000px)  {
+            max-width: 1200px;
+            margin: 5% auto;
+        }
+        @media only screen and (min-width: 2800px) {
+            max-width: 1570px;
+            margin: 5% auto;
+        }
+    }
     h2 {
         font-family: stencilFontFamily('prata-font');
         font-style: normal;
@@ -182,6 +250,14 @@
         font-size: remCalc(34px);
         line-height: remCalc(44px);
         color: #695C5C;
+        @media only screen and (min-width: 2000px) {
+            font-size: remCalc(40px);
+            line-height: remCalc(50px);
+        }
+        @media only screen and (min-width: 2800px) {
+            font-size: remCalc(45px);
+            line-height: remCalc(65px);
+        }
     }
     p {
         font-family: stencilFontFamily('default-font-light');
@@ -190,19 +266,39 @@
         font-size: remCalc(16px);
         line-height: remCalc(26px);
         color: #695C5C;
+        @media only screen and (min-width: 2000px) {
+            font-size: remCalc(18px);
+            line-height: remCalc(30px);
+        }
+        @media only screen and (min-width: 2800px) {
+            font-size: remCalc(28px);
+            line-height: remCalc(50px);
+        }
     }
 }
 
 .logoSliderBlock {
+    display: block;
+    margin: 5% 0;
+    @include breakpoint("medium") { 
+        margin: 5% 0;
+    }
+    .slick-slide {
+        height: 52px;
+        @media only screen and (min-width: 2000px) {
+            height: 70px;
+        }
+        img {
+            width: auto;
+            height: 100%;
+        }
+    }
     .slick-track {
         margin-left: 0;
         margin-right: 0;
      }
      .slick-next {
-         @include breakpoint("medium") {
-             right: 0;
-         }
-         right: -10px;
+         right: 0;
          top: 33%;
          width: 52px;
          height: 52px;
@@ -212,10 +308,7 @@
          }
      }
      .slick-prev {
-         @include breakpoint("medium") {
-             left: 0;
-         }
-         left: -10px;
+         left: 0;
          top: 33%;
          width: 52px;
          height: 52px;
@@ -225,4 +318,32 @@
             background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAyMSAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0wLjYzNzAxNCA3LjY1MjE2QzAuMjgwMjg2IDcuNjUyMTYgMCA3LjM3MTg3IDAgNy4wMTUxNEMwIDYuNjcxMTYgMC4yODAyODYgNi4zNzgxMyAwLjYzNzAxNCA2LjM3ODEzSDE4LjIxODZMMTIuOTMxNCAxLjA5MDkyQzEyLjY4OTMgMC44MzYxMTEgMTIuNjg5MyAwLjQ0MTE2MyAxMi45MzE0IDAuMTg2MzU3QzEzLjE4NjIgLTAuMDY4NDQ4NCAxMy41ODExIC0wLjA1NTcwODEgMTMuODM1OSAwLjE4NjM1N0wyMC4xNjc5IDYuNTE4MjdDMjAuMzA4IDYuNjMyOTQgMjAuMzk3MiA2LjgxMTMgMjAuMzk3MiA3LjAwMjRDMjAuMzk3MiA3LjE4MDc3IDIwLjMyMDcgNy4zNTkxMyAyMC4xOTMzIDcuNDczNzlMMTMuODM1OSAxMy44MTg1QzEzLjU4MTEgMTQuMDYwNSAxMy4xODYyIDE0LjA2MDUgMTIuOTMxNCAxMy44MTg1QzEyLjY4OTMgMTMuNTc2NCAxMi42ODkzIDEzLjE2ODcgMTIuOTMxNCAxMi45MjY2TDE4LjIxODYgNy42NTIxNkgwLjYzNzAxNFoiIGZpbGw9IiMyODI4MjgiLz4KPC9zdmc+Cg==");
         }
      }
+}
+.instaFeedDiv {
+    max-width: 91.71429rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    overflow: hidden;
+    @media only screen and (min-width: 1600px)  {
+        max-width: 100rem;
+    }
+    @media only screen and (min-width: 2000px) {
+        max-width: 120rem;
+    }
+    @media only screen and (min-width: 2600px) {
+        max-width: 140rem;
+    }
+    @media only screen and (min-width: 3000px) {
+        max-width: 170rem;
+    }
+    #eapps-instagram-feed-1 {
+        .eapps-instagram-feed-title {
+            font-size: remCalc(14px);
+            line-height: remCalc(20px);
+            @include breakpoint("medium") { 
+                font-size: remCalc(22px);
+                line-height: remCalc(26px);
+            }
+        }
+    }
 }

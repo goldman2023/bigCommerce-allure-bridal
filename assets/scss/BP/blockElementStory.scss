@@ -1,9 +1,9 @@
 .blockElementStory {
     display: block;
-    margin: 5% -3rem;
+    margin: 5% 0;
     @include breakpoint("medium") { 
         display:flex;
-        align-items: flex-start;
+        align-items: end;
         justify-content: space-between;
         margin: 5% 0;
     }
@@ -28,6 +28,16 @@
                 font-size:  remCalc(50px);
                 line-height:  remCalc(60px);
             }
+            @media only screen and (min-width: 2000px) {
+                font-size: remCalc(60px);
+                line-height: remCalc(70px);
+                width: 400px;
+            }
+            @media only screen and (min-width: 2800px) {
+                font-size: remCalc(75px);
+                line-height: remCalc(85px);
+                width: 450px;
+            }
         }
         .date {
             font-family: stencilFontFamily('default-font-regular');
@@ -43,6 +53,14 @@
             font-size:  remCalc(10px);
             @include breakpoint("medium") { 
                 font-size:  remCalc(12px);
+            }
+            @media only screen and (min-width: 2000px) {
+                font-size: remCalc(18px);
+                line-height: remCalc(22px);
+            }
+            @media only screen and (min-width: 2800px) {
+                font-size: remCalc(24px);
+                line-height: remCalc(34px);
             }
             &::before {
                 position: absolute;
@@ -77,6 +95,9 @@
         }
         .topleft {
             max-width: 302px;
+            @media only screen and (min-width: 1600px)  {
+                max-width: 90%;
+            }
         }
         .topright {
             @include breakpoint("medium") { 
@@ -107,6 +128,20 @@
                 font-size:  remCalc(14px);
                 line-height:  remCalc(22px);
                 color: stencilColor("color-default-neutral-3");
+                @media only screen and (min-width: 2000px) {
+                    font-size: remCalc(20px);
+                    line-height: remCalc(30px);
+                }
+                @media only screen and (min-width: 2800px) {
+                    font-size: remCalc(26px);
+                    line-height: remCalc(46px);
+                }
+            }
+            .button {
+                @media only screen and (min-width: 2800px) {
+                    font-size: remCalc(20px);
+                    line-height: remCalc(20px);
+                }
             }
         }
         .rightcol {
@@ -150,7 +185,7 @@
 
 .blockElementDiscover {
     display: block;
-    margin: 5% -3rem;
+    margin: 5% 0;
     @include breakpoint("medium") { 
         margin: 5% 0;
     }
@@ -163,6 +198,9 @@
                 @include breakpoint("medium") { 
                     width: 45%;
                 }
+                @media only screen and (min-width: 1600px)  {
+                    width: 48%;
+                }
                 position: relative;
                 width: 48%;
                 img.first {
@@ -173,6 +211,10 @@
                         left:0;
                         z-index: 8;
                         margin-top: 0;
+                        width: 70%;
+                    }
+                    @media only screen and (min-width: 1600px)  {
+                        width: 76%;
                     }
                 }
                 img.second {
@@ -182,7 +224,11 @@
                         bottom: 0;
                         right: 0;
                         margin-top: 0;
+                        width: 40%;
                     }
+                }
+                img.third {
+                    width: 100%;
                 }
             }
         }
@@ -193,13 +239,24 @@
             padding: 10px 20px;
             position: absolute;
             @include breakpoint("medium") { 
-                top: 20%;
-                left: 30%;
+                top: 30%;
+                left: 50%;
                 width: 40%;
                 padding: 10px 30px;
+                transform: translate(-50%, -50%)
             }
             background: #fff;
             z-index: 9;
+            p {
+                @media only screen and (min-width: 2000px) {
+                    font-size: remCalc(22px);
+                    line-height: remCalc(30px);
+                }
+                @media only screen and (min-width: 2800px) {
+                    font-size: remCalc(30px);
+                    line-height: remCalc(46px);
+                }
+            }
         }
     }
 }

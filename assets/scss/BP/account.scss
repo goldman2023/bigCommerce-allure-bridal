@@ -1,7 +1,21 @@
 .account-section-page {
     display: flex;
     justify-content: space-between;
-    margin-top: 50px;
+    margin-top: 20%;
+    .section-title {
+        .editdetails {
+            color: #695C5C;
+            margin-left: 20px;
+            cursor: pointer;
+            font-family: stencilFontFamily('default-font-regular');
+            font-style: normal;
+            font-weight: 500;
+            font-size: remCalc(12px);
+            line-height:remCalc(15px);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+    }
     .navBar--sub {
         text-align: left;
         width: 30%;
@@ -145,11 +159,6 @@
                         font-weight: 600;
                         font-size: remCalc(14px);
                         line-height: remCalc(17px);
-                    }
-                    &.edit {
-                        color: #695C5C;
-                        margin-top: 10px;
-                        cursor: pointer;
                     }
                 }
             }

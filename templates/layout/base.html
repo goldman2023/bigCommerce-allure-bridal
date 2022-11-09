@@ -75,9 +75,10 @@
         {{{head.scripts}}}
         {{~inject 'workatoApiPath' theme_settings.workato_api_path}}
         {{~inject 'workatoApiToken' theme_settings.workato_api_token}}
+        {{~inject 'contentfulApiPath' theme_settings.contentful_api_path}}
+        {{~inject 'contentfulApiToken' theme_settings.contentful_api_token}}
         {{~inject 'zoomSize' theme_settings.zoom_size}}
         {{~inject 'productSize' theme_settings.product_size}}
-        {{~inject 'contentfulApiToken' theme_settings.contentful_api_token}}
         {{~inject 'genericError' (lang 'common.generic_error')}}
         {{~inject 'maintenanceModeSettings' settings.maintenance}}
         {{~inject 'adminBarLanguage' (langJson 'admin')}}
@@ -96,8 +97,23 @@
 
         {{!-- Get this loading ASAP --}}
         <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.main.js'}}" as="script">
+
+        {{!-- Google Tag Manager --}}
+        <script>
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || []; w[l].push({
+                    'gtm.start':
+                        new Date().getTime(), event: 'gtm.js'
+                }); var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-KDMVGVL');
+        </script>
+        {{!-- End Google Tag Manager --}}
     </head>
     <body class="{{ page_type }}-type {{#if template '===' 'pages\custom\product\suits-product'}}suitsProduct{{/if}}">
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDMVGVL" height="0" width="0"
+                style="display:none;visibility:hidden"></iframe></noscript>
         <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>
 
         {{> components/common/header }}

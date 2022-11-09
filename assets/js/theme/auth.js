@@ -212,5 +212,34 @@ export default class Auth extends PageManager {
         if ($createAccountForm.length) {
             this.registerCreateAccountValidator($createAccountForm);
         }
+
+
+        let self = this;
+        $('#customregistration').on('submit', function(e){
+            e.preventDefault();
+            const formData = {
+                "email": "kdddk@ggg.com",
+                "first_name": "dd1",
+                "last_name": "dd",
+                "phone": "1234567890",
+                "authentication": {
+                    "force_password_reset": true,
+                    "new_password": "Mind@123"
+                }
+            };
+            $.ajax({
+                type: "POST",
+                url: `https://apim.workato.com/allure/allure-b2c-website/login/createaccount`,
+                headers: {"API-TOKEN": self.context.workatoApiToken},
+                data: JSON.stringify(formData),
+                success: response => {
+                    console.log('register', response);
+                },
+                error: error => {
+                    console.log('error r', error);
+                }
+            });
+        }); 
+
     }
 }

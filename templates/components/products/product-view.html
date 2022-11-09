@@ -29,14 +29,19 @@
             {{> components/common/alert/alert-success success}}
         {{/if}}
     {{/each}}
-    
-    {{#each breadcrumbs}}
-        {{#contains ../product.category this.name}}
+    <!-- {{#each breadcrumbs}}
+        {{#contains product.category this.name}}
             <div class="productView--top">
                 <a href="{{this.url}}">{{lang 'products.back_to_list'}}</a>
             </div>
         {{/contains}}
-    {{/each}}
+    {{/each}} -->
+
+    <div class="productView--top">
+        <a href="/{{#each product.category}}{{#if @last}}{{lowercase (hyphenate this)}}{{else}}{{this}}, {{/if}}{{/each}}">{{lang 'products.back_to_list'}}</a>
+    </div>
+    
+
     
     <div class="productView--inner">
         <div class="productView--left">
@@ -199,7 +204,7 @@
                             {{inject 'showSwatchNames' theme_settings.show_product_swatch_names}}
                             {{#each product.options}}
                                 {{{dynamicComponent 'components/products/options'}}}
-                                <div class="border"></div>
+                                <div class="divider"></div>
                             {{/each}}
                         </div>
                         <div class="form-field form-field--stock{{#unless product.stock_level}} u-hiddenVisually{{/unless}}">

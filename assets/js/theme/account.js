@@ -25,6 +25,13 @@ export default class Account extends PageManager {
     }
 
     onReady() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const urlparam = urlParams.get('action');
+        if(urlparam === 'order_status') {
+            window.location.href = queryString.replace('order_status','account_details');
+        }
+
         const $editAccountForm = classifyForm('form[data-edit-account-form]');
         const $addressForm = classifyForm('form[data-address-form]');
         const $inboxForm = classifyForm('form[data-inbox-form]');
@@ -84,7 +91,7 @@ export default class Account extends PageManager {
 
         this.bindDeleteAddress();
         this.bindDeletePaymentMethod();
-        $('.infocol .edit').on('click', function() {
+        $('.editdetails').on('click', function() {
             $('#personalinfo').hide();
             $('#updatePro').show();
         });

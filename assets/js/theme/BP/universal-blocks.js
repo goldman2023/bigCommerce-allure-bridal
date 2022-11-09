@@ -546,20 +546,52 @@ export function blockElementFullscreenVideo(selectorID,element) {
 }
 
 export function lookBookglobal(blockData) {
-   return `<div class="blockElementLookbook block-item" id="blockElementLookbook"><div><h4 class="title">Lookbooks - ${blockData.subheadline}</h4><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData.subheadline}" /><div class="caption"><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div></div></div></div>`;
+   return `<div class="blockElementLookbook block-item full-size" id="blockElementLookbook"><div><h4 class="title">Lookbooks - ${blockData.subheadline}</h4><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData.subheadline}" /><div class="caption"><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a></div></div></div></div>`;
 }
 
+export function lookBookglobal2(blockData) {
+    return `<div class="blockElementLookbook2 block-item full-size" id="blockElementLookbook2"><div><div class="caption"><h2>${blockData.blocktitle}</h2><div class="divider"></div><h4>${blockData.subheadline}</h4><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="button button-secondary">${blockData.linkText}</a></div><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData.subheadline}" /></div></div></div>`;
+}
+export function events(blockData) {
+    return `<div class="events block-item" id="events">
+    <h2>Upcoming Designer Events</h2>
+    <div class="eventsGrid">
+        ${blockData.trunkShowsCollection.items.map((item)=> 
+            `<div class="eventsCard">
+              <div class="block">
+                <div class="imageblock col"><img src="${item.eventImage.url}" /></div>
+                <div class="contentBlock col">
+                    <h4>${item.retailerName}</h4>
+                    <p class="addressp">${item.location}</p>
+                    <div class="divider"></div>
+                    <label>Date</label>
+                    <p class="colored">${new Date(item.eventStartDate).toLocaleDateString().replaceAll('/','.')} - ${new Date(item.eventEndDate).toLocaleDateString().replaceAll('/','.')}</p>
+                    <label>Collections</label>
+                    <p class="colored">${item.collectionsAvailable.map((col)=> `${col}`).join("  ")}</p>
+                    <label>address</label>
+                    <span>${item.locationAddressStreet}</span>
+                    <span>${item.locationAddressCityStateZip}</span>
+                    <p><a class="colored" href="${item.locationWebsiteUrl}">GET DIRECTION</a></p>
+                    <label>Phone</label>
+                    <p>${item.locationPhoneNumber}</p>
+                    <label>website</label>
+                    <p class="colored">${item.locationWebsiteUrl}</p>
+                </div>
+              </div>
+            </div>`).join('')}
+    </div></div>`;
+}
 export function blockElementFullscreenImage(blockData) {
-    return `<div class="blockElementFullscreenImage block-item" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" style="width: 100%;"/>
-    ${blockData.bodyCopy !== null ? `<div class="homepageCaption"><h4>${blockData.subheadline}</h4><p>${blockData.bodyCopy}</p><a href="${blockData.linkUrl}">${blockData.linkText}</a></div>` : ''}</div></div>`;
+    return `<div class="blockElementFullscreenImage block-item full-size" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" />
+    ${blockData.bodyCopy !== null ? `<div class="homepageCaption"><div class="content"><div class="bannercap"><h4>${blockData.subheadline}</h4><p>${blockData.bodyCopy}</p><a href="${blockData.linkUrl}">${blockData.linkText}</a></div>` : ''}</div></div></div></div>`;
 }
 
 export function blockElementCopyBlock(blockData) {
-    return `<div class="blockElementCopyBlock block-item" id="blockElementCopyBlock"><h2>${blockData.blockName}</h2><p>${blockData.bodyCopy}<p></div>`;
+    return `<div class="blockElementCopyBlock block-item" id="blockElementCopyBlock"><div class="heightwidth"><h2>${blockData.blockName}</h2><p>${blockData.bodyCopy}<p></div></div>`;
 }
 
 export function logoSliderBlock(blockData) {
-    return `<div class="logoSliderBlock block-item" id="logoSliderBlock"><div class="imgslider"> ${blockData.logosCollection.items.map((logo)=> `<img src="${logo.url}" alt="${logo.title}" />` ).join('')}</div></div>`;
+    return `<div class="logoSliderBlock block-item" id="logoSliderBlock"><div class="imgslider"> ${blockData.logosCollection.items.map((logo)=> `<div class="logo-item"><img src="${logo.url}" alt="${logo.title}" /></div>` ).join('')}</div></div>`;
 }
 
 export function blockElement3ImagesScreenWidth(blockData) {
@@ -572,7 +604,7 @@ export function blockElementDiscover(blockData) {
                 <div class="discovery-section">
                     <div class="imageflex">
                         <div><img class="first" src="${blockData.imagesCollection.items[0].url}" alt="" /><img class="second" src="${blockData.imagesCollection.items[1].url}" alt=""/></div>
-                        <div><img  src="${blockData.imagesCollection.items[2].url}"  alt="" /></div>
+                        <div><img  class="third" src="${blockData.imagesCollection.items[2].url}"  alt="" /></div>
                     </div>
                     <div class="caption">
                         <h2>${blockData.blocktitle}</h2>
@@ -603,7 +635,7 @@ export function imageWithContentSlider(blockData) {
         <h2 class="title">${item.title}</h2><p class="content">${item.bodyCopy}</p><a href="${item.linkUrl}" class="buttonlink">${item.linkText}</a>
         </div></div></div></li>`
     });
-    return `<div class="imageWithContentSlider block-item" id="imageWithContentSlider"><ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1,"infinite": true}'>${sliderLi.join('')}</ul></div>`;
+    return `<div class="imageWithContentSlider block-item full-size" id="imageWithContentSlider"><ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1,"infinite": true}'>${sliderLi.join('')}</ul></div>`;
 };
 
 export function collectionPreview(blockData) {
@@ -704,8 +736,8 @@ export function createProductSlider(block,blockData) {
     block.querySelector('.sub-description').innerHTML = blockData.description;
 };
 
-export function blogpostTopBanner(selectorID,title,heading,imageHeading){
-    let  contentStructure = `<div class="topbannerSection"><img src="${imageHeading.url}" alt="${title}" /><div class="caption"><h2>${title ? title : ''}</h2><span class="date"><div class="divider"></div></span><p class="subheading">${heading ? heading : ''}</p></div></div>`;
+export function blogpostTopBanner(selectorID,title,heading,imageHeading,date){
+    let  contentStructure = `<div class="topbannerSection"><img src="${imageHeading.url}" alt="${title}" /><div class="caption"><h2>${title ? title : ''}</h2><span class="date">${date ? date : ''}<div class="divider"></div></span><p class="subheading">${heading ? heading : ''}</p></div></div>`;
     document.getElementById(selectorID).innerHTML = contentStructure;
 };
 

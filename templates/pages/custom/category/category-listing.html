@@ -11,11 +11,10 @@ category:
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js"></script>
 
-<div class="page category-listing-page">
+<div class="category-listing-page">
     {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
-    <div class="page-content" id="product-listing-container">
+    <div id="product-listing-container">
         {{#if category.subcategories}}
-            <div>
                 {{#each category.subcategories}}
                 {{#if @index '===' 3}}
                     <div class="customBanner">
@@ -35,7 +34,6 @@ category:
                     </div>
                 </div>
                 {{/each}}
-            </div>
         {{/if}}
     </div>
 </div>

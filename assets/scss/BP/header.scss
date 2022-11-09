@@ -1,0 +1,84 @@
+header {
+    @include breakpoint("medium") {
+        &.header {
+            .header-navigation__cta-container {
+                display: flex;
+                gap: 24px;
+                align-items: center;
+                justify-content: space-between;
+                padding: 24px 40px;
+                .header-navigation__cta-links {
+                    display: flex;
+                    justify-content: flex-end;
+                    gap: 10px;
+                    flex: 2;
+                }
+                .header-navigation__cta {
+                    display: flex;
+                    flex-flow: column;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 8px;
+                }
+                .header-navigation__search {
+                    flex: 2;
+                    justify-content: flex-start;
+                    flex-direction: row;
+                    .form {
+                        margin: 0;
+                        .form-field {
+                            padding: 0;
+                        }
+                        .search-icon {
+                            position: absolute;
+                            right: 0;
+                            top: 5px;
+                        }
+                    }
+                }
+                .header-logo {
+                    flex: 1;
+                    display: flex;
+                    justify-content: center;
+                    min-width: 230px;
+                    .header-logo-image-container {
+                        display: flex;
+                    }
+                }
+            }
+            ul {
+                &.site-navigation {
+                    padding: 12px 0;
+                    .site-navigation__link {
+                        padding: 12px 0;
+                        a {
+                            margin: 0;
+                            padding: 0;
+                        }
+                    }
+                    .sub-site__navigation {
+                        .sub-site__text {
+                            a {
+                                &:hover {
+                                    text-decoration: underline;
+                                    color: stencilColor('color-allure-bridals-primary-1');
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .header-svg__border {
+                position: relative;
+                svg {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    margin: auto;
+                    bottom: 0;
+                }
+            }
+        }
+    }
+}

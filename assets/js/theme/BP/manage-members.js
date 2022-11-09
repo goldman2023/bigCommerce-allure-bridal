@@ -8,7 +8,6 @@ import { defaultModal } from '../global/modal';
 export default class ManageMembers extends PageManager {
     constructor(context) {
         super(context);
-        console.log(context);
         this.$manageListEl = document.querySelector('.page-content .manageMembers--members');
         this.$addMemberEl = $('.page-content .manageMembers--list li:first-child');
         this.manageMembersHtml = '';
@@ -336,7 +335,7 @@ export default class ManageMembers extends PageManager {
         return new Promise((resolve, reject) => {
             $.ajax({
                 type: "POST",
-                url: `${this.context.workatoApiPath}/wedding-studio/members/create`,
+                url: `${this.context.workatoApiPath}members/create`,
                 headers: {"API-TOKEN": this.context.workatoApiToken},
                 data: JSON.stringify(formData),
                 success: response => {
@@ -361,7 +360,7 @@ export default class ManageMembers extends PageManager {
         return new Promise((resolve, reject) => {
             $.ajax({
                 type: "POST",
-                url: `${this.context.workatoApiPath}/wedding-studio/members/update`,
+                url: `${this.context.workatoApiPath}members/update`,
                 headers: {"API-TOKEN": this.context.workatoApiToken},
                 data: JSON.stringify(formData),
                 success: response => {
@@ -417,7 +416,7 @@ export default class ManageMembers extends PageManager {
         return new Promise((resolve, reject) => {
             $.ajax({
                 type: "GET",
-                url: `${this.context.workatoApiPath}/wedding-studio/members?wedding_party_id=2`,
+                url: `${this.context.workatoApiPath}members?wedding_party_id=2`,
                 headers: {"API-TOKEN": this.context.workatoApiToken},
                 success: response => {
                     console.log(response);
@@ -440,7 +439,7 @@ export default class ManageMembers extends PageManager {
         return new Promise((resolve, reject) => {
             $.ajax({
                 type: "POST",
-                url: `${this.context.workatoApiPath}/wedding-studio/members/remove`,
+                url: `${this.context.workatoApiPath}members/remove`,
                 headers: {"API-TOKEN": this.context.workatoApiToken},
                 data: JSON.stringify(formData),
                 success: response => {
@@ -463,7 +462,7 @@ export default class ManageMembers extends PageManager {
         return new Promise((resolve, reject) => {
             $.ajax({
                 type: "GET",
-                url: `${this.context.workatoApiPath}/wedding-studio/members?wedding_party_id=2&customer_email=${customer_email}`,
+                url: `${this.context.workatoApiPath}members?wedding_party_id=2&customer_email=${customer_email}`,
                 headers: {"API-TOKEN": this.context.workatoApiToken},
                 success: response => {
                     console.log(response);
