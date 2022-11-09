@@ -50,12 +50,12 @@ export default class RetailFinder extends PageManager {
     cityState.classList.add('retailer-city-state');
     cityState.innerText = `${retailer.retailerCity}, ${retailer.state}`;
     locationInfo.append(cityState);
+    container.append(locationInfo);
+
     const distance = document.createElement('span');
     distance.classList.add('retailer-distance');
-    //TODO figure out how to calculate this
     distance.innerText = `${retailer.distanceFromUser} miles away`;
-    locationInfo.append(distance);
-    container.append(locationInfo);
+    container.append(distance);
 
     const numCollections = document.createElement('span');
     numCollections.classList.add('retailer-collection-count');
@@ -101,13 +101,14 @@ export default class RetailFinder extends PageManager {
     });
   }
 
-  getMarker = (latLong, display, infoWindow) => {
+  getMarker = (latLong, display, infoWindow, icon) => {
     const position = {
       lat: latLong.lat,
       lng: latLong.lon
     };
     const marker = new google.maps.Marker({
-      position
+      position,
+      icon
     });
 
     // markers can only be keyboard focusable when they have click listeners
@@ -251,10 +252,21 @@ export default class RetailFinder extends PageManager {
         ${loc.retailerName} <br/>
         ${loc.distanceFromUser} miles away
       `
-      return this.getMarker(loc.location, display, infoWindow)
+      return this.getMarker(loc.location, display, infoWindow, {
+        path: 'M10 0C4.5 0 0 4.5 0 10c0 7.4 9.1 13.6 9.4 13.8.2.1.4.2.6.2s.4-.1.6-.2c.3-.2 9.4-6.4 9.4-13.8 0-5.5-4.5-10-10-10zm0 14c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z',
+        fillColor: '#373c3f',
+        fillOpacity: 1,
+        strokeWeight: 1,
+      })
     });
     // Add a marker clusterer to manage the markers.
-    const userLocationMarker = this.getMarker(userLocation, 'Your Location', infoWindow);
+    const userLocationMarker = this.getMarker(userLocation, 'Your Location', infoWindow, {
+      path: 'M10 0C4.5 0 0 4.5 0 10c0 7.4 9.1 13.6 9.4 13.8.2.1.4.2.6.2s.4-.1.6-.2c.3-.2 9.4-6.4 9.4-13.8 0-5.5-4.5-10-10-10zm0 14c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z',
+      fillColor: '#fe948a',
+      fillOpacity: 1,
+      strokeWeight: 1,
+
+    });
     markers.push(userLocationMarker);
     new MarkerClusterer({ markers, map })
 

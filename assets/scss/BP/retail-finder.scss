@@ -113,15 +113,17 @@
               line-height: 22px;
               display: flex;
               align-items: center;
-              margin-bottom: 11px;
+              margin-bottom: 2px;
 
               .retailer-city-state {
                 margin-right: 25px;
-              }
 
-              .retailer-distance {
-                display: list-item;
               }
+            }
+
+            .retailer-distance {
+              margin-bottom: 8px;
+              color: stencilColor('color-allure-bridals-primary-1');
             }
 
             .retailer-collection-count {
