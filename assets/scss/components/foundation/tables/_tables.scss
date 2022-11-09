@@ -35,11 +35,13 @@
         margin-left: 0;
         margin-right: 0;
         width: 100%;
+        line-height: 30px;
 
         @include breakpoint("small") {
             display: inline-block;
             margin-bottom: 0;
             width: auto;
+            line-height: 30px;
         }
 
         + .button {

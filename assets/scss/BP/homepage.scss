@@ -45,6 +45,11 @@
             }
         }
     }
+    .breadcrumbs {
+        @include breakpoint("medium") {
+            margin: 0 auto !important;
+        }
+    }
     .blockElementFullscreenImage .mainImage {
         min-height: 300px;
         @include breakpoint("medium") {

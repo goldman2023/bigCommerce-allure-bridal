@@ -5,7 +5,7 @@ customer:
 ---
 
 {{#partial "page"}}
-
+<div style="visibility: hidden;">
 {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
 <h1 class="page-heading">{{lang 'account.orders.heading' }}</h1>
 {{> components/account/navigation account_page='orders'}}
@@ -29,6 +29,6 @@ customer:
         </section>
     </div>
 </div>
-
+</div>
 {{/partial}}
 {{> layout/base}}
