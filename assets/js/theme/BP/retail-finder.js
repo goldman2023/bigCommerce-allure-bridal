@@ -1,5 +1,4 @@
 import { MarkerClusterer } from '@googlemaps/markerclusterer'
-import { defaults } from 'lodash';
 // import is required by client, not by code
 import regeneratorRuntime from 'regenerator-runtime'
 import PageManager from '../page-manager'
@@ -20,7 +19,8 @@ export default class RetailFinder extends PageManager {
     }
   ];
   constructor(context) {
-    super(context)
+    super(context);
+    this.map = null;
     this.pageContent = document.querySelector('.page-content');
     this.originalRetailers = [];
     this.retailers = [];
@@ -29,6 +29,17 @@ export default class RetailFinder extends PageManager {
   onReady = async () => {
     await this.paintMapAndRetailers();
     this.addSortSelectOptions();
+    this.addEventHandlers();
+  }
+
+  addEventHandlers = () => {
+    const locationTypeahead = document.getElementById('location-typeahead');
+    const autocomplete = new google.maps.places.Autocomplete(locationTypeahead);
+    autocomplete.bindTo("bounds", this.map);
+    autocomplete.addListener("place_changed", () => {
+      const place = autocomplete.getPlace();
+      console.log("place", place);
+    });
   }
 
   createRetailerItem = (retailer, total, idx) => {
@@ -238,10 +249,13 @@ export default class RetailFinder extends PageManager {
     this.retailers = retailerData;
     const userLocation = await this.getUserLocation();
     // TODO: filter array based on chosen mile radius
-    const map = new google.maps.Map(document.getElementById('map'), {
+    const map = this.map || new google.maps.Map(document.getElementById('map'), {
       zoom: 10,
       center: { lat: userLocation.lat, lng: userLocation.lon },
-    })
+    });
+    if (!this.map) {
+      this.map = map;
+    }
     const infoWindow = new google.maps.InfoWindow({
       content: '',
       disableAutoPan: true,

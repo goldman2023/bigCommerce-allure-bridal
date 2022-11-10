@@ -5,7 +5,7 @@
 <section class="page">
     <div class="content">
         <div class="left-content">
-            <form class="form">
+            <div class="form">
                 <h2 class="header-title">Try It On</h2>
                 <div class="form-field">
                     <span class="form-label">Within</span>
@@ -17,7 +17,10 @@
                 </div>
                 <div class="form-field">
                     <span class="form-label">of</span>
-                    <input class="form-input selector-dropdown" type="text" />
+                    <div id="pac-container">
+                        <input class="form-input location-typeahead selector-dropdown" type="text"
+                            id="location-typeahead" />
+                    </div>
                 </div>
                 <div class="form-field">
                     <span class="form-label">carrying</span>
@@ -32,14 +35,15 @@
                     <input class="form-label" type="checkbox" />
                 </div> -->
                 <div class="buttons-container">
-                    <button class="button">SEARCH</button>
+                    <button class="button" type="button">SEARCH</button>
                 </div>
-            </form>
+            </div>
         </div>
         <div class="right-content">
             <div id="map"></div>
-            <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ theme_settings.google_api_token }}">
-            </script>
+            <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key={{ theme_settings.google_api_token }}&libraries=places">
+                </script>
             <div class="available-retailers">
                 <div class="top">
                     <h2 class="header-title retailers">Wedding Retailers Near You</h2>

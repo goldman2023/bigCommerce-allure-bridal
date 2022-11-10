@@ -1,3 +1,7 @@
+.pac-container {
+  top: 270px !important;
+}
+
 .page {
   margin-top: 40px;
   min-height: 1200px;
@@ -8,6 +12,14 @@
     .left-content {
       width: 20%;
       margin-right: 40px;
+
+      .form {
+        position: relative;
+
+        .location-typeahead {
+          color: stencilColor("color-allure-bridals-neutral-1") !important;
+        }
+      }
     }
 
     .right-content {
@@ -79,7 +91,7 @@
         }
 
         .retailer-results {
-          color: #1D1B1B;
+          color: stencilColor('allure-bridals-neutral-1');
           display: grid;
           grid-template-columns: repeat(3, 1fr);
 
@@ -87,7 +99,6 @@
           .retailer-item {
             display: flex;
             flex-direction: column;
-            justify-content: center;
 
             &:not(:nth-child(3n)) {
               padding-right: 50px;
