@@ -6,7 +6,24 @@ header {
                 gap: 24px;
                 align-items: center;
                 justify-content: space-between;
-                padding: 24px 40px;
+                max-width: 91.71429rem;
+                margin: 20px auto;
+                padding: 24px 1.5rem;
+                @include breakpoint("medium") {
+                    margin: 0 auto;
+                }
+                @media only screen and (min-width: 1600px)  {
+                    max-width: 100rem;
+                }
+                @media only screen and (min-width: 2000px) {
+                    max-width: 120rem;
+                }
+                @media only screen and (min-width: 2600px) {
+                    max-width: 140rem;
+                }
+                @media only screen and (min-width: 3000px) {
+                    max-width: 170rem;
+                }
                 .header-navigation__cta-links {
                     display: flex;
                     justify-content: flex-end;
