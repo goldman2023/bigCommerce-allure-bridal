@@ -33,25 +33,30 @@
                 <div class="register-form__container">
                   <form method="post" class="form" id="customregistration">
 
-                    <div class="form-field">
+                    <div class="form-field" >
                         <label class="form-label" for="register_first">First Name</label>
-                        <input class="form-input" name="register_first" id="login_email" type="email" placeholder="First Name">
+                        <input class="form-input" name="register_first" id="register_first" type="email" placeholder="First Name">
+                        <span class="form-inlineMessage">First Name field cannot be blank.</span>
                     </div>
                     <div class="form-field">
                         <label class="form-label" for="register_last">Last Name</label>
-                        <input class="form-input" id="register_last" type="password" name="login_pass" autocomplete="off" placeholder="Last Name">
+                        <input class="form-input" id="register_last" type="password" name="register_last" autocomplete="off" placeholder="Last Name">
+                        <span class="form-inlineMessage">Last Name field cannot be blank.</span>
                     </div>
                     <div class="form-field">
                         <label class="form-label" for="register_email">{{lang 'login.field_email'}}</label>
                         <input class="form-input" name="register_email" id="login_email" type="email" placeholder="{{lang 'login.field_email'}}">
+                        <span class="form-inlineMessage">You must enter a valid email.</span>
                     </div>
                     <div class="form-field">
                         <label class="form-label" for="register_pass">{{lang 'login.field_password'}}</label>
                         <input class="form-input" id="register_pass" type="password" name="login_pass" autocomplete="off" placeholder="{{lang 'login.field_password'}}">
+                        <span class="form-inlineMessage">You must enter a password.</span>
                     </div>
                     <div class="form-field">
                         <label class="form-label" for="register_pass-confirm">Confirm Password</label>
                         <input class="form-input" id="register_pass-confirm" type="password" name="login_pass" autocomplete="off" placeholder="Confirm Password">
+                        <span class="form-inlineMessage">You must enter a password.</span>
                     </div>
                     <div class="checkbox-fields">
                         <div class="checkbox-field">
@@ -61,6 +66,7 @@
                         <div class="checkbox-field">
                             <input type="checkbox" class="register_pass-policy">
                             <label for="register_pass-policy">I accept the Privacy <a href="#">Policy</a></label>
+                            <span class="form-inlineMessage">* Required</span>
                         </div>
                     </div>
                     {{{ forms.create_account.recaptcha.markup}}}
