@@ -96,3 +96,33 @@
             padding: 0 !important;
     }
 }
+
+.pages-product,
+.suits-product {
+    .custompro {
+        @media only screen and (max-width: 600px)  {
+            padding: 0 !important; 
+            .productView {
+                padding: 0 1.5rem;
+            }
+        }
+    }
+    .breadcrumbs {
+        @media only screen and (max-width: 600px)  {
+            padding: 0 1.5rem !important;
+        }
+    }
+    .youMightalsoLike,.thePerfectMatch,.recentlyViewed {
+        @media only screen and (max-width: 600px)  {
+            max-width: 91.71429rem;
+            margin: 20px auto;
+            padding: 0 1.5rem;
+        }
+    }
+
+    .blockElementFullscreenImage .mainImage img {
+        @media only screen and (max-width: 600px)  {
+            width: 100%;
+        }
+    }
+}
