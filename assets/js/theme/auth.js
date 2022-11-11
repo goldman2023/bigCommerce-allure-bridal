@@ -222,12 +222,12 @@ export default class Auth extends PageManager {
             if(validform) {
                 const formData = {
                     "email": $('#login_email').val(),
-                    "first_name": $('#register_first'),
-                    "last_name": $('#register_last'),
+                    "first_name": $('#register_first').val(),
+                    "last_name": $('#register_last').val(),
                     "phone": "",
                     "authentication": {
                         "force_password_reset": true,
-                        "new_password": $('#register_pass')
+                        "new_password": $('#register_pass').val()
                     }
                 };
                 $.ajax({
@@ -267,7 +267,7 @@ export default class Auth extends PageManager {
                 return false;
             } else {
                 var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-                if(!regex.test(email)) {
+                if(!regex.test($('#login_email').val())) {
                     if(!$('#login_email').parent().hasClass('form-field--error')) {
                         $('#login_email').parent().removeClass('form-field--error')
                     }
@@ -287,6 +287,7 @@ export default class Auth extends PageManager {
                 return false;
             } else {
                 if($('#register_pass').val() !== $('#register_pass-confirm').val()) {
+                    $('#register_pass-confirm').parent().addClass('form-field--error');
                     return false;
                 } else {
                     if($('#register_pass-confirm').parent().hasClass('form-field--error')) {
@@ -295,7 +296,7 @@ export default class Auth extends PageManager {
                 }
             }
             if(!$('.register_pass-policy').is(":checked")) {
-                $('#register_pass').parent().addClass('form-field--error');
+                $('.register_pass-policy').parent().parent().addClass('form-field--error');
                 return false;
             }
             return true;
