@@ -144,3 +144,19 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+-----------------------------------------------------------------------------------------------------
+
+### Steps to setup Project on local server
+
+```
+git clone https://github.com/YOUR_USERNAME/YOUR_FORK.git
+git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPO.git
+```
+
+### Coding Standards
+* Don't update any native ```JavaScript``` files instead either create new file or update existing file if file corresponding to particular module exists in ```/assets/js/theme/BP``` directory.
+* Don't update any native ```SCSS``` files instead either create new file or update existing file if file corresponding to particular module exists in ```/assets/scss/BP``` directory.
+* If need to create new component in ```templates``` directory then create in ```templates/BP/```.
+* For any text contents, don't add in ```JavaScript``` or ```templates``` file directory instead use ```en.json``` file.
+* For any static keys or API paths, use ```config.json``` file.
