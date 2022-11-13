@@ -288,21 +288,28 @@ form.form.forgot-password-form {
 .forgot-password__page {
         display: flex;
         flex-flow: column;
+        border: 1px solid stencilColor("color-default-neutral-3");
+        border-radius: 4px;
+        padding: 20px;
+        margin: 5% auto;
 
     h2.form-heading {
-        margin: 0px 0px 8px 0px;
-        font-family: $prata-font;
-        font-weight: 400;
-        font-size: 22px;
-        line-height: 30px;
-        color: $color-default-neutral-2;
+        font-family: stencilFontFamily('default-font-bold');
+        font-style: normal;
+        font-weight: 600;
+        font-size: remCalc(12px);
+        line-height:remCalc(15px);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: stencilColor("color-default-neutral-3");
+        margin-top: 0;
     }
 
     p.form-sub_heading {
         font-family: $inter;
         font-weight: 400;
-        font-size: 12px;
-        line-height: 20px;
+        font-size: remCalc(12px);
+        line-height:remCalc(20px);
         color: $color-default-neutral-5;
         border-bottom: solid 1px $color-border;
         padding-bottom: 13.5px;
@@ -326,6 +333,27 @@ form.form.forgot-password-form {
     .form-field {
         margin: 0 !important;
         padding: 0 !important;
+    }
+    .form .form-field .form-label {
+        color:  stencilColor("color-allure-bridals-neutral-1");
+    }
+    .form-prefixPostfix-button--postfix {
+        max-width: 100%;
+    }
+    .sendemail {
+        text-align: right;
+        font-family: $inter;
+        font-style: normal;
+        font-weight: 500;
+        font-size: remCalc(12px);
+        line-height:remCalc(15px);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: stencilColor("color-default-primary-1");
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        float: right;
     }
 
 }
