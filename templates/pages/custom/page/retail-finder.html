@@ -7,14 +7,7 @@
         <div class="left-content">
             <div class="form">
                 <h2 class="header-title">Try It On</h2>
-                <div class="form-field">
-                    <span class="form-label">Within</span>
-                    <select class="form-select selector-dropdown">
-                        <option>50 Miles</option>
-                        <option>100 Miles</option>
-                        <option>150 Miles</option>
-                    </select>
-                </div>
+                <div id="distanceFilter"></div>
                 <div class="form-field">
                     <span class="form-label">of</span>
                     <div id="pac-container">
@@ -22,21 +15,8 @@
                             id="location-typeahead" />
                     </div>
                 </div>
-                <div class="form-field">
-                    <span class="form-label">carrying</span>
-                    <select class="form-select selector-dropdown">
-                        <option selected>Any Collection</option>
-                        <option>100</option>
-                        <option>150</option>
-                    </select>
-                </div>
-                <!-- <div class="form-field--checkbox">
-                    <span>View Map</span>
-                    <input class="form-label" type="checkbox" />
-                </div> -->
-                <div class="buttons-container">
-                    <button class="button" type="button">SEARCH</button>
-                </div>
+                <div id="collectionsFilter"></div>
+                <div class="buttons-container" id="filterButton"></div>
             </div>
         </div>
         <div class="right-content">
