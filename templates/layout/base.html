@@ -1,134 +1,143 @@
 <!DOCTYPE html>
 <html class="no-js" lang="{{ locale_name }}">
-    <head>
-        <title>{{ head.title }}</title>
-        {{{ resourceHints }}}
-        {{{ head.meta_tags }}}
-        {{{ head.config }}}
-        {{#block "head"}} {{/block}}
 
-        <link href="{{ head.favicon }}" rel="shortcut icon">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <title>{{ head.title }}</title>
+    {{{ resourceHints }}}
+    {{{ head.meta_tags }}}
+    {{{ head.config }}}
+    {{#block "head"}} {{/block}}
 
-        <style type="text/css" media="screen, print">
-            @font-face {
-                font-family: "Inter Bold";
-                font-style: normal;
-                font-weight: 700;
-                src: url("{{cdn 'webdav:fonts/Inter-Bold.ttf'}}");
+    <link href="{{ head.favicon }}" rel="shortcut icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style type="text/css" media="screen, print">
+        @font-face {
+            font-family: "Inter Bold";
+            font-style: normal;
+            font-weight: 700;
+            src: url("{{cdn 'webdav:fonts/Inter-Bold.ttf'}}");
+        }
+
+        @font-face {
+            font-family: "Inter Regular";
+            font-style: normal;
+            font-weight: 500;
+            src: url("{{cdn 'webdav:fonts/Inter-Regular.ttf'}}");
+        }
+
+        @font-face {
+            font-family: "Inter Light";
+            font-style: normal;
+            font-weight: 300;
+            src: url("{{cdn 'webdav:fonts/Inter-Light.ttf'}}");
+        }
+
+        @font-face {
+            font-family: "Prata";
+            font-style: normal;
+            font-weight: 400;
+            src: url("{{cdn 'webdav:fonts/Prata-Regular.ttf'}}");
+        }
+
+        @font-face {
+            font-family: "Stay Classy Duo Script Brush";
+            font-style: normal;
+            font-weight: 400;
+            src: url("{{cdn 'webdav:fonts/StayClassyDuoScript_Brush.ttf'}}");
+        }
+
+        @font-face {
+            font-family: "Avenir";
+            font-style: normal;
+            font-weight: 500;
+            src: url("{{cdn 'webdav:fonts//AvenirNextLTPro-Regular.otf'}}");
+        }
+    </style>
+
+    <script>
+        { { !--Change document class from no - js to js so we can detect this in css-- } }
+        document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    </script>
+
+    {{> components/common/polyfill-script }}
+    <script>window.consentManagerTranslations = `{{{langJson 'consent_manager'}}}`;</script>
+
+    {{!-- Load Lazysizes script ASAP so images will appear --}}
+    <script>
+        { { !--Only load visible elements until the onload event fires, after which preload nearby elements. -- } }
+        window.lazySizesConfig = window.lazySizesConfig || {};
+        window.lazySizesConfig.loadMode = 1;
+    </script>
+    <script async src="{{cdn 'assets/dist/theme-bundle.head_async.js'}}"></script>
+
+    {{getFontsCollection font-display='block'}}
+
+    <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.font.js'}}" as="script">
+    <script async src="{{cdn 'assets/dist/theme-bundle.font.js'}}"></script>
+
+    {{{stylesheet '/assets/css/theme.css'}}}
+
+    {{{head.scripts}}}
+    {{~inject 'googleApiToken' theme_settings.google_api_token}}
+    {{~inject 'workatoApiPath' theme_settings.workato_api_path}}
+    {{~inject 'workatoApiToken' theme_settings.workato_api_token}}
+    {{~inject 'contentfulApiPath' theme_settings.contentful_api_path}}
+    {{~inject 'contentfulApiToken' theme_settings.contentful_api_token}}
+    {{~inject 'zoomSize' theme_settings.zoom_size}}
+    {{~inject 'productSize' theme_settings.product_size}}
+    {{~inject 'genericError' (lang 'common.generic_error')}}
+    {{~inject 'maintenanceModeSettings' settings.maintenance}}
+    {{~inject 'adminBarLanguage' (langJson 'admin')}}
+    {{~inject 'urls' urls}}
+    {{~inject 'secureBaseUrl' settings.secure_base_url}}
+    {{~inject 'cartId' cart_id}}
+    {{~inject 'channelId' settings.channel_id}}
+    {{~inject 'template' template}}
+    {{~inject 'graphQlToken' settings.storefront_api.token}}
+    {{~inject 'validationDictionaryJSON' (langJson 'validation_messages')}}
+    {{~inject 'validationFallbackDictionaryJSON' (langJson 'validation_fallback_messages')}}
+    {{~inject 'validationDefaultDictionaryJSON' (langJson 'validation_default_messages')}}
+    {{~inject 'carouselArrowAndDotAriaLabel' (lang 'carousel.arrow_and_dot_aria_label')}}
+    {{~inject 'carouselActiveDotAriaLabel' (lang 'carousel.active_dot_aria_label')}}
+    {{~inject 'carouselContentAnnounceMessage' (lang 'carousel.content_announce_message')}}
+
+    {{!-- Get this loading ASAP --}}
+    <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.main.js'}}" as="script">
+
+    {{!-- Google Tag Manager --}}
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-KDMVGVL');
+    </script>
+    {{!-- End Google Tag Manager --}}
+</head>
+
+<body class="{{ page_type }}-type {{#if template '===' 'pages\custom\product\suits-product'}}suitsProduct{{/if}}">
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDMVGVL" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>
+
+    {{> components/common/header }}
+    {{> components/common/body }}
+    {{> components/common/footer }}
+
+    <script>window.__webpack_public_path__ = "{{cdn 'assets/dist/'}}";</script>
+    <script>
+        { { !--Exported in app.js-- } }
+        function onThemeBundleMain() {
+            window.stencilBootstrap("{{page_type}}", {{ jsContext }}).load();
             }
-            @font-face {
-                font-family: "Inter Regular";
-                font-style: normal;
-                font-weight: 500;
-                src: url("{{cdn 'webdav:fonts/Inter-Regular.ttf'}}");
-            }
-            @font-face {
-                font-family: "Inter Light";
-                font-style: normal;
-                font-weight: 300;
-                src: url("{{cdn 'webdav:fonts/Inter-Light.ttf'}}");
-            }
-            @font-face {
-                font-family: "Prata";
-                font-style: normal;
-                font-weight: 400;
-                src: url("{{cdn 'webdav:fonts/Prata-Regular.ttf'}}");
-            }
-            @font-face {
-                font-family: "Stay Classy Duo Script Brush";
-                font-style: normal;
-                font-weight: 400;
-                src: url("{{cdn 'webdav:fonts/StayClassyDuoScript_Brush.ttf'}}");
-            }
-            @font-face {
-                font-family: "Avenir";
-                font-style: normal;
-                font-weight: 500;
-                src: url("{{cdn 'webdav:fonts//AvenirNextLTPro-Regular.otf'}}");
-            }
-        </style>
+    </script>
+    <script async defer src="{{cdn 'assets/dist/theme-bundle.main.js'}}" onload="onThemeBundleMain()"></script>
 
-        <script>
-            {{!-- Change document class from no-js to js so we can detect this in css --}}
-            document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
-        </script>
+    {{{footer.scripts}}}
+</body>
 
-        {{> components/common/polyfill-script }}
-        <script>window.consentManagerTranslations = `{{{langJson 'consent_manager'}}}`;</script>
-
-        {{!-- Load Lazysizes script ASAP so images will appear --}}
-        <script>
-            {{!-- Only load visible elements until the onload event fires, after which preload nearby elements. --}}
-            window.lazySizesConfig = window.lazySizesConfig || {};
-            window.lazySizesConfig.loadMode = 1;
-        </script>
-        <script async src="{{cdn 'assets/dist/theme-bundle.head_async.js'}}"></script>
-
-        {{getFontsCollection font-display='block'}}
-
-        <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.font.js'}}" as="script">
-        <script async src="{{cdn 'assets/dist/theme-bundle.font.js'}}"></script>
-
-        {{{stylesheet '/assets/css/theme.css'}}}
-
-        {{{head.scripts}}}
-        {{~inject 'workatoApiPath' theme_settings.workato_api_path}}
-        {{~inject 'workatoApiToken' theme_settings.workato_api_token}}
-        {{~inject 'contentfulApiPath' theme_settings.contentful_api_path}}
-        {{~inject 'contentfulApiToken' theme_settings.contentful_api_token}}
-        {{~inject 'zoomSize' theme_settings.zoom_size}}
-        {{~inject 'productSize' theme_settings.product_size}}
-        {{~inject 'genericError' (lang 'common.generic_error')}}
-        {{~inject 'maintenanceModeSettings' settings.maintenance}}
-        {{~inject 'adminBarLanguage' (langJson 'admin')}}
-        {{~inject 'urls' urls}}
-        {{~inject 'secureBaseUrl' settings.secure_base_url}}
-        {{~inject 'cartId' cart_id}}
-        {{~inject 'channelId' settings.channel_id}}
-        {{~inject 'template' template}}
-        {{~inject 'graphQlToken' settings.storefront_api.token}}
-        {{~inject 'validationDictionaryJSON' (langJson 'validation_messages')}}
-        {{~inject 'validationFallbackDictionaryJSON' (langJson 'validation_fallback_messages')}}
-        {{~inject 'validationDefaultDictionaryJSON' (langJson 'validation_default_messages')}}
-        {{~inject 'carouselArrowAndDotAriaLabel' (lang 'carousel.arrow_and_dot_aria_label')}}
-        {{~inject 'carouselActiveDotAriaLabel' (lang 'carousel.active_dot_aria_label')}}
-        {{~inject 'carouselContentAnnounceMessage' (lang 'carousel.content_announce_message')}}
-
-        {{!-- Get this loading ASAP --}}
-        <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.main.js'}}" as="script">
-
-        {{!-- Google Tag Manager --}}
-        <script>
-            (function (w, d, s, l, i) {
-                w[l] = w[l] || []; w[l].push({
-                    'gtm.start':
-                        new Date().getTime(), event: 'gtm.js'
-                }); var f = d.getElementsByTagName(s)[0],
-                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-            })(window, document, 'script', 'dataLayer', 'GTM-KDMVGVL');
-        </script>
-        {{!-- End Google Tag Manager --}}
-    </head>
-    <body class="{{ page_type }}-type {{#if template '===' 'pages\custom\product\suits-product'}}suitsProduct{{/if}}">
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDMVGVL" height="0" width="0"
-                style="display:none;visibility:hidden"></iframe></noscript>
-        <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>
-
-        {{> components/common/header }}
-        {{> components/common/body }}
-        {{> components/common/footer }}
-
-        <script>window.__webpack_public_path__ = "{{cdn 'assets/dist/'}}";</script>
-        <script>
-            {{!-- Exported in app.js --}}
-            function onThemeBundleMain() {
-                window.stencilBootstrap("{{page_type}}", {{jsContext}}).load();
-            }
-        </script>
-        <script async defer src="{{cdn 'assets/dist/theme-bundle.main.js'}}" onload="onThemeBundleMain()"></script>
-
-        {{{footer.scripts}}}
-    </body>
 </html>
