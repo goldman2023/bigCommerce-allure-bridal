@@ -10,7 +10,7 @@
     margin-bottom: spacing("single");
 
     @include breakpoint("medium") {
-        margin: auto;
+        margin: 20px auto auto auto;
         width: 100%;
     }
 
