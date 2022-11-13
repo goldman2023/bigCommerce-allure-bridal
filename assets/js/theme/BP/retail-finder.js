@@ -195,7 +195,7 @@ export default class RetailFinder extends PageManager {
         headers: {
           'Content-Type': 'application/json',
           Authorization:
-            'Bearer gfV8uz8VRPcukDWe6Xf22_vlvkfz5-w83Bo7JRDpAUY',
+            `Bearer ${this.context.contentfulApiToken}`,
         },
         body: JSON.stringify({ query }),
       }
