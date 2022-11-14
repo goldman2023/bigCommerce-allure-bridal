@@ -134,3 +134,12 @@
         margin-top: 25px !important;
     }
 }
+.pages-custom-category-bp-category {
+    .customBanner {
+        padding: 0 0.75rem !important;
+        .leftTextbanner .caption .title {
+            font-size: remCalc(33px);
+            line-height: remCalc(40px);
+        }
+    }
+}
