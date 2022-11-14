@@ -8,7 +8,9 @@
         font-size: remCalc(22px);
         line-height: remCalc(30px);
         color: stencilColor("color-default-neutral-3");
-        padding: 0 10px;
+        max-width: 91.71429rem;
+        margin: 20px auto;
+        padding: 0 1.5rem;
         @include breakpoint("medium") { 
             padding: 0;
         }
