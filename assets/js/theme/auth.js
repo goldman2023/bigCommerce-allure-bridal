@@ -242,13 +242,16 @@ export default class Auth extends PageManager {
                         headers: {"API-TOKEN": self.context.workatoApiToken},
                         data: JSON.stringify(formData),
                         success: response => {
-                            window.location.href = '/account.php?action=account_details';
+                            swal.fire({
+                                text: "Your account has been created",
+                                icon: 'success',
+                                showCancelButton: false
+                            })
+                           window.location.href = '/account.php?action=account_details';
                         },
                         error: error => {
-                            let jsondata = '';
-                            if(error.statusText) {
-                                jsondata = error.statusText;
-                            }
+                            console.log(error.responseJSON.Error.split('".customer_create":"')[1].replace(`"}}'`, ''));
+                            let jsondata = error.responseJSON.Error.split('".customer_create":"')[1].replace(`"}}'`, '');
                             swal.fire({
                                 text: jsondata,
                                 icon: 'error',
@@ -310,7 +313,7 @@ export default class Auth extends PageManager {
             //     }
             // }
             if(!$('.register_pass-policy').is(":checked")) {
-                $('.register_pass-policy').parent().parent().addClass('form-field--error');
+                $('.register_pass-policy').parent().parent().parent().addClass('form-field--error');
                 return false;
             }
             return true;

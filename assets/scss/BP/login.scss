@@ -434,6 +434,7 @@ svg.login-diamond {
             height: 1.14286rem;
             display: grid;
             place-content: center;
+            margin-right: 10px;
           }
           input[type="checkbox"]::before {
             content: "";
@@ -454,7 +455,7 @@ svg.login-diamond {
             outline-offset: 0;
           }
     }
-    .checkbox-field {
+    .checkbox-field label {
         margin-bottom: 10px;
         display: flex;
     }
@@ -466,7 +467,7 @@ svg.login-diamond {
         line-height: remCalc(20px);
         color: stencilColor("color-default-neutral-3");
         text-transform: inherit;
-        margin-left: 10px;
+        // margin-left: 10px;
     }
     .account--fixed {
         @include breakpoint("medium") { 
