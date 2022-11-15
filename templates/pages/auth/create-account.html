@@ -5,6 +5,7 @@
 
     <div class="account account--fixed">
         <div class="account-body register-page">
+            <!-- <div class="loadingOverlay" style="display: block;"></div> -->
             <h2 class="form-heading">Register</h2>
             <p class="form-sub_heading">If you don't have Allure Bridals account, use this option to create new account. Provide your details to make <strong class="sub_heading-site">Allurebridal.com</strong> purchase easier.</p>
             <svg class="login-diamond" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -13,6 +14,7 @@
             {{#if forms.create_account.error}}
                 {{> components/common/alert/alert-error forms.create_account.error}}
             {{/if}}
+            {{> components/common/alert/alert-success ''}}
             {{#if settings.account_creation_enabled}}
                 <!-- <form action="{{urls.auth.save_new_account}}" data-create-account-form method="post" class="form">
                     <div class="form-row form-row--half1">
@@ -31,7 +33,7 @@
                     </div>
                 </form> -->
                 <div class="register-form__container">
-                  <form method="post" class="form" id="customregistration">
+                  <form method="post" class="form" id="customregistration" data-create-custom-account-form>
 
                     <div class="form-field" >
                         <label class="form-label" for="register_first">First Name</label>
@@ -50,12 +52,12 @@
                     </div>
                     <div class="form-field">
                         <label class="form-label" for="register_pass">{{lang 'login.field_password'}}</label>
-                        <input class="form-input" id="register_pass" type="password" name="login_pass" autocomplete="off" placeholder="{{lang 'login.field_password'}}">
+                        <input class="form-input" id="register_pass" type="password" name="register_pass" autocomplete="off" placeholder="{{lang 'login.field_password'}}">
                         <span class="form-inlineMessage">You must enter a password.</span>
                     </div>
                     <div class="form-field">
                         <label class="form-label" for="register_pass-confirm">Confirm Password</label>
-                        <input class="form-input" id="register_pass-confirm" type="password" name="login_pass" autocomplete="off" placeholder="Confirm Password">
+                        <input class="form-input" id="register_pass-confirm" type="password" name="register_pass-confirm" autocomplete="off" placeholder="Confirm Password">
                         <span class="form-inlineMessage">You must enter a password.</span>
                     </div>
                     <div class="checkbox-fields">
@@ -73,7 +75,7 @@
                     </div>
                     {{{ forms.create_account.recaptcha.markup}}}
 
-                    <button type="submit" class="button button--secondary">create account</button>
+                    <button type="submit" class="button button--secondary" id="createBTn">create account</button>
                     </form>
                 </div>
             {{/if}}
