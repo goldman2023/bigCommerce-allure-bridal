@@ -134,7 +134,7 @@
         margin-top: 25px !important;
     }
 }
-.pages-custom-category-bp-category {
+.pages-custom-category-bp-category,.pages-custom-category-suits-bp-category {
     .customBanner {
         padding: 0 0.75rem !important;
         .leftTextbanner .caption .title {
@@ -142,4 +142,19 @@
             line-height: remCalc(40px);
         }
     }
+}
+
+.pages-custom-category-suits-bp-category,.suits-product {
+.product,.productCarousel-slide {
+    .card-title > a {
+        &.titleIcon {
+            &::after {
+                background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTUuNSIgc3Ryb2tlPSIjNjY3MDg5Ii8+CjxwYXRoIGQ9Ik0xMy40OTk5IDExLjVDMTMuNDk5OSAxMC4zOTU0IDE0LjYxOTIgOS41IDE1Ljk5OTkgOS41QzE3LjM4MDYgOS41IDE4LjQ5OTkgMTAuNSAxOC40OTk5IDExLjVDMTguNDk5OSAxMyAxNS45OTk5IDEzLjUgMTUuOTk5OSAxNC41QzE1Ljk5OTkgMTUgMTUuOTk5OSAxNS4zODU0IDE1Ljk5OTkgMTUuMzg1NE0xNS45OTk5IDE1LjM4NTRDMTYuMzc5MiAxNS4zODU0IDE2Ljc1ODUgMTUuNDkzMSAxNy4wODk5IDE1LjcwODVMMjIuNDY0NSAxOS4yMDE5QzIzLjUwNzcgMTkuODgwMSAyMy4wMjc1IDIxLjUgMjEuNzgzMiAyMS41SDEwLjIxNjZDOC45NzIzNCAyMS41IDguNDkyMTMgMTkuODgwMSA5LjUzNTM5IDE5LjIwMTlMMTQuOTA5OSAxNS43MDg1QzE1LjI0MTMgMTUuNDkzMSAxNS42MjA2IDE1LjM4NTQgMTUuOTk5OSAxNS4zODU0WiIgc3Ryb2tlPSIjNjY3MDg5IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==");
+            }
+            &:hover::after {
+                background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM2NjcwODkiLz4KPHBhdGggZD0iTTEzLjQ5OTkgMTEuNUMxMy40OTk5IDEwLjM5NTQgMTQuNjE5MiA5LjUgMTUuOTk5OSA5LjVDMTcuMzgwNiA5LjUgMTguNDk5OSAxMC41IDE4LjQ5OTkgMTEuNUMxOC40OTk5IDEzIDE1Ljk5OTkgMTMuNSAxNS45OTk5IDE0LjVDMTUuOTk5OSAxNSAxNS45OTk5IDE1LjM4NTQgMTUuOTk5OSAxNS4zODU0TTE1Ljk5OTkgMTUuMzg1NEMxNi4zNzkyIDE1LjM4NTQgMTYuNzU4NSAxNS40OTMxIDE3LjA4OTkgMTUuNzA4NUwyMi40NjQ1IDE5LjIwMTlDMjMuNTA3NyAxOS44ODAxIDIzLjAyNzUgMjEuNSAyMS43ODMyIDIxLjVIMTAuMjE2NkM4Ljk3MjM0IDIxLjUgOC40OTIxMyAxOS44ODAxIDkuNTM1MzkgMTkuMjAxOUwxNC45MDk5IDE1LjcwODVDMTUuMjQxMyAxNS40OTMxIDE1LjYyMDYgMTUuMzg1NCAxNS45OTk5IDE1LjM4NTRaIiBzdHJva2U9IiNGN0Y0RjAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K");
+            }
+        }
+    }
+}
 }
