@@ -32,6 +32,8 @@ import {
     blockElement3ImagesScreenWidth,
     blockElementFullscreenImage,
     lookBook,
+    getFirstprodImageFromCategory,
+    createCategorySlider,
     collectionPreview} from './BP/universal-blocks';
 
 export default class Global extends PageManager {
@@ -144,6 +146,17 @@ export default class Global extends PageManager {
             });
         }
         //Product Detail page end
+
+        //about page start
+        if(mainContent.contains('pages-custom-page-about')) {
+            document.querySelectorAll('.catlist').forEach((item) => {
+                getFirstprodImageFromCategory(this.context,item.getAttribute('data-path'),response => {
+                    createCategorySlider(item,response);
+                });
+            });
+            applySlider('.aboutcategorylist',4,false,false);
+        }
+        //about page end
 
         //category Landing page start
         if(mainContent.contains('pages-custom-category-category-landing')) {
