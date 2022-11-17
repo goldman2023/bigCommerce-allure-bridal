@@ -228,6 +228,53 @@ function categoryQuery (context, categoryPath, callback) {
     })
     .catch(error => console.error(error));
 }
+function categoryByPath (context, categoryPath, callback) {
+    let query = `
+    query CategoryByUrl {
+        site {
+            route(path: "${categoryPath}") {
+            node {
+                id
+                ... on Category {
+                name
+                products {
+                    edges {
+                    node {
+                        defaultImage {
+                        url(width: 1200)
+                        }
+                    }
+                    }
+                }
+                }
+            }
+            }
+        }
+    }
+    `;
+    fetch('/graphql', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${context.graphQlToken}`
+        },
+        body: JSON.stringify({
+            query: query
+        })
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(res) {
+        if (typeof callback == 'function') {
+            callback.call(this, res);
+        }
+    })
+    .catch(error => console.error(error));
+}
+
+
 function categoryQueryByPath (context, categoryPath, callback) {
     let query = `
     query CategoryByUrl {
@@ -456,6 +503,22 @@ export function getProductsByCategoryPath(context,path, callback) {
         }
     });
 }
+
+export function getFirstprodImageFromCategory(context,path, callback) { 
+    categoryByPath(context, path, response => {
+        if (response.data.site.route.node !== undefined) {
+            callback.call(this, response.data.site.route.node);
+        }
+    });
+}
+
+export function createCategorySlider(block,blockdata) {
+    if(blockdata.products.edges.length > 0){
+        block.querySelector('.cardimage').setAttribute("src", blockdata.products.edges[0].node.defaultImage.url);
+    } else {
+        block.querySelector('.cardimage').setAttribute("src", 'https://via.placeholder.com/150x250?Text=No Image'); 
+    }
+};
 
 export function getCategorySpecificMetaData(context,path, callback) { 
     categoryQuery(context, path, response => {
