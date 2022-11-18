@@ -19,7 +19,8 @@
         "recent_posts": "Recent Posts",
         "label": "Blog",
         "posted_by": "Posted by {name}",
-        "read_more": "read more"
+        "read_more": "read more",
+        "get_inspired": "Get Inspired"
     },
     "unavailable": {
         "hibernation_title": "We'll be back",
@@ -209,7 +210,15 @@
             "10": "Oct",
             "11": "Nov",
             "12": "Dec"
-        }
+        },
+        "personalinfo": "Personal Info",
+        "mydressingroom": "My Dressing Room",
+        "fullname": "Full Name",
+        "email": "Email",
+        "mobile": "Mobile",
+        "password": "Password",
+        "updatepro": "Update Profile",
+        "back": "Back"
     },
     "compare": {
         "button": "Compare Products",
@@ -255,13 +264,28 @@
         }
     },
     "create_account": {
-        "heading": "New Account",
+        "heading": "Register",
+        "subheading": "If you don't have Allure Bridals account, use this option to create new account. Provide your details to make <strong class='sub_heading-site'>Allurebridal.com</strong> purchase easier.",
         "created": {
             "heading": "Your account has been created",
             "intro": "Thank you for creating your account at {store_name}. Your account details have been emailed to <strong>{email}</strong>",
             "continue": "Continue Shopping"
         },
-        "recaptcha_title": "Google recaptcha"
+        "recaptcha_title": "Google recaptcha",
+        "form_field": {
+            "first_name": "First Name",
+            "last_name": "Last Name",
+            "confirm_pass": "Confirm Password",
+            "marketing": "I wish to receive Allure Bridals News on my e-mail",
+            "privacy_accept": "I accept the Privacy",
+            "error": {
+                "first_name": "First Name field cannot be blank.",
+                "last_name": "Last Name field cannot be blank.",
+                "email": "You must enter a valid email.",
+                "pass": "You must enter a password.",
+                "required": "* Required"
+            }
+        }
     },
     "login": {
         "heading": "Sign in",
@@ -518,6 +542,11 @@
                 "intro1": "Product search feeds allow you to save your custom product searches as syndication feed that will always update when there are new results.",
                 "intro2": "To create a product search feed, perform a standard search on {store} and at the bottom of the page click on one of the syndication options."
             }
+        },
+        "about": {
+            "collection_heading" : "View Our Collections",
+            "insta_heading" : "Allure in the Wild",
+            "insta_subheading": "The Allure Bridals instagram is a mix of our newest dresses, our favorite picks, and our favorite brides. Follow us for the latest trends"
         }
     },
     "forms": {
@@ -806,7 +835,19 @@
         "size_guide": "Size Guide",
         "add_to_my_dressing_room": "Add to My Dressing Room",
         "try_it_on": "Try It On",
-        "back_to_list": "back to lists"
+        "back_to_list": "back to lists",
+        "sizeguide": {
+            "bridala": "BRIDAL A",
+            "bridalb": "BRIDAL B",
+            "bridal_plus": "BRIDAL PLUS SIZE",
+            "bridesmaids": "BRIDESMAIDS",
+            "howtomesure": "How to measure",
+            "viewvideo": "VIEW VIDEO",
+            "caption": "We want to ensure that you have the perfect fit for your perfect day."
+        },
+        "youmayalsolike": "You Might Also Like",
+        "thePerfectMatch": "The Perfect Match",
+        "recentlyViewed": "Recently Viewed"
     },
     "invoice": {
         "for_order": "{name} Invoice for Order #{id}",
