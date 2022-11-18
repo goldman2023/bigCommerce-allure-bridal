@@ -461,7 +461,11 @@ ol {
     border-top: 1px solid stencilColor('color-allure-bridals-neutral-4');
     height: 2px;
     position: relative;
-    margin: 5% 0;
+    margin: 25px 0;
+    @include breakpoint("medium") {
+        margin: 80px 0;
+    }
+
     &::after {
         position: absolute;
         content: "";

@@ -200,7 +200,7 @@ export default class Global extends PageManager {
                     });
 
                     document.getElementById('contentBlocksCollection').innerHTML = blocksCollections.join('');
-                    applySlider('.imageWithContentSlider ul',1,true,true);
+                    applySlider('.imageWithContentSlider ul',1,false,true);
                   });
             });
         }
