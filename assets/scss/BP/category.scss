@@ -157,6 +157,7 @@
     }
     .card-image {
         object-fit: cover;
+        height: 100%;
     }
 }
 .actionBar {
@@ -318,6 +319,35 @@
             .caption {
                 margin: 0;
                 padding: 15px 10px 0 10px;
+                font-family: stencilFontFamily('default-font-regular');
+                font-style: normal;
+                font-weight: 400;
+                font-size: remCalc(16px);
+                line-height: remCalc(26px);
+                color: stencilColor("color-black");
+                background-color: #ffffff;
+                position: relative;
+                &::before {
+                    position: absolute;
+                    content: "";
+                    top: 0;
+                    left: 50%;
+                    width: 6px;
+                    height: 6px;
+                    background: #d1b3ab;
+                    outline: 3px solid #fff;
+                    transform: rotate(45deg);
+                }
+                .author {
+                    display: block;
+                    font-family: stencilFontFamily('default-font-light');
+                    font-style: normal;
+                    font-weight: 300;
+                    font-size: remCalc(14px);
+                    line-height: remCalc(22px);
+                    color: stencilColor("color-default-neutral-1");
+                    margin-top: 8px;
+                }
             }
         }
     }

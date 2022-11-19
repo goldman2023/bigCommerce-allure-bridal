@@ -1,4 +1,9 @@
 .pages-custom-page-about {
+    .aboutcategorylist {
+        margin: 20px 0 0 0;
+        padding: 0;
+        list-style: none;
+    }
     .eapps-instagram-feed-title-container {
         display: none !important;
     }
@@ -7,6 +12,9 @@
         max-width: 400px;
         position: relative;
         display: block;
+    }
+    .card {
+        margin: 0 10px 3rem 10px;
     }
     .catlist {
         a {
@@ -51,5 +59,8 @@
             text-align: center;
             color: #000000;
         }
+    }
+    .productGridslider .slick-prev, .productCarousel .slick-prev,.productGridslider .slick-next, .productCarousel .slick-next {
+        top: 45%;
     }
 }

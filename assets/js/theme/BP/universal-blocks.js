@@ -604,7 +604,7 @@ export function blockElementFullscreenVideo(selectorID,element) {
       videoURL = `https://www.youtube.com/embed/${element.videoUrl.split('=')[1]}`;
       document.getElementById(selectorID).innerHTML = `<div><iframe type="text/html" src="${videoURL}"  frameborder="0" id="colbannerVideo" controls=0></iframe></div>`;
     } else {
-        document.getElementById(selectorID).innerHTML = `<div><video controls id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div>`;
+        document.getElementById(selectorID).innerHTML = `<div><video autoplay loop muted plays-inline="" id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div>`;
     }
 }
 
@@ -679,7 +679,7 @@ export function blockElementDiscover(blockData) {
 }
 
 export function blockElementStory(blockData) {
-    return `<div class="blockElementStory block-item" id="blockElementStory"><div class="heading-section"><h2 class="title">${blockData.blockname}</h2><p class="date">${blockData.displayedate}</p><div class="leftBottom">
+    return `<div class="blockElementStory block-item" id="blockElementStory"><div class="heading-section"><h2 class="title">${blockData.blockname}</h2>${blockData.displayedate ? `<p class="date">${blockData.displayedate}</p>` : `<p></p></br>`}<div class="leftBottom">
         <img src="${blockData.imagesCollection.items[0].url}" alt="" />
         </div></div><div class="rightside-section"><div class="rightcol">
         <img src="${blockData.imagesCollection.items[1].url}" class="topleft" alt=""/>
@@ -718,13 +718,13 @@ export function collectionPreview(blockData) {
     } else {
         return `<div class="blockElementCollectionPreview block-item" id="blockElementCollectionPreview"><div class="previewblock">
         <div class="caption"><h4>${blockData.title}</h4><p>${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
-        <div class="imagesection"><div class="leftImg"><img src="${blockData.imagesCollection.items[0].url}"  alt="${blockData.imagesCollection.items[0].description}"/>
+        <div class="imagesection"><div class="leftImg"><span><img src="${blockData.imagesCollection.items[0].url}"  alt="${blockData.imagesCollection.items[0].description}"/></span>
         <div class="dateSection">
         ${blockData.photoCaption !== null ? `<p>${blockData.photoCaption}</p>` : ''}
         ${blockData.photoCaptionDate !== null ? `<p>${blockData.photoCaptionDate}</p>` : ''}
         </div>
         </div><div class="rightImg">
-        <img src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].description}"/>
+        <span><img src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].description}"/></span>
         </div></div></div></div>`;
     }
     
@@ -741,7 +741,8 @@ export function blockElementVerticalGallery(blockData) {
             if(item.description === '') {
                 return `<div class="contentDiv"><img src="${item.url}" /></div>`;
             } else {
-                return `<div class="contentDiv"><img src="${item.url}" /><p class="caption">${item.description}</p></div>`;
+                let descriptionArr = item.description.split('—');
+                return `<div class="contentDiv"><img src="${item.url}" /><p class="caption">${descriptionArr[0]}<span class="author">-${descriptionArr[1]}</span></p></div>`;
             }
         }
     });
@@ -750,7 +751,8 @@ export function blockElementVerticalGallery(blockData) {
             if(item.description === '') {
                 return `<div class="contentDiv"><img src="${item.url}" /></div>`;
             } else {
-                return `<div class="contentDiv"><img src="${item.url}" /><p class="caption">${item.description}</p></div>`;
+                let descriptionArr = item.description.split('—');
+                return `<div class="contentDiv"><img src="${item.url}" /><p class="caption">${descriptionArr[0]}<span class="author">-${descriptionArr[1]}</span></p></div>`;
             }
         }
     });
