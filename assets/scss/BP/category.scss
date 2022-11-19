@@ -329,7 +329,7 @@
         font-weight: 400;
         font-size: remCalc(34px);
         line-height: remCalc(44px);
-        color: stencilColor("color-default-neutral-3");;
+        color: stencilColor("color-default-neutral-3");
     }
 }
 .pages-custom-category-suits-bp-category,.suits-product {
@@ -345,4 +345,18 @@
             }
         }
     }
-    }
+    input::placeholder {
+        color: stencilColor("color-men-design-primary-1");
+      }
+      
+      input:-ms-input-placeholder { 
+        color: stencilColor("color-men-design-primary-1");
+      }
+      
+      input::-ms-input-placeholder {
+        color: stencilColor("color-men-design-primary-1");
+      }
+      *::placeholder {
+        color: stencilColor("color-men-design-primary-1");
+      }
+}

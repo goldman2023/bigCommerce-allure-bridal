@@ -33,17 +33,17 @@ product:
 
         <!-- {{> components/products/tabs}} -->
         <div class="youMightalsoLike" id="youMightalsoLike">
-            <h4 class="title">You Might Also Like</h4>
+            <h4 class="title">{{lang 'products.youmayalsolike'}}</h4>
             <div class="prodData"></div>
         </div>
         {{> BP/components/common/divider}}
         <div class="thePerfectMatch" id="thePerfectMatch">
-            <h4 class="title">The Perfect Match</h4>
+            <h4 class="title">{{lang 'products.thePerfectMatch'}}</h4>
             <div class="prodData"></div>
         </div>
         {{> BP/components/common/divider}}
         <div class="recentlyViewed" id="recentlyViewed" >
-            <h4 class="title">Recently Viewed</h4>
+            <h4 class="title">{{lang 'products.recentlyViewed'}}</h4>
             {{#if product.similar_by_views}}
                 {{> BP/components/common/carousel products=product.similar_by_views columns=4 list="Customers Also Viewed"}}
             {{/if}}
