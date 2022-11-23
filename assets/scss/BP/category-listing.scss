@@ -192,14 +192,14 @@
         color: stencilColor("color-default-neutral-3");
         margin: 50px 0;
         text-align: center;
-        .lastword {
+        .lastword { 
             font-family: stencilFontFamily('stay-classy-font');
             font-size:  remCalc(66px);
             line-height:  remCalc(70px);
             font-style: normal;
-            font-weight: 400;
+            font-weight: 500;
             letter-spacing: -0.01em;
-            color: stencilColor("color-default-primary-3");
+            color: stencilColor("color-default-primary-1");
         }
     }
     .productGridSection {

@@ -86,7 +86,7 @@
             }
         }
     }
-    .blockElementDiscover,.events.block-item,.blockElementLookbook2,.blockElementStory,#eapps-instagram-feed-1 {
+    .blockElementDiscover,.events.block-item,.blockElementLookbook2,.blockElementStory {
         @include breakpoint("medium") {
             margin: 80px auto;
         }

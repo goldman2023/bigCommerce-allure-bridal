@@ -301,20 +301,30 @@
         .verticalLeftCol {
             @include breakpoint("medium") {
                 width:50%;
-                padding: 10px;
+                padding: 0 10px;
             }
         }
         .verticalRightCol {
             @include breakpoint("medium") {
                 width:50%;
-                padding: 10px;
+                padding: 0 10px;
                 margin-top: 70px;
+            }
+            .contentDiv:last-child {
+                @include breakpoint("medium") {
+                    padding: 20px 10px 0 10px;
+                }
             }
         }
         .contentDiv {
             padding: 10px 0;
             @include breakpoint("medium") {
                 padding: 20px 10px;
+            }
+            &:first-child {
+                @include breakpoint("medium") {
+                    padding: 0 10px 20px 10px;
+                }
             }
             .caption {
                 margin: 0;

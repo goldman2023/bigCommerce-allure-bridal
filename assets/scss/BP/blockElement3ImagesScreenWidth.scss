@@ -282,6 +282,9 @@
     margin: 5% 0;
     @include breakpoint("medium") { 
         margin: 5% 0;
+        .slick-list {
+            padding: 0 !important;
+        }
     }
     .slick-slide {
         height: 52px;
@@ -343,6 +346,7 @@
             @include breakpoint("medium") { 
                 font-size: remCalc(22px);
                 line-height: remCalc(26px);
+                padding: 0 10px 25px 10px;
             }
         }
     }

@@ -613,7 +613,7 @@ export function lookBookglobal(blockData) {
 }
 
 export function lookBookglobal2(blockData) {
-    return `<div class="blockElementLookbook2 block-item full-size" id="blockElementLookbook2"><div><div class="caption"><h2>${blockData.blocktitle}</h2><div class="divider"></div><h4>${blockData.subheadline}</h4><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="button button-secondary">${blockData.linkText}</a></div><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData.subheadline}" /></div></div></div>`;
+    return `<div class="blockElementLookbook2 block-item full-size" id="blockElementLookbook2"><div><div class="caption"><h2>${blockData.blocktitle}</h2><div class="divider"></div><h4>${blockData.subheadline}</h4><p class="content">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="button button-secondary">${blockData.linkText}</a></div><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData.subheadline}" /></div></div></div><div class="divider"></div>`;
 }
 export function events(blockData) {
     return `<div class="events block-item" id="events">
@@ -634,7 +634,7 @@ export function events(blockData) {
                     <label>address</label>
                     <span>${item.locationAddressStreet}</span>
                     <span>${item.locationAddressCityStateZip}</span>
-                    <p><a class="colored" href="${item.locationWebsiteUrl}">GET DIRECTION</a></p>
+                    <p><a class="colored" href="http://maps.google.com/?q=${item.locationAddressStreet} ${item.locationAddressCityStateZip}">GET DIRECTION</a></p>
                     <label>Phone</label>
                     <p>${item.locationPhoneNumber}</p>
                     <label>website</label>
@@ -642,7 +642,9 @@ export function events(blockData) {
                 </div>
               </div>
             </div>`).join('')}
-    </div></div>`;
+    </div>
+    <button type="button" class="button button--secondary" >view all trunk shows</button>
+    </div><div class="divider"></div>`;
 }
 export function blockElementFullscreenImage(blockData) {
     return `<div class="blockElementFullscreenImage block-item full-size" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" />
@@ -675,11 +677,13 @@ export function blockElementDiscover(blockData) {
                         <button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button>
                     </div>
                 </div>
-            </div>`;
+            </div><div class="divider"></div>`;
 }
 
 export function blockElementStory(blockData) {
-    return `<div class="blockElementStory block-item" id="blockElementStory"><div class="heading-section"><h2 class="title">${blockData.blockname}</h2>${blockData.displayedate ? `<p class="date">${blockData.displayedate}</p>` : `<p></p></br>`}<div class="leftBottom">
+    return `<div class="blockElementStory block-item" id="blockElementStory">
+    <div class="caption" ><h2>Inspiration</h2><p>Allure Bridals real customer’s fantastic wedding stories. These should be your wedding inspiration.</p></div>
+    <div class="flexdata"><div class="heading-section"><h2 class="title">${blockData.blockname}</h2>${blockData.displayedate ? `<p class="date">${blockData.displayedate}</p>` : `<p></p></br>`}<div class="leftBottom">
         <img src="${blockData.imagesCollection.items[0].url}" alt="" />
         </div></div><div class="rightside-section"><div class="rightcol">
         <img src="${blockData.imagesCollection.items[1].url}" class="topleft" alt=""/>
@@ -687,7 +691,7 @@ export function blockElementStory(blockData) {
         <button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div></div><div class="topright">
         <img src="${blockData.imagesCollection.items[2].url}"  alt="" />
         </div></div><div class="mobilecaption"><p class="content">${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
-        <div class="mobilebanner"><img src="${blockData.imagesCollection.items[0].url}" alt="" /></div></div>`;
+        <div class="mobilebanner"><img src="${blockData.imagesCollection.items[0].url}" alt="" /></div></div></div><div class="divider"></div>`;
 }
 
 export function imageWithContentSlider(blockData) {
@@ -698,7 +702,7 @@ export function imageWithContentSlider(blockData) {
         <h2 class="title">${item.title}</h2><p class="content">${item.bodyCopy}</p><a href="${item.linkUrl}" class="buttonlink">${item.linkText}</a>
         </div></div></div></li>`
     });
-    return `<div class="imageWithContentSlider block-item full-size" id="imageWithContentSlider"><ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1,"infinite": true}'>${sliderLi.join('')}</ul></div>`;
+    return `<div class="imageWithContentSlider block-item full-size" id="imageWithContentSlider"><ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1,"infinite": true}'>${sliderLi.join('')}</ul></div><div class="divider"></div>`;
 };
 
 export function collectionPreview(blockData) {
@@ -714,7 +718,7 @@ export function collectionPreview(blockData) {
         </div><div class="rightImg half">
         <img src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].description}"/>
         ${blockData.imagesCollection.items[2] ? `<img src="${blockData.imagesCollection.items[2].url}" alt="${blockData.imagesCollection.items[2].description}"/>` : ''}
-        </div></div></div></div>`;
+        </div></div></div></div> <div class="divider"></div>`;
     } else {
         return `<div class="blockElementCollectionPreview block-item" id="blockElementCollectionPreview"><div class="previewblock">
         <div class="caption"><h4>${blockData.title}</h4><p>${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
@@ -725,7 +729,7 @@ export function collectionPreview(blockData) {
         </div>
         </div><div class="rightImg">
         <span><img src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].description}"/></span>
-        </div></div></div></div>`;
+        </div></div></div></div><div class="divider"></div>`;
     }
     
 };
@@ -757,7 +761,7 @@ export function blockElementVerticalGallery(blockData) {
         }
     });
 
-    return `<div class="blockElementVerticalGallery block-item" id="blockElementVerticalGallery"><div class="verticalBlock"><div class="verticalLeftCol">${leftData.join('')}</div><div class="verticalRightCol">${rightData.join('')}</div></div></div>`;
+    return `<div class="blockElementVerticalGallery block-item" id="blockElementVerticalGallery"><div class="verticalBlock"><div class="verticalLeftCol">${leftData.join('')}</div><div class="verticalRightCol">${rightData.join('')}</div></div></div><div class="divider"></div>`;
 };
 
 function productCard(products) {
