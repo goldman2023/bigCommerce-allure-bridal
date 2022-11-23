@@ -1,4 +1,7 @@
 .bp-category {
+    .sidebarBlock+.sidebarBlock {
+        padding-top: 60px;
+    }
     .bp-category-header {
         @include breakpoint("medium") {
             display: flex;
