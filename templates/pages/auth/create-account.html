@@ -7,7 +7,7 @@
         <div class="account-body register-page">
             <!-- <div class="loadingOverlay" style="display: block;"></div> -->
             <h2 class="form-heading">{{lang 'create_account.heading'}}</h2>
-            <p class="form-sub_heading">{{lang 'create_account.subheading'}}</p>
+            <p class="form-sub_heading">{{{lang 'create_account.subheading'}}}</p>
             <svg class="login-diamond" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <rect x="5.99991" y="1.58603" width="6" height="6" transform="rotate(45 5.99991 1.58603)" fill="#695C5C" stroke="white" stroke-width="2"></rect>
             </svg>
@@ -38,27 +38,22 @@
                     <div class="form-field" >
                         <label class="form-label" for="register_first">{{lang 'create_account.form_field.first_name'}}</label>
                         <input class="form-input" name="register_first" id="register_first" type="text" placeholder="First Name">
-                        <span class="form-inlineMessage">{{lang 'create_account.form_field.error.first_name'}}</span>
                     </div>
                     <div class="form-field">
                         <label class="form-label" for="register_last">{{lang 'create_account.form_field.last_name'}}</label>
                         <input class="form-input" id="register_last" type="text" name="register_last" autocomplete="off" placeholder="Last Name">
-                        <span class="form-inlineMessage">{{lang 'create_account.form_field.error.last_name'}}</span>
                     </div>
                     <div class="form-field">
                         <label class="form-label" for="register_email">{{lang 'login.field_email'}}</label>
                         <input class="form-input" name="register_email" id="login_email" type="email" placeholder="{{lang 'login.field_email'}}">
-                        <span class="form-inlineMessage">{{lang 'create_account.form_field.error.email'}}</span>
                     </div>
                     <div class="form-field">
                         <label class="form-label" for="register_pass">{{lang 'login.field_password'}}</label>
                         <input class="form-input" id="register_pass" type="password" name="register_pass" autocomplete="off" placeholder="{{lang 'login.field_password'}}">
-                        <span class="form-inlineMessage">{{lang 'create_account.form_field.error.pass'}}</span>
                     </div>
                     <div class="form-field">
                         <label class="form-label" for="register_pass-confirm">{{lang 'create_account.form_field.confirm_pass'}}</label>
                         <input class="form-input" id="register_pass-confirm" type="password" name="register_pass-confirm" autocomplete="off" placeholder="Confirm Password">
-                        <span class="form-inlineMessage">{{lang 'create_account.form_field.error.pass'}}</span>
                     </div>
                     <div class="checkbox-fields">
                         <div class="checkbox-field">
