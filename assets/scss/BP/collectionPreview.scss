@@ -73,13 +73,14 @@
                     &::before {
                         position: absolute;
                         content: "";
-                        left: 20px;
+                        left: 16px;
                         top: 50%;
                         width: 6px;
                         height: 6px;
                         background: #d1b3ab;
                         outline: 3px solid #fff;
                         transform: rotate(45deg);
+                        z-index: 9;
                     }
                 }
                  img {
@@ -89,6 +90,7 @@
                  }
                  .dateSection {
                     margin-left: 20px;
+                    padding: 20px 0;
                     p {
                         margin-bottom: 2px;
                         @media only screen and (min-width: 2000px) {
@@ -121,7 +123,7 @@
                     &::before {
                         position: absolute;
                         content: "";
-                        right: 0;
+                        right: -4px;
                         top: 50%;
                         width: 6px;
                         height: 6px;
