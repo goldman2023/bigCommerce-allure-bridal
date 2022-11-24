@@ -86,7 +86,7 @@
             }
         }
     }
-    .blockElementDiscover,.events.block-item,.blockElementLookbook2,.blockElementStory,#eapps-instagram-feed-1 {
+    .blockElementDiscover,.events.block-item,.blockElementLookbook2,.blockElementStory {
         @include breakpoint("medium") {
             margin: 80px auto;
         }
@@ -139,6 +139,7 @@
 .pages-custom-category-bp-category,.pages-custom-category-suits-bp-category {
     .customBanner {
         padding: 0 0.75rem !important;
+        margin: 10px auto !important;
         .leftTextbanner .caption .title {
             font-size: remCalc(33px);
             line-height: remCalc(40px);
