@@ -11,9 +11,9 @@
         max-width: 91.71429rem;
         margin: 20px auto;
         padding: 0 1.5rem;
-        @include breakpoint("medium") { 
-            padding: 0;
-        }
+        // @include breakpoint("medium") { 
+        //     padding: 0;
+        // }
     }
     .contentSection {
         position: relative;
