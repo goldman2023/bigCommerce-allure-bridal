@@ -761,7 +761,7 @@ export function blockElementVerticalGallery(blockData) {
         }
     });
 
-    return `<div class="blockElementVerticalGallery block-item" id="blockElementVerticalGallery"><div class="verticalBlock"><div class="verticalLeftCol">${leftData.join('')}</div><div class="verticalRightCol">${rightData.join('')}</div></div></div><div class="divider"></div>`;
+    return `<div class="blockElementVerticalGallery block-item full-size" id="blockElementVerticalGallery"><div class="backgroundoverlay"></div><div class="verticalcontainer"><div class="verticalBlock"><div class="verticalLeftCol">${leftData.join('')}</div><div class="verticalRightCol">${rightData.join('')}</div></div></div></div><div class="divider"></div>`;
 };
 
 function productCard(products) {

@@ -58,6 +58,7 @@
     }
     .blocks {
         padding-top: 5%;
+        width: 100%;
         .block {
             display: block;
             @include breakpoint("medium") { 

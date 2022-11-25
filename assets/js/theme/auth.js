@@ -189,6 +189,11 @@ export default class Auth extends PageManager {
             submit: `${this.formCreateSelectorCustom} input[type='submit']`,
             tap: announceInputErrorMessage,
         });
+        const firstNameSelector = `${this.formCreateSelectorCustom} input[name='register_first']`;
+        const $firstNameElement = $(firstNameSelector);
+        const lastNameSelector = `${this.formCreateSelectorCustom} input[name='register_last']`;
+        const $lastNameElement = $(lastNameSelector);
+
         const emailSelector = `${this.formCreateSelectorCustom} input[name='register_email']`;
         const $emailElement = $(emailSelector);
         const passwordSelector = `${this.formCreateSelectorCustom} input[name='register_pass']`;
@@ -197,7 +202,32 @@ export default class Auth extends PageManager {
         const $password2Element = $(password2Selector);
 
         createAccountValidator.add(validationModel);
+        createAccountValidator.add([
+            {
+                selector: firstNameSelector,
+                validate: (cb, val) => {
+                    const result = forms.notEmpty(val);
 
+                    cb(result);
+                },
+                errorMessage: 'First Name cannot be empty',
+            },
+            {
+                selector: lastNameSelector,
+                validate: (cb, val) => {
+                    const result = forms.notEmpty(val);
+
+                    cb(result);
+                },
+                errorMessage: 'Last Name cannot be empty',
+            },
+        ]);
+
+        // if ($firstNameElement) {
+        //     createAccountValidator.remove(firstNameSelector);
+        //     Validators.setFirstNameValidation(createAccountValidator, firstNameSelector, this.validationDictionary.valid_first_name);
+        // }
+        
         if ($emailElement) {
             createAccountValidator.remove(emailSelector);
             Validators.setEmailValidation(createAccountValidator, emailSelector, this.validationDictionary.valid_email);
@@ -263,22 +293,22 @@ export default class Auth extends PageManager {
             }
         });
         function  customValidation() {
-            if($('#register_first').val() === null || $('#register_first').val() === '') {
-                $('#register_first').parent().addClass('form-field--error');
-                return false;
-            } else {
-                if($('#register_first').parent().hasClass('form-field--error')) {
-                    $('#register_first').parent().removeClass('form-field--error')
-                }
-            }
-            if($('#register_last').val() === null || $('#register_last').val() === '') {
-                $('#register_last').parent().addClass('form-field--error');
-                return false;
-            } else {
-                if($('#register_last').parent().hasClass('form-field--error')) {
-                    $('#register_last').parent().removeClass('form-field--error')
-                }
-            }
+            // if($('#register_first').val() === null || $('#register_first').val() === '') {
+            //     $('#register_first').parent().addClass('form-field--error');
+            //     return false;
+            // } else {
+            //     if($('#register_first').parent().hasClass('form-field--error')) {
+            //         $('#register_first').parent().removeClass('form-field--error')
+            //     }
+            // }
+            // if($('#register_last').val() === null || $('#register_last').val() === '') {
+            //     $('#register_last').parent().addClass('form-field--error');
+            //     return false;
+            // } else {
+            //     if($('#register_last').parent().hasClass('form-field--error')) {
+            //         $('#register_last').parent().removeClass('form-field--error')
+            //     }
+            // }
             // if($('#login_email').val() === null || $('#login_email').val() === '') {
             //     $('#login_email').parent().addClass('form-field--error');
             //     return false;
