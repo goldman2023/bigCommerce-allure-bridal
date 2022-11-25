@@ -15,6 +15,11 @@
         @include breakpoint("medium") {
             padding: 20px 3rem 0;
         }
+        @include breakpoint("medium") {
+            .divider {
+                margin: 16px 0;
+            }
+        }
 
         .productView-info, .productView-price, .productView-thumbnails, .add-to-cart-wrapper, .form-wishlist, .socialLinks {
             display: none !important;
@@ -91,6 +96,9 @@
             line-height: remCalc(26px);
             letter-spacing: 0.1em;
             color: stencilColor('color-default-neutral-2');
+            p {
+                margin: 0;
+            }
         }
         [data-product-attribute="swatch"] {
             .form-option {

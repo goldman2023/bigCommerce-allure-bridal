@@ -204,7 +204,6 @@
         }
     }
     .facetedSearch-refineFilters {
-        margin-top: -40px;
         .sidebarBlock-heading {
             font-family: stencilFontFamily('default-font-regular');
             font-style: normal;
@@ -290,6 +289,7 @@
                 font-size: remCalc(12px);
                 line-height: remCalc(20px);
                 color: stencilColor("color-default-neutral-1");
+                word-break: break-all;
             }
         }
     }

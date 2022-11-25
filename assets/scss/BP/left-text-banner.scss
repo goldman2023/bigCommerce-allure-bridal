@@ -6,7 +6,7 @@
         width: 100%;
     }
     .overlay {
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)); 
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)); 
         width:100%;
         height: 100%;
         position: absolute;
@@ -23,7 +23,7 @@
             font-family: stencilFontFamily('stay-classy-font');
             font-style: normal;
             font-weight: 400;
-            font-size: 40px;
+            font-size: remCalc(40px);
             margin-bottom: 0;
             margin-top: 15px;
             line-height: remCalc(70px);
@@ -35,7 +35,7 @@
             font-family: stencilFontFamily('default-font-light');
             font-style: normal;
             font-weight: 300;
-            font-size: remCalc(14px);
+            font-size: remCalc(12px);
             line-height: remCalc(22px);
             color: stencilColor("color-secondary");
             margin-bottom: 10px;
@@ -44,7 +44,7 @@
             font-family: stencilFontFamily('default-font-regular');
             font-style: normal;
             font-weight: 500;
-            font-size: remCalc(12px);
+            font-size: remCalc(10px);
             line-height: remCalc(15px);
             text-align: center;
             letter-spacing: 0.1em;
@@ -74,7 +74,7 @@
         width: 100%;
     }
     .overlay {
-        background-image: linear-gradient(to left, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)); 
+        background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)); 
         width:100%;
         height: 100%;
         position: absolute;
@@ -91,7 +91,7 @@
             font-family: stencilFontFamily('stay-classy-font');
             font-style: normal;
             font-weight: 400;
-            font-size: 40px;
+            font-size: remCalc(40px);
             margin-bottom: 0;
             margin-top: 15px;
             line-height: remCalc(70px);
@@ -103,7 +103,7 @@
             font-family: stencilFontFamily('default-font-light');
             font-style: normal;
             font-weight: 300;
-            font-size: remCalc(14px);
+            font-size: remCalc(12px);
             line-height: remCalc(22px);
             color: stencilColor("color-secondary");
             margin-bottom: 10px;
@@ -112,7 +112,7 @@
             font-family: stencilFontFamily('default-font-regular');
             font-style: normal;
             font-weight: 500;
-            font-size: remCalc(12px);
+            font-size: remCalc(10px);
             line-height: remCalc(15px);
             text-align: center;
             letter-spacing: 0.1em;
