@@ -23,7 +23,12 @@ const MAP_MARKER_ORANGE = {
 const FILTER_IDS = {
   distance: 'distanceFilterSelect',
   collection: 'collectionFilterSelect',
-}
+};
+
+const DEFAULT_ZOOM_LEVEL = 10;
+
+const MARKER_HOVER_EVENT = 'markerHoverEvent';
+const RETAILER_ITEM_HOVER_EVENT = 'retailerItemHoverEvent';
 
 export default class RetailFinder extends PageManager {
   SORTABLES = [
@@ -98,7 +103,8 @@ export default class RetailFinder extends PageManager {
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
       if (place) {
-
+        this.map?.setCenter({ lat: place.geometry.location.lat(), lng: place.geometry.location.lng() })
+        this.map?.setZoom(DEFAULT_ZOOM_LEVEL);
         this.selectedPlace = place;
         if (needsInitialFilter) {
           this.filterRetailers();
@@ -122,6 +128,29 @@ export default class RetailFinder extends PageManager {
       }
     });
     this.autocomplete = autocomplete;
+
+    // hover events
+    document.addEventListener(MARKER_HOVER_EVENT, (evt) => {
+      const retailerId = evt.detail;
+      if (retailerId) {
+        const retailerItem = document.querySelector(`[data-retailer-id=${retailerId}]`);
+        retailerItem.classList.add('hovered');
+      } else {
+        const anyHovered = document.querySelectorAll('.retailer-item.hovered');
+        anyHovered.forEach((elem) => elem.classList.remove('hovered'));
+      }
+    });
+
+    document.addEventListener(RETAILER_ITEM_HOVER_EVENT, (evt) => {
+      const retailer = evt.detail;
+      if (retailer) {
+        // TODO debounce
+        this.map.setCenter({ lat: retailer.location.lat, lng: retailer.location.lon });
+        this.map.setZoom(DEFAULT_ZOOM_LEVEL);
+        this.paintMapAndRetailers(this.retailers, retailer);
+      }
+    });
+
   }
 
   createRetailerItem = (retailer, total, idx) => {
@@ -129,6 +158,7 @@ export default class RetailFinder extends PageManager {
     mainContainer.classList.add('retailer-item-container');
     const container = document.createElement('div');
     container.classList.add('retailer-item');
+    container.dataset.retailerId = retailer.bridalLiveRetailerId;
     // any of last three which would be in the last row doesnt need a border
     const rowsWithBorder = Math.floor(total / 3);
     const firstIdxWithoutBorder = rowsWithBorder * 3
@@ -180,6 +210,17 @@ export default class RetailFinder extends PageManager {
 
     }
 
+    // hover events
+    mainContainer.addEventListener('mouseenter', () => {
+      const retailerHoveredEvent = new CustomEvent(RETAILER_ITEM_HOVER_EVENT, { detail: retailer });
+      document.dispatchEvent(retailerHoveredEvent);
+    });
+
+    mainContainer.addEventListener('mouseext', () => {
+      const retailerExitEvent = new CustomEvent(RETAILER_ITEM_HOVER_EVENT, { detail: null });
+      document.dispatchEvent(retailerExitEvent);
+    });
+
     return mainContainer;
   };
 
@@ -194,14 +235,18 @@ export default class RetailFinder extends PageManager {
     });
   }
 
-  getMarker = (latLong, display, infoWindow, id = null) => {
+  getMarker = (latLong, display, infoWindow, id = null, centerRetailer = null) => {
     const position = {
       lat: latLong.lat,
       lng: latLong.lon
     };
+    let icon = MAP_MARKER_BLACK;
+    if (id && centerRetailer && id === centerRetailer.bridalLiveRetailerId) {
+      icon = MAP_MARKER_ORANGE;
+    }
     const marker = new google.maps.Marker({
       position,
-      icon: MAP_MARKER_BLACK
+      icon
     });
 
     // markers can only be keyboard focusable when they have click listeners
@@ -213,13 +258,16 @@ export default class RetailFinder extends PageManager {
 
     google.maps.event.addListener(marker, "mouseover", function () {
       marker.setIcon(MAP_MARKER_ORANGE);
+      const hoveredMarkerEvent = new CustomEvent(MARKER_HOVER_EVENT, { detail: id });
+      document.dispatchEvent(hoveredMarkerEvent);
       this.hoveredId = id;
     });
     google.maps.event.addListener(marker, "mouseout", function () {
       marker.setIcon(MAP_MARKER_BLACK);
+      const hoverOutMarkerEvent = new CustomEvent(MARKER_HOVER_EVENT);
+      document.dispatchEvent(hoverOutMarkerEvent, { detail: {} });
       this.hoveredId = null
     });
-
     return marker;
   };
 
@@ -245,47 +293,86 @@ export default class RetailFinder extends PageManager {
     return distance // in miles
   };
 
+  setUserLocation = (location) => {
+    const latLng = new google.maps.LatLng(location.lat, location.lon);
+    // this is a pretty hacky putting this in here...
+    // only reason is because it's in a convenient spot and the calls underneath
+    // need to be called after getting user location          
+    // re-evaluate putting the bottom stuff in onReady();
+    if (!this.originalUserLocationName) {
+      this.geocoder.geocode({
+        'latLng': latLng,
+      }).then((res) => {
+        let userLocationName;
+        // go backwards b/c it's highest to most specific and we want neighborhood before street address
+        for (let i = res.results.length - 1; i >= 0; i--) {
+          const component = res.results[i];
+          //hopefully we have at least one of these, if not keep going, do later
+          if (component.types.includes('postal_code')) {
+            userLocationName = component.formatted_address;
+            break;
+          } else if (component.types.includes('neighborhood')) {
+            userLocationName = component.formatted_address;
+          }
+        }
+        this.originalUserLocationName = userLocationName;
+        this.setOriginalLocation();
+      });
+    }
+  };
+
   getUserLocation = async () =>
     new Promise((resolve, reject) => {
       window.navigator.geolocation.getCurrentPosition(
-        (position) => {
+        async (position) => {
+
+          // TODO remove hardcode, just using a better location than denver cuz more retailers
           const location = {
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
+            lat: 35.227085 || position.coords.latitude,
+            lon: -80.843124 || position.coords.longitude,
           }
-          const latLng = new google.maps.LatLng(location.lat, location.lon);
-          // this is a pretty hacky putting this in here...
-          // only reason is because it's in a convenient spot and the calls underneath
-          // need to be called after getting user location          
-          // re-evaluate putting the bottom stuff in onReady();
-          if (!this.originalUserLocationName) {
-            this.geocoder.geocode({
-              'latLng': latLng,
-            }).then((res) => {
-              let userLocationName;
-              // go backwards b/c it's highest to most specific and we want neighborhood before street address
-              for (let i = res.results.length - 1; i >= 0; i--) {
-                const component = res.results[i];
-                //hopefully we have at least one of these ,if not keep going, do later
-                if (component.types.includes('postal_code')) {
-                  userLocationName = component.formatted_address;
-                  break;
-                } else if (component.types.includes('neighborhood')) {
-                  userLocationName = component.formatted_address;
-                }
-              }
-              this.originalUserLocationName = userLocationName;
-              this.setOriginalLocation();
-            });
-          }
+          this.setUserLocation(location);
           resolve(location);
         },
-        (err) => reject(err)
-      )
+        async (err) => {
+          const accessToken = this.context.ipstackAccessToken;
+          if (!accessToken) {
+            alert("Unable to identify location.");
+            return reject(err);
+          }
+          // use ipstack to get estimate with ip address      
+          // TODO use https when we have a prod token
+          const results = await fetch(
+            `http://api.ipstack.com/check?access_key=${accessToken}`,
+          )
+          const ipLocationInfo = await results.json();
+          // TODO remove hardcode, just using a better location than denver cuz more retailers
+          const location = {
+            lat: 35.227085 || ipLocationInfo.latitude,
+            lon: -80.843124 || ipLocationInfo.longitude,
+          };
+          this.setUserLocation(location);
+          resolve(location);
+        }
+      );
     });
 
   applyFilters = (filterType, evt) => {
     this.appliedFilters[filterType] = evt.target.value;
+
+    // adjust zoom for convenience in distance changes  
+    const distanceToZoomLevels = {
+      100: 8,
+      500: 5,
+    };
+    if (filterType === 'distance') {
+      const newZoomLevel = distanceToZoomLevels[evt.target.value];
+      if (newZoomLevel) {
+        this.map.setZoom(newZoomLevel);
+      } else {
+        this.map.setZoom(DEFAULT_ZOOM_LEVEL);
+      }
+    };
   };
 
   filterRetailers = () => {
@@ -318,6 +405,13 @@ export default class RetailFinder extends PageManager {
     );
     this.sortRetailers();
     this.paintMapAndRetailers(this.retailers);
+    this.updateResultsInfo();
+  };
+
+  updateResultsInfo = () => {
+    const retailerInfoElem = document.getElementById('results-info');
+    const resultsInfoText = this.retailers.length ? 'PRODUCT STYLES AND AVAILABILITY BY RETAILER' : 'No Results found. Try widening your search.';
+    retailerInfoElem.innerText = resultsInfoText;
   };
 
   resetFilters = () => {
@@ -331,7 +425,8 @@ export default class RetailFinder extends PageManager {
     };
     this.selectedPlace = this.originalUserLocationPlace;
     this.autocomplete.set('place', this.originalUserLocationPlace);
-
+    this.map.setCenter({ lat: this.userLocation.lat, lng: this.userLocation.lon });
+    this.map.setZoom(DEFAULT_ZOOM_LEVEL);
     this.filterRetailers();
   };
 
@@ -483,7 +578,16 @@ export default class RetailFinder extends PageManager {
     const latLoc = await results.json();
     const retailers = latLoc.data.retailersCollection.items;
 
-    return this.setupFilterData(retailers);
+    // TODO just use retailers, need fake bridalLiveRetailIds for now
+    const retailersWithFakeIds = retailers.map(
+      (retailer, idx) => {
+        return {
+          ...retailer,
+          bridalLiveRetailerId: `retailer-${idx}`,
+        }
+      }
+    )
+    return this.setupFilterData(retailersWithFakeIds);
   };
 
   sortRetailers = (evt, override = null) => {
@@ -512,10 +616,14 @@ export default class RetailFinder extends PageManager {
     this.sortRetailers(null, initialSort);
   }
 
-  paintMapAndRetailers = async (retailerData) => {
-    // TODO: filter array based on chosen mile radius
+  // google maps api has no way to reference existing markers
+  // so we have to re-paint every time the data to show, retailerData, changes
+  // or if we want to center a specific marker, in the case of a hover event
+  // so this method is called anytime the data to show changes or when a 
+  // retailer marker needs to be centered and highlighted
+  paintMapAndRetailers = (retailerData, centerRetailer = null) => {
     const map = this.map || new google.maps.Map(document.getElementById('map'), {
-      zoom: 10,
+      zoom: DEFAULT_ZOOM_LEVEL,
       center: { lat: this.userLocation.lat, lng: this.userLocation.lon },
     });
     if (!this.map) {
@@ -526,13 +634,12 @@ export default class RetailFinder extends PageManager {
       disableAutoPan: true,
     });
 
-    // Add some markers to the map. 
-    const markers = retailerData.map((loc) => {
+    const markers = retailerData.map((retailer) => {
       const display = `
-        ${loc.retailerName} <br/>
-        ${loc.distanceFromUser} miles away
+        ${retailer.retailerName} <br/>
+        ${retailer.distanceFromUser} miles away
       `
-      return this.getMarker(loc.location, display, infoWindow, retailerData.bridalLiveRetailerId);
+      return this.getMarker(retailer.location, display, infoWindow, retailer.bridalLiveRetailerId, centerRetailer);
     });
     // Add a marker clusterer to manage the markers.
     const userLocationMarker = this.getMarker(this.userLocation, 'Your Location', infoWindow);
@@ -543,6 +650,10 @@ export default class RetailFinder extends PageManager {
       this.markerClusterer.clearMarkers();
       this.markerClusterer.addMarkers(markers);
     }
-    this.addRetailerInfo(retailerData);
+    // when we have a center retailer we are highlighting on an existing retailerInfo already
+    // so no neeed to recreate - also creates infinite loop with event handling
+    if (!centerRetailer) {
+      this.addRetailerInfo(retailerData);
+    }
   }
 };
