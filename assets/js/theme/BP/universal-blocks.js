@@ -622,7 +622,7 @@ export function events(blockData) {
         ${blockData.trunkShowsCollection.items.map((item)=> 
             `<div class="eventsCard">
               <div class="block">
-                <div class="imageblock col"><img src="${item.eventImage.url}" /></div>
+                <div class="imageblock col"><img src="${item.eventImage.url}" alt="${item.retailerName}" /></div>
                 <div class="contentBlock col">
                     <h4>${item.retailerName}</h4>
                     <p class="addressp">${item.location}</p>
@@ -647,7 +647,7 @@ export function events(blockData) {
     </div><div class="divider"></div>`;
 }
 export function blockElementFullscreenImage(blockData) {
-    return `<div class="blockElementFullscreenImage block-item full-size" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" />
+    return `<div class="blockElementFullscreenImage block-item full-size" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData.backgroundImage.url}" alt="${blockData.subheadline}" />
     ${blockData.bodyCopy !== null ? `<div class="homepageCaption"><div class="content"><div class="bannercap"><h4>${blockData.subheadline}</h4><p>${blockData.bodyCopy}</p><a href="${blockData.linkUrl}">${blockData.linkText}</a></div>` : ''}</div></div></div></div>`;
 }
 
@@ -660,7 +660,7 @@ export function logoSliderBlock(blockData) {
 }
 
 export function blockElement3ImagesScreenWidth(blockData) {
-    let imgthum = blockData.imagesCollection.items.map((image) => `<div class="imageDiv"><img src="${image.url}" /></div>`);
+    let imgthum = blockData.imagesCollection.items.map((image) => `<div class="imageDiv"><img src="${image.url}" alt="${image.title}" /></div>`);
     return ` <div class="blockElement3ImagesScreenWidth block-item" id="blockElement3ImagesScreenWidth"><div class="thumbImg">${imgthum.join('')}</div></div>`;
 };
 
@@ -668,8 +668,8 @@ export function blockElementDiscover(blockData) {
     return `<div class="blockElementDiscover block-item" id="blockElementDiscover">
                 <div class="discovery-section">
                     <div class="imageflex">
-                        <div><img class="first" src="${blockData.imagesCollection.items[0].url}" alt="" /><img class="second" src="${blockData.imagesCollection.items[1].url}" alt=""/></div>
-                        <div><img  class="third" src="${blockData.imagesCollection.items[2].url}"  alt="" /></div>
+                        <div><img class="first" src="${blockData.imagesCollection.items[0].url}" alt="${blockData.imagesCollection.items[0].title}" /><img class="second" src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].title}"/></div>
+                        <div><img  class="third" src="${blockData.imagesCollection.items[2].url}"  alt="${blockData.imagesCollection.items[2].title}" /></div>
                     </div>
                     <div class="caption">
                         <h2>${blockData.blocktitle}</h2>
@@ -684,14 +684,14 @@ export function blockElementStory(blockData) {
     return `<div class="blockElementStory block-item" id="blockElementStory">
     <div class="caption" ><h2>Inspiration</h2><p>Allure Bridals real customer’s fantastic wedding stories. These should be your wedding inspiration.</p></div>
     <div class="flexdata"><div class="heading-section"><h2 class="title">${blockData.blockname}</h2>${blockData.displayedate ? `<p class="date">${blockData.displayedate}</p>` : `<p></p></br>`}<div class="leftBottom">
-        <img src="${blockData.imagesCollection.items[0].url}" alt="" />
+        <img src="${blockData.imagesCollection.items[0].url}" alt="${blockData.imagesCollection.items[0].title}" />
         </div></div><div class="rightside-section"><div class="rightcol">
-        <img src="${blockData.imagesCollection.items[1].url}" class="topleft" alt=""/>
+        <img src="${blockData.imagesCollection.items[1].url}" class="topleft" alt="${blockData.imagesCollection.items[1].title}"/>
         <div class="caption"><p class="content">${blockData.bodyCopy}</p>
         <button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div></div><div class="topright">
-        <img src="${blockData.imagesCollection.items[2].url}"  alt="" />
+        <img src="${blockData.imagesCollection.items[2].url}"  alt="${blockData.imagesCollection.items[2].title}" />
         </div></div><div class="mobilecaption"><p class="content">${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
-        <div class="mobilebanner"><img src="${blockData.imagesCollection.items[0].url}" alt="" /></div></div></div><div class="divider"></div>`;
+        <div class="mobilebanner"><img src="${blockData.imagesCollection.items[0].url}" alt="${blockData.imagesCollection.items[0].title}" /></div></div></div><div class="divider"></div>`;
 }
 
 export function imageWithContentSlider(blockData) {
@@ -743,20 +743,20 @@ export function blockElementVerticalGallery(blockData) {
     let leftData = blockData.imagesCollection.items.map((item,i) => {
         if(i < 3) {
             if(item.description === '') {
-                return `<div class="contentDiv"><img src="${item.url}" /></div>`;
+                return `<div class="contentDiv"><img src="${item.url}" alt="${item.title}" /></div>`;
             } else {
                 let descriptionArr = item.description.split('—');
-                return `<div class="contentDiv"><img src="${item.url}" /><p class="caption">${descriptionArr[0]}<span class="author">-${descriptionArr[1]}</span></p></div>`;
+                return `<div class="contentDiv"><img src="${item.url}" alt="${item.title}" /><p class="caption">${descriptionArr[0]}<span class="author">-${descriptionArr[1]}</span></p></div>`;
             }
         }
     });
     let rightData = blockData.imagesCollection.items.map((item,i) => {
         if(i > 2) {
             if(item.description === '') {
-                return `<div class="contentDiv"><img src="${item.url}" /></div>`;
+                return `<div class="contentDiv"><img src="${item.url}" alt="${item.title}" /></div>`;
             } else {
                 let descriptionArr = item.description.split('—');
-                return `<div class="contentDiv"><img src="${item.url}" /><p class="caption">${descriptionArr[0]}<span class="author">-${descriptionArr[1]}</span></p></div>`;
+                return `<div class="contentDiv"><img src="${item.url}" alt="${item.title}" /><p class="caption">${descriptionArr[0]}<span class="author">-${descriptionArr[1]}</span></p></div>`;
             }
         }
     });
@@ -778,12 +778,12 @@ function productCard(products) {
 };
 
 export function blockElementImages2ColumnRight(blockData) {
-    let  contentStructure = `<div class="blockElementImages2ColumnRight block-item" id="blockElementImages2ColumnRight"><div class="col1"><img src="${blockData.image1Column.url}" /></div><div class="col2"><img src="${blockData.image2Column.url}" /></div></div>`;
+    let  contentStructure = `<div class="blockElementImages2ColumnRight block-item" id="blockElementImages2ColumnRight"><div class="col1"><img src="${blockData.image1Column.url}" alt="${blockData.image1Column.title}" /></div><div class="col2"><img src="${blockData.image2Column.url}" src="${blockData.image2Column.title}" /></div></div>`;
     return contentStructure;
 };
 
 export function blockElementImageLeftCopyRight(blockData) {
-    let  contentStructure = `<div class="blockElementImageLeftCopyRight block-item" id="blockElementImageLeftCopyRight"><div class="leftimageblock"><div class="leftImg"><img src="${blockData.image.url}" /></div><div class="textSection"><div class="caption"><h3>${blockData.blockName}</h3><p>${blockData.bodyCopy}</p><a  href="${blockData.linkUrl}" class="button button--secondary">${blockData.linkText}</a></div></div></div></div>`;
+    let  contentStructure = `<div class="blockElementImageLeftCopyRight block-item" id="blockElementImageLeftCopyRight"><div class="leftimageblock"><div class="leftImg"><img src="${blockData.image.url}" src="${blockData.blockName}" /></div><div class="textSection"><div class="caption"><h3>${blockData.blockName}</h3><p>${blockData.bodyCopy}</p><a  href="${blockData.linkUrl}" class="button button--secondary">${blockData.linkText}</a></div></div></div></div>`;
     return contentStructure;
 };
 
