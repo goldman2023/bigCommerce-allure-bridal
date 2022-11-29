@@ -144,7 +144,7 @@ export default class RetailFinder extends PageManager {
     document.addEventListener(RETAILER_ITEM_HOVER_EVENT, (evt) => {
       const retailer = evt.detail;
       if (retailer) {
-        // TODO debounce
+        // TODO debounce if needed, doesnt seem that bad without it.
         this.map.setCenter({ lat: retailer.location.lat, lng: retailer.location.lon });
         this.map.setZoom(DEFAULT_ZOOM_LEVEL);
         this.paintMapAndRetailers(this.retailers, retailer);
@@ -190,6 +190,8 @@ export default class RetailFinder extends PageManager {
     container.append(numCollections)
 
     // todo evaluate featured
+    // cant add icons via svg so unsure if this is plausible
+    // save for 1.2
     if (true) {
       const featuredCollections = document.createElement('svg');
       const icon = document.createElement('use');
@@ -198,14 +200,9 @@ export default class RetailFinder extends PageManager {
       container.append(featuredCollections);
     }
 
-    // TODO
-    // Need to figure out pagination and map marker - what to show?
-    // May set up event driven setup
-    // Hover either or fire event to center it on the map?
-    // Click it to filter the list? 
-    //
 
     // todo evaluate platinum collections
+    // same as featured todo above
     if (true) {
 
     }
@@ -322,39 +319,24 @@ export default class RetailFinder extends PageManager {
   };
 
   getUserLocation = async () =>
-    new Promise((resolve, reject) => {
-      window.navigator.geolocation.getCurrentPosition(
-        async (position) => {
-
-          // TODO remove hardcode, just using a better location than denver cuz more retailers
-          const location = {
-            lat: 35.227085 || position.coords.latitude,
-            lon: -80.843124 || position.coords.longitude,
-          }
-          this.setUserLocation(location);
-          resolve(location);
-        },
-        async (err) => {
-          const accessToken = this.context.ipstackAccessToken;
-          if (!accessToken) {
-            alert("Unable to identify location.");
-            return reject(err);
-          }
-          // use ipstack to get estimate with ip address      
-          // TODO use https when we have a prod token
-          const results = await fetch(
-            `http://api.ipstack.com/check?access_key=${accessToken}`,
-          )
-          const ipLocationInfo = await results.json();
-          // TODO remove hardcode, just using a better location than denver cuz more retailers
-          const location = {
-            lat: 35.227085 || ipLocationInfo.latitude,
-            lon: -80.843124 || ipLocationInfo.longitude,
-          };
-          this.setUserLocation(location);
-          resolve(location);
-        }
-      );
+    new Promise(async (resolve, reject) => {
+      const accessToken = this.context.ipstackAccessToken;
+      if (!accessToken) {
+        alert("Unable to identify location.");
+        return reject(err);
+      }
+      // use ipstack to get estimate with ip address      
+      // TODO use https when we have a prod token
+      const results = await fetch(
+        `https://api.ipstack.com/check?access_key=${accessToken}`,
+      )
+      const ipLocationInfo = await results.json();
+      const location = {
+        lat: ipLocationInfo.latitude,
+        lon: ipLocationInfo.longitude,
+      };
+      this.setUserLocation(location);
+      resolve(location);
     });
 
   applyFilters = (filterType, evt) => {
@@ -577,17 +559,7 @@ export default class RetailFinder extends PageManager {
     )
     const latLoc = await results.json();
     const retailers = latLoc.data.retailersCollection.items;
-
-    // TODO just use retailers, need fake bridalLiveRetailIds for now
-    const retailersWithFakeIds = retailers.map(
-      (retailer, idx) => {
-        return {
-          ...retailer,
-          bridalLiveRetailerId: `retailer-${idx}`,
-        }
-      }
-    )
-    return this.setupFilterData(retailersWithFakeIds);
+    return this.setupFilterData(retailers);
   };
 
   sortRetailers = (evt, override = null) => {
