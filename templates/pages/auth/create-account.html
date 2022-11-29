@@ -5,14 +5,16 @@
 
     <div class="account account--fixed">
         <div class="account-body register-page">
-            <h2 class="form-heading">Register</h2>
-            <p class="form-sub_heading">If you don't have Allure Bridals account, use this option to create new account. Provide your details to make <strong class="sub_heading-site">Allurebridal.com</strong> purchase easier.</p>
+            <!-- <div class="loadingOverlay" style="display: block;"></div> -->
+            <h2 class="form-heading">{{lang 'create_account.heading'}}</h2>
+            <p class="form-sub_heading">{{{lang 'create_account.subheading'}}}</p>
             <svg class="login-diamond" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <rect x="5.99991" y="1.58603" width="6" height="6" transform="rotate(45 5.99991 1.58603)" fill="#695C5C" stroke="white" stroke-width="2"></rect>
             </svg>
             {{#if forms.create_account.error}}
                 {{> components/common/alert/alert-error forms.create_account.error}}
             {{/if}}
+            {{> components/common/alert/alert-success ''}}
             {{#if settings.account_creation_enabled}}
                 <!-- <form action="{{urls.auth.save_new_account}}" data-create-account-form method="post" class="form">
                     <div class="form-row form-row--half1">
@@ -31,15 +33,15 @@
                     </div>
                 </form> -->
                 <div class="register-form__container">
-                  <form method="post" class="form" id="customregistration">
+                  <form method="post" class="form" id="customregistration" data-create-custom-account-form>
 
-                    <div class="form-field">
-                        <label class="form-label" for="register_first">First Name</label>
-                        <input class="form-input" name="register_first" id="login_email" type="email" placeholder="First Name">
+                    <div class="form-field" >
+                        <label class="form-label" for="register_first">{{lang 'create_account.form_field.first_name'}}</label>
+                        <input class="form-input" name="register_first" id="register_first" type="text" placeholder="First Name">
                     </div>
                     <div class="form-field">
-                        <label class="form-label" for="register_last">Last Name</label>
-                        <input class="form-input" id="register_last" type="password" name="login_pass" autocomplete="off" placeholder="Last Name">
+                        <label class="form-label" for="register_last">{{lang 'create_account.form_field.last_name'}}</label>
+                        <input class="form-input" id="register_last" type="text" name="register_last" autocomplete="off" placeholder="Last Name">
                     </div>
                     <div class="form-field">
                         <label class="form-label" for="register_email">{{lang 'login.field_email'}}</label>
@@ -47,25 +49,32 @@
                     </div>
                     <div class="form-field">
                         <label class="form-label" for="register_pass">{{lang 'login.field_password'}}</label>
-                        <input class="form-input" id="register_pass" type="password" name="login_pass" autocomplete="off" placeholder="{{lang 'login.field_password'}}">
+                        <input class="form-input" id="register_pass" type="password" name="register_pass" autocomplete="off" placeholder="{{lang 'login.field_password'}}">
                     </div>
                     <div class="form-field">
-                        <label class="form-label" for="register_pass-confirm">Confirm Password</label>
-                        <input class="form-input" id="register_pass-confirm" type="password" name="login_pass" autocomplete="off" placeholder="Confirm Password">
+                        <label class="form-label" for="register_pass-confirm">{{lang 'create_account.form_field.confirm_pass'}}</label>
+                        <input class="form-input" id="register_pass-confirm" type="password" name="register_pass-confirm" autocomplete="off" placeholder="Confirm Password">
                     </div>
                     <div class="checkbox-fields">
                         <div class="checkbox-field">
-                            <input type="checkbox" class="register_pass-news">
-                            <label for="register_pass-news">I wish to receive Allure Bridals News on my e-mail</label>
+                            <label for="register_pass-news">
+                                <input type="checkbox" class="register_pass-news" name="register_pass-news" id="register_pass-news"/>
+                                {{lang 'create_account.form_field.marketing'}}
+                            </label>
                         </div>
-                        <div class="checkbox-field">
-                            <input type="checkbox" class="register_pass-policy">
-                            <label for="register_pass-policy">I accept the Privacy <a href="#">Policy</a></label>
+                        <div>
+                            <div class="checkbox-field">
+                                <label for="register_pass-policy">
+                                    <input type="checkbox" class="register_pass-policy" name="register_pass-policy" id="register_pass-policy"/>
+                                    {{lang 'create_account.form_field.privacy_accept'}} <a href="#">Policy</a>
+                                </label>
+                            </div>
+                            <span class="form-inlineMessage">{{lang 'create_account.form_field.error.required'}}</span>
                         </div>
                     </div>
                     {{{ forms.create_account.recaptcha.markup}}}
 
-                    <button type="submit" class="button button--secondary">create account</button>
+                    <button type="submit" class="button button--secondary" id="createBTn">{{lang 'login.new_customer.create_account'}}</button>
                     </form>
                 </div>
             {{/if}}

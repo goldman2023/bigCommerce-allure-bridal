@@ -5,12 +5,20 @@
     .blockElementFullscreenImage {
         margin-bottom: 20px !important;
         padding: 0 1.5rem !important;
+        @media only screen and (max-width: 600px)  {
+            padding: 0 !important;
+        }
     }
     .productView {
         margin: 0;
         padding: 0;
         @include breakpoint("medium") {
             padding: 20px 3rem 0;
+        }
+        @include breakpoint("medium") {
+            .divider {
+                margin: 16px 0;
+            }
         }
 
         .productView-info, .productView-price, .productView-thumbnails, .add-to-cart-wrapper, .form-wishlist, .socialLinks {
@@ -88,6 +96,9 @@
             line-height: remCalc(26px);
             letter-spacing: 0.1em;
             color: stencilColor('color-default-neutral-2');
+            p {
+                margin: 0;
+            }
         }
         [data-product-attribute="swatch"] {
             .form-option {
@@ -275,5 +286,11 @@
                 }
             }
         }
+    }
+}
+.productView--left {
+    order: 1;
+    @include breakpoint("medium") {
+        order: 0;
     }
 }

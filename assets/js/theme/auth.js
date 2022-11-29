@@ -3,6 +3,8 @@ import stateCountry from './common/state-country';
 import nod from './common/nod';
 import validation from './common/form-validation';
 import forms from './common/models/forms';
+import swal from './global/sweet-alert';
+
 import {
     classifyForm,
     Validators,
@@ -16,6 +18,7 @@ export default class Auth extends PageManager {
         super(context);
         this.validationDictionary = createTranslationDictionary(context);
         this.formCreateSelector = 'form[data-create-account-form]';
+        this.formCreateSelectorCustom = 'form[data-create-custom-account-form]';
         this.recaptcha = $('.g-recaptcha iframe[src]');
     }
 
@@ -107,50 +110,124 @@ export default class Auth extends PageManager {
         );
     }
 
-    registerCreateAccountValidator($createAccountForm) {
-        const validationModel = validation($createAccountForm, this.context);
+    // registerCreateAccountValidator($createAccountForm) {
+    //     const validationModel = validation($createAccountForm, this.context);
+    //     const createAccountValidator = nod({
+    //         submit: `${this.formCreateSelector} input[type='submit']`,
+    //         tap: announceInputErrorMessage,
+    //     });
+    //     const $stateElement = $('[data-field-type="State"]');
+    //     const emailSelector = `${this.formCreateSelector} [data-field-type='EmailAddress']`;
+    //     const $emailElement = $(emailSelector);
+    //     const passwordSelector = `${this.formCreateSelector} [data-field-type='Password']`;
+    //     const $passwordElement = $(passwordSelector);
+    //     const password2Selector = `${this.formCreateSelector} [data-field-type='ConfirmPassword']`;
+    //     const $password2Element = $(password2Selector);
+
+    //     createAccountValidator.add(validationModel);
+
+    //     if ($stateElement) {
+    //         let $last;
+
+    //         // Requests the states for a country with AJAX
+    //         stateCountry($stateElement, this.context, (err, field) => {
+    //             if (err) {
+    //                 throw new Error(err);
+    //             }
+
+    //             const $field = $(field);
+
+    //             if (createAccountValidator.getStatus($stateElement) !== 'undefined') {
+    //                 createAccountValidator.remove($stateElement);
+    //             }
+
+    //             if ($last) {
+    //                 createAccountValidator.remove($last);
+    //             }
+
+    //             if ($field.is('select')) {
+    //                 $last = field;
+    //                 Validators.setStateCountryValidation(createAccountValidator, field, this.validationDictionary.field_not_blank);
+    //             } else {
+    //                 Validators.cleanUpStateValidation(field);
+    //             }
+    //         });
+    //     }
+
+    //     if ($emailElement) {
+    //         createAccountValidator.remove(emailSelector);
+    //         Validators.setEmailValidation(createAccountValidator, emailSelector, this.validationDictionary.valid_email);
+    //     }
+
+    //     if ($passwordElement && $password2Element) {
+    //         const { password: enterPassword, password_match: matchPassword } = this.validationDictionary;
+
+    //         createAccountValidator.remove(passwordSelector);
+    //         createAccountValidator.remove(password2Selector);
+    //         Validators.setPasswordValidation(
+    //             createAccountValidator,
+    //             passwordSelector,
+    //             password2Selector,
+    //             this.passwordRequirements,
+    //             createPasswordValidationErrorTextObject(enterPassword, enterPassword, matchPassword, this.passwordRequirements.error),
+    //         );
+    //     }
+
+    //     $createAccountForm.on('submit', event => {
+    //         createAccountValidator.performCheck();
+
+    //         if (createAccountValidator.areAll('valid')) {
+    //             return;
+    //         }
+
+    //         event.preventDefault();
+    //     });
+    // }
+    regcreateAccountValidator($createAccountFormCustom) {
+        const validationModel = validation($createAccountFormCustom, this.context);
         const createAccountValidator = nod({
-            submit: `${this.formCreateSelector} input[type='submit']`,
+            submit: `${this.formCreateSelectorCustom} input[type='submit']`,
             tap: announceInputErrorMessage,
         });
-        const $stateElement = $('[data-field-type="State"]');
-        const emailSelector = `${this.formCreateSelector} [data-field-type='EmailAddress']`;
+        const firstNameSelector = `${this.formCreateSelectorCustom} input[name='register_first']`;
+        const $firstNameElement = $(firstNameSelector);
+        const lastNameSelector = `${this.formCreateSelectorCustom} input[name='register_last']`;
+        const $lastNameElement = $(lastNameSelector);
+
+        const emailSelector = `${this.formCreateSelectorCustom} input[name='register_email']`;
         const $emailElement = $(emailSelector);
-        const passwordSelector = `${this.formCreateSelector} [data-field-type='Password']`;
+        const passwordSelector = `${this.formCreateSelectorCustom} input[name='register_pass']`;
         const $passwordElement = $(passwordSelector);
-        const password2Selector = `${this.formCreateSelector} [data-field-type='ConfirmPassword']`;
+        const password2Selector = `${this.formCreateSelectorCustom} input[name='register_pass-confirm']`;
         const $password2Element = $(password2Selector);
 
         createAccountValidator.add(validationModel);
+        createAccountValidator.add([
+            {
+                selector: firstNameSelector,
+                validate: (cb, val) => {
+                    const result = forms.notEmpty(val);
 
-        if ($stateElement) {
-            let $last;
+                    cb(result);
+                },
+                errorMessage: 'First Name cannot be empty',
+            },
+            {
+                selector: lastNameSelector,
+                validate: (cb, val) => {
+                    const result = forms.notEmpty(val);
 
-            // Requests the states for a country with AJAX
-            stateCountry($stateElement, this.context, (err, field) => {
-                if (err) {
-                    throw new Error(err);
-                }
+                    cb(result);
+                },
+                errorMessage: 'Last Name cannot be empty',
+            },
+        ]);
 
-                const $field = $(field);
-
-                if (createAccountValidator.getStatus($stateElement) !== 'undefined') {
-                    createAccountValidator.remove($stateElement);
-                }
-
-                if ($last) {
-                    createAccountValidator.remove($last);
-                }
-
-                if ($field.is('select')) {
-                    $last = field;
-                    Validators.setStateCountryValidation(createAccountValidator, field, this.validationDictionary.field_not_blank);
-                } else {
-                    Validators.cleanUpStateValidation(field);
-                }
-            });
-        }
-
+        // if ($firstNameElement) {
+        //     createAccountValidator.remove(firstNameSelector);
+        //     Validators.setFirstNameValidation(createAccountValidator, firstNameSelector, this.validationDictionary.valid_first_name);
+        // }
+        
         if ($emailElement) {
             createAccountValidator.remove(emailSelector);
             Validators.setEmailValidation(createAccountValidator, emailSelector, this.validationDictionary.valid_email);
@@ -170,15 +247,107 @@ export default class Auth extends PageManager {
             );
         }
 
-        $createAccountForm.on('submit', event => {
+        let self = this;
+        $createAccountFormCustom.on('submit', function(e){
+            e.preventDefault();
+
             createAccountValidator.performCheck();
 
             if (createAccountValidator.areAll('valid')) {
-                return;
+                let validform = customValidation();
+                if(validform) {
+                    const formData = {
+                        email: $('#login_email').val(),
+                        first_name: $('#register_first').val(),
+                        last_name: $('#register_last').val(),
+                        phone: "",
+                        authentication: {
+                            force_password_reset: true,
+                            new_password: $('#register_pass').val()
+                        }
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: `https://apim.workato.com/allure/allure-b2c-website/login/createaccount`,
+                        headers: {"API-TOKEN": self.context.workatoApiToken},
+                        data: JSON.stringify(formData),
+                        success: response => {
+                            swal.fire({
+                                text: "Your account has been created",
+                                icon: 'success',
+                                showCancelButton: false
+                            })
+                           window.location.href = '/account.php?action=account_details';
+                        },
+                        error: error => {
+                            console.log(error.responseJSON.Error.split('".customer_create":"')[1].replace(`"}}'`, ''));
+                            let jsondata = error.responseJSON.Error.split('".customer_create":"')[1].replace(`"}}'`, '');
+                            swal.fire({
+                                text: jsondata,
+                                icon: 'error',
+                                showCancelButton: false
+                            })
+                        }
+                    });
+                }
             }
-
-            event.preventDefault();
         });
+        function  customValidation() {
+            // if($('#register_first').val() === null || $('#register_first').val() === '') {
+            //     $('#register_first').parent().addClass('form-field--error');
+            //     return false;
+            // } else {
+            //     if($('#register_first').parent().hasClass('form-field--error')) {
+            //         $('#register_first').parent().removeClass('form-field--error')
+            //     }
+            // }
+            // if($('#register_last').val() === null || $('#register_last').val() === '') {
+            //     $('#register_last').parent().addClass('form-field--error');
+            //     return false;
+            // } else {
+            //     if($('#register_last').parent().hasClass('form-field--error')) {
+            //         $('#register_last').parent().removeClass('form-field--error')
+            //     }
+            // }
+            // if($('#login_email').val() === null || $('#login_email').val() === '') {
+            //     $('#login_email').parent().addClass('form-field--error');
+            //     return false;
+            // } else {
+            //     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            //     if(!regex.test($('#login_email').val())) {
+            //         if(!$('#login_email').parent().hasClass('form-field--error')) {
+            //             $('#login_email').parent().removeClass('form-field--error')
+            //         }
+            //         return false;
+            //     } 
+            // }
+            // if($('#register_pass').val() === null || $('#register_pass').val() === '') {
+            //     $('#register_pass').parent().addClass('form-field--error');
+            //     return false;
+            // } else {
+            //     if($('#register_pass').parent().hasClass('form-field--error')) {
+            //         $('#register_pass').parent().removeClass('form-field--error')
+            //     }
+            // }
+            // if($('#register_pass-confirm').val() === null || $('#register_pass-confirm').val() === '') {
+            //     $('#register_pass-confirm').parent().addClass('form-field--error');
+            //     return false;
+            // } else {
+            //     if($('#register_pass').val() !== $('#register_pass-confirm').val()) {
+            //         $('#register_pass-confirm').parent().addClass('form-field--error');
+            //         return false;
+            //     } else {
+            //         if($('#register_pass-confirm').parent().hasClass('form-field--error')) {
+            //             $('#register_pass-confirm').parent().removeClass('form-field--error')
+            //         }
+            //     }
+            // }
+            if(!$('.register_pass-policy').is(":checked")) {
+                $('.register_pass-policy').parent().parent().parent().addClass('form-field--error');
+                return false;
+            }
+            return true;
+        }
     }
 
     /**
@@ -190,6 +359,7 @@ export default class Auth extends PageManager {
         }
 
         const $createAccountForm = classifyForm(this.formCreateSelector);
+        const $createAccountFormCustom = classifyForm(this.formCreateSelectorCustom);
         const $loginForm = classifyForm('.login-form');
         const $forgotPasswordForm = classifyForm('.forgot-password-form');
         const $newPasswordForm = classifyForm('.new-password-form'); // reset password
@@ -212,34 +382,9 @@ export default class Auth extends PageManager {
         if ($createAccountForm.length) {
             this.registerCreateAccountValidator($createAccountForm);
         }
-
-
-        let self = this;
-        $('#customregistration').on('submit', function(e){
-            e.preventDefault();
-            const formData = {
-                "email": "kdddk@ggg.com",
-                "first_name": "dd1",
-                "last_name": "dd",
-                "phone": "1234567890",
-                "authentication": {
-                    "force_password_reset": true,
-                    "new_password": "Mind@123"
-                }
-            };
-            $.ajax({
-                type: "POST",
-                url: `https://apim.workato.com/allure/allure-b2c-website/login/createaccount`,
-                headers: {"API-TOKEN": self.context.workatoApiToken},
-                data: JSON.stringify(formData),
-                success: response => {
-                    console.log('register', response);
-                },
-                error: error => {
-                    console.log('error r', error);
-                }
-            });
-        }); 
+        if ($createAccountFormCustom.length) {
+            this.regcreateAccountValidator($createAccountFormCustom);
+        }
 
     }
 }

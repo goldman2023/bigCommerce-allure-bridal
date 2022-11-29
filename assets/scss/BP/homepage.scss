@@ -3,7 +3,14 @@
 .pages-custom-category-category-listing,
 .pages-custom-page-all-content-blocks,
 .pages-product,
-.suits-product {
+.suits-product,
+.pages-custom-category-bp-category,
+.pages-custom-category-suits-bp-category,
+.pages-blog-post,
+.pages-blog,
+.suits-product,
+.pages-custom-page-about,
+.pages-custom-page-custom-form {
     .button {
         @media only screen and (min-width: 2800px) {
             font-size: remCalc(20px);
@@ -15,12 +22,18 @@
         padding: 0;
         max-width: 100%;
     }
-    .block-item,.sub-category-block,.customBanner,.breadcrumbs,.custompro {
+    .block-item,
+    .sub-category-block,
+    .customBanner,
+    .custombread,
+    .custompro,
+    .bp-category,
+    .inspiration-page {
         max-width: 91.71429rem;
         margin: 20px auto;
         padding: 0 1.5rem;
         @include breakpoint("medium") {
-            margin: 5% auto;
+            margin: 80px auto;
         }
         @media only screen and (min-width: 1600px)  {
             max-width: 100rem;
@@ -45,9 +58,17 @@
             }
         }
     }
-    .breadcrumbs {
+    .custombread {
         @include breakpoint("medium") {
             margin: 0 auto !important;
+        }
+        ol.breadcrumbs {
+            margin: 0;
+        }
+    }
+    .bp-category {
+        @include breakpoint("medium") {
+            margin: 20px auto !important;
         }
     }
     .blockElementFullscreenImage .mainImage {
@@ -65,9 +86,65 @@
             }
         }
     }
-    .blockElementDiscover,.events.block-item,.blockElementLookbook2,.blockElementStory,#eapps-instagram-feed-1 {
+    .blockElementDiscover,.events.block-item,.blockElementLookbook2,.blockElementStory {
         @include breakpoint("medium") {
-            margin: 5% auto;
+            margin: 80px auto;
         }
     }
 }
+.pages-product,
+.suits-product {
+    .custombread {
+            padding: 0 !important;
+    }
+}
+
+.pages-product,
+.suits-product {
+    .custompro {
+        .block-item {
+            padding: 0 !important;
+        }
+        @media only screen and (max-width: 600px)  {
+            padding: 0 !important; 
+            .productView {
+                padding: 0 1.5rem;
+            }
+        }
+    }
+    .breadcrumbs {
+        @media only screen and (max-width: 600px)  {
+            padding: 0 1.5rem !important;
+        }
+    }
+    .youMightalsoLike,.thePerfectMatch,.recentlyViewed {
+        @media only screen and (max-width: 600px)  {
+            max-width: 91.71429rem;
+            margin: 20px auto;
+            padding: 0 1.5rem;
+        }
+    }
+
+    .blockElementFullscreenImage .mainImage img {
+        @media only screen and (max-width: 600px)  {
+            width: 100%;
+        }
+    }
+}
+.pages-custom-category-category-landing {
+    .blockElementFullscreenVideo {
+        margin-top: 25px !important;
+    }
+}
+.pages-custom-category-bp-category,.pages-custom-category-suits-bp-category {
+    .customBanner {
+        padding: 0 0.75rem !important;
+        margin: 10px auto !important;
+        .leftTextbanner .caption .title {
+            font-size: remCalc(33px);
+            line-height: remCalc(40px);
+        }
+    }
+}
+
+

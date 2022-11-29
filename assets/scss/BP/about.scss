@@ -1,0 +1,66 @@
+.pages-custom-page-about {
+    .aboutcategorylist {
+        margin: 20px 0 0 0;
+        padding: 0;
+        list-style: none;
+    }
+    .eapps-instagram-feed-title-container {
+        display: none !important;
+    }
+    .categorycard {
+        width: 100%;
+        max-width: 400px;
+        position: relative;
+        display: block;
+    }
+    .card {
+        margin: 0 10px 3rem 10px;
+    }
+    .catlist {
+        a {
+            font-family: 'Prata';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 22px;
+            line-height: 30px;
+            color: #1D1B1B;
+            text-decoration: none;
+            p {
+                font-family: 'Prata';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 22px;
+                line-height: 30px;
+                color: #1D1B1B;
+            }
+        }
+    }
+    .card-figure {
+        max-height: 385px;
+    }
+    .captionheader {
+        max-width: 550px;
+        text-align: center;
+        margin: 0 auto;
+        h3 {
+            font-family: 'Prata';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 34px;
+            line-height: 44px;
+            color: #AC634D;
+        }
+        p {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 26px;
+            text-align: center;
+            color: #000000;
+        }
+    }
+    .productGridslider .slick-prev, .productCarousel .slick-prev,.productGridslider .slick-next, .productCarousel .slick-next {
+        top: 45%;
+    }
+}

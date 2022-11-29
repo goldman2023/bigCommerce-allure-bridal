@@ -1,0 +1,50 @@
+{{#partial "page"}}
+<section>
+    {{{region name="page_builder_content"}}}
+    <div >
+       <input type="hidden"  value="{{page.content}}" id="allcontentdata" />
+       <div id="contentBlocksCollection"></div>
+       <div class="our-col block-item">
+        <div class="captionheader">
+            <h3>{{lang 'page.about.collection_heading'}}</h3> 
+        </div>
+        <ul class="productGridslider aboutcategorylist" >
+            {{#each categories}}
+            {{#each children}}
+            <li class="catlist product" data-path="{{url}}">
+                <article class="card">
+                    <figure class="card-figure">
+                        <a href="{{url}}">
+                            <div class="card-img-container">
+                                <img class="cardimage" src="https://via.placeholder.com/150x250?Text=No-Image" alt="{{name}}">
+                            </div>
+                        </a>
+                    </figure>
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            <a href="{{url}}">
+                                {{name}}               
+                            </a>
+                        </h3>
+                    </div>
+                </article>
+          </li>
+            {{/each}}
+        {{/each}}
+            
+        </ul>
+       </div>
+       <div class="instaFeedDiv">
+        <div class="captionheader">
+            <h3>{{lang 'page.about.insta_heading'}}</h3>
+            <p>{{lang 'page.about.insta_subheading'}}</p>    
+        </div>
+        <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+        <div class="elfsight-app-2accabd9-4992-4055-9430-022b788dff5e"></div>
+      </div>
+    </div>
+</section>
+
+{{/partial}}
+
+{{> layout/base}}

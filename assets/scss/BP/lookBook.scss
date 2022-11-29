@@ -8,10 +8,12 @@
         font-size: remCalc(22px);
         line-height: remCalc(30px);
         color: stencilColor("color-default-neutral-3");
-        padding: 0 10px;
-        @include breakpoint("medium") { 
-            padding: 0;
-        }
+        max-width: 91.71429rem;
+        margin: 20px auto;
+        padding: 0 1.5rem;
+        // @include breakpoint("medium") { 
+        //     padding: 0;
+        // }
     }
     .contentSection {
         position: relative;
@@ -83,6 +85,9 @@
     text-align: center;
     @include breakpoint("medium") { 
         margin: 5% -5rem;
+    }
+    .divider {
+        margin: 20px auto
     }
     .caption {
         max-width: 550px;
@@ -217,6 +222,9 @@
                     @media only screen and (min-width: 2800px) {
                         font-size: remCalc(28px);
                         line-height: remCalc(40px);
+                    }
+                    .divider {
+                        margin: 20px auto;
                     }
                     h4 {
                         font-family: stencilFontFamily('prata-font');

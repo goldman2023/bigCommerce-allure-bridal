@@ -168,3 +168,14 @@
         }
     }
 }
+.form-inlineMessage {
+    display: none;
+}
+.form-field--error .form-inlineMessage {
+    display: block;
+}
+.wishlists-table {
+    .button {
+        width: auto !important;
+    }
+}

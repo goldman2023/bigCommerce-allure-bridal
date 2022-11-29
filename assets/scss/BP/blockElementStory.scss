@@ -1,11 +1,48 @@
 .blockElementStory {
-    display: block;
-    margin: 5% 0;
-    @include breakpoint("medium") { 
-        display:flex;
-        align-items: end;
-        justify-content: space-between;
+    .flexdata {
+        display: block;
         margin: 5% 0;
+        @include breakpoint("medium") { 
+            display:flex;
+            align-items: end;
+            justify-content: space-between;
+            margin: 5% 0;
+        }
+    }
+    .caption {
+        text-align: center;
+        h2 {
+            font-family: stencilFontFamily('prata-font');
+            font-style: normal;
+            font-weight: 400;
+            font-size: remCalc(34px);
+            line-height: remCalc(44px);
+            color: #695C5C;
+            @media only screen and (min-width: 2000px) {
+                font-size: remCalc(40px);
+                line-height: remCalc(50px);
+            }
+            @media only screen and (min-width: 2800px) {
+                font-size: remCalc(45px);
+                line-height: remCalc(65px);
+            }
+        }
+        p {
+            font-family: stencilFontFamily('default-font-light');
+            font-style: normal;
+            font-weight: 300;
+            font-size: remCalc(16px);
+            line-height: remCalc(26px);
+            color: #695C5C;
+            @media only screen and (min-width: 2000px) {
+                font-size: remCalc(18px);
+                line-height: remCalc(30px);
+            }
+            @media only screen and (min-width: 2800px) {
+                font-size: remCalc(28px);
+                line-height: remCalc(50px);
+            }
+        }
     }
 
     .heading-section {
@@ -241,13 +278,30 @@
             @include breakpoint("medium") { 
                 top: 30%;
                 left: 50%;
-                width: 40%;
-                padding: 10px 30px;
+                width: 45%;
+                padding: 15px 50px;
                 transform: translate(-50%, -50%)
             }
             background: #fff;
             z-index: 9;
+            h2 {
+                font-style: normal;
+                font-weight: 400;
+                text-align: justify;
+                font-family: stencilFontFamily('stay-classy-font');
+                font-size:  remCalc(66px);
+                line-height:  remCalc(70px);
+                letter-spacing: -0.01em;
+                color: stencilColor("color-allure-bridals-primary-1");
+            }
             p {
+                font-family: stencilFontFamily('default-font-regular');
+                font-style: normal;
+                font-weight: 400;
+                font-size: remCalc(16px);
+                line-height: remCalc(26px);
+                text-align: justify;
+                color: stencilColor("color-allure-bridals-neutral-2");
                 @media only screen and (min-width: 2000px) {
                     font-size: remCalc(22px);
                     line-height: remCalc(30px);

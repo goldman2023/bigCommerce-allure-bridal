@@ -21,7 +21,7 @@
             font-weight: 400;
             font-size: remCalc(34px);
             line-height: remCalc(44px);
-            color: stencilColor("color-default-neutral-3");;
+            color: stencilColor("color-default-neutral-3");
         }
         p {
             font-family: stencilFontFamily('default-font-light');
@@ -58,6 +58,7 @@
     }
     .blocks {
         padding-top: 5%;
+        width: 100%;
         .block {
             display: block;
             @include breakpoint("medium") { 
