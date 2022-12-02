@@ -541,27 +541,27 @@ export function getCategorySpecificMetaData(context,path, callback) {
         }
     });
 }
-export function getProducts(context,selector,prodList,slidescroll) {
+export function getProducts(context, selector, prodList, slidescroll) {
     let prodArray = [];
     prodArray = prodList;
-    //prodArray = prodList.split(',');
+    console.log('prodList', prodList);
+    console.log('selector', selector);
     let products = [];
-    if(selector === '.thePerfectMatch .prodData' || selector === '.youMightalsoLike .prodData') {
+    if (selector === '.thePerfectMatch .prodData' || selector === '.youMightalsoLike .prodData' || selector === '.productSlider .productGridSection') {
         products = prodArray;
-    } else {
-        products = ['170', '285', '274', '270','2242','2128','167'];
-    }
-    fetch('/graphql', { 
-       method: 'POST',
-       credentials: 'same-origin',
-       headers: {
-           'Content-Type': 'application/json',
-           'Authorization': `Bearer ${context.graphQlToken}`
-          },
-       body: JSON.stringify({
-           query: `query ProductsQuery {
+    } 
+    if (products.length > 0) {
+        fetch('/graphql', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${context.graphQlToken}`
+            },
+            body: JSON.stringify({
+                query: `query ProductsQuery {
             site { 
-              products(entityIds: [${products}]) {
+              products(entityIds: [${products.toString() }]) {
                       edges {
                         node {
                           id
@@ -579,32 +579,35 @@ export function getProducts(context,selector,prodList,slidescroll) {
                   } 
                 }
                `
-           }),
-   })
-   .then(res => res.json())
-   .then(productsData => {
-    const productArray = productsData.data.site.products.edges;
-    let prdlist = [];
-    if(productArray.length > 0 ){
-        prdlist = productCard(productArray);
-        if(slidescroll) {
-            document.querySelector(selector).innerHTML = `<ul class="productSliderGrid" data-slick='{"slidesToShow": ${slidescroll}, "slidesToScroll": 1}'>${prdlist.join('')}</ul>`;
-        } else {
-            document.querySelector(selector).innerHTML = `<ul class="productGrid" >${prdlist.join('')}</ul>`;
-        }
-    } else {
-      document.querySelector(selector).innerHTML =  `<p data-no-products-notification role="alert" aria-live="assertive"tabindex="-1">There are no products listed under this category.</p>`;
+            }),
+        })
+        .then(res => res.json())
+        .then(productsData => {
+            const productArray = productsData.data.site.products.edges;
+            console.log('productArray', productArray);
+            let prdlist = [];
+            if (productArray.length > 0) {
+                prdlist = productCard(productArray);
+                if (slidescroll) {
+                    document.querySelector(selector).innerHTML = `<ul class="productSliderGrid" data-slick='{"slidesToShow": ${slidescroll}, "slidesToScroll": 1}'>${prdlist.join('')}</ul>`;
+                } else {
+                    document.querySelector(selector).innerHTML = `<ul class="productGrid" >${prdlist.join('')}</ul>`;
+                }
+            } 
+        });
     }
-   });
+    
 };
 
-export function blockElementFullscreenVideo(selectorID,element) {
+export function blockElementFullscreenVideo(selectorID, element) {
     let videoURL = '';
-    if(element.videoUrl.includes('youtube')) {
-      videoURL = `https://www.youtube.com/embed/${element.videoUrl.split('=')[1]}`;
-      document.getElementById(selectorID).innerHTML = `<div><iframe type="text/html" src="${videoURL}"  frameborder="0" id="colbannerVideo" controls=0></iframe></div>`;
-    } else {
-        document.getElementById(selectorID).innerHTML = `<div><video autoplay loop muted plays-inline="" id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div>`;
+    if (element.videoUrl) {
+        if (element.videoUrl.includes('youtube')) {
+            videoURL = `https://www.youtube.com/embed/${element.videoUrl.split('=')[1]}`;
+            document.getElementById(selectorID).innerHTML = `<div><iframe type="text/html" src="${videoURL}"  frameborder="0" id="colbannerVideo" controls=0></iframe></div>`;
+        } else {
+            document.getElementById(selectorID).innerHTML = `<div><video autoplay loop muted plays-inline="" id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div>`;
+        }
     }
 }
 
@@ -709,7 +712,7 @@ export function imageWithContentSlider(blockData) {
         return `<li><div class="blockrow"><div class="leftblock block">
         <img src="${item.imagesCollection.items[0].url}" alt="image left block" />
         </div><div class="rightblock block"><div class="caption">
-        <h2 class="title">${item.title}</h2><p class="content">${item.bodyCopy}</p><a href="${item.linkUrl}" class="buttonlink">${item.linkText}</a>
+        <h2 class="title">${item.title}</h2><p class="content">${(item.bodyCopy) ? item.bodyCopy : ''}</p><a href="${(item.linkUrl) ? item.linkUrl : ''}" class="buttonlink">${(item.linkText) ? item.linkText : ''}</a>
         </div></div></div></li>`
     });
     return `<div class="imageWithContentSlider block-item full-size" id="imageWithContentSlider"><ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1,"infinite": true}'>${sliderLi.join('')}</ul></div><div class="divider"></div>`;
@@ -730,16 +733,24 @@ export function collectionPreview(blockData) {
             ${blockData.imagesCollection.items[2] ? `<img src="${blockData.imagesCollection.items[2].url}" alt="${blockData.imagesCollection.items[2].description}"/>` : ''}
             </div></div></div></div> <div class="divider"></div>`;
         } else {
+            let leftImg = '';
+            if (blockData.imagesCollection.items[0]) {
+                leftImg = `<span><img src="${blockData.imagesCollection.items[0].url}"  alt="${blockData.imagesCollection.items[0].description}"/></span>`;
+            }
+            let rightImg = '';
+            if (blockData.imagesCollection.items[1]) {
+                rightImg = `<div class="rightImg">
+                <span><img src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].description}"/></span>
+                </div>`;
+            }
             return `<div class="blockElementCollectionPreview block-item" id="blockElementCollectionPreview"><div class="previewblock">
             <div class="caption"><h4>${blockData.title}</h4><p>${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
-            <div class="imagesection"><div class="leftImg"><span><img src="${blockData.imagesCollection.items[0].url}"  alt="${blockData.imagesCollection.items[0].description}"/></span>
+            <div class="imagesection"><div class="leftImg">${leftImg}
             <div class="dateSection">
             ${blockData.photoCaption !== null ? `<p>${blockData.photoCaption}</p>` : ''}
             ${blockData.photoCaptionDate !== null ? `<p>${blockData.photoCaptionDate}</p>` : ''}
             </div>
-            </div><div class="rightImg">
-            <span><img src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].description}"/></span>
-            </div></div></div></div><div class="divider"></div>`;
+            </div>${rightImg}</div></div></div><div class="divider"></div>`;
         }
     } else {
         return '';
@@ -757,8 +768,12 @@ export function blockElementVerticalGallery(blockData) {
             if(item.description === '') {
                 return `<div class="contentDiv"><img src="${item.url}" alt="${item.title}" /></div>`;
             } else {
-                let descriptionArr = item.description.split('—');
-                return `<div class="contentDiv"><img src="${item.url}" alt="${item.title}" /><p class="caption">${descriptionArr[0]}<span class="author">-${descriptionArr[1]}</span></p></div>`;
+                let descriptionArr = (item.description) ? item.description.split('—') : '';
+                let descriptionHtml = '';
+                if (descriptionArr.length > 0) {
+                    descriptionHtml = `<p class="caption">${descriptionArr[0]}<span class="author">-${descriptionArr[1]}</span></p>`;
+                }
+                return `<div class="contentDiv"><img src="${item.url}" alt="${item.title}" />${descriptionHtml}</div>`;
             }
         }
     });

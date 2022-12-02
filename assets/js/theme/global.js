@@ -40,7 +40,8 @@ import {
     lookBookglobal,
     leftTextBlockglobal,
     blockElementCopyBlock,
-    logoSliderBlock
+    logoSliderBlock,
+    globalblockElementFullscreenVideo
 } from './BP/universal-blocks';
 
 export default class Global extends PageManager {
@@ -130,6 +131,42 @@ export default class Global extends PageManager {
                     if(element.__typename === "BlockElement3ImagesScreenWidth"){
                         return blockElement3ImagesScreenWidth(element);
                     }
+                    if (element.__typename === "BlockElementCollectionPreview") {
+                        return collectionPreview(element);
+                    }
+                    if (element.__typename === "BlockElementBigCarouselSlider") {
+                        return imageWithContentSlider(element);
+                    }
+                    if (element.__typename === "BlockElementDiscover") {
+                        return blockElementDiscover(element);
+                    }
+                    if (element.__typename === "BlockElementVerticalGallery") {
+                        return blockElementVerticalGallery(element);
+                    }
+                    if (element.__typename === "BlockElementImages2ColumnRight") {
+                        return blockElementImages2ColumnRight(element);
+                    }
+                    if (element.__typename === "BlockElementImageLeftCopyRight") {
+                        return blockElementImageLeftCopyRight(element);
+                    }
+                    if (element.__typename === "BlockElementLookbook") {
+                        return lookBookglobal(element);
+                    }
+                    if (element.__typename === "ReferencedBlockCategoryBanners") {
+                        return leftTextBlockglobal('leftTextbanner', element);
+                    }
+                    if (element.__typename === "ReferencedBlockCategoryBanners" && element.layoutOrientation === "Image Right") {
+                        return leftTextBlockglobal('rightTextbanner', element);
+                    }
+                    if (element.__typename === "BlockElementCopyBlock") {
+                        return blockElementCopyBlock(element);
+                    }
+                    if (element.__typename === "ReferencedBlockLogoRow") {
+                        return logoSliderBlock(element);
+                    }
+                    if (element.__typename === "BlockElementFullscreenVideo") {
+                        return globalblockElementFullscreenVideo(element);
+                    }
                 }).join('');
 
                 document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;
@@ -218,14 +255,20 @@ export default class Global extends PageManager {
                             return leftTextBlockglobal('leftTextbanner', ele);
                         }
                         if (ele.__typename === "ReferencedBlockCategoryBanners" && ele.layoutOrientation === "Image Right") {
-                            return leftTextBlockglobal('rightTextbanner', element);
+                            return leftTextBlockglobal('rightTextbanner', ele);
                         }
                         if (ele.__typename === "BlockElementCopyBlock") {
                             return blockElementCopyBlock(ele);
                         }
                         if (ele.__typename === "ReferencedBlockLogoRow") {
                             return logoSliderBlock(ele);
-                        }    
+                        }  
+                        if (ele.__typename === "BlockElementFullscreenVideo") {
+                            return globalblockElementFullscreenVideo(ele);
+                        }  
+                        if (ele.__typename === "BlockElement3ImagesScreenWidth") {
+                            return blockElement3ImagesScreenWidth(ele);
+                        }
                     });
 
                     document.getElementById('contentBlocksCollection').innerHTML = blocksCollections.join('');
