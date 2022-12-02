@@ -1,6 +1,8 @@
 import { MarkerClusterer } from '@googlemaps/markerclusterer'
 // import is required by client, not by code
 import regeneratorRuntime from 'regenerator-runtime'
+
+import { defaultModal } from '../global/modal';
 import PageManager from '../page-manager'
 
 
@@ -150,8 +152,7 @@ export default class RetailFinder extends PageManager {
         this.paintMapAndRetailers(this.retailers, retailer);
       }
     });
-
-  }
+  };
 
   createRetailerItem = (retailer, total, idx) => {
     const mainContainer = document.createElement('div');
@@ -189,23 +190,18 @@ export default class RetailFinder extends PageManager {
     numCollections.innerText = `Carries ${retailer.collectionsAvailableCollection.items.length} collections`;
     container.append(numCollections)
 
-    // todo evaluate featured
-    // cant add icons via svg so unsure if this is plausible
-    // save for 1.2
-    if (true) {
-      const featuredCollections = document.createElement('svg');
-      const icon = document.createElement('use');
-      icon.setAttribute('xlink:href', '#icon-retailer-featured');
-      featuredCollections.append(icon);
+    if (retailer.featured) {
+      const featuredCollections = document.createElement('div');
+      featuredCollections.classList.add('featured');
       container.append(featuredCollections);
     }
 
 
-    // todo evaluate platinum collections
-    // same as featured todo above
-    if (true) {
-
-    }
+    if (retailer.disneyPlatinumCollection) {
+      const disneyCollections = document.createElement('div');
+      disneyCollections.classList.add('disney');
+      container.append(disneyCollections);
+    };
 
     // hover events
     mainContainer.addEventListener('mouseenter', () => {
@@ -217,6 +213,9 @@ export default class RetailFinder extends PageManager {
       const retailerExitEvent = new CustomEvent(RETAILER_ITEM_HOVER_EVENT, { detail: null });
       document.dispatchEvent(retailerExitEvent);
     });
+
+    // click event
+    mainContainer.addEventListener('click', () => this.openDetailsModal(retailer));
 
     return mainContainer;
   };
@@ -542,6 +541,10 @@ export default class RetailFinder extends PageManager {
                         collectionName
                     }
                 }
+                featured
+                disneyPlatinumCollection
+                retailerStreet
+                phoneNumber
             }
         }
     }`
@@ -586,7 +589,7 @@ export default class RetailFinder extends PageManager {
     const initialSort = this.SORTABLES[1].value;
     sortSelect.value = initialSort;
     this.sortRetailers(null, initialSort);
-  }
+  };
 
   // google maps api has no way to reference existing markers
   // so we have to re-paint every time the data to show, retailerData, changes
@@ -627,5 +630,108 @@ export default class RetailFinder extends PageManager {
     if (!centerRetailer) {
       this.addRetailerInfo(retailerData);
     }
+  };
+
+  openDetailsModal = (retailer) => {
+    const detailElement = document.createElement('div');
+    detailElement.classList.add('retailer-details');
+
+    const header = document.createElement('div');
+    header.classList.add('retailer-header');
+
+    if (retailer.featured) {
+      const featuredElement = document.createElement('span');
+      featuredElement.classList.add('featured');
+      header.append(featuredElement);
+    }
+
+    const nameElement = document.createElement('h2');
+    nameElement.classList.add('header-title');
+    nameElement.innerText = retailer.retailerName;
+    header.append(nameElement);
+
+    const locationElement = document.createElement('span');
+    locationElement.classList.add('location');
+    locationElement.innerText = `${retailer.retailerCity}, ${retailer.state}`;
+    header.append(locationElement);
+    detailElement.append(header);
+
+    const collections = document.createElement('div');
+    collections.classList.add('collections');
+    const collectionsHeader = document.createElement('span');
+    collectionsHeader.classList.add('retailer-label');
+    collectionsHeader.innerText = 'COLLECTIONS';
+    collections.append(collectionsHeader);
+
+    const collectionsList = document.createElement('div');
+    collectionsList.classList.add('collections-list');
+    for (const collection of retailer.collectionsAvailableCollection.items) {
+      const collectionItem = document.createElement('div');
+      collectionItem.classList.add('collection-item');
+      collectionItem.classList.add('retailer-detail');
+      collectionItem.innerText = collection.collectionName;
+      collectionsList.append(collectionItem);
+    };
+    collections.append(collectionsList);
+    detailElement.append(collections);
+
+    const address = document.createElement('div');
+    address.classList.add('retailer-address');
+    const addressLabel = document.createElement('span');
+    addressLabel.classList.add('retailer-label');
+    addressLabel.innerText = 'ADDRESS';
+    address.append(addressLabel);
+    const streetAddress = document.createElement('div');
+    streetAddress.classList.add('street-address');
+    streetAddress.classList.add('retailer-detail');
+    streetAddress.innerText = retailer.retailerStreet;
+    address.append(streetAddress);
+    const directions = document.createElement('a');
+    directions.classList.add('directions');
+    directions.innerText = 'GET DIRECTIONS'
+    const start = this.originalUserLocationName.replaceAll(',', '').replaceAll(' ', '+');
+    const destination = retailer.retailerStreet.replaceAll(',', '').replaceAll(' ', '+');
+    directions.setAttribute('href', `https://www.google.com/maps?saddr=${start}&daddr=${destination}`);
+    directions.setAttribute('target', '_blank');
+    directions.setAttribute('rel', 'noopener noreferrer');
+    address.append(directions);
+    detailElement.append(address);
+
+    const phone = document.createElement('div');
+    phone.classList.add('phone');
+    const phoneLabel = document.createElement('div');
+    phoneLabel.classList.add('retailer-label');
+    phoneLabel.innerText = 'PHONE';
+    phone.append(phoneLabel);
+    const phoneNumber = document.createElement('div');
+    phoneNumber.classList.add('retailer-detail');
+    phoneNumber.innerText = retailer.phoneNumber;
+    phone.append(phoneNumber)
+    detailElement.append(phone);
+
+    const scheduleBtn = document.createElement('button');
+    scheduleBtn.setAttribute('type', 'button');
+    scheduleBtn.classList.add('schedule-btn');
+    const btnText = document.createElement('span');
+    btnText.innerText = 'BOOK AN APPOINTMENT'
+    scheduleBtn.append(btnText);
+    scheduleBtn.addEventListener('click', () => this.openScheduler(retailer));
+
+    detailElement.append(scheduleBtn);
+
+    const modal = defaultModal({ size: 'normal', skipCache: true });
+    modal.open();
+    modal.updateContent(detailElement, { wrap: true });
+  };
+
+  openScheduler = (retailer) => {
+    const modal = defaultModal({ size: 'large', skipCache: true });
+    modal.open();
+    const scheduler = document.createElement('iframe');
+    scheduler.setAttribute('src', `https://qa.bridallive.com/forms.html?formType=scheduler&retailerId=${retailer.bridalLiveRetailerId}`);
+    scheduler.setAttribute('width', '100%');
+    scheduler.setAttribute('height', '100%');
+    modal.updateContent(scheduler);
   }
+
 };
