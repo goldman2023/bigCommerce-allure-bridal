@@ -6,7 +6,15 @@ import {
     blockElementImageLeftCopyRight,
     blogpostTopBanner,
     blogpostContentBlock,
-    blockElementStory 
+    blockElementStory,
+    collectionPreview,
+    imageWithContentSlider,
+    blockElementDiscover,
+    blockElementVerticalGallery,
+    lookBookglobal,
+    leftTextBlockglobal,
+    blockElementCopyBlock,
+    logoSliderBlock
     } from '../BP/universal-blocks';
 export default class Blog extends PageManager {
     constructor(context) {
@@ -62,6 +70,33 @@ export default class Blog extends PageManager {
             if(element.__typename === "BlockElementStoryBlock"){
                 return blockElementStory(element); 
             }
+            if (element.__typename === "BlockElementCollectionPreview") {
+                return collectionPreview(element);
+            }
+            if (element.__typename === "BlockElementBigCarouselSlider") {
+                return imageWithContentSlider(element);
+            }
+            if (element.__typename === "BlockElementDiscover") {
+                return blockElementDiscover(element);
+            }
+            if (element.__typename === "BlockElementVerticalGallery") {
+                return blockElementVerticalGallery(element);
+            }
+            if (element.__typename === "BlockElementLookbook") {
+                return lookBookglobal(element);
+            }
+            if (element.__typename === "ReferencedBlockCategoryBanners") {
+                return leftTextBlockglobal('leftTextbanner', element);
+            }
+            if (element.__typename === "ReferencedBlockCategoryBanners" && element.layoutOrientation === "Image Right") {
+                return leftTextBlockglobal('rightTextbanner', element);
+            }
+            if (element.__typename === "BlockElementCopyBlock") {
+                return blockElementCopyBlock(element);
+            }
+            if (element.__typename === "ReferencedBlockLogoRow") {
+                return logoSliderBlock(element);
+            }    
         }).join('');
         document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;
     }
