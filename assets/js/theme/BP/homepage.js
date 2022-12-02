@@ -13,7 +13,8 @@ import {
     imageWithContentSlider,
     blockElementCopyBlock,
     logoSliderBlock,
-    events
+    events,
+    globalblockElementFullscreenVideo
     } from './universal-blocks';
 export default class Homepage extends PageManager {
     constructor(context) {
@@ -69,7 +70,12 @@ export default class Homepage extends PageManager {
              if(element.__typename === "BlockElementBigCarouselSlider" ){
                 return imageWithContentSlider(element);
             }
+            if(element.__typename === "BlockElementFullscreenVideo") {
+                return globalblockElementFullscreenVideo(element);
+            }
         }).join('');
+
+        console.log(blocksCollections);
         document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;
 
         document.querySelectorAll('.imageWithContentSlider ul').forEach((item) => {
