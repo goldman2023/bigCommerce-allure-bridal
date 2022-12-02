@@ -712,7 +712,7 @@ export function imageWithContentSlider(blockData) {
         return `<li><div class="blockrow"><div class="leftblock block">
         <img src="${item.imagesCollection.items[0].url}" alt="image left block" />
         </div><div class="rightblock block"><div class="caption">
-        <h2 class="title">${item.title}</h2><p class="content">${(item.bodyCopy) ? item.bodyCopy : ''}</p><a href="${(item.linkUrl) ? item.linkUrl : ''}" class="buttonlink">${(item.linkText) ? item.linkText : ''}</a>
+        <h2 class="title">${item.title}</h2><p class="content">${(item.bodyCopy) ? item.bodyCopy : ''}</p>${item.linkUrl ? `<a href="${(item.linkUrl) ? item.linkUrl : ''}" class="buttonlink">${(item.linkText) ? item.linkText : ''}</a>` : ''}
         </div></div></div></li>`
     });
     return `<div class="imageWithContentSlider block-item full-size" id="imageWithContentSlider"><ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1,"infinite": true}'>${sliderLi.join('')}</ul></div><div class="divider"></div>`;
