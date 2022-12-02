@@ -121,7 +121,7 @@ export default class Global extends PageManager {
                 let metadata = response.contentFul;
                 let relatedPro = response.related;
                 console.log(metadata);
-                let blocksCollections = metadata.contentBlocksCollection.items.map(element => {
+                let blocksCollections = metadata?.contentBlocksCollection?.items?.map(element => {
                     if(element.__typename === "BlockElementStoryBlock"){
                         return blockElementStory(element);
                     }
@@ -171,7 +171,7 @@ export default class Global extends PageManager {
 
                 document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;
 
-                metadata.contentBlocksCollection.items.forEach(element => {
+                metadata?.contentBlocksCollection?.items?.forEach(element => {
                     if(element.__typename === "BlockElementLookbook"){
                         lookBook('blockElementLookbook',element);
                     }
@@ -187,6 +187,9 @@ export default class Global extends PageManager {
                         getProducts(contentId,'.youMightalsoLike .prodData',youmaylike);
                     }
                 }
+                document.querySelectorAll('.imageWithContentSlider ul').forEach((item) => {
+                    applySlider(item,1,false,true);
+                });
             });
         }
         //Product Detail page end
@@ -272,7 +275,10 @@ export default class Global extends PageManager {
                     });
 
                     document.getElementById('contentBlocksCollection').innerHTML = blocksCollections.join('');
-                    applySlider('.imageWithContentSlider ul',1,false,true);
+
+                    document.querySelectorAll('.imageWithContentSlider ul').forEach((item) => {
+                        applySlider(item,1,false,true);
+                    });
                   });
             });
         }
