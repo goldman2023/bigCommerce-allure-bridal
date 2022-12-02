@@ -608,7 +608,7 @@ export function blockElementFullscreenVideo(selectorID,element) {
     }
 }
 
-export function globalblockElementFullscreenVideo(selectorID,element) {
+export function globalblockElementFullscreenVideo(element) {
     let videoURL = '';
     if(element.videoUrl.includes('youtube')) {
         videoURL = `https://www.youtube.com/embed/${element.videoUrl.split('=')[1]}`;
