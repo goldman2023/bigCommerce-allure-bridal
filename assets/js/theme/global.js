@@ -164,6 +164,7 @@ export default class Global extends PageManager {
             getCategorySpecificMetaData(this.context, geturl, response => {
                 let categoryData = response[0].value;
                 categoryData.items.forEach(element => {
+                    console.log('element', element);
                     if(element.collectionName === document.getElementById('categoryLanding').getAttribute('data-id')) {
                       if(element.collectionBannerImage1) {
                         blockElementFullscreenVideo('blockElementFullscreenVideo',element.collectionBannerImage1);
@@ -173,7 +174,7 @@ export default class Global extends PageManager {
                       document.querySelector('.productSlider .heading').innerHTML= `${heading.replace(lastword,'')} <span class="lastword">${lastword}</span>`
                       let stringArray = element.productsInCollection;
                       let numberArray = [];
-                      length = stringArray.length;
+                      let length = (element.productsInCollection) ? stringArray.length : 0;
                       for (var i = 0; i < length; i++){
                         if(stringArray[i] !== ""){
                           numberArray.push(parseInt(stringArray[i]));
