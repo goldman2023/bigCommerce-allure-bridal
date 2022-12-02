@@ -716,32 +716,34 @@ export function imageWithContentSlider(blockData) {
 };
 
 export function collectionPreview(blockData) {
-
-    if(blockData.imagesCollection.items.length > 2){
-        return `<div class="blockElementCollectionPreview block-item" id="blockElementCollectionPreview"><div class="previewblock">
-        <div class="caption"><h4>${blockData.title}</h4><p>${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
-        <div class="imagesection"><div class="leftImg half"><img src="${blockData.imagesCollection.items[0].url}"  alt="${blockData.imagesCollection.items[0].description}"/>
-        <div class="dateSection">
-        ${blockData.photoCaption !== null ? `<p>${blockData.photoCaption}</p>` : ''}
-        ${blockData.photoCaptionDate !== null ? `<p>${blockData.photoCaptionDate}</p>` : ''}
-        </div>
-        </div><div class="rightImg half">
-        <img src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].description}"/>
-        ${blockData.imagesCollection.items[2] ? `<img src="${blockData.imagesCollection.items[2].url}" alt="${blockData.imagesCollection.items[2].description}"/>` : ''}
-        </div></div></div></div> <div class="divider"></div>`;
+    if (blockData.imagesCollection.items.length > 0) {
+        if (blockData.imagesCollection.items.length > 2) {
+            return `<div class="blockElementCollectionPreview block-item" id="blockElementCollectionPreview"><div class="previewblock">
+            <div class="caption"><h4>${blockData.title}</h4><p>${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
+            <div class="imagesection"><div class="leftImg half"><img src="${blockData.imagesCollection.items[0].url}"  alt="${blockData.imagesCollection.items[0].description}"/>
+            <div class="dateSection">
+            ${blockData.photoCaption !== null ? `<p>${blockData.photoCaption}</p>` : ''}
+            ${blockData.photoCaptionDate !== null ? `<p>${blockData.photoCaptionDate}</p>` : ''}
+            </div>
+            </div><div class="rightImg half">
+            <img src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].description}"/>
+            ${blockData.imagesCollection.items[2] ? `<img src="${blockData.imagesCollection.items[2].url}" alt="${blockData.imagesCollection.items[2].description}"/>` : ''}
+            </div></div></div></div> <div class="divider"></div>`;
+        } else {
+            return `<div class="blockElementCollectionPreview block-item" id="blockElementCollectionPreview"><div class="previewblock">
+            <div class="caption"><h4>${blockData.title}</h4><p>${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
+            <div class="imagesection"><div class="leftImg"><span><img src="${blockData.imagesCollection.items[0].url}"  alt="${blockData.imagesCollection.items[0].description}"/></span>
+            <div class="dateSection">
+            ${blockData.photoCaption !== null ? `<p>${blockData.photoCaption}</p>` : ''}
+            ${blockData.photoCaptionDate !== null ? `<p>${blockData.photoCaptionDate}</p>` : ''}
+            </div>
+            </div><div class="rightImg">
+            <span><img src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].description}"/></span>
+            </div></div></div></div><div class="divider"></div>`;
+        }
     } else {
-        return `<div class="blockElementCollectionPreview block-item" id="blockElementCollectionPreview"><div class="previewblock">
-        <div class="caption"><h4>${blockData.title}</h4><p>${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
-        <div class="imagesection"><div class="leftImg"><span><img src="${blockData.imagesCollection.items[0].url}"  alt="${blockData.imagesCollection.items[0].description}"/></span>
-        <div class="dateSection">
-        ${blockData.photoCaption !== null ? `<p>${blockData.photoCaption}</p>` : ''}
-        ${blockData.photoCaptionDate !== null ? `<p>${blockData.photoCaptionDate}</p>` : ''}
-        </div>
-        </div><div class="rightImg">
-        <span><img src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].description}"/></span>
-        </div></div></div></div><div class="divider"></div>`;
+        return '';
     }
-    
 };
 
 export function leftTextBlockglobal(selectorId,blockData) {

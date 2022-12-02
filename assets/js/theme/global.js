@@ -34,7 +34,14 @@ import {
     lookBook,
     getFirstprodImageFromCategory,
     createCategorySlider,
-    collectionPreview} from './BP/universal-blocks';
+    collectionPreview,
+    blockElementImages2ColumnRight,
+    blockElementImageLeftCopyRight,
+    lookBookglobal,
+    leftTextBlockglobal,
+    blockElementCopyBlock,
+    logoSliderBlock
+} from './BP/universal-blocks';
 
 export default class Global extends PageManager {
     onReady() {
@@ -183,21 +190,42 @@ export default class Global extends PageManager {
                       getProducts(this.context,'.productSlider .productGridSection',numberArray,3);
                     }
                     let blocksCollections = element.contentBlocksCollection.items.map(ele => {
-                        if(ele.__typename === "BlockElementCollectionPreview"){
+                        if (ele.__typename === "BlockElementCollectionPreview"){
                            return collectionPreview(ele);
                         }
-                        if(ele.__typename === "BlockElementBigCarouselSlider"){
+                        if (ele.__typename === "BlockElementBigCarouselSlider"){
                             return imageWithContentSlider(ele);
                         }
-                        if(ele.__typename === "BlockElementDiscover"){
+                        if (ele.__typename === "BlockElementDiscover"){
                             return blockElementDiscover(ele);
                         }
-                        if(ele.__typename === "BlockElementVerticalGallery"){
+                        if (ele.__typename === "BlockElementVerticalGallery"){
                             return blockElementVerticalGallery(ele);
                         }
-                        if(ele.__typename === "BlockElementFullscreenImage"){
+                        if (ele.__typename === "BlockElementFullscreenImage"){
                             return blockElementFullscreenImage(ele);
                         }
+                        if (ele.__typename === "BlockElementImages2ColumnRight") {
+                            return blockElementImages2ColumnRight(ele);
+                        }
+                        if (ele.__typename === "BlockElementImageLeftCopyRight") {
+                            return blockElementImageLeftCopyRight(ele);
+                        }
+                        if (ele.__typename === "BlockElementLookbook") {
+                            return lookBookglobal(ele);
+                        }
+                        if (ele.__typename === "ReferencedBlockCategoryBanners") {
+                            return leftTextBlockglobal('leftTextbanner', ele);
+                        }
+                        if (ele.__typename === "ReferencedBlockCategoryBanners" && ele.layoutOrientation === "Image Right") {
+                            return leftTextBlockglobal('rightTextbanner', element);
+                        }
+                        if (ele.__typename === "BlockElementCopyBlock") {
+                            return blockElementCopyBlock(ele);
+                        }
+                        if (ele.__typename === "ReferencedBlockLogoRow") {
+                            return logoSliderBlock(ele);
+                        }    
                     });
 
                     document.getElementById('contentBlocksCollection').innerHTML = blocksCollections.join('');
