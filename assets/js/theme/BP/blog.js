@@ -1,4 +1,6 @@
 import PageManager from '../page-manager';
+import '../global/jquery-migrate';
+
 import {
     blockElement3ImagesScreenWidth,
     blockElementFullscreenImage,
@@ -52,6 +54,46 @@ export default class Blog extends PageManager {
         }
         let dateformatted = `${dayvariable[new Date(date).getDay()]}, ${monthVariable[new Date(date).getMonth()]} ${new Date(date).getDate()}, ${new Date(date).getFullYear()}`;
 
+        function applySlider(selector,slide,centerM,infinity) {
+            let centermood = false;
+            let infinitymode = false;
+            if(centerM){
+                centermood = centerM;
+            }
+            if(infinity) {
+                infinitymode = infinity;
+            }
+            $(selector).slick({
+                dots: false,
+                infinite: infinitymode,
+                speed: 300,
+                slidesToShow: slide,
+                slidesToScroll: 1,
+                centerMode: centerM,
+                responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                    slidesToShow: slide,
+                    slidesToScroll: 1,
+                    infinite: infinitymode,
+                    dots: false
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: { 
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        centerMode: true,
+                        infinite: infinitymode,
+                        dots: false
+                    }
+                }
+                ]
+            });
+        };
+
         blogpostTopBanner('topBanner',metadata[1].title, metadata[1].headline,metadata[1].headlineImage,dateformatted);
         blogpostContentBlock('content-section',metadata[1]);
         let blocksCollections = metadata[1].contentBlocksCollection.items.map(element => {
@@ -99,6 +141,8 @@ export default class Blog extends PageManager {
             }    
         }).join('');
         document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;
+
+        applySlider('.imageWithContentSlider ul',1,false,true);
     }
 
 }

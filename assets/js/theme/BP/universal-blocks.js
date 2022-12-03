@@ -544,8 +544,6 @@ export function getCategorySpecificMetaData(context,path, callback) {
 export function getProducts(context, selector, prodList, slidescroll) {
     let prodArray = [];
     prodArray = prodList;
-    console.log('prodList', prodList);
-    console.log('selector', selector);
     let products = [];
     if (selector === '.thePerfectMatch .prodData' || selector === '.youMightalsoLike .prodData' || selector === '.productSlider .productGridSection') {
         products = prodArray;
@@ -584,7 +582,6 @@ export function getProducts(context, selector, prodList, slidescroll) {
         .then(res => res.json())
         .then(productsData => {
             const productArray = productsData.data.site.products.edges;
-            console.log('productArray', productArray);
             let prdlist = [];
             if (productArray.length > 0) {
                 prdlist = productCard(productArray);
@@ -681,13 +678,14 @@ export function blockElementDiscover(blockData) {
     return `<div class="blockElementDiscover block-item" id="blockElementDiscover">
                 <div class="discovery-section">
                     <div class="imageflex">
-                        <div><img class="first" src="${blockData.imagesCollection.items[0].url}" alt="${blockData.imagesCollection.items[0].title}" /><img class="second" src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].title}"/></div>
-                        <div><img  class="third" src="${blockData.imagesCollection.items[2].url}"  alt="${blockData.imagesCollection.items[2].title}" /></div>
+                        <div>${blockData?.imagesCollection?.items[0]?.url ? `<img class="first" src="${blockData?.imagesCollection?.items[0]?.url}" alt="${blockData?.imagesCollection?.items[0]?.title}" />` : ''}
+                        ${blockData?.imagesCollection?.items[1]?.url ? `<img class="second" src="${blockData?.imagesCollection?.items[1]?.url}" alt="${blockData?.imagesCollection?.items[1]?.title}"/>` : ''}</div>
+                        <div>${blockData?.imagesCollection?.items[2]?.url ? `<img  class="third" src="${blockData?.imagesCollection?.items[2]?.url}"  alt="${blockData?.imagesCollection?.items[2]?.title}" />` : '' }</div>
                     </div>
                     <div class="caption">
-                        <h2>${blockData.blocktitle}</h2>
-                        <p class="content">${blockData.bodyCopy}</p>
-                        <button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button>
+                        <h2>${blockData?.blocktitle}</h2>
+                        <p class="content">${blockData?.bodyCopy}</p>
+                        <button href="${blockData?.linkUrl}" class="button button--secondary buttonlink">${blockData?.linkText}</button>
                     </div>
                 </div>
             </div><div class="divider"></div>`;
@@ -712,14 +710,14 @@ export function imageWithContentSlider(blockData) {
         return `<li><div class="blockrow"><div class="leftblock block">
         <img src="${item.imagesCollection.items[0].url}" alt="image left block" />
         </div><div class="rightblock block"><div class="caption">
-        <h2 class="title">${item.title}</h2><p class="content">${(item.bodyCopy) ? item.bodyCopy : ''}</p><a href="${(item.linkUrl) ? item.linkUrl : ''}" class="buttonlink">${(item.linkText) ? item.linkText : ''}</a>
+        <h2 class="title">${item.title}</h2><p class="content">${(item.bodyCopy) ? item.bodyCopy : ''}</p>${item.linkUrl ? `<a href="${(item.linkUrl) ? item.linkUrl : ''}" class="buttonlink">${(item.linkText) ? item.linkText : ''}</a>` : ''}
         </div></div></div></li>`
     });
     return `<div class="imageWithContentSlider block-item full-size" id="imageWithContentSlider"><ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1,"infinite": true}'>${sliderLi.join('')}</ul></div><div class="divider"></div>`;
 };
 
 export function collectionPreview(blockData) {
-    if (blockData.imagesCollection.items.length > 0) {
+    if (blockData?.imagesCollection?.items?.length > 0) {
         if (blockData.imagesCollection.items.length > 2) {
             return `<div class="blockElementCollectionPreview block-item" id="blockElementCollectionPreview"><div class="previewblock">
             <div class="caption"><h4>${blockData.title}</h4><p>${blockData.bodyCopy}</p><button href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</button></div>
@@ -734,11 +732,11 @@ export function collectionPreview(blockData) {
             </div></div></div></div> <div class="divider"></div>`;
         } else {
             let leftImg = '';
-            if (blockData.imagesCollection.items[0]) {
+            if (blockData?.imagesCollection?.items[0]) {
                 leftImg = `<span><img src="${blockData.imagesCollection.items[0].url}"  alt="${blockData.imagesCollection.items[0].description}"/></span>`;
             }
             let rightImg = '';
-            if (blockData.imagesCollection.items[1]) {
+            if (blockData?.imagesCollection?.items[1]) {
                 rightImg = `<div class="rightImg">
                 <span><img src="${blockData.imagesCollection.items[1].url}" alt="${blockData.imagesCollection.items[1].description}"/></span>
                 </div>`;
@@ -763,32 +761,33 @@ export function leftTextBlockglobal(selectorId,blockData) {
 };
 
 export function blockElementVerticalGallery(blockData) {
-    let leftData = blockData.imagesCollection.items.map((item,i) => {
-        if(i < 3) {
-            if(item.description === '') {
-                return `<div class="contentDiv"><img src="${item.url}" alt="${item.title}" /></div>`;
-            } else {
-                let descriptionArr = (item.description) ? item.description.split('—') : '';
-                let descriptionHtml = '';
-                if (descriptionArr.length > 0) {
-                    descriptionHtml = `<p class="caption">${descriptionArr[0]}<span class="author">-${descriptionArr[1]}</span></p>`;
+    if(blockData.imagesCollection) {
+        let leftData = blockData?.imagesCollection?.items?.map((item,i) => {
+            if(i < 3) {
+                if(item.description === '') {
+                    return `<div class="contentDiv"><img src="${item.url}" alt="${item.title}" /></div>`;
+                } else {
+                    let descriptionArr = (item.description) ? item.description.split('—') : '';
+                    let descriptionHtml = '';
+                    if (descriptionArr.length > 0) {
+                        descriptionHtml = `<p class="caption">${descriptionArr[0]}<span class="author">-${descriptionArr[1]}</span></p>`;
+                    }
+                    return `<div class="contentDiv"><img src="${item.url}" alt="${item.title}" />${descriptionHtml}</div>`;
                 }
-                return `<div class="contentDiv"><img src="${item.url}" alt="${item.title}" />${descriptionHtml}</div>`;
             }
-        }
-    });
-    let rightData = blockData.imagesCollection.items.map((item,i) => {
-        if(i > 2) {
-            if(item.description === '') {
-                return `<div class="contentDiv"><img src="${item.url}" alt="${item.title}" /></div>`;
-            } else {
-                let descriptionArr = item.description.split('—');
-                return `<div class="contentDiv"><img src="${item.url}" alt="${item.title}" /><p class="caption">${descriptionArr[0]}<span class="author">-${descriptionArr[1]}</span></p></div>`;
+        });
+        let rightData = blockData?.imagesCollection?.items?.map((item,i) => {
+            if(i > 2) {
+                if(item.description === '') {
+                    return `<div class="contentDiv"><img src="${item.url}" alt="${item.title}" /></div>`;
+                } else {
+                    let descriptionArr = item.description.split('—');
+                    return `<div class="contentDiv"><img src="${item.url}" alt="${item.title}" /><p class="caption">${descriptionArr[0]}<span class="author">-${descriptionArr[1]}</span></p></div>`;
+                }
             }
-        }
-    });
-
-    return `<div class="blockElementVerticalGallery block-item full-size" id="blockElementVerticalGallery"><div class="backgroundoverlay"></div><div class="verticalcontainer"><div class="verticalBlock"><div class="verticalLeftCol">${leftData.join('')}</div><div class="verticalRightCol">${rightData.join('')}</div></div></div></div><div class="divider"></div>`;
+        });
+        return `<div class="blockElementVerticalGallery block-item full-size" id="blockElementVerticalGallery"><div class="backgroundoverlay"></div><div class="verticalcontainer"><div class="verticalBlock"><div class="verticalLeftCol">${leftData?.join('')}</div><div class="verticalRightCol">${rightData?.join('')}</div></div></div></div><div class="divider"></div>`;
+    }
 };
 
 function productCard(products) {
