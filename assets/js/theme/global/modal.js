@@ -261,16 +261,14 @@ export class Modal {
  */
 export default function modalFactory(selector = '[data-reveal]', options = {}) {
     const $modals = $(selector, options.$context);
-
     return $modals.map((index, element) => {
         const $modal = $(element);
         const instanceKey = 'modalInstance';
         const cachedModal = $modal.data(instanceKey);
 
-        if (cachedModal instanceof Modal) {
+        if (cachedModal instanceof Modal && !options.skipCache) {
             return cachedModal;
         }
-
         const modal = new Modal($modal, options);
 
         $modal.data(instanceKey, modal);
@@ -282,8 +280,8 @@ export default function modalFactory(selector = '[data-reveal]', options = {}) {
 /*
  * Return the default page modal
  */
-export function defaultModal() {
-    return modalFactory('#modal')[0];
+export function defaultModal(options) {
+    return modalFactory('#modal', options)[0];
 }
 
 /*
