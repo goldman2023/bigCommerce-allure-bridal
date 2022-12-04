@@ -153,7 +153,7 @@
         }
         .caption {
             width: 78%;
-            padding: 30px 0;
+            padding: 30px 0 0;
             display: none;
             @include breakpoint("medium") {
                 display: block; 
@@ -175,6 +175,7 @@
                 }
             }
             .button {
+                margin: 0;
                 @media only screen and (min-width: 2800px) {
                     font-size: remCalc(20px);
                     line-height: remCalc(20px);
@@ -187,6 +188,7 @@
                 float: left;
                 position: absolute;
                 margin-top: 0;
+                bottom: 0;
             }
             position: relative;
             float: right;
