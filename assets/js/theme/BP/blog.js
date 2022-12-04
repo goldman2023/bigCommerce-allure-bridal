@@ -16,7 +16,8 @@ import {
     lookBookglobal,
     leftTextBlockglobal,
     blockElementCopyBlock,
-    logoSliderBlock
+    logoSliderBlock,
+    BlockElementBigCarousel
     } from '../BP/universal-blocks';
 export default class Blog extends PageManager {
     constructor(context) {
@@ -117,6 +118,9 @@ export default class Blog extends PageManager {
             }
             if (element.__typename === "BlockElementBigCarouselSlider") {
                 return imageWithContentSlider(element);
+            }
+            if (element.__typename === "BlockElementBigCarousel") {
+                return BlockElementBigCarousel(element);
             }
             if (element.__typename === "BlockElementDiscover") {
                 return blockElementDiscover(element);

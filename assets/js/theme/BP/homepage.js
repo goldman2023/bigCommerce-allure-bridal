@@ -14,7 +14,8 @@ import {
     blockElementCopyBlock,
     logoSliderBlock,
     events,
-    globalblockElementFullscreenVideo
+    globalblockElementFullscreenVideo,
+    BlockElementBigCarousel
     } from './universal-blocks';
 export default class Homepage extends PageManager {
     constructor(context) {
@@ -72,6 +73,9 @@ export default class Homepage extends PageManager {
             }
             if(element.__typename === "BlockElementFullscreenVideo") {
                 return globalblockElementFullscreenVideo(element);
+            }
+            if (element.__typename === "BlockElementBigCarousel") {
+                return BlockElementBigCarousel(element);
             }
         }).join('');
 

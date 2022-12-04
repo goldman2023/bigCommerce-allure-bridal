@@ -41,7 +41,8 @@ import {
     leftTextBlockglobal,
     blockElementCopyBlock,
     logoSliderBlock,
-    globalblockElementFullscreenVideo
+    globalblockElementFullscreenVideo,
+    BlockElementBigCarousel
 } from './BP/universal-blocks';
 
 export default class Global extends PageManager {
@@ -137,6 +138,9 @@ export default class Global extends PageManager {
                     if (element.__typename === "BlockElementBigCarouselSlider") {
                         return imageWithContentSlider(element);
                     }
+                    if (element.__typename === "BlockElementBigCarousel") {
+                        return BlockElementBigCarousel(element);
+                    }
                     if (element.__typename === "BlockElementDiscover") {
                         return blockElementDiscover(element);
                     }
@@ -180,11 +184,11 @@ export default class Global extends PageManager {
 
                     if(relatedPro.thePerfectMatch.length > 0) {
                         let perfectmatch = relatedPro.thePerfectMatch.map((item) => item.bc_product_id);
-                        getProducts(contentId,'.thePerfectMatch .prodData',perfectmatch);
+                        getProducts(contentId,'.thePerfectMatch .prodData', perfectmatch);
                     }
                     if(relatedPro.youMightAlsoLike.length > 0) {
                         let youmaylike = relatedPro.youMightAlsoLike.map((item) => item.bc_product_id);
-                        getProducts(contentId,'.youMightalsoLike .prodData',youmaylike);
+                        getProducts(contentId,'.youMightalsoLike .prodData', youmaylike);
                     }
                 }
                 document.querySelectorAll('.imageWithContentSlider ul').forEach((item) => {
@@ -217,24 +221,30 @@ export default class Global extends PageManager {
                         blockElementFullscreenVideo('blockElementFullscreenVideo',element.collectionBannerImage1);
                       }
                       let heading = element.collectionHeadline;
-                      let lastword = heading.split(" ").reverse()[0];
-                      document.querySelector('.productSlider .heading').innerHTML= `${heading.replace(lastword,'')} <span class="lastword">${lastword}</span>`
+                      let lastword = heading?.split(" ")?.reverse()[0];
+                        document.querySelector('.productSlider .heading').innerHTML = `${(heading?.replace(lastword, '') !== undefined) ? heading?.replace(lastword, '') : ''} <span class="lastword">${(lastword !== undefined) ? lastword : ''}</span>`
                       let stringArray = element.productsInCollection;
-                      let numberArray = [];
+                      /*let numberArray = [];
                       let length = (element.productsInCollection) ? stringArray.length : 0;
                       for (var i = 0; i < length; i++){
                         if(stringArray[i] !== ""){
                           numberArray.push(parseInt(stringArray[i]));
                         }
-                      }
-                      getProducts(this.context,'.productSlider .productGridSection',numberArray,3);
+                      }*/
+                        getProducts(this.context, '.productSlider .productGridSection', stringArray, 3);
                     }
                     let blocksCollections = element.contentBlocksCollection.items.map(ele => {
                         if (ele.__typename === "BlockElementCollectionPreview"){
                            return collectionPreview(ele);
                         }
+                        if (ele.__typename === "BlockElementStoryBlock") {
+                            return blockElementStory(ele);
+                        }
                         if (ele.__typename === "BlockElementBigCarouselSlider"){
                             return imageWithContentSlider(ele);
+                        }
+                        if (ele.__typename === "BlockElementBigCarousel") {
+                            return BlockElementBigCarousel(ele);
                         }
                         if (ele.__typename === "BlockElementDiscover"){
                             return blockElementDiscover(ele);
