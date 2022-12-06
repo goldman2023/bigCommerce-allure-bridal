@@ -42,6 +42,14 @@
                 width: auto;
                 margin: 0 auto;
                 display: block;
+                text-transform: uppercase;
+                font-family: stencilFontFamily('default-font-regular');
+                font-style: normal;
+                font-weight: 500;
+                font-size: remCalc(12px);
+                line-height: remCalc(15px);
+                text-align: center;
+                letter-spacing: 0.1em;
                 .divider {
                     border-top: 1px solid #FFFFFF;
                 }
