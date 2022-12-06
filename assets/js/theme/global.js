@@ -42,7 +42,8 @@ import {
     blockElementCopyBlock,
     logoSliderBlock,
     globalblockElementFullscreenVideo,
-    BlockElementBigCarousel
+    BlockElementBigCarousel,
+    collectionHeaderContent
 } from './BP/universal-blocks';
 
 export default class Global extends PageManager {
@@ -213,24 +214,26 @@ export default class Global extends PageManager {
         if(mainContent.contains('pages-custom-category-category-landing')) {
             let geturl = document.getElementById('categoryLanding').getAttribute('data-url')
             getCategorySpecificMetaData(this.context, geturl, response => {
-                let categoryData = response[0].value;
-                categoryData.items.forEach(element => {
+                console.log('category response', response);
+                let categoryData = response[0]?.value;
+                categoryData?.items?.forEach(element => {
                     console.log('element', element);
                     if(element.collectionName === document.getElementById('categoryLanding').getAttribute('data-id')) {
-                      if(element.collectionBannerImage1) {
-                        blockElementFullscreenVideo('blockElementFullscreenVideo',element.collectionBannerImage1);
-                      }
-                      let heading = element.collectionHeadline;
-                      let lastword = heading?.split(" ")?.reverse()[0];
-                        document.querySelector('.productSlider .heading').innerHTML = `${(heading?.replace(lastword, '') !== undefined) ? heading?.replace(lastword, '') : ''} <span class="lastword">${(lastword !== undefined) ? lastword : ''}</span>`
-                      let stringArray = element.productsInCollection;
-                      /*let numberArray = [];
-                      let length = (element.productsInCollection) ? stringArray.length : 0;
-                      for (var i = 0; i < length; i++){
-                        if(stringArray[i] !== ""){
-                          numberArray.push(parseInt(stringArray[i]));
+                        collectionHeaderContent(element);
+                        if(element.collectionBannerImage1) {
+                            blockElementFullscreenVideo('blockElementFullscreenVideo',element.collectionBannerImage1);
                         }
-                      }*/
+                        let heading = element.collectionHeadline;
+                        let lastword = heading?.split(" ")?.reverse()[0];
+                        document.querySelector('.productSlider .heading').innerHTML = `${(heading?.replace(lastword, '') !== undefined) ? heading?.replace(lastword, '') : ''} <span class="lastword">${(lastword !== undefined) ? lastword : ''}</span>`
+                        let stringArray = element.productsInCollection;
+                        /*let numberArray = [];
+                        let length = (element.productsInCollection) ? stringArray.length : 0;
+                        for (var i = 0; i < length; i++){
+                            if(stringArray[i] !== ""){
+                            numberArray.push(parseInt(stringArray[i]));
+                            }
+                        }*/
                         getProducts(this.context, '.productSlider .productGridSection', stringArray, 3);
                     }
                     let blocksCollections = element.contentBlocksCollection.items.map(ele => {

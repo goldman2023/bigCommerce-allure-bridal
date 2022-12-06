@@ -188,19 +188,19 @@ function categoryQuery (context, categoryPath, callback) {
               ... on Category {
                 name
                 metafields (
-                  namespace: "Contentful Data"
-                  keys: ["Contentful Data"]
-                  first: 1
-              ) {
-                  edges {
-                      node {
-                          entityId
-                          id
-                          key
-                          value
-                      }
-                  }
-                }
+                    namespace: "Contentful Data"
+                    keys: ["Contentful Data", "Related Products"]
+                    first: 2
+                ) {
+                    edges {
+                        node {
+                            entityId
+                            id
+                            key
+                            value
+                        }
+                    }
+                 }
               }
             }
           }
@@ -933,3 +933,9 @@ export function blogpostContentBlock(selectorID,blockData){
         }
     document.getElementById(selectorID).innerHTML = contentStructure;
 };
+
+export function collectionHeaderContent(element) {
+    const headerContent = document.querySelector('.blockElementHeaderContent');
+    headerContent.innerHTML = `<h1>${element.collectionName}</h1>
+        <p>${element.collectionSubheadline}</p><div><a href="javascript:void(0);" class="button button--secondary buttonlink">View Collection</a></div>`;
+}

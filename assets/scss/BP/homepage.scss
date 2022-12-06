@@ -28,9 +28,10 @@
     .custombread,
     .custompro,
     .bp-category,
-    .inspiration-page {
+    .inspiration-page,
+    .blockElementHeaderContent {
         max-width: 91.71429rem;
-        margin: 20px auto;
+        margin: 40px auto;
         padding: 0 1.5rem;
         @include breakpoint("medium") {
             margin: 80px auto;
