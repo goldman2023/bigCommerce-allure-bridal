@@ -936,6 +936,6 @@ export function blogpostContentBlock(selectorID,blockData){
 
 export function collectionHeaderContent(element) {
     const headerContent = document.querySelector('.blockElementHeaderContent');
-    headerContent.innerHTML = `${(element.collectionSubheadline) ? '<h1>' + element.collectionSubheadline + '</h1>' : ''}
+    headerContent.innerHTML = `${(element.collectionName) ? '<h1>' + element.collectionName + '</h1>' : ''}
         ${(element.collectionSubheadline) ? '<p>'+element.collectionSubheadline+'</p>': ''}<div><a href="javascript:void(0);" class="button button--secondary buttonlink">View Collection</a></div>`;
 }
