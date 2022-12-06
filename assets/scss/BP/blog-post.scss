@@ -105,6 +105,7 @@
                         padding: 5px 0;
                         span,a{
                             color: #BC8372;
+                            text-decoration: none;
                         }
                     }
                 }
@@ -118,6 +119,10 @@
         font-size: remCalc(16px);
         line-height: remCalc(26px);
         color: #282828;
+    }
+    a{
+        color: #BC8372;
+        text-decoration: none;
     }
     .para-0 {
         position: relative;
