@@ -42,6 +42,14 @@
                 width: auto;
                 margin: 0 auto;
                 display: block;
+                text-transform: uppercase;
+                font-family: stencilFontFamily('default-font-regular');
+                font-style: normal;
+                font-weight: 500;
+                font-size: remCalc(12px);
+                line-height: remCalc(15px);
+                text-align: center;
+                letter-spacing: 0.1em;
                 .divider {
                     border-top: 1px solid #FFFFFF;
                 }
@@ -105,6 +113,7 @@
                         padding: 5px 0;
                         span,a{
                             color: #BC8372;
+                            text-decoration: none;
                         }
                     }
                 }
@@ -118,6 +127,10 @@
         font-size: remCalc(16px);
         line-height: remCalc(26px);
         color: #282828;
+    }
+    a{
+        color: #BC8372;
+        text-decoration: none;
     }
     .para-0 {
         position: relative;

@@ -866,64 +866,41 @@ export function lookBook(selectorID,blockData) {
 };
 
 export function blogpostContentBlock(selectorID,blockData){
-    let paragraphs = blockData?.bodyCopy?.json?.content?.map((p,i) =>  `<p class="para-${i}">${p?.content[0]?.value}</p>`).join('');
+    let paragraphs = blockData?.bodyCopy?.json?.content?.map((p,i) =>
+    `<p class="para-${i}">${p?.content?.map((cont)=>{
+        if (cont.nodeType === 'text' || cont.nodeType === 'paragraph') {
+            return cont.value;
+        }
+        if (cont.nodeType === 'hyperlink') {
+            return `<a href="${cont.data.uri ? cont.data.uri : cont.data.url}" target="_blank">${cont.content[0]?.value ? cont.content[0]?.value : cont.data.uri}</a>`;
+        }
+    }).join('')}</p>`).join('');
+
+    const dataDisplay = (name,data) => {
+        return `<div class="row"><div>${name}</div>
+            <div>
+                ${data.json?.content.map((p)=>
+                    `<span >
+                        ${p?.content?.map((cont)=>{
+                            if (cont.nodeType === 'text' || cont.nodeType === 'paragraph') {
+                                return cont.value;
+                            }
+                            if (cont.nodeType === 'hyperlink') {
+                                return `<a href="${cont.data.uri ? cont.data.uri : cont.data.url}" target="_blank">${cont.content[0]?.value ? cont.content[0]?.value : cont.data.uri}</a>`;
+                            }
+                        }).join('')}
+                    </span>`
+                ).join(' ') }
+            </div>
+        </div>`
+    };
     let rightsideblock = `<h6>VENDORS</h6>
         <div class="flexdiv">
-        ${blockData?.gown !== null ?
-            `<div class="row">
-                <div>Gown</div>
-                <div><span>${blockData?.gown?.json?.content?.map((item)=> item?.content[0]?.value).join(' ')}</span></div>
-            </div>`
-            : ''}
-            ${blockData?.tuxedos !== null ?
-            `<div class="row">
-                <div>Tuxedos</div>
-                <div><span>${blockData?.tuxedos?.json?.content?.map((item)=> item?.content[0]?.value).join(' ')}</span></div>
-            </div>`
-            : ''}
-            ${blockData.photographyVideography !== null ?
-            `<div class="row">
-                <div>Photographer/Videography</div>
-                <div>
-                ${blockData?.photographyVideography?.json?.content[0]?.content[0]?.value}
-                ${blockData?.photographyVideography?.json?.content[1]?.content?.map((item)=> {
-                    if(item.nodeType == "hyperlink") {
-                        return `<a href="${item.data.url}" target="_blank">${item.content[0].value}</a>`;
-                    } else {
-                        return item.value;
-                    }
-                }).join(' ') }
-                </div>
-            </div>`
-            : ''}
-            ${blockData?.florals !== null ?
-            `<div class="row">
-                <div>Florals</div>
-                <div>
-                ${blockData?.florals?.json?.content[0]?.content[0]?.value}
-                ${blockData?.florals?.json?.content[1]?.content?.map((item)=> {
-                    if(item.nodeType == "hyperlink") {
-                        return `<a href="${item.data.url}" target="_blank">${item.content[0].value}</a>`;
-                    } else {
-                        return item.value;
-                    }
-                }).join(' ')}</div>
-            </div>`
-            : ''}
-            ${blockData?.planningVenue !== null ?
-            `<div class="row">
-                <div>Planning & Venue</div>
-                <div>
-                ${blockData?.planningVenue?.json?.content[0]?.content[0]?.value}
-                ${blockData?.planningVenue?.json?.content[1]?.content.map((item)=> {
-                    if(item.nodeType == "hyperlink") {
-                        return `<a href="${item?.data?.url}" target="_blank">${item?.content[0]?.value}</a>`;
-                    } else {
-                        return item.value;
-                    }
-                }).join(' ') }</div>
-            </div>`
-            : ''}
+            ${blockData?.gown !== null ? `${dataDisplay('Gown',blockData.gown)}`  : ''}
+            ${blockData?.tuxedos !== null ? `${dataDisplay('Tuxedos',blockData.tuxedos)}`  : ''}
+            ${blockData?.photographyVideography !== null ? `${dataDisplay('Photographer/Videography',blockData.photographyVideography)}`  : ''}
+            ${blockData?.florals !== null ? `${dataDisplay('Florals',blockData.florals)}`  : ''}
+            ${blockData?.planningVenue !== null ? `${dataDisplay('Planning & Venue',blockData.planningVenue)}`  : ''}
         </div>`;
         let  contentStructure = '';
         if(blockData.gown === null && blockData.tuxedos === null && blockData.photographyVideography === null && blockData.florals === null && blockData.planningVenue === null) {

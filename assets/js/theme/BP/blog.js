@@ -28,32 +28,40 @@ export default class Blog extends PageManager {
         let blogJson = this.context.blogJson;
         let metadata = JSON.parse(blogJson.replace( /(<([^>]+)>)/ig, ''));
         console.log("blog post data",metadata[1]);
-        let date = metadata[1].sortingDate;
-        console.log(new Date(date));
+        let date = new Date(metadata[1].sortingDate);
+        console.log(date);
+        let formatdate = date.toString().split(' ')
         let dayvariable = {
-            '0' : "Sunday",
-            "1": "Monday",
-            '2' : "Tuesday",
-            "3": "Wednesday",
-            '4' : "Thrusday",
-            "5": "Friday",
-            "6": "Saturday",
+            'Sun' : "Sunday",
+            "Mon": "Monday",
+            'Tue' : "Tuesday",
+            "Wed": "Wednesday",
+            'Thru' : "Thrusday",
+            "Fri": "Friday",
+            "Sat": "Saturday",
         }
         let monthVariable = {
-            '0' : "Jan",
-            "1": "Feb",
-            '2' : "March",
-            "3": "April",
-            '4' : "May",
-            "5": "June",
-            "6": "July",
-            '7' : "Aug",
-            "8": "Sept",
-            '9' : "Oct",
-            "10": "Nov",
-            '11' : "Dec",
+            'Jan' : "Jan",
+            "Feb": "Feb",
+            'Mar' : "March",
+            "Apr": "April",
+            'May' : "May",
+            "Jun": "June",
+            "Jul": "July",
+            'Aug' : "Aug",
+            "Sep": "Sept",
+            'Oct' : "Oct",
+            "Nov": "Nov",
+            'Dec' : "Dec",
         }
-        let dateformatted = `${dayvariable[new Date(date).getDay()]}, ${monthVariable[new Date(date).getMonth()]} ${new Date(date).getDate()}, ${new Date(date).getFullYear()}`;
+        let datevar = {
+            '1' : "st",
+            "2": "nd",
+            '3' : "rd",
+            '22' : "nd",
+            '23' : "rd",
+        }
+        let dateformatted = `${dayvariable[formatdate[0]]}, ${monthVariable[formatdate[1]]} ${datevar[formatdate[2]] ? `${formatdate[2]}${datevar[formatdate[2]]}` : `${formatdate[2]}th`}, ${formatdate[3]}`;
 
         function applySlider(selector,slide,centerM,infinity) {
             let centermood = false;
