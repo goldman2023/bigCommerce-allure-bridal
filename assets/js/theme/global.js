@@ -215,84 +215,88 @@ export default class Global extends PageManager {
             let geturl = document.getElementById('categoryLanding').getAttribute('data-url')
             getCategorySpecificMetaData(this.context, geturl, response => {
                 console.log('category response', response);
-                let categoryData = response[0]?.value;
-                categoryData?.items?.forEach(element => {
-                    console.log('element', element);
-                    if(element.collectionName === document.getElementById('categoryLanding').getAttribute('data-id')) {
-                        collectionHeaderContent(element);
-                        if(element.collectionBannerImage1) {
-                            blockElementFullscreenVideo('blockElementFullscreenVideo',element.collectionBannerImage1);
-                        }
-                        let heading = element.collectionHeadline;
-                        let lastword = heading?.split(" ")?.reverse()[0];
-                        document.querySelector('.productSlider .heading').innerHTML = `${(heading?.replace(lastword, '') !== undefined) ? heading?.replace(lastword, '') : ''} <span class="lastword">${(lastword !== undefined) ? lastword : ''}</span>`
-                        let stringArray = element.productsInCollection;
-                        /*let numberArray = [];
-                        let length = (element.productsInCollection) ? stringArray.length : 0;
-                        for (var i = 0; i < length; i++){
-                            if(stringArray[i] !== ""){
-                            numberArray.push(parseInt(stringArray[i]));
+                for (const categoryData of response) {
+                    if (categoryData.key === "Contentful Data") {
+                        let contentfulData = categoryData?.value;
+                        contentfulData?.items?.forEach(element => {
+                            if (element.collectionName === document.getElementById('categoryLanding').getAttribute('data-id')) {
+                                collectionHeaderContent(element);
+                                if (element.collectionBannerImage1) {
+                                    blockElementFullscreenVideo('blockElementFullscreenVideo', element.collectionBannerImage1);
+                                }
+                                let heading = element.collectionHeadline;
+                                let lastword = heading?.split(" ")?.reverse()[0];
+                                document.querySelector('.productSlider .heading').innerHTML = `${(heading?.replace(lastword, '') !== undefined) ? heading?.replace(lastword, '') : ''} <span class="lastword">${(lastword !== undefined) ? lastword : ''}</span>`;
+                                
                             }
-                        }*/
-                        getProducts(this.context, '.productSlider .productGridSection', stringArray, 3);
+                            let blocksCollections = element.contentBlocksCollection.items.map(ele => {
+                                if (ele.__typename === "BlockElementCollectionPreview") {
+                                    return collectionPreview(ele);
+                                }
+                                if (ele.__typename === "BlockElementStoryBlock") {
+                                    return blockElementStory(ele);
+                                }
+                                if (ele.__typename === "BlockElementBigCarouselSlider") {
+                                    return imageWithContentSlider(ele);
+                                }
+                                if (ele.__typename === "BlockElementBigCarousel") {
+                                    return BlockElementBigCarousel(ele);
+                                }
+                                if (ele.__typename === "BlockElementDiscover") {
+                                    return blockElementDiscover(ele);
+                                }
+                                if (ele.__typename === "BlockElementVerticalGallery") {
+                                    return blockElementVerticalGallery(ele);
+                                }
+                                if (ele.__typename === "BlockElementFullscreenImage") {
+                                    return blockElementFullscreenImage(ele);
+                                }
+                                if (ele.__typename === "BlockElementImages2ColumnRight") {
+                                    return blockElementImages2ColumnRight(ele);
+                                }
+                                if (ele.__typename === "BlockElementImageLeftCopyRight") {
+                                    return blockElementImageLeftCopyRight(ele);
+                                }
+                                if (ele.__typename === "BlockElementLookbook") {
+                                    return lookBookglobal(ele);
+                                }
+                                if (ele.__typename === "ReferencedBlockCategoryBanners") {
+                                    return leftTextBlockglobal('leftTextbanner', ele);
+                                }
+                                if (ele.__typename === "ReferencedBlockCategoryBanners" && ele.layoutOrientation === "Image Right") {
+                                    return leftTextBlockglobal('rightTextbanner', ele);
+                                }
+                                if (ele.__typename === "BlockElementCopyBlock") {
+                                    return blockElementCopyBlock(ele);
+                                }
+                                if (ele.__typename === "ReferencedBlockLogoRow") {
+                                    return logoSliderBlock(ele);
+                                }
+                                if (ele.__typename === "BlockElementFullscreenVideo") {
+                                    return globalblockElementFullscreenVideo(ele);
+                                }
+                                if (ele.__typename === "BlockElement3ImagesScreenWidth") {
+                                    return blockElement3ImagesScreenWidth(ele);
+                                }
+                            });
+
+                            document.getElementById('contentBlocksCollection').innerHTML = blocksCollections.join('');
+
+                            document.querySelectorAll('.imageWithContentSlider ul').forEach((item) => {
+                                applySlider(item, 1, false, true);
+                            });
+                        });
                     }
-                    let blocksCollections = element.contentBlocksCollection.items.map(ele => {
-                        if (ele.__typename === "BlockElementCollectionPreview"){
-                           return collectionPreview(ele);
+                    if (categoryData.key === "Related Products") {
+                        const relatedProducts = categoryData.value;
+                        const relatedProductIds = [];
+                        for (const relatedProduct of relatedProducts) {
+                            relatedProductIds.push(relatedProduct.bc_product_id);
                         }
-                        if (ele.__typename === "BlockElementStoryBlock") {
-                            return blockElementStory(ele);
-                        }
-                        if (ele.__typename === "BlockElementBigCarouselSlider"){
-                            return imageWithContentSlider(ele);
-                        }
-                        if (ele.__typename === "BlockElementBigCarousel") {
-                            return BlockElementBigCarousel(ele);
-                        }
-                        if (ele.__typename === "BlockElementDiscover"){
-                            return blockElementDiscover(ele);
-                        }
-                        if (ele.__typename === "BlockElementVerticalGallery"){
-                            return blockElementVerticalGallery(ele);
-                        }
-                        if (ele.__typename === "BlockElementFullscreenImage"){
-                            return blockElementFullscreenImage(ele);
-                        }
-                        if (ele.__typename === "BlockElementImages2ColumnRight") {
-                            return blockElementImages2ColumnRight(ele);
-                        }
-                        if (ele.__typename === "BlockElementImageLeftCopyRight") {
-                            return blockElementImageLeftCopyRight(ele);
-                        }
-                        if (ele.__typename === "BlockElementLookbook") {
-                            return lookBookglobal(ele);
-                        }
-                        if (ele.__typename === "ReferencedBlockCategoryBanners") {
-                            return leftTextBlockglobal('leftTextbanner', ele);
-                        }
-                        if (ele.__typename === "ReferencedBlockCategoryBanners" && ele.layoutOrientation === "Image Right") {
-                            return leftTextBlockglobal('rightTextbanner', ele);
-                        }
-                        if (ele.__typename === "BlockElementCopyBlock") {
-                            return blockElementCopyBlock(ele);
-                        }
-                        if (ele.__typename === "ReferencedBlockLogoRow") {
-                            return logoSliderBlock(ele);
-                        }  
-                        if (ele.__typename === "BlockElementFullscreenVideo") {
-                            return globalblockElementFullscreenVideo(ele);
-                        }  
-                        if (ele.__typename === "BlockElement3ImagesScreenWidth") {
-                            return blockElement3ImagesScreenWidth(ele);
-                        }
-                    });
-
-                    document.getElementById('contentBlocksCollection').innerHTML = blocksCollections.join('');
-
-                    document.querySelectorAll('.imageWithContentSlider ul').forEach((item) => {
-                        applySlider(item,1,false,true);
-                    });
-                  });
+                        getProducts(this.context, '.productSlider .productGridSection', relatedProductIds, 3);
+                    }
+                }
+                
             });
         }
         //category Landing page end

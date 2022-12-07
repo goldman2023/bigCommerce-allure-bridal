@@ -542,15 +542,10 @@ export function getCategorySpecificMetaData(context,path, callback) {
     });
 }
 export function getProducts(context, selector, prodList, slidescroll) {
-    console.log('prodList', prodList);
-    let prodArray = [];
-    prodArray = prodList;
     let products = [];
-    console.log('selector', selector);
     if (selector === '.thePerfectMatch .prodData' || selector === '.youMightalsoLike .prodData' || selector === '.productSlider .productGridSection') {
-        products = prodArray;
+        products = prodList;
     } 
-    console.log('products', products);
     if (products.length > 0) {
         fetch('/graphql', {
             method: 'POST',
@@ -599,7 +594,6 @@ export function getProducts(context, selector, prodList, slidescroll) {
             }
         });
     }
-    
 };
 
 export function blockElementFullscreenVideo(selectorID, element) {
@@ -914,5 +908,7 @@ export function blogpostContentBlock(selectorID,blockData){
 export function collectionHeaderContent(element) {
     const headerContent = document.querySelector('.blockElementHeaderContent');
     headerContent.innerHTML = `${(element.collectionName) ? '<h1>' + element.collectionName + '</h1>' : ''}
-        ${(element.collectionSubheadline) ? '<p>'+element.collectionSubheadline+'</p>': ''}<div><a href="javascript:void(0);" class="button button--secondary buttonlink">View Collection</a></div>`;
+        <p>${(element.collectionSubheadline) ? element.collectionSubheadline : ''}</p><div>
+        ${(element.collectionButton) ? '<a href="' + element.collectionButtonUrl +'" class="button button--secondary buttonlink">' + element.collectionButton +'</a>' : ''}
+        </div>`;
 }
