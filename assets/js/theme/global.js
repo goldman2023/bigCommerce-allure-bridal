@@ -196,6 +196,9 @@ export default class Global extends PageManager {
                     applySlider(item,1,false,true);
                 });
             });
+
+            $( ".prod-option.color" ).insertBefore( $( ".prod-option.size" ) );
+
         }
         //Product Detail page end
 

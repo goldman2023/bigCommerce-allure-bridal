@@ -203,8 +203,10 @@
                         <div data-product-option-change style="display:none;">
                             {{inject 'showSwatchNames' theme_settings.show_product_swatch_names}}
                             {{#each product.options}}
+                            <div class="prod-option {{dashcase this.display_name}}">
                                 {{{dynamicComponent 'components/products/options'}}}
                                 <div class="divider"></div>
+                            </div>
                             {{/each}}
                         </div>
                         <div class="form-field form-field--stock{{#unless product.stock_level}} u-hiddenVisually{{/unless}}">
