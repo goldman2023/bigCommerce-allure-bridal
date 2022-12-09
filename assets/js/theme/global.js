@@ -43,7 +43,9 @@ import {
     logoSliderBlock,
     globalblockElementFullscreenVideo,
     BlockElementBigCarousel,
-    collectionHeaderContent
+    collectionHeaderContent,
+    blockElementDivider,
+    blockElementSpacer
 } from './BP/universal-blocks';
 
 export default class Global extends PageManager {
@@ -172,6 +174,9 @@ export default class Global extends PageManager {
                     if (element.__typename === "BlockElementFullscreenVideo") {
                         return globalblockElementFullscreenVideo(element);
                     }
+                    if (element.__typename === "BlockElementDivider") {
+                        return blockElementDivider();
+                    }
                 }).join('');
 
                 document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;
@@ -281,6 +286,13 @@ export default class Global extends PageManager {
                                 if (ele.__typename === "BlockElement3ImagesScreenWidth") {
                                     return blockElement3ImagesScreenWidth(ele);
                                 }
+                                if (ele.__typename === "BlockElementDivider") {
+                                    return blockElementDivider();
+                                }
+                                if (ele.__typename === "BlockElementSpacer") {
+                                    return blockElementSpacer();
+                                }
+                                
                             });
 
                             document.getElementById('contentBlocksCollection').innerHTML = blocksCollections.join('');
