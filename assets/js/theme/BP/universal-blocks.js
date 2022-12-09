@@ -625,6 +625,15 @@ export function lookBookglobal(blockData) {
 export function lookBookglobal2(blockData) {
     return `<div class="blockElementLookbook2 block-item full-size" id="blockElementLookbook2"><div><div class="caption"><h2>${blockData?.blocktitle}</h2><div class="divider"></div><h4>${blockData?.subheadline}</h4><p class="content">${blockData?.bodyCopy}</p><a href="${blockData?.linkUrl}" class="button button-secondary">${blockData?.linkText}</a></div><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData?.subheadline}" /></div></div></div><div class="divider"></div>`;
 }
+
+export function blockElementDivider() {
+    return '<div class="divider"></div>';
+}
+
+export function blockElementSpacer() {
+    return '<div class="spacer"></div>';
+}
+
 export function events(blockData) {
     return `<div class="events block-item" id="events">
     <h2>Upcoming Designer Events</h2>

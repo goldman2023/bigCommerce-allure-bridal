@@ -495,3 +495,16 @@ body {
 .margin10TB {
     margin: 10px 0;
 }
+.spacer {
+    min-height: 40px;
+    @include breakpoint("medium") {
+        min-height: 80px;
+    }
+}
+body {
+    &.category-type {
+        .body {
+            margin-bottom: 0;
+        } 
+    }
+ }
