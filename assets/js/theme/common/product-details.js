@@ -105,9 +105,9 @@ export default class ProductDetails extends ProductDetailsBase {
         $('body').on('click', '#sizeGuide', (event) => {
             event.preventDefault();
             const sizeChart = document.querySelector('.sizeChart');
-            this.$modal.open({ size: 'medium' });
+            this.$modal.open({ size: 'large' });
             this.$modal.updateContent(sizeChart);
-        });
+        }); 
         document.querySelector('.buttonOnOff').addEventListener("click", this.viewVideoToggle);
     }
     viewVideoToggle(){
