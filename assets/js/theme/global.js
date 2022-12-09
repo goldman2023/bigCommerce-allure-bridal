@@ -296,7 +296,7 @@ export default class Global extends PageManager {
                         for (const relatedProduct of relatedProducts) {
                             relatedProductIds.push(relatedProduct.bc_product_id);
                         }
-                        getProducts(this.context, '.productSlider .productGridSection', relatedProductIds, 3);
+                        getProducts(this.context, '.productSlider .productGridSection', relatedProductIds, 5);
                     }
                 }
                 
