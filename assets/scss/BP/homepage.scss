@@ -31,11 +31,11 @@
     .inspiration-page,
     .blockElementHeaderContent {
         max-width: 91.71429rem;
-        /*margin: 40px auto;*/
+        margin: 0 auto;
         padding: 0 1.5rem;
-        /* @include breakpoint("medium") {
-            margin: 80px auto;
-        }*/
+        @include breakpoint("medium") {
+            margin: 0 auto;
+        }
         @media only screen and (min-width: 1600px)  {
             max-width: 100rem;
         }
@@ -89,7 +89,7 @@
     }
     .blockElementDiscover,.events.block-item,.blockElementLookbook2,.blockElementStory {
         @include breakpoint("medium") {
-            /*margin: 80px auto;*/
+            margin: 0 auto;
         }
     }
 }
