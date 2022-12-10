@@ -922,6 +922,11 @@ export default class RetailFinder extends PageManager {
     if(retailer.bridalLiveRetailerId) {
       elem = this.getDirectBookingElem(retailer.bridalLiveRetailerId);
     } else {
+      // TODO style this form
+      // should just need a scrollable modal with padding
+      // like the designs
+      // and figure out why the generic form-input /label etc classes
+      // arent styling the inputs like they are in the side menu filters
       elem = this.getEmailBookingForm(retailer);
     }
     modal.updateContent(elem);
