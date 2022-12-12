@@ -1,10 +1,4 @@
 .inspiration-page {
-    .desktoponly {
-        display: none;
-        @include breakpoint("medium") { 
-            display: block;
-        }
-    }
     .mobileonly {
         display: block;
         @include breakpoint("medium") { 
@@ -14,7 +8,7 @@
     .header-section {
         text-align: center;
         max-width: 400px;
-        margin: 0 auto;
+        margin: 64px auto 0;
         h2 {
             font-family: stencilFontFamily('prata-font');
             font-style: normal;
@@ -35,19 +29,23 @@
     }
     .filterbutton {
         text-align: center;
+        margin-bottom: 40px;
         ul {
-            margin: 0;
+            margin: 0 0 24px;
             padding: 0;
             list-style: none;
             li {
                 margin: 5px;
-                .button.button--primary,.button.button--secondary {
+                @include breakpoint("medium") {
+                    margin: 5px 5px 0;
+                }
+                .button.button--primary, .button.button--secondary {
                     padding: 15px;
                     height: 34px;
                     font-weight: 500;
                     font-size: remCalc(10px);
                     line-height: remCalc(12px);
-
+                    margin: 0;
                 }
                 .button:before {
                     height: 27px;
@@ -57,28 +55,41 @@
         }
     }
     .blocks {
-        padding-top: 5%;
         width: 100%;
+        padding: 64px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 80px;
+        @include breakpoint("medium") {
+            padding: 64px 0;
+        }
         .block {
             display: block;
             @include breakpoint("medium") { 
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                gap: 161px;
             }
-            .image-block,.content-block{
+            .image-block, .content-block{
                 width: 100%;
                 @include breakpoint("medium") { 
-                    width: calc(50% - 25px);
+                    width: calc(50% - 40px);
                 }
             }
             .content-block {
-                padding: 5%;
+                width: 100%;
                 @include breakpoint("medium") {
-                    padding: 5% 10%; 
+                    width: calc(50% - 120px);
                 }
+            }
+            .content-block {
                 .caption {
                     position: relative;
+                    text-align: center;
+                    @include breakpoint("medium") {
+                        text-align: left;
+                    }
                     .initials {
                         font-family: stencilFontFamily('prata-font');
                         font-style: normal;
@@ -88,10 +99,10 @@
                         color: stencilColor('color-allure-bridals-primary-5');
                         position: absolute;
                         top: -23px;
-                        left: -5%;
+                        left: 0;
                         z-index: -1;
                         @include breakpoint("medium") { 
-                            left: -15%;
+                            left: -64px;
                         }
                     }
                     h3 {
@@ -104,9 +115,11 @@
                         letter-spacing: -0.01em;
                         color: stencilColor('color-allure-bridals-neutral-1');
                         padding: 0 7%;
+                        margin: 64px 0 24px;
                         @include breakpoint("medium") { 
                             text-align: left;
                             padding: 0;
+                            margin: 0 0 24px;
                         }
                     }
                     p {
@@ -127,89 +140,106 @@
                 .vertical_image {
                     width: 37%;
                     position: absolute;
-                    right: -8px;
+                    right: 0;
                     background: stencilColor('color-secondary');;
-                    padding: 10px;
+                    padding: 10px 0 10px 10px;
                     top: 0;
                     @include breakpoint("medium") { 
                         bottom: 0;
                         top: auto;
-                        right: -50px;
+                        right: -40px;
+                        padding: 10px 0 0 10px;
                     }
                 }
                 .postdate {
                     text-align: right;
                     margin: 0;
-                    padding: 10px 35% 10px 0;
-                    @include breakpoint("medium") { 
-                        padding: 10px 28% 10px 0;
-                    }
                     position: relative;
+                    min-height: 56px;
+                    width: 63%;
+                    padding-right: 40px;
+                    justify-content: end;
+                    align-items: center;
+                    &.mobileonly {
+                        display: inline-flex;
+                        @include breakpoint("medium") {
+                            display: none;
+                        }
+                    }
+                    &.desktoponly {
+                        display: none;
+                        @include breakpoint("medium") {
+                            display: inline-flex;
+                            width: 70%;
+                        }
+                    }
                     &::before {
                         background: stencilColor("color-allure-bridals-neutral-4");
                         height: 1px;
-                        width: 35%;
+                        width: calc(100% - 160px);
                         position: absolute;
                         content: "";
                         left: 0;
-                        top: 19px;
-                        @include breakpoint("medium") { 
-                            width: 50%;
-                        }
+                        top: 0;
+                        bottom: 0;
+                        margin: auto;
                     }
                     &::after {
                         position: absolute;
                         content: "";
-                        right: 65%;
-                        top: 18px;
+                        left: calc(100% - 160px);
+                        top: 0;
+                        bottom: 0;
+                        margin: auto;
                         width: 4px;
                         height: 4px;
                         background: stencilColor("color-default-neutral-3");
                         transform: rotate(45deg);
                         outline: 3px solid stencilColor('color-secondary');
-                        @include breakpoint("medium") { 
-                            right: 50%;
-                        }
                     }
                 }
             }
-            &:nth-child(even) {
-                .image-block {
-                    order: 1;
-                    .vertical_image {
-                        @include breakpoint("medium") { 
-                            left: -50px;
+            @include breakpoint("medium") {
+                &:nth-child(even) {
+                    .image-block {
+                        order: 1;
+                        text-align: right;
+                        .vertical_image {
+                            padding: 10px 10px 0 0;
+                            @include breakpoint("medium") { 
+                                left: -50px;
+                            }
                         }
-                    }
-                    .postdate {
-                        @include breakpoint("medium") { 
-                            text-align: left;
-                            margin: 0;
-                            padding: 10px 0 10px 28%;
-                            position: relative;
-                            &::before {
-                                right: 0px;
-                                left: auto;
+                        .postdate {
+                            padding-right: 0;
+                            padding-left: 40px;
+                            justify-content: flex-start;
+                            @include breakpoint("medium") { 
+                                text-align: left;
+                                margin: 0;
+                                position: relative;
+                                &::before {
+                                    right: 0;
+                                    left: unset;
+                                }
+                                &::after {
+                                    left: 160px;
+                                }
                             }
                         }
                     }
+                    .content-block {
+                        display: flex;
+                        justify-content: end;
+                    }
                 }
-                .content-block {
-                    @include breakpoint("medium") { 
-                        padding: 5% 6% 5% 8%;
+                &:nth-child(odd) {
+                    .image-block {
+                        order: 0;
                     }
                 }
             }
-            &:nth-child(odd) {
-                .image-block {
-                    order: 0;
-                }
-                .content-block {
-                    @include breakpoint("medium") { 
-                        padding: 5% 5% 5% 10%;
-                    }
-                }
-            }
+            
         }
     }
 }
