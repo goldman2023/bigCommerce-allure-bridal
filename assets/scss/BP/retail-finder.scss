@@ -472,3 +472,8 @@
     content: url('/assets/icons/platinum-collection.svg');
   }
 }
+@media (min-width: 1261px) {
+  .modal--large {
+    max-width: 900px !important; 
+  }
+}
