@@ -60,6 +60,13 @@ footer.footer {
 
         svg {
             margin: auto;
+            width: 12px;
+            height: 14px;
+        }
+        &.icon--facebook {
+            svg {
+                width: 8px;
+            }
         }
     }
 
