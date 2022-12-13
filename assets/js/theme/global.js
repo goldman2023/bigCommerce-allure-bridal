@@ -177,6 +177,9 @@ export default class Global extends PageManager {
                     if (element.__typename === "BlockElementDivider") {
                         return blockElementDivider();
                     }
+                    if (element.__typename === "BlockElementSpacer") {
+                        return blockElementSpacer();
+                    }
                 }).join('');
 
                 document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;
@@ -292,7 +295,6 @@ export default class Global extends PageManager {
                                 if (ele.__typename === "BlockElementSpacer") {
                                     return blockElementSpacer();
                                 }
-                                
                             });
 
                             document.getElementById('contentBlocksCollection').innerHTML = blocksCollections.join('');

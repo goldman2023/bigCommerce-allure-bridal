@@ -619,11 +619,11 @@ export function globalblockElementFullscreenVideo(element) {
 }
 
 export function lookBookglobal(blockData) {
-   return `<div class="blockElementLookbook block-item full-size" id="blockElementLookbook"><div><h4 class="title">Lookbooks - ${blockData?.subheadline}</h4><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData?.subheadline}" /><div class="caption"><p class="content">${blockData?.bodyCopy}</p><a href="${blockData?.linkUrl}" class="buttonlink">${blockData?.linkText}</a></div></div></div></div>`;
+    return `<div class="blockElementLookbook block-item full-size" id="blockElementLookbook"><div><h4 class="title">${(blockData.blocktitle) ? blockData.blocktitle : ''} - ${(blockData.subheadline) ? blockData.subheadline : ''}</h4><div class="contentSection"><img src="${(blockData.imagesCollection.items[0].url) ? blockData.imagesCollection.items[0].url : ''}" alt="${(blockData.subheadline) ? blockData.subheadline : ''}" /><div class="caption"><p class="content">${blockData?.bodyCopy}</p><a href="${blockData?.linkUrl}" class="buttonlink">${blockData?.linkText}</a></div></div></div></div>`;
 }
 
 export function lookBookglobal2(blockData) {
-    return `<div class="blockElementLookbook2 block-item full-size" id="blockElementLookbook2"><div><div class="caption"><h2>${blockData?.blocktitle}</h2><div class="divider"></div><h4>${blockData?.subheadline}</h4><p class="content">${blockData?.bodyCopy}</p><a href="${blockData?.linkUrl}" class="button button-secondary">${blockData?.linkText}</a></div><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData?.subheadline}" /></div></div></div>`;
+    return `<div class="blockElementLookbook2 block-item full-size" id="blockElementLookbook2"><div><div class="caption"><h2>${(blockData.blocktitle) ? blockData.blocktitle : ''}</h2><div class="divider"></div><h4>${(blockData.subheadline) ? blockData.subheadline : ''}</h4><p class="content">${blockData?.bodyCopy}</p><a href="${blockData?.linkUrl}" class="button button-secondary">${blockData?.linkText}</a></div><div class="contentSection"><img src="${(blockData.imagesCollection.items[0].url) ? blockData.imagesCollection.items[0].url : ''}" alt="${blockData?.subheadline}" /></div></div></div>`;
 }
 
 export function blockElementDivider() {
@@ -863,8 +863,8 @@ export function blogpostTopBanner(selectorID,title,heading,imageHeading,date){
     document.getElementById(selectorID).innerHTML = contentStructure;
 };
 
-export function lookBook(selectorID,blockData) {
-    let blockItem = `<div><h4 class="title">Lookbooks - ${blockData?.subheadline}</h4><div class="contentSection"><img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/lookbook.jpg" alt="${blockData?.subheadline}" /><div class="caption"><p class="content">${blockData?.bodyCopy}</p><a href="${blockData?.linkUrl}" class="buttonlink">${blockData?.linkText}</a></div></div></div>`;
+export function lookBook(selectorID, blockData) {
+    let blockItem = `<div><h4 class="title">${(blockData.blocktitle) ? blockData.blocktitle : ''} - ${(blockData.subheadline) ? blockData.subheadline : ''}</h4><div class="contentSection"><img src="${(blockData.imagesCollection.items[0].url) ? blockData.imagesCollection.items[0].url : ''}" alt="${(blockData.subheadline) ? blockData.subheadline : ''}" /><div class="caption"><p class="content">${blockData?.bodyCopy}</p><a href="${blockData?.linkUrl}" class="buttonlink">${blockData?.linkText}</a></div></div></div>`;
     document.getElementById(selectorID).innerHTML = blockItem;
 };
 

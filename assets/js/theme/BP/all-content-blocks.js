@@ -12,7 +12,9 @@ import {
     blockElementVerticalGallery,
     imageWithContentSlider,
     blockElementCopyBlock,
-    logoSliderBlock
+    logoSliderBlock,
+    blockElementDivider,
+    blockElementSpacer
     } from './universal-blocks';
 export default class AllContentBlocks extends PageManager {
     constructor(context) {
@@ -63,6 +65,12 @@ export default class AllContentBlocks extends PageManager {
              }
              if(element.__typename === "BlockElementBigCarouselSlider" ){
                 return imageWithContentSlider(element);
+            }
+            if (element.__typename === "BlockElementDivider") {
+                return blockElementDivider();
+            }
+            if (element.__typename === "BlockElementSpacer") {
+                return blockElementSpacer();
             }
         }).join('');
         document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;

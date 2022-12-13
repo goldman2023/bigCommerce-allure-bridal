@@ -17,7 +17,9 @@ import {
     leftTextBlockglobal,
     blockElementCopyBlock,
     logoSliderBlock,
-    BlockElementBigCarousel
+    BlockElementBigCarousel,
+    blockElementDivider,
+    blockElementSpacer
     } from '../BP/universal-blocks';
 export default class Blog extends PageManager {
     constructor(context) {
@@ -151,6 +153,12 @@ export default class Blog extends PageManager {
             if (element.__typename === "ReferencedBlockLogoRow") {
                 return logoSliderBlock(element);
             }    
+            if (element.__typename === "BlockElementDivider") {
+                return blockElementDivider();
+            }
+            if (element.__typename === "BlockElementSpacer") {
+                return blockElementSpacer();
+            }
         }).join('');
         document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;
 
