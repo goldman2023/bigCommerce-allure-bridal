@@ -645,6 +645,12 @@ export default class RetailFinder extends PageManager {
       header.append(featuredElement);
     }
 
+    if (retailer.disneyPlatinumCollection) {
+      const dpcElement = document.createElement('span');
+      dpcElement.classList.add('disney');
+      header.append(dpcElement);
+    }
+
     const nameElement = document.createElement('h2');
     nameElement.classList.add('header-title');
     nameElement.innerText = retailer.retailerName;
@@ -724,14 +730,205 @@ export default class RetailFinder extends PageManager {
     modal.updateContent(detailElement, { wrap: true });
   };
 
+  getDirectBookingElem = (retailerId) => {
+    const scheduler = document.createElement('iframe');
+    scheduler.setAttribute('src', `https://app.bridallive.com/forms.html?formType=scheduler&retailerId=${retailer.bridalLiveRetailerId}`);
+    scheduler.setAttribute('width', '100%');
+    scheduler.setAttribute('height', '100%');
+    return scheduler
+  }
+
+  getEmailBookingForm = () => {
+    // yes all this code has SO much room for DRY fixes
+    // especially these create form input elements
+    // but designers made these not easy to code (i.e. inconsistent widths, random input rows with more htan 1 field, etc)
+    // and this project is super rushed since I joined so just moving as fast as possible
+    const bookingForm = document.createElement('form');
+    const formHeader = document.createElement('h2');
+    formHeader.innerText = 'Contact Information';
+    bookingForm.append(
+      formHeader
+    );
+
+    const topFields = [
+      {
+        label: 'First Name',
+        attr: 'firstName',
+        type: 'text'
+      },
+      {
+        label: 'Last Name',
+        attr: 'lastName',
+        type: 'text'
+      },
+      {
+        label: 'Email',
+        attr: 'email',
+        type: 'email'
+      },
+    ];
+    for (const field of topFields) {
+      const fieldElem = document.createElement('div');
+      fieldElem.classList.add('form-field');
+      const label = document.createElement('span');
+      label.classList.add('form-label');
+      label.innerText = field.label;
+      fieldElem.append(label);
+
+      const inputElem = document.createElement('input');
+      inputElem.classList.add('form-input');
+      inputElem.setAttribute('type', field.type);
+      fieldElem.append(inputElem);
+      bookingForm.append(fieldElem);
+    };
+
+    const phoneFieldRow = document.createElement('div');
+    phoneFieldRow.classList.add('field-row');
+    
+    const phoneNumberField = document.createElement('div');
+    phoneNumberField.classList.add('form-field');
+    const phoneLabel = document.createElement('span');
+    phoneLabel.classList.add('form-label');
+    phoneLabel.innerText = 'Phone Number';
+    phoneNumberField.append(phoneLabel);
+    const phoneInput = document.createElement('input');
+    phoneInput.classList.add('form-input');
+    phoneInput.setAttribute('type', 'phone');
+    phoneNumberField.append(phoneInput);
+
+    phoneFieldRow.append(phoneNumberField);
+
+    const phoneTypeField = document.createElement('select');
+    phoneTypeField.classList.add('form-select');
+    phoneTypeField.classList.add('selector-dropdown');
+    ['Mobile', 'Home', 'Work'].forEach(
+      (type) => {
+        const typeOption = document.createElement('option');
+        typeOption.setAttribute('value', type);
+        typeOption.innerText = type;
+        phoneTypeField.append(
+          typeOption
+        );
+      }
+    );
+    phoneFieldRow.append(phoneTypeField);
+    bookingForm.append(phoneFieldRow);
+
+    const eventRow = document.createElement('div');
+    eventRow.classList.add('field-row');
+    
+    const eventDateField = document.createElement('div');
+    eventDateField.classList.add('form-field');
+    const eventDateLabel = document.createElement('span');
+    eventDateLabel.classList.add('form-label');
+    eventDateLabel.innerText = 'Phone Number';
+    eventDateField.append(eventDateLabel);
+    // todo probably find a better  one
+    const eventInput = document.createElement('input');
+    eventInput.classList.add('form-input');
+    eventInput.setAttribute('type', 'date');
+    eventDateField.append(eventInput);
+
+    eventRow.append(eventDateField);
+    bookingForm.append(eventRow);
+    
+    const viaText = document.createElement('input');
+    viaText.classList.add('form-checkbox');
+    viaText.id = 'viaText';
+    viaText.setAttribute('type', 'checkbox');
+    const viaTextLabel = document.createElement('label');
+    viaTextLabel.innerText = 'Receive Account Alerts via Text';
+    viaTextLabel.setAttribute('for', '#viaText');
+    bookingForm.append(viaText);
+    bookingForm.append(viaTextLabel);
+
+    const bottomFields = [
+      {
+        label: 'Address 1',
+        attr: 'address1',
+        type: 'text'
+      },
+      {
+        label: 'Address 2',
+        attr: 'address2',
+        type: 'text'
+      },
+      {
+        label: 'City',
+        attr: 'city',
+        type: 'text'
+      },
+      {
+        label: 'State',
+        attr: 'state',
+        type: 'select',
+        options: [
+          'AL',
+          'AK',
+          'AZ',
+          'AR',
+          'CA'
+        ]
+      },
+      {
+        label: 'Zip Code',
+        attr: 'zip',
+        type: 'text'
+      },
+      {
+        label: '# of People Attending',
+        attr: 'numAttendants',
+        type: 'text'
+      },
+    ];
+    for (const field of bottomFields) {
+      const fieldElem = document.createElement('div');
+      fieldElem.classList.add('form-field');
+      const label = document.createElement('span');
+      label.classList.add('form-label');
+      label.innerText = field.label;
+      fieldElem.append(label);
+      if(field.type !== 'select') {
+        const inputElem = document.createElement('input');
+        inputElem.classList.add('form-input');
+        inputElem.setAttribute('type', field.type);
+        fieldElem.append(inputElem);
+        bookingForm.append(fieldElem);
+      } else {
+        const typeField = document.createElement('select');
+        bookingForm.append(typeField);
+        typeField.classList.add('form-select');
+        typeField.classList.add('selector-dropdown');
+        field.options.forEach(
+          (o) => {
+            const typeOption = document.createElement('option');
+            typeOption.setAttribute('value', o);
+            typeOption.innerText = o;
+            typeField.append(
+              typeOption
+            );
+          }
+        );
+      }
+    };
+    return bookingForm;
+  };
+  
+
   openScheduler = (retailer) => {
     const modal = defaultModal({ size: 'large', skipCache: true });
     modal.open();
-    const scheduler = document.createElement('iframe');
-    scheduler.setAttribute('src', `https://qa.bridallive.com/forms.html?formType=scheduler&retailerId=${retailer.bridalLiveRetailerId}`);
-    scheduler.setAttribute('width', '100%');
-    scheduler.setAttribute('height', '100%');
-    modal.updateContent(scheduler);
+    let elem;
+    if(retailer.bridalLiveRetailerId) {
+      elem = this.getDirectBookingElem(retailer.bridalLiveRetailerId);
+    } else {
+      // TODO style this form
+      // should just need a scrollable modal with padding
+      // like the designs
+      // and figure out why the generic form-input /label etc classes
+      // arent styling the inputs like they are in the side menu filters
+      elem = this.getEmailBookingForm(retailer);
+    }
+    modal.updateContent(elem);
   }
-
 };
