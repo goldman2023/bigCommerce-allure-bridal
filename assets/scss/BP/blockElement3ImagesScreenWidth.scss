@@ -1,34 +1,25 @@
 .blockElement3ImagesScreenWidth {
-    margin: 20px -3rem;
-    @include breakpoint("medium") { 
-        margin: 15px 0;
-    }
     .mainImage {
         width: 100%;
         display: block;
         margin-bottom: 15px;
     }
     .thumbImg {
-        width: 100%;
         display: flex;
-        justify-content: space-between;
+        gap: 24px;
         .imageDiv {
-            width: 32.5%;
+            flex: 1;
         }
     }
 }
 .blockElementImages2ColumnRight {
-    margin: 20px -3rem;
     display: flex;
-    justify-content: space-between;
-    @include breakpoint("medium") { 
-        margin: 15px 0;
-    }
+    gap: 24px;
     .col1 {
-        width: 32.5%;
+        flex: 1;
     }
     .col2 {
-        width: calc(67.5% - 15px);
+        flex: 2;
     }
     img {
         width: 100%;
