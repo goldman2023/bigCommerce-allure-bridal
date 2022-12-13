@@ -8,7 +8,8 @@
     .header-section {
         text-align: center;
         max-width: 400px;
-        margin: 64px auto 0;
+        margin: 0 auto;
+        padding-top: 88px;
         h2 {
             font-family: stencilFontFamily('prata-font');
             font-style: normal;
@@ -16,6 +17,7 @@
             font-size: remCalc(34px);
             line-height: remCalc(44px);
             color: stencilColor("color-default-neutral-3");
+            margin-top: 0;
         }
         p {
             font-family: stencilFontFamily('default-font-light');
@@ -29,9 +31,9 @@
     }
     .filterbutton {
         text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: 72px;
         ul {
-            margin: 0 0 24px;
+            margin: 0;
             padding: 0;
             list-style: none;
             li {
