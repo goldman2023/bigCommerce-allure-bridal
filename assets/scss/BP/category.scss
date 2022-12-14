@@ -95,11 +95,29 @@
         }
     }
 }
-.productGrid .product {
-    @media screen and (max-width: 550px){
-        width: 100%;
+.recentlyViewed, .thePerfectMatch, .youMightalsoLike {
+    .productGrid {
+        margin: 0;
+        .product {
+            .card {
+                margin: 0;
+                .card-body {
+                    padding-bottom: 0;
+                    .card-text {
+                        height: unset;
+                    }
+                }
+            }
+        }
     }
 }
+.productGrid {
+    .product {
+        @media screen and (max-width: 550px) {
+            width: 100%;
+        }
+    }
+}   
 .product,.productCarousel-slide {
     .card-body {
         padding: 10px 7px;

@@ -87,7 +87,6 @@ export default class Homepage extends PageManager {
             }
         }).join('');
 
-        console.log(blocksCollections);
         document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;
 
         document.querySelectorAll('.imageWithContentSlider ul').forEach((item) => {

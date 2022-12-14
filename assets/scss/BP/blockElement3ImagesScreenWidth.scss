@@ -8,7 +8,10 @@
         display: flex;
         gap: 24px;
         .imageDiv {
-            flex: 1;
+            flex: calc(33.33% - 16px);
+            img {
+                width: 100%;
+            }
         }
     }
 }
@@ -16,10 +19,10 @@
     display: flex;
     gap: 24px;
     .col1 {
-        flex: 1;
+        flex-basis: calc(33.05% - 12px);
     }
     .col2 {
-        flex: 2;
+        flex-basis: calc(66.95% - 12px);
     }
     img {
         width: 100%;
