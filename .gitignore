@@ -7,3 +7,4 @@ assets/dist
 parsed/
 meta/
 settings.json
+yarn.lock
