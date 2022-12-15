@@ -59,7 +59,7 @@
                     <input class="form-input" type="email" name="email" placeholder="Email">
 
                 </div>
-                <div class="phone-row">
+                <div class="form-retail-row">
                     <div class="form-field filter full">
                         <span class="form-label">Phone Number</span>
 
@@ -78,14 +78,21 @@
                 </div>
                 <div class="checkbox-fields">
                     <div class="checkbox-field">
-                        <input type="checkbox" class="register_pass-news">
-                        <label for="register_pass-news">Receive text alerts</label>
+
+                        <label for="register_pass-news"> <input type="checkbox" class="register_pass-news">Receive text
+                            alerts</label>
                     </div>
                     <div class="checkbox-field">
-                        <input type="checkbox" class="register_pass-news">
-                        <label for="register_pass-news">Receive Email alerts</label>
+
+                        <label for="register_pass-news"> <input type="checkbox" class="register_pass-news"> Receive
+                            Email alerts</label>
                     </div>
 
+                </div>
+                <div class="disclaimer">
+                    <span>SAMPLE TEXT</span> - Message and data rates may apply. Max 5 msgs/mo. Consent not required to
+                    buy
+                    goods/svcs. Terms and conditions at ourwebsite.com/terms. Privacy policy at Ourwebsite.com/privacy.
                 </div>
                 <div class="form-field filter">
                     <span class="form-label">Address 1</span>
@@ -121,16 +128,35 @@
 
                     </div>
                 </div>
-                <div class="form-field filter flatpickr">
-                    <span class="form-label">Event Date</span>
+                <div class="form-retail-row">
+                    <div class="form-field filter flatpickr">
+                        <span class="form-label">Event Date</span>
 
-                    <input class="form-input date-picker " type="text" placeholder="Event Date">
+                        <input class="form-input date-picker " type="text" placeholder="MM/DD/YYYY">
 
+                    </div>
+                    <div class="form-field filter flatpickr">
+                        <span class="form-label">Preferred Appointment Dates (choose 3)</span>
+
+                        <input class="form-input multiple-dates " type="text" placeholder="MM/DD/YYYY">
+                        <div class="disclaimer">Selected dates are not guaranteed.</div>
+                    </div>
                 </div>
+
                 <div class="form-field filter">
                     <span class="form-label"># of People Attending</span>
 
-                    <input class="form-input" type="number" name="noOfPeopleAttending" placeholder="Zip Code">
+                    <input class="form-input" type="number" name="noOfPeopleAttending"
+                        placeholder="# of People Attending">
+
+                </div>
+                <div class="checkbox-fields">
+                    <div class="checkbox-field">
+
+                        <label for="register_pass-news"> <input type="checkbox" class="register_pass-news">I accept the
+                            terms and conditions*</label>
+                    </div>
+
 
                 </div>
 
@@ -148,6 +174,24 @@
         // Initialize the date picker on load
         flatpickr('.date-picker', { position: 'below' })
         flatpickr('.inline-picker', { inline: true, monthSelectorType: 'static' })
+        flatpickr('.multiple-dates', {
+            mode: 'multiple', position: 'below', onChange: function (selectedDates, dateStr, instance) {
+                var selectedDatesStr = selectedDates.reduce(function (acc, ele) {
+                    var str = instance.formatDate(ele, "d/m/Y");
+                    acc = (acc == '') ? str : acc + ';' + str;
+                    return acc;
+                }, '');
+                instance.set('enable', [function (date) {
+                    if (selectedDates.length >= 3) {
+                        var currDateStr = instance.formatDate(date, "d/m/Y")
+                        var x = selectedDatesStr.indexOf(currDateStr);
+                        return x != -1;
+                    } else {
+                        return true;
+                    }
+                }]);
+            }
+        })
     });
 
 </script>
