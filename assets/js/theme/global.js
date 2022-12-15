@@ -45,7 +45,8 @@ import {
     BlockElementBigCarousel,
     collectionHeaderContent,
     blockElementDivider,
-    blockElementSpacer
+    blockElementSpacer,
+    blockElementSpacer24Px
 } from './BP/universal-blocks';
 
 export default class Global extends PageManager {
@@ -180,6 +181,9 @@ export default class Global extends PageManager {
                     if (element.__typename === "BlockElementSpacer") {
                         return blockElementSpacer();
                     }
+                    if (element.__typename === "BlockElementSpacer24Px") {
+                        return blockElementSpacer24Px();
+                    }
                 }).join('');
 
                 document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;
@@ -294,6 +298,9 @@ export default class Global extends PageManager {
                                 }
                                 if (ele.__typename === "BlockElementSpacer") {
                                     return blockElementSpacer();
+                                }
+                                if (ele.__typename === "BlockElementSpacer24Px") {
+                                    return blockElementSpacer24Px();
                                 }
                             });
 

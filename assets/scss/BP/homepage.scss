@@ -27,8 +27,7 @@
     .customBanner,
     .custombread,
     .custompro,
-    .bp-category,
-    .blockElementHeaderContent {
+    .bp-category {
         max-width: 91.71429rem;
         margin: 0 auto;
         padding: 0 1.5rem;
@@ -129,11 +128,6 @@
         @media only screen and (max-width: 600px)  {
             width: 100%;
         }
-    }
-}
-.pages-custom-category-category-landing {
-    .blockElementFullscreenVideo {
-        margin-top: 25px !important;
     }
 }
 .pages-custom-category-bp-category,.pages-custom-category-suits-bp-category {

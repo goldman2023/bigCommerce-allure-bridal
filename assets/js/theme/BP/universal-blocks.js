@@ -631,7 +631,11 @@ export function blockElementDivider() {
 }
 
 export function blockElementSpacer() {
-    return '<div class="spacer"></div>';
+    return '<div class="blockElementSpacer spacer"></div>';
+}
+
+export function blockElementSpacer24Px() {
+    return '<div class="blockElementSpacer24Px spacer24"></div>';
 }
 
 export function events(blockData) {
