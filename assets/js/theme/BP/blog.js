@@ -19,7 +19,8 @@ import {
     logoSliderBlock,
     BlockElementBigCarousel,
     blockElementDivider,
-    blockElementSpacer
+    blockElementSpacer,
+    blockElementSpacer24Px
     } from '../BP/universal-blocks';
 export default class Blog extends PageManager {
     constructor(context) {
@@ -158,6 +159,9 @@ export default class Blog extends PageManager {
             }
             if (element.__typename === "BlockElementSpacer") {
                 return blockElementSpacer();
+            }
+            if (element.__typename === "BlockElementSpacer24Px") {
+                return blockElementSpacer24Px();
             }
         }).join('');
         document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;

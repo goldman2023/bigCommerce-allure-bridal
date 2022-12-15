@@ -17,7 +17,8 @@ import {
     globalblockElementFullscreenVideo,
     BlockElementBigCarousel,
     blockElementDivider,
-    blockElementSpacer
+    blockElementSpacer,
+    blockElementSpacer24Px
     } from './universal-blocks';
 export default class Homepage extends PageManager {
     constructor(context) {
@@ -84,6 +85,9 @@ export default class Homepage extends PageManager {
             }
             if (element.__typename === "BlockElementSpacer") {
                 return blockElementSpacer();
+            }
+            if (element.__typename === "BlockElementSpacer24Px") {
+                return blockElementSpacer24Px();
             }
         }).join('');
 
