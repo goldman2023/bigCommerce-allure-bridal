@@ -924,4 +924,32 @@ export function collectionHeaderContent(element) {
         <p>${(element.collectionSubheadline) ? element.collectionSubheadline : ''}</p><div>
         ${(element.collectionButton) ? '<a href="' + element.collectionButtonUrl +'" class="button button--secondary buttonlink">' + element.collectionButton +'</a>' : ''}
         </div>`;
-}
+};
+
+export function referencedBlockHomepageCollections(blockData) {
+
+    let logoStructure = blockData.homepageCollectionsCollection?.items?.map((item,i) => {
+        return `<div class="tab ${i === 0 ? 'is-active' : ''}" role="presentation">${item?.logoImage.url ? `<img class="first" src="${item?.logoImage.url}" alt="${item?.logoImage.title}" />` : ''}</div>`;
+    });
+
+    let contentStructure = blockData.homepageCollectionsCollection?.items?.map((item,i) => {
+        return `<div class="tab-content ${i === 0 ? 'is-active' : ''}" id="tab-description-${i}">
+            <div class="blockElementDiscover">
+                <div class="discovery-section">
+                    <div class="imageflex">
+                        <div>${item?.imageLeft.url ? `<img class="first" src="${item?.imageLeft.url}" alt="${item?.imageLeft.title}" />` : ''}
+                        ${item?.imageCenter.url ? `<img class="second" src="${item?.imageCenter.url}" alt="${item?.imageCenter.title}"/>` : ''}</div>
+                        <div>${item?.imageRight.url ? `<img  class="third" src="${item?.imageRight.url}"  alt="${item?.imageRight.title}" />` : '' }</div>
+                    </div>
+                    <div class="caption">
+                        <h2>${item?.collectionName}</h2>
+                        <p class="content">${item?.description}</p>
+                        <a href="${item?.linkUrl}" class="button button--secondary buttonlink">${item?.linkText}</a>
+                    </div>
+                </div>
+            </div>
+        </div>`
+    });
+
+    return  `<div class="block-item"><div class="tabs logoTabs" data-tab role="tablist">${logoStructure.join('')}</div><div class="tabs-contents">${contentStructure.join('')}</div></div>`;
+};

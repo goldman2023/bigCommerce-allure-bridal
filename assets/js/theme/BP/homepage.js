@@ -18,7 +18,8 @@ import {
     BlockElementBigCarousel,
     blockElementDivider,
     blockElementSpacer,
-    blockElementSpacer24Px
+    blockElementSpacer24Px,
+    referencedBlockHomepageCollections
     } from './universal-blocks';
 export default class Homepage extends PageManager {
     constructor(context) {
@@ -34,6 +35,9 @@ export default class Homepage extends PageManager {
             }
             if(element.__typename === "BlockElementCopyBlock"){
                 return blockElementCopyBlock(element);
+            }
+            if(element.__typename === "ReferencedBlockHomepageCollections"){
+                return referencedBlockHomepageCollections(element);
             }
             if(element.__typename === "ReferencedBlockLogoRow"){
                 return logoSliderBlock(element);
@@ -183,6 +187,58 @@ export default class Homepage extends PageManager {
                 ]
             });
         };
+
+        let tabs = document.querySelectorAll(".tabs div");
+        let tabContents = document.querySelectorAll(".tab-content");
+
+        tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => {
+            tabContents.forEach((content) => {
+            content.classList.remove("is-active");
+            });
+            tabs.forEach((tab) => {
+            tab.classList.remove("is-active");
+            });
+            tabContents[index].classList.add("is-active");
+            tabs[index].classList.add("is-active");
+        });
+        });
+
+        if(document.querySelector('.logoTabs')) {
+            $('.logoTabs').slick({
+                dots: false,
+                infinite: false,
+                speed: 300,
+                slidesToShow: 6,
+                slidesToScroll: 1,
+                centerMode: true,
+                arrows: true,
+                responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                    slidesToShow: 6,
+                    slidesToScroll: 1,
+                    infinite: false,
+                    centerMode: true,
+                    arrows: true,
+                    dots: false
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        centerMode: true,
+                        infinite: false,
+                        dots: false,
+                        arrows: false
+                    }
+                }
+                ]
+            });
+        }
 
     }
 
