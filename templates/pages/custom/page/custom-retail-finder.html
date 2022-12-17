@@ -1,0 +1,200 @@
+{{#partial "page"}}
+
+
+
+<section class="page pages-custom-retail-submission-form">
+    {{{region name="page_builder_content"}}}
+
+    <div>
+        {{#replace '%%Syndicate%%' page.content}}
+        {{> components/page/rss_feed}}
+        {{else}}
+        <p>{{{page.content}}}</p>
+        {{/replace}}
+    </div>
+    <div class="container">
+        <div class="content login">
+            {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+            <div class="select-date">
+                <h2 class="header-title">Select Date & Time</h2>
+                <div class="date-container">
+                    <div> <input class="inline-picker" type="hidden" id="inline-picker"
+                            placeholder="Select Date & Time"></div>
+                    <div class="time">
+
+                        <button class="date-button">10:00 AM</button>
+                        <button class="date-button">10:30 AM</button>
+                        <button class="date-button active">11:00 AM</button>
+                        <button class="date-button">11:30 AM</button>
+                        <button class="date-button">12:00 PM</button>
+                        <button class="date-button">12:30 PM</button>
+                        <button class="date-button">1:00 PM</button>
+                        <button class="date-button">1:30 PM</button>
+                        <button class="date-button">2:00 PM</button>
+                        <button class="date-button">2:30 PM</button>
+                        <button class="date-button">3:00 PM</button>
+                        <button class="date-button">3:30 PM</button>
+                    </div>
+                </div>
+
+            </div>
+            <form class="form">
+                <h2 class="header-title">Contact Information</h2>
+                <div class="form-field filter">
+                    <span class="form-label">First Name</span>
+
+                    <input class="form-input" type="text" name="firstName" placeholder="First Name">
+
+                </div>
+                <div class="form-field filter">
+                    <span class="form-label">Last Name</span>
+
+                    <input class="form-input" type="text" name="lastName" placeholder="Last Name">
+
+                </div>
+                <!--Add Email-->
+                <div class="form-field filter">
+                    <span class="form-label">Email</span>
+
+                    <input class="form-input" type="email" name="email" placeholder="Email">
+
+                </div>
+                <div class="form-retail-row">
+                    <div class="form-field filter full">
+                        <span class="form-label">Phone Number</span>
+
+                        <input class="form-input" type="tel" name="phoneNumber" placeholder="Phone Number">
+
+                    </div>
+                    <div class="form-field filter">
+
+                        <span class="form-label">Type</span>
+                        <select id="" name="phoneType" class="form-select selector-dropdown">
+                            <option value="Home">Home</option>
+                            <option value="Mobile">Mobile</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="checkbox-fields">
+                    <div class="checkbox-field">
+
+                        <label for="register_pass-news"> <input type="checkbox" class="register_pass-news">Receive text
+                            alerts</label>
+                    </div>
+                    <div class="checkbox-field">
+
+                        <label for="register_pass-news"> <input type="checkbox" class="register_pass-news"> Receive
+                            Email alerts</label>
+                    </div>
+
+                </div>
+                <div class="disclaimer">
+                    <span>SAMPLE TEXT</span> - Message and data rates may apply. Max 5 msgs/mo. Consent not required to
+                    buy
+                    goods/svcs. Terms and conditions at ourwebsite.com/terms. Privacy policy at Ourwebsite.com/privacy.
+                </div>
+                <div class="form-field filter">
+                    <span class="form-label">Address 1</span>
+
+                    <input class="form-input" type="text" name="address1" placeholder="Address 1">
+
+                </div>
+                <div class="form-field filter">
+                    <span class="form-label">Address 2</span>
+
+                    <input class="form-input" type="text" name="address2" placeholder="Address 2">
+
+                </div>
+                <div class="city-container">
+                    <div class="form-field filter">
+                        <span class="form-label">City</span>
+
+                        <input class="form-input" type="text" name="city" placeholder="City">
+
+                    </div>
+                    <div class="form-field filter">
+
+                        <span class="form-label">State/Province/Country</span>
+                        <select id="" name="state" class="form-select selector-dropdown">
+                            <option value="CA">California</option>
+                        </select>
+
+                    </div>
+                    <div class="form-field filter">
+                        <span class="form-label">Zip Code</span>
+
+                        <input class="form-input" type="text" name="zip" placeholder="Zip Code">
+
+                    </div>
+                </div>
+                <div class="form-retail-row">
+                    <div id="eventDate" class="form-field filter flatpickr">
+                        <span class="form-label">Event Date</span>
+
+                        <input class="form-input date-picker " type="text" placeholder="MM/DD/YYYY">
+
+                    </div>
+                    <div class="form-field filter flatpickr">
+                        <span class="form-label">Preferred Appointment Dates (choose 3)</span>
+
+                        <input class="form-input multiple-dates " type="text" placeholder="MM/DD/YYYY">
+                        <div class="disclaimer">Selected dates are not guaranteed.</div>
+                    </div>
+                </div>
+
+                <div class="form-field filter">
+                    <span class="form-label"># of People Attending</span>
+
+                    <input class="form-input" type="number" name="noOfPeopleAttending"
+                        placeholder="# of People Attending">
+
+                </div>
+                <div class="checkbox-fields">
+                    <div class="checkbox-field">
+
+                        <label for="register_pass-news"> <input type="checkbox" class="register_pass-news">I accept the
+                            terms and conditions*</label>
+                    </div>
+
+
+                </div>
+
+                <button class="button" type="button">Submit</button>
+
+            </form>
+
+
+        </div>
+    </div>
+
+</section>
+<script>
+    window.addEventListener("load", (event) => {
+        // Initialize the date picker on load
+        flatpickr('.date-picker', { position: 'below' })
+        flatpickr('.inline-picker', { inline: true, monthSelectorType: 'static' })
+        flatpickr('.multiple-dates', {
+            mode: 'multiple', position: 'below', onChange: function (selectedDates, dateStr, instance) {
+                var selectedDatesStr = selectedDates.reduce(function (acc, ele) {
+                    var str = instance.formatDate(ele, "d/m/Y");
+                    acc = (acc == '') ? str : acc + ';' + str;
+                    return acc;
+                }, '');
+                instance.set('enable', [function (date) {
+                    if (selectedDates.length >= 3) {
+                        var currDateStr = instance.formatDate(date, "d/m/Y")
+                        var x = selectedDatesStr.indexOf(currDateStr);
+                        return x != -1;
+                    } else {
+                        return true;
+                    }
+                }]);
+            }
+        })
+    });
+
+</script>
+{{/partial}}
+
+{{> layout/base}}

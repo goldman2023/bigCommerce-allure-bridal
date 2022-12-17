@@ -156,3 +156,250 @@
           padding: 20px !important;
       }
 }
+.has-activeNavPages {
+
+    position: relative;
+  }
+.pages-custom-retail-submission-form {
+  .full {
+    width: 100%;
+  }
+  .header-title {
+    margin-top: 1rem;
+  }
+  .form-field {
+    margin: 0 !important;
+    flex: 1;
+    padding: 15px 0 !important;
+    .disclaimer {
+      position: absolute;
+    }
+    .form-input[readonly] {
+      background: none;
+    }
+  }
+  //   .checkbox-fields {
+  //     display: flex;
+  //     gap: 10px;
+  //     margin-bottom: 1rem;
+  //     margin-top: 1rem;
+  //     .checkbox-field {
+  //       display: flex;
+  //       justify-content: center;
+  //       gap: 4px;
+  //     }
+  //     label {
+  //       font-style: normal;
+  //       font-weight: 600;
+  //       font-size: 12px;
+  //       line-height: 16px;
+  //       /* identical to box height, or 133% */
+
+  //       letter-spacing: 0.05em;
+  //       text-transform: uppercase;
+
+  //       /* Neutral/400 */
+
+  //       color: #615d5d;
+  //     }
+
+  //   }
+
+  .checkbox-fields {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    input[type='checkbox'] {
+      -webkit-appearance: none;
+      appearance: none;
+      margin: 0;
+      border: 1px solid #bc8372;
+      background-color: white;
+      border-radius: 3px;
+      width: 1.14286rem;
+      height: 1.14286rem;
+      display: grid;
+      place-content: center;
+      margin-right: 10px;
+    }
+    input[type='checkbox']::before {
+      content: '';
+      width: 0;
+      height: 0;
+    }
+    input[type='checkbox']:checked::before {
+      width: 1.14286rem;
+      height: 1.14286rem;
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z' fill='rgba(255, 255, 255, 0.999)' /%3E%3C/svg%3E");
+      border: 1px solid #bc8372;
+      background-color: #bc8372;
+      background-size: contain;
+      border-radius: 3px;
+    }
+    input[type='checkbox']:focus {
+      outline: 0;
+      outline-offset: 0;
+    }
+  }
+  .checkbox-field label {
+    margin-bottom: 10px;
+    display: flex;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    /* identical to box height, or 133% */
+
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+
+    /* Neutral/400 */
+
+    color: #615d5d;
+  }
+  .form-retail-row {
+    display: flex;
+    gap: 20px;
+
+    flex-flow: row;
+
+    justify-content: unset;
+
+    align-items: unset;
+  }
+  .city-container {
+    gap: 20px;
+    display: flex;
+  }
+  .disclaimer {
+    font-style: italic;
+
+    font-size: 11px;
+    line-height: 14px;
+    /* or 127% */
+
+    text-transform: capitalize;
+
+    /* Neutral/400 */
+
+    color: #615d5d;
+
+    margin-bottom: 1rem;
+    span {
+      font-weight: 700;
+    }
+  }
+  .inline-picker {
+    display: none;
+  }
+  .select-date {
+    margin-bottom: 2rem;
+    .flatpickr-months {
+      margin-bottom: 1rem;
+    }
+    .flatpickr-calendar {
+      box-shadow: none;
+      .flatpickr-current-month {
+        left: 0;
+        text-align: left;
+        .cur-month {
+          font-weight: inherit;
+        }
+      }
+      .flatpickr-prev-month {
+        right: 25px;
+        left: auto;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+      }
+      .flatpickr-next-month {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+      .flatpickr-prev-month,
+      .flatpickr-next-month {
+        padding: 7px;
+        background: #dad4ce;
+        &:hover {
+          background: #ada093;
+          color: #000;
+          svg {
+            fill: #000;
+          }
+        }
+      }
+    }
+    .flatpickr-weekday {
+      font-weight: 400;
+      font-size: 12px;
+      color: #ada093;
+      text-transform: uppercase;
+    }
+    .date-container {
+      display: flex;
+      gap: 10px;
+      > div {
+        flex: 1;
+      }
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+        > div {
+          flex: unset;
+        }
+      }
+    }
+    .time {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      grid-auto-rows: min-content;
+      .date-button {
+        padding: 12px 16px;
+        height: 43px;
+        background: #dad4ce;
+        border-radius: 7px;
+        font-weight: 700;
+        &.active {
+          background: #ac634d;
+          color: #fff;
+        }
+      }
+    }
+
+    .prevMonthDay,
+    .nextMonthDay {
+      background: none !important;
+    }
+    .flatpickr-day {
+      background: #c3e1e4;
+      margin-bottom: 1rem;
+      font-size: 12px;
+      &.selected {
+        background: #ac634d;
+        color: #fff;
+      }
+    }
+    .dayContainer > .flatpickr-day:nth-child(7n),
+    .dayContainer > .flatpickr-day:nth-child(7n-6) {
+      background: #dad4ce;
+      //   font-size: 20px;
+    }
+    .nextMonthDay {
+      &:nth-last-child(-n + 7) {
+        display: none;
+      }
+    }
+  }
+  .button {
+    background: #bc8372;
+    border: 1px solid #bc8372;
+    color: #fff;
+    &:hover {
+      background: #fff;
+      color: #bc8372;
+      border: 1px solid #bc8372;
+    }
+  }
+}

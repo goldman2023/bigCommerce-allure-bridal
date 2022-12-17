@@ -74,6 +74,7 @@ module.exports = {
     ],
     resolve: {
         alias: {
+            
             jquery: path.resolve(__dirname, 'node_modules/jquery/dist/jquery.min.js'),
             jstree: path.resolve(__dirname, 'node_modules/jstree/dist/jstree.min.js'),
             lazysizes: path.resolve(__dirname, 'node_modules/lazysizes/lazysizes.min.js'),
@@ -81,6 +82,10 @@ module.exports = {
             'slick-carousel': path.resolve(__dirname, 'node_modules/slick-carousel/slick/slick.min.js'),
             'svg-injector': path.resolve(__dirname, 'node_modules/svg-injector/dist/svg-injector.min.js'),
             sweetalert2: path.resolve(__dirname, 'node_modules/sweetalert2/dist/sweetalert2.min.js'),
+            flatpickr: path.resolve(
+                __dirname,
+                'node_modules/flatpickr/dist/flatpickr.min.js'
+              )
         },
     },
 };

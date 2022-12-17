@@ -15,6 +15,7 @@ import adminBar from './global/adminBar';
 import carousel from './common/carousel';
 import loadingProgressBar from './global/loading-progress-bar';
 import svgInjector from './global/svg-injector';
+import flatpick from './BP/flatpickr';
 import {
     renderHeaderFooter,
     contentFullmetaData,
