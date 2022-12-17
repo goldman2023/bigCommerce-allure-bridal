@@ -6,11 +6,11 @@ export default class Inspiration extends PageManager {
 
     onReady() {
         let filters = [];
-        if(localStorage.getItem('inspirationfilters')) {
-            filters = localStorage.getItem('inspirationfilters').split(",");
-        } else {
+        if(window.location.href.indexOf("/tag/") == -1){
             filters = document.getElementById('inspirationfilter').value.split(",");
             localStorage.setItem('inspirationfilters',document.getElementById('inspirationfilter').value);
+        } else {
+            filters = localStorage.getItem('inspirationfilters').split(",");
         }
         var unique = filters.filter(element => {
             return element !== '';
