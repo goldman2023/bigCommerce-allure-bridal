@@ -190,7 +190,7 @@
         font-style: normal;
         font-weight: 400;
         color: stencilColor("color-default-neutral-3");
-        margin: 50px 0;
+        margin: 50px 0 0 0;
         text-align: center;
         .lastword { 
             font-family: stencilFontFamily('stay-classy-font');
@@ -202,9 +202,21 @@
             color: stencilColor("color-default-primary-1");
         }
     }
+    p.descrip {
+        font-family: stencilFontFamily('default-font-light');
+        font-style: normal;
+        font-weight: 300;
+        font-size:  remCalc(16px);
+        line-height:  remCalc(26px);
+        text-align: center;
+        color: stencilColor("color-default-neutral-2");
+        max-width: 650px;
+        margin: 0 auto;
+    }
     .productGridSection {
         margin-left: 0;
         width: 100%;
+        margin-top: 20px;
         .productSliderGrid {
             margin: 0 !important;
             li.product {
