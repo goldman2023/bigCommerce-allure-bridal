@@ -140,5 +140,38 @@
         }
     }
 }
+.logoTabs {
+    border-bottom: 1px solid transparent;
+    .slick-list {
+        padding: 0 !important;
+    }
+    .tab {
+        margin-bottom: 10px;
+        min-height: 46px;
+        @media only screen and (min-width: 800px)  {
+            display: flex;
+            align-items: center;
+        }
+    }
+    input:focus, button:focus, textarea:focus, select:focus, details:focus, [href]:focus, [tabindex]:not([tabindex="-1"]):focus, [contenteditable="true"]:focus {
+        outline: 2px solid transparent !important;
+        outline-offset: 1px !important;
+    }
+    .tab.is-active {
+        border: 1px solid transparent;
+        border-bottom: 1px solid #c8c6c6;
+    }
+    .tab.is-active::after {
+        position: absolute;
+        content: "";
+        left: calc(50% - 12px/2 - 1px);
+        bottom: -3px;
+        width: 4px;
+        height: 4px;
+        background: #695c5c;
+        outline: 3px solid white;
+        transform: rotate(45deg);
+    }
+}
 
 
