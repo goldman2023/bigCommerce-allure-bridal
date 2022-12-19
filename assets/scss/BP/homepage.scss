@@ -173,5 +173,21 @@
         transform: rotate(45deg);
     }
 }
+.logotabcontents {
+    .tab-content:nth-child(even) {
+        .blockElementDiscover .discovery-section .caption h2 {
+            color: #4977BD;
+        }
+        .buttonlink {
+            color: #4977BD;
+            border: 1px solid #4977BD;
+            &:hover {
+                color: #ffffff;
+                border: 1px solid #4977BD;
+                background-color: #4977BD;
+            }
+        }
+    }
+}
 
 
