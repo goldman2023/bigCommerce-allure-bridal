@@ -85,6 +85,10 @@ module.exports = {
             flatpickr: path.resolve(
                 __dirname,
                 'node_modules/flatpickr/dist/flatpickr.min.js'
+              ),
+              inputmask: path.resolve(
+                __dirname,
+                'node_modules/inputmask/dist/inputmask.min.js'
               )
         },
     },

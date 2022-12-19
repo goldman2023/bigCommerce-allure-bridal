@@ -161,6 +161,10 @@
     position: relative;
   }
 .pages-custom-retail-submission-form {
+    #thank-you {
+        display: none;
+        text-align: center;
+    }
   .full {
     width: 100%;
   }
@@ -204,6 +208,7 @@
   //     }
 
   //   }
+
 
   .checkbox-fields {
     margin-top: 10px;
@@ -295,6 +300,7 @@
     display: none;
   }
   .select-date {
+    display: none;
     margin-bottom: 2rem;
     .flatpickr-months {
       margin-bottom: 1rem;
@@ -392,6 +398,7 @@
       }
     }
   }
+
   .button {
     background: #bc8372;
     border: 1px solid #bc8372;
@@ -403,3 +410,27 @@
     }
   }
 }
+.flatpickr-calendar {
+    .flatpickr-current-month {
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+    .flatpickr-weekday{
+        color: #AC634D;
+        font-weight: 600;
+font-size: 12px;
+line-height: 16px;
+letter-spacing: 0.05em;
+text-transform: uppercase;
+
+    }
+    .cur-year {
+        font-weight: 600;
+    }
+    .flatpickr-day{
+        &.selected {
+            background: #AC634D;
+            border-color: #AC634D;
+        }
+    }
+  }

@@ -718,12 +718,26 @@ export default class RetailFinder extends PageManager {
     const scheduleBtn = document.createElement('button');
     scheduleBtn.setAttribute('type', 'button');
     scheduleBtn.classList.add('schedule-btn');
+
     const btnText = document.createElement('span');
     btnText.innerText = 'BOOK AN APPOINTMENT'
     scheduleBtn.append(btnText);
     scheduleBtn.addEventListener('click', () => this.openScheduler(retailer));
 
     detailElement.append(scheduleBtn);
+
+    //Add Request Appointment Button
+    const requestBtn = document.createElement('button');
+    requestBtn.setAttribute('type', 'button');
+    requestBtn.classList.add('schedule-btn');
+
+    const requestBtnText = document.createElement('span');
+    requestBtnText.innerText = 'REQUEST AN APPOINTMENT'
+    requestBtn.append(requestBtnText);
+    requestBtn.addEventListener('click', () => this.openRequestForm(retailer));
+
+    detailElement.append(requestBtn);
+
 
     const modal = defaultModal({ size: 'normal', skipCache: true });
     modal.open();
@@ -930,5 +944,19 @@ export default class RetailFinder extends PageManager {
       elem = this.getEmailBookingForm(retailer);
     }
     modal.updateContent(elem);
+  }
+  openRequestForm = (retailer) => {
+    console.log(retailer)
+    let elem;
+    if(retailer.bridalLiveRetailerId) {
+        window.location.href = '/request-appointment?retailerId=' + retailer.bridalLiveRetailerId + '&retailerName=' + retailer.retailerName;
+
+     
+      //redirect to custom form appending query string
+
+    } else {
+        window.location.href = '/request-appointment?retailerName=' + retailer.retailerName;
+    }
+   
   }
 };

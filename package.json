@@ -17,6 +17,7 @@
     "focus-within-polyfill": "^5.1.0",
     "formdata-polyfill": "^3.0.20",
     "foundation-sites": "^5.5.3",
+    "inputmask": "^5.0.7",
     "jquery": "^3.5.1",
     "jstree": "^3.3.12",
     "lazysizes": "5.2.2",
