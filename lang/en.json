@@ -289,6 +289,7 @@
     },
     "login": {
         "heading": "Sign in",
+        "subheading": "Welcome back to <strong class='sub_heading-site'>Allurbridals.com</strong> Please sign in.",
         "field_email": "Email Address",
         "field_password": "Password",
         "submit_value": "Sign in",
