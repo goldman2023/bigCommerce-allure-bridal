@@ -31,9 +31,11 @@ export default class Blog extends PageManager {
         let blogJson = this.context.blogJson;
         let metadata = JSON.parse(blogJson.replace( /(<([^>]+)>)/ig, ''));
         console.log("blog post data",metadata[1]);
-        let date = new Date(metadata[1].sortingDate);
-        console.log(date);
-        let formatdate = date.toString().split(' ')
+        
+        let sortDate = (metadata[1]?.sortingDate).split('T');
+        let date = new Date(`${sortDate[0]}T00:00`);
+        let formatdate = date.toString().split(' ');
+
         let dayvariable = {
             'Sun' : "Sunday",
             "Mon": "Monday",
