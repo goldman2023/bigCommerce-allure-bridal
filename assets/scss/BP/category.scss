@@ -96,6 +96,13 @@
     }
 }
 .recentlyViewed, .thePerfectMatch, .youMightalsoLike {
+    h4.title {
+        font-family: stencilFontFamily('prata-font');
+        font-style: normal;
+        font-weight: 400;
+        font-size: remCalc(22px);
+        line-height: remCalc(30px);
+    }
     .productGrid {
         margin: 0;
         .product {
