@@ -16,6 +16,7 @@ import carousel from './common/carousel';
 import loadingProgressBar from './global/loading-progress-bar';
 import svgInjector from './global/svg-injector';
 import flatpick from './BP/flatpickr';
+import inputmask from './BP/inputmask';
 import {
     renderHeaderFooter,
     contentFullmetaData,
