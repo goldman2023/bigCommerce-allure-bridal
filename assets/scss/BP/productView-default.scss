@@ -85,18 +85,31 @@
             }
         }
         h1 {
+            margin: 0 0 16px;
+            font-family: stencilFontFamily('prata-font');
+            font-style: normal;
+            font-weight: 400;
             font-size: remCalc(28px);
             line-height: remCalc(34px);
-            margin: 0 0 16px;
+            color: stencilColor("color-default-neutral-1");
         }
         .productView-subheading {
             font-family: stencilFontFamily('default-font-light');
+            font-style: normal;
+            font-weight: 300;
             font-size: remCalc(16px);
             line-height: remCalc(26px);
             letter-spacing: 0.1em;
             color: stencilColor('color-default-neutral-2');
             p {
                 margin: 0;
+                font-family: stencilFontFamily('default-font-light');
+                font-style: normal;
+                font-weight: 300;
+                font-size: remCalc(16px);
+                line-height: remCalc(26px);
+                letter-spacing: 0.1em;
+                color: stencilColor('color-default-neutral-2');
             }
         }
         [data-product-attribute="swatch"] {
@@ -212,10 +225,21 @@
             .tabs-contents {
                 .tab-content {
                     font-family: stencilFontFamily('default-font-light');
+                    font-style: normal;
+                    font-weight: 300;
                     font-size: remCalc(16px);
                     line-height: remCalc(26px);
                     letter-spacing: 0.1em;
                     color: stencilColor('color-default-neutral-2');
+                    p {
+                        font-family: stencilFontFamily('default-font-light');
+                        font-style: normal;
+                        font-weight: 300;
+                        font-size: remCalc(16px);
+                        line-height: remCalc(26px);
+                        letter-spacing: 0.1em;
+                        color: stencilColor('color-default-neutral-2');
+                    }
                 }
             }
         }

@@ -951,5 +951,5 @@ export function referencedBlockHomepageCollections(blockData) {
         </div>`
     });
 
-    return  `<div class="block-item"><div class="tabs logoTabs" data-tab role="tablist">${logoStructure.join('')}</div><div class="tabs-contents">${contentStructure.join('')}</div></div>`;
+    return  `<div class="block-item"><div class="tabs logoTabs" data-tab role="tablist">${logoStructure.join('')}</div><div class="logotabcontents tabs-contents">${contentStructure.join('')}</div></div>`;
 };
