@@ -148,21 +148,25 @@
         font-weight: 400;
         font-family: stencilFontFamily('prata-font');
         color: stencilColor('color-default-neutral-3');
-        margin: 0;
+        margin: 0 auto;
         font-size: remCalc(66px);
         line-height: remCalc(70px);
+        max-width: 750px;
     }
     p {
         text-align: center;
         font-weight: 300;
         font-family: stencilFontFamily('default-font-regular');
         color: stencilColor('color-default-neutral-2');
-        margin: 40px 0;
+        margin: 40px auto;
         font-size: remCalc(16px);
         line-height: remCalc(26px);
+        max-width: 750px;
     }
     div {
         text-align: center;
+        max-width: 750px;
+        margin: 0 auto;
     }
     .button {
         margin-bottom: 0;
