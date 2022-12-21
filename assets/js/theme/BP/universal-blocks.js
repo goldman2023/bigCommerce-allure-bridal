@@ -666,7 +666,7 @@ export function events(blockData) {
               </div>
             </div>`).join('')}
     </div>
-    <button type="button" class="button button--secondary" >view all trunk shows</button>
+    <a href="${blockData.containerButtonUrl}" class="button button--secondary" >${blockData.containerButtonText}</a>
     </div>`;
 }
 export function blockElementFullscreenImage(blockData) {
