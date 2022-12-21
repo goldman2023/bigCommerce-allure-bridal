@@ -23,7 +23,7 @@ category:
 {{/unless}}
 
 <div class="bp-category suits-plp" >
-    <div class="bp-category-header">
+    <div class="bp-category-header {{#if category.image}}has-image{{/if}}">
         <div class="bp-cat-content">
             <h3 class="page-heading">{{category.name}}</h3>
             <div class="description">{{{category.description}}}</div>
