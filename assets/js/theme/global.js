@@ -244,7 +244,11 @@ export default class Global extends PageManager {
                                 let heading = element.collectionHeadline;
                                 let lastword = heading?.split(" ")?.reverse()[0];
                                 document.querySelector('.productSlider .heading').innerHTML = `${(heading?.replace(lastword, '') !== undefined) ? heading?.replace(lastword, '') : ''} <span class="lastword">${(lastword !== undefined) ? lastword : ''}</span>`;
-                                document.querySelector('.productSlider .descrip').innerHTML = `${element.collectionDescription}`;
+                                if(element.collectionDescription != null || element.collectionDescription != undefined) {
+                                    document.querySelector('.productSlider .descrip').innerHTML = `${element.collectionDescription}`;
+                                } else {
+                                    document.querySelector('.productSlider .descrip').style.display = 'none';
+                                }
                             }
                             let blocksCollections = element.contentBlocksCollection.items.map(ele => {
                                 if (ele.__typename === "BlockElementCollectionPreview") {

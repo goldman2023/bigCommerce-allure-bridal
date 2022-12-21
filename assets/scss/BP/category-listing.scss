@@ -146,7 +146,7 @@
         height: 65px;
     }
     .card-image {
-        object-fit: cover;
+        object-fit: contain;
     }
     .slick-track {
        margin-left: 0;

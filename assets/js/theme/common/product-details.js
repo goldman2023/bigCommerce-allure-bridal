@@ -181,7 +181,11 @@ export default class ProductDetails extends ProductDetailsBase {
             document.querySelector('.sizeChart .description').innerHTML = sizeGuide.description;
             let howtomesureimg = sizeGuide.howToMeasureBackgroundImage.url;
             document.getElementById('howtomesureimg').setAttribute('src',howtomesureimg);
-            document.getElementById('sizechatvideo').setAttribute('src',sizeGuide.videoUrl);
+            if(sizeGuide.videoUrl != null) {
+                document.getElementById('sizechatvideo').setAttribute('src',sizeGuide.videoUrl);
+            } else {
+                document.querySelector('.how-to-mesure').style.display = "none"; 
+            }
 
             let sizes = sizeGuide.sizingData.replace(/[\r\n]/gm, '?').split('?');
             let sizetable = sizes.map((element,i)=> {
