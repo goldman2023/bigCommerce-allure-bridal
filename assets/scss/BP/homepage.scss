@@ -71,13 +71,13 @@
         }
     }
     .blockElementFullscreenImage .mainImage {
-        min-height: 300px;
+        min-height: auto;
         @include breakpoint("medium") {
             min-height: auto;
         }
         img {
-            height: 100%;
-            position: absolute;
+           // height: 100%;
+           // position: absolute;
             @media only screen and (min-width: 600px) {
                 width: 100%;
                 height: auto;

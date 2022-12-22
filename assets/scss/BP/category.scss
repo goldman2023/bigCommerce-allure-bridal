@@ -4,18 +4,25 @@
     }
     .bp-category-header {
         @include breakpoint("medium") {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            margin-bottom: 70px;
+            &.has-image {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                margin-bottom: 70px;
+                .bp-cat-content {
+                    @include breakpoint("medium") {
+                        width: 70%;
+                        padding-right: 30px;
+                    }
+                    h3,.description {
+                        text-align: left;
+                    } 
+                }
+            }
         }
         display: block;
         margin-bottom: 20px;
         .bp-cat-content {
-            @include breakpoint("medium") {
-                width: 70%;
-                padding-right: 30px;
-            }
             width: 100%;
             padding-right: 0;
             h3 {
@@ -27,9 +34,6 @@
                 text-align: center;
                 color: stencilColor("color-default-neutral-1");
                 margin-bottom: 10px;
-                @include breakpoint("medium") {
-                    text-align: left;
-                }
             }
             .description {
                 font-family: stencilFontFamily('default-font-light');
@@ -38,6 +42,7 @@
                 font-size: remCalc(14px);
                 line-height: remCalc(22px);
                 color: stencilColor("color-default-neutral-2");
+                text-align: center;
             }
         }
         .bp-cat-image {
