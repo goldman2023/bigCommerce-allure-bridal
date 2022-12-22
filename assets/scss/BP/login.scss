@@ -478,3 +478,9 @@ svg.login-diamond {
         max-width: 100%;
     }
 }
+.forgot-password__page {
+    border: 0 !important;
+    .sendemail {
+        display: none;
+    }
+}
