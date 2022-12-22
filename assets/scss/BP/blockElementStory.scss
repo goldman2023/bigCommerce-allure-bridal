@@ -46,6 +46,9 @@
 
     .heading-section {
         width: 100%;
+        @media screen  and (min-width: 600px) and (max-width: 899px){
+            margin-bottom: 40px;
+        }
         @include breakpoint("medium") { 
             width: 45%;
         }
@@ -131,6 +134,11 @@
         }
         .topleft {
             max-width: 302px;
+            @media screen  and (min-width: 600px) and (max-width: 899px){
+                margin-left: -40px;
+                max-width: 400px;
+                width: calc(100% + 40px) !important;
+            }
             @media only screen and (min-width: 1600px)  {
                 max-width: 90%;
             }
@@ -154,6 +162,11 @@
             width: 78%;
             padding: 30px 0 0;
             display: none;
+            @media screen  and (min-width: 600px) and (max-width: 899px){
+                display: block; 
+                width: 100%;
+                padding: 30px 0 0 30px;
+            }
             @include breakpoint("medium") {
                 display: block; 
             }
@@ -175,6 +188,9 @@
             }
             .button {
                 margin: 0;
+                @media screen  and (min-width: 600px) and (max-width: 899px){
+                    max-width: 400px;
+                }
                 @media only screen and (min-width: 2800px) {
                     font-size: remCalc(20px);
                     line-height: remCalc(20px);
@@ -182,6 +198,9 @@
             }
         }
         .rightcol {
+            @media screen  and (min-width: 600px) and (max-width: 899px){
+                margin-top: -15px;
+            }
             @include breakpoint("medium") {
                 width: 48%;
                 float: left;
@@ -210,6 +229,9 @@
     }
     .mobilecaption,.mobilebanner {
         display: block;
+        @media screen  and (min-width: 600px) and (max-width: 899px){
+            display: none; 
+        }
         @include breakpoint("medium") {
             display: none;
         }
