@@ -63,4 +63,9 @@
     .productGridslider .slick-prev, .productCarousel .slick-prev,.productGridslider .slick-next, .productCarousel .slick-next {
         top: 45%;
     }
+    .blockElementStory {
+        .caption {
+            display: none !important;
+        }
+    }
 }
