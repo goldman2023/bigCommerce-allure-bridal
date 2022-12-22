@@ -549,13 +549,13 @@ export default class RetailFinder extends PageManager {
         }
     }`
     const results = await fetch(
-      'https://graphql.contentful.com/content/v1/spaces/y49u4slmhh3t/',
+      'https://allure-integration.azurewebsites.net/leads',
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization:
-            `Bearer ${this.context.contentfulApiToken}`,
+            `Bearer ${this.context.leadmgmtApiToken}`,
         },
         body: JSON.stringify({ query }),
       }
