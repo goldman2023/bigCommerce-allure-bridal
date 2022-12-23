@@ -292,7 +292,7 @@
                 position: relative;
                 width: 48%;
                 img.first {
-                    margin-top: 60px;
+                    margin-top: 75px;
                     @include breakpoint("medium") { 
                         position: absolute;
                         top:0;
@@ -306,7 +306,7 @@
                     }
                 }
                 img.second {
-                    margin-top: 75px;
+                    margin-top: 175px;
                     @include breakpoint("medium") { 
                         position: absolute;
                         bottom: 0;
@@ -326,6 +326,9 @@
             width: 85%;
             padding: 10px 20px;
             position: absolute;
+            @media only screen and (max-width: 600px)  {
+                top: 28%;
+            }
             @include breakpoint("medium") { 
                 top: 30%;
                 left: 50%;
@@ -345,6 +348,10 @@
                 letter-spacing: -0.01em;
                 color: stencilColor("color-allure-bridals-primary-1");
                 position: relative;
+                @media only screen and (max-width: 600px) {
+                    font-size:  remCalc(50px);
+                    line-height:  remCalc(55px);
+                }
                 @media only screen and (min-width: 1200px) {
                     &::before {
                         position: absolute;
@@ -380,6 +387,10 @@
                 line-height: remCalc(26px);
                 text-align: justify;
                 color: stencilColor("color-allure-bridals-neutral-2");
+                @media only screen and (max-width: 600px) {
+                    font-size:  remCalc(14px);
+                    line-height:  remCalc(22px);
+                }
                 @media only screen and (min-width: 2000px) {
                     font-size: remCalc(22px);
                     line-height: remCalc(30px);
