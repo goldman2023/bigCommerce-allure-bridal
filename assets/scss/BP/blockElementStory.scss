@@ -275,7 +275,12 @@
     display: block;
     margin: 5% 0;
     @include breakpoint("medium") { 
-        margin: 5% 0;
+        margin: 5% 0 ;
+    }
+    &.block-item {
+        @media only screen and (max-width: 900px)  {
+            padding: 0 !important;
+        }
     }
     .discovery-section {
         position: relative;
