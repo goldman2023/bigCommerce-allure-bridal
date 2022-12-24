@@ -302,7 +302,7 @@
             "fact2": "Save multiple shipping addresses",
             "fact3": "Access your order history",
             "fact4": "Track new orders",
-            "fact5": "Save items to your Wish List",
+            "fact5": "Save items to your Dressing room",
             "create_account": "Create Account"
         }
     },
@@ -317,7 +317,7 @@
             "orders": "Orders",
             "returns": "Returns",
             "messages": "Messages ({num_new_messages})",
-            "wishlists": "Wish Lists",
+            "wishlists": "Dressing rooms",
             "recently_viewed": "Recently Viewed",
             "settings": "Account Settings",
             "addresses": "Addresses",
@@ -325,7 +325,7 @@
         },
         "mobile_nav": {
             "messages": "Messages",
-            "wishlists": "Wish Lists"
+            "wishlists": "Dressing rooms"
         },
         "addresses": {
             "heading": "Addresses",
@@ -483,29 +483,29 @@
             "no_items": "The items you've recently looked at on our site will appear below."
         },
         "wishlists": {
-            "heading": "Wish Lists",
-            "tag_line": "Fill in the form below to create a new Wish List. Click the \"Create Wish List\" button when you're done.",
-            "new": "New Wish List",
-            "you_have_none": "You have no Wish Lists, add one now.",
-            "empty_wishlist": "Your Wish List is empty. When you add items to your Wish List they will appear here.",
+            "heading": "Dressing rooms",
+            "tag_line": "Fill in the form below to create a new Dressing room. Click the \"CreateDressing room\" button when you're done.",
+            "new": "New Dressing room",
+            "you_have_none": "You have no Dressing rooms, add one now.",
+            "empty_wishlist": "Your Dressing room is empty. When you add items to your Dressing room they will appear here.",
             "num_items": "Items",
-            "add_item": "Add to Wish List",
+            "add_item": "Add to Dressing room",
             "remove_item": "Remove Item",
-            "name": "Wish List Name",
+            "name": "Dressing room Name",
             "shared": "Shared",
             "action": "Action",
-            "add": "Add Wish List",
+            "add": "Add Dressing room",
             "delete_all": "Delete All",
-            "edit": "Edit Wish List",
-            "view_heading": "Wish List: {name}",
-            "share_intro": "Share this Wish List with friends:",
+            "edit": "Edit Dressing room",
+            "view_heading": "Dressing room: {name}",
+            "share_intro": "Share this Dressing room with friends:",
             "num_products": "{num_products, plural, one {1 product} other {# products}}",
-            "create": "Create Wish List",
-            "save": "Save Wish List",
-            "delete_alert": "Are you sure you want to delete your Wish List(s)? This action cannot be undone.",
-            "create_new": "Create New Wish List",
-            "add_to_default": "Add to My Wish List",
-            "enter_wishlist_name_error": "You must enter a wishlist name."
+            "create": "Create Dressing room",
+            "save": "Save Dressing room",
+            "delete_alert": "Are you sure you want to delete your Dressing room(s)? This action cannot be undone.",
+            "create_new": "Create New Dressing room",
+            "add_to_default": "Add to My Dressing room",
+            "enter_wishlist_name_error": "You must enter a Dressing room name."
         }
     },
     "page": {
@@ -671,8 +671,8 @@
             "searchsubs": "Automatically search sub categories"
         },
         "wishlist": {
-            "name": "Wish List Name:",
-            "public": "Share Wish List?"
+            "name": "Dressing room Name:",
+            "public": "Share Dressing room?"
         },
         "validate": {
             "account": {

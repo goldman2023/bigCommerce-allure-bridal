@@ -46,6 +46,9 @@
 
     .heading-section {
         width: 100%;
+        @media screen  and (min-width: 600px) and (max-width: 899px){
+            margin-bottom: 40px;
+        }
         @include breakpoint("medium") { 
             width: 45%;
         }
@@ -87,6 +90,10 @@
             margin-top: 20px;
             position: relative;
             font-size:  remCalc(10px);
+            @media only screen and (max-width: 600px) {
+                padding-left: 86px;
+                text-align: left;
+            }
             @include breakpoint("medium") { 
                 font-size:  remCalc(12px);
             }
@@ -106,6 +113,9 @@
                 height: 20px;
                 background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTg4IiBoZWlnaHQ9IjEzIiB2aWV3Qm94PSIwIDAgMTg4IDEzIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB4PSIxODIiIHk9IjEuOTgxMzIiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHRyYW5zZm9ybT0icm90YXRlKDQ1IDE4MiAxLjk4MTMyKSIgZmlsbD0iIzY5NUM1QyIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxyZWN0IHk9IjUuODk1NTEiIHdpZHRoPSIxODAiIGhlaWdodD0iMSIgZmlsbD0iI0M4QzZDNiIvPgo8L3N2Zz4K");
                 background-repeat: no-repeat;
+                @media only screen and (max-width: 600px) {
+                    width: 70px;
+                }
             }
             &::after {
                 position: absolute;
@@ -117,6 +127,9 @@
                 background: stencilColor("color-default-neutral-1");
                 transform: rotate(45deg);
                 outline: 3px solid stencilColor('color-secondary');
+                @media only screen and (max-width: 600px) {
+                    left: 70px;
+                }
             }
         }
     }
@@ -131,6 +144,16 @@
         }
         .topleft {
             max-width: 302px;
+            @media screen  and (max-width: 599px){
+                margin-left: -30px;
+                max-width: 400px;
+                width: calc(100% + 30px) !important;
+            }
+            @media screen  and (min-width: 600px) and (max-width: 899px){
+                margin-left: -40px;
+                max-width: 400px;
+                width: calc(100% + 40px) !important;
+            }
             @media only screen and (min-width: 1600px)  {
                 max-width: 90%;
             }
@@ -154,6 +177,11 @@
             width: 78%;
             padding: 30px 0 0;
             display: none;
+            @media screen  and (min-width: 600px) and (max-width: 899px){
+                display: block; 
+                width: 100%;
+                padding: 30px 0 0 30px;
+            }
             @include breakpoint("medium") {
                 display: block; 
             }
@@ -175,6 +203,9 @@
             }
             .button {
                 margin: 0;
+                @media screen  and (min-width: 600px) and (max-width: 899px){
+                    max-width: 400px;
+                }
                 @media only screen and (min-width: 2800px) {
                     font-size: remCalc(20px);
                     line-height: remCalc(20px);
@@ -182,6 +213,9 @@
             }
         }
         .rightcol {
+            @media screen  and (min-width: 600px) and (max-width: 899px){
+                margin-top: -15px;
+            }
             @include breakpoint("medium") {
                 width: 48%;
                 float: left;
@@ -208,14 +242,30 @@
             width: 100%;
         }
     }
-    .mobilecaption,.mobilebanner {
+    .mobilecaption {
         display: block;
+        @media screen  and (min-width: 600px) and (max-width: 899px){
+            display: none; 
+        }
         @include breakpoint("medium") {
             display: none;
         }
     }
     .mobilecaption {
-            padding: 10px;
+        padding: 20px 20px 0 20px;
+        .button {
+            margin-bottom: 0;
+        }
+    }
+    .mobilebanner {
+        display: block;
+        margin: 40px 0;
+        @media screen  and (min-width: 900px) {
+            display: none;
+        }
+        img {
+            width: 100%;
+        }
     }
 }
 
@@ -242,7 +292,7 @@
                 position: relative;
                 width: 48%;
                 img.first {
-                    margin-top: 60px;
+                    margin-top: 75px;
                     @include breakpoint("medium") { 
                         position: absolute;
                         top:0;
@@ -256,7 +306,7 @@
                     }
                 }
                 img.second {
-                    margin-top: 75px;
+                    margin-top: 175px;
                     @include breakpoint("medium") { 
                         position: absolute;
                         bottom: 0;
@@ -276,6 +326,9 @@
             width: 85%;
             padding: 10px 20px;
             position: absolute;
+            @media only screen and (max-width: 600px)  {
+                top: 28%;
+            }
             @include breakpoint("medium") { 
                 top: 30%;
                 left: 50%;
@@ -294,6 +347,37 @@
                 line-height:  remCalc(70px);
                 letter-spacing: -0.01em;
                 color: stencilColor("color-allure-bridals-primary-1");
+                position: relative;
+                @media only screen and (max-width: 600px) {
+                    font-size:  remCalc(50px);
+                    line-height:  remCalc(55px);
+                }
+                @media only screen and (min-width: 1200px) {
+                    &::before {
+                        position: absolute;
+                        right: -50px;
+                        top: 40%;
+                        content: "";
+                        width: 17%;
+                        height: 20px;
+                        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTg4IiBoZWlnaHQ9IjEzIiB2aWV3Qm94PSIwIDAgMTg4IDEzIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB4PSIxODIiIHk9IjEuOTgxMzIiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHRyYW5zZm9ybT0icm90YXRlKDQ1IDE4MiAxLjk4MTMyKSIgZmlsbD0iIzY5NUM1QyIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxyZWN0IHk9IjUuODk1NTEiIHdpZHRoPSIxODAiIGhlaWdodD0iMSIgZmlsbD0iI0M4QzZDNiIvPgo8L3N2Zz4K");
+                        background-repeat: no-repeat;
+                        @media only screen and (max-width: 600px) {
+                            width: 70px;
+                        }
+                    }
+                    &::after {
+                        position: absolute;
+                        content: "";
+                        right: 7.5%;
+                        top: 46%;
+                        width: 2px;
+                        height: 2px;
+                        background: stencilColor('color-secondary');
+                        transform: rotate(45deg);
+                        outline: 2px solid #66676C;
+                    }
+                }
             }
             p {
                 font-family: stencilFontFamily('default-font-regular');
@@ -303,6 +387,10 @@
                 line-height: remCalc(26px);
                 text-align: justify;
                 color: stencilColor("color-allure-bridals-neutral-2");
+                @media only screen and (max-width: 600px) {
+                    font-size:  remCalc(14px);
+                    line-height:  remCalc(22px);
+                }
                 @media only screen and (min-width: 2000px) {
                     font-size: remCalc(22px);
                     line-height: remCalc(30px);

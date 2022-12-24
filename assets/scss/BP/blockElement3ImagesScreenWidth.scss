@@ -339,6 +339,8 @@
     .eapps-instagram-feed-title {
         font-size: remCalc(14px);
         line-height: remCalc(20px);
+        padding: 24px 1.5rem;
+
         @include breakpoint("medium") { 
             font-size: remCalc(22px);
             line-height: remCalc(26px);

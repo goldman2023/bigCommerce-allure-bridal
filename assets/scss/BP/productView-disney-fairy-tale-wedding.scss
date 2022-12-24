@@ -224,8 +224,9 @@
                     }
                     .button {
                         flex: 1;
-                        padding: 13px;
+                        padding: 0 6px;
                         margin: 0;
+                        line-height: 45px;
                     }
                     .productView-availability {
                         font-family: stencilFontFamily('default-font-regular');

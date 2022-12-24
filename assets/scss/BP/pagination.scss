@@ -115,6 +115,9 @@
                     z-index: 0;
                 }
            }
+           &:only-child {
+            display: none;
+           }
         }
     }
 }
