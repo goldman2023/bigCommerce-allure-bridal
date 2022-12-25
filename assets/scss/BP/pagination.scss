@@ -119,5 +119,21 @@
             display: none;
            }
         }
+        &.preview {
+            position: absolute;
+            left: 0;
+            top: 25px;
+            .pagination-item:only-child {
+                display: block;
+               }
+        }
+        &.next {
+            position: absolute;
+            right: 0;
+            top: 25px;
+            .pagination-item:only-child {
+                display: block;
+               }
+        }
     }
 }

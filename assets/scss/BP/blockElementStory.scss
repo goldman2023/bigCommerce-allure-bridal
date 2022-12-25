@@ -275,7 +275,12 @@
     display: block;
     margin: 5% 0;
     @include breakpoint("medium") { 
-        margin: 5% 0;
+        margin: 5% 0 ;
+    }
+    &.block-item {
+        @media only screen and (max-width: 900px)  {
+            padding: 0 !important;
+        }
     }
     .discovery-section {
         position: relative;
@@ -341,7 +346,7 @@
             h2 {
                 font-style: normal;
                 font-weight: 400;
-                text-align: justify;
+                text-align: left;
                 font-family: stencilFontFamily('stay-classy-font');
                 font-size:  remCalc(66px);
                 line-height:  remCalc(70px);
