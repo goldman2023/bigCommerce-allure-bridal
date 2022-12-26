@@ -270,3 +270,22 @@
 #modal .sizeChart {
     display: block;
 }
+.product-type{
+
+ .dropdown-menu-button .icon {
+        display: none; 
+    }
+    #wishlist-dropdown.is-open {
+        padding: 0;
+        .button{
+            height: 30px;
+            line-height: 30px;
+            &:before {
+                display: none;
+            }
+            &:hover {
+                color: #bc8372;
+            }
+        }
+    }
+}

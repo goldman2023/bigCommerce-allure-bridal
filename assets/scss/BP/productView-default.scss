@@ -20,9 +20,10 @@
             }
         }
 
-        .productView-info, .productView-price, .productView-thumbnails, .add-to-cart-wrapper, .form-wishlist, .socialLinks {
+        .productView-info, .productView-price, .productView-thumbnails, .add-to-cart-wrapper,  .socialLinks {
             display: none !important;
         }
+        
         .productView-product {
             border: none;
             padding: 0;
