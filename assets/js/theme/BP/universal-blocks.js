@@ -863,7 +863,7 @@ export function createProductSlider(block,blockData) {
 };
 
 export function blogpostTopBanner(selectorID,title,heading,imageHeading,date){
-    let  contentStructure = `<div class="topbannerSection"><img src="${imageHeading?.url}" alt="${title}" /><div class="caption"><h2>${title ? title : ''}</h2><span class="date">${date ? date : ''}<div class="divider"></div></span><p class="subheading">${heading ? heading : ''}</p></div></div>`;
+    let  contentStructure = `<div class="topbannerSection"><img src="${imageHeading?.url}" alt="${title}" /><div class="overlay"></div><div class="caption"><h2>${title ? title : ''}</h2><span class="date">${date ? date : ''}<div class="divider"></div></span><p class="subheading">${heading ? heading : ''}</p></div></div>`;
     document.getElementById(selectorID).innerHTML = contentStructure;
 };
 

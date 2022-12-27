@@ -218,7 +218,7 @@ body {
             font-weight: 400;
             font-size: 12px;
             line-height: 15px;
-            color: stencilColor('color-theme');
+            color: stencilColor('color-allure-bridals-neutral-1');
             border-color: stencilColor('color-theme');
             &::placeholder { 
                 color: stencilColor('color-theme-dark');
@@ -511,4 +511,7 @@ body {
             margin-bottom: 0;
         } 
     }
+ }
+ input:-internal-autofill-selected {
+    background-color: white !important;
  }
