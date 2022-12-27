@@ -38,6 +38,10 @@
                 text-align: center;
                 color: stencilColor("color-default-neutral-1");
                 margin-bottom: 10px;
+                @media screen and (max-width: 900px) {
+                    text-align: left;
+                    margin-top: 10px;
+                }
             }
             .description {
                 font-family: stencilFontFamily('default-font-light');
@@ -47,6 +51,10 @@
                 line-height: remCalc(22px);
                 color: stencilColor("color-default-neutral-2");
                 text-align: center;
+                @media screen and (max-width: 900px) {
+                    text-align: left;
+                    margin-bottom: 40px;
+                }
             }
         }
         .bp-cat-image {
