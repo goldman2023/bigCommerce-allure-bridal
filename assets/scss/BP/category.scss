@@ -10,8 +10,12 @@
                 align-items: center;
                 margin-bottom: 70px;
                 .bp-cat-content {
-                    @include breakpoint("medium") {
+                    @media screen and (min-width: 900px) and (max-width: 1200px){
                         width: 70%;
+                        padding-right: 20px;
+                    }
+                    @media screen and (min-width: 1201px) {
+                        width: calc(100% - 427px);
                         padding-right: 30px;
                     }
                     h3,.description {
@@ -48,8 +52,11 @@
         .bp-cat-image {
             width: 100%;
             position: relative;
-            @include breakpoint("medium") {
+            @media screen and (min-width: 900px) and (max-width: 1200px){
                 width: 30%;
+            }
+            @media screen and (min-width: 1201px) {
+                width: 427px;
             }
             &::after, &::before {
                 position: absolute;
