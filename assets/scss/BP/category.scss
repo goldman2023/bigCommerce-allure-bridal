@@ -132,6 +132,9 @@
                 .card-body {
                     padding-bottom: 0;
                     margin: 0 0 32px;
+                    @media screen and (max-width: 600px) {
+                        padding: 16px 0 0;
+                    }
                     @include breakpoint("medium") {
                         margin: 0;
                     }
