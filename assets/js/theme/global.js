@@ -120,8 +120,9 @@ export default class Global extends PageManager {
         }
         //Category Listing page end
 
+        const bodyClassEl = document.querySelector('body').classList;
         //Product Detail page start
-        if(mainContent.contains('pages-product') || mainContent.contains('suits-product')) {
+        if (bodyClassEl.contains('product-type')) {
             let productId = document.querySelector('.productView').getAttribute('data-prod-id');
 
             productDeatilMetaData(this.context,productId, response => {

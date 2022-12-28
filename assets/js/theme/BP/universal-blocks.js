@@ -619,11 +619,17 @@ export function globalblockElementFullscreenVideo(element) {
 }
 
 export function lookBookglobal(blockData) {
-    return `<div class="blockElementLookbook block-item full-size" id="blockElementLookbook"><div><h4 class="title">${(blockData.blocktitle) ? blockData.blocktitle : ''} - ${(blockData.subheadline) ? blockData.subheadline : ''}</h4><div class="contentSection"><img src="${(blockData.imagesCollection.items[0].url) ? blockData.imagesCollection.items[0].url : ''}" alt="${(blockData.subheadline) ? blockData.subheadline : ''}" /><div class="caption"><p class="content">${blockData?.bodyCopy}</p><a href="${blockData?.linkUrl}" class="buttonlink">${blockData?.linkText}</a></div></div></div></div>`;
+    return `<div class="blockElementLookbook block-item full-size" id="blockElementLookbook"><div><h4 class="title">${(blockData?.blocktitle) ? blockData?.blocktitle : ''} - ${(blockData?.subheadline) ? blockData?.subheadline : ''}</h4><div class="contentSection"><img src="${(blockData?.imagesCollection?.items[0]?.url) ? blockData?.imagesCollection?.items[0]?.url : ''}" alt="${(blockData?.subheadline) ? blockData?.subheadline : ''}" /><div class="caption">
+        ${(blockData?.bodyCopy == null || blockData?.bodyCopy == undefined) ? '' :
+        `<p class="content">${blockData.bodyCopy}</p>`
+        }   
+        ${(blockData?.linkText == null || blockData?.linkText == undefined) ? '' :
+        `<a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a>` }
+        </div></div></div></div>`;
 }
 
 export function lookBookglobal2(blockData) {
-    return `<div class="blockElementLookbook2 block-item full-size" id="blockElementLookbook2"><div><div class="caption"><h2>${(blockData.blocktitle) ? blockData.blocktitle : ''}</h2><div class="divider"></div><h4>${(blockData.subheadline) ? blockData.subheadline : ''}</h4><p class="content">${blockData?.bodyCopy}</p><a href="${blockData?.linkUrl}" class="button button-secondary">${blockData?.linkText}</a></div><div class="contentSection"><img src="${(blockData.imagesCollection.items[0].url) ? blockData.imagesCollection.items[0].url : ''}" alt="${blockData?.subheadline}" /></div></div></div>`;
+    return `<div class="blockElementLookbook2 block-item full-size" id="blockElementLookbook2"><div><div class="caption"><h2>${(blockData.blocktitle) ? blockData.blocktitle : ''}</h2><div class="divider"></div><h4>${(blockData.subheadline) ? blockData.subheadline : ''}</h4><p class="content">${blockData?.bodyCopy}</p><a href="${blockData?.linkUrl}" class="button button-secondary">${blockData?.linkText}</a></div><div class="contentSection"><img src="${(blockData?.imagesCollection?.items[0]?.url) ? blockData?.imagesCollection?.items[0]?.url : ''}" alt="${blockData?.subheadline}" /></div></div></div>`;
 }
 
 export function blockElementDivider() {
@@ -670,7 +676,7 @@ export function events(blockData) {
     </div>`;
 }
 export function blockElementFullscreenImage(blockData) {
-    return `<div class="blockElementFullscreenImage block-item full-size" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData?.backgroundImage?.url}" alt="${blockData?.subheadline}" />
+    return `<div class="blockElementFullscreenImage block-item ${(blockData?.contentOrScreenWidth !== 'Screen Width') ? 'full-size' : ''}" id="blockElementFullscreenImage"><div class="mainImage"><img src="${blockData?.backgroundImage?.url}" alt="${blockData?.subheadline}" />
     ${blockData?.bodyCopy !== null ? `<div class="homepageCaption"><div class="content"><div class="bannercap"><h4>${blockData?.subheadline}</h4><p>${blockData?.bodyCopy}</p><a href="${blockData?.linkUrl}">${blockData?.linkText}</a></div>` : ''}</div></div></div></div>`;
 }
 
@@ -707,7 +713,7 @@ export function blockElementDiscover(blockData) {
 export function blockElementStory(blockData) {
     return `<div class="blockElementStory block-item" id="blockElementStory">
     <div class="caption" ><h2>Inspiration</h2><p>Allure Bridals real customer’s fantastic wedding stories. These should be your wedding inspiration.</p></div>
-    <div class="flexdata"><div class="heading-section"><h2 class="title">${blockData?.blockname}</h2>${blockData?.displayedate ? `<p class="date">${blockData?.displayedate}</p>` : `<p></p></br>`}<div class="leftBottom">
+    <div class="flexdata"><div class="heading-section"><h2 class="title">${blockData?.blockname}</h2>${(blockData?.displayedate != undefined && blockData?.displayedate != null) ? `<p class="date">${blockData?.displayedate}</p>` : `<p></p></br>`}<div class="leftBottom">
         <img src="${blockData?.imagesCollection?.items[0]?.url}" alt="${blockData?.imagesCollection?.items[0]?.title}" />
         </div></div><div class="rightside-section"><div class="rightcol">
         <img src="${(blockData?.imagesCollection?.items[1]?.url !== undefined) ? blockData?.imagesCollection?.items[1]?.url : ''}" class="topleft" alt="${(blockData?.imagesCollection?.items[1]?.title !== undefined) ? blockData?.imagesCollection?.items[1]?.title : ''}"/>
@@ -868,7 +874,13 @@ export function blogpostTopBanner(selectorID,title,heading,imageHeading,date){
 };
 
 export function lookBook(selectorID, blockData) {
-    let blockItem = `<div><h4 class="title">${(blockData.blocktitle) ? blockData.blocktitle : ''} - ${(blockData.subheadline) ? blockData.subheadline : ''}</h4><div class="contentSection"><img src="${(blockData.imagesCollection.items[0].url) ? blockData.imagesCollection.items[0].url : ''}" alt="${(blockData.subheadline) ? blockData.subheadline : ''}" /><div class="caption"><p class="content">${blockData?.bodyCopy}</p><a href="${blockData?.linkUrl}" class="buttonlink">${blockData?.linkText}</a></div></div></div>`;
+    let blockItem = `<div><h4 class="title">${(blockData.blocktitle) ? blockData.blocktitle : ''} - ${(blockData.subheadline) ? blockData.subheadline : ''}</h4><div class="contentSection"><img src="${(blockData.imagesCollection.items[0].url) ? blockData.imagesCollection.items[0].url : ''}" alt="${(blockData.subheadline) ? blockData.subheadline : ''}" /><div class="caption"><div class="caption">
+        ${(blockData?.bodyCopy == null || blockData?.bodyCopy == undefined) ? '' :
+            `<p class="content">${blockData.bodyCopy}</p>`
+        }   
+        ${(blockData?.linkText == null || blockData?.linkText == undefined) ? '' :
+            `<a href="${blockData.linkUrl}" class="buttonlink">${blockData.linkText}</a>` }
+        </div></div></div>`;
     document.getElementById(selectorID).innerHTML = blockItem;
 };
 

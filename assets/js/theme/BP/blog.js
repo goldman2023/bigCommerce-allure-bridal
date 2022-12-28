@@ -35,13 +35,13 @@ export default class Blog extends PageManager {
         let sortDate = (metadata[1]?.sortingDate).split('T');
         let date = new Date(`${sortDate[0]}T00:00`);
         let formatdate = date.toString().split(' ');
-
+        
         let dayvariable = {
             'Sun' : "Sunday",
             "Mon": "Monday",
             'Tue' : "Tuesday",
             "Wed": "Wednesday",
-            'Thru' : "Thrusday",
+            'Thu' : "Thrusday",
             "Fri": "Friday",
             "Sat": "Saturday",
         }
@@ -108,7 +108,7 @@ export default class Blog extends PageManager {
             });
         };
 
-        blogpostTopBanner('topBanner',metadata[1].title, metadata[1].headline,metadata[1].headlineImage,dateformatted);
+        blogpostTopBanner('topBanner', metadata[1].title, metadata[1].headline, metadata[1].headlineImage, dateformatted);
         blogpostContentBlock('content-section',metadata[1]);
         let blocksCollections = metadata[1].contentBlocksCollection.items.map(element => {
             if(element.__typename === "BlockElementFullscreenImage"){

@@ -1,19 +1,6 @@
----
-product:
-    videos:
-        limit: {{theme_settings.productpage_videos_count}}
-    reviews:
-        limit: {{theme_settings.productpage_reviews_count}}
-    related_products:
-        limit: {{theme_settings.productpage_related_products_count}}
-    similar_by_views:
-        limit: {{theme_settings.productpage_similar_by_views_count}}
----
 {{inject 'productId' product.id}}
 
 {{#partial "page"}}
-
-
     {{#each product.shipping_messages}}
         {{> components/common/alert/alert-info message}}
     {{/each}}
@@ -26,28 +13,29 @@ product:
         {{{region name="product_below_content"}}}
 
         {{#if product.videos.list.length}}
-            {{> components/products/videos product.videos}}
+        {{> components/products/videos product.videos}}
         {{/if}}
 
-        {{#all settings.show_product_reviews theme_settings.show_product_reviews (if theme_settings.show_product_details_tabs '!==' true)}}
-            {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
+        {{#all settings.show_product_reviews theme_settings.show_product_reviews (if
+        theme_settings.show_product_details_tabs '!==' true)}}
+        {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
         {{/all}}
 
         <!-- {{> components/products/tabs}} -->
         <div class="youMightalsoLike" id="youMightalsoLike">
-            <h4 class="title">You Might Also Like</h4>
+            <h4 class="title">{{lang 'products.youmayalsolike'}}</h4>
             <div class="prodData"></div>
         </div>
         {{> BP/components/common/divider}}
         <div class="thePerfectMatch" id="thePerfectMatch">
-            <h4 class="title">The Perfect Match</h4>
+            <h4 class="title">{{lang 'products.thePerfectMatch'}}</h4>
             <div class="prodData"></div>
         </div>
         {{> BP/components/common/divider}}
-        <div class="recentlyViewed" id="recentlyViewed" >
-            <h4 class="title">Recently Viewed</h4>
+        <div class="recentlyViewed" id="recentlyViewed">
+            <h4 class="title">{{lang 'products.recentlyViewed'}}</h4>
             {{#if product.similar_by_views}}
-                {{> BP/components/common/carousel products=product.similar_by_views columns=4 list="Customers Also Viewed"}}
+            {{> BP/components/common/carousel products=product.similar_by_views columns=4 list="Customers Also Viewed"}}
             {{/if}}
         </div>
         {{> BP/components/common/divider}}
@@ -55,7 +43,6 @@ product:
         <div class="elfsight-app-2accabd9-4992-4055-9430-022b788dff5e"></div>
     </div>
     <div class="blockElementLookbook block-item full-size" id="blockElementLookbook"></div>
-
 
     {{> components/products/schema}}
 {{/partial}}
