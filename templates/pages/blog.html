@@ -6,6 +6,8 @@ blog:
         summary: 9999999
 ---
 {{#partial "page"}}
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
 <div class="inspiration-page">
     <div class="header-section">
         {{#unless theme_settings.hide_blog_page_heading }}
