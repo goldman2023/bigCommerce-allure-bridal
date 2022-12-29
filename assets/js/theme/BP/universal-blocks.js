@@ -801,7 +801,7 @@ export function blockElementVerticalGallery(blockData) {
                     let descriptionArr = (item.description) ? item.description.split('—') : '';
                     let descriptionHtml = '';
                     if (descriptionArr.length > 0) {
-                        descriptionHtml = `<p class="caption">${descriptionArr[0]}<span class="author">-${descriptionArr[1]}</span></p>`;
+                        descriptionHtml = `<p class="caption">${descriptionArr[0]} ${(descriptionArr[1] != null && descriptionArr[1] != undefined) ? `<span class="author">-${descriptionArr[1]}</span>` : ''}</p>`;
                     }
                     leftData +=  `<div class="contentDiv"><img src="${item.url}" alt="${item.title}" />${descriptionHtml}</div>`;
                 }
@@ -816,7 +816,7 @@ export function blockElementVerticalGallery(blockData) {
                     let descriptionHtml = '';
                     if (item.description) {
                         let descriptionArr = item.description.split('—');
-                        descriptionHtml = `<p class="caption">${descriptionArr[0]}<span class="author">-${descriptionArr[1]}</span></p>`;
+                        descriptionHtml = `<p class="caption">${descriptionArr[0]} ${(descriptionArr[1] != null && descriptionArr[1] != undefined) ? `<span class="author">-${descriptionArr[1]}</span>` : ''}</p>`;
                     }
                     
                     rightData += `<div class="contentDiv"><img src="${item.url}" alt="${item.title}" />${descriptionHtml} </div>`;

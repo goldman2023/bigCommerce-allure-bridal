@@ -14,7 +14,7 @@
             }
         }
 
-        .productView-info, .productView-price, .productView-thumbnails, .add-to-cart-wrapper,  .socialLinks {
+        .productView-info, .productView-price, .add-to-cart-wrapper,  .socialLinks {
             display: none !important;
         }
         
@@ -71,11 +71,20 @@
             .productView--right {
                 @include breakpoint("medium") {
                     flex-basis: 50%;
+                    max-width: 50%;
                 }
                 .productView-images {
                     float: none;
                     width: auto;
                     clear: both;
+                    margin: 0;
+                }
+                .slick-next,
+                .slick-prev {
+                    margin-top: 0;
+                    &::before {
+                        height: 2rem;
+                    }
                 }
             }
         }
@@ -256,7 +265,6 @@
                     margin: 0;
                     width: 100%;
                     max-width: unset;
-                    line-height: 45px;
                 }
             }
         }

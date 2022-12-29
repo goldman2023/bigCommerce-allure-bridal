@@ -31,10 +31,6 @@
     }
 }
 .blockElementImageLeftCopyRight {
-    margin: 0 -3rem;
-    @include breakpoint("medium") { 
-        margin: 5% 0;
-    }
     .leftimageblock {
         width: 100%;
         display: inline-block;
@@ -113,9 +109,6 @@
     }
 }
 .blockElementFullscreenImage {
-    @include breakpoint("medium") { 
-        margin: 15px 0;
-    }
     .mainImage {
         position: relative;
         .homepageCaption {
