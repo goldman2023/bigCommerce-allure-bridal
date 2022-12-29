@@ -92,6 +92,9 @@
                     @include breakpoint("medium") {
                         text-align: left;
                     }
+                    @media screen and (min-width: 601px) and (max-width: 900px){
+                        text-align: left;
+                    }
                     .initials {
                         font-family: stencilFontFamily('prata-font');
                         font-style: normal;
@@ -118,6 +121,12 @@
                         color: stencilColor('color-allure-bridals-neutral-1');
                         padding: 0 7%;
                         margin: 64px 0 24px;
+                        @media screen and (max-width: 600px) {
+                            margin: 30px 0 24px;
+                        }
+                        @media screen and (min-width: 601px) and (max-width: 900px){
+                            text-align: left;
+                        }
                         @include breakpoint("medium") { 
                             text-align: left;
                             padding: 0;
@@ -131,6 +140,14 @@
                         font-size: remCalc(14px);
                         line-height: remCalc(24px);
                         color: stencilColor('color-default-neutral-1');
+                        @media screen and (min-width: 601px) and (max-width: 900px){
+                            padding-left: 7%;
+                        }
+                    }
+                    .button {
+                        @media screen and (min-width: 601px) and (max-width: 900px){
+                            margin-left: 7%;
+                        }
                     }
                 }
             }
@@ -138,14 +155,26 @@
                 position: relative;
                 .horizontal_image {
                     width: 100%;
+                    @media screen and (min-width: 601px) and (max-width: 900px){
+                        padding-right: 40px;
+                    }
                 }
                 .vertical_image {
                     width: 37%;
                     position: absolute;
                     right: 0;
-                    background: stencilColor('color-secondary');;
+                    background: stencilColor('color-secondary');
                     padding: 10px 0 10px 10px;
                     top: 0;
+                    @media screen and (max-width: 600px) {
+                        padding: 0 0 10px 10px;
+                    }
+                    @media screen and (min-width: 601px) and (max-width: 900px){
+                        bottom: 0;
+                        top: auto;
+                        right: 0;
+                        padding: 10px 0 0 10px;
+                    }
                     @include breakpoint("medium") { 
                         bottom: 0;
                         top: auto;
@@ -162,15 +191,23 @@
                     padding-right: 40px;
                     justify-content: end;
                     align-items: center;
+                    @media screen and (max-width: 600px) {
+                        min-height: 14px;
+                        margin-bottom: 10px;
+                    }
                     &.mobileonly {
                         display: inline-flex;
-                        @include breakpoint("medium") {
+                        @media screen and (min-width: 601px) {
                             display: none;
                         }
                     }
                     &.desktoponly {
                         display: none;
-                        @include breakpoint("medium") {
+                        @media screen and (min-width: 601px) and (max-width: 900px){
+                            display: inline-flex;
+                            width: 50%;
+                        }
+                        @media screen and (min-width: 901px) {
                             display: inline-flex;
                             width: 70%;
                         }
@@ -185,6 +222,9 @@
                         top: 0;
                         bottom: 0;
                         margin: auto;
+                        @media screen and (max-width: 600px) {
+                            left: -16px;
+                        }
                     }
                     &::after {
                         position: absolute;
@@ -198,6 +238,9 @@
                         background: stencilColor("color-default-neutral-3");
                         transform: rotate(45deg);
                         outline: 3px solid stencilColor('color-secondary');
+                        @media screen and (max-width: 600px) {
+                            left: calc(100% - 182px);
+                        }
                     }
                 }
             }
