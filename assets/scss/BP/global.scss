@@ -511,7 +511,18 @@ body {
             margin-bottom: 0;
         } 
     }
- }
- input:-internal-autofill-selected {
-    background-color: white !important;
- }
+}
+input:-internal-autofill-selected {
+    background-color: stencilColor('color-white') !important;
+}
+.privacy-policy {
+    p {
+        font-size: remCalc(16px);
+        line-height: remCalc(26px);
+    }
+}
+.page {
+    .page-heading {
+        font-size: remCalc(40px);
+    }
+}
