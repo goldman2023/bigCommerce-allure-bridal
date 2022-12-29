@@ -128,7 +128,10 @@
             .pagination-item:only-child {
                 display: block;
                 margin: 0;
-               }
+                @media only screen and (max-width: 600px)  {
+                    span {display: none;}
+                }
+            }
         }
         &.next {
             position: absolute;
@@ -137,7 +140,10 @@
             .pagination-item:only-child {
                 display: block;
                 margin: 0;
-               }
+                @media only screen and (max-width: 600px)  {
+                    span {display: none;}
+                }
+            }
         }
     }
 }
