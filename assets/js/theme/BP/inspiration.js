@@ -26,7 +26,7 @@ export default class Inspiration extends PageManager {
             }, []);
             let selectedValue = "";
             if(window.location.href.indexOf("/tag/") > -1) {
-                selectedValue = window.location.href.split('/tag/')[1].replace("%20"," ");
+                selectedValue = window.location.href.split('/tag/')[1].replaceAll("%20"," ");
             }
             if(unique.length > 0 ) {
                 if(selectedValue !== "") {
