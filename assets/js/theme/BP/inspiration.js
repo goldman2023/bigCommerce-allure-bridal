@@ -6,7 +6,7 @@ export default class Inspiration extends PageManager {
 
     onReady() {
         let self = this;
-        fetch('https://apim.workato.com/allure/allure-b2c-website/blog/tags', {
+        fetch(this.context.workatoApiPathTags, {
             method: 'GET',
             credentials: 'same-origin',
             headers: {"API-TOKEN": self.context.workatoApiToken},
