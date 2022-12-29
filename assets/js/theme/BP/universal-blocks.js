@@ -945,7 +945,7 @@ export function referencedBlockHomepageCollections(blockData) {
     });
 
     let contentStructure = blockData.homepageCollectionsCollection?.items?.map((item,i) => {
-        return `<div class="tab-content ${i === 0 ? 'is-active' : ''}" id="tab-description-${i}">
+        return `<div class="tab-content ${i === 0 ? 'is-active' : ''} ${item?.slug}" id="tab-description-${i}">
             <div class="blockElementDiscover">
                 <div class="discovery-section">
                     <div class="imageflex">
