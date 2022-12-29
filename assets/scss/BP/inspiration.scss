@@ -91,6 +91,7 @@
                     text-align: center;
                     @include breakpoint("medium") {
                         text-align: left;
+                        padding-right: 120px;
                     }
                     @media screen and (min-width: 601px) and (max-width: 900px){
                         text-align: left;
@@ -276,6 +277,8 @@
                     .content-block {
                         display: flex;
                         justify-content: end;
+                        padding-left: 120px;
+                        padding-right: 0;
                     }
                 }
                 &:nth-child(odd) {
