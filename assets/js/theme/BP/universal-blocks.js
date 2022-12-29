@@ -697,9 +697,9 @@ export function blockElementDiscover(blockData) {
     return `<div class="blockElementDiscover block-item" id="blockElementDiscover">
                 <div class="discovery-section">
                     <div class="imageflex">
-                        <div>${blockData?.imagesCollection?.items[0]?.url ? `<img class="first" src="${blockData?.imagesCollection?.items[0]?.url}" alt="${blockData?.imagesCollection?.items[0]?.title}" />` : ''}
+                        <div class="leftcol">${blockData?.imagesCollection?.items[0]?.url ? `<img class="first" src="${blockData?.imagesCollection?.items[0]?.url}" alt="${blockData?.imagesCollection?.items[0]?.title}" />` : ''}
                         ${blockData?.imagesCollection?.items[1]?.url ? `<img class="second" src="${blockData?.imagesCollection?.items[1]?.url}" alt="${blockData?.imagesCollection?.items[1]?.title}"/>` : ''}</div>
-                        <div>${blockData?.imagesCollection?.items[2]?.url ? `<img  class="third" src="${blockData?.imagesCollection?.items[2]?.url}"  alt="${blockData?.imagesCollection?.items[2]?.title}" />` : '' }</div>
+                        <div class="rightcol">${blockData?.imagesCollection?.items[2]?.url ? `<img  class="third" src="${blockData?.imagesCollection?.items[2]?.url}"  alt="${blockData?.imagesCollection?.items[2]?.title}" />` : '' }</div>
                     </div>
                     <div class="caption">
                         <h2>${blockData?.blocktitle}</h2>
@@ -949,9 +949,9 @@ export function referencedBlockHomepageCollections(blockData) {
             <div class="blockElementDiscover">
                 <div class="discovery-section">
                     <div class="imageflex">
-                        <div>${item?.imageLeft.url ? `<img class="first" src="${item?.imageLeft.url}" alt="${item?.imageLeft.title}" />` : ''}
+                        <div class="leftcol">${item?.imageLeft.url ? `<img class="first" src="${item?.imageLeft.url}" alt="${item?.imageLeft.title}" />` : ''}
                         ${item?.imageCenter.url ? `<img class="second" src="${item?.imageCenter.url}" alt="${item?.imageCenter.title}"/>` : ''}</div>
-                        <div>${item?.imageRight.url ? `<img  class="third" src="${item?.imageRight.url}"  alt="${item?.imageRight.title}" />` : '' }</div>
+                        <div class="rightcol">${item?.imageRight.url ? `<img  class="third" src="${item?.imageRight.url}"  alt="${item?.imageRight.title}" />` : '' }</div>
                     </div>
                     <div class="caption">
                         <h2>${item?.collectionName}</h2>
@@ -963,5 +963,5 @@ export function referencedBlockHomepageCollections(blockData) {
         </div>`
     });
 
-    return  `<div class="block-item"><div class="tabs logoTabs" data-tab role="tablist">${logoStructure.join('')}</div><div class="logotabcontents tabs-contents">${contentStructure.join('')}</div></div>`;
+    return  `<div class="block-item logotabsblocksection"><div class="tabs logoTabs" data-tab role="tablist">${logoStructure.join('')}</div><div class="logotabcontents tabs-contents">${contentStructure.join('')}</div></div>`;
 };
