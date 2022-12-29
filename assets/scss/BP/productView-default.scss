@@ -154,6 +154,8 @@
             margin-bottom: 16px;
             letter-spacing: 0.1em;
             position: relative;
+            left : 0;
+            padding: 0;
         }
         .form {
             .form-field {
@@ -210,6 +212,10 @@
                         border: none;
                         position: relative;
                         border-bottom: 1px solid stencilColor("color-border");
+                        @media screen and (max-width: 600px) {
+                            margin: 0;
+                            border-bottom: 0;
+                        }
                         &::after {
                             position: absolute;
                             content: "";

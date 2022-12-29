@@ -149,8 +149,9 @@
     .tab {
         margin-bottom: 10px;
         min-height: 46px;
-        width: auto !important;
-        cursor: pointer;
+        @media only screen and (max-width: 600px)  {
+            display: inline-block;
+        }
         @media only screen and (min-width: 800px)  {
             display: flex;
             align-items: center;
@@ -195,6 +196,14 @@
 .category-landing {
     .blockElementHeaderContent {
         padding: 80px 0;
+        @media screen and (max-width: 900px) {
+            padding: 40px 10px; 
+        }
+    }
+}
+.logotabsblocksection {
+    @media only screen and (min-width: 601px) and (max-width: 900px)  {
+        padding: 0 !important;
     }
 }
 

@@ -286,14 +286,35 @@
             div {
                 @include breakpoint("medium") { 
                     width: 45%;
+                    position: relative;
                 }
                 @media only screen and (min-width: 1600px)  {
                     width: 48%;
+                    position: relative;
                 }
-                position: relative;
-                width: 48%;
+                @media only screen and (min-width: 601px) and (max-width: 900px)  {
+                    &.leftcol {
+                        width: 30%;
+                    }
+                    &.rightcol {
+                        width: 70%;
+                    }
+                }
+                @media only screen and (max-width: 600px)  {
+                    position: relative;
+                    width: 48%;
+                }
                 img.first {
-                    margin-top: 75px;
+                    @media only screen and (max-width: 600px)  {
+                        margin-top: 75px;
+                    }
+                    @media only screen and (min-width: 601px) and (max-width: 900px)  {
+                        margin-top: 0;
+                        width: 45%;
+                        position: absolute;
+                        top: 0;
+                        border: 20px solid white;
+                    }
                     @include breakpoint("medium") { 
                         position: absolute;
                         top:0;
@@ -307,7 +328,15 @@
                     }
                 }
                 img.second {
-                    margin-top: 175px;
+                    @media only screen and (max-width: 600px)  {
+                        margin-top: 175px;
+                    }
+                    @media only screen and (min-width: 601px) and (max-width: 900px)  {
+                        position: absolute;
+                        bottom: 0;
+                        width: 30%;
+                        border-right: 20px solid white;
+                    }
                     @include breakpoint("medium") { 
                         position: absolute;
                         bottom: 0;
@@ -318,6 +347,10 @@
                 }
                 img.third {
                     width: 100%;
+                    @media only screen and (min-width: 601px) and (max-width: 900px)  {
+                        margin-bottom: 40px;
+                    }
+
                 }
             }
         }
@@ -330,8 +363,17 @@
             @media only screen and (max-width: 600px)  {
                 top: 28%;
             }
-            @include breakpoint("medium") { 
+            @media only screen and (min-width: 601px) and (max-width: 900px)  {
                 top: 30%;
+                left: 10%;
+                width: 80%;
+                padding: 10px 60px 20px 60px;
+                position: absolute;
+                background: #fff;
+                z-index: 9;
+            }
+            @include breakpoint("medium") { 
+                top: 50%;
                 left: 50%;
                 width: 45%;
                 padding: 15px 50px;
@@ -353,11 +395,9 @@
                     font-size:  remCalc(50px);
                     line-height:  remCalc(55px);
                 }
-                @media only screen and (min-width: 1200px) {
+                @media only screen and (min-width: 601px) {
                     &::before {
                         position: absolute;
-                        right: -50px;
-                        top: 40%;
                         content: "";
                         width: 17%;
                         height: 20px;
@@ -370,13 +410,31 @@
                     &::after {
                         position: absolute;
                         content: "";
-                        right: 7.5%;
-                        top: 46%;
                         width: 2px;
                         height: 2px;
                         background: stencilColor('color-secondary');
                         transform: rotate(45deg);
                         outline: 2px solid #66676C;
+                    }
+                }
+                @media only screen and (min-width: 901px) {
+                    &::before {
+                        right: -50px;
+                        top: 40%;
+                    }
+                    &::after {
+                        right: 7.5%;
+                        top: 46%;
+                    }
+                }
+                @media only screen and (min-width: 601px) and (max-width: 900px)  {
+                    &::before {
+                        right: -60px;
+                        top: 40%;
+                    }
+                    &::after {
+                        right: 5.5%;
+                        top: 47%;
                     }
                 }
             }

@@ -103,6 +103,7 @@
                 text-align: center;
                 letter-spacing: 0.1em;
                 text-transform: uppercase;
+                position: relative;
                 .background-rot {
                     position: absolute;
                     content: "";
@@ -110,7 +111,7 @@
                     left: 1px;
                     width: 20px;
                     height: 20px;
-                    background: stencilColor('color-white');
+                    background: transparent;
                     transform: rotate(45deg);
                     z-index: 0;
                 }
@@ -123,9 +124,14 @@
             position: absolute;
             left: 0;
             top: 25px;
+            padding: 0;
             .pagination-item:only-child {
                 display: block;
-               }
+                margin: 0;
+                @media only screen and (max-width: 600px)  {
+                    span {display: none;}
+                }
+            }
         }
         &.next {
             position: absolute;
@@ -133,7 +139,11 @@
             top: 25px;
             .pagination-item:only-child {
                 display: block;
-               }
+                margin: 0;
+                @media only screen and (max-width: 600px)  {
+                    span {display: none;}
+                }
+            }
         }
     }
 }

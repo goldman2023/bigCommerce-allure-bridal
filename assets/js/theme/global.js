@@ -343,6 +343,7 @@ export default class Global extends PageManager {
                 $('.productGridslider').each(function(){
                     applySlider('.productGridslider',4,false,true);
                 });
+                $('.productGridSection').removeClass('hide');
             }, 3000);
         });
 
