@@ -161,7 +161,7 @@
                     }
                 }
                 .vertical_image {
-                    width: 37%;
+                    width: calc(25% + 40px);
                     position: absolute;
                     right: 0;
                     background: stencilColor('color-secondary');
@@ -210,7 +210,7 @@
                         }
                         @media screen and (min-width: 901px) {
                             display: inline-flex;
-                            width: 70%;
+                            width: 75%;
                         }
                     }
                     &::before {
@@ -253,7 +253,7 @@
                         .vertical_image {
                             padding: 10px 10px 0 0;
                             @include breakpoint("medium") { 
-                                left: -50px;
+                                left: -40px;
                             }
                         }
                         .postdate {
