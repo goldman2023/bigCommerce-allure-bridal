@@ -2,6 +2,12 @@ body {
     font-family: stencilFontFamily('default-font-regular');
     line-height: unset;
     position: static;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    footer {
+        margin-top: auto;
+    }
     .button {
         font-family: stencilFontFamily('default-font-regular');
         position: relative;
