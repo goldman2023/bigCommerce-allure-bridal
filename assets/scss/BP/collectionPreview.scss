@@ -16,29 +16,11 @@
             @include breakpoint("medium") { 
                 flex-basis: calc(60% - 30px);
             }
-            h4 {
-                font-family: stencilFontFamily('prata-font');
-                font-style: normal;
-                font-weight: 400;
-                font-size: remCalc(34px);
-                line-height: remCalc(44px);
+            h2 {
                 color: stencilColor("color-allure-bridals-neutral-1");
                 margin-top: 0;
-                @media only screen and (min-width: 2000px) {
-                    font-size: remCalc(40px);
-                    line-height: remCalc(50px);
-                }
-                @media only screen and (min-width: 2800px) {
-                    font-size: remCalc(45px);
-                    line-height: remCalc(65px);
-                }
             }
             p {
-                font-family: stencilFontFamily('default-font-regular');
-                font-style: normal;
-                font-weight: 400;
-                font-size: remCalc(16px);
-                line-height: remCalc(26px);
                 color: stencilColor("color-allure-bridals-neutral-2");
                 @media only screen and (min-width: 2000px) {
                     font-size: remCalc(20px);
@@ -145,22 +127,14 @@
     padding: 80px 0px;
     h1 {
         text-align: center;
-        font-weight: 400;
-        font-family: stencilFontFamily('prata-font');
         color: stencilColor('color-default-neutral-3');
         margin: 0 auto;
-        font-size: remCalc(66px);
-        line-height: remCalc(70px);
         max-width: 750px;
     }
     p {
         text-align: center;
-        font-weight: 300;
-        font-family: stencilFontFamily('default-font-regular');
         color: stencilColor('color-default-neutral-2');
         margin: 40px auto;
-        font-size: remCalc(16px);
-        line-height: remCalc(26px);
         max-width: 750px;
     }
     div {

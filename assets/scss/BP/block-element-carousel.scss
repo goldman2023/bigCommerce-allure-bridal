@@ -23,32 +23,18 @@
             }
             .caption {
                 .title {
-                    font-family: stencilFontFamily('stay-classy-font');
-                    font-style: normal;
-                    font-weight: 400;
-                    font-size: remCalc(40px);
                     margin-bottom: 0;
                     margin-top: 15px;
-                    line-height: remCalc(70px);
-                    letter-spacing: -0.01em;
                     color: stencilColor("color-secondary");
                     text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
                 }
                 .content {
-                    font-family: stencilFontFamily('default-font-light');
-                    font-style: normal;
-                    font-weight: 300;
-                    font-size: remCalc(14px);
-                    line-height: remCalc(22px);
                     color: stencilColor("color-secondary");
-                    margin-bottom: 10px;
+                    margin-bottom: 42px;
+                    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
                 }
                 .buttonlink {
-                    font-family: stencilFontFamily('default-font-regular');
-                    font-style: normal;
                     font-weight: 500;
-                    font-size: remCalc(12px);
-                    line-height: remCalc(15px);
                     text-align: center;
                     letter-spacing: 0.1em;
                     text-transform: uppercase;
@@ -65,6 +51,9 @@
                         background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxOCAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xLjE5NzU5IDYuNTQzNjdDMC45MDAzMiA2LjU0MzY3IDAuNjY2NzQ4IDYuMzEwMSAwLjY2Njc0OCA2LjAxMjgyQzAuNjY2NzQ4IDUuNzI2MTcgMC45MDAzMiA1LjQ4MTk4IDEuMTk3NTkgNS40ODE5OEgxNS44NDg5TDExLjQ0MjkgMS4wNzU5N0MxMS4yNDEyIDAuODYzNjI5IDExLjI0MTIgMC41MzQ1MDYgMTEuNDQyOSAwLjMyMjE2OEMxMS42NTUyIDAuMTA5ODMgMTEuOTg0NCAwLjEyMDQ0NyAxMi4xOTY3IDAuMzIyMTY4TDE3LjQ3MzMgNS41OTg3NkMxNy41OTAxIDUuNjk0MzIgMTcuNjY0NCA1Ljg0Mjk1IDE3LjY2NDQgNi4wMDIyMUMxNy42NjQ0IDYuMTUwODQgMTcuNjAwNyA2LjI5OTQ4IDE3LjQ5NDUgNi4zOTUwM0wxMi4xOTY3IDExLjY4MjJDMTEuOTg0NCAxMS44ODQgMTEuNjU1MiAxMS44ODQgMTEuNDQyOSAxMS42ODIyQzExLjI0MTIgMTEuNDgwNSAxMS4yNDEyIDExLjE0MDggMTEuNDQyOSAxMC45MzkxTDE1Ljg0ODkgNi41NDM2N0gxLjE5NzU5WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==");
                         background-repeat: no-repeat;
                         top: 1px;
+                    }
+                    &:hover {
+                        text-decoration: underline;
                     }
                 }
             }

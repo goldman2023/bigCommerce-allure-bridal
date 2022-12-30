@@ -244,7 +244,7 @@ export default class Global extends PageManager {
                                 }
                                 let heading = element.collectionHeadline;
                                 let lastword = heading?.split(" ")?.reverse()[0];
-                                document.querySelector('.productSlider .heading').innerHTML = `${(heading?.replace(lastword, '') !== undefined) ? heading?.replace(lastword, '') : ''} <span class="lastword">${(lastword !== undefined) ? lastword : ''}</span>`;
+                                document.querySelector('.productSlider .heading').innerHTML = `${(heading?.replace(lastword, '') !== undefined) ? heading?.replace(lastword, '') : ''} <span class="lastword h1-italic">${(lastword !== undefined) ? lastword : ''}</span>`;
                                 if(element.collectionDescription != null || element.collectionDescription != undefined) {
                                     document.querySelector('.productSlider .descrip').innerHTML = `${element.collectionDescription}`;
                                 } else {
