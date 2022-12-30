@@ -35,7 +35,7 @@
                                 <p class="card-text"><a href="{{brand.url}}">{{ brand.name }}</a></p>
                             {{/if}}
                             <h3 class="card-title">
-                                <a href="{{url}}">{{ name }}</a>
+                                <a href="{{url}}" class="h4">{{ name }}</a>
                             </h3>
                             {{#or ../customer (if ../theme_settings.restrict_to_login '!==' true)}}
                                 {{#if price_range}}
