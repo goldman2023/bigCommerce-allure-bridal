@@ -278,7 +278,7 @@
             "last_name": "Last Name",
             "confirm_pass": "Confirm Password",
             "marketing": "I wish to receive Allure Bridals News on my e-mail",
-            "privacy_accept": "I accept the Privacy",
+            "privacy_accept": "I accept the <a href='/privacy_policy/'>Privacy Policy</a>",
             "error": {
                 "first_name": "First Name field cannot be blank.",
                 "last_name": "Last Name field cannot be blank.",
