@@ -124,11 +124,23 @@ export default class Global extends PageManager {
         //Product Detail page start
         if (bodyClassEl.contains('product-type')) {
             let productId = document.querySelector('.productView').getAttribute('data-prod-id');
-
             productDeatilMetaData(this.context,productId, response => {
                 let metadata = response.contentFul;
                 let relatedPro = response.related;
-                console.log(metadata);
+
+
+                if(Object.keys(metadata).length === 0) {
+                    $('.contentBlocksCollection').hide();
+                } else {
+                    $('.contentBlocksCollection').show();
+                }
+
+                if(Object.keys(relatedPro).length === 0) {
+                    $('.productsrelate').hide();
+                } else {
+                    $('.contentBlocksCollection').show();
+                }
+                
                 let blocksCollections = metadata?.contentBlocksCollection?.items?.map(element => {
                     if(element.__typename === "BlockElementStoryBlock"){
                         return blockElementStory(element);
@@ -201,14 +213,13 @@ export default class Global extends PageManager {
                     if(relatedPro.thePerfectMatch.length > 0) {
                         let perfectmatch = relatedPro.thePerfectMatch.map((item) => item.bc_product_id);
                         getProducts(contentId,'.thePerfectMatch .prodData', perfectmatch);
-                    } else {
-                        document.getElementById('thePerfectMatch').style.display = 'none';
+                        $('#thePerfectMatch').removeClass('hide');
                     }
+                    console.log("you might",relatedPro.youMightAlsoLike.length);
                     if(relatedPro.youMightAlsoLike.length > 0) {
                         let youmaylike = relatedPro.youMightAlsoLike.map((item) => item.bc_product_id);
                         getProducts(contentId,'.youMightalsoLike .prodData', youmaylike);
-                    } else {
-                        document.getElementById('youMightalsoLike').style.display = 'none';
+                        $('#youMightalsoLike').removeClass('hide');
                     }
                 }
                 document.querySelectorAll('.imageWithContentSlider ul').forEach((item) => {

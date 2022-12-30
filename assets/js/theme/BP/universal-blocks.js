@@ -377,6 +377,10 @@ export function productDeatilMetaData(context,prodID, callback) {
                         }
                     }
                 }
+            } else {
+                let contentFul = {};
+                let related = {};
+                callback.call(this, {contentFul, related});
             }
         }
     });
