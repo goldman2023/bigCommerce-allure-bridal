@@ -22,11 +22,6 @@
         }
         .sub-cat-header {
             h3 {
-                font-style: normal;
-                font-weight: 400;
-                font-family: stencilFontFamily('prata-font');
-                font-size: remCalc(28px);
-                line-height: 34px;
                 color: stencilColor("color-default-neutral-1");
             }
             p {
@@ -45,19 +40,10 @@
                         }
                     }
                 }
-                span,a {
-                    font-family: stencilFontFamily('default-font-light');
-                    font-size: remCalc(12px);
-                    font-style: normal;
-                    font-weight: 300;
-                    line-height: 20px;
+                span, a {
                     color: stencilColor("color-default-neutral-2");
                 }
                 .viewCategory {
-                    font-family: stencilFontFamily('default-font-regular');
-                    font-weight: 500;
-                    line-height: 15px;
-                    letter-spacing: 0.1em;
                     text-transform: uppercase;
                     color: stencilColor("color-default-neutral-3");
                     text-decoration: none;
@@ -96,11 +82,6 @@
         justify-content: space-between;
     }
     .card-title > a {
-        font-family: stencilFontFamily('prata-font');
-        font-size: remCalc(22px);
-        font-style: normal;
-        font-weight: 400;
-        line-height: 30px;
         color: stencilColor("color-default-neutral-1");
         &.name {
             width: calc(100% - 25px);
@@ -132,7 +113,6 @@
         }
     }
     .card-text {
-        font-family: stencilFontFamily('default-font-regular');
         font-size: remCalc(12px);
         font-style: normal;
         font-weight: 400;
@@ -159,7 +139,12 @@
         height: 52px;
         padding: 0 14px;
         &::before {
-            background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yLjE5NzUxIDEwLjU0MzZDMS45MDAyNCAxMC41NDM2IDEuNjY2NjcgMTAuMzEgMS42NjY2NyAxMC4wMTI3QzEuNjY2NjcgOS43MjYwNiAxLjkwMDI0IDkuNDgxODcgMi4xOTc1MSA5LjQ4MTg3SDE2Ljg0ODhMMTIuNDQyOCA1LjA3NTg2QzEyLjI0MTEgNC44NjM1MiAxMi4yNDExIDQuNTM0NCAxMi40NDI4IDQuMzIyMDZDMTIuNjU1MiA0LjEwOTcyIDEyLjk4NDMgNC4xMjAzNCAxMy4xOTY2IDQuMzIyMDZMMTguNDczMiA5LjU5ODY1QzE4LjU5IDkuNjk0MjEgMTguNjY0MyA5Ljg0Mjg0IDE4LjY2NDMgMTAuMDAyMUMxOC42NjQzIDEwLjE1MDcgMTguNjAwNiAxMC4yOTk0IDE4LjQ5NDUgMTAuMzk0OUwxMy4xOTY2IDE1LjY4MjFDMTIuOTg0MyAxNS44ODM5IDEyLjY1NTIgMTUuODgzOSAxMi40NDI4IDE1LjY4MjFDMTIuMjQxMSAxNS40ODA0IDEyLjI0MTEgMTUuMTQwNyAxMi40NDI4IDE0LjkzOUwxNi44NDg4IDEwLjU0MzZIMi4xOTc1MVoiIGZpbGw9IiNCQzgzNzIiLz4KPC9zdmc+Cg==");
+            mask-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yLjE5NzUxIDEwLjU0MzZDMS45MDAyNCAxMC41NDM2IDEuNjY2NjcgMTAuMzEgMS42NjY2NyAxMC4wMTI3QzEuNjY2NjcgOS43MjYwNiAxLjkwMDI0IDkuNDgxODcgMi4xOTc1MSA5LjQ4MTg3SDE2Ljg0ODhMMTIuNDQyOCA1LjA3NTg2QzEyLjI0MTEgNC44NjM1MiAxMi4yNDExIDQuNTM0NCAxMi40NDI4IDQuMzIyMDZDMTIuNjU1MiA0LjEwOTcyIDEyLjk4NDMgNC4xMjAzNCAxMy4xOTY2IDQuMzIyMDZMMTguNDczMiA5LjU5ODY1QzE4LjU5IDkuNjk0MjEgMTguNjY0MyA5Ljg0Mjg0IDE4LjY2NDMgMTAuMDAyMUMxOC42NjQzIDEwLjE1MDcgMTguNjAwNiAxMC4yOTk0IDE4LjQ5NDUgMTAuMzk0OUwxMy4xOTY2IDE1LjY4MjFDMTIuOTg0MyAxNS44ODM5IDEyLjY1NTIgMTUuODgzOSAxMi40NDI4IDE1LjY4MjFDMTIuMjQxMSAxNS40ODA0IDEyLjI0MTEgMTUuMTQwNyAxMi40NDI4IDE0LjkzOUwxNi44NDg4IDEwLjU0MzZIMi4xOTc1MVoiIGZpbGw9IiNCQzgzNzIiLz4KPC9zdmc+Cg==");
+            mask-repeat: no-repeat;
+            mask-size: 100%;
+            mask-position: 50%;
+            background-image: none;
+            background-color: stencilColor('color-default-primary-1');
         }
     }
     .slick-prev {
@@ -169,7 +154,12 @@
         height: 52px;
         padding: 0 14px;
         &::before {
-            background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xOC4xMzM0IDkuNDU2NjFDMTguNDMwNyA5LjQ1NjYxIDE4LjY2NDIgOS42OTAxOSAxOC42NjQyIDkuOTg3NDZDMTguNjY0MiAxMC4yNzQxIDE4LjQzMDcgMTAuNTE4MyAxOC4xMzM0IDEwLjUxODNMMy40ODIwOCAxMC41MTgzTDcuODg4MSAxNC45MjQzQzguMDg5ODIgMTUuMTM2NyA4LjA4OTgyIDE1LjQ2NTggNy44ODgxIDE1LjY3ODFDNy42NzU3NiAxNS44OTA1IDcuMzQ2NjMgMTUuODc5OCA3LjEzNDMgMTUuNjc4MUwxLjg1NzcgMTAuNDAxNUMxLjc0MDkxIDEwLjMwNiAxLjY2NjYgMTAuMTU3MyAxLjY2NjYgOS45OTgwOEMxLjY2NjYgOS44NDk0NCAxLjczMDMgOS43MDA4IDEuODM2NDYgOS42MDUyNUw3LjEzNDMgNC4zMTgwNEM3LjM0NjYzIDQuMTE2MzIgNy42NzU3NiA0LjExNjMyIDcuODg4MSA0LjMxODA0QzguMDg5ODIgNC41MTk3NiA4LjA4OTgyIDQuODU5NSA3Ljg4ODEgNS4wNjEyMkwzLjQ4MjA4IDkuNDU2NjFMMTguMTMzNCA5LjQ1NjYxWiIgZmlsbD0iI0JDODM3MiIvPgo8L3N2Zz4K");
+            mask-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xOC4xMzM0IDkuNDU2NjFDMTguNDMwNyA5LjQ1NjYxIDE4LjY2NDIgOS42OTAxOSAxOC42NjQyIDkuOTg3NDZDMTguNjY0MiAxMC4yNzQxIDE4LjQzMDcgMTAuNTE4MyAxOC4xMzM0IDEwLjUxODNMMy40ODIwOCAxMC41MTgzTDcuODg4MSAxNC45MjQzQzguMDg5ODIgMTUuMTM2NyA4LjA4OTgyIDE1LjQ2NTggNy44ODgxIDE1LjY3ODFDNy42NzU3NiAxNS44OTA1IDcuMzQ2NjMgMTUuODc5OCA3LjEzNDMgMTUuNjc4MUwxLjg1NzcgMTAuNDAxNUMxLjc0MDkxIDEwLjMwNiAxLjY2NjYgMTAuMTU3MyAxLjY2NjYgOS45OTgwOEMxLjY2NjYgOS44NDk0NCAxLjczMDMgOS43MDA4IDEuODM2NDYgOS42MDUyNUw3LjEzNDMgNC4zMTgwNEM3LjM0NjYzIDQuMTE2MzIgNy42NzU3NiA0LjExNjMyIDcuODg4MSA0LjMxODA0QzguMDg5ODIgNC41MTk3NiA4LjA4OTgyIDQuODU5NSA3Ljg4ODEgNS4wNjEyMkwzLjQ4MjA4IDkuNDU2NjFMMTguMTMzNCA5LjQ1NjYxWiIgZmlsbD0iI0JDODM3MiIvPgo8L3N2Zz4K");
+            mask-repeat: no-repeat;
+            mask-size:  100%;
+            mask-position: 50%;
+            background-image: none;
+            background-color: stencilColor('color-default-primary-1');
         }
     }
 }
@@ -184,30 +174,15 @@
         padding: 3px 7.5px 0 7.5px;
     }
     h2.heading {
-        font-family: stencilFontFamily('prata-font');
-        font-size:  remCalc(34px);
-        line-height:  remCalc(44px);
-        font-style: normal;
-        font-weight: 400;
         color: stencilColor("color-default-neutral-3");
         margin: 50px 0 0 0;
         text-align: center;
         .lastword { 
-            font-family: stencilFontFamily('stay-classy-font');
-            font-size:  remCalc(66px);
-            line-height:  remCalc(70px);
-            font-style: normal;
-            font-weight: 500;
-            letter-spacing: -0.01em;
             color: stencilColor("color-default-primary-1");
+            margin-left: 8px;
         }
     }
     p.descrip {
-        font-family: stencilFontFamily('default-font-light');
-        font-style: normal;
-        font-weight: 300;
-        font-size:  remCalc(16px);
-        line-height:  remCalc(26px);
         text-align: center;
         color: stencilColor("color-default-neutral-2");
         max-width: 650px;
@@ -226,13 +201,7 @@
         }
     }
     .product .card-title > a {
-        font-family: stencilFontFamily('default-font-regular');
-        font-size:  remCalc(12px);
-        line-height:  remCalc(15px);
-        font-style: normal;
-        font-weight: 500;
         text-align: center;
-        letter-spacing: 0.1em;
         text-transform: uppercase;
         color: stencilColor("color-default-neutral-2");
     }

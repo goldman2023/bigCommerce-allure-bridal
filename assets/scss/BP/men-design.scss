@@ -10,9 +10,10 @@ body {
             background: stencilColor('color-white');
             color: stencilColor('color-men-design-primary-1');
             border-color: stencilColor('color-men-design-primary-1');
-            font-family: stencilFontFamily('avenir-font');
+            font-family: stencilFontFamily('default-font-regular');
             font-size: remCalc(12px);
-            line-height: remCalc(18px);
+            line-height: remCalc(15px);
+            letter-spacing: 0.1em;
             font-weight: 600;
             .icon {
                 svg use {
@@ -57,11 +58,12 @@ body {
             }
         }
         .breadcrumbs {
+            border-color: stencilColor('color-men-design-primary-2');
             .breadcrumb {
                 &::after {
                     width: 2.5px;
                     height: 2.5px;
-                    background-color: stencilColor('color-men-design-neutral-1');
+                    background-color: stencilColor('color-men-design-primary-1');
                 }
                 .breadcrumb-label {
                     span {
@@ -233,6 +235,216 @@ body {
                 line-height: remCalc(22px);
                 font-weight: 400;
                 color: stencilColor('color-men-design-neutral-1');
+            }
+        }
+        .bp-category {
+            .bp-category-header {
+                .bp-cat-image {
+                    &::before, &::after {
+                        background: stencilColor('color-men-design-primary-1');
+                    }
+                }
+            }
+            .navList-action--checkbox {
+                &::before {
+                    border-color: stencilColor('color-men-design-primary-1');
+                }
+                &.is-selected {
+                    &::before {
+                        background-color: stencilColor('color-men-design-primary-1');
+                    }
+                }
+            }
+            .facetedSearch {
+                .clearBtn {
+                    color: stencilColor('color-men-design-primary-1');
+                }
+                .facetedSearch-navList {
+                    .accordion-block {
+                        border-color: stencilColor('color-men-design-primary-2');
+                        &::after {
+                            background-color: stencilColor('color-men-design-primary-1');
+                        }
+                    }
+                }
+            }
+        }
+        .sidebarBlock+.sidebarBlock {
+            border-color: stencilColor('color-men-design-primary-2');
+        }
+        .accordion--navList {
+            .accordion-indicator {
+                fill: stencilColor('color-men-design-primary-2');
+            }
+        }
+        .pagination {
+            border-color: stencilColor('color-men-design-primary-2');
+            &::after {
+                background-color: stencilColor('color-men-design-primary-1');
+            }
+            .pagination-list {
+                .pagination-item {
+                    &.pagination-item--current {
+                        a.pagination-link {
+                            .background-rot {
+                                background-color: stencilColor('color-men-design-primary-1');
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .blockElementStory {
+            .heading-section {
+                h2 {
+                    color: stencilColor('color-men-design-primary-1');
+                }
+                .date {
+                    &::after {
+                        background: stencilColor('color-men-design-primary-1');
+                    }
+                }
+            }
+        }
+        .blockElementDiscover {
+            .discovery-section {
+                .caption {
+                    h2 {
+                        color: stencilColor('color-men-design-primary-1');
+                    }
+                    p {
+                        color: stencilColor('color-men-design-neutral-1');
+                    }
+                }
+            }
+        }
+        .blockElementImageLeftCopyRight {
+            .leftimageblock {
+                .textSection {
+                    .caption {
+                        h3 {
+                            color: stencilColor('color-men-design-primary-1');
+                            font-size: remCalc(66px);
+                            line-height: remCalc(70px);
+                        }
+                        p {
+                            font-family: stencilFontFamily('default-font-regular');
+                            font-size: remCalc(14px);
+                            line-height: remCalc(22px);
+                            color: stencilColor('color-men-design-neutral-1');
+                            &::before {
+                                @include quotesOpen(stencilColor('color-men-design-primary-3'));
+                            }
+                            &::after {
+                                @include quotesClose(stencilColor('color-men-design-primary-3'));
+                            }
+                        }
+                        
+                    }
+                }
+            }
+        }
+        .blockElementVerticalGallery {
+            .verticalBlock {
+                .contentDiv {
+                    .caption {
+                        font-family: stencilFontFamily('default-font-regular');
+                        font-size: remCalc(14px);
+                        line-height: remCalc(22px);
+                        color: stencilColor('color-men-design-neutral-1');
+                        &::before {
+                            background: stencilColor('color-men-design-primary-1');
+                        }
+                    }
+                }
+            }
+            .backgroundoverlay {
+                background: stencilColor('color-men-design-primary-5');
+            }
+        }
+        
+        .divider {
+            border-color: stencilColor('color-men-design-primary-2');
+
+            &::after {
+                background: stencilColor('color-men-design-primary-1');
+            }
+        }
+        
+        .imageWithContentSlider {
+            ul {
+                li {
+                    .blockrow {
+                        background: stencilColor('color-men-design-primary-1');
+                    }
+                }
+            }
+        }
+
+        .productSlider {
+            h2 {
+                &.heading {
+                    .lastword {
+                        color: stencilColor('color-men-design-primary-1');
+                    }
+                }
+            }
+        }
+        
+        .category-listing-page {
+            .sub-category-block {
+                border-color: stencilColor('color-men-design-primary-2');
+
+                &::after {
+                    background: stencilColor('color-men-design-primary-1');
+                }
+            }
+        }
+
+        .productGridslider {
+            .slick-prev {
+                &::before {
+                    background: stencilColor('color-men-design-primary-1');
+                }
+            }
+
+            .slick-next {
+                &::before {
+                    background: stencilColor('color-men-design-primary-1');
+                }
+            }
+        }
+        
+        .product,
+        .productCarousel-slide {
+            .card-title {
+                >a {
+                    &.titleIcon {
+                        &::after {
+                            @include wishlist-icon(stencilColor('color-men-design-primary-1'));
+                        }
+                        &:hover {
+                            &::after {
+                                @include wishlist-icon-hover(stencilColor('color-men-design-primary-1'), stencilColor('color-men-design-primary-4'));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        .blockElementCollectionPreview {
+            .previewblock {
+                .imagesection {
+                    .leftImg,
+                    .rightImg {
+                        span {
+                            &::before {
+                                background: stencilColor('color-men-design-primary-1');
+                            }
+                        }
+                    }
+                }
             }
         }
     }

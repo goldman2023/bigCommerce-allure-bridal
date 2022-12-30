@@ -409,7 +409,7 @@ svg.login-diamond {
     }
     .form .form-field .form-input, .form .form-field .form-select {
         border: 1px solid stencilColor("color-default-primary-2");
-        color: stencilColor("color-default-primary-2");
+        color: stencilColor("color-allure-bridals-neutral-1");
     }
     .form .form-field .form-label {
         font-family: stencilFontFamily('default-font-bold');
@@ -467,7 +467,6 @@ svg.login-diamond {
         line-height: remCalc(20px);
         color: stencilColor("color-default-neutral-3");
         text-transform: inherit;
-        // margin-left: 10px;
     }
     .account--fixed {
         @include breakpoint("medium") { 
@@ -476,5 +475,11 @@ svg.login-diamond {
     }
     .button {
         max-width: 100%;
+    }
+}
+.forgot-password__page {
+    border: 0 !important;
+    .sendemail {
+        display: none;
     }
 }

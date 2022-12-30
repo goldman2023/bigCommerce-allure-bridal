@@ -2,12 +2,6 @@
     .container {
         padding: 0 3rem;
     }
-    .blockElementFullscreenImage {
-        padding: 0 1.5rem !important;
-        @media only screen and (max-width: 600px)  {
-            padding: 0 !important;
-        }
-    }
     .productView {
         margin: 0;
         padding: 0;
@@ -20,9 +14,10 @@
             }
         }
 
-        .productView-info, .productView-price, .productView-thumbnails, .add-to-cart-wrapper, .form-wishlist, .socialLinks {
+        .productView-info, .productView-price, .add-to-cart-wrapper,  .socialLinks {
             display: none !important;
         }
+        
         .productView-product {
             border: none;
             padding: 0;
@@ -76,11 +71,20 @@
             .productView--right {
                 @include breakpoint("medium") {
                     flex-basis: 50%;
+                    max-width: 50%;
                 }
                 .productView-images {
                     float: none;
                     width: auto;
                     clear: both;
+                    margin: 0;
+                }
+                .slick-next,
+                .slick-prev {
+                    margin-top: 0;
+                    &::before {
+                        height: 2rem;
+                    }
                 }
             }
         }
@@ -149,6 +153,9 @@
             text-transform: uppercase;
             margin-bottom: 16px;
             letter-spacing: 0.1em;
+            position: relative;
+            left : 0;
+            padding: 0;
         }
         .form {
             .form-field {
@@ -205,6 +212,10 @@
                         border: none;
                         position: relative;
                         border-bottom: 1px solid stencilColor("color-border");
+                        @media screen and (max-width: 600px) {
+                            margin: 0;
+                            border-bottom: 0;
+                        }
                         &::after {
                             position: absolute;
                             content: "";
@@ -257,7 +268,7 @@
                 }
                 .button {
                     flex: 1;
-                    padding: 13px;
+                    padding: 0 6px;
                     margin: 0;
                     width: 100%;
                     max-width: unset;

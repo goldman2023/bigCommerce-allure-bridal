@@ -10,8 +10,12 @@
                 align-items: center;
                 margin-bottom: 70px;
                 .bp-cat-content {
-                    @include breakpoint("medium") {
+                    @media screen and (min-width: 900px) and (max-width: 1200px){
                         width: 70%;
+                        padding-right: 20px;
+                    }
+                    @media screen and (min-width: 1201px) {
+                        width: calc(100% - 427px);
                         padding-right: 30px;
                     }
                     h3,.description {
@@ -34,6 +38,10 @@
                 text-align: center;
                 color: stencilColor("color-default-neutral-1");
                 margin-bottom: 10px;
+                @media screen and (max-width: 900px) {
+                    text-align: left;
+                    margin-top: 40px;
+                }
             }
             .description {
                 font-family: stencilFontFamily('default-font-light');
@@ -43,13 +51,20 @@
                 line-height: remCalc(22px);
                 color: stencilColor("color-default-neutral-2");
                 text-align: center;
+                @media screen and (max-width: 900px) {
+                    text-align: left;
+                    margin-bottom: 40px;
+                }
             }
         }
         .bp-cat-image {
             width: 100%;
             position: relative;
-            @include breakpoint("medium") {
+            @media screen and (min-width: 900px) and (max-width: 1200px){
                 width: 30%;
+            }
+            @media screen and (min-width: 1201px) {
+                width: 427px;
             }
             &::after, &::before {
                 position: absolute;
@@ -111,11 +126,15 @@
     .productGrid {
         margin: 0;
         .product {
+            padding: 0;
             .card {
                 margin: 0;
                 .card-body {
                     padding-bottom: 0;
                     margin: 0 0 32px;
+                    @media screen and (max-width: 600px) {
+                        padding: 16px 0 0;
+                    }
                     @include breakpoint("medium") {
                         margin: 0;
                     }
@@ -138,17 +157,13 @@
     .card-title {
         display: flex;
         justify-content: space-between;
-        text-align: left;
     }
     .card-title > a {
-        font-family: stencilFontFamily('prata-font');
-        font-size: remCalc(22px);
-        font-style: normal;
-        font-weight: 400;
-        line-height: remCalc(30px);
         color: stencilColor("color-default-neutral-1");
+        text-align: left;
         &.name {
             width: calc(100% - 25px);
+            text-align: left;
         }
         &.titleIcon {
             position: relative;
@@ -160,28 +175,14 @@
                 content: "";
                 width: 24px;
                 height: 24px;
-                background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTUuNSIgc3Ryb2tlPSIjQkM4MzcyIi8+CjxwYXRoIGQ9Ik0xMy40OTk5IDExLjVDMTMuNDk5OSAxMC4zOTU0IDE0LjYxOTIgOS41IDE1Ljk5OTkgOS41QzE3LjM4MDYgOS41IDE4LjQ5OTkgMTAuNSAxOC40OTk5IDExLjVDMTguNDk5OSAxMyAxNS45OTk5IDEzLjUgMTUuOTk5OSAxNC41QzE1Ljk5OTkgMTUgMTUuOTk5OSAxNS4zODU0IDE1Ljk5OTkgMTUuMzg1NE0xNS45OTk5IDE1LjM4NTRDMTYuMzc5MiAxNS4zODU0IDE2Ljc1ODUgMTUuNDkzMSAxNy4wODk5IDE1LjcwODVMMjIuNDY0NSAxOS4yMDE5QzIzLjUwNzcgMTkuODgwMSAyMy4wMjc1IDIxLjUgMjEuNzgzMiAyMS41SDEwLjIxNjZDOC45NzIzNCAyMS41IDguNDkyMTMgMTkuODgwMSA5LjUzNTM5IDE5LjIwMTlMMTQuOTA5OSAxNS43MDg1QzE1LjI0MTMgMTUuNDkzMSAxNS42MjA2IDE1LjM4NTQgMTUuOTk5OSAxNS4zODU0WiIgc3Ryb2tlPSIjQkM4MzcyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==");
-                background-repeat: no-repeat;
-                background-size: contain;
+                @include wishlist-icon(stencilColor('color-default-primary-1'));
             }
             &:hover::after {
-                position: absolute;
-                right: 0;
-                content: "";
-                width: 24px;
-                height: 24px;
-                background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiNCQzgzNzIiLz4KPHBhdGggZD0iTTEzLjQ5OTkgMTEuNUMxMy40OTk5IDEwLjM5NTQgMTQuNjE5MiA5LjUgMTUuOTk5OSA5LjVDMTcuMzgwNiA5LjUgMTguNDk5OSAxMC41IDE4LjQ5OTkgMTEuNUMxOC40OTk5IDEzIDE1Ljk5OTkgMTMuNSAxNS45OTk5IDE0LjVDMTUuOTk5OSAxNSAxNS45OTk5IDE1LjM4NTQgMTUuOTk5OSAxNS4zODU0TTE1Ljk5OTkgMTUuMzg1NEMxNi4zNzkyIDE1LjM4NTQgMTYuNzU4NSAxNS40OTMxIDE3LjA4OTkgMTUuNzA4NUwyMi40NjQ1IDE5LjIwMTlDMjMuNTA3NyAxOS44ODAxIDIzLjAyNzUgMjEuNSAyMS43ODMyIDIxLjVIMTAuMjE2NkM4Ljk3MjM0IDIxLjUgOC40OTIxMyAxOS44ODAxIDkuNTM1MzkgMTkuMjAxOUwxNC45MDk5IDE1LjcwODVDMTUuMjQxMyAxNS40OTMxIDE1LjYyMDYgMTUuMzg1NCAxNS45OTk5IDE1LjM4NTRaIiBzdHJva2U9IiNGN0Y0RjAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K");
-                background-repeat: no-repeat;
-                background-size: contain;
+                @include wishlist-icon-hover(stencilColor('color-default-primary-1'), stencilColor('color-default-primary-4'));
             }
         }
     }
     .card-text {
-        font-family: stencilFontFamily('default-font-regular');
-        font-size: remCalc(12px);
-        font-style: normal;
-        font-weight: 400;
-        line-height: remCalc(20px);
         color: stencilColor("color-default-neutral-1");
         overflow: hidden;
         text-overflow: ellipsis;
@@ -202,6 +203,7 @@
     .facetedSearch-toggle {
         border: none;
         padding: 20px 0;
+        position: relative;
         &::before {
             position: absolute;
             left: 8px;
@@ -340,7 +342,7 @@
         max-width: 91.71429rem;
         margin: 0 auto;
         padding: 0 1.5rem;
-        @include breakpoint("medium") {
+        @media only screen and (min-width: 601px)  {
             margin: 0 auto;
         }
         @media only screen and (min-width: 1600px)  {
@@ -357,19 +359,24 @@
         }
     }
     .verticalBlock {
+        @media only screen and (min-width: 601px) and (max-width: 899px)  {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+        }
         @include breakpoint("medium") {
             max-width: 70%;
             margin: 0 auto;
             display: flex;
         }
         .verticalLeftCol {
-            @include breakpoint("medium") {
+            @media only screen and (min-width: 601px)  {
                 width:50%;
                 padding: 0 10px;
             }
         }
         .verticalRightCol {
-            @include breakpoint("medium") {
+            @media only screen and (min-width: 601px)  {
                 width:50%;
                 padding: 0 10px;
                 margin-top: 70px;
@@ -377,19 +384,14 @@
         }
         .contentDiv {
             padding: 10px 0;
-            @include breakpoint("medium") {
+            @media only screen and (min-width: 601px)  {
                 padding: 20px 10px;
             }
             .caption {
                 margin: 0;
                 padding: 15px 10px;
-                font-family: stencilFontFamily('default-font-regular');
-                font-style: normal;
-                font-weight: 400;
-                font-size: remCalc(16px);
-                line-height: remCalc(26px);
                 color: stencilColor("color-black");
-                background-color: #ffffff;
+                background-color: stencilColor("color-white");
                 position: relative;
                 &::before {
                     position: absolute;
@@ -404,11 +406,6 @@
                 }
                 .author {
                     display: block;
-                    font-family: stencilFontFamily('default-font-light');
-                    font-style: normal;
-                    font-weight: 300;
-                    font-size: remCalc(14px);
-                    line-height: remCalc(22px);
                     color: stencilColor("color-default-neutral-1");
                     margin-top: 8px;
                 }
@@ -453,4 +450,15 @@
       *::placeholder {
         color: stencilColor("color-men-design-primary-1");
       }
+}
+.pages-account-wishlist-details {
+    .product .card-title > a.titleIcon::after, .productCarousel-slide .card-title > a.titleIcon::after {
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiNCQzgzNzIiLz4KPHBhdGggZD0iTTEzLjQ5OTkgMTEuNUMxMy40OTk5IDEwLjM5NTQgMTQuNjE5MiA5LjUgMTUuOTk5OSA5LjVDMTcuMzgwNiA5LjUgMTguNDk5OSAxMC41IDE4LjQ5OTkgMTEuNUMxOC40OTk5IDEzIDE1Ljk5OTkgMTMuNSAxNS45OTk5IDE0LjVDMTUuOTk5OSAxNSAxNS45OTk5IDE1LjM4NTQgMTUuOTk5OSAxNS4zODU0TTE1Ljk5OTkgMTUuMzg1NEMxNi4zNzkyIDE1LjM4NTQgMTYuNzU4NSAxNS40OTMxIDE3LjA4OTkgMTUuNzA4NUwyMi40NjQ1IDE5LjIwMTlDMjMuNTA3NyAxOS44ODAxIDIzLjAyNzUgMjEuNSAyMS43ODMyIDIxLjVIMTAuMjE2NkM4Ljk3MjM0IDIxLjUgOC40OTIxMyAxOS44ODAxIDkuNTM1MzkgMTkuMjAxOUwxNC45MDk5IDE1LjcwODVDMTUuMjQxMyAxNS40OTMxIDE1LjYyMDYgMTUuMzg1NCAxNS45OTk5IDE1LjM4NTRaIiBzdHJva2U9IiNGN0Y0RjAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K");
+    }
+}
+
+
+input:focus, button:focus, textarea:focus, select:focus, details:focus, [href]:focus, [tabindex]:not([tabindex="-1"]):focus, [contenteditable="true"]:focus {
+    outline: 0 !important;
+    outline-offset: 1px !important;
 }

@@ -1,16 +1,18 @@
 <nav class="pagination" aria-label="pagination">
-    <ul class="pagination-list">
-        {{#if previous}}
+    <ul class="pagination-list preview">
+    {{#if previous}}
             <li class="pagination-item pagination-item--previous">
                 <a class="pagination-link"
                    href="{{previous}}"
                    {{#unless reload}}data-faceted-search-facet{{/unless}}
                    aria-label="{{lang 'common.previous'}}"
                 >
-                    {{lang 'common.previous'}}
+                   <span>{{lang 'common.previous'}}</span> 
                 </a>
             </li>
         {{/if}}
+    </ul>
+    <ul class="pagination-list">
         {{#each links}}
             <li class="pagination-item {{#if this.number '==' ../current}}pagination-item--current{{/if}}">
                 <a class="pagination-link"
@@ -27,16 +29,19 @@
             </li>
         {{/each}}
 
-        {{#if next}}
-            <li class="pagination-item pagination-item--next">
-                <a class="pagination-link"
-                   href="{{next}}"
-                   {{#unless reload}}data-faceted-search-facet{{/unless}}
-                   aria-label="{{lang 'common.next'}}"
-                >
-                    {{lang 'common.next'}}
-                </a>
-            </li>
-        {{/if}}
+        
     </ul>
+    <ul class="pagination-list next">
+        {{#if next}}
+        <li class="pagination-item pagination-item--next">
+            <a class="pagination-link"
+               href="{{next}}"
+               {{#unless reload}}data-faceted-search-facet{{/unless}}
+               aria-label="{{lang 'common.next'}}"
+            >
+               <span>{{lang 'common.next'}}</span> 
+            </a>
+        </li>
+        {{/if}}
+     </ul>
 </nav>

@@ -1,7 +1,112 @@
+.h1-italic {
+    font-family: stencilFontFamily('stay-classy-font');
+    font-size: remCalc(66px);
+    line-height: remCalc(70px);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+
+.h2-italic {
+    font-family: stencilFontFamily('stay-classy-font');
+    font-size: remCalc(34px);
+    line-height: remCalc(44px);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+
+.h3-italic {
+    font-family: stencilFontFamily('stay-classy-font');
+    font-size: remCalc(28px);
+    line-height: remCalc(34px);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+
+.h4-italic {
+    font-family: stencilFontFamily('stay-classy-font');
+    font-size: remCalc(22px);
+    line-height: remCalc(38px);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+
+h1, .h1 {
+    font-family: stencilFontFamily('prata-font');
+    font-size: remCalc(66px);
+    line-height: remCalc(70px);
+    font-weight: 400;
+}
+
+h2, .h2 {
+    font-family: stencilFontFamily('prata-font');
+    font-size: remCalc(34px);
+    line-height: remCalc(44px);
+    font-weight: 400;
+}
+
+h3, .h3 {
+    font-family: stencilFontFamily('prata-font');
+    font-size: remCalc(28px);
+    line-height: remCalc(34px);
+    font-weight: 400;
+}
+
+h4, .h4 {
+    font-family: stencilFontFamily('prata-font');
+    font-size: remCalc(22px);
+    line-height: remCalc(30px);
+    font-weight: 400;
+}
+
+.body-light-1 {
+    font-family: stencilFontFamily('default-font-light');
+    font-size: remCalc(16px);
+    line-height: remCalc(26px);
+}
+
+.body-light-2 {
+    font-family: stencilFontFamily('default-font-light');
+    font-size: remCalc(14px);
+    line-height: remCalc(22px);
+}
+
+.body-light-3 {
+    font-family: stencilFontFamily('default-font-light');
+    font-size: remCalc(12px);
+    line-height: remCalc(20px);
+}
+
+.body-1 {
+    font-family: stencilFontFamily('default-font-regular');
+    font-size: remCalc(16px);
+    line-height: remCalc(26px);
+    font-weight: 400;
+}
+
+.body-2 {
+    font-family: stencilFontFamily('default-font-regular');
+    font-size: remCalc(14px);
+    line-height: remCalc(22px);
+    font-weight: 400;
+}
+
+.body-3 {
+    font-family: stencilFontFamily('default-font-regular');
+    font-size: remCalc(12px);
+    line-height: remCalc(20px);
+    font-weight: 400;
+}
+
 body {
     font-family: stencilFontFamily('default-font-regular');
     line-height: unset;
     position: static;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    footer {
+        margin-top: auto;
+    }
     .button {
         font-family: stencilFontFamily('default-font-regular');
         position: relative;
@@ -26,7 +131,7 @@ body {
             border: 1px solid #F0EBE6;
             border-radius: 3px;
             height: 39px;
-            width: calc(100% - 8px);;
+            width: calc(100% - 6px);
             box-sizing: border-box;
             -moz-box-sizing: border-box;
             -webkit-box-sizing: border-box;
@@ -218,7 +323,7 @@ body {
             font-weight: 400;
             font-size: 12px;
             line-height: 15px;
-            color: stencilColor('color-theme');
+            color: stencilColor('color-allure-bridals-neutral-1');
             border-color: stencilColor('color-theme');
             &::placeholder { 
                 color: stencilColor('color-theme-dark');
@@ -364,34 +469,6 @@ body {
 .block {
     display: block;
 }
-h1, h2, h3, h4, h5, h6 {
-    color: stencilColor('color-black');
-    letter-spacing: -0.01em;
-    &.stay-classy {
-        font-family: stencilFontFamily('stay-classy-font');
-    }
-}
-h1, h2, h3, h4, h5, h6 {
-    &.prata {
-        font-family: stencilFontFamily('prata-font');
-    }
-}
-h1 {
-    font-size: remCalc(66px);
-    line-height: remCalc(70px);
-}
-h2 {
-    font-size: remCalc(34px);
-    line-height: remCalc(44px);
-}
-h3 {
-    font-size: remCalc(28px);
-    line-height: remCalc(34px);
-}
-h4 {
-    font-size: remCalc(22px);
-    line-height: remCalc(38px);
-}
 .productView-info-name, .productView-info-value {
     font-family: stencilFontFamily('default-font-regular');
 }
@@ -511,4 +588,18 @@ body {
             margin-bottom: 0;
         } 
     }
- }
+}
+input:-internal-autofill-selected {
+    background-color: stencilColor('color-white') !important;
+}
+.privacy-policy {
+    p {
+        font-size: remCalc(16px);
+        line-height: remCalc(26px);
+    }
+}
+.page {
+    .page-heading {
+        font-size: remCalc(40px);
+    }
+}

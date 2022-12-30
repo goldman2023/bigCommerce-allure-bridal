@@ -746,7 +746,7 @@ export default class RetailFinder extends PageManager {
 
   getDirectBookingElem = (retailerId) => {
     const scheduler = document.createElement('iframe');
-    scheduler.setAttribute('src', `https://app.bridallive.com/forms.html?formType=scheduler&retailerId=${retailer.bridalLiveRetailerId}`);
+    scheduler.setAttribute('src', `https://app.bridallive.com/forms.html?formType=scheduler&retailerId=${retailerId}`);
     scheduler.setAttribute('width', '100%');
     scheduler.setAttribute('height', '100%');
     return scheduler

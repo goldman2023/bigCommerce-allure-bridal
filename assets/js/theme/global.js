@@ -80,11 +80,11 @@ export default class Global extends PageManager {
         })
 
         //Product Listing page start
-        if(mainContent.contains('pages-custom-category-bp-category') || mainContent.contains('pages-custom-category-suits-bp-category')) {
+        if (mainContent.contains('pages-custom-category-bp-category') || mainContent.contains('bp-category') || mainContent.contains('pages-custom-category-suits-bp-category')) {
             contentFullmetaData(this.context, response => {
                 let metadata = response[0].value;
                 metadata.contentBlocksCollection.items.forEach(element => {
-                    if(mainContent.contains('pages-custom-category-bp-category') && element.__typename === "ReferencedBlockCategoryBanners"){
+                    if(mainContent.contains('bp-category') && element.__typename === "ReferencedBlockCategoryBanners"){
                         leftTextBlock('leftTextbanner',element);
                     }
                     if(mainContent.contains('pages-custom-category-suits-bp-category') && element.__typename === "ReferencedBlockCategoryBanners" && element.layoutOrientation === "Image Right"){
@@ -96,7 +96,7 @@ export default class Global extends PageManager {
         //Product Listing page end
 
         //Category Listing page start
-        if(mainContent.contains('pages-custom-category-category-listing') || mainContent.contains('pages-custom-category-suits-category-listing')) {
+        if (mainContent.contains('pages-custom-category-category-listing') || mainContent.contains('category-listing') || mainContent.contains('pages-custom-category-suits-category-listing')) {
             document.querySelectorAll('.sub-category-block').forEach((item)=> {
                 getProductsByCategoryPath(this.context,item.getAttribute('data-path'),response => {
                     createProductSlider(item,response);
@@ -105,7 +105,7 @@ export default class Global extends PageManager {
             contentFullmetaData(this.context, response => {
                 let metadata = response[0].value;
                 metadata.contentBlocksCollection.items.forEach(element => {
-                    if(mainContent.contains('pages-custom-category-category-listing')) {
+                    if(mainContent.contains('category-listing')) {
                         if(element.__typename === "ReferencedBlockCategoryBanners"){
                             leftTextBlock('leftTextbanner',element);
                         }
@@ -120,8 +120,9 @@ export default class Global extends PageManager {
         }
         //Category Listing page end
 
+        const bodyClassEl = document.querySelector('body').classList;
         //Product Detail page start
-        if(mainContent.contains('pages-product') || mainContent.contains('suits-product')) {
+        if (bodyClassEl.contains('product-type')) {
             let productId = document.querySelector('.productView').getAttribute('data-prod-id');
 
             productDeatilMetaData(this.context,productId, response => {
@@ -228,7 +229,7 @@ export default class Global extends PageManager {
         //about page end
 
         //category Landing page start
-        if(mainContent.contains('pages-custom-category-category-landing')) {
+        if (mainContent.contains('pages-custom-category-category-landing') || mainContent.contains('category-landing')) {
             let geturl = document.getElementById('categoryLanding').getAttribute('data-url')
             getCategorySpecificMetaData(this.context, geturl, response => {
                 console.log('category response', response);
@@ -243,7 +244,7 @@ export default class Global extends PageManager {
                                 }
                                 let heading = element.collectionHeadline;
                                 let lastword = heading?.split(" ")?.reverse()[0];
-                                document.querySelector('.productSlider .heading').innerHTML = `${(heading?.replace(lastword, '') !== undefined) ? heading?.replace(lastword, '') : ''} <span class="lastword">${(lastword !== undefined) ? lastword : ''}</span>`;
+                                document.querySelector('.productSlider .heading').innerHTML = `${(heading?.replace(lastword, '') !== undefined) ? heading?.replace(lastword, '') : ''} <span class="lastword h1-italic">${(lastword !== undefined) ? lastword : ''}</span>`;
                                 if(element.collectionDescription != null || element.collectionDescription != undefined) {
                                     document.querySelector('.productSlider .descrip').innerHTML = `${element.collectionDescription}`;
                                 } else {
@@ -342,7 +343,8 @@ export default class Global extends PageManager {
                 $('.productGridslider').each(function(){
                     applySlider('.productGridslider',4,false,true);
                 });
-            },3000);
+                $('.productGridSection').removeClass('hide');
+            }, 3000);
         });
 
         function applySlider(selector,slide,centerM,infinity) {

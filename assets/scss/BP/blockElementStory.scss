@@ -2,101 +2,59 @@
     .flexdata {
         display: block;
         @include breakpoint("medium") { 
-            display:flex;
-            align-items: end;
+            display: flex;
+            align-items: flex-end;
             justify-content: space-between;
         }
     }
-    .caption {
+    >.caption {
         text-align: center;
         h2 {
-            font-family: stencilFontFamily('prata-font');
-            font-style: normal;
-            font-weight: 400;
-            font-size: remCalc(34px);
-            line-height: remCalc(44px);
-            color: #695C5C;
+            color: stencilColor('color-default-neutral-3');
             margin-top: 0;
-            @media only screen and (min-width: 2000px) {
-                font-size: remCalc(40px);
-                line-height: remCalc(50px);
-            }
-            @media only screen and (min-width: 2800px) {
-                font-size: remCalc(45px);
-                line-height: remCalc(65px);
-            }
         }
         p {
-            font-family: stencilFontFamily('default-font-light');
-            font-style: normal;
-            font-weight: 300;
-            font-size: remCalc(16px);
-            line-height: remCalc(26px);
-            color: #695C5C;
-            @media only screen and (min-width: 2000px) {
-                font-size: remCalc(18px);
-                line-height: remCalc(30px);
-            }
-            @media only screen and (min-width: 2800px) {
-                font-size: remCalc(28px);
-                line-height: remCalc(50px);
+            color: stencilColor('color-default-neutral-3');
+            margin-bottom: 50px;
+            @include breakpoint("medium") {
+                margin-bottom: 117px;
             }
         }
     }
 
     .heading-section {
         width: 100%;
+        @media screen  and (min-width: 600px) and (max-width: 899px){
+            margin-bottom: 40px;
+        }
         @include breakpoint("medium") { 
             width: 45%;
         }
-        h2 {
-            font-family: stencilFontFamily('stay-classy-font');
+        .title {
             width: 70%;
-            font-size:  remCalc(36px);
-            line-height:  remCalc(46px);
             text-align: center;
-            letter-spacing: -0.01em;
             color: stencilColor("color-default-primary-1");
             width: 360px;
             margin: 40px auto 0 auto;
             @include breakpoint("medium") { 
                 width: 360px;
-                font-size:  remCalc(50px);
-                line-height:  remCalc(60px);
             }
             @media only screen and (min-width: 2000px) {
-                font-size: remCalc(60px);
-                line-height: remCalc(70px);
                 width: 400px;
             }
             @media only screen and (min-width: 2800px) {
-                font-size: remCalc(75px);
-                line-height: remCalc(85px);
                 width: 450px;
             }
         }
         .date {
-            font-family: stencilFontFamily('default-font-regular');
-            font-style: normal;
-            font-weight: 500;
-            line-height:  remCalc(15px);
-            letter-spacing: 0.1em;
             text-transform: uppercase;
             color: stencilColor("color-default-neutral-3");
             text-align: center;
             margin-top: 20px;
             position: relative;
-            font-size:  remCalc(10px);
-            @include breakpoint("medium") { 
-                font-size:  remCalc(12px);
-            }
-            @media only screen and (min-width: 2000px) {
-                font-size: remCalc(18px);
-                line-height: remCalc(22px);
-            }
-            @media only screen and (min-width: 2800px) {
-                font-size: remCalc(24px);
-                line-height: remCalc(34px);
+            @media only screen and (max-width: 600px) {
+                padding-left: 86px;
+                text-align: left;
             }
             &::before {
                 position: absolute;
@@ -104,19 +62,26 @@
                 content: "";
                 width: 25%;
                 height: 20px;
+                top: 4px;
                 background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTg4IiBoZWlnaHQ9IjEzIiB2aWV3Qm94PSIwIDAgMTg4IDEzIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB4PSIxODIiIHk9IjEuOTgxMzIiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHRyYW5zZm9ybT0icm90YXRlKDQ1IDE4MiAxLjk4MTMyKSIgZmlsbD0iIzY5NUM1QyIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxyZWN0IHk9IjUuODk1NTEiIHdpZHRoPSIxODAiIGhlaWdodD0iMSIgZmlsbD0iI0M4QzZDNiIvPgo8L3N2Zz4K");
                 background-repeat: no-repeat;
+                @media only screen and (max-width: 600px) {
+                    width: 70px;
+                }
             }
             &::after {
                 position: absolute;
                 content: "";
                 left: 25%;
-                top: 4px;
+                top: 8px;
                 width: 4px;
                 height: 4px;
                 background: stencilColor("color-default-neutral-1");
                 transform: rotate(45deg);
                 outline: 3px solid stencilColor('color-secondary');
+                @media only screen and (max-width: 600px) {
+                    left: 70px;
+                }
             }
         }
     }
@@ -131,38 +96,45 @@
         }
         .topleft {
             max-width: 302px;
+            @media screen  and (max-width: 599px){
+                margin-left: -30px;
+                max-width: 400px;
+                width: calc(100% + 30px) !important;
+            }
+            @media screen  and (min-width: 600px) and (max-width: 899px){
+                margin-left: -40px;
+                max-width: 400px;
+                width: calc(100% + 40px) !important;
+            }
             @media only screen and (min-width: 1600px)  {
                 max-width: 90%;
             }
         }
         .topright {
-            @include breakpoint("medium") { 
-                width: 58%;
-            }
             width: 60%;
             float: right;
-
+            @include breakpoint("medium") {
+                width: 58%;
+                padding: 0 0 50px;
+            }
             img {
-                @include breakpoint("medium") { 
-                    margin-top: 37px;
-                }
                 width: 100%;
-                margin-top: 0;
             }
         }
         .caption {
             width: 78%;
             padding: 30px 0 0;
             display: none;
+            @media screen  and (min-width: 600px) and (max-width: 899px){
+                display: block; 
+                width: 100%;
+                padding: 30px 0 0 30px;
+            }
             @include breakpoint("medium") {
                 display: block; 
+                padding-bottom: 107px;
             }
             .content {
-                font-family: 'Inter';
-                font-style: normal;
-                font-weight: 400;
-                font-size:  remCalc(14px);
-                line-height:  remCalc(22px);
                 color: stencilColor("color-default-neutral-3");
                 @media only screen and (min-width: 2000px) {
                     font-size: remCalc(20px);
@@ -175,6 +147,9 @@
             }
             .button {
                 margin: 0;
+                @media screen  and (min-width: 600px) and (max-width: 899px){
+                    max-width: 400px;
+                }
                 @media only screen and (min-width: 2800px) {
                     font-size: remCalc(20px);
                     line-height: remCalc(20px);
@@ -182,18 +157,19 @@
             }
         }
         .rightcol {
-            @include breakpoint("medium") {
-                width: 48%;
-                float: left;
-                position: absolute;
-                margin-top: 0;
-                bottom: 0;
-            }
             position: relative;
             float: right;
             margin-right: 0;
             width: 40%;
-            margin-top: 50px;
+            @include breakpoint("medium") {
+                width: 48%;
+                float: left;
+                position: absolute;
+                top: -37px;
+                bottom: 0;
+                display: flex;
+                flex-direction: column;
+            }
             img {
                 width: 100%;
             }
@@ -208,14 +184,30 @@
             width: 100%;
         }
     }
-    .mobilecaption,.mobilebanner {
+    .mobilecaption {
         display: block;
+        @media screen  and (min-width: 600px) and (max-width: 899px){
+            display: none; 
+        }
         @include breakpoint("medium") {
             display: none;
         }
     }
     .mobilecaption {
-            padding: 10px;
+        padding: 20px 20px 0 20px;
+        .button {
+            margin-bottom: 0;
+        }
+    }
+    .mobilebanner {
+        display: block;
+        margin: 40px 0;
+        @media screen  and (min-width: 900px) {
+            display: none;
+        }
+        img {
+            width: 100%;
+        }
     }
 }
 
@@ -223,9 +215,10 @@
 
 .blockElementDiscover {
     display: block;
-    margin: 5% 0;
-    @include breakpoint("medium") { 
-        margin: 5% 0;
+    &.block-item {
+        @media only screen and (max-width: 900px)  {
+            padding: 0 !important;
+        }
     }
     .discovery-section {
         position: relative;
@@ -235,14 +228,35 @@
             div {
                 @include breakpoint("medium") { 
                     width: 45%;
+                    position: relative;
                 }
                 @media only screen and (min-width: 1600px)  {
                     width: 48%;
+                    position: relative;
                 }
-                position: relative;
-                width: 48%;
+                @media only screen and (min-width: 601px) and (max-width: 900px)  {
+                    &.leftcol {
+                        width: 30%;
+                    }
+                    &.rightcol {
+                        width: 70%;
+                    }
+                }
+                @media only screen and (max-width: 600px)  {
+                    position: relative;
+                    width: 48%;
+                }
                 img.first {
-                    margin-top: 60px;
+                    @media only screen and (max-width: 600px)  {
+                        margin-top: 75px;
+                    }
+                    @media only screen and (min-width: 601px) and (max-width: 900px)  {
+                        margin-top: 0;
+                        width: 45%;
+                        position: absolute;
+                        top: 0;
+                        border: 20px solid white;
+                    }
                     @include breakpoint("medium") { 
                         position: absolute;
                         top:0;
@@ -256,7 +270,15 @@
                     }
                 }
                 img.second {
-                    margin-top: 75px;
+                    @media only screen and (max-width: 600px)  {
+                        margin-top: 175px;
+                    }
+                    @media only screen and (min-width: 601px) and (max-width: 900px)  {
+                        position: absolute;
+                        bottom: 0;
+                        width: 30%;
+                        border-right: 20px solid white;
+                    }
                     @include breakpoint("medium") { 
                         position: absolute;
                         bottom: 0;
@@ -267,6 +289,10 @@
                 }
                 img.third {
                     width: 100%;
+                    @media only screen and (min-width: 601px) and (max-width: 900px)  {
+                        margin-bottom: 40px;
+                    }
+
                 }
             }
         }
@@ -276,41 +302,77 @@
             width: 85%;
             padding: 10px 20px;
             position: absolute;
-            @include breakpoint("medium") { 
+            @media only screen and (max-width: 600px)  {
+                top: 28%;
+            }
+            @media only screen and (min-width: 601px) and (max-width: 900px)  {
                 top: 30%;
+                left: 10%;
+                width: 80%;
+                padding: 10px 60px 20px 60px;
+                position: absolute;
+                background: #fff;
+                z-index: 9;
+            }
+            @include breakpoint("medium") { 
+                top: 50%;
                 left: 50%;
                 width: 45%;
                 padding: 15px 50px;
                 transform: translate(-50%, -50%)
             }
-            background: #fff;
+            background: stencilColor('color-white');
             z-index: 9;
-            h2 {
-                font-style: normal;
-                font-weight: 400;
-                text-align: justify;
-                font-family: stencilFontFamily('stay-classy-font');
-                font-size:  remCalc(66px);
-                line-height:  remCalc(70px);
-                letter-spacing: -0.01em;
+            h1 {
+                text-align: left;
                 color: stencilColor("color-allure-bridals-primary-1");
+                position: relative;
+                @media only screen and (min-width: 601px) {
+                    &::before {
+                        position: absolute;
+                        content: "";
+                        width: 17%;
+                        height: 20px;
+                        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTg4IiBoZWlnaHQ9IjEzIiB2aWV3Qm94PSIwIDAgMTg4IDEzIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB4PSIxODIiIHk9IjEuOTgxMzIiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHRyYW5zZm9ybT0icm90YXRlKDQ1IDE4MiAxLjk4MTMyKSIgZmlsbD0iIzY5NUM1QyIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxyZWN0IHk9IjUuODk1NTEiIHdpZHRoPSIxODAiIGhlaWdodD0iMSIgZmlsbD0iI0M4QzZDNiIvPgo8L3N2Zz4K");
+                        background-repeat: no-repeat;
+                        @media only screen and (max-width: 600px) {
+                            width: 70px;
+                        }
+                    }
+                    &::after {
+                        position: absolute;
+                        content: "";
+                        width: 2px;
+                        height: 2px;
+                        background: stencilColor('color-secondary');
+                        transform: rotate(45deg);
+                        outline: 2px solid #66676C;
+                    }
+                }
+                @media only screen and (min-width: 901px) {
+                    &::before {
+                        right: -50px;
+                        top: 40%;
+                    }
+                    &::after {
+                        right: 7.5%;
+                        top: 46%;
+                    }
+                }
+                @media only screen and (min-width: 601px) and (max-width: 900px)  {
+                    &::before {
+                        right: -60px;
+                        top: 40%;
+                    }
+                    &::after {
+                        right: 5.5%;
+                        top: 47%;
+                    }
+                }
             }
             p {
-                font-family: stencilFontFamily('default-font-regular');
-                font-style: normal;
-                font-weight: 400;
-                font-size: remCalc(16px);
-                line-height: remCalc(26px);
                 text-align: justify;
                 color: stencilColor("color-allure-bridals-neutral-2");
-                @media only screen and (min-width: 2000px) {
-                    font-size: remCalc(22px);
-                    line-height: remCalc(30px);
-                }
-                @media only screen and (min-width: 2800px) {
-                    font-size: remCalc(30px);
-                    line-height: remCalc(46px);
-                }
             }
         }
     }

@@ -50,6 +50,7 @@ export default class WishList extends PageManager {
         ]);
 
         $addWishlistForm.on('submit', event => {
+            $('#wishlistSubmit').prop('disabled', true);
             this.addWishlistValidator.performCheck();
 
             if (this.addWishlistValidator.areAll('valid')) {

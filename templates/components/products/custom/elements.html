@@ -13,18 +13,22 @@
     </div>
 </div>
 <div class="productView-customElement productView-customElement--button">
-    <a 
+    <!-- <a 
         id="form-action-addToDressingRoom"  
         class="button button--secondary" 
-        href="{{product.add_to_wishlist_url}}"
+        href="{{product.add_to_wishlist_url}}" 
     >
         {{lang 'products.add_to_my_dressing_room'}}
-    </a>
-    <button 
+    </a> -->
+    {{#if settings.show_wishlist}}
+                        {{> components/common/wishlist-dropdown}}
+                    {{/if}}
+    <!-- <button 
         id="form-action-addToDressingRoom"  
         class="button button--primary" 
         type="button"
     >
         {{lang 'products.try_it_on'}}
-    </button>
+    </button> -->
+    <a href="/retail-finder/" class="button button--primary" >{{lang 'products.try_it_on'}}</a>
 </div>
