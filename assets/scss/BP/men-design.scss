@@ -332,7 +332,14 @@ body {
                             font-size: remCalc(14px);
                             line-height: remCalc(22px);
                             color: stencilColor('color-men-design-neutral-1');
+                            &::before {
+                                @include quotesOpen(stencilColor('color-men-design-primary-3'));
+                            }
+                            &::after {
+                                @include quotesClose(stencilColor('color-men-design-primary-3'));
+                            }
                         }
+                        
                     }
                 }
             }
@@ -414,12 +421,11 @@ body {
                 >a {
                     &.titleIcon {
                         &::after {
-                            background: stencilColor('color-men-design-primary-1');
+                            @include wishlist-icon(stencilColor('color-men-design-primary-1'));
                         }
-
                         &:hover {
                             &::after {
-                                background: stencilColor('color-men-design-primary-1');
+                                @include wishlist-icon-hover(stencilColor('color-men-design-primary-1'), stencilColor('color-men-design-primary-4'));
                             }
                         }
                     }
@@ -430,7 +436,6 @@ body {
         .blockElementCollectionPreview {
             .previewblock {
                 .imagesection {
-
                     .leftImg,
                     .rightImg {
                         span {

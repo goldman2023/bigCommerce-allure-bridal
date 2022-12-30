@@ -22,11 +22,6 @@
         }
         .sub-cat-header {
             h3 {
-                font-style: normal;
-                font-weight: 400;
-                font-family: stencilFontFamily('prata-font');
-                font-size: remCalc(28px);
-                line-height: 34px;
                 color: stencilColor("color-default-neutral-1");
             }
             p {
@@ -45,19 +40,10 @@
                         }
                     }
                 }
-                span,a {
-                    font-family: stencilFontFamily('default-font-light');
-                    font-size: remCalc(12px);
-                    font-style: normal;
-                    font-weight: 300;
-                    line-height: 20px;
+                span, a {
                     color: stencilColor("color-default-neutral-2");
                 }
                 .viewCategory {
-                    font-family: stencilFontFamily('default-font-regular');
-                    font-weight: 500;
-                    line-height: 15px;
-                    letter-spacing: 0.1em;
                     text-transform: uppercase;
                     color: stencilColor("color-default-neutral-3");
                     text-decoration: none;
@@ -96,11 +82,6 @@
         justify-content: space-between;
     }
     .card-title > a {
-        font-family: stencilFontFamily('prata-font');
-        font-size: remCalc(22px);
-        font-style: normal;
-        font-weight: 400;
-        line-height: 30px;
         color: stencilColor("color-default-neutral-1");
         &.name {
             width: calc(100% - 25px);
@@ -132,7 +113,6 @@
         }
     }
     .card-text {
-        font-family: stencilFontFamily('default-font-regular');
         font-size: remCalc(12px);
         font-style: normal;
         font-weight: 400;
@@ -194,30 +174,15 @@
         padding: 3px 7.5px 0 7.5px;
     }
     h2.heading {
-        font-family: stencilFontFamily('prata-font');
-        font-size:  remCalc(34px);
-        line-height:  remCalc(44px);
-        font-style: normal;
-        font-weight: 400;
         color: stencilColor("color-default-neutral-3");
         margin: 50px 0 0 0;
         text-align: center;
         .lastword { 
-            font-family: stencilFontFamily('stay-classy-font');
-            font-size:  remCalc(66px);
-            line-height:  remCalc(70px);
-            font-style: normal;
-            font-weight: 500;
-            letter-spacing: -0.01em;
             color: stencilColor("color-default-primary-1");
+            margin-left: 8px;
         }
     }
     p.descrip {
-        font-family: stencilFontFamily('default-font-light');
-        font-style: normal;
-        font-weight: 300;
-        font-size:  remCalc(16px);
-        line-height:  remCalc(26px);
         text-align: center;
         color: stencilColor("color-default-neutral-2");
         max-width: 650px;
@@ -236,13 +201,7 @@
         }
     }
     .product .card-title > a {
-        font-family: stencilFontFamily('default-font-regular');
-        font-size:  remCalc(12px);
-        line-height:  remCalc(15px);
-        font-style: normal;
-        font-weight: 500;
         text-align: center;
-        letter-spacing: 0.1em;
         text-transform: uppercase;
         color: stencilColor("color-default-neutral-2");
     }
