@@ -1,5 +1,5 @@
 .topBanner {
-    margin: 0 -3rem;
+    margin: 40px 0 0 0; 
     @include breakpoint("medium") { 
         margin: 0;
     }
@@ -19,8 +19,8 @@
         .caption {
             position: absolute;
             bottom: 10px;
-            max-width: 90%;
-            left: 30px;
+            left: 44px;
+            max-width: calc(100% - 88px); 
             width: 100%;
             text-align: center;
             @include breakpoint("medium") { 
@@ -68,6 +68,10 @@
                 font-weight: 300;
                 font-size: remCalc(12px);
                 line-height: remCalc(20px);
+                @include breakpoint("small") { 
+                    font-size: remCalc(14px);
+                    line-height: remCalc(22px);
+                }
                 @include breakpoint("medium") { 
                     font-size: remCalc(16px);
                     line-height: remCalc(26px);
