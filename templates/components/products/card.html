@@ -80,6 +80,7 @@
         <h3 class="card-title">
             <a aria-label="{{> components/products/product-info}}"
                href="{{url}}"
+               class="h4"
                {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}}
             >
              Style {{name}}
@@ -87,7 +88,7 @@
             <a href="/wishlist.php?action=addwishlist&product_id={{id}}" class="titleIcon"></a>
         </h3>
 
-        <div class="card-text" data-test-info-type="price">
+        <div class="card-text body-3" data-test-info-type="price">
             {{summary}}
         </div>
     </div>
