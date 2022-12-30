@@ -201,10 +201,14 @@ export default class Global extends PageManager {
                     if(relatedPro.thePerfectMatch.length > 0) {
                         let perfectmatch = relatedPro.thePerfectMatch.map((item) => item.bc_product_id);
                         getProducts(contentId,'.thePerfectMatch .prodData', perfectmatch);
+                    } else {
+                        document.getElementById('thePerfectMatch').style.display = 'none';
                     }
                     if(relatedPro.youMightAlsoLike.length > 0) {
                         let youmaylike = relatedPro.youMightAlsoLike.map((item) => item.bc_product_id);
                         getProducts(contentId,'.youMightalsoLike .prodData', youmaylike);
+                    } else {
+                        document.getElementById('youMightalsoLike').style.display = 'none';
                     }
                 }
                 document.querySelectorAll('.imageWithContentSlider ul').forEach((item) => {
