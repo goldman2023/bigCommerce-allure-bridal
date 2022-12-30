@@ -1075,7 +1075,7 @@
         "phone": "Phone Number",
         "phoneType": "Type",
         "smsAlerts": "Receive text alerts",
-        "emailAlerts": "Receive Email alerts",
+        "emailAlerts": "Receive Email and Text alerts",
         "address1": "Address 1",
         "address2": "Address 2",
         "city": "City",

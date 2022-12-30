@@ -161,6 +161,7 @@
     position: relative;
   }
 .pages-custom-retail-submission-form {
+   
     .form-label {
         letter-spacing: 0.05em;
     }
@@ -277,17 +278,33 @@
   }
   .form-retail-row {
     display: flex;
-    gap: 20px;
+   
 
-    flex-flow: row;
+    flex-flow: column;
+    gap: 0;
 
     justify-content: unset;
 
     align-items: unset;
+    @media screen and (min-width: 768px) {
+      
+      flex-flow: row;
+      gap: 20px;
+    
+        
+    }
   }
   .city-container {
-    gap: 20px;
+    gap: 0px;
     display: flex;
+    flex-flow: column;
+    @media screen and (min-width: 768px) {
+      
+        flex-flow: row;
+        gap: 20px;
+      
+          
+      }
   }
   .disclaimer {
     font-style: italic;
