@@ -1,11 +1,11 @@
 body {
-    .men-design, .allure-men {
-        font-family: stencilFontFamily('font-men-design-body');
+    .madison-james {
+        font-family: stencilFontFamily('font-madison-james-body');
         .h1-italic,
         .h2-italic,
         .h3-italic,
         .h4-italic {
-            font-family: stencilFontFamily('font-men-design-display-headings');
+            font-family: stencilFontFamily('font-madison-james-display-headings');
         }
 
         h1,
@@ -16,7 +16,7 @@ body {
         .h3,
         h4,
         .h4 {
-            font-family: stencilFontFamily('font-men-design-headings');
+            font-family: stencilFontFamily('font-madison-james-headings');
         }
 
         .body-1,
@@ -25,35 +25,35 @@ body {
         .body-light-1,
         .body-light-2,
         .body-light-3 {
-            font-family: stencilFontFamily('font-men-design-body');
+            font-family: stencilFontFamily('font-madison-james-body');
         }
 
         .border {
-            border-color: stencilColor('color-men-design-primary-2');
+            border-color: stencilColor('color-madison-james-primary-2');
 
             &::after {
-                background-color: stencilColor('color-men-design-primary-1');
+                background-color: stencilColor('color-madison-james-primary-1');
             }
         }
 
         .button {
             background: stencilColor('color-white');
-            color: stencilColor('color-men-design-primary-1');
-            border-color: stencilColor('color-men-design-primary-1');
+            color: stencilColor('color-madison-james-primary-1');
+            border-color: stencilColor('color-madison-james-primary-1');
 
             .icon {
                 svg use {
-                    fill: stencilColor("color-men-design-primary-1");
+                    fill: stencilColor("color-madison-james-primary-1");
                 }
             }
 
             &:before {
-                border-color: stencilColor('color-men-design-primary-5');
+                border-color: stencilColor('color-madison-james-primary-5');
             }
 
             &:hover {
-                background: stencilColor('color-men-design-primary-1');
-                border-color: stencilColor('color-men-design-primary-1');
+                background: stencilColor('color-madison-james-primary-1');
+                border-color: stencilColor('color-madison-james-primary-1');
                 color: stencilColor('color-white');
 
                 .icon {
@@ -64,8 +64,8 @@ body {
             }
 
             &.button--primary {
-                background: stencilColor('color-men-design-primary-1');
-                border-color: stencilColor('color-men-design-primary-1');
+                background: stencilColor('color-madison-james-primary-1');
+                border-color: stencilColor('color-madison-james-primary-1');
                 color: stencilColor('color-white');
 
                 &:before {
@@ -73,8 +73,8 @@ body {
                 }
 
                 &:hover {
-                    background: stencilColor('color-men-design-primary-2');
-                    border-color: stencilColor('color-men-design-primary-2');
+                    background: stencilColor('color-madison-james-primary-2');
+                    border-color: stencilColor('color-madison-james-primary-2');
 
                     &:before {
                         border-color: rgba(255, 255, 255, 0.6);
@@ -83,8 +83,8 @@ body {
             }
 
             &:disabled {
-                background: stencilColor('color-men-design-primary-2');
-                border-color: stencilColor('color-men-design-primary-2');
+                background: stencilColor('color-madison-james-primary-2');
+                border-color: stencilColor('color-madison-james-primary-2');
                 color: stencilColor('color-white');
 
                 &:before {
@@ -94,25 +94,25 @@ body {
         }
 
         .breadcrumbs {
-            border-color: stencilColor('color-men-design-primary-2');
+            border-color: stencilColor('color-madison-james-primary-2');
 
             .breadcrumb {
                 &::after {
                     width: 2.5px;
                     height: 2.5px;
-                    background-color: stencilColor('color-men-design-primary-1');
+                    background-color: stencilColor('color-madison-james-primary-1');
                 }
 
                 .breadcrumb-label {
                     span {
-                        color: stencilColor('color-men-design-neutral-1');
+                        color: stencilColor('color-madison-james-neutral-1');
                     }
                 }
 
                 &:last-child {
                     .breadcrumb-label {
                         span {
-                            color: stencilColor('color-men-design-primary-1');
+                            color: stencilColor('color-madison-james-primary-1');
                         }
                     }
                 }
@@ -122,28 +122,28 @@ body {
         .form {
             .form-field {
                 .form-label {
-                    color: stencilColor('color-men-design-primary-1');
+                    color: stencilColor('color-madison-james-primary-1');
                 }
 
                 .form-radio,
                 .form-checkbox {
                     &~.form-label {
-                        color: stencilColor('color-men-design-neutral-1');
+                        color: stencilColor('color-madison-james-neutral-1');
                     }
                 }
 
                 .form-radio {
                     &~.form-label {
                         &::before {
-                            border-color: stencilColor('color-men-design-primary-1');
+                            border-color: stencilColor('color-madison-james-primary-1');
                         }
                     }
 
                     &:disabled {
                         &~.form-label {
                             &::before {
-                                border-color: stencilColor('color-men-design-primary-2');
-                                background-color: stencilColor('color-men-design-primary-4');
+                                border-color: stencilColor('color-madison-james-primary-2');
+                                background-color: stencilColor('color-madison-james-primary-4');
                             }
                         }
                     }
@@ -152,15 +152,15 @@ body {
                 .form-checkbox {
                     &~.form-label {
                         &::before {
-                            border-color: stencilColor('color-men-design-primary-2');
+                            border-color: stencilColor('color-madison-james-primary-2');
                         }
                     }
 
                     &:disabled {
                         &~.form-label {
                             &::before {
-                                border-color: stencilColor('color-men-design-primary-2');
-                                background-color: stencilColor('color-men-design-primary-4');
+                                border-color: stencilColor('color-madison-james-primary-2');
+                                background-color: stencilColor('color-madison-james-primary-4');
                             }
                         }
                     }
@@ -169,15 +169,15 @@ body {
                 input[type="checkbox"]:checked {
                     &~.form-label {
                         &::before {
-                            background-color: stencilColor('color-men-design-neutral-1');
+                            background-color: stencilColor('color-madison-james-neutral-1');
                         }
                     }
 
                     &:disabled {
                         &~.form-label {
                             &::before {
-                                border-color: stencilColor('color-men-design-primary-2');
-                                background-color: stencilColor('color-men-design-primary-2');
+                                border-color: stencilColor('color-madison-james-primary-2');
+                                background-color: stencilColor('color-madison-james-primary-2');
                             }
                         }
                     }
@@ -186,7 +186,7 @@ body {
                 input[type="radio"]:checked {
                     &~.form-label {
                         &::after {
-                            border-color: stencilColor('color-men-design-primary-2');
+                            border-color: stencilColor('color-madison-james-primary-2');
                             background-color: stencilColor('color-white');
                         }
                     }
@@ -194,12 +194,12 @@ body {
                     &:disabled {
                         &~.form-label {
                             &::before {
-                                border-color: stencilColor('color-men-design-neutral-1');
+                                border-color: stencilColor('color-madison-james-neutral-1');
                             }
 
                             &::after {
-                                background-color: stencilColor('color-men-design-neutral-1');
-                                border-color: stencilColor('color-men-design-neutral-1');
+                                background-color: stencilColor('color-madison-james-neutral-1');
+                                border-color: stencilColor('color-madison-james-neutral-1');
                             }
                         }
                     }
@@ -208,59 +208,59 @@ body {
                 .form-input,
                 .form-select {
                     background-color: stencilColor('color-white');
-                    border-color: stencilColor('color-men-design-primary-1');
-                    color: stencilColor('color-men-design-primary-1');
+                    border-color: stencilColor('color-madison-james-primary-1');
+                    color: stencilColor('color-madison-james-primary-1');
 
                     &::placeholder {
-                        color: stencilColor('color-men-design-primary-3');
-                        border-color: stencilColor('color-men-design-primary-1');
+                        color: stencilColor('color-madison-james-primary-3');
+                        border-color: stencilColor('color-madison-james-primary-1');
                     }
 
                     &:focus {
-                        color: stencilColor('color-men-design-primary-1');
-                        border-color: stencilColor('color-men-design-primary-1');
+                        color: stencilColor('color-madison-james-primary-1');
+                        border-color: stencilColor('color-madison-james-primary-1');
                     }
 
                     &:active {
-                        color: stencilColor('color-men-design-primary-1');
-                        border-color: stencilColor('color-men-design-primary-1');
+                        color: stencilColor('color-madison-james-primary-1');
+                        border-color: stencilColor('color-madison-james-primary-1');
                     }
                 }
 
                 .form-select {
-                    color: stencilColor('color-men-design-primary-3');
+                    color: stencilColor('color-madison-james-primary-3');
 
                     option {
-                        color: stencilColor("color-men-design-neutral-1");
+                        color: stencilColor("color-madison-james-neutral-1");
                     }
 
                     &:active {
-                        border-color: stencilColor('color-men-design-primary-1');
+                        border-color: stencilColor('color-madison-james-primary-1');
                     }
 
                     &:valid {
-                        color: stencilColor('color-men-design-primary-1');
+                        color: stencilColor('color-madison-james-primary-1');
                     }
 
                     &:focus {
-                        color: stencilColor("color-men-design-primary-1");
+                        color: stencilColor("color-madison-james-primary-1");
                     }
                 }
             }
 
             .form-field--checkbox {
                 .form-label {
-                    color: stencilColor('color-men-design-neutral-1');
+                    color: stencilColor('color-madison-james-neutral-1');
 
                     &::before {
-                        border-color: stencilColor('color-men-design-primary-2');
+                        border-color: stencilColor('color-madison-james-primary-2');
                         background-color: stencilColor('color-white');
                     }
                 }
 
                 input[type="checkbox"]:checked+.form-label {
                     &::before {
-                        background-color: stencilColor('color-men-design-primary-1');
+                        background-color: stencilColor('color-madison-james-primary-1');
                         color: stencilColor('color-white');
                     }
                 }
@@ -272,10 +272,10 @@ body {
                 .productView-customElement {
                     .productView-sizeGuide {
                         a {
-                            color: stencilColor('color-men-design-primary-1');
+                            color: stencilColor('color-madison-james-primary-1');
 
                             &::after {
-                                @include sizeGuide(stencilColor('color-men-design-primary-1'));
+                                @include sizeGuide(stencilColor('color-madison-james-primary-1'));
                             }
                         }
                     }
@@ -283,20 +283,20 @@ body {
             }
 
             .form-radio:checked+.form-option {
-                border-color: stencilColor('color-men-design-primary-1');
+                border-color: stencilColor('color-madison-james-primary-1');
                 ;
             }
 
             .productView-description {
                 .tabs-contents {
                     .tab-content {
-                        color: stencilColor('color-men-design-neutral-1');
+                        color: stencilColor('color-madison-james-neutral-1');
                     }
                 }
             }
 
             .productView-subheading {
-                color: stencilColor('color-men-design-neutral-1');
+                color: stencilColor('color-madison-james-neutral-1');
             }
         }
 
@@ -306,34 +306,34 @@ body {
 
                     &::before,
                     &::after {
-                        background: stencilColor('color-men-design-primary-1');
+                        background: stencilColor('color-madison-james-primary-1');
                     }
                 }
             }
 
             .navList-action--checkbox {
                 &::before {
-                    border-color: stencilColor('color-men-design-primary-1');
+                    border-color: stencilColor('color-madison-james-primary-1');
                 }
 
                 &.is-selected {
                     &::before {
-                        background-color: stencilColor('color-men-design-primary-1');
+                        background-color: stencilColor('color-madison-james-primary-1');
                     }
                 }
             }
 
             .facetedSearch {
                 .clearBtn {
-                    color: stencilColor('color-men-design-primary-1');
+                    color: stencilColor('color-madison-james-primary-1');
                 }
 
                 .facetedSearch-navList {
                     .accordion-block {
-                        border-color: stencilColor('color-men-design-primary-2');
+                        border-color: stencilColor('color-madison-james-primary-2');
 
                         &::after {
-                            background-color: stencilColor('color-men-design-primary-1');
+                            background-color: stencilColor('color-madison-james-primary-1');
                         }
                     }
                 }
@@ -341,20 +341,20 @@ body {
         }
 
         .sidebarBlock+.sidebarBlock {
-            border-color: stencilColor('color-men-design-primary-2');
+            border-color: stencilColor('color-madison-james-primary-2');
         }
 
         .accordion--navList {
             .accordion-indicator {
-                fill: stencilColor('color-men-design-primary-2');
+                fill: stencilColor('color-madison-james-primary-2');
             }
         }
 
         .pagination {
-            border-color: stencilColor('color-men-design-primary-2');
+            border-color: stencilColor('color-madison-james-primary-2');
 
             &::after {
-                background-color: stencilColor('color-men-design-primary-1');
+                background-color: stencilColor('color-madison-james-primary-1');
             }
 
             .pagination-list {
@@ -362,7 +362,7 @@ body {
                     &.pagination-item--current {
                         a.pagination-link {
                             .background-rot {
-                                background-color: stencilColor('color-men-design-primary-1');
+                                background-color: stencilColor('color-madison-james-primary-1');
                             }
                         }
                     }
@@ -373,12 +373,12 @@ body {
         .blockElementStory {
             .heading-section {
                 h1 {
-                    color: stencilColor('color-men-design-primary-1');
+                    color: stencilColor('color-madison-james-primary-1');
                 }
 
                 .date {
                     &::after {
-                        background: stencilColor('color-men-design-primary-1');
+                        background: stencilColor('color-madison-james-primary-1');
                     }
                 }
             }
@@ -388,11 +388,11 @@ body {
             .discovery-section {
                 .caption {
                     h1 {
-                        color: stencilColor('color-men-design-primary-1');
+                        color: stencilColor('color-madison-james-primary-1');
                     }
 
                     p {
-                        color: stencilColor('color-men-design-neutral-1');
+                        color: stencilColor('color-madison-james-neutral-1');
                     }
                 }
             }
@@ -403,18 +403,18 @@ body {
                 .textSection {
                     .caption {
                         h1 {
-                            color: stencilColor('color-men-design-primary-1');
+                            color: stencilColor('color-madison-james-primary-1');
                         }
 
                         p {
-                            color: stencilColor('color-men-design-neutral-1');
+                            color: stencilColor('color-madison-james-neutral-1');
 
                             &::before {
-                                @include quotesOpen(stencilColor('color-men-design-primary-3'));
+                                @include quotesOpen(stencilColor('color-madison-james-primary-3'));
                             }
 
                             &::after {
-                                @include quotesClose(stencilColor('color-men-design-primary-3'));
+                                @include quotesClose(stencilColor('color-madison-james-primary-3'));
                             }
                         }
 
@@ -427,25 +427,25 @@ body {
             .verticalBlock {
                 .contentDiv {
                     .caption {
-                        color: stencilColor('color-men-design-neutral-1');
+                        color: stencilColor('color-madison-james-neutral-1');
 
                         &::before {
-                            background: stencilColor('color-men-design-primary-1');
+                            background: stencilColor('color-madison-james-primary-1');
                         }
                     }
                 }
             }
 
             .backgroundoverlay {
-                background: stencilColor('color-men-design-primary-5');
+                background: stencilColor('color-madison-james-primary-5');
             }
         }
 
         .divider {
-            border-color: stencilColor('color-men-design-primary-2');
+            border-color: stencilColor('color-madison-james-primary-2');
 
             &::after {
-                background: stencilColor('color-men-design-primary-1');
+                background: stencilColor('color-madison-james-primary-1');
             }
         }
 
@@ -453,7 +453,7 @@ body {
             ul {
                 li {
                     .blockrow {
-                        background: stencilColor('color-men-design-primary-1');
+                        background: stencilColor('color-madison-james-primary-1');
                     }
                 }
             }
@@ -463,7 +463,7 @@ body {
             h2 {
                 &.heading {
                     .lastword {
-                        color: stencilColor('color-men-design-primary-1');
+                        color: stencilColor('color-madison-james-primary-1');
                     }
                 }
             }
@@ -471,10 +471,10 @@ body {
 
         .category-listing-page {
             .sub-category-block {
-                border-color: stencilColor('color-men-design-primary-2');
+                border-color: stencilColor('color-madison-james-primary-2');
 
                 &::after {
-                    background: stencilColor('color-men-design-primary-1');
+                    background: stencilColor('color-madison-james-primary-1');
                 }
             }
         }
@@ -482,13 +482,13 @@ body {
         .productGridslider {
             .slick-prev {
                 &::before {
-                    background: stencilColor('color-men-design-primary-1');
+                    background: stencilColor('color-madison-james-primary-1');
                 }
             }
 
             .slick-next {
                 &::before {
-                    background: stencilColor('color-men-design-primary-1');
+                    background: stencilColor('color-madison-james-primary-1');
                 }
             }
         }
@@ -499,12 +499,12 @@ body {
                 >a {
                     &.titleIcon {
                         &::after {
-                            @include wishlist-icon(stencilColor('color-men-design-primary-1'));
+                            @include wishlist-icon(stencilColor('color-madison-james-primary-1'));
                         }
 
                         &:hover {
                             &::after {
-                                @include wishlist-icon-hover(stencilColor('color-men-design-primary-1'), stencilColor('color-men-design-primary-4'));
+                                @include wishlist-icon-hover(stencilColor('color-madison-james-primary-1'), stencilColor('color-madison-james-primary-4'));
                             }
                         }
                     }
@@ -520,7 +520,7 @@ body {
                     .rightImg {
                         span {
                             &::before {
-                                background: stencilColor('color-men-design-primary-1');
+                                background: stencilColor('color-madison-james-primary-1');
                             }
                         }
                     }
