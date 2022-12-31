@@ -124,11 +124,22 @@ export default class Global extends PageManager {
         //Product Detail page start
         if (bodyClassEl.contains('product-type')) {
             let productId = document.querySelector('.productView').getAttribute('data-prod-id');
-
             productDeatilMetaData(this.context,productId, response => {
                 let metadata = response.contentFul;
                 let relatedPro = response.related;
-                console.log(metadata);
+
+                if(Object.keys(metadata).length === 0) {
+                    $('.contentBlocksCollection').hide();
+                } else {
+                    $('.contentBlocksCollection').show();
+                }
+
+                if(Object.keys(relatedPro).length === 0) {
+                    $('.productsrelate').hide();
+                } else {
+                    $('.contentBlocksCollection').show();
+                }
+                
                 let blocksCollections = metadata?.contentBlocksCollection?.items?.map(element => {
                     if(element.__typename === "BlockElementStoryBlock"){
                         return blockElementStory(element);
@@ -199,12 +210,14 @@ export default class Global extends PageManager {
                 if(Object.keys(relatedPro).length > 0) {
 
                     if(relatedPro.thePerfectMatch.length > 0) {
-                        let perfectmatch = relatedPro.thePerfectMatch.map((item) => item.bc_product_id);
+                        let perfectmatch = relatedPro.thePerfectMatch.map((item) => item.bc_product_id).filter((a) => a);
                         getProducts(contentId,'.thePerfectMatch .prodData', perfectmatch);
+                        $('#thePerfectMatch').removeClass('hide');
                     }
                     if(relatedPro.youMightAlsoLike.length > 0) {
-                        let youmaylike = relatedPro.youMightAlsoLike.map((item) => item.bc_product_id);
+                        let youmaylike = relatedPro.youMightAlsoLike.map((item) => item.bc_product_id).filter((a) => a);
                         getProducts(contentId,'.youMightalsoLike .prodData', youmaylike);
+                        $('#youMightalsoLike').removeClass('hide');
                     }
                 }
                 document.querySelectorAll('.imageWithContentSlider ul').forEach((item) => {
@@ -232,7 +245,6 @@ export default class Global extends PageManager {
         if (mainContent.contains('pages-custom-category-category-landing') || mainContent.contains('category-landing')) {
             let geturl = document.getElementById('categoryLanding').getAttribute('data-url')
             getCategorySpecificMetaData(this.context, geturl, response => {
-                console.log('category response', response);
                 for (const categoryData of response) {
                     if (categoryData.key === "Contentful Data") {
                         let contentfulData = categoryData?.value;
@@ -344,6 +356,11 @@ export default class Global extends PageManager {
                     applySlider('.productGridslider',4,false,true);
                 });
                 $('.productGridSection').removeClass('hide');
+                if (document.querySelector('body').classList.contains('product-type')) {
+                    $('.productGrid').each(function(){
+                        applySlider('.productGrid',4,false,true);
+                    });
+                }
             }, 3000);
         });
 

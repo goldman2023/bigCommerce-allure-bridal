@@ -176,29 +176,31 @@ export default class ProductDetails extends ProductDetailsBase {
             return response.json();
         })
         .then(function(res) {
-            const prodData = JSON.parse(res.data.site.product.metafields.edges[0].node.value);
-            const sizeGuide = prodData.sizeGuide;
-            document.querySelector('.sizeChart .description').innerHTML = sizeGuide.description;
-            let howtomesureimg = sizeGuide.howToMeasureBackgroundImage.url;
-            document.getElementById('howtomesureimg').setAttribute('src',howtomesureimg);
-            if(sizeGuide.videoUrl != null) {
-                document.getElementById('sizechatvideo').setAttribute('src',sizeGuide.videoUrl);
-            } else {
-                document.querySelector('.how-to-mesure').style.display = "none"; 
+            if(res.data.site.product.metafields.edges.length > 0) {
+                const prodData = JSON.parse(res.data.site.product.metafields.edges[0]?.node?.value);
+                const sizeGuide = prodData?.sizeGuideCollection;
+                document.querySelector('.sizeChart .description').innerHTML = sizeGuide?.items[0]?.description;
+                let sizeTableContent = `${sizeGuide?.items?.map((item,i)=>{ return `<input type="radio" id="${item.sizeChartName.toLowerCase().replaceAll(' ','')}" name="css-tabs" ${i === 0 ? 'checked' : ''}>`}).join('')}<ul class="tabs">${sizeGuide?.items?.map((item,i)=>{  return `<li class="tab"><label for="${item.sizeChartName.toLowerCase().replaceAll(' ','')}">${item.sizeChartName}</label></li>`}).join('')}</ul>${sizeGuide?.items?.map((item,i)=>{ return `<div class="tab-content" class="${item.sizeChartName.toLowerCase().replaceAll(' ','')}" >
+                <p class="tableheading">For all styles Spring 2018 and previous</p><div class="tablestructure">${item.sizingData.replace(/[\r\n]/gm, '?').split('?').map((element,i)=> {
+                        let eachrow = element.split(',').map((el)=>{
+                            return `<div class="tb-col">${el}</div>`;
+                        });
+                        return `<div class="tb-row">${eachrow.join("")}</div>`;
+                }).join('')}</div></div>`}).join('')}`;
+
+                document.getElementById('sizecharttable').innerHTML = sizeTableContent;
+
+                let howtomesureimg = sizeGuide?.items[0]?.howToMeasureBackgroundImage.url;
+                document.getElementById('howtomesureimg').setAttribute('src',howtomesureimg);
+                if(sizeGuide?.items[0]?.videoUrl != null) {
+                    document.getElementById('sizechatvideo').setAttribute('src',sizeGuide?.items[0]?.videoUrl);
+                } else {
+                    document.querySelector('.how-to-mesure').style.display = "none"; 
+                }
+                document.querySelector('.leftTop').innerHTML =  `<h6>${sizeGuide?.items[0]?.leftCopyBlock.json.content[0].content[0].value}</h6><p>${sizeGuide?.items[0]?.leftCopyBlock.json.content[1].content[0].value}</p>`;
+                document.querySelector('.rightTop').innerHTML = `<h6>${sizeGuide?.items[0]?.topRightCopyBlock.json.content[0].content[0].value}</h6><p>${sizeGuide?.items[0]?.topRightCopyBlock.json.content[1].content[0].value}</p>`;
+                document.querySelector('.rightBottom').innerHTML = `<h6>${sizeGuide?.items[0]?.bottomRightCopyBlock.json.content[0].content[0].value}</h6><p>${sizeGuide?.items[0]?.bottomRightCopyBlock.json.content[1].content[0].value}</p>`;
             }
-
-            let sizes = sizeGuide.sizingData.replace(/[\r\n]/gm, '?').split('?');
-            let sizetable = sizes.map((element,i)=> {
-                    let eachrow = element.split(',').map((el)=>{
-                        return `<div class="tb-col">${el}</div>`;
-                    });
-                    return `<div class="tb-row">${eachrow.join("")}</div>`;
-            });
-            document.querySelector('.tabSection .tab-content').innerHTML =  `<p class="tableheading">For all styles Spring 2018 and previous</p><div class="tablestructure">${sizetable.join("")}</div>`;
-            document.querySelector('.leftTop').innerHTML =  `<h6>${sizeGuide.leftCopyBlock.json.content[0].content[0].value}</h6><p>${sizeGuide.leftCopyBlock.json.content[1].content[0].value}</p>`;
-            document.querySelector('.rightTop').innerHTML = `<h6>${sizeGuide.topRightCopyBlock.json.content[0].content[0].value}</h6><p>${sizeGuide.topRightCopyBlock.json.content[1].content[0].value}</p>`;
-            document.querySelector('.rightBottom').innerHTML = `<h6>${sizeGuide.bottomRightCopyBlock.json.content[0].content[0].value}</h6><p>${sizeGuide.bottomRightCopyBlock.json.content[1].content[0].value}</p>`;
-
         });
     }
 
