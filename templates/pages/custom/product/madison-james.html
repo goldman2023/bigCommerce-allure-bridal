@@ -1,0 +1,50 @@
+{{inject 'productId' product.id}}
+
+{{#partial "page"}}
+    {{#each product.shipping_messages}}
+        {{> components/common/alert/alert-info message}}
+    {{/each}}
+
+    <div class="custompro">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+        {{> components/products/product-view}}
+
+        {{{region name="product_below_content"}}}
+
+        {{#if product.videos.list.length}}
+        {{> components/products/videos product.videos}}
+        {{/if}}
+
+        {{#all settings.show_product_reviews theme_settings.show_product_reviews (if
+        theme_settings.show_product_details_tabs '!==' true)}}
+        {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
+        {{/all}}
+        <div class="productsrelate">
+        <!-- {{> components/products/tabs}} -->
+        <div class="youMightalsoLike hide" id="youMightalsoLike">
+            <h4 class="title">{{lang 'products.youmayalsolike'}}</h4>
+            <div class="prodData"></div>
+        </div>
+        {{> BP/components/common/divider}}
+        <div class="thePerfectMatch hide" id="thePerfectMatch">
+            <h4 class="title">{{lang 'products.thePerfectMatch'}}</h4>
+            <div class="prodData"></div>
+        </div>
+        {{> BP/components/common/divider}}
+        </div>
+        <div class="recentlyViewed" id="recentlyViewed">
+            <h4 class="title">{{lang 'products.recentlyViewed'}}</h4>
+            {{#if product.similar_by_views}}
+            {{> BP/components/common/carousel products=product.similar_by_views columns=4 list="Customers Also Viewed"}}
+            {{/if}}
+        </div>
+        {{> BP/components/common/divider}}
+        <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+        <div class="elfsight-app-2accabd9-4992-4055-9430-022b788dff5e"></div>
+    </div>
+    <div class="blockElementLookbook block-item full-size" id="blockElementLookbook"></div>
+
+    {{> components/products/schema}}
+{{/partial}}
+{{> layout/base}}

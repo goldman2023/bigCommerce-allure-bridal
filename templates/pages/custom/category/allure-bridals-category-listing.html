@@ -1,0 +1,79 @@
+---
+category:
+    shop_by_price: true
+    products:
+        limit: {{theme_settings.categorypage_products_per_page}}
+---
+{{inject "categoryProductsPerPage" theme_settings.categorypage_products_per_page}}
+{{inject "categoryId" category.id}}
+
+{{#partial "page"}}
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js"></script>
+
+<div class="category-listing-page">
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    <div id="product-listing-container">
+        {{#if category.subcategories}}
+                {{#each category.subcategories}}
+                {{#if @index '===' 3}}
+                    <div class="customBanner">
+                        <div class="leftTextbanner" id="leftTextbanner"></div>
+                        {{> BP/components/common/divider}}
+                    </div> 
+                {{/if}}
+                <div class="sub-category-block" data-path="{{url}}">
+                    <div class="sub-cat-header">
+                        <h3>{{name}}</h3>
+                        <p>
+                            <span class="sub-description body-light-3"></span>
+                            <a  href="{{url}}" class="viewCategory body-light-3">View {{name}} </a>
+                        </p>
+                    </div>
+                    <div class="sub-products">
+                    </div>
+                </div>
+                {{/each}}
+        {{/if}}
+    </div>
+</div>
+<input type="hidden" id="gettheKey" value="{{ settings.storefront_api.token }}">
+<script>
+    //From category-listing.js slick is not applying so Added here. When it will be working We can remove from this file.
+   $(window).on('load', function(){ 
+    setTimeout(function(){
+        $('.productGrid').each(function(){
+        $(this).slick({
+                    dots: false,
+                    infinite: false,
+                    speed: 300,
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: false,
+                        dots: false
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            centerMode: true,
+                            infinite: false,
+                            dots: false
+                        }
+                    }
+                    ]
+                });
+    });
+    },3000);
+    });
+</script>
+{{/partial}}
+{{> layout/base}}

@@ -3,6 +3,12 @@
 .category-listing,
 .pages-custom-page-all-content-blocks,
 .pages-custom-page-page-men-design,
+.pages-custom-page-page-wilderly-bride,
+.pages-custom-page-page-abella-design,
+.pages-custom-page-page-allure-bridals,
+.pages-custom-page-page-disney-fairy-tale-wedding,
+.pages-custom-page-page-madison-james,
+.pages-custom-page-page-wilderly-bride,
 .pages-product,
 .suits-product,
 .bp-category,
@@ -177,22 +183,6 @@
         background: #695c5c;
         outline: 3px solid white;
         transform: rotate(45deg);
-    }
-}
-.logotabcontents {
-    .tab-content:nth-child(even) {
-        .blockElementDiscover .discovery-section .caption h2 {
-            color: #4977BD;
-        }
-        .buttonlink {
-            color: #4977BD;
-            border: 1px solid #4977BD;
-            &:hover {
-                color: #ffffff;
-                border: 1px solid #4977BD;
-                background-color: #4977BD;
-            }
-        }
     }
 }
 .category-landing {
