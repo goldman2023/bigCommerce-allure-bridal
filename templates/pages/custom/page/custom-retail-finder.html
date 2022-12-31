@@ -1,7 +1,19 @@
 {{#partial "page"}}
 
 
+<style>
+    .pac-container {
+        margin-top: 460px !important;
+    }
 
+    @media screen and (max-width: 768px) {
+        .pac-container {
+            margin-top: 410px !important;
+        }
+
+
+    }
+</style>
 <section class="page pages-custom-retail-submission-form">
     {{{region name="page_builder_content"}}}
 
@@ -70,7 +82,7 @@
                             placeholder="{{lang 'request_appointment.phone'}}">
 
                     </div>
-                    <div class="form-field filter">
+                    <!-- <div class="form-field filter">
 
                         <span class="form-label">
                             {{lang 'request_appointment.phoneType'}}
@@ -80,16 +92,16 @@
                             <option value="Mobile">Mobile</option>
                         </select>
 
-                    </div>
+                    </div> -->
                 </div>
                 <div class="checkbox-fields">
-                    <div class="checkbox-field">
+                    <!-- <div class="checkbox-field">
 
                         <label for="register_pass-news"> <input type="checkbox" name="smsAlerts"
                                 class="register_pass-news">
                             {{lang 'request_appointment.smsAlerts'}}
                         </label>
-                    </div>
+                    </div> -->
                     <div class="checkbox-field">
 
                         <label for="register_pass-news"> <input type="checkbox" name="emailAlerts"
@@ -105,14 +117,14 @@
                 <div class="form-field filter">
                     <span class="form-label">{{lang 'request_appointment.address1'}}</span>
 
-                    <input class="form-input" type="text" name="address1"
+                    <input id="address1" class="form-input" type="text" name="address1"
                         placeholder="{{lang 'request_appointment.address1'}}">
 
                 </div>
                 <div class="form-field filter">
                     <span class="form-label">{{lang 'request_appointment.address2'}}</span>
 
-                    <input class="form-input" type="text" name="address2"
+                    <input id="address2" class="form-input" type="text" name="address2"
                         placeholder="{{lang 'request_appointment.address2'}}">
 
                 </div>
@@ -120,14 +132,14 @@
                     <div class="form-field filter">
                         <span class="form-label">{{lang 'request_appointment.city'}}</span>
 
-                        <input class="form-input" type="text" name="city"
+                        <input id="city" class="form-input" type="text" name="city"
                             placeholder="{{lang 'request_appointment.city'}}">
 
                     </div>
                     <div class="form-field filter">
 
                         <span class="form-label">{{lang 'request_appointment.state'}}</span>
-                        <select id="" name="state" class="form-select selector-dropdown">
+                        <select id="state" name="state" class="form-select selector-dropdown">
                             <option hidden value="">Select State...</option>
                             <option value="AL">AL</option>
                             <option value="AK">AK</option>
@@ -185,7 +197,7 @@
                     <div class="form-field filter">
                         <span class="form-label">{{lang 'request_appointment.zip'}}</span>
 
-                        <input maxlength="5" class="form-input" type="text" name="zip"
+                        <input id="zip" maxlength="5" class="form-input" type="text" name="zip"
                             placeholder="{{lang 'request_appointment.zip'}}">
 
                     </div>
@@ -238,9 +250,92 @@
 
 </section>
 <script>
+    let autocomplete;
+    let address1Field;
+    let address2Field;
+    let postalField;
+    function initAutocomplete() {
+        address1Field = document.querySelector("#address1");
+        address2Field = document.querySelector("#address2");
+        postalField = document.querySelector("#zip");
+        // Create the autocomplete object, restricting the search predictions to
+        // addresses in the US and Canada.
+        autocomplete = new google.maps.places.Autocomplete(address1Field, {
+            componentRestrictions: { country: ["us", "ca"] },
+            fields: ["address_components", "geometry"],
+            types: ["address"],
+        });
+        address1Field.focus();
+        // When the user selects an address from the drop-down, populate the
+        // address fields in the form.
+        autocomplete.addListener("place_changed", fillInAddress);
+    }
+    function fillInAddress() {
+        // Get the place details from the autocomplete object.
+        const place = autocomplete.getPlace();
+        let address1 = "";
+        let postcode = "";
+
+        // Get each component of the address from the place details,
+        // and then fill-in the corresponding field on the form.
+        // place.address_components are google.maps.GeocoderAddressComponent objects
+        // which are documented at http://goo.gle/3l5i5Mr
+        for (const component of place.address_components) {
+            // @ts-ignore remove once typings fixed
+            const componentType = component.types[0];
+
+            switch (componentType) {
+                case "street_number": {
+                    address1 = `${component.long_name} ${address1}`;
+                    break;
+                }
+
+                case "route": {
+                    address1 += component.short_name;
+                    break;
+                }
+
+                case "postal_code": {
+                    postcode = `${component.long_name}${postcode}`;
+                    break;
+                }
+
+
+                case "locality":
+                    document.querySelector("#city").value = component.long_name;
+                    break;
+                case "administrative_area_level_1": {
+                    document.querySelector("#state").value = component.short_name;
+                    break;
+                }
+                case "country":
+                    //document.querySelector("#country").value = component.long_name;
+                    break;
+            }
+        }
+
+        address1Field.value = address1;
+        postalField.value = postcode;
+        // After filling the form with address components from the Autocomplete
+        // prediction, set cursor focus on the second address line to encourage
+        // entry of subpremise information such as apartment, unit, or floor number.
+        address2Field.focus();
+    }
+    window.initAutocomplete = initAutocomplete;
+
     window.addEventListener("load", (event) => {
+        //initalize google autocomplete
+        // const addressInput = document.getElementById('');
+        // const autocomplete = new google.maps.places.Autocomplete(addressInput);
+        // autocomplete.addListener('place_changed', function () {
+        //     const place = autocomplete.getPlace();
+        //     document.getElementById('address1').value = place.address_components[0].long_name;
+        //     document.getElementById('route').value = place.address_components[1].long_name;
+        //     document.getElementById('locality').value = place.address_components[2].long_name;
+        //     document.getElementById('administrative_area_level_1').value = place.address_components[5].short_name;
+        // });
         // Initialize the date picker on load
-        flatpickr('.date-picker', { position: 'below', monthSelectorType: 'static', enableTime: true })
+        flatpickr('.date-picker', { position: 'below', monthSelectorType: 'static' })
         flatpickr('.inline-picker', { inline: true, monthSelectorType: 'static' })
         flatpickr('.multiple-dates', {
             monthSelectorType: 'static',
@@ -274,8 +369,8 @@
             const email = form.elements.email.value;
 
             const phone = form.elements.phoneNumber.value;
-            const phoneType = form.elements.phoneType.value;
-            const smsAlerts = form.elements.smsAlerts.checked;
+            //const phoneType = form.elements.phoneType.value;
+            // const smsAlerts = form.elements.smsAlerts.checked;
             const emailAlerts = form.elements.emailAlerts.checked;
             const terms = form.elements.termsAndCond.checked;
             const address1 = form.elements.address1.value;
@@ -285,8 +380,8 @@
             const zip = form.elements.zip.value;
             const eventDate = form.elements.eventDate.value;
             //strip out time value from event date, date format being YYYY-MM-DD HH:MM
-            const eventDateOnly = eventDate.split(' ')[0];
-            const eventTime = eventDate.split(' ')[1];
+            // const eventDateOnly = eventDate.split(' ')[0];
+            // const eventTime = eventDate.split(' ')[1];
             const noOfPeopleAttending = form.elements.noOfPeopleAttending.value;
             const preferredDates = form.elements.preferredDates.value;
             //get retailer name from querystring
@@ -320,22 +415,19 @@
                 FirstName: firstName,
                 LastName: lastName,
                 Email: email,
-                PhoneNumber: unmaskedPhone,
+                PhoneNumber: '+1' + unmaskedPhone,
                 Address1: address1,
                 Address2: address2,
                 City: city,
                 State: state,
                 PostalCode: zip,
-                AppointmentDate: eventDateOnly,
-                AppointmentTime: eventTime,
+                AppointmentDate: eventDate,
                 NumberPeopleinAppointment: parseInt(noOfPeopleAttending),
                 EmailOptin: emailAlerts,
-                SMSOptIn: smsAlerts,
                 RetailerName: retailerName,
                 RetailerId: retailerId ? parseInt(retailerId) : 0,
                 DirectBook: "true",
-                PreferredAppointmentDates: preferredDates,
-                PhoneType: phoneType
+                PreferredAppointmentDates: preferredDates
             };
 
             fetch(url, {
@@ -366,6 +458,9 @@
     });
 
 </script>
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA68nj5mHdkdbHs0O6JOVfzYoau2oeD-Gs&callback=initAutocomplete&libraries=places">
+    </script>
 {{/partial}}
 
 {{> layout/base}}
