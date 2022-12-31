@@ -25,7 +25,7 @@
 
     .heading-section {
         width: 100%;
-        @media screen  and (min-width: 600px) and (max-width: 899px){
+        @include breakpoint("small") { 
             margin-bottom: 40px;
         }
         @include breakpoint("medium") { 
@@ -102,7 +102,7 @@
                 max-width: 400px;
                 width: calc(100% + 30px) !important;
             }
-            @media screen  and (min-width: 600px) and (max-width: 899px){
+            @include breakpoint("small") { 
                 margin-left: -40px;
                 max-width: 400px;
                 width: calc(100% + 40px) !important;
@@ -148,8 +148,11 @@
             }
             .button {
                 margin: 0;
-                @media screen  and (min-width: 600px) and (max-width: 899px){
+                @include breakpoint("small") { 
                     max-width: 400px;
+                }
+                @include breakpoint("medium") { 
+                    max-width: auto;
                 }
                 @media only screen and (min-width: 2800px) {
                     font-size: remCalc(20px);
@@ -187,7 +190,7 @@
     }
     .mobilecaption {
         display: block;
-        @media screen  and (min-width: 600px) and (max-width: 899px){
+        @include breakpoint("small") { 
             display: none; 
         }
         @include breakpoint("medium") {
@@ -227,31 +230,39 @@
             display: flex;
             justify-content: space-between;
             div {
+                &.leftcol {
+                    width: 40%;
+                }
+                &.rightcol {
+                    width: 60%;
+                }
                 @include breakpoint("medium") { 
-                    width: 45%;
                     position: relative;
-                }
-                @media only screen and (min-width: 1600px)  {
-                    width: 48%;
-                    position: relative;
-                }
-                @media only screen and (min-width: 601px) and (max-width: 900px)  {
                     &.leftcol {
-                        width: 30%;
+                        width: 45%;
                     }
                     &.rightcol {
-                        width: 70%;
+                        width: 45%;
                     }
                 }
-                @media only screen and (max-width: 600px)  {
+                @media only screen and (min-width: 1600px)  {
                     position: relative;
-                    width: 48%;
+                    &.leftcol {
+                        width: 48%;
+                    }
+                    &.rightcol {
+                        width: 48%;
+                    }
                 }
                 img.first {
-                    @media only screen and (max-width: 600px)  {
-                        margin-top: 75px;
-                    }
-                    @media only screen and (min-width: 601px) and (max-width: 900px)  {
+                    border-right: 20px solid white;
+                    border-top: 20px solid white;
+                    border-bottom: 20px solid white;
+                    margin-top: 0;
+                    width: 50%;
+                    position: absolute;
+                    top: 40px;
+                    @include breakpoint("small") { 
                         margin-top: 0;
                         width: 45%;
                         position: absolute;
@@ -271,14 +282,13 @@
                     }
                 }
                 img.second {
-                    @media only screen and (max-width: 600px)  {
-                        margin-top: 175px;
-                    }
-                    @media only screen and (min-width: 601px) and (max-width: 900px)  {
+                    display: none;
+                    @include breakpoint("small") { 
                         position: absolute;
                         bottom: 0;
                         width: 30%;
                         border-right: 20px solid white;
+                        display: block;
                     }
                     @include breakpoint("medium") { 
                         position: absolute;
@@ -286,27 +296,29 @@
                         right: 0;
                         margin-top: 0;
                         width: 40%;
+                        display: block;
                     }
                 }
                 img.third {
                     width: 100%;
-                    @media only screen and (min-width: 601px) and (max-width: 900px)  {
+                    @include breakpoint("small") { 
                         margin-bottom: 40px;
                     }
-
+                    @include breakpoint("medium") { 
+                        margin-bottom: 0;
+                    }
                 }
             }
         }
         .caption {
-            top: 40%;
-            left: 9%;
-            width: 85%;
+            margin-top: -40%;
+            left: 20px;
+            width: calc(100% - 40px);
             padding: 10px 20px;
-            position: absolute;
-            @media only screen and (max-width: 600px)  {
-                top: 28%;
-            }
-            @media only screen and (min-width: 601px) and (max-width: 900px)  {
+            position: relative;
+            background: white;
+            z-index: 9;
+            @include breakpoint("small") { 
                 top: 30%;
                 left: 10%;
                 width: 80%;
@@ -328,7 +340,7 @@
                 text-align: left;
                 color: stencilColor("color-allure-bridals-primary-1");
                 position: relative;
-                @media only screen and (min-width: 601px) {
+                @include breakpoint("small") { 
                     &::before {
                         position: absolute;
                         content: "";
@@ -350,17 +362,8 @@
                         outline: 2px solid #66676C;
                     }
                 }
-                @media only screen and (min-width: 901px) {
-                    &::before {
-                        right: -50px;
-                        top: 40%;
-                    }
-                    &::after {
-                        right: 7.5%;
-                        top: 46%;
-                    }
-                }
-                @media only screen and (min-width: 601px) and (max-width: 900px)  {
+                
+                @include breakpoint("small") { 
                     &::before {
                         right: -60px;
                         top: 40%;
@@ -368,6 +371,16 @@
                     &::after {
                         right: 5.5%;
                         top: 47%;
+                    }
+                }
+                @include breakpoint("medium") { 
+                    &::before {
+                        right: -50px;
+                        top: 40%;
+                    }
+                    &::after {
+                        right: 7.5%;
+                        top: 46%;
                     }
                 }
             }
