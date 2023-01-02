@@ -61,27 +61,27 @@
                 position: absolute;
                 left: 0;
                 content: "";
-                width: 25%;
+                width: 70px;
                 height: 20px;
                 top: 4px;
                 background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTg4IiBoZWlnaHQ9IjEzIiB2aWV3Qm94PSIwIDAgMTg4IDEzIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB4PSIxODIiIHk9IjEuOTgxMzIiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHRyYW5zZm9ybT0icm90YXRlKDQ1IDE4MiAxLjk4MTMyKSIgZmlsbD0iIzY5NUM1QyIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxyZWN0IHk9IjUuODk1NTEiIHdpZHRoPSIxODAiIGhlaWdodD0iMSIgZmlsbD0iI0M4QzZDNiIvPgo8L3N2Zz4K");
                 background-repeat: no-repeat;
-                @media only screen and (max-width: 600px) {
-                    width: 70px;
+                @include breakpoint("small") {
+                    width: 25%
                 }
             }
             &::after {
                 position: absolute;
                 content: "";
-                left: 25%;
+                left: 70px;
                 top: 8px;
                 width: 4px;
                 height: 4px;
                 background: stencilColor("color-default-neutral-1");
                 transform: rotate(45deg);
                 outline: 3px solid stencilColor('color-secondary');
-                @media only screen and (max-width: 600px) {
-                    left: 70px;
+                @include breakpoint("small") {
+                    left: 25%;
                 }
             }
         }
@@ -96,12 +96,9 @@
             margin-left: 20px;
         }
         .topleft {
-            max-width: 302px;
-            @media screen  and (max-width: 599px){
-                margin-left: -30px;
-                max-width: 400px;
-                width: calc(100% + 30px) !important;
-            }
+            margin-left: -30px;
+            max-width: 400px;
+            width: calc(100% + 30px) !important;
             @include breakpoint("small") { 
                 margin-left: -40px;
                 max-width: 400px;
@@ -126,7 +123,7 @@
             width: 78%;
             padding: 30px 0 0;
             display: none;
-            @media screen  and (min-width: 600px) and (max-width: 899px){
+            @include breakpoint("small") {
                 display: block; 
                 width: 100%;
                 padding: 30px 0 0 30px;
@@ -206,7 +203,7 @@
     .mobilebanner {
         display: block;
         margin: 40px 0;
-        @media screen  and (min-width: 900px) {
+        @include breakpoint("medium") {
             display: none;
         }
         img {
@@ -346,12 +343,12 @@
                     &::before {
                         position: absolute;
                         content: "";
-                        width: 17%;
+                        width: 70px;
                         height: 20px;
                         background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTg4IiBoZWlnaHQ9IjEzIiB2aWV3Qm94PSIwIDAgMTg4IDEzIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB4PSIxODIiIHk9IjEuOTgxMzIiIHdpZHRoPSI2IiBoZWlnaHQ9IjYiIHRyYW5zZm9ybT0icm90YXRlKDQ1IDE4MiAxLjk4MTMyKSIgZmlsbD0iIzY5NUM1QyIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxyZWN0IHk9IjUuODk1NTEiIHdpZHRoPSIxODAiIGhlaWdodD0iMSIgZmlsbD0iI0M4QzZDNiIvPgo8L3N2Zz4K");
                         background-repeat: no-repeat;
-                        @media only screen and (max-width: 600px) {
-                            width: 70px;
+                        @include breakpoint("small") {
+                            width: 17%;
                         }
                     }
                     &::after {

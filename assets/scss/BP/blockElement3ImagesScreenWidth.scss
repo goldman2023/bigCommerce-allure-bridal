@@ -54,16 +54,12 @@
                 margin: 0;
             }
             .caption {
-                padding: 5% 10%;
                 background: #ffffff;
-                margin-left: 20px;
                 margin-top: -60px;
                 z-index: 9;
                 position: relative;
-                @media only screen and (max-width: 900px) {
-                    padding: 5% 7%;
-                    margin-left: 0;
-                }
+                padding: 5% 7%;
+                margin-left: 0;
                 @include breakpoint("medium") { 
                     margin-left: -15%;
                     padding: 10%;
