@@ -326,13 +326,15 @@
                 position: absolute;
                 background: #fff;
                 z-index: 9;
+                margin-top: 0;
             }
             @include breakpoint("medium") { 
                 top: 50%;
                 left: 50%;
                 width: 45%;
                 padding: 15px 50px;
-                transform: translate(-50%, -50%)
+                transform: translate(-50%, -50%);
+                margin-top: 0;
             }
             background: stencilColor('color-white');
             z-index: 9;
