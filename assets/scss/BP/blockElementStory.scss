@@ -29,7 +29,7 @@
             margin-bottom: 40px;
         }
         @include breakpoint("medium") { 
-            width: 45%;
+            width: 40%;
         }
         .title {
             width: 70%;
@@ -130,7 +130,8 @@
             }
             @include breakpoint("medium") {
                 display: block; 
-                padding-bottom: 107px;
+                padding: 30px 30px 107px 0;
+                margin-left: -40px;
             }
             .content {
                 color: stencilColor("color-default-neutral-3");
