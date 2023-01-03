@@ -28,6 +28,10 @@ body {
             font-family: stencilFontFamily('font-disney-body');
         }
 
+        .form-label {
+            font-family: stencilFontFamily('font-disney-body');
+        }
+
         .border {
             border-color: stencilColor('color-disney-primary-2');
 
@@ -40,7 +44,8 @@ body {
             background: stencilColor('color-white');
             color: stencilColor('color-disney-primary-1');
             border-color: stencilColor('color-disney-primary-1');
-
+            font-family: stencilFontFamily('font-disney-body');
+            
             .icon {
                 svg use {
                     fill: stencilColor("color-disney-primary-1");

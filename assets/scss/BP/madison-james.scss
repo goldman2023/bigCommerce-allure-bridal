@@ -28,6 +28,10 @@ body {
             font-family: stencilFontFamily('font-madison-james-body');
         }
 
+        .form-label {
+            font-family: stencilFontFamily('font-madison-james-body');
+        }
+
         .border {
             border-color: stencilColor('color-madison-james-primary-2');
 
@@ -40,7 +44,8 @@ body {
             background: stencilColor('color-white');
             color: stencilColor('color-madison-james-primary-1');
             border-color: stencilColor('color-madison-james-primary-1');
-
+            font-family: stencilFontFamily('font-madison-james-body');
+            
             .icon {
                 svg use {
                     fill: stencilColor("color-madison-james-primary-1");
