@@ -29,6 +29,10 @@ body {
             font-family: stencilFontFamily('font-abella-design-body');
         }
 
+        .form-label {
+            font-family: stencilFontFamily('font-abella-design-body');
+        }
+
         .border {
             border-color: stencilColor('color-abella-design-primary-2');
 
@@ -41,7 +45,7 @@ body {
             background: stencilColor('color-white');
             color: stencilColor('color-abella-design-primary-1');
             border-color: stencilColor('color-abella-design-primary-1');
-
+            font-family: stencilFontFamily('font-abella-design-body');
             .icon {
                 svg use {
                     fill: stencilColor("color-abella-design-primary-1");

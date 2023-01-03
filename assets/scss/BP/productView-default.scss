@@ -90,7 +90,6 @@
         }
         h1 {
             margin: 0 0 16px;
-            font-family: stencilFontFamily('prata-font');
             font-style: normal;
             font-weight: 400;
             font-size: remCalc(28px);
@@ -98,8 +97,6 @@
             color: stencilColor("color-default-neutral-1");
         }
         .productView-subheading {
-            font-family: stencilFontFamily('default-font-light');
-            font-style: normal;
             font-weight: 300;
             font-size: remCalc(16px);
             line-height: remCalc(26px);
@@ -107,7 +104,6 @@
             color: stencilColor('color-default-neutral-2');
             p {
                 margin: 0;
-                font-family: stencilFontFamily('default-font-light');
                 font-style: normal;
                 font-weight: 300;
                 font-size: remCalc(16px);
@@ -145,7 +141,6 @@
             box-shadow: none;
         }
         .form-label {
-            font-family: stencilFontFamily('default-font-regular');
             font-weight: 600;
             font-size: remCalc(12px);
             line-height: remCalc(15px);
@@ -276,7 +271,6 @@
             }
         }
         .productView-availability {
-            font-family: stencilFontFamily('default-font-regular');
             font-size: remCalc(12px);
             line-height: remCalc(20px);
             color: stencilColor('color-default-neutral-2');
@@ -299,7 +293,6 @@
             position: relative;
             a {
                 text-transform: uppercase;
-                font-family: stencilFontFamily('default-font-regular');
                 font-size: remCalc(12px);
                 line-height: remCalc(20px);
                 letter-spacing: 0.1em;

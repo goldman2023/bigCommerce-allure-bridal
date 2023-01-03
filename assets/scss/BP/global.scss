@@ -104,6 +104,9 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    .form-label {
+        font-family: stencilFontFamily('default-font-regular');
+    }
     footer {
         margin-top: auto;
     }

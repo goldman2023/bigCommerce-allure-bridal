@@ -28,6 +28,10 @@ body {
             font-family: stencilFontFamily('font-men-design-body');
         }
 
+        .form-label {
+            font-family: stencilFontFamily('font-men-design-body');
+        }
+
         .border {
             border-color: stencilColor('color-men-design-primary-2');
 
@@ -40,7 +44,8 @@ body {
             background: stencilColor('color-white');
             color: stencilColor('color-men-design-primary-1');
             border-color: stencilColor('color-men-design-primary-1');
-
+            font-family: stencilFontFamily('font-men-design-body');
+            
             .icon {
                 svg use {
                     fill: stencilColor("color-men-design-primary-1");

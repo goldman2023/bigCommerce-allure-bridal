@@ -28,6 +28,10 @@ body {
             font-family: stencilFontFamily('font-wilderly-bride-body');
         }
 
+        .form-label {
+            font-family: stencilFontFamily('font-wilderly-bride-body');
+        }
+
         .border {
             border-color: stencilColor('color-wilderly-bride-primary-2');
 
@@ -40,7 +44,8 @@ body {
             background: stencilColor('color-white');
             color: stencilColor('color-wilderly-bride-primary-1');
             border-color: stencilColor('color-wilderly-bride-primary-1');
-
+            font-family: stencilFontFamily('font-wilderly-bride-body');
+            
             .icon {
                 svg use {
                     fill: stencilColor("color-wilderly-bride-primary-1");
