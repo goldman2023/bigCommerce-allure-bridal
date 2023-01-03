@@ -42,18 +42,13 @@
                     }
                 }
            }
+           &.pagination-item--previous  a.pagination-link ,&.pagination-item--next  a.pagination-link {
+                font-family: stencilFontFamily('default-font-bold');
+                font-weight: 500;
+                color: stencilColor('color-default-neutral-3');
+           }
 
            &.pagination-item--next  a.pagination-link {
-                font-family: stencilFontFamily('default-font-bold');
-                font-style: normal;
-                font-weight: 500;
-                font-size: 12px;
-                line-height: 15px;
-                text-align: center;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                color: stencilColor('color-default-neutral-3');
-                position: relative;
                 padding-right: 30px;
                 &::after {
                     position: absolute;
@@ -67,16 +62,6 @@
                 }
            }
            &.pagination-item--previous  a.pagination-link {
-                font-family: stencilFontFamily('default-font-bold');
-                font-style: normal;
-                font-weight: 500;
-                font-size: 12px;
-                line-height: 15px;
-                text-align: center;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                color: stencilColor('color-default-neutral-3');
-                position: relative;
                 padding-left: 30px;
                 &::before {
                     position: absolute;
@@ -120,30 +105,26 @@
             display: none;
            }
         }
-        &.preview {
+        &.preview ,&.next{
             position: absolute;
-            left: 0;
             top: 25px;
-            padding: 0;
             .pagination-item:only-child {
                 display: block;
                 margin: 0;
-                @media only screen and (max-width: 600px)  {
-                    span {display: none;}
+                span {
+                    display: none;
+                    @include breakpoint("small") { 
+                        display: inline-block;
+                    }
                 }
             }
         }
         &.next {
-            position: absolute;
             right: 0;
-            top: 25px;
-            .pagination-item:only-child {
-                display: block;
-                margin: 0;
-                @media only screen and (max-width: 600px)  {
-                    span {display: none;}
-                }
-            }
+        }
+        &.preview {
+            left: 0;
+            padding: 0;
         }
     }
 }
