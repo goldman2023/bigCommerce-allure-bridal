@@ -284,7 +284,8 @@
                 "last_name": "Last Name field cannot be blank.",
                 "email": "You must enter a valid email.",
                 "pass": "You must enter a password.",
-                "required": "* Required"
+                "required": "* Required",
+                "privacyrequired": "* Please accept the Privacy policy"
             }
         }
     },

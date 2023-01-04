@@ -29,7 +29,7 @@
             margin-bottom: 40px;
         }
         @include breakpoint("medium") { 
-            width: 45%;
+            width: 40%;
         }
         .title {
             width: 70%;
@@ -130,7 +130,8 @@
             }
             @include breakpoint("medium") {
                 display: block; 
-                padding-bottom: 107px;
+                padding: 30px 30px 107px 0;
+                margin-left: -40px;
             }
             .content {
                 color: stencilColor("color-default-neutral-3");
@@ -268,11 +269,14 @@
                     }
                     @include breakpoint("medium") { 
                         position: absolute;
-                        top:0;
+                        top: 50px;
                         left:0;
                         z-index: 8;
                         margin-top: 0;
                         width: 70%;
+                        border-right: 20px solid white;
+                        border-top: 20px solid white;
+                        border-bottom: 20px solid white;
                     }
                     @media only screen and (min-width: 1600px)  {
                         width: 76%;
@@ -292,7 +296,7 @@
                         bottom: 0;
                         right: 0;
                         margin-top: 0;
-                        width: 40%;
+                        width: 44%;
                         display: block;
                     }
                 }
@@ -326,7 +330,7 @@
                 margin-top: 0;
             }
             @include breakpoint("medium") { 
-                top: 50%;
+                top: 40%;
                 left: 50%;
                 width: 45%;
                 padding: 15px 50px;
