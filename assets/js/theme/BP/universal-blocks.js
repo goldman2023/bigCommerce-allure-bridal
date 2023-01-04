@@ -346,6 +346,9 @@ export function contentFullmetaData(context, callback) {
                     }
                 }
             }
+        } else {
+            let metafieldData = [];
+            callback.call(this, metafieldData);
         }
     });
 }
@@ -541,6 +544,9 @@ export function getCategorySpecificMetaData(context,path, callback) {
                         }
                     }
                 }
+            } else {
+                let metafieldData = [];
+                callback.call(this, metafieldData);
             }
         }
     });
