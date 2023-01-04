@@ -1,9 +1,13 @@
 .blockElementStory {
+    padding: 0 !important;
+    @include breakpoint("medium") { 
+        padding: 0 1.5rem;
+    }
     .flexdata {
         display: block;
         @include breakpoint("medium") { 
             display: flex;
-            align-items: flex-end;
+            align-items: flex-start;
             justify-content: space-between;
         }
     }
@@ -92,8 +96,7 @@
         position: relative;
         display: inline-block;
         @include breakpoint("medium") { 
-            width: 55%;
-            margin-left: 20px;
+            width: 52%;
         }
         .topleft {
             margin-left: -30px;
@@ -104,22 +107,41 @@
                 max-width: 400px;
                 width: calc(100% + 40px) !important;
             }
+            @include breakpoint("medium") { 
+                width: calc(100% + 80px) !important;
+                z-index: 9;
+            }
             @media only screen and (min-width: 1600px)  {
                 max-width: 90%;
             }
         }
         .topright {
-            width: 60%;
+            width: 67%;
             float: right;
+            position: relative;
+            @include breakpoint("small") {
+                margin-top: 40px;
+                width: 60%;
+            }
             @include breakpoint("medium") {
-                width: 58%;
                 padding: 0 0 50px;
+            }
+            &::before {
+                position: absolute;
+                content: "";
+                top: -4px;
+                left: 50%;
+                width: 6px;
+                height: 6px;
+                background: #d1b3ab;
+                outline: 3px solid #fff;
+                transform: rotate(45deg);
             }
             img {
                 width: 100%;
             }
         }
-        .caption {
+        .caption { 
             width: 78%;
             padding: 30px 0 0;
             display: none;
@@ -130,8 +152,10 @@
             }
             @include breakpoint("medium") {
                 display: block; 
-                padding: 30px 30px 107px 0;
                 margin-left: -40px;
+                max-width: 400px;
+                width: calc(100% + 40px) !important;
+                padding: 30px 30px 0 0;
             }
             .content {
                 color: stencilColor("color-default-neutral-3");
@@ -162,12 +186,15 @@
             position: relative;
             float: right;
             margin-right: 0;
-            width: 40%;
+            margin-top: 40px;
+            width: 33%;
+            @include breakpoint("small") {
+                width: 40%;
+                margin-top: 0;
+            }
             @include breakpoint("medium") {
-                width: 48%;
                 float: left;
-                position: absolute;
-                top: -37px;
+                top: 0;
                 bottom: 0;
                 display: flex;
                 flex-direction: column;
@@ -181,6 +208,18 @@
         display: none;
         @include breakpoint("medium") {
             display: block;
+            position: relative;
+        }
+        &::before {
+            position: absolute;
+            content: "";
+            top: 50%;
+            right: -4px;
+            width: 6px;
+            height: 6px;
+            background: #d1b3ab;
+            outline: 3px solid #fff;
+            transform: rotate(45deg);
         }
         img {
             width: 100%;
