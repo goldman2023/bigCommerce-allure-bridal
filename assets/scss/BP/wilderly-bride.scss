@@ -447,10 +447,14 @@ body {
         }
 
         .divider {
-            border-color: stencilColor('color-wilderly-bride-primary-2');
-
+            border-color: stencilColor('color-wilderly-bride-divider-line');
             &::after {
-                background: stencilColor('color-wilderly-bride-primary-1');
+                width: 14px;
+                height: 7px;
+                background-size: 14px 7px;
+                top: -4px;
+                transform: unset;
+                @include wilderlyDivider(stencilColor('color-wilderly-bride-divider-icon'));
             }
         }
 
@@ -530,6 +534,23 @@ body {
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+.logoTabs .tab {
+    &.wilderly-bride {
+        &.is-active {
+            border-bottom-color: stencilColor('color-wilderly-bride-divider-line');
+            &::after {
+                width: 14px;
+                height: 7px;
+                background-size: 14px 7px;
+                bottom: -4px;
+                transform: unset;
+                outline-width: 2px;
+                @include wilderlyDivider(stencilColor('color-wilderly-bride-divider-icon'));
             }
         }
     }

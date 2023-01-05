@@ -446,14 +446,6 @@ body {
             }
         }
 
-        .divider {
-            border-color: stencilColor('color-abella-design-primary-2');
-
-            &::after {
-                background: stencilColor('color-abella-design-primary-1');
-            }
-        }
-
         .imageWithContentSlider {
             ul {
                 li {
@@ -530,6 +522,37 @@ body {
                         }
                     }
                 }
+            }
+        }
+        .divider {
+            border-color: stencilColor('color-abella-design-divider-line');
+
+            &::after {
+                width: 14px;
+                height: 7px;
+                background-size: 14px 7px;
+                top: -4px;
+                transform: unset;
+                @include abellaDivider(stencilColor('color-abella-design-divider-icon'));
+            }
+        }
+    }
+}
+
+.logoTabs .tab {
+    &.abella {
+        &.is-active {
+            border-bottom-color: stencilColor('color-abella-design-divider-line');
+
+            &::after {
+                width: 14px;
+                height: 7px;
+                background-size: 14px 7px;
+                bottom: -4px;
+                transform: unset;
+                outline-width: 2px;
+                background-color: stencilColor('color-white');
+                @include abellaDivider(stencilColor('color-abella-design-divider-icon'));
             }
         }
     }
