@@ -6,6 +6,7 @@
     {{{region name="page_builder_content"}}}
 
     <div>
+        <input type="text" value="" style="visibility: hidden;"/>
         {{#replace '%%Syndicate%%' page.content}}
             {{> components/page/rss_feed}}
         {{else}}
