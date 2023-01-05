@@ -447,10 +447,16 @@ body {
         }
 
         .divider {
-            border-color: stencilColor('color-disney-primary-2');
+            border-color: stencilColor('color-disney-neutral-4');
 
             &::after {
-                background: stencilColor('color-disney-primary-1');
+                width: 36px;
+                height: 36px;
+                background: unset;
+                transform: unset;
+                top: -19px;
+                background-color: stencilColor('color-white');
+                @include disneyDivider(stencilColor('color-disney-neutral-2'));
             }
         }
 
@@ -530,6 +536,25 @@ body {
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+.logoTabs .tab {
+    &.disney-fairy-tale-weddings {
+        &.is-active {
+            border-bottom-color: stencilColor('color-disney-neutral-4');
+            
+            &::after {
+                width: 36px;
+                height: 36px;
+                background: unset;
+                transform: unset;
+                bottom: -18.2px;
+                background-color: transparent;
+                outline: unset;
+                @include disneyDivider(stencilColor('color-disney-neutral-2'));
             }
         }
     }

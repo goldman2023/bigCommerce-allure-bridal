@@ -951,7 +951,7 @@ export function collectionHeaderContent(element) {
 export function referencedBlockHomepageCollections(blockData) {
 
     let logoStructure = blockData.homepageCollectionsCollection?.items?.map((item,i) => {
-        return `<div class="tab ${i === 0 ? 'is-active' : ''}" role="presentation">${item?.logoImage.url ? `<img class="first" src="${item?.logoImage.url}" alt="${item?.logoImage.title}" />` : ''}</div>`;
+        return `<div class="tab ${item?.slug} ${i === 0 ? 'is-active' : ''}" role="presentation">${item?.logoImage.url ? `<img class="first" src="${item?.logoImage.url}" alt="${item?.logoImage.title}" />` : ''}</div>`;
     });
 
     let contentStructure = blockData.homepageCollectionsCollection?.items?.map((item,i) => {
