@@ -357,8 +357,17 @@ export default class Global extends PageManager {
                 });
                 $('.productGridSection').removeClass('hide');
                 if (document.querySelector('body').classList.contains('product-type')) {
+
+                    $('.productGrid .product').each(function(){
+                        if($(this).children().length == 0) {
+                            $(this).remove();
+                        }
+                    });
                     $('.productGrid').each(function(){
-                        applySlider('.productGrid',4,false,true);
+                        let self = $(this);
+                        if(self.find('.product').length > 4 ) {
+                            applySlider(self,4,false,false);
+                        }
                     });
                 }
             }, 3000);
