@@ -606,3 +606,7 @@ input:-internal-autofill-selected {
         font-size: remCalc(40px);
     }
 }
+#wishlist-dropdown li .button:hover {
+    color: white !important;
+    background-color: #bc8372 !important;
+}
