@@ -229,12 +229,14 @@
                     padding-right: 40px;
                     justify-content: end;
                     align-items: center;
+                    text-transform: uppercase;
                     @media screen and (max-width: 600px) {
                         min-height: 14px;
                         margin-bottom: 10px;
                     }
                     &.mobileonly {
                         display: inline-flex;
+                        padding-right: 12px;
                         @include breakpoint("small") {
                             display: none;
                         }
@@ -243,7 +245,7 @@
                         display: none;
                         @include breakpoint("small") {
                             display: inline-flex;
-                            width: 50%;
+                            width: 73%;
                         }
                         @include breakpoint("medium") {
                             display: inline-flex;
@@ -253,7 +255,7 @@
                     &::before {
                         background: stencilColor("color-allure-bridals-neutral-4");
                         height: 1px;
-                        width: calc(100% - 160px);
+                        width: calc(100% - 124px);
                         position: absolute;
                         content: "";
                         left: -16px;
@@ -261,6 +263,7 @@
                         bottom: 0;
                         margin: auto;
                         @include breakpoint("small") {
+                            width: calc(100% - 160px);
                             left: -0;
                         }
                     }
@@ -268,7 +271,7 @@
                         position: absolute;
                         content: "";
                         top: 0;
-                        left: calc(100% - 182px);
+                        left: calc(100% - 146px);
                         bottom: 0;
                         margin: auto;
                         width: 4px;
