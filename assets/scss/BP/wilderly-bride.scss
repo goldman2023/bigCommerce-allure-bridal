@@ -468,6 +468,16 @@ body {
             }
         }
 
+        .imageWithContentSlider, .productSlider {
+            .slick-prev::before {
+                @include prevIcon(stencilColor('color-wilderly-bride-primary-1'));
+            }
+        
+            .slick-next::before {
+                @include nextIcon(stencilColor('color-wilderly-bride-primary-1'));
+            }
+        }
+
         .productSlider {
             h2 {
                 &.heading {

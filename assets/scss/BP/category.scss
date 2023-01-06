@@ -462,3 +462,11 @@ input:focus, button:focus, textarea:focus, select:focus, details:focus, [href]:f
     outline: 0 !important;
     outline-offset: 1px !important;
 }
+
+body {
+    .card-img-container {
+        .card-image {
+            object-fit: unset;
+        }
+    }
+}
