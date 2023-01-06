@@ -3,12 +3,14 @@
         margin: 0;
         padding: 0;
         li .blockrow {
+            padding-bottom: 50px;
+            background: stencilColor("color-allure-bridals-primary-2");
+            display: block;
             @include breakpoint("medium") {
                 display: flex;
                 align-items: center;
+                padding-bottom: 0;
             }
-            background: stencilColor("color-allure-bridals-primary-2");
-            display: block;
             .block { 
                 width: 100%;
                 @include breakpoint("medium") {
@@ -19,12 +21,23 @@
                 }
             }
             .rightblock {
-                padding: 5%;
+                padding: 0 1.5rem;
+                @include breakpoint("small") {
+                    padding: 0 10%;
+                }
+                @include breakpoint("medium") {
+                    padding: 5%;
+                }
             }
             .caption {
                 .title {
                     margin-bottom: 0;
-                    margin-top: 15px;
+                    margin-top: 65px;
+                    margin-left: 18px;
+                    @include breakpoint("medium") {
+                        margin-top: 15px;
+                        margin-left: 18px;
+                    }
                     color: stencilColor("color-secondary");
                     text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
                 }
