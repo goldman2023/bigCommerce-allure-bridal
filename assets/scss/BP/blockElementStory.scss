@@ -274,6 +274,14 @@
                 &.rightcol {
                     width: 60%;
                 }
+                @include breakpoint("small") { 
+                    &.leftcol {
+                        width: 41%;
+                    }
+                    &.rightcol {
+                        width: 78%;
+                    }
+                }
                 @include breakpoint("medium") { 
                     position: relative;
                     &.leftcol {
@@ -302,7 +310,7 @@
                     top: 40px;
                     @include breakpoint("small") { 
                         margin-top: 0;
-                        width: 45%;
+                        width: 40%;
                         position: absolute;
                         top: 0;
                         border: 20px solid white;
@@ -327,7 +335,7 @@
                     @include breakpoint("small") { 
                         position: absolute;
                         bottom: 0;
-                        width: 30%;
+                        width: 37%;
                         border-right: 20px solid white;
                         display: block;
                     }
