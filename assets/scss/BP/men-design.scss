@@ -464,6 +464,16 @@ body {
             }
         }
 
+        .imageWithContentSlider, .productSlider {
+            .slick-prev::before {
+                @include prevIcon(stencilColor('color-men-design-primary-1'));
+            }
+        
+            .slick-next::before {
+                @include nextIcon(stencilColor('color-men-design-primary-1'));
+            }
+        }
+        
         .productSlider {
             h2 {
                 &.heading {

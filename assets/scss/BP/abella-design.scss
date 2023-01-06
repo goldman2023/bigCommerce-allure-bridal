@@ -455,7 +455,16 @@ body {
                 }
             }
         }
-
+        .imageWithContentSlider, .productSlider {
+            .slick-prev::before {
+                @include prevIcon(stencilColor('color-abella-design-primary-1'));
+            }
+        
+            .slick-next::before {
+                @include nextIcon(stencilColor('color-abella-design-primary-1'));
+            }
+        }
+        
         .productSlider {
             h2 {
                 &.heading {
