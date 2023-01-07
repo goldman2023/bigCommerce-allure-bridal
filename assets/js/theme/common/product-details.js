@@ -200,6 +200,8 @@ export default class ProductDetails extends ProductDetailsBase {
                 document.querySelector('.leftTop').innerHTML =  `<h6>${sizeGuide?.items[0]?.leftCopyBlock.json.content[0].content[0].value}</h6><p>${sizeGuide?.items[0]?.leftCopyBlock.json.content[1].content[0].value}</p>`;
                 document.querySelector('.rightTop').innerHTML = `<h6>${sizeGuide?.items[0]?.topRightCopyBlock.json.content[0].content[0].value}</h6><p>${sizeGuide?.items[0]?.topRightCopyBlock.json.content[1].content[0].value}</p>`;
                 document.querySelector('.rightBottom').innerHTML = `<h6>${sizeGuide?.items[0]?.bottomRightCopyBlock.json.content[0].content[0].value}</h6><p>${sizeGuide?.items[0]?.bottomRightCopyBlock.json.content[1].content[0].value}</p>`;
+            } else {
+                document.getElementById('sizeChart').innerHTML = `<p style="text-align: center;margin: 40px 0;">Data not available</p>`;
             }
         });
     }
