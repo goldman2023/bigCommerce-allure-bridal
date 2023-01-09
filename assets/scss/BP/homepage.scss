@@ -96,6 +96,12 @@
         }
     }
 }
+.events.block-item {
+    padding: 0 !important;
+    @include breakpoint("small") {
+        padding: 0 1.5rem !important;
+    }
+}
 .pages-product,
 .suits-product {
     .custombread {
