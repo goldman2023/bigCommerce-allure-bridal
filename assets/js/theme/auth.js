@@ -293,55 +293,6 @@ export default class Auth extends PageManager {
             }
         });
         function  customValidation() {
-            // if($('#register_first').val() === null || $('#register_first').val() === '') {
-            //     $('#register_first').parent().addClass('form-field--error');
-            //     return false;
-            // } else {
-            //     if($('#register_first').parent().hasClass('form-field--error')) {
-            //         $('#register_first').parent().removeClass('form-field--error')
-            //     }
-            // }
-            // if($('#register_last').val() === null || $('#register_last').val() === '') {
-            //     $('#register_last').parent().addClass('form-field--error');
-            //     return false;
-            // } else {
-            //     if($('#register_last').parent().hasClass('form-field--error')) {
-            //         $('#register_last').parent().removeClass('form-field--error')
-            //     }
-            // }
-            // if($('#login_email').val() === null || $('#login_email').val() === '') {
-            //     $('#login_email').parent().addClass('form-field--error');
-            //     return false;
-            // } else {
-            //     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-            //     if(!regex.test($('#login_email').val())) {
-            //         if(!$('#login_email').parent().hasClass('form-field--error')) {
-            //             $('#login_email').parent().removeClass('form-field--error')
-            //         }
-            //         return false;
-            //     } 
-            // }
-            // if($('#register_pass').val() === null || $('#register_pass').val() === '') {
-            //     $('#register_pass').parent().addClass('form-field--error');
-            //     return false;
-            // } else {
-            //     if($('#register_pass').parent().hasClass('form-field--error')) {
-            //         $('#register_pass').parent().removeClass('form-field--error')
-            //     }
-            // }
-            // if($('#register_pass-confirm').val() === null || $('#register_pass-confirm').val() === '') {
-            //     $('#register_pass-confirm').parent().addClass('form-field--error');
-            //     return false;
-            // } else {
-            //     if($('#register_pass').val() !== $('#register_pass-confirm').val()) {
-            //         $('#register_pass-confirm').parent().addClass('form-field--error');
-            //         return false;
-            //     } else {
-            //         if($('#register_pass-confirm').parent().hasClass('form-field--error')) {
-            //             $('#register_pass-confirm').parent().removeClass('form-field--error')
-            //         }
-            //     }
-            // }
             if(!$('.register_pass-policy').is(":checked")) {
                 $('.register_pass-policy').parent().parent().parent().addClass('form-field--error');
                 return false;
