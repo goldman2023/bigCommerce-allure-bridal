@@ -405,7 +405,7 @@ export default class Account extends PageManager {
             {
                 selector: `${formEditSelector} input[name='account_firstname']`,
                 validate: (cb, val) => {
-                    const result = val.length;
+                    const result = val.trim().length > 0;
 
                     cb(result);
                 },
@@ -414,7 +414,7 @@ export default class Account extends PageManager {
             {
                 selector: `${formEditSelector} input[name='account_lastname']`,
                 validate: (cb, val) => {
-                    const result = val.length;
+                    const result = val.trim().length > 0;
 
                     cb(result);
                 },
