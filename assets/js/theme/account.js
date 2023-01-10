@@ -31,6 +31,13 @@ export default class Account extends PageManager {
         if(urlparam === 'order_status') {
             window.location.href = queryString.replace('order_status','account_details');
         }
+        if (sessionStorage.getItem('editopen') && urlparam !== 'account_details') {
+            sessionStorage.removeItem('editopen');
+        }
+        if(sessionStorage.getItem('editopen') && urlparam === 'account_details' ) {
+            $('#personalinfo').hide();
+            $('#updatePro').show();
+        }
 
         const $editAccountForm = classifyForm('form[data-edit-account-form]');
         const $addressForm = classifyForm('form[data-address-form]');
@@ -94,10 +101,12 @@ export default class Account extends PageManager {
         $('.editdetails').on('click', function() {
             $('#personalinfo').hide();
             $('#updatePro').show();
+            sessionStorage.setItem('editopen', true);
         });
         $('#updatePro .back').on('click', function() {
             $('#personalinfo').show();
             $('#updatePro').hide();
+            sessionStorage.removeItem('editopen');
         });
         
     }
@@ -396,7 +405,7 @@ export default class Account extends PageManager {
             {
                 selector: `${formEditSelector} input[name='account_firstname']`,
                 validate: (cb, val) => {
-                    const result = val.length;
+                    const result = val.trim().length > 0;
 
                     cb(result);
                 },
@@ -405,7 +414,7 @@ export default class Account extends PageManager {
             {
                 selector: `${formEditSelector} input[name='account_lastname']`,
                 validate: (cb, val) => {
-                    const result = val.length;
+                    const result = val.trim().length > 0;
 
                     cb(result);
                 },

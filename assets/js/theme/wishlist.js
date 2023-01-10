@@ -41,22 +41,23 @@ export default class WishList extends PageManager {
             {
                 selector: '.wishlist-form input[name="wishlistname"]',
                 validate: (cb, val) => {
-                    const result = val.length > 0;
-
+                    const result = val.trim().length > 0;
                     cb(result);
                 },
                 errorMessage: this.context.enterWishlistNameError,
             },
         ]);
 
+        $('.wishlist-form input[name="wishlistname"]').keypress(function() {
+            $('#wishlistSubmit').prop('disabled', false);
+        });
+
         $addWishlistForm.on('submit', event => {
             $('#wishlistSubmit').prop('disabled', true);
             this.addWishlistValidator.performCheck();
-
             if (this.addWishlistValidator.areAll('valid')) {
                 return;
             }
-
             event.preventDefault();
         });
     }
