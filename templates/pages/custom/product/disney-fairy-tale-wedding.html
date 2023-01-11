@@ -34,13 +34,15 @@
         </div>
         {{> BP/components/common/divider}}
         </div>
-        <div class="recentlyViewed" id="recentlyViewed">
+        {{#if product.similar_by_views}}
+        <div class="recentlyViewed" id="recentlyViewed" >
             <h4 class="title">{{lang 'products.recentlyViewed'}}</h4>
             {{#if product.similar_by_views}}
-            {{> BP/components/common/carousel products=product.similar_by_views columns=4 list="Customers Also Viewed"}}
+                {{> BP/components/common/carousel products=product.similar_by_views columns=4 list="Customers Also Viewed"}}
             {{/if}}
         </div>
         {{> BP/components/common/divider}}
+        {{/if}}
         <script src="https://apps.elfsight.com/p/platform.js" defer></script>
         <div class="elfsight-app-2accabd9-4992-4055-9430-022b788dff5e"></div>
     </div>
