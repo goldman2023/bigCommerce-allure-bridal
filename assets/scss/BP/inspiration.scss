@@ -319,6 +319,9 @@
                         justify-content: end;
                         padding-left: 120px;
                         padding-right: 0;
+                        .caption h3::before,.caption h3::after {
+                            display: none;
+                        }
                     }
                 }
                 &:nth-child(odd) {
