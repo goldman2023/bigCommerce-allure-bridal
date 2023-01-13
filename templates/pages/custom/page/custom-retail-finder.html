@@ -52,48 +52,40 @@
             </div>
             <form id="retail-finder-form" class="form">
                 <h2 class="header-title">{{lang 'request_appointment.title'}}</h2>
-                <div class="form-field filter">
-                    <span class="form-label">{{lang 'request_appointment.firstName'}}</span>
-
-                    <input required class="form-input" type="text" name="firstName"
-                        placeholder="{{lang 'request_appointment.firstName'}}">
-
-                </div>
-                <div class=" form-field filter">
-                    <span class="form-label">{{lang 'request_appointment.lastName'}}</span>
-
-                    <input required class="form-input" type="text" name="lastName"
-                        placeholder="{{lang 'request_appointment.lastName'}}">
-
-                </div>
-                <!--Add Email-->
-                <div class="form-field filter">
-                    <span class="form-label">{{lang 'request_appointment.email'}}</span>
-
-                    <input required class="form-input" type="email" name="email"
-                        placeholder="{{lang 'request_appointment.email'}}">
-
+                <div class="form-retail-row">
+                    <div class="form-field filter">
+                        <span class="form-label">{{lang 'request_appointment.firstName'}}</span>
+    
+                        <input required class="form-input" type="text" name="firstName"
+                            placeholder="{{lang 'request_appointment.firstName'}}">
+    
+                    </div>
+                    <div class=" form-field filter">
+                        <span class="form-label">{{lang 'request_appointment.lastName'}}</span>
+    
+                        <input required class="form-input" type="text" name="lastName"
+                            placeholder="{{lang 'request_appointment.lastName'}}">
+    
+                    </div>
                 </div>
                 <div class="form-retail-row">
-                    <div class="form-field filter full">
+                    <!--Add Email-->
+                        <div class="form-field filter">
+                            <span class="form-label">{{lang 'request_appointment.email'}}</span>
+
+                            <input required class="form-input" type="email" name="email"
+                                placeholder="{{lang 'request_appointment.email'}}"/>
+
+                        </div>
+                    <div class="form-field filter">
                         <span class="form-label">{{lang 'request_appointment.phone'}}</span>
 
                         <input id="phone" required class="form-input" type="tel" name="phoneNumber"
-                            placeholder="{{lang 'request_appointment.phone'}}">
+                            placeholder="{{lang 'request_appointment.phone'}}"/>
 
                     </div>
-                    <!-- <div class="form-field filter">
-
-                        <span class="form-label">
-                            {{lang 'request_appointment.phoneType'}}
-                        </span>
-                        <select id="" name="phoneType" class="form-select selector-dropdown">
-                            <option value="Home">Home</option>
-                            <option value="Mobile">Mobile</option>
-                        </select>
-
-                    </div> -->
                 </div>
+                
                 <div class="checkbox-fields">
                     <!-- <div class="checkbox-field">
 
@@ -203,13 +195,6 @@
                     </div>
                 </div>
                 <div class="form-retail-row">
-                    <div id="eventDate" class="form-field filter flatpickr">
-                        <span class="form-label">{{lang 'request_appointment.eventDate'}}</span>
-
-                        <input required name="eventDate" class="form-input date-picker " type="text"
-                            placeholder="MM/DD/YYYY">
-
-                    </div>
                     <div class="form-field filter flatpickr">
                         <span class="form-label">{{lang 'request_appointment.preferedAppointment'}}</span>
 
@@ -217,14 +202,24 @@
                             placeholder="MM/DD/YYYY">
                         <div class="disclaimer">Selected dates are not guaranteed.</div>
                     </div>
+                    <div class="form-field filter">
+                        <span class="form-label">{{lang 'request_appointment.peopleAttending'}}</span>
+    
+                        <input class="form-input" type="number" name="noOfPeopleAttending"
+                            placeholder="{{lang 'request_appointment.peopleAttending'}}">
+    
+                    </div>
                 </div>
 
-                <div class="form-field filter">
-                    <span class="form-label">{{lang 'request_appointment.peopleAttending'}}</span>
+               
+                <div class="form-retail-row">
+                    <div id="eventDate" class="form-field filter flatpickr">
+                        <span class="form-label">{{lang 'request_appointment.eventDate'}}</span>
 
-                    <input class="form-input" type="number" name="noOfPeopleAttending"
-                        placeholder="{{lang 'request_appointment.peopleAttending'}}">
+                        <input required name="eventDate" class="form-input date-picker " type="text"
+                            placeholder="MM/DD/YYYY">
 
+                    </div>
                 </div>
                 <div class="checkbox-fields">
                     <div class="checkbox-field">
