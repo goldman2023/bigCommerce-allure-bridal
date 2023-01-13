@@ -54,14 +54,14 @@
                 <h2 class="header-title">{{lang 'request_appointment.title'}}</h2>
                 <div class="form-retail-row">
                     <div class="form-field filter">
-                        <span class="form-label">{{lang 'request_appointment.firstName'}}</span>
+                        <span class="form-label">{{lang 'request_appointment.firstName'}} <span class="asterisk">*</span></span>
     
                         <input required class="form-input" type="text" name="firstName"
                             placeholder="{{lang 'request_appointment.firstName'}}">
     
                     </div>
                     <div class=" form-field filter">
-                        <span class="form-label">{{lang 'request_appointment.lastName'}}</span>
+                        <span class="form-label">{{lang 'request_appointment.lastName'}} <span class="asterisk">*</span></span>
     
                         <input required class="form-input" type="text" name="lastName"
                             placeholder="{{lang 'request_appointment.lastName'}}">
@@ -71,14 +71,14 @@
                 <div class="form-retail-row">
                     <!--Add Email-->
                         <div class="form-field filter">
-                            <span class="form-label">{{lang 'request_appointment.email'}}</span>
+                            <span class="form-label">{{lang 'request_appointment.email'}} <span class="asterisk">*</span></span>
 
                             <input required class="form-input" type="email" name="email"
                                 placeholder="{{lang 'request_appointment.email'}}"/>
 
                         </div>
                     <div class="form-field filter">
-                        <span class="form-label">{{lang 'request_appointment.phone'}}</span>
+                        <span class="form-label">{{lang 'request_appointment.phone'}} <span class="asterisk">*</span></span>
 
                         <input id="phone" required class="form-input" type="tel" name="phoneNumber"
                             placeholder="{{lang 'request_appointment.phone'}}"/>
@@ -107,7 +107,7 @@
                     goods/svcs. Terms and conditions at ourwebsite.com/terms. Privacy policy at Ourwebsite.com/privacy.
                 </div>
                 <div class="form-field filter">
-                    <span class="form-label">{{lang 'request_appointment.address1'}}</span>
+                    <span class="form-label">{{lang 'request_appointment.address1'}} <span class="asterisk">*</span></span>
 
                     <input id="address1" class="form-input" type="text" name="address1"
                         placeholder="{{lang 'request_appointment.address1'}}">
@@ -122,7 +122,7 @@
                 </div>
                 <div class="city-container">
                     <div class="form-field filter">
-                        <span class="form-label">{{lang 'request_appointment.city'}}</span>
+                        <span class="form-label">{{lang 'request_appointment.city'}} <span class="asterisk">*</span></span>
 
                         <input id="city" class="form-input" type="text" name="city"
                             placeholder="{{lang 'request_appointment.city'}}">
@@ -130,7 +130,7 @@
                     </div>
                     <div class="form-field filter">
 
-                        <span class="form-label">{{lang 'request_appointment.state'}}</span>
+                        <span class="form-label">{{lang 'request_appointment.state'}} <span class="asterisk">*</span></span>
                         <select id="state" name="state" class="form-select selector-dropdown">
                             <option hidden value="">Select State...</option>
                             <option value="AL">AL</option>
@@ -187,7 +187,7 @@
 
                     </div>
                     <div class="form-field filter">
-                        <span class="form-label">{{lang 'request_appointment.zip'}}</span>
+                        <span class="form-label">{{lang 'request_appointment.zip'}} <span class="asterisk">*</span></span>
 
                         <input id="zip" maxlength="5" class="form-input" type="text" name="zip"
                             placeholder="{{lang 'request_appointment.zip'}}">
@@ -196,14 +196,14 @@
                 </div>
                 <div class="form-retail-row">
                     <div class="form-field filter flatpickr">
-                        <span class="form-label">{{lang 'request_appointment.preferedAppointment'}}</span>
+                        <span class="form-label">{{lang 'request_appointment.preferedAppointment'}} <span class="asterisk">*</span></span>
 
                         <input required class="form-input multiple-dates " name="preferredDates" type="text"
                             placeholder="MM/DD/YYYY">
                         <div class="disclaimer">Selected dates are not guaranteed.</div>
                     </div>
                     <div class="form-field filter">
-                        <span class="form-label">{{lang 'request_appointment.peopleAttending'}}</span>
+                        <span class="form-label">{{lang 'request_appointment.peopleAttending'}} <span class="asterisk">*</span></span>
     
                         <input class="form-input" type="number" name="noOfPeopleAttending"
                             placeholder="{{lang 'request_appointment.peopleAttending'}}">
@@ -214,7 +214,7 @@
                
                 <div class="form-retail-row">
                     <div id="eventDate" class="form-field filter flatpickr">
-                        <span class="form-label">{{lang 'request_appointment.eventDate'}}</span>
+                        <span class="form-label">{{lang 'request_appointment.eventDate'}} <span class="asterisk">*</span></span>
 
                         <input required name="eventDate" class="form-input date-picker " type="text"
                             placeholder="MM/DD/YYYY">
