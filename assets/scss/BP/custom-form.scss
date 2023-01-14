@@ -164,6 +164,7 @@
    
     .form-label {
         letter-spacing: 0.05em;
+        top: 8px !important;
     }
     .form-input {
         border: 1px solid #D1B3AB;
@@ -431,6 +432,7 @@
     background: #bc8372;
     border: 1px solid #bc8372;
     color: #fff;
+    width: 140px;
     &:hover {
       background: #fff;
       color: #bc8372;
