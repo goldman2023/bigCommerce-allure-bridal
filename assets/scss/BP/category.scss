@@ -161,8 +161,7 @@
         margin: 0;
 
         .product {
-            padding: 0;
-
+            padding: 0 1rem 0 0;
             .card {
                 margin: 0;
 
@@ -346,21 +345,23 @@
 
     .facetedSearch-navList {
         .accordion-block {
-            border-bottom: 1px solid stencilColor("color-border");
-            position: relative;
-            padding-bottom: 20px;
-
-            &::after {
-                position: absolute;
-                content: "";
-                right: 50%;
-                bottom: -2.5px;
-                width: 4px;
-                height: 4px;
-                background: stencilColor("color-default-neutral-1");
-                transform: rotate(45deg);
-                outline: 3px solid stencilColor('color-secondary');
+            @include breakpoint("medium") {
+                border-bottom: 1px solid stencilColor("color-border");
+                position: relative;
+                padding-bottom: 20px;
+                &::after {
+                    position: absolute;
+                    content: "";
+                    right: 50%;
+                    bottom: -2.5px;
+                    width: 4px;
+                    height: 4px;
+                    background: stencilColor("color-default-neutral-1");
+                    transform: rotate(45deg);
+                    outline: 3px solid stencilColor('color-secondary');
+                }
             }
+            
 
             &:last-child {
                 border-bottom: 0;
@@ -566,24 +567,8 @@ details:focus,
 
 body {
     .card-img-container {
-        min-height: unset;
-        position: unset;
-        height: unset;
-
-        &::after {
-            padding-bottom: 0;
-        }
-
         .card-image {
-            object-fit: unset;
-            height: unset;
-            position: unset;
-        }
-    }
-
-    .productGrid {
-        .product {
-            vertical-align: bottom;
+            object-fit: cover;
         }
     }
 }
