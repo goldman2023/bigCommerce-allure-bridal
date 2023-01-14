@@ -567,6 +567,9 @@ body {
         @include breakpoint("medium") {
             margin-top: 173px;
         }
+        &.pages-account-edit, &.pages-account-wishlists {
+            margin-top: 0;
+        }
     }
 }
 .unstyled {

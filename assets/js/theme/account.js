@@ -420,6 +420,15 @@ export default class Account extends PageManager {
                 },
                 errorMessage: this.context.lastName,
             },
+            {
+                selector: `${formEditSelector} input[name='account_phone']`,
+                validate: (cb, val) => {
+                    const result = val.length == 10;
+
+                    cb(result);
+                },
+                errorMessage: "Phone must not be greater than or less than 10 digits.",
+            }
         ]);
 
         $editAccountForm.on('submit', event => {
