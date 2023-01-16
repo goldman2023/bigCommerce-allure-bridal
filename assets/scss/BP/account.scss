@@ -1,7 +1,6 @@
 .account-section-page {
     display: flex;
     justify-content: space-between;
-    margin-top: 20%;
     .section-title {
         .editdetails {
             color: #695C5C;
@@ -87,7 +86,9 @@
         }
     }
     .rightaccountside {
-        width: 70%;
+        @include breakpoint("medium") {
+            width: 70%;
+        }
         .section-title {
             font-family: stencilFontFamily('prata-font');
             font-style: normal;
@@ -143,8 +144,9 @@
             justify-content: space-between;
             border-bottom: 1px solid stencilColor("color-allure-bridals-neutral-4");
             padding: 20px 0;
+            gap: 20px;
             .infocol {
-                width: 50%;
+                flex-basis: calc(50% - 10px);
                 p {
                     margin: 0;
                     font-family: stencilFontFamily('default-font-regular');
