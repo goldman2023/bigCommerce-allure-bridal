@@ -154,8 +154,14 @@
 }
 .logoTabs {
     border-bottom: 1px solid transparent;
+    @media only screen and (min-width: 601px) and (max-width: 1024px)  {
+        margin-bottom: 50px;
+    }
     .slick-list {
         padding: 0 !important;
+    }
+    .slick-track {
+        display: flex;
     }
     .tab {
         margin-bottom: 10px;
