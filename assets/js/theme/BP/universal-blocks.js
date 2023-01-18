@@ -677,7 +677,7 @@ export function events(blockData) {
                     <label>Phone</label>
                     <p>${item.locationPhoneNumber}</p>
                     <label>website</label>
-                    <p class="colored">${item.locationWebsiteUrl}</p>
+                    <a href="${item.locationWebsiteUrl}" target="_blank" class="colored">${item.locationWebsiteUrl}</a>
                 </div>
               </div>
             </div>`).join('')}
