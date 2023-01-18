@@ -210,7 +210,7 @@ export default class Homepage extends PageManager {
                 speed: 300,
                 slidesToShow: 6,
                 slidesToScroll: 1,
-                centerMode: true,
+                centerMode: false,
                 arrows: true,
                 responsive: [
                 {
@@ -219,7 +219,7 @@ export default class Homepage extends PageManager {
                     slidesToShow: 6,
                     slidesToScroll: 1,
                     infinite: false,
-                    centerMode: true,
+                    centerMode: false,
                     arrows: true,
                     dots: false
                     }
@@ -240,7 +240,7 @@ export default class Homepage extends PageManager {
                     settings: {
                         slidesToShow: 3,
                         slidesToScroll: 1,
-                        centerMode: true,
+                        centerMode: false,
                         infinite: false,
                         dots: false,
                         arrows: false
@@ -251,7 +251,7 @@ export default class Homepage extends PageManager {
                     settings: {
                         slidesToShow: 3,
                         slidesToScroll: 1,
-                        centerMode: true,
+                        centerMode: false,
                         infinite: false,
                         dots: false,
                         arrows: false
@@ -262,7 +262,7 @@ export default class Homepage extends PageManager {
                     settings: {
                         slidesToShow: 3,
                         slidesToScroll: 1,
-                        centerMode: true,
+                        centerMode: false,
                         infinite: false,
                         dots: false,
                         arrows: false
@@ -272,9 +272,9 @@ export default class Homepage extends PageManager {
                     breakpoint: 600,
                     settings: {
                         slidesToShow: 2,
-                        slidesToScroll: 1,
-                        centerMode: true,
-                        infinite: false,
+                        slidesToScroll: 2,
+                        centerMode: false,
+                        infinite: true,
                         dots: false,
                         arrows: false
                     }

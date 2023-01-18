@@ -163,16 +163,18 @@
     .slick-track {
         display: flex;
     }
+    .slick-slide img {
+        width: auto;
+    }
     .tab {
         margin-bottom: 10px;
         min-height: 46px;
         cursor: pointer;
-        width: auto !important;
         display: inline-block;
         border: 0;
         border-bottom: 1px solid #F7F4F0;
-
         @include breakpoint("medium") {
+            width: auto !important;
             display: flex;
             align-items: center;
         }
