@@ -214,7 +214,7 @@ export default class Homepage extends PageManager {
                 arrows: true,
                 responsive: [
                 {
-                    breakpoint: 1024,
+                    breakpoint: 1100,
                     settings: {
                     slidesToShow: 6,
                     slidesToScroll: 1,
@@ -222,6 +222,50 @@ export default class Homepage extends PageManager {
                     centerMode: true,
                     arrows: true,
                     dots: false
+                    }
+                },
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: false,
+                        centerMode: true,
+                        arrows: false,
+                        dots: false
+                    }
+                },
+                {
+                    breakpoint: 1023,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        centerMode: true,
+                        infinite: false,
+                        dots: false,
+                        arrows: false
+                    }
+                },
+                {
+                    breakpoint: 900,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        centerMode: true,
+                        infinite: false,
+                        dots: false,
+                        arrows: false
+                    }
+                },
+                {
+                    breakpoint: 800,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        centerMode: true,
+                        infinite: false,
+                        dots: false,
+                        arrows: false
                     }
                 },
                 {
