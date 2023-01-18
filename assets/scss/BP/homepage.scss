@@ -170,6 +170,8 @@
         width: auto !important;
         display: inline-block;
         border: 0;
+        border-bottom: 1px solid #F7F4F0;
+
         @include breakpoint("medium") {
             display: flex;
             align-items: center;
