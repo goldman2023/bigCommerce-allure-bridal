@@ -1,6 +1,6 @@
-.pac-container {
-  top: 270px !important;
-}
+// .pac-container {
+//   top: 270px !important;
+// }
 
 
 .page {
@@ -343,7 +343,8 @@
     padding: 24px;
 
     .modal-body {
-      min-height: 600px;
+      height: 100%;
+      min-height: fit-content;
       border: 1px solid #E2E2E2;
       padding-top: 48px;
       padding-left: 40px;
@@ -430,6 +431,11 @@
 
       .phone {
         margin-bottom: 48px;
+        a.retailer-detail{
+          color: stencilColor('color-allure-bridals-primary-1');
+          letter-spacing: .1em;
+          text-decoration: none;
+        }
       }
 
       .schedule-btn {
@@ -445,6 +451,12 @@
           width: 100%;
           border: 1px solid stencilColor('color-allure-bridals-primary-5');
           border-radius: 3px;
+        }
+        .schedule-btn:hover {
+          background: stencilColor('color-allure-bridals-primary-1');
+          span{
+            color: stencilColor('color-white');
+          }
         }
       }
     }
