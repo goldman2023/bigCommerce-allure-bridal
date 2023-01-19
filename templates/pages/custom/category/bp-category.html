@@ -39,7 +39,15 @@ category:
             </div>
         {{/if}}
     </div>
-    <div class="page">
+    <div class="page category-container-block-section" >
+        <div class="pagefilterheader">
+            <div></div>
+            <div class="rightside"> 
+                <span>Showing  {{category.total_products}} product<span>{{#if category.total_products '>=' 1}}s{{/if}}</span></span>
+                <button class="hideshowfilter"></button>
+            </div>
+        </div>
+        <div class="plp-cont">
         {{#if category.faceted_search_enabled}}
             <aside class="page-sidebar" id="faceted-search-container">
                 {{> components/category/sidebar}}
@@ -60,6 +68,7 @@ category:
             {{> BP/category/product-listing}}
             {{{region name="category_below_content"}}}
         </div>
+    </div>
     </div>
 </div>
 

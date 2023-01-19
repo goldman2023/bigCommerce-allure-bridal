@@ -23,46 +23,54 @@ category:
 {{/unless}}
 
 <div class="bp-category suits-plp" >
-    <div class="bp-category-header {{#if category.image}}has-image{{/if}}">
-        <div class="bp-cat-content">
-            <h3 class="page-heading">{{category.name}}</h3>
-            <div class="description">{{{category.description}}}</div>
+        <div class="bp-category-header {{#if category.image}}has-image{{/if}}">
+            <div class="bp-cat-content">
+                <h3 class="page-heading">{{category.name}}</h3>
+                <div class="description">{{{category.description}}}</div>
+            </div>
+            {{#if category.image}}
+                <div class="bp-cat-image">
+                        {{> components/common/responsive-img
+                            image=category.image
+                            fallback_size=theme_settings.zoom_size
+                            lazyload=theme_settings.lazyload_mode
+                            class="category-header-image"
+                        }}
+                </div>
+            {{/if}}
         </div>
-        {{#if category.image}}
-
-        <div class="bp-cat-image">
-                {{> components/common/responsive-img
-                    image=category.image
-                    fallback_size=theme_settings.zoom_size
-                    lazyload=theme_settings.lazyload_mode
-                    class="category-header-image"
-                }}
-        </div>
-        {{/if}}
-    </div>
-    <div class="page">
-        {{#if category.faceted_search_enabled}}
-            <aside class="page-sidebar" id="faceted-search-container">
-                {{> components/category/sidebar}}
-            </aside>
-        {{else if category.subcategories}}
-            <aside class="page-sidebar" id="faceted-search-container">
-                {{> components/category/sidebar}}
-            </aside>
-        {{else if category.shop_by_price}}
-            {{#if theme_settings.shop_by_price_visibility}}
-                 <aside class="page-sidebar" id="faceted-search-container">
+        <div class="page category-container-block-section" >
+            <div class="pagefilterheader">
+                <div></div>
+                <div class="rightside"> 
+                    <span>Showing  {{category.total_products}} product<span>{{#if category.total_products '>=' 1}}s{{/if}}</span></span>
+                    <button class="hideshowfilter"></button>
+                </div>
+            </div>
+            <div class="plp-cont">
+            {{#if category.faceted_search_enabled}}
+                <aside class="page-sidebar" id="faceted-search-container">
                     {{> components/category/sidebar}}
                 </aside>
+            {{else if category.subcategories}}
+                <aside class="page-sidebar" id="faceted-search-container">
+                    {{> components/category/sidebar}}
+                </aside>
+            {{else if category.shop_by_price}}
+                {{#if theme_settings.shop_by_price_visibility}}
+                     <aside class="page-sidebar" id="faceted-search-container">
+                        {{> components/category/sidebar}}
+                    </aside>
+                {{/if}}
             {{/if}}
-        {{/if}}
-    
-        <div class="page-content" id="product-listing-container">
-            {{> BP/category/suits-product-listing}}
-            {{{region name="category_below_content"}}}
+        
+            <div class="page-content" id="product-listing-container">
+                {{> BP/category/product-listing}}
+                {{{region name="category_below_content"}}}
+            </div>
+        </div>
         </div>
     </div>
-</div>
 
 {{/partial}}
 {{> layout/base}}

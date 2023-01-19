@@ -439,6 +439,13 @@
                 text-align: left;
                 color: stencilColor("color-allure-bridals-neutral-2");
             }
+            .buttonlink {
+                @media screen and (max-width: 600px) {
+                    display: block;
+                    margin: 0 auto;
+                    line-height: 2;
+                }
+            }
         }
     }
 }
