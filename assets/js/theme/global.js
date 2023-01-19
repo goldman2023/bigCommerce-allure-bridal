@@ -77,6 +77,7 @@ export default class Global extends PageManager {
         $('.mobileMenu-icons.searchIcon').on('click', function(e){
             e.preventDefault();
             $('.navPages-quickSearch.mobile-only').toggle();
+            $('.header-shadow').toggleClass('opensearch');
         });
 
 

@@ -139,3 +139,39 @@ header {
         }
     } 
 }
+.navPages-quickSearch.mobile-only {
+
+    .menusearchfield {
+        border: 1px solid #F1E8E7;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #1D1B1B;
+        height: 40px;
+        min-height: 40px;
+        border-radius: 0;
+        &::placeholder { 
+            color: #1D1B1B;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 12px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+    }
+    .search-icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+        background: #AC634D;
+        height: 40px;
+        width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+}
