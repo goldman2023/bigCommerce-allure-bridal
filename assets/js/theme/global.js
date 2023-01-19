@@ -77,7 +77,10 @@ export default class Global extends PageManager {
         $('.mobileMenu-icons.searchIcon').on('click', function(e){
             e.preventDefault();
             $('.navPages-quickSearch.mobile-only').toggle();
-        })
+        });
+
+
+       
 
         //Product Listing page start
         if (mainContent.contains('pages-custom-category-bp-category') || mainContent.contains('bp-category') || mainContent.contains('pages-custom-category-suits-bp-category')) {
@@ -370,6 +373,7 @@ export default class Global extends PageManager {
                         }
                     });
                 }
+                
             }, 3000);
         });
 
@@ -417,5 +421,11 @@ export default class Global extends PageManager {
             let customerName = document.getElementById('initials').getAttribute('data-name');
             document.getElementById('initials').innerHTML = customerName.charAt(0);
         }
+
+        $(document).on('click','.navPages-action',function(){
+            e.preventDefault();
+            $(this).toggleClass('is-open');
+            $(this).siblings().toggleClass('is-open');
+        });
     }
 }
