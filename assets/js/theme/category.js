@@ -90,7 +90,7 @@ export default class Category extends CatalogPage {
             $('body').triggerHandler('compareReset');
 
             $('html, body').animate({
-                scrollTop: 0,
+               // scrollTop: 0,
             }, 100);
         }, {
             validationErrorMessages: {
