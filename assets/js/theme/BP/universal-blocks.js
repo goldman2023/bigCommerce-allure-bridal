@@ -443,38 +443,110 @@ export function renderHeaderFooter (context) {
         
         //navigation bar implementation
         const navigationEl = document.querySelector('.site-navigation');
+        const navigationElMobile = document.querySelector('.newmobilemenu');
+
         let navigationHtml = ``;
+        let navigationHtmlMobile = `<li class="navPages-item my-acct"><a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.6339 22.7601C17.7435 24.0475 15.4596 24.8001 13 24.8001C10.5403 24.8001 8.25641 24.0475 6.36599 22.7601H7.09995C7.09995 19.5016 9.74147 16.8601 13 16.8601C16.2584 16.8601 18.9 19.5016 18.9 22.7601H19.6339ZM19.8975 22.5753C19.8133 19.3707 17.5441 16.7103 14.525 16.0292C16.4492 15.3904 17.8371 13.5759 17.8371 11.4373C17.8371 8.76577 15.6714 6.60007 12.9999 6.60007C10.3284 6.60007 8.1627 8.76577 8.1627 11.4373C8.1627 13.5759 9.55063 15.3904 11.4749 16.0292C8.45582 16.7103 6.18665 19.3707 6.10238 22.5753C3.13277 20.4323 1.19995 16.9419 1.19995 13.0001C1.19995 6.48311 6.48299 1.20007 13 1.20007C19.5169 1.20007 24.8 6.48311 24.8 13.0001C24.8 16.9419 22.8671 20.4323 19.8975 22.5753ZM25.8 13.0001C25.8 20.0693 20.0692 25.8001 13 25.8001C5.93071 25.8001 0.199951 20.0693 0.199951 13.0001C0.199951 5.93083 5.93071 0.200073 13 0.200073C20.0692 0.200073 25.8 5.93083 25.8 13.0001ZM12.9999 15.2745C15.1191 15.2745 16.8371 13.5565 16.8371 11.4373C16.8371 9.31805 15.1191 7.60007 12.9999 7.60007C10.8807 7.60007 9.1627 9.31805 9.1627 11.4373C9.1627 13.5565 10.8807 15.2745 12.9999 15.2745Z" fill="#1D1B1B" ></path>
+            </svg><span class="navPages-action accountlink">My Account</span></a></li>`;
+
         let index = 0;
+
+        console.log(globalData.navigation);
+
         for (const navigation of globalData.navigation) {
             const topNavs = navigation.navEntriesCollection.items;
             for (const topNav of topNavs) {
-                navigationHtml += `<li 
-                    class="site-navigation__link"
-                >
-                    <a href="${topNav.topNavLinkUrl}">${topNav.topNavLinkName}</a>`;
-                
+
+
+                navigationHtml += `<li class="site-navigation__link"><a href="${topNav.topNavLinkUrl}">${topNav.topNavLinkName}</a>`;
+
+                navigationHtmlMobile += `<li class="navPages-item">
+                    <a href="${topNav.topNavLinkUrl}" 
+                            data-collapsible="navPages-${index}" 
+                            class="navPages-action ${topNav.sectionChildNavigationCollection?.items?.length > 0 && 'has-subMenu'}">
+                        ${topNav.topNavLinkName}${topNav.sectionChildNavigationCollection?.items?.length > 0 && `<i class="icon navPages-action-moreIcon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="16" viewBox="0 0 8 16" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.400086 14.9374C0.0876666 14.625 0.0876666 14.1184 0.400086 13.806L6.2344 7.97169L0.400086 2.13738C0.087666 1.82496 0.087666 1.31843 0.400085 1.00601C0.712505 0.693586 1.21904 0.693586 1.53146 1.00601L7.36577 6.84032C7.99061 7.46516 7.99061 8.47822 7.36577 9.10306L1.53146 14.9374C1.21904 15.2498 0.712506 15.2498 0.400086 14.9374Z" fill="#93908F"></path>
+                        </svg></i>`}
+                    </a>`;
+
                 if (topNav.sectionChildNavigationCollection.items.length > 0) {
+
+                    navigationHtmlMobile += `<div class="navPage-subMenu" id="navPages-${index}" aria-hidden="true" tabindex="-1">
+                    <ul class="navPage-subMenu-list">`;
+
                     navigationHtml += `<div class="sub-site__navigation">`;
+
                     for (const secondNav of topNav.sectionChildNavigationCollection.items) {
+                        navigationHtmlMobile += `<li class="navPage-subMenu-item">
+                            <a class="navPage-subMenu-action navPages-action ${secondNav.navItemsCollection?.items?.length > 0 && 'has-subMenu'}" href="${secondNav.navSectionUrl}" aria-label="${secondNav.navSectionName}">${secondNav.navSectionName}
+                            ${secondNav.navItemsCollection?.items?.length > 0 && `
+                            <span class="collapsible-icon-wrapper"
+                            data-collapsible="navPages-${secondNav.navSectionName.replaceAll(' ','')}"
+                            data-collapsible-disabled-breakpoint="medium"
+                            data-collapsible-disabled-state="open"
+                            data-collapsible-enabled-state="closed"
+                        >
+                            <i class="icon navPages-action-moreIcon" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="6" viewBox="0 0 12 6" fill="none">
+                                    <path d="M10.7929 6.10352e-05H1.20711C0.761654 6.10352e-05 0.538571 0.538632 0.853554 0.853615L5.64645 5.64651C5.84171 5.84177 6.15829 5.84177 6.35355 5.64651L11.1464 0.853615C11.4614 0.538632 11.2383 6.10352e-05 10.7929 6.10352e-05Z" fill="#BC8372"/>
+                                    </svg>
+                            </i>
+                        </span>`}</a>
+                        `;
+
                         navigationHtml += `<ul class="sub-site__navigation-${secondNav.navSectionName.toLowerCase()}">
                                 <li class="sub-site__title">
                                     <a href="${secondNav.navSectionUrl}">
                                         ${secondNav.navSectionName}
                                     </a>
                                 </li>`;
-                        for (const thirdNav of secondNav.navItemsCollection.items) {       
-                            navigationHtml +=`<li class="sub-site__text"><a href="${thirdNav.navLinkUrl}">${thirdNav.navLinkName}</a></li>`;
-                        }   
+                        if (secondNav.navItemsCollection.items.length > 0) {
+
+                            navigationHtmlMobile += `<ul class="navPage-childList" id="navPages-${secondNav.navSectionName.replaceAll(' ','')}">`;
+
+                            for (const thirdNav of secondNav.navItemsCollection.items) {  
+                                navigationHtmlMobile += `<li class="navPage-childList-item">
+                                    <a class="navPage-childList-action navPages-action"
+                                    href="${thirdNav.navLinkUrl}"
+                                    aria-label="${thirdNav.navLinkName}"
+                                    >
+                                    ${thirdNav.navLinkName}
+                                        <i class="icon navPages-action-moreIcon" aria-hidden="true">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="16" viewBox="0 0 8 16" fill="none">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.400086 14.9374C0.0876666 14.625 0.0876666 14.1184 0.400086 13.806L6.2344 7.97169L0.400086 2.13738C0.087666 1.82496 0.087666 1.31843 0.400085 1.00601C0.712505 0.693586 1.21904 0.693586 1.53146 1.00601L7.36577 6.84032C7.99061 7.46516 7.99061 8.47822 7.36577 9.10306L1.53146 14.9374C1.21904 15.2498 0.712506 15.2498 0.400086 14.9374Z" fill="#93908F"/>
+                                            </svg>
+                                        </i>
+                                    </a>
+                                </li>
+                                `
+
+                                navigationHtml +=`<li class="sub-site__text"><a href="${thirdNav.navLinkUrl}">${thirdNav.navLinkName}</a></li>`;
+                            }   
+                            navigationHtmlMobile += `</ul>`;
+
+                        }
+                        navigationHtmlMobile += `</li>`;
+
                         navigationHtml += `</ul>`;
+
                     }
                     navigationHtml += `
                         <div class="sub-site__navigation-image">
                             <img data-src="${topNav.megaMenuImage.url}" class="lazyload">
                         </div>
                     </div>`;
+
+                    navigationHtmlMobile += `</ul><div class="sub-site__navigation-image">
+                    <img data-src="${topNav.megaMenuImage.url}" class="lazyload">
+                </div></div>`
                 }
                 
                 navigationHtml += `</li>`;
+                navigationHtmlMobile +=  `</li>`;
+
                 if (topNavs.length != index+1) {
                     navigationHtml +=   `<svg 
                             class="site-navigation_svg" 
@@ -497,10 +569,15 @@ export function renderHeaderFooter (context) {
                             </rect>
                         </svg>`;
                 }
+
+
+
                 index++;
             }
         }
         navigationEl.innerHTML = navigationHtml;
+        navigationElMobile.innerHTML = navigationHtmlMobile;
+
     });
 }
 export function getProductsByCategoryPath(context,path, callback) { 

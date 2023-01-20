@@ -99,3 +99,79 @@ header {
         }
     }
 }
+.mobileMenu-toggle {
+    .mobileMenu-toggleIcon,
+    .mobileMenu-toggleIcon::before,
+    .mobileMenu-toggleIcon::after {
+        background: stencilColor('color-allure-bridals-primary-1');
+        height: 1.2px;
+    }
+    &.is-open .mobileMenu-toggleIcon {
+        &::before,
+        &::after {
+            background-color: stencilColor('color-allure-bridals-primary-1');
+        }        
+    }
+}
+.header a.navPage-subMenu-action.navPages-action.is-open {
+    background: #AC634D;
+    color: white;
+}
+.navPages-container.mobile-only {
+    .account-modal__retailers {
+        .label {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 15px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: #000000;
+        }
+        a {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 22px;
+            color: #BA8476;
+            text-decoration: none;
+        }
+    } 
+}
+.navPages-quickSearch.mobile-only {
+
+    .menusearchfield {
+        border: 1px solid #F1E8E7;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #1D1B1B;
+        height: 40px;
+        min-height: 40px;
+        border-radius: 0;
+        &::placeholder { 
+            color: #1D1B1B;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 12px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+    }
+    .search-icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+        background: #AC634D;
+        height: 40px;
+        width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+}

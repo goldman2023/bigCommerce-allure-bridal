@@ -1,6 +1,15 @@
 @media (max-width: '900px') {
     header.header-shadow {
         display: none !important;
+        &.opensearch {
+            display: block !important;
+            width: 100%;
+            background-color: #b0aaaa;
+            height: 100%;
+            position: absolute;
+            right: 0;
+            z-index: 99;
+        }
     }
 
     header.header.is-open + .header-shadow {
@@ -73,6 +82,12 @@
             color: #1D1B1B;
             background-color: white;
             border-bottom: 0px;
+            &.accountlink {
+                font-style: normal;
+                font-weight: 500;
+                font-size: 10px;
+                line-height: 12px;
+            }
         }
         
         
@@ -176,6 +191,7 @@
         header.header-shadow {
             display: none;
         }
+        
 
         .header-svg__border {
             border-bottom: solid 1px #C8C6C6;
@@ -244,7 +260,7 @@
             }
             header.header-shadow {
                 width: 10%;
-                background-color: #000000;
+                background-color: #b0aaaa;
                 height: 100%;
                 position: absolute;
                 right: 0;
@@ -294,7 +310,7 @@
 
 .is-open + header.header-shadow {
     width: 10%;
-    background-color: #000000;
+    background-color: #b0aaaa;
     height: 100%;
     position: absolute;
     right: 0;
