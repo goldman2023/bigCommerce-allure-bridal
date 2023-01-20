@@ -198,7 +198,11 @@
                     {{/if}}
                     <div class="account-modal__retailers">
                         <div>FOR RETAILERS</div>
-                        <a href="{{#if customer}}{{urls.account.index}}{{else}}{{urls.auth.login}}{{/if}}">Retailer Login -></a>
+                        {{#if customer}}
+                            <a href="{{urls.auth.logout}}">Logout -></a>
+                        {{else}}
+                            <a href="{{urls.auth.login}}">Retailer Login -></a>
+                        {{/if}}
                     </div>
                 </div>
             </div>
@@ -227,7 +231,12 @@
             <ul class="navPages-list navPages-list--user">
                 <div class="account-modal__retailers">
                     <div class="label">FOR RETAILERS</div>
-                    <a href="{{#if customer}}{{urls.account.index}}{{else}}{{urls.auth.login}}{{/if}}">Retailer Login -></a>
+                    {{#if customer}}
+                        <a href="{{urls.auth.logout}}">Logout -></a>
+                    {{else}}
+                        <a href="{{urls.auth.login}}">Retailer Login -></a>
+                    {{/if}}
+                    
                 </div>
             </ul>
         </nav>

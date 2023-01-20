@@ -396,13 +396,13 @@ function headerFooterData(context, callback) {
                 const metafields = product.metafields.edges;
                 const metafieldData = [];
                 const noOfEntries = metafields.length;
+                let footer = [];
+                let navigation = [];
                 for(const [index, metafield] of metafields.entries()) {
                     if (typeof callback == 'function') {
                         const metaFieldObj = {"key": metafield.node.key, "value": JSON.parse(metafield.node.value)};
                         metafieldData.push(metaFieldObj);
                         if (index+1 === noOfEntries) {
-                            let footer = [];
-                            let navigation = [];
                             for (const data of metafieldData) {
                                 if (data.key === "Data for footer") {
                                     footer = data.value;
@@ -410,12 +410,11 @@ function headerFooterData(context, callback) {
                                 if (data.key === "Data for navigation") {
                                     navigation = data.value;
                                 }
-                                
-                                callback.call(this, {navigation, footer});
                             }
                         }
                     }
                 }
+                callback.call(this, { navigation, footer });
             }
         }
     });
@@ -446,20 +445,16 @@ export function renderHeaderFooter (context) {
         const navigationElMobile = document.querySelector('.newmobilemenu');
 
         let navigationHtml = ``;
-        let navigationHtmlMobile = `<li class="navPages-item my-acct"><a href="#">
+        let navigationHtmlMobile = `<li class="navPages-item my-acct"><a href="${context.customer ? '/account.php?action=order_status' : '/login.php'}">
             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M19.6339 22.7601C17.7435 24.0475 15.4596 24.8001 13 24.8001C10.5403 24.8001 8.25641 24.0475 6.36599 22.7601H7.09995C7.09995 19.5016 9.74147 16.8601 13 16.8601C16.2584 16.8601 18.9 19.5016 18.9 22.7601H19.6339ZM19.8975 22.5753C19.8133 19.3707 17.5441 16.7103 14.525 16.0292C16.4492 15.3904 17.8371 13.5759 17.8371 11.4373C17.8371 8.76577 15.6714 6.60007 12.9999 6.60007C10.3284 6.60007 8.1627 8.76577 8.1627 11.4373C8.1627 13.5759 9.55063 15.3904 11.4749 16.0292C8.45582 16.7103 6.18665 19.3707 6.10238 22.5753C3.13277 20.4323 1.19995 16.9419 1.19995 13.0001C1.19995 6.48311 6.48299 1.20007 13 1.20007C19.5169 1.20007 24.8 6.48311 24.8 13.0001C24.8 16.9419 22.8671 20.4323 19.8975 22.5753ZM25.8 13.0001C25.8 20.0693 20.0692 25.8001 13 25.8001C5.93071 25.8001 0.199951 20.0693 0.199951 13.0001C0.199951 5.93083 5.93071 0.200073 13 0.200073C20.0692 0.200073 25.8 5.93083 25.8 13.0001ZM12.9999 15.2745C15.1191 15.2745 16.8371 13.5565 16.8371 11.4373C16.8371 9.31805 15.1191 7.60007 12.9999 7.60007C10.8807 7.60007 9.1627 9.31805 9.1627 11.4373C9.1627 13.5565 10.8807 15.2745 12.9999 15.2745Z" fill="#1D1B1B" ></path>
             </svg><span class="navPages-action accountlink">My Account</span></a></li>`;
 
         let index = 0;
 
-        console.log(globalData.navigation);
-
         for (const navigation of globalData.navigation) {
             const topNavs = navigation.navEntriesCollection.items;
             for (const topNav of topNavs) {
-
-
                 navigationHtml += `<li class="site-navigation__link"><a href="${topNav.topNavLinkUrl}">${topNav.topNavLinkName}</a>`;
 
                 navigationHtmlMobile += `<li class="navPages-item">
@@ -573,8 +568,6 @@ export function renderHeaderFooter (context) {
                         </svg>`;
                 }
 
-
-
                 index++;
             }
         }
@@ -583,14 +576,14 @@ export function renderHeaderFooter (context) {
 
         setTimeout(() => {
             const mobileNavItems = document.querySelectorAll('.newmobilemenu .navPages-item .has-subMenu');
-
-            for (const mobileNavItem of mobileNavItems) {
-                mobileNavItem.addEventListener('click', function onClick(event) {
+            [].forEach.call(mobileNavItems, function (mobileNavItem) {
+                mobileNavItem.addEventListener("click", function (event) {
+                    event.stopPropagation();
                     event.preventDefault();
-                    mobileNavItem.classList.add('is-open');
-                    mobileNavItem.nextElementSibling.classList.add('is-open');
-                });
-            }
+                    mobileNavItem.classList.toggle('is-open');
+                    mobileNavItem.nextElementSibling.classList.toggle('is-open');
+                }, false);
+            });
         }, 500);
 
     });
