@@ -1,6 +1,8 @@
 .account-section-page {
+    @include breakpoint("medium") {
     display: flex;
     justify-content: space-between;
+    }
     .section-title {
         .editdetails {
             color: #695C5C;
@@ -106,7 +108,12 @@
         }
     }
     .productGrid .product {
-        width: 33.33%;
+        @include breakpoint("small") {
+            width: 50%;
+        }
+        @include breakpoint("medium") {
+            width: 33.33%;
+        }
     }
 }
 .editaccount {
