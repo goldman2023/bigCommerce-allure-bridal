@@ -396,13 +396,13 @@ function headerFooterData(context, callback) {
                 const metafields = product.metafields.edges;
                 const metafieldData = [];
                 const noOfEntries = metafields.length;
+                let footer = [];
+                let navigation = [];
                 for(const [index, metafield] of metafields.entries()) {
                     if (typeof callback == 'function') {
                         const metaFieldObj = {"key": metafield.node.key, "value": JSON.parse(metafield.node.value)};
                         metafieldData.push(metaFieldObj);
                         if (index+1 === noOfEntries) {
-                            let footer = [];
-                            let navigation = [];
                             for (const data of metafieldData) {
                                 if (data.key === "Data for footer") {
                                     footer = data.value;
@@ -410,19 +410,17 @@ function headerFooterData(context, callback) {
                                 if (data.key === "Data for navigation") {
                                     navigation = data.value;
                                 }
-                                
-                                callback.call(this, {navigation, footer});
                             }
                         }
                     }
                 }
+                callback.call(this, { navigation, footer });
             }
         }
     });
 }
 
 export function renderHeaderFooter (context) {
-    console.log(context);
     headerFooterData (context, globalData => {
         //footer implementation
         const footerListContainer = document.querySelector('.footer-info');
@@ -454,13 +452,9 @@ export function renderHeaderFooter (context) {
 
         let index = 0;
 
-        console.log(globalData.navigation);
-
         for (const navigation of globalData.navigation) {
             const topNavs = navigation.navEntriesCollection.items;
             for (const topNav of topNavs) {
-
-
                 navigationHtml += `<li class="site-navigation__link"><a href="${topNav.topNavLinkUrl}">${topNav.topNavLinkName}</a>`;
 
                 navigationHtmlMobile += `<li class="navPages-item">
@@ -582,14 +576,14 @@ export function renderHeaderFooter (context) {
 
         setTimeout(() => {
             const mobileNavItems = document.querySelectorAll('.newmobilemenu .navPages-item .has-subMenu');
-
-            for (const mobileNavItem of mobileNavItems) {
-                mobileNavItem.addEventListener('click', function onClick(event) {
+            [].forEach.call(mobileNavItems, function (mobileNavItem) {
+                mobileNavItem.addEventListener("click", function (event) {
+                    event.stopPropagation();
                     event.preventDefault();
                     mobileNavItem.classList.toggle('is-open');
                     mobileNavItem.nextElementSibling.classList.toggle('is-open');
-                });
-            }
+                }, false);
+            });
         }, 500);
 
     });
