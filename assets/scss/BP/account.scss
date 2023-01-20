@@ -181,7 +181,9 @@
 }
 .wishlists-table {
     .button {
-        width: auto !important;
+        @include breakpoint("medium") {
+            width: auto !important;
+        }        
     }
 }
 .asterisk {
