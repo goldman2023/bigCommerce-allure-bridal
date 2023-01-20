@@ -465,11 +465,14 @@ export function renderHeaderFooter (context) {
                 navigationHtmlMobile += `<li class="navPages-item">
                     <a href="${topNav.topNavLinkUrl}" 
                             data-collapsible="navPages-${index}" 
-                            class="navPages-action ${topNav.sectionChildNavigationCollection?.items?.length > 0 && 'has-subMenu'}">
-                        ${topNav.topNavLinkName}${topNav.sectionChildNavigationCollection?.items?.length > 0 && `<i class="icon navPages-action-moreIcon" aria-hidden="true">
+                            aria-controls="navPages-${index}" 
+                            class="navPages-action ${topNav.sectionChildNavigationCollection?.items?.length > 0 && 'has-subMenu'}"
+                            aria-expanded="false"
+                            >
+                        ${topNav.topNavLinkName}${topNav.sectionChildNavigationCollection?.items?.length > 0 ? `<i class="icon navPages-action-moreIcon" aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="8" height="16" viewBox="0 0 8 16" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M0.400086 14.9374C0.0876666 14.625 0.0876666 14.1184 0.400086 13.806L6.2344 7.97169L0.400086 2.13738C0.087666 1.82496 0.087666 1.31843 0.400085 1.00601C0.712505 0.693586 1.21904 0.693586 1.53146 1.00601L7.36577 6.84032C7.99061 7.46516 7.99061 8.47822 7.36577 9.10306L1.53146 14.9374C1.21904 15.2498 0.712506 15.2498 0.400086 14.9374Z" fill="#93908F"></path>
-                        </svg></i>`}
+                        </svg></i>`: ''}
                     </a>`;
 
                 if (topNav.sectionChildNavigationCollection.items.length > 0) {
@@ -577,6 +580,18 @@ export function renderHeaderFooter (context) {
         }
         navigationEl.innerHTML = navigationHtml;
         navigationElMobile.innerHTML = navigationHtmlMobile;
+
+        setTimeout(() => {
+            const mobileNavItems = document.querySelectorAll('.newmobilemenu .navPages-item .has-subMenu');
+
+            for (const mobileNavItem of mobileNavItems) {
+                mobileNavItem.addEventListener('click', function onClick(event) {
+                    event.preventDefault();
+                    mobileNavItem.classList.add('is-open');
+                    mobileNavItem.nextElementSibling.classList.add('is-open');
+                });
+            }
+        }, 500);
 
     });
 }

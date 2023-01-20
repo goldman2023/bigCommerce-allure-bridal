@@ -38,6 +38,7 @@ export class MobileMenuToggle {
         this.$toggle = $toggle;
         this.mediumMediaQueryList = mediaQueryListFactory('medium');
 
+        
         // Auto-bind
         this.onToggleClick = this.onToggleClick.bind(this);
         this.onCartPreviewOpen = this.onCartPreviewOpen.bind(this);
@@ -49,7 +50,7 @@ export class MobileMenuToggle {
 
         // Assign DOM attributes
         this.$toggle.attr('aria-controls', this.$menu.attr('id'));
-
+        
         // Hide by default
         this.hide();
     }

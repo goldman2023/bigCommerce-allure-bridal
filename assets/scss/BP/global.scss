@@ -429,11 +429,6 @@ body {
                 fill: stencilColor('color-neutral-normal');
             }
         }
-        .close {
-            .icon {
-                cursor: pointer;
-            }
-        }
     }
     &.alertBox--success {
         margin-top: 20px;
@@ -448,10 +443,12 @@ body {
                 fill: stencilColor('color-theme-dark');
             }
         }
-        .close {
-            .icon {
-                cursor: pointer;
-            }
+    }
+    .close {
+        right: 10px;
+        top: 0;
+        .icon {
+            cursor: pointer;
         }
     }
 }
@@ -612,7 +609,7 @@ input:-internal-autofill-selected {
     display: block;
     overflow: hidden;
     &:hover {
-        color: white !important;
-        background-color: #bc8372 !important;
+        color: stencilColor('color-white') !important;
+        background-color: stencilColor('color-theme') !important;
     }
 }

@@ -334,22 +334,16 @@ header.header{
             flex-flow: wrap;
             height: fit-content;
             flex: 2;
+            column-gap: 20px;
             li.sub-site__title {
                 text-align: left;
                 width: 100%;
             }
             li.sub-site__text {
-                width: 55%;
-                &:nth-child(even) {
-                    width: calc(45% - 1rem);
-                    margin-right: 1rem;
-                }
+                flex-basis: calc(50% - 10px);
                 @include breakpoint("large") {
-                    width: 55%;
-                    &:nth-child(even) {
-                        width: calc(45% - 2.5rem);
-                        margin-right: 2.5rem;
-                    }
+                    
+                    
                 }
             }
         }
