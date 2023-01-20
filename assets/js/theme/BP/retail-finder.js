@@ -676,7 +676,7 @@ export default class RetailFinder extends PageManager {
       collectionItem.classList.add('collection-item');
       collectionItem.classList.add('retailer-detail');
       collectionItem.innerText = collection.collectionName;
-      collectionsList.append(collectionItem);
+      collectionsList.append(collectionItem);      
     };
     collections.append(collectionsList);
     detailElement.append(collections);
@@ -709,7 +709,8 @@ export default class RetailFinder extends PageManager {
     phoneLabel.classList.add('retailer-label');
     phoneLabel.innerText = 'PHONE';
     phone.append(phoneLabel);
-    const phoneNumber = document.createElement('div');
+    const phoneNumber = document.createElement('a');
+    phoneNumber.setAttribute("href", `tel:${retailer.phone}`);
     phoneNumber.classList.add('retailer-detail');
     phoneNumber.innerText = retailer.phoneNumber;
     phone.append(phoneNumber)
