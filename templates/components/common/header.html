@@ -231,8 +231,20 @@
     <div class="navPages-quickSearch mobile-only">
         {{> components/common/quick-search name='nav-menu-quick-search'}}
     </div>
-    <div class="navPages-container mobile-only" id="menu" data-menu>
+    <!-- <div class="navPages-container mobile-only" id="menu" data-menu>
         {{> components/common/navigation-menu}}
+    </div> -->
+    <div class="navPages-container mobile-only" id="menu" data-menu>
+        <nav class="navPages">
+            <ul class="navPages-list{{#if theme_settings.navigation_design '!==' 'simple'}} navPages-list-depth-max{{/if}} newmobilemenu">
+            </ul>
+            <ul class="navPages-list navPages-list--user">
+                <div class="account-modal__retailers">
+                    <div class="label">FOR RETAILERS</div>
+                    <a href="#">Retailer Login -></a>
+                </div>
+            </ul>
+        </nav>
     </div>
 </header>
 <header class="header-shadow" role="banner-shadow">

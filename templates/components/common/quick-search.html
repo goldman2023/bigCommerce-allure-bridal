@@ -3,14 +3,21 @@
         <fieldset class="form-fieldset">
             <div class="form-field">
                 <label class="is-srOnly" for="{{name}}">{{lang "search.quick_search.input_label"}}</label>
-                <input class="form-input"
+                <input class="form-input menusearchfield"
                        data-search-quick
                        name="{{name}}"
                        id="{{name}}"
                        data-error-message="{{lang 'search.error.empty_field'}}"
-                       placeholder="{{lang 'search.quick_search.input_placeholder'}}"
+                       placeholder="{{lang 'search.quick_search.input_label'}}"
                        autocomplete="off"
                 >
+                <label class="search-icon">
+                    <input type="submit" style="display:none">
+                    <svg width="21" height="14" viewBox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.637014 7.65216C0.280286 7.65216 0 7.37187 0 7.01514C0 6.67116 0.280286 6.37813 0.637014 6.37813H18.2186L12.9314 1.09092C12.6893 0.836111 12.6893 0.441163 12.9314 0.186357C13.1862 -0.0684484 13.5811 -0.0557081 13.8359 0.186357L20.1679 6.51827C20.308 6.63294 20.3972 6.8113 20.3972 7.0024C20.3972 7.18077 20.3207 7.35913 20.1933 7.47379L13.8359 13.8185C13.5811 14.0605 13.1862 14.0605 12.9314 13.8185C12.6893 13.5764 12.6893 13.1687 12.9314 12.9266L18.2186 7.65216H0.637014Z" fill="white"/>
+                        </svg>
+                        
+                </label>
             </div>
         </fieldset>
     </form>
