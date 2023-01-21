@@ -808,7 +808,7 @@ export function blockElementDiscover(blockData) {
 export function blockElementStory(blockData) {
     return `<div class="blockElementStory block-item" id="blockElementStory">
     <div class="caption" ><h2>Inspiration</h2><p class="body-light-1">Allure Bridals real customer’s fantastic wedding stories. These should be your wedding inspiration.</p></div>
-    <div class="flexdata"><div class="heading-section"><h1 class="title h1-italic">${blockData?.blockname}</h1>${(blockData?.displayedate != undefined && blockData?.displayedate != null) ? `<p class="date body-3">${blockData?.displayedate}</p>` : `<p></p></br>`}<div class="leftBottom">
+    <div class="flexdata"><div class="heading-section"><h1 class="title h1-italic">${blockData?.blockname}</h1>${(blockData?.displayedate != undefined && blockData?.displayedate != null) ? `<p class="date body-3"><span class="borderdate"></span><span class="originaldate">${blockData?.displayedate}</span></p>` : `<p></p></br>`}<div class="leftBottom">
         <img data-src="${blockData?.imagesCollection?.items[0]?.url}" alt="${blockData?.imagesCollection?.items[0]?.title}" class="lazyload"/>
         </div></div><div class="rightside-section"><div class="rightcol">
         <img data-src="${(blockData?.imagesCollection?.items[1]?.url !== undefined) ? blockData?.imagesCollection?.items[1]?.url : ''}" class="topleft lazyload" alt="${(blockData?.imagesCollection?.items[1]?.title !== undefined) ? blockData?.imagesCollection?.items[1]?.title : ''}"/>

@@ -262,7 +262,10 @@
                     margin: 36px 0;
                 }
                 .button {
+                    @include breakpoint("medium") {
+
                     flex: 1;
+                    }
                     padding: 0 6px;
                     margin: 0;
                     width: 100%;

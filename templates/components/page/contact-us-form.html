@@ -22,7 +22,7 @@
 
         <div class="form-field">
             <label class="form-label" for="contact_email">{{lang 'forms.contact_us.email'}}
-                <small>{{lang 'common.required' }}</small>
+                <span class="asterisk">*</span>
             </label>
             <input class="form-input" type="text" id="contact_email" name="contact_email" value="{{customer.email}}">
         </div>
@@ -51,7 +51,7 @@
 
     <div class="form-field">
         <label class="form-label" for="contact_question">{{lang 'forms.contact_us.question'}}
-            <small>{{lang 'common.required' }}</small>
+            <span class="asterisk">*</span>
         </label>
         <textarea name="contact_question" id="contact_question" rows="5" cols="50" class="form-input"></textarea>
     </div>

@@ -214,7 +214,8 @@
         .desktop-only{display:none;}
 
         .navPages-container.is-open {
-            padding-top: 85px;
+            top: 85px;
+            padding-top: 0;
         }
         .mobileMenu-header.mobile-only {
             width: 100%;
