@@ -476,16 +476,6 @@ body {
             }
         }
 
-        .category-listing-page {
-            .sub-category-block {
-                border-color: stencilColor('color-madison-james-primary-2');
-
-                &::after {
-                    background: stencilColor('color-madison-james-primary-1');
-                }
-            }
-        }
-
         .productGridslider {
             .slick-prev {
                 &::before {
@@ -535,15 +525,34 @@ body {
             }
         }
 
-        .divider {
+        .divider, .sub-category-block {
             border-color: stencilColor('color-madison-james-divider-line');
 
             &::after {
                 width: 5.3px;
                 height: 5.3px;
-                background: stencilColor('color-white');
+                background-color: stencilColor('color-white');
                 outline: 2px solid stencilColor('color-white');
                 border: 1.5px solid stencilColor('color-madison-james-divider-icon');
+            }
+        }
+
+        .logoTabs .tab {
+            position: relative;
+
+            &.is-active {
+                border-bottom-color: stencilColor('color-madison-james-divider-line');
+
+                &::after {
+                    width: 5.3px;
+                    height: 5.3px;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    background: stencilColor('color-white');
+                    outline: 2px solid stencilColor('color-white');
+                    border: 1.5px solid stencilColor('color-madison-james-divider-icon');
+                }
             }
         }
     }

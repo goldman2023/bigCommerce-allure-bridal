@@ -446,11 +446,11 @@ body {
             }
         }
 
-        .divider {
+        .divider, .sub-category-block {
             border-color: stencilColor('color-allure-bridals-primary-2');
 
             &::after {
-                background: stencilColor('color-allure-bridals-primary-1');
+                background-color: stencilColor('color-allure-bridals-primary-1');
             }
         }
 
@@ -480,16 +480,6 @@ body {
                     .lastword {
                         color: stencilColor('color-allure-bridals-primary-1');
                     }
-                }
-            }
-        }
-
-        .category-listing-page {
-            .sub-category-block {
-                border-color: stencilColor('color-allure-bridals-primary-2');
-
-                &::after {
-                    background: stencilColor('color-allure-bridals-primary-1');
                 }
             }
         }

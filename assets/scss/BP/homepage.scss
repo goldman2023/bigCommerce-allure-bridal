@@ -174,9 +174,9 @@
         border: 0;
         border-bottom: 1px solid #F7F4F0;
         @include breakpoint("medium") {
-            width: auto !important;
             display: flex;
             align-items: center;
+            justify-content: center;
         }
     }
     input:focus, button:focus, textarea:focus, select:focus, details:focus, [href]:focus, [tabindex]:not([tabindex="-1"]):focus, [contenteditable="true"]:focus {
@@ -197,6 +197,22 @@
         background: #695c5c;
         outline: 3px solid white;
         transform: rotate(45deg);
+    }
+}
+.pages-custom-page-custom-home-page {
+    .logoTabs {
+        .tab {
+            @include breakpoint("medium") {
+                width: auto !important;
+            }
+        }
+    }
+}
+
+.logotabcontents {
+    .button {
+        max-width: unset;
+        width: unset;
     }
 }
 .category-landing {
