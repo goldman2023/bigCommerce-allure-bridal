@@ -16,11 +16,11 @@ import {
     events,
     globalblockElementFullscreenVideo,
     BlockElementBigCarousel,
-    blockElementDivider,
+    blockElementDivider, 
     blockElementSpacer,
     blockElementSpacer24Px,
     referencedBlockHomepageCollections
-    } from './universal-blocks';
+} from './universal-blocks';
 export default class Homepage extends PageManager {
     constructor(context) {
         super(context);
@@ -187,20 +187,20 @@ export default class Homepage extends PageManager {
             });
         };
 
-        let tabs = document.querySelectorAll(".tabs div");
+        let tabs = document.querySelectorAll(".tabs .tab");
         let tabContents = document.querySelectorAll(".tab-content");
 
         tabs.forEach((tab, index) => {
-        tab.addEventListener("click", () => {
-            tabContents.forEach((content) => {
-            content.classList.remove("is-active");
+            tab.addEventListener("click", () => {
+                tabContents.forEach((content) => {
+                    content.classList.remove("is-active");
+                });
+                tabs.forEach((tab) => {
+                    tab.classList.remove("is-active");
+                });
+                tabContents[index].classList.add("is-active");
+                tabs[index].classList.add("is-active");
             });
-            tabs.forEach((tab) => {
-            tab.classList.remove("is-active");
-            });
-            tabContents[index].classList.add("is-active");
-            tabs[index].classList.add("is-active");
-        });
         });
 
         if(document.querySelector('.logoTabs')) {

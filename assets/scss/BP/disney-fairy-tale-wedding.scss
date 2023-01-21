@@ -446,7 +446,7 @@ body {
             }
         }
 
-        .divider {
+        .divider, .sub-category-block {
             border-color: stencilColor('color-disney-neutral-4');
 
             &::after {
@@ -457,6 +457,15 @@ body {
                 top: -19px;
                 background-color: stencilColor('color-white');
                 @include disneyDivider(stencilColor('color-disney-neutral-2'));
+            }
+        }
+        
+        .category-listing-page {
+            .sub-category-block {
+                &::after {
+                    top: unset;
+                    bottom: -19px;
+                }
             }
         }
 
@@ -486,16 +495,6 @@ body {
                     .lastword {
                         color: stencilColor('color-disney-primary-1');
                     }
-                }
-            }
-        }
-
-        .category-listing-page {
-            .sub-category-block {
-                border-color: stencilColor('color-disney-primary-2');
-
-                &::after {
-                    background: stencilColor('color-disney-primary-1');
                 }
             }
         }
@@ -548,6 +547,26 @@ body {
                 }
             }
         }
+        .logoTabs .tab {
+            position: relative;
+            &.is-active {
+                border-bottom-color: stencilColor('color-disney-neutral-4');
+                &::after {
+                    width: 36px;
+                    height: 36px;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    background: unset;
+                    transform: unset;
+                    bottom: -18.2px;
+                    background-color: transparent;
+                    outline: unset;
+                    @include disneyDivider(stencilColor('color-disney-neutral-2'));
+                }
+            }
+        }
+        
     }
 }
 

@@ -446,13 +446,14 @@ body {
             }
         }
 
-        .divider {
+        .divider, .sub-category-block {
             border-color: stencilColor('color-men-design-primary-2');
 
             &::after {
-                background: stencilColor('color-men-design-primary-1');
+                background-color: stencilColor('color-men-design-primary-1');
             }
         }
+
 
         .imageWithContentSlider {
             ul {
@@ -480,16 +481,6 @@ body {
                     .lastword {
                         color: stencilColor('color-men-design-primary-1');
                     }
-                }
-            }
-        }
-
-        .category-listing-page {
-            .sub-category-block {
-                border-color: stencilColor('color-men-design-primary-2');
-
-                &::after {
-                    background: stencilColor('color-men-design-primary-1');
                 }
             }
         }

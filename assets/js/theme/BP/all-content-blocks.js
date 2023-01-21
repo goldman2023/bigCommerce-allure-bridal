@@ -15,7 +15,8 @@ import {
     logoSliderBlock,
     blockElementDivider,
     blockElementSpacer,
-    blockElementSpacer24Px
+    blockElementSpacer24Px,
+    referencedBlockHomepageCollections
     } from './universal-blocks';
 export default class AllContentBlocks extends PageManager {
     constructor(context) {
@@ -75,6 +76,9 @@ export default class AllContentBlocks extends PageManager {
             }
             if (element.__typename === "BlockElementSpacer24Px") {
                 return blockElementSpacer24Px();
+            }
+            if (element.__typename === "ReferencedBlockHomepageCollections") {
+                return referencedBlockHomepageCollections(element);
             }
         }).join('');
         document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;

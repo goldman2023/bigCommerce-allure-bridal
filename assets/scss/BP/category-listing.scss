@@ -6,9 +6,21 @@
     .customBanner {
         margin-top: 30px;
     }
+    #product-listing-container {
+        padding: 40px 0 0;
+        .sub-category-block {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            @include breakpoint("medium") {
+                margin-bottom: 80px;
+                padding-bottom: 80px;
+            }
+        }
+    }
     .sub-category-block {
         border-bottom: 1px solid stencilColor("color-border");
         position: relative;
+        
         &::after {
             position: absolute;
             content: "";
@@ -22,6 +34,7 @@
         }
         .sub-cat-header {
             h3 {
+                margin-top: 0;
                 color: stencilColor("color-default-neutral-1");
             }
             p {
@@ -70,6 +83,11 @@
                     }
                 }
             }
+        }
+    }
+    .product {
+        article {
+            margin: 0;
         }
     }
 }
@@ -123,7 +141,6 @@
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
-        height: 65px;
     }
     .card-image {
         object-fit: contain;
@@ -134,7 +151,7 @@
     }
     .slick-next {
         right: 0;
-        top: 33%;
+        top: 42%;
         width: 52px;
         height: 52px;
         padding: 0 14px;
@@ -149,7 +166,7 @@
     }
     .slick-prev {
         left: 0;
-        top: 33%;
+        top: 42%;
         width: 52px;
         height: 52px;
         padding: 0 14px;
@@ -168,7 +185,7 @@
         margin-bottom: 0;
     }
     .product .card-body, .productCarousel-slide .card-body {
-        padding: 10px 7px 0 10px;
+        padding: 10px 0 0;
     }
     .card-figure {
         padding: 3px 7.5px 0 7.5px;
@@ -211,7 +228,6 @@
         line-height:  remCalc(30px);
         font-style: normal;
         font-weight: 400;
-        text-align: center;
         color: stencilColor("color-default-neutral-2");
         overflow: hidden;
         text-overflow: hidden;

@@ -48,7 +48,8 @@ import {
     collectionHeaderContent,
     blockElementDivider,
     blockElementSpacer,
-    blockElementSpacer24Px
+    blockElementSpacer24Px,
+    referencedBlockHomepageCollections
 } from './BP/universal-blocks';
 
 export default class Global extends PageManager {
@@ -202,6 +203,9 @@ export default class Global extends PageManager {
                     if (element.__typename === "BlockElementSpacer24Px") {
                         return blockElementSpacer24Px();
                     }
+                    if (element.__typename === "ReferencedBlockHomepageCollections") {
+                        return referencedBlockHomepageCollections(element);
+                    }
                 }).join('');
 
                 document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;
@@ -268,6 +272,7 @@ export default class Global extends PageManager {
                                 }
                             }
                             let blocksCollections = element.contentBlocksCollection.items.map(ele => {
+                                
                                 if (ele.__typename === "BlockElementCollectionPreview") {
                                     return collectionPreview(ele);
                                 }
@@ -305,6 +310,7 @@ export default class Global extends PageManager {
                                     return leftTextBlockglobal('rightTextbanner', ele);
                                 }
                                 if (ele.__typename === "BlockElementCopyBlock") {
+                                    console.log(ele);
                                     return blockElementCopyBlock(ele);
                                 }
                                 if (ele.__typename === "ReferencedBlockLogoRow") {
@@ -324,6 +330,9 @@ export default class Global extends PageManager {
                                 }
                                 if (ele.__typename === "BlockElementSpacer24Px") {
                                     return blockElementSpacer24Px();
+                                }
+                                if (ele.__typename === "ReferencedBlockHomepageCollections") {
+                                    return referencedBlockHomepageCollections(ele);
                                 }
                             });
 
@@ -428,5 +437,104 @@ export default class Global extends PageManager {
             $(this).toggleClass('is-open');
             $(this).siblings().toggleClass('is-open');
         });
+
+        setTimeout(() => {
+            let tabs = document.querySelectorAll(".tabs .tab");
+            let tabContents = document.querySelectorAll(".tab-content");
+
+            tabs.forEach((tab, index) => {
+                console.log('index', index);
+                tab.addEventListener("click", () => {
+                    tabContents.forEach((content) => {
+                        content.classList.remove("is-active");
+                    });
+                    tabs.forEach((tab) => {
+                        tab.classList.remove("is-active");
+                    });
+                    tabContents[index].classList.add("is-active");
+                    tabs[index].classList.add("is-active");
+                });
+            });
+
+            if (document.querySelector('.logoTabs')) {
+                $('.logoTabs').slick({
+                    dots: false,
+                    infinite: false,
+                    speed: 300,
+                    slidesToShow: tabs.length > 6 ? 6 : tabs.length,
+                    slidesToScroll: 1,
+                    centerMode: false,
+                    arrows: true,
+                    responsive: [
+                        {
+                            breakpoint: 1100,
+                            settings: {
+                                slidesToShow: 6,
+                                slidesToScroll: 1,
+                                infinite: false,
+                                centerMode: false,
+                                arrows: true,
+                                dots: false
+                            }
+                        },
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 3,
+                                slidesToScroll: 1,
+                                infinite: false,
+                                centerMode: true,
+                                arrows: false,
+                                dots: false
+                            }
+                        },
+                        {
+                            breakpoint: 1023,
+                            settings: {
+                                slidesToShow: 3,
+                                slidesToScroll: 1,
+                                centerMode: false,
+                                infinite: false,
+                                dots: false,
+                                arrows: false
+                            }
+                        },
+                        {
+                            breakpoint: 900,
+                            settings: {
+                                slidesToShow: 3,
+                                slidesToScroll: 1,
+                                centerMode: false,
+                                infinite: false,
+                                dots: false,
+                                arrows: false
+                            }
+                        },
+                        {
+                            breakpoint: 800,
+                            settings: {
+                                slidesToShow: 3,
+                                slidesToScroll: 1,
+                                centerMode: false,
+                                infinite: false,
+                                dots: false,
+                                arrows: false
+                            }
+                        },
+                        {
+                            breakpoint: 600,
+                            settings: {
+                                slidesToShow: 2,
+                                slidesToScroll: 2,
+                                centerMode: false,
+                                infinite: true,
+                                dots: false,
+                                arrows: false
+                            }
+                        }
+                    ]
+                });
+            }
+        }, 1000);
     }
 }

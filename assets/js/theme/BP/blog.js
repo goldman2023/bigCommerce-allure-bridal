@@ -20,8 +20,9 @@ import {
     BlockElementBigCarousel,
     blockElementDivider,
     blockElementSpacer,
-    blockElementSpacer24Px
-    } from '../BP/universal-blocks';
+    blockElementSpacer24Px,
+    referencedBlockHomepageCollections
+} from '../BP/universal-blocks';
 export default class Blog extends PageManager {
     constructor(context) {
         super(context);
@@ -164,6 +165,9 @@ export default class Blog extends PageManager {
             }
             if (element.__typename === "BlockElementSpacer24Px") {
                 return blockElementSpacer24Px();
+            }
+            if (element.__typename === "ReferencedBlockHomepageCollections") {
+                return referencedBlockHomepageCollections(element);
             }
         }).join('');
         document.getElementById('contentBlocksCollection').innerHTML = blocksCollections;
