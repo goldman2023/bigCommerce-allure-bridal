@@ -674,7 +674,6 @@ export function getProducts(context, selector, prodList, slidescroll) {
         })
         .then(res => res.json())
         .then(productsData => {
-            console.log(productsData);
             if (productsData.data) {
                 const productArray = productsData.data.site.products.edges;
                 let prdlist = [];

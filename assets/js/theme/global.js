@@ -81,7 +81,7 @@ export default class Global extends PageManager {
             $('.header-shadow').toggleClass('opensearch');
         });
 
-
+        console.log('customer', this.context.customer);
        
 
         //Product Listing page start
@@ -443,7 +443,6 @@ export default class Global extends PageManager {
             let tabContents = document.querySelectorAll(".tab-content");
 
             tabs.forEach((tab, index) => {
-                console.log('index', index);
                 tab.addEventListener("click", () => {
                     tabContents.forEach((content) => {
                         content.classList.remove("is-active");
@@ -456,7 +455,7 @@ export default class Global extends PageManager {
                 });
             });
 
-            if (document.querySelector('.logoTabs')) {
+            if ($('.logoTabs')) {
                 $('.logoTabs').slick({
                     dots: false,
                     infinite: false,

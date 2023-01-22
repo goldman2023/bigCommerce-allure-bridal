@@ -47,7 +47,7 @@
         }
 
         a.navPage-subMenu-action.navPages-action.has-subMenu i.icon.navPages-action-moreIcon {
-            margin: 0px !important;
+            margin: 0px;
             border: 0px;
         }
 
@@ -97,7 +97,7 @@
         }
 
         a.navPage-childList-action.navPages-action i.icon.navPages-action-moreIcon {
-            margin: 0px !important;
+            margin: 0px;
             transform: rotate(0deg);
         }
 
@@ -118,7 +118,11 @@
 
         ul.navPages-list > li.navPages-item > a i.icon.navPages-action-moreIcon {
             transform: none;
-            margin: 0px !important;
+            margin: 0px;
+            svg {
+                fill: stencilColor('color-allure-bridals-neutral-3');
+                stroke: stencilColor('color-allure-bridals-neutral-3');
+            }
         }
         
         ul.navPages-list > li.navPages-item > a.navPages-action.has-subMenu.is-open {
@@ -129,9 +133,14 @@
             order: 2
         }
         
-        ul.navPages-list > li.navPages-item > a.navPages-action.has-subMenu.is-open i {
-            transform: rotate(180deg);
-            margin-right: 10px !important;
+        ul.navPages-list > li.navPages-item > a.navPages-action.has-subMenu.is-open {
+            position: relative;
+            i {
+                transform: rotate(180deg);
+                margin-right: 10px;
+                position: absolute;
+                left: 10px;
+            }
         }
 
         ul.navPages-list {
@@ -153,7 +162,7 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: #1D1B1B;
-            padding: 12.5px 16px !important;
+            padding: 12.5px 30px;
             background-color: white;
             border-bottom: 1px solid #F1F0F0;
         }
@@ -182,7 +191,7 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: #1D1B1B;
-            padding: 12.5px 16px;
+            padding: 12.5px 30px;
             background-color: white;
             border-bottom: 1px solid #F1F0F0;
         }
