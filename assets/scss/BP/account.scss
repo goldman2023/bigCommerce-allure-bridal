@@ -218,13 +218,36 @@
             th {
                 &:first-child {
                     width: 30%;
+                    @include breakpoint("medium") {
+                        width: 25%;
+                    }
                 }
                 &:nth-child(2), &:nth-child(3) {
                     width: 20%;
+                    @include breakpoint("medium") {
+                        width: 15%;
+                    }
                 }
                 &:last-child {
                     width: 30%;
+                    @include breakpoint("medium") {
+                        width: 45%;
+                    }
                 }
+            }
+        }
+    }
+    .table-actions {
+        .form-fieldset {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: flex-end;
+            @include breakpoint("medium") {
+                flex-direction: row;
+            }
+            .button {
+                margin: 0;
             }
         }
     }
