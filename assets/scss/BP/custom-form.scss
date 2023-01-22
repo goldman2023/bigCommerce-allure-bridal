@@ -161,23 +161,28 @@
     position: relative;
   }
 .pages-custom-retail-submission-form {
-   
-    .form-label {
+  .content {
+    .form-field {
+      .form-label {
         letter-spacing: 0.05em;
-        top: 8px !important;
+        top: 8px;
+        font-size: 11px;
+        left: 8px;
+      }
     }
-    .form-input {
-        border: 1px solid #D1B3AB;
-        border-radius: 3px;
-        &:focus, &:active {
-            border: 1px solid #615D5D !important;
-            outline: none !important;
-        }
-    }
-    #thank-you {
-        display: none;
-        text-align: center;
-    }
+  }
+  .form-input {
+      border: 1px solid #D1B3AB;
+      border-radius: 3px;
+      &:focus, &:active {
+          border: 1px solid #615D5D !important;
+          outline: none !important;
+      }
+  }
+  #thank-you {
+      display: none;
+      text-align: center;
+  }
   .full {
     width: 100%;
   }
@@ -195,34 +200,6 @@
       background: none;
     }
   }
-  //   .checkbox-fields {
-  //     display: flex;
-  //     gap: 10px;
-  //     margin-bottom: 1rem;
-  //     margin-top: 1rem;
-  //     .checkbox-field {
-  //       display: flex;
-  //       justify-content: center;
-  //       gap: 4px;
-  //     }
-  //     label {
-  //       font-style: normal;
-  //       font-weight: 600;
-  //       font-size: 12px;
-  //       line-height: 16px;
-  //       /* identical to box height, or 133% */
-
-  //       letter-spacing: 0.05em;
-  //       text-transform: uppercase;
-
-  //       /* Neutral/400 */
-
-  //       color: #615d5d;
-  //     }
-
-  //   }
-
-
   .checkbox-fields {
     margin-top: 10px;
     display: flex;
@@ -279,27 +256,20 @@
   }
   .form-retail-row {
     display: flex;
-   
-
     flex-flow: column;
     gap: 0;
-
     justify-content: unset;
-
     align-items: unset;
-    @media screen and (min-width: 768px) {
-      
+    @include breakpoint("medium") {
       flex-flow: row;
       gap: 20px;
-    
-        
     }
   }
   .city-container {
     gap: 0px;
     display: flex;
     flex-flow: column;
-    @media screen and (min-width: 768px) {
+    @include breakpoint("medium") {
       
         flex-flow: row;
         gap: 20px;
