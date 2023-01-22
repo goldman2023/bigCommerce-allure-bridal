@@ -1,11 +1,12 @@
 .account-section-page {
     @include breakpoint("medium") {
-    display: flex;
-    justify-content: space-between;
+        display: flex;
+        justify-content: space-between;
+        margin: 80px 0;
     }
     .section-title {
-        .editdetails {
-            color: #695C5C;
+        .editdetails { 
+            color: stencilColor('color-neutral-normal');
             margin-left: 20px;
             cursor: pointer;
             font-family: stencilFontFamily('default-font-regular');
@@ -19,7 +20,12 @@
     }
     .navBar--sub {
         text-align: left;
-        width: 30%;
+        flex-basis: 100%;
+        margin: 24px 0;
+        @include breakpoint("medium") {
+            flex-basis: 30%;
+            margin: 0;
+        }
         h2 {
             margin: 0;
             font-family: stencilFontFamily('prata-font');
@@ -29,7 +35,7 @@
             line-height: remCalc(25px);
             color: stencilColor("color-default-neutral-3");
             #initials {
-                background: #695C5C;
+                background: stencilColor('color-neutral-normal');
                 font-family: stencilFontFamily('stay-classy-font');
                 text-transform: uppercase;
                 font-style: normal;
@@ -44,8 +50,8 @@
             }
         }
         .navBar-item {
-            display:block;
-            margin: 20px 0;
+            display: block;
+            margin: 16px 0;
             .navBar-action {
                 font-family: stencilFontFamily('default-font-light');
                 font-style: normal;
@@ -55,16 +61,13 @@
                 color: stencilColor("color-default-neutral-3");
                 display: flex;
                 align-items: center;
+                gap: 16px;
                 svg {
-                    width: 40px;
-                    path {
-                        stroke: stencilColor("color-default-neutral-3");
-                    }
-                    &#person,&#logout {
-                        path {
-                            fill: stencilColor("color-default-neutral-3");
-                            stroke: none;
-                        }
+                    width: 20px;
+                    height: 20px;
+                    stroke: stencilColor("color-default-neutral-3");
+                    &#person, &#logout {
+                        stroke: none;
                     }
                 }
             }
@@ -73,13 +76,10 @@
                 .navBar-action {
                     color: stencilColor("color-default-primary-1");
                     svg {
-                        path {
-                            stroke: stencilColor("color-default-primary-1");
-                        }
-                        &#person,&#logout {
-                            path {
-                                fill: stencilColor("color-default-primary-1");
-                                stroke: none;
+                        stroke: stencilColor("color-default-primary-1");
+                        &#person, &#logout {
+                            use {
+                                stroke: stencilColor("color-default-primary-1");
                             }
                         }
                     }
@@ -88,8 +88,9 @@
         }
     }
     .rightaccountside {
+        flex-basis: 100%;
         @include breakpoint("medium") {
-            width: 70%;
+            flex-basis: 70%;
         }
         .section-title {
             font-family: stencilFontFamily('prata-font');
@@ -99,9 +100,8 @@
             line-height: remCalc(30px);
             color: stencilColor("color-default-neutral-2");
             border-bottom: 1px solid stencilColor("color-allure-bridals-neutral-4");
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-            margin-top: 0;
+            padding-bottom: 24px;
+            margin: 0;
         }
         .wishlists-table .table-actions {
             width: 305px;
@@ -134,7 +134,7 @@
         display: none;
         .back {
             float: right;
-            color: #695C5C;
+            color: stencilColor('color-neutral-normal');
             cursor: pointer;
             font-family: stencilFontFamily('default-font-regular');
             font-style: normal;
@@ -149,11 +149,24 @@
         .inforow {
             display: flex;
             justify-content: space-between;
-            border-bottom: 1px solid stencilColor("color-allure-bridals-neutral-4");
-            padding: 20px 0;
-            gap: 20px;
+            flex-direction: column;
+            padding: 0;
+            border-bottom: none;
+            @include breakpoint("medium") {
+                gap: 24px;
+                flex-direction: row;
+                padding: 48px 0;
+                border-bottom: 1px solid stencilColor("color-allure-bridals-neutral-4");
+            }
             .infocol {
-                flex-basis: calc(50% - 10px);
+                border-bottom: 1px solid stencilColor("color-allure-bridals-neutral-4");
+                flex-basis: 100%;
+                padding: 24px 0;
+                @include breakpoint("medium") {
+                    border-bottom: none;
+                    flex-basis: calc(50% - 12px);
+                    padding: 0;
+                }
                 p {
                     margin: 0;
                     font-family: stencilFontFamily('default-font-regular');
@@ -163,7 +176,7 @@
                     line-height:remCalc(15px);
                     letter-spacing: 0.1em;
                     text-transform: uppercase;
-                    color: #282828;
+                    color: stencilColor('color-text');
                     &.label {
                         margin-bottom: 10px;
                         font-family: stencilFontFamily('default-font-bold');
@@ -194,5 +207,25 @@
     }
 }
 .asterisk {
-    color: #cc4749;
+    color: stencilColor('color-error');
+}
+.navBar--account {
+    display: block;
+}
+.wishlists-table {
+    .table-thead {
+        tr {
+            th {
+                &:first-child {
+                    width: 30%;
+                }
+                &:nth-child(2), &:nth-child(3) {
+                    width: 20%;
+                }
+                &:last-child {
+                    width: 30%;
+                }
+            }
+        }
+    }
 }

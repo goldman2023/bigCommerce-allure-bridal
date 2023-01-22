@@ -1,11 +1,6 @@
 {{inject 'passwordRequirements' settings.password_requirements}}
 {{#partial "page"}}
-<!-- <div class="account account--fixedLarge"> -->
-    <div>
-    <!-- {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
-    <h2 class="page-heading">{{lang 'account.settings.heading' }}</h2> -->
-    <div class="account-section-page">
-
+<div class="account-section-page">
     {{> components/account/navigation account_page='settings'}}
     <div class="rightaccountside editaccount">
         <div id="personalinfo">
@@ -50,7 +45,6 @@
             {{> components/account/edit-account}}
         </div>
     </div>
-</div>
 </div>
 {{/partial}}
 {{> layout/base}}
