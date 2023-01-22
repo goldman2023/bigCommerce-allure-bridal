@@ -1,18 +1,29 @@
 footer {
-    [data-section-type="newsletterSubscription"] {
-        .form-field {
-            position: relative;
-            .form-input {
-                height: 47px;
-            }
-            button {
-                position: absolute;
-                max-width: 120px;
-                right: 0;
+    &.footer {
+        [data-section-type="newsletterSubscription"] {
+            .form-field {
+                position: relative;
+    
+                .form-input {
+                    height: 47px;
+                }
+    
+                button {
+                    position: absolute;
+                    max-width: 120px;
+                    right: 0;
+                }
             }
         }
-    }
-    .footer-info-heading {
-        text-transform: capitalize;
+    
+        .footer-info-heading {
+            text-transform: capitalize;
+        }
+    
+        .footer-info__link {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
 }
