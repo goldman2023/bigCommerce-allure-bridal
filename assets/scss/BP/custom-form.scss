@@ -168,6 +168,10 @@
         top: 8px;
         font-size: 11px;
         left: 8px;
+        @include breakpoint("medium") {
+          font-size: 12px;
+          left: 13px;
+        }
       }
     }
   }
@@ -434,3 +438,12 @@ text-transform: uppercase;
         }
     }
   }
+
+.pac-container {
+  margin-top: 410px !important;
+  @include breakpoint('medium') {
+    margin-top: 460px !important;
+  }
+}
+  
+    
