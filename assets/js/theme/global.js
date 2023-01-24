@@ -234,10 +234,11 @@ export default class Global extends PageManager {
             });
 
             $( ".prod-option.color" ).insertBefore( $( ".prod-option.size" ) );
-            $('select').customSelect();
+            $('.prod-option.color .form-select').customSelect();
 
         } else {
-            $('.prod-option.color .form-select').customSelect();
+            $('select').customSelect();
+
         }
         //Product Detail page end
 
