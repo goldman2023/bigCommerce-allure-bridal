@@ -168,11 +168,12 @@
         top: 8px;
         font-size: 11px;
         left: 8px;
+        z-index: 9;
       }
     }
   }
   .form-input {
-      border: 1px solid #D1B3AB;
+      border: 1px solid #D1B3AB !important;
       border-radius: 3px;
       &:focus, &:active {
           border: 1px solid #615D5D !important;
@@ -279,17 +280,9 @@
   }
   .disclaimer {
     font-style: italic;
-
     font-size: 11px;
     line-height: 14px;
-    /* or 127% */
-
-    text-transform: capitalize;
-
-    /* Neutral/400 */
-
     color: #615d5d;
-
     margin-bottom: 1rem;
     span {
       font-weight: 700;
