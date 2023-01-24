@@ -193,12 +193,13 @@
 .product,
 .productCarousel-slide {
     .card-body {
-        padding: 16px 7px 0;
+        padding: 16px 0 0;
     }
 
     .card-title {
         display: flex;
         justify-content: space-between;
+        gap: 10px;
     }
 
     .card-title>a {

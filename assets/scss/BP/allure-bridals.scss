@@ -532,5 +532,9 @@ body {
                 }
             }
         }
+
+        .custom-select__option--value {
+            border-color: stencilColor('color-allure-bridals-primary-1');
+        }
     }
 }

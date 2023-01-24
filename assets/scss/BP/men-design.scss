@@ -533,5 +533,13 @@ body {
                 }
             }
         }
+
+        .productView-sizeGuide {
+            display: none;
+        }
+        
+        .custom-select__option--value {
+            border-color: stencilColor('color-men-design-primary-1');
+        }
     }
 }

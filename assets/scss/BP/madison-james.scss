@@ -555,6 +555,9 @@ body {
                 }
             }
         }
+        .custom-select__option--value {
+            border-color: stencilColor('color-madison-james-primary-1');
+        }
     }
 }
 
