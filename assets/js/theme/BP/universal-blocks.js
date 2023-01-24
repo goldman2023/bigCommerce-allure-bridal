@@ -464,10 +464,11 @@ export function renderHeaderFooter (context) {
                             class="navPages-action ${topNav.sectionChildNavigationCollection?.items?.length > 0 && 'has-subMenu'}"
                             aria-expanded="false"
                             >
-                        ${topNav.topNavLinkName}${topNav.sectionChildNavigationCollection?.items?.length > 0 ? `<i class="icon navPages-action-moreIcon" aria-hidden="true">
+                        ${topNav.topNavLinkName} 
+                        <i class="icon navPages-action-moreIcon" aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="8" height="16" viewBox="0 0 8 16" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M0.400086 14.9374C0.0876666 14.625 0.0876666 14.1184 0.400086 13.806L6.2344 7.97169L0.400086 2.13738C0.087666 1.82496 0.087666 1.31843 0.400085 1.00601C0.712505 0.693586 1.21904 0.693586 1.53146 1.00601L7.36577 6.84032C7.99061 7.46516 7.99061 8.47822 7.36577 9.10306L1.53146 14.9374C1.21904 15.2498 0.712506 15.2498 0.400086 14.9374Z" fill="#93908F"></path>
-                        </svg></i>`: ''}
+                        </svg></i>
                     </a>`;
 
                 if (topNav.sectionChildNavigationCollection.items.length > 0) {
@@ -480,7 +481,7 @@ export function renderHeaderFooter (context) {
                     for (const secondNav of topNav.sectionChildNavigationCollection.items) {
                         navigationHtmlMobile += `<li class="navPage-subMenu-item">
                             <a class="navPage-subMenu-action navPages-action ${secondNav.navItemsCollection?.items?.length > 0 && 'has-subMenu'}" href="${secondNav.navSectionUrl}" aria-label="${secondNav.navSectionName}">${secondNav.navSectionName}
-                            ${secondNav.navItemsCollection?.items?.length > 0 && `
+                            ${secondNav.navItemsCollection?.items?.length > 0 ? `
                             <span class="collapsible-icon-wrapper"
                             data-collapsible="navPages-${secondNav.navSectionName.replaceAll(' ','')}"
                             data-collapsible-disabled-breakpoint="medium"
@@ -492,7 +493,7 @@ export function renderHeaderFooter (context) {
                                     <path d="M10.7929 6.10352e-05H1.20711C0.761654 6.10352e-05 0.538571 0.538632 0.853554 0.853615L5.64645 5.64651C5.84171 5.84177 6.15829 5.84177 6.35355 5.64651L11.1464 0.853615C11.4614 0.538632 11.2383 6.10352e-05 10.7929 6.10352e-05Z" fill="#BC8372"/>
                                     </svg>
                             </i>
-                        </span>`}</a>
+                        </span>`: ''}</a>
                         `;
 
                         navigationHtml += `<ul class="sub-site__navigation-${secondNav.navSectionName.toLowerCase()}">

@@ -1,5 +1,8 @@
 .product-type {
     .suits-product {
+        .productView-sizeGuide {
+            display: none;
+        }
         .productView {
             .border::after {
                 position: absolute;
@@ -50,6 +53,19 @@
                 border: 1px solid stencilColor('color-men-design-primary-1');
                 color: stencilColor('color-white');
             }
+        }
+        .dropdown-menu-button {
+            border: 1px solid stencilColor('color-men-design-primary-1');
+            color: stencilColor('color-men-design-primary-1');
+        
+            &:hover {
+                background: stencilColor('color-men-design-primary-1');
+                border: 1px solid stencilColor('color-men-design-primary-1');
+                color: stencilColor('color-white');
+            }
+        }
+        .custom-select__option--value {
+            border-color: stencilColor('color-men-design-primary-1');
         }
         .blockElementStory .heading-section h2,
         .blockElementStory .heading-section .date,

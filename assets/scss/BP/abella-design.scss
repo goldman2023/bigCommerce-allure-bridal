@@ -564,6 +564,9 @@ body {
                 }
             }
         }
+        .custom-select__option--value {
+            border-color: stencilColor('color-abella-design-primary-1');
+        }
     }
 }
 
