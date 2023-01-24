@@ -215,8 +215,8 @@ export default class Global extends PageManager {
                         lookBook('blockElementLookbook',element);
                     }
                 });
-                if(Object.keys(relatedPro).length > 0) {
 
+                if(Object.keys(relatedPro).length > 0) {
                     if(relatedPro.thePerfectMatch.length > 0) {
                         let perfectmatch = relatedPro.thePerfectMatch.map((item) => item.bc_product_id).filter((a) => a);
                         getProducts(contentId,'.thePerfectMatch .prodData', perfectmatch);
@@ -228,6 +228,28 @@ export default class Global extends PageManager {
                         $('#youMightalsoLike').removeClass('hide');
                     }
                 }
+                
+                //Added recently product using localstorage
+                if (document.getElementById('recentlyViewed')) {
+                    const recentlyProduct = (localStorage.getItem("recentlyProduct")) ? (localStorage.getItem("recentlyProduct")).split(',') : [];
+                    const updatedRecentlyProduct = recentlyProduct.slice();
+                    if (updatedRecentlyProduct.length > 0) {
+                        const currentProductIndex = recentlyProduct.indexOf(this.context.productId);
+                        updatedRecentlyProduct.splice(currentProductIndex, 1);
+                        getProducts(contentId, '.recentlyViewed .prodData', updatedRecentlyProduct);
+                        (updatedRecentlyProduct.length > 0) ? $('#recentlyViewed').removeClass('hide') : '';
+                    }
+                    if (recentlyProduct.indexOf(this.context.productId) !== -1) {
+                        const index = recentlyProduct.indexOf(this.context.productId);
+                        recentlyProduct.splice(index, 1);
+                    }
+                    if (recentlyProduct.length >= 12) {
+                        recentlyProduct.pop();
+                    }
+                    recentlyProduct.unshift(this.context.productId);
+                    localStorage.setItem("recentlyProduct", recentlyProduct.join(','));
+                }
+
                 document.querySelectorAll('.imageWithContentSlider ul').forEach((item) => {
                     applySlider(item,1,false,true);
                 });
@@ -367,9 +389,9 @@ export default class Global extends PageManager {
 
         $(window).on('load', function() {
             setTimeout(function(){
-                applySlider('.productSliderGrid',3,true,true);
+                applySlider('.productSliderGrid', 3, true, true);
                 $('.productGridslider').each(function(){
-                    applySlider('.productGridslider',4,false,true);
+                    applySlider('.productGridslider', 4, false, true);
                 });
                 $('.productGridSection').removeClass('hide');
                 if (document.querySelector('body').classList.contains('product-type')) {
@@ -382,18 +404,18 @@ export default class Global extends PageManager {
                     $('.productGrid').each(function(){
                         let self = $(this);
                         if(self.find('.product').length > 4 ) {
-                            applySlider(self,4,false,false);
+                            applySlider(self, 4, false, false);
                         }
                     });
                 }
                 // const iframe = document.getElementById("schedulebridalapp");
-                const iframe = document.getElementsByTagName('iframe');
-                const iWindow = iframe.contentWindow;
-                const iDocument = iWindow.document;
+                const iframe = document?.getElementsByTagName('iframe');
+                const iWindow = iframe?.contentWindow;
+                const iDocument = iWindow?.document;
 
                 // accessing the element
-                const ielement = iDocument.getElementsByTagName('select');
-                if(ielement.length >0) {
+                const ielement = iDocument?.getElementsByTagName('select');
+                if(ielement?.length > 0) {
                     ielement.customSelect();
                 }
             }, 3000);
