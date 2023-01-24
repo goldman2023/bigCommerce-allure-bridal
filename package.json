@@ -19,6 +19,7 @@
     "foundation-sites": "^5.5.3",
     "inputmask": "^5.0.7",
     "jquery": "^3.5.1",
+    "jquery-custom-select": "^1.6.4",
     "jstree": "^3.3.12",
     "lazysizes": "5.2.2",
     "lodash": "^4.17.21",

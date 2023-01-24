@@ -1,0 +1,219 @@
+// @import "base";
+/*
+ * Custom Select jQuery Plugin Base
+ */
+
+ $custom-select-block: "custom-select" !default;
+
+ .#{$custom-select-block} {
+   position: relative;
+ 
+   &__option {
+     overflow: hidden;
+     box-sizing: border-box;
+     display: block;
+     width: 100%;
+     padding: 0;
+     background-color: transparent;
+     border: 0;
+     border-radius: 0;
+     font-family: inherit;
+     white-space: nowrap;
+     text-align: left;
+     text-overflow: ellipsis;
+     cursor: pointer;
+     user-select: none;
+     -webkit-appearance: none;
+     -moz-appearance: none;
+     appearance: none;
+   }
+ 
+   &__option-wrap {
+     position: relative;
+   }
+ 
+   &__input {
+     box-sizing: border-box;
+     display: block;
+     width: 100%;
+     padding: 0;
+     border-width: 1px 0;
+     border-style: solid;
+     border-radius: 0;
+     font-family: inherit;
+     -webkit-appearance: none;
+     -moz-appearance: none;
+     appearance: none;
+   }
+ 
+   &__dropdown {
+     position: absolute;
+     box-sizing: border-box;
+     width: 100%;
+     top: 100%;
+     left: 0;
+ 
+     .#{$custom-select-block}--dropup & {
+       top: auto;
+       bottom: 100%;
+     }
+   }
+ }
+
+/*
+ * Custom Select jQuery Plugin Theme
+ */
+
+$white: #fff !default;
+
+.#{$custom-select-block} {
+  $_gutter: 0.75rem;
+  $_color: #212121;
+
+  &__option {
+    position: relative;
+    padding: 0.375rem $_gutter;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    color: #615D5D;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover,
+    &:focus {
+        background: #F1E8E7;
+    }
+
+    &--value {
+        padding: 15px 13px;        
+        height: 45px;        
+        background: #FFFFFF;        
+        border: 1px solid #D1B3AB;
+        border-radius: 3px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        color: #615D5D;
+
+        &:hover {
+            background: none;
+        }
+
+      &::after {
+        position: absolute;
+        box-sizing: border-box;
+        width: 0;
+        height: 0;
+        top: 50%;
+        right: $_gutter;
+        border-width: 0.3rem;
+        border-bottom-width: 0;
+        border-style: solid;
+        border-color: currentColor transparent;
+        transform: translateY(-50%);
+        content: "";
+
+        .#{$custom-select-block}--active & {
+          transform: translateY(-50%) rotate(-180deg);
+        }
+      }
+
+      .#{$custom-select-block}--active & {
+        
+        background: #FFFFFF;        
+        border: 1px solid #615D5D;
+        box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.14);
+        border-radius: 0.25rem 0.25rem 0 0;
+
+        &:hover,
+        &:focus {
+          background-color: $white;
+        }
+
+        @at-root {
+          .#{$custom-select-block}--dropup#{&} {
+            border-top-color: transparent;
+            border-bottom-color: darken($white, 10%);
+            border-radius: 0 0 0.25rem 0.25rem;
+          }
+        }
+      }
+    }
+
+    &--selected {
+      background-color: darken($white, 1.25%);
+    }
+
+    &[disabled] {
+      color: lighten($_color, 50%);
+      cursor: default;
+
+      &:hover,
+      &:focus {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &__option-wrap {
+    overflow-y: auto;
+    max-height: (0.375rem * 2 + 1rem * 1.5) * 5;
+
+    &::-webkit-scrollbar {
+      width: 16px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: darken($white, 10%);
+      background-clip: padding-box;
+      border-width: 0 4px;
+      border-style: solid;
+      border-color: transparent;
+    }
+  }
+
+  &__input {
+    position: relative;
+    z-index: 1;
+    height: 2.25rem;
+    margin-top: -1px;
+    padding: 0 $_gutter;
+    border-color: darken($white, 10%);
+    transform: translateY(1px);
+    font-size: 1rem;
+    color: $_color;
+
+    &:focus {
+      outline: none;
+    }
+
+    .#{$custom-select-block}--dropup & {
+      border-top-width: 0;
+      margin-top: 0;
+      transform: translateY(0);
+    }
+  }
+
+  &__dropdown {
+    overflow: hidden;
+    z-index: 1;
+    //top: calc(100% - 1px);
+    background-color: $white;
+    border-width: 0 1px 1px;
+    border-style: solid;
+    border-color: #615D5D;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.14);
+    border-radius: 0 0 0.25rem 0.25rem;
+
+    .#{$custom-select-block}--dropup & {
+      bottom: calc(100% - 1px);
+      border-width: 1px 1px 0;
+      border-radius: 0.25rem 0.25rem 0 0;
+    }
+  }
+}

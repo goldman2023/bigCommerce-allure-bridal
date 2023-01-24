@@ -15,6 +15,8 @@ import adminBar from './global/adminBar';
 import carousel from './common/carousel';
 import loadingProgressBar from './global/loading-progress-bar';
 import svgInjector from './global/svg-injector';
+import 'jquery-custom-select';
+
 import flatpick from './BP/flatpickr';
 import inputmask from './BP/inputmask';
 import {
@@ -54,6 +56,7 @@ import {
 
 export default class Global extends PageManager {
     onReady() {
+        
         const {
             channelId, cartId, productId, categoryId, secureBaseUrl, maintenanceModeSettings, adminBarLanguage,
         } = this.context;
@@ -79,10 +82,7 @@ export default class Global extends PageManager {
             e.preventDefault();
             $('.navPages-quickSearch.mobile-only').toggle();
             $('.header-shadow').toggleClass('opensearch');
-        });
-
-        console.log('customer', this.context.customer);
-       
+        });       
 
         //Product Listing page start
         if (mainContent.contains('pages-custom-category-bp-category') || mainContent.contains('bp-category') || mainContent.contains('pages-custom-category-suits-bp-category')) {
@@ -234,7 +234,10 @@ export default class Global extends PageManager {
             });
 
             $( ".prod-option.color" ).insertBefore( $( ".prod-option.size" ) );
+            $('select').customSelect();
 
+        } else {
+            $('.prod-option.color .form-select').customSelect();
         }
         //Product Detail page end
 
@@ -383,7 +386,16 @@ export default class Global extends PageManager {
                         }
                     });
                 }
-                
+                // const iframe = document.getElementById("schedulebridalapp");
+                const iframe = document.getElementsByTagName('iframe');
+                const iWindow = iframe.contentWindow;
+                const iDocument = iWindow.document;
+
+                // accessing the element
+                const ielement = iDocument.getElementsByTagName('select');
+                if(ielement.length >0) {
+                    ielement.customSelect();
+                }
             }, 3000);
         });
 
@@ -535,5 +547,7 @@ export default class Global extends PageManager {
                 });
             }
         }, 1000);
+
+
     }
 }
