@@ -4,15 +4,13 @@
         {{> components/common/requireness-msg}}
     </label>
     <select class="form-select form-select--small" name="attribute[{{this.id}}]" id="attribute_select_{{id}}" {{#if required}}required{{/if}}>
-        {{#or (if this.display_name '===' 'Sizes Available') (if this.display_name '===' 'Size') (if this.display_name '===' 'Length')}}
+        {{#or (if this.display_name '===' 'Sizes Available') (if this.display_name '===' 'Size')}}
             <option value="">
                 {{#each this.values}}
                     {{#if @first}} {{label}} - {{/if}}
                     {{#if @last}} {{label}} {{/if}}
                 {{/each}}
             </option>
-        {{else}}
-            <option value="">{{lang 'products.choose_options'}}</option>
         {{/or}}
         {{#each this.values}}
             <option data-product-attribute-value="{{id}}" value="{{id}}" {{#if selected}}selected data-default{{/if}}>{{label}}</option>

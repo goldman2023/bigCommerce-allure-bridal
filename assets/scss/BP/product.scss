@@ -32,6 +32,15 @@
             }
         }
     }
+    .size {
+      .form-select {
+        display: block !important;
+        pointer-events: none;
+      }
+      .custom-select__option {
+        display: none;
+      }
+    }
 }
 
 

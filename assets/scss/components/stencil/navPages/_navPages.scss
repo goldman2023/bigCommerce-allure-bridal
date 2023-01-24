@@ -201,12 +201,11 @@
         }
     }
 
-    &.has-subMenu {
-        .navPages-list:not(.navPages-list-depth-max) & {
-            align-items: center;
-            display: flex;
-            justify-content: space-between;
-        }
+    
+    .navPages-list:not(.navPages-list-depth-max) & {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
     }
 
     &.is-open,

@@ -566,7 +566,9 @@ body {
                 }
             }
         }
-        
+        .custom-select__option--value {
+            border-color: stencilColor('color-disney-primary-1');
+        }
     }
 }
 
