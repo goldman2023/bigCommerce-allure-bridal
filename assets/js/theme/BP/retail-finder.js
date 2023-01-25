@@ -539,6 +539,7 @@ export default class RetailFinder extends PageManager {
                 collectionsAvailableCollection {
                     items {
                         collectionName
+                        collectionButtonUrl
                     }
                 }
                 featured
@@ -549,13 +550,13 @@ export default class RetailFinder extends PageManager {
         }
     }`
     const results = await fetch(
-      'https://allure-integration.azurewebsites.net/leads',
+      'https://graphql.contentful.com/content/v1/spaces/y49u4slmhh3t/',
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization:
-            `Bearer ${this.context.leadmgmtApiToken}`,
+            `Bearer ${this.context.contentfulApiToken}`,
         },
         body: JSON.stringify({ query }),
       }
@@ -672,7 +673,8 @@ export default class RetailFinder extends PageManager {
     const collectionsList = document.createElement('div');
     collectionsList.classList.add('collections-list');
     for (const collection of retailer.collectionsAvailableCollection.items) {
-      const collectionItem = document.createElement('div');
+      const collectionItem = document.createElement('a');
+      collectionItem.setAttribute("href", collection.collectionButtonUrl);
       collectionItem.classList.add('collection-item');
       collectionItem.classList.add('retailer-detail');
       collectionItem.innerText = collection.collectionName;
@@ -710,7 +712,7 @@ export default class RetailFinder extends PageManager {
     phoneLabel.innerText = 'PHONE';
     phone.append(phoneLabel);
     const phoneNumber = document.createElement('a');
-    phoneNumber.setAttribute("href", `tel:${retailer.phone}`);
+    phoneNumber.setAttribute("href", `tel:${retailer.phoneNumber}`);
     phoneNumber.classList.add('retailer-detail');
     phoneNumber.innerText = retailer.phoneNumber;
     phone.append(phoneNumber)
@@ -719,6 +721,7 @@ export default class RetailFinder extends PageManager {
     const scheduleBtn = document.createElement('button');
     scheduleBtn.setAttribute('type', 'button');
     scheduleBtn.classList.add('schedule-btn');
+    scheduleBtn.classList.add('book-appt');
 
     const btnText = document.createElement('span');
     btnText.innerText = 'BOOK AN APPOINTMENT'
@@ -947,7 +950,6 @@ export default class RetailFinder extends PageManager {
     modal.updateContent(elem);
   }
   openRequestForm = (retailer) => {
-    console.log(retailer)
     let elem;
     if(retailer.bridalLiveRetailerId) {
         window.location.href = '/request-appointment?retailerId=' + retailer.bridalLiveRetailerId + '&retailerName=' + retailer.retailerName;

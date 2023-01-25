@@ -446,6 +446,9 @@
         padding: 2px;
         display: flex;
         margin-top: 1rem;
+        &.book-appt{
+          display: none;
+        }
         span {
           padding: 14px 0;
           width: 100%;
