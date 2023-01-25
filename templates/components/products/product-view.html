@@ -307,7 +307,7 @@
                                 data-image-gallery-zoom-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
                             > -->
                             <a
-                            class="productView-thumbnail-link"
+                            class="productView-thumbnail-link {{#if @index '===' 0}}is-active{{/if}}"
                             href="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1}}"
                             data-image-gallery-item
                             data-image-gallery-new-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1}}"

@@ -88,20 +88,6 @@
             .originaldate {
                 width: 200px;
             }
-            // &::before {
-            //     position: absolute;
-            //     left: 0;
-            //     content: "";
-            //     width: 70px;
-            //     height: 20px;
-            //     top: 9px;
-            //     background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUyIiBoZWlnaHQ9IjEiIHZpZXdCb3g9IjAgMCAyNTIgMSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeT0iLTkuNTM2NzRlLTA3IiB3aWR0aD0iMjUxLjUiIGhlaWdodD0iMSIgZmlsbD0iI0M4QzZDNiIvPgo8L3N2Zz4K");
-            //     background-repeat: no-repeat;
-            //     @include breakpoint("small") {
-            //         width: 25%
-            //     }
-            // }
-            
         }
     }
     .rightside-section {
@@ -252,7 +238,8 @@
     .mobilecaption {
         padding: 20px 20px 0 20px;
         .button {
-            margin-bottom: 0;
+            display: block;
+            margin: 0 auto;
         }
     }
     .mobilebanner {

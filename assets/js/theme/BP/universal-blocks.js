@@ -699,7 +699,7 @@ export function blockElementFullscreenVideo(selectorID, element) {
             videoURL = `https://www.youtube.com/embed/${element.videoUrl.split('=')[1]}`;
             document.getElementById(selectorID).innerHTML = `<div><iframe type="text/html" src="${videoURL}"  frameborder="0" id="colbannerVideo" controls=0></iframe></div>`;
         } else {
-            document.getElementById(selectorID).innerHTML = `<div><video autoplay loop muted plays-inline="" id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div>`;
+            document.getElementById(selectorID).innerHTML = `<div><video autoplay playsinline loop muted plays-inline="" id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div>`;
         }
     }
 }

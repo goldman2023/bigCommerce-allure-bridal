@@ -1082,9 +1082,9 @@
         "city": "City",
         "state": "State/Province/Country",
         "zip": "Zip Code",
-        "eventDate": "Event Date",
+        "eventDate": "Date of Event",
         "preferedAppointment": "Preferred Appointment Dates (choose 3)",
-        "peopleAttending": "# of People Attending",
+        "peopleAttending": "# of Appointment Attendees",
         "agreeTerms": "I accept the terms and conditions"
     }
 }

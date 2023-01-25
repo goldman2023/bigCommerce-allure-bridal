@@ -52,6 +52,7 @@
      width: 100%;
      top: 100%;
      left: 0;
+     z-index: 999;
  
      .#{$custom-select-block}--dropup & {
        top: auto;
@@ -201,7 +202,7 @@ $white: #fff !default;
 
   &__dropdown {
     overflow: hidden;
-    z-index: 1;
+    z-index: 999;
     //top: calc(100% - 1px);
     background-color: $white;
     border-width: 0 1px 1px;
