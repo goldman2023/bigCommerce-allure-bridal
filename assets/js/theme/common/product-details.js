@@ -195,7 +195,7 @@ export default class ProductDetails extends ProductDetailsBase {
                 const sizeGuide = prodData?.sizeGuideCollection;
                 document.querySelector('.sizeChart .description').innerHTML = sizeGuide?.items[0]?.description;
                 let sizeTableContent = `${sizeGuide?.items?.map((item,i)=>{ return `<input type="radio" id="${item.sizeChartName.toLowerCase().replaceAll(' ','')}" name="css-tabs" ${i === 0 ? 'checked' : ''}>`}).join('')}<ul class="tabs">${sizeGuide?.items?.map((item,i)=>{  return `<li class="tab"><label for="${item.sizeChartName.toLowerCase().replaceAll(' ','')}">${item.sizeChartName}</label></li>`}).join('')}</ul>${sizeGuide?.items?.map((item,i)=>{ return `<div class="tab-content" class="${item.sizeChartName.toLowerCase().replaceAll(' ','')}" >
-                <p class="tableheading">For all styles Spring 2018 and previous</p><div class="tablestructure">${item.sizingData.replace(/[\r\n]/gm, '?').split('?').map((element,i)=> {
+                <p class="tableheading"></p><div class="tablestructure">${item.sizingData.replace(/[\r\n]/gm, '?').split('?').map((element,i)=> {
                         let eachrow = element.split(',').map((el)=>{
                             return `<div class="tb-col">${el}</div>`;
                         });
