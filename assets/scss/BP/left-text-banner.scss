@@ -7,6 +7,18 @@
         @include breakpoint("medium") {
             min-height: unset;
         }
+        &.desktoponly {
+            display: none;
+            @include breakpoint("medium") {
+                display: block;
+            }
+        }
+        &.mobileonly {
+            display: block;
+            @include breakpoint("medium") {
+                display: none;
+            }
+        }
     }
     .overlay {
         background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0)); 
