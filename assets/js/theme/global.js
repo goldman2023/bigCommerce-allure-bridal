@@ -16,6 +16,7 @@ import carousel from './common/carousel';
 import loadingProgressBar from './global/loading-progress-bar';
 import svgInjector from './global/svg-injector';
 import 'jquery-custom-select';
+import swal from './global/sweet-alert';
 
 import flatpick from './BP/flatpickr';
 import inputmask from './BP/inputmask';
@@ -132,7 +133,6 @@ export default class Global extends PageManager {
             productDeatilMetaData(this.context,productId, response => {
                 let metadata = response.contentFul;
                 let relatedPro = response.related;
-
                 if(Object.keys(metadata).length === 0) {
                     $('.contentBlocksCollection').hide();
                 } else {
@@ -570,7 +570,34 @@ export default class Global extends PageManager {
                 });
             }
         }, 1000);
-
+        $('.card .titleIcon').on('click', function(e){
+            e.preventDefault();
+            let prodid = $(this).attr('data-id');
+            fetch("/api/storefront/form-fields?filter=customerAccount", {
+                "method": "GET",
+                "headers": {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then((response) => response.json()).then((data) => {
+                console.log(data);
+                $.ajax({
+                    type: "POST",
+                    url: `/wishlist.php?action=add&wishlistid=107&product_id=${prodid}`,
+                    success: response => {
+                        swal.fire({
+                            text: "Product added to wishlist",
+                            icon: 'success',
+                            showCancelButton: false
+                        })
+                       window.location.href = '/account.php?action=account_details';
+                    },
+                    error: error => {
+                        console.log(error);
+                    }
+                });
+            });
+        });
 
     }
 }
