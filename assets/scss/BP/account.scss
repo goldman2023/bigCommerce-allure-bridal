@@ -106,6 +106,15 @@
         .wishlists-table .table-actions {
             width: 305px;
         }
+        @media screen and (max-width: 374px) {
+            .alertBox-message {
+                padding-right: 10px;
+            }
+            .alertBox-icon {
+                padding-right: 6px;
+            }
+        }
+        
     }
     .productGrid .product {
         @include breakpoint("small") {
