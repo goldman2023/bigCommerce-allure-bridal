@@ -962,6 +962,7 @@ export function createProductSlider(block,blockData) {
         block.querySelector('.sub-products').innerHTML = `<p data-no-products-notification role="alert" aria-live="assertive"tabindex="-1">There are no products listed under this category.</p>`;
     }
     block.querySelector('.sub-description').innerHTML = blockData?.description;
+    block.querySelector('.sub-products').classList.add("slideradded");
 };
 
 export function blogpostTopBanner(selectorID,title,heading,imageHeading,date){

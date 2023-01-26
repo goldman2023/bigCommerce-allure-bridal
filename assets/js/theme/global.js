@@ -106,7 +106,10 @@ export default class Global extends PageManager {
             document.querySelectorAll('.sub-category-block').forEach((item)=> {
                 getProductsByCategoryPath(this.context,item.getAttribute('data-path'),response => {
                     createProductSlider(item,response);
+                    let selectForslider = item.querySelector('.slideradded .productGridslider');
+                    applySlider(selectForslider, 4, false, true);
                 });
+                
             });
             contentFullmetaData(this.context, response => {
                 let metadata = response[0].value;
@@ -133,6 +136,7 @@ export default class Global extends PageManager {
             productDeatilMetaData(this.context,productId, response => {
                 let metadata = response.contentFul;
                 let relatedPro = response.related;
+                console.log(metadata);
                 if(Object.keys(metadata).length === 0) {
                     $('.contentBlocksCollection').hide();
                 } else {
@@ -391,9 +395,12 @@ export default class Global extends PageManager {
         $(window).on('load', function() {
             setTimeout(function(){
                 applySlider('.productSliderGrid', 3, true, true);
+                if (!mainContent.contains('pages-custom-category-category-listing') || !mainContent.contains('category-listing') || !mainContent.contains('pages-custom-category-suits-category-listing')) {
+
                 $('.productGridslider').each(function(){
                     applySlider('.productGridslider', 4, false, true);
                 });
+                }
                 $('.productGridSection').removeClass('hide');
                 if (document.querySelector('body').classList.contains('product-type')) {
 
