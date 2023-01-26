@@ -330,9 +330,9 @@ function categoryQueryByPath (context, categoryPath, callback) {
 }
 export function contentFullmetaData(context, callback) {
     globalMetadata(context,'', response => {
-        if (response.data.site.product !== undefined) {
+        if (response?.data?.site?.product !== undefined) {
             const product = response.data.site.product;
-            if (product.metafields.edges.length > 0) {
+            if (product?.metafields?.edges?.length > 0) {
                 const metafields = product.metafields.edges;
                 const metafieldData = [];
                 const noOfEntries = metafields.length;
