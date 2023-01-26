@@ -282,7 +282,7 @@
 .productView-options {
     @include clearfix;
     margin-bottom: spacing("single");
-    text-align: center;
+    text-align: left;
 
     @include breakpoint("small") {
         text-align: left;
