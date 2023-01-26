@@ -449,6 +449,24 @@
                 });
         });
 
+        var appointmentDate = document.querySelector(".pages-custom-retail-submission-form .form-input.multiple-dates");
+        var eventDate = document.querySelector(".pages-custom-retail-submission-form #eventDate");
+        if(appointmentDate){
+            appointmentDate.flatpickr({
+                disable: [
+                    { from: "1900-01-01", to: new Date().toISOString().split('T')[0] },
+                    "2016-08-24",
+                ]
+            });
+        }
+        if(eventDate){
+            eventDate.flatpickr({
+                disable: [
+                    { from: "1900-01-01", to: new Date().toISOString().split('T')[0] },
+                    "2016-08-24",
+                ]
+            });
+        }
 
     });
 

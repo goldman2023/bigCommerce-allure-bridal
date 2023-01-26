@@ -395,6 +395,8 @@
           .collection-item {
             color: stencilColor('color-default-primary-1');
             flex: 1 1 40%;
+            max-width: 40%;
+            text-decoration: none;
           }
         }
       }

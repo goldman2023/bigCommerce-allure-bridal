@@ -104,6 +104,12 @@ export default class RetailFinder extends PageManager {
     autocomplete.bindTo("bounds", this.map);
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
+      if (!place.geometry || !place.geometry.location) {
+        // User entered the name of a Place that was not suggested and
+        // pressed the Enter key, or the Place Details request failed.
+        window.alert("No details available for input: '" + place.name + "'");
+        return;
+      }
       if (place) {
         this.map?.setCenter({ lat: place.geometry.location.lat(), lng: place.geometry.location.lng() })
         this.map?.setZoom(DEFAULT_ZOOM_LEVEL);
@@ -221,13 +227,14 @@ export default class RetailFinder extends PageManager {
   };
 
   addRetailerInfo = (retailerData) => {
-    const retailFinderResults = document.getElementById('retail-finder-results')
+    const retailFinderResults = document.getElementById('retail-finder-results');
     retailFinderResults.innerHTML = "";
     const total = retailerData.length;
     this.retailers = retailerData;
+    console.log(retailerData.length);
     retailerData.forEach((retailerData, idx) => {
       const retailerItem = this.createRetailerItem(retailerData, total, idx);
-      retailFinderResults.append(retailerItem)
+      retailFinderResults.append(retailerItem);
     });
   }
 
@@ -550,13 +557,13 @@ export default class RetailFinder extends PageManager {
         }
     }`
     const results = await fetch(
-      'https://graphql.contentful.com/content/v1/spaces/y49u4slmhh3t/',
+      'https://allure-integration.azurewebsites.net/leads',
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization:
-            `Bearer ${this.context.contentfulApiToken}`,
+            `Bearer: ${this.context.leadmgmtApiToken}`,
         },
         body: JSON.stringify({ query }),
       }
@@ -675,6 +682,7 @@ export default class RetailFinder extends PageManager {
     for (const collection of retailer.collectionsAvailableCollection.items) {
       const collectionItem = document.createElement('a');
       collectionItem.setAttribute("href", collection.collectionButtonUrl);
+      collectionItem.setAttribute("target", "_blank");
       collectionItem.classList.add('collection-item');
       collectionItem.classList.add('retailer-detail');
       collectionItem.innerText = collection.collectionName;
@@ -951,6 +959,7 @@ export default class RetailFinder extends PageManager {
   }
   openRequestForm = (retailer) => {
     let elem;
+    console.log(retailer.bridalLiveRetailerId + "Test" +retailer.retailerName);
     if(retailer.bridalLiveRetailerId) {
         window.location.href = '/request-appointment?retailerId=' + retailer.bridalLiveRetailerId + '&retailerName=' + retailer.retailerName;
 
