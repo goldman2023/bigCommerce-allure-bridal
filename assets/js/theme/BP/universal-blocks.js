@@ -772,7 +772,7 @@ export function events(blockData) {
               </div>
             </div>`).join('')}
     </div>
-    <a href="${blockData.containerButtonUrl}" class="button button--secondary" >${blockData.containerButtonText}</a>
+    ${blockData.containerButtonUrl !== null ? `<a href="${blockData.containerButtonUrl}" class="button button--secondary" >${blockData.containerButtonText}</a>` : ''}
     </div>`;
 }
 export function blockElementFullscreenImage(blockData) {
@@ -891,7 +891,8 @@ export function collectionPreview(blockData) {
 };
 
 export function leftTextBlockglobal(selectorId, blockData) {
-    return `<div id="${selectorId} block-item" class="${selectorId}"><img data-src="${blockData?.backgroundImage?.url}" alt="category banner" class="lazyload desktoponly"/><img data-src="${blockData?.mobileImage?.url}" alt="category banner" class="lazyload mobileonly"/>
+
+    return `<div id="${selectorId} block-item" class="${selectorId}"><img data-src="${blockData.backgroundImage.url}" alt="category banner" class="lazyload desktoponly"/><img data-src="${blockData?.mobileImage?.url}" alt="category banner" class="lazyload mobileonly"/>
         <div class="overlay"></div><div class="content-wrapper"><div class="caption"><h1 class="title h1-italic">${blockData.bannerTitle}</h1><p class="content body-light-2">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink body-3">${blockData.linkText}</a></div></div></div>`;
 };
 
@@ -971,6 +972,7 @@ export function createProductSlider(block,blockData) {
         block.querySelector('.sub-products').innerHTML = `<p data-no-products-notification role="alert" aria-live="assertive"tabindex="-1">There are no products listed under this category.</p>`;
     }
     block.querySelector('.sub-description').innerHTML = blockData?.description;
+    block.querySelector('.sub-products').classList.add("slideradded");
 };
 
 export function blogpostTopBanner(selectorID,title,heading,imageHeading,date){
