@@ -201,7 +201,7 @@
                 padding: 0;
                 margin: 0;
             }
-            .sizes-available, .size, .length {
+            .sizes-available, .size {
                 .form-label {
                     position: unset;
                 }
@@ -215,6 +215,9 @@
                     padding: 8px 24px;
                     min-height: unset;
                 }
+            }
+            .length {
+                display: none;
             }
         }
         .productView-images {
