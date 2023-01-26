@@ -104,6 +104,12 @@ export default class RetailFinder extends PageManager {
     autocomplete.bindTo("bounds", this.map);
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
+      if (!place.geometry || !place.geometry.location) {
+        // User entered the name of a Place that was not suggested and
+        // pressed the Enter key, or the Place Details request failed.
+        window.alert("No details available for input: '" + place.name + "'");
+        return;
+      }
       if (place) {
         this.map?.setCenter({ lat: place.geometry.location.lat(), lng: place.geometry.location.lng() })
         this.map?.setZoom(DEFAULT_ZOOM_LEVEL);
@@ -221,13 +227,14 @@ export default class RetailFinder extends PageManager {
   };
 
   addRetailerInfo = (retailerData) => {
-    const retailFinderResults = document.getElementById('retail-finder-results')
+    const retailFinderResults = document.getElementById('retail-finder-results');
     retailFinderResults.innerHTML = "";
     const total = retailerData.length;
     this.retailers = retailerData;
+    console.log(retailerData.length);
     retailerData.forEach((retailerData, idx) => {
       const retailerItem = this.createRetailerItem(retailerData, total, idx);
-      retailFinderResults.append(retailerItem)
+      retailFinderResults.append(retailerItem);
     });
   }
 
@@ -539,6 +546,7 @@ export default class RetailFinder extends PageManager {
                 collectionsAvailableCollection {
                     items {
                         collectionName
+                        collectionButtonUrl
                     }
                 }
                 featured
@@ -553,9 +561,7 @@ export default class RetailFinder extends PageManager {
       {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          Authorization:
-            `Bearer ${this.context.leadmgmtApiToken}`,
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({ query }),
       }
@@ -672,7 +678,9 @@ export default class RetailFinder extends PageManager {
     const collectionsList = document.createElement('div');
     collectionsList.classList.add('collections-list');
     for (const collection of retailer.collectionsAvailableCollection.items) {
-      const collectionItem = document.createElement('div');
+      const collectionItem = document.createElement('a');
+      collectionItem.setAttribute("href", collection.collectionButtonUrl);
+      collectionItem.setAttribute("target", "_blank");
       collectionItem.classList.add('collection-item');
       collectionItem.classList.add('retailer-detail');
       collectionItem.innerText = collection.collectionName;
@@ -710,7 +718,7 @@ export default class RetailFinder extends PageManager {
     phoneLabel.innerText = 'PHONE';
     phone.append(phoneLabel);
     const phoneNumber = document.createElement('a');
-    phoneNumber.setAttribute("href", `tel:${retailer.phone}`);
+    phoneNumber.setAttribute("href", `tel:${retailer.phoneNumber}`);
     phoneNumber.classList.add('retailer-detail');
     phoneNumber.innerText = retailer.phoneNumber;
     phone.append(phoneNumber)
@@ -719,6 +727,7 @@ export default class RetailFinder extends PageManager {
     const scheduleBtn = document.createElement('button');
     scheduleBtn.setAttribute('type', 'button');
     scheduleBtn.classList.add('schedule-btn');
+    scheduleBtn.classList.add('book-appt');
 
     const btnText = document.createElement('span');
     btnText.innerText = 'BOOK AN APPOINTMENT'
@@ -947,8 +956,8 @@ export default class RetailFinder extends PageManager {
     modal.updateContent(elem);
   }
   openRequestForm = (retailer) => {
-    console.log(retailer)
     let elem;
+    console.log(retailer.bridalLiveRetailerId + "Test" +retailer.retailerName);
     if(retailer.bridalLiveRetailerId) {
         window.location.href = '/request-appointment?retailerId=' + retailer.bridalLiveRetailerId + '&retailerName=' + retailer.retailerName;
 

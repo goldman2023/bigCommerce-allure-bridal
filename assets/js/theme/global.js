@@ -150,6 +150,7 @@ export default class Global extends PageManager {
                 }
                 
                 let blocksCollections = metadata?.contentBlocksCollection?.items?.map(element => {
+                    console.log('response', element);
                     if(element.__typename === "BlockElementStoryBlock"){
                         return blockElementStory(element);
                     }
