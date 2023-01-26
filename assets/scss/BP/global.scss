@@ -613,3 +613,12 @@ input:-internal-autofill-selected {
         background-color: stencilColor('color-theme') !important;
     }
 }
+.pages-errors-404 {
+    .form-prefixPostfix.wrap {
+        .button.button--primary {
+            width: auto;
+            margin-top: 0;
+            margin-left: 5px;
+        }
+    }
+}
