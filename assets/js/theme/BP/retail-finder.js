@@ -561,9 +561,7 @@ export default class RetailFinder extends PageManager {
       {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          Authorization:
-            `Bearer: ${this.context.leadmgmtApiToken}`,
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({ query }),
       }
