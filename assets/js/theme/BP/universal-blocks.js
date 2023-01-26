@@ -891,7 +891,7 @@ export function collectionPreview(blockData) {
 };
 
 export function leftTextBlockglobal(selectorId, blockData) {
-    return `<div id="${selectorId} block-item" class="${selectorId}"><img data-src="${blockData.backgroundImage.url}" alt="category banner" class="lazyload desktoponly"/><img data-src="${blockData.mobileImage.url}" alt="category banner" class="lazyload mobileonly"/>
+    return `<div id="${selectorId} block-item" class="${selectorId}"><img data-src="${blockData?.backgroundImage?.url}" alt="category banner" class="lazyload desktoponly"/><img data-src="${blockData?.mobileImage?.url}" alt="category banner" class="lazyload mobileonly"/>
         <div class="overlay"></div><div class="content-wrapper"><div class="caption"><h1 class="title h1-italic">${blockData.bannerTitle}</h1><p class="content body-light-2">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink body-3">${blockData.linkText}</a></div></div></div>`;
 };
 
