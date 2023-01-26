@@ -606,8 +606,12 @@ export function getFirstprodImageFromCategory(context,path, callback) {
 }
 
 export function createCategorySlider(block,blockdata) {
-    if(blockdata.products.edges.length > 0){
-        block.querySelector('.cardimage').setAttribute("src", blockdata.products.edges[0].node.defaultImage.url);
+    if(blockdata?.products?.edges?.length > 0) {
+        if (blockdata.products.edges[0].node.defaultImage !== null) {
+            block.querySelector('.cardimage').setAttribute("src", blockdata.products.edges[0].node.defaultImage.url);
+        } else {
+            block.querySelector('.cardimage').setAttribute("src", 'https://via.placeholder.com/150x250?Text=No Image');  
+        }
     } else {
         block.querySelector('.cardimage').setAttribute("src", 'https://via.placeholder.com/150x250?Text=No Image'); 
     }
@@ -772,12 +776,12 @@ export function events(blockData) {
     </div>`;
 }
 export function blockElementFullscreenImage(blockData) {
-    return `<div class="blockElementFullscreenImage block-item ${(blockData?.contentOrScreenWidth !== 'Screen Width') ? 'full-size' : ''}" id="blockElementFullscreenImage"><div class="mainImage"><img data-src="${blockData?.backgroundImage?.url}" alt="${blockData?.subheadline}" class="lazyload"/>
-    ${blockData?.bodyCopy !== null ? `<div class="homepageCaption"><div class="content"><div class="bannercap"><h4>${blockData?.subheadline}</h4><p>${blockData?.bodyCopy}</p><a href="${blockData?.linkUrl}">${blockData?.linkText}</a></div>` : ''}</div></div></div></div>`;
+    return `<div class="blockElementFullscreenImage block-item ${(blockData?.contentOrScreenWidth !== 'Screen Width') ? 'full-size' : ''}" id="blockElementFullscreenImage"><div class="mainImage"><img data-src="${blockData?.backgroundImage?.url}" alt="${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>
+    ${blockData?.bodyCopy !== null ? `<div class="homepageCaption"><div class="content"><div class="bannercap"><h4>${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}</h4><p>${(blockData?.bodyCopy && blockData?.bodyCopy !== undefined) ? blockData?.bodyCopy : ''}</p><a href="${blockData?.linkUrl}">${blockData?.linkText}</a></div>` : ''}</div></div></div></div>`;
 }
 
 export function blockElementCopyBlock(blockData) {
-    return `<div class="blockElementCopyBlock block-item" id="blockElementCopyBlock"><div class="heightwidth"><h2 class="h2">${blockData?.blockName}</h2><p class="body-light-1">${blockData?.bodyCopy}<p></div></div>`;
+    return `<div class="blockElementCopyBlock block-item" id="blockElementCopyBlock"><div class="heightwidth"><h2 class="h2">${(blockData?.blockName && blockData?.blockName !== undefined) ? blockData?.blockName : ''}</h2><p class="body-light-1">${(blockData?.bodyCopy && blockData?.bodyCopy !== undefined) ? blockData?.bodyCopy : ''}<p></div></div>`;
 }
 
 export function logoSliderBlock(blockData) {
@@ -813,10 +817,15 @@ export function blockElementStory(blockData) {
         <img data-src="${blockData?.imagesCollection?.items[0]?.url}" alt="${blockData?.imagesCollection?.items[0]?.title}" class="lazyload"/>
         </div></div><div class="rightside-section"><div class="rightcol">
         <img data-src="${(blockData?.imagesCollection?.items[1]?.url !== undefined) ? blockData?.imagesCollection?.items[1]?.url : ''}" class="topleft lazyload" alt="${(blockData?.imagesCollection?.items[1]?.title !== undefined) ? blockData?.imagesCollection?.items[1]?.title : ''}"/>
-        <div class="caption"><p class="content body-2">${blockData?.bodyCopy}</p>
-        <a href="${(blockData?.linkUrl) ? blockData?.linkUrl : ''}" class="button button--secondary buttonlink">${blockData?.linkText}</a></div></div><div class="topright">
+        <div class="caption"><p class="content body-2">${(blockData?.bodyCopy && blockData?.bodyCopy !== undefined) ? blockData?.bodyCopy : ''}</p>
+        ${(blockData?.linkUrl && blockData?.linkUrl !== undefined && blockData?.linkText && blockData?.linkText !== undefined) ? 
+        `<a href="${(blockData?.linkUrl) ? blockData?.linkUrl : ''}" class="button button--secondary buttonlink">${(blockData?.linkText) ? blockData?.linkText : ''}</a>` : ''}
+        </div></div><div class="topright">
         <img data-src="${(blockData?.imagesCollection?.items[2]?.url !== undefined) ? blockData?.imagesCollection?.items[2]?.url : ''}"  alt="${(blockData?.imagesCollection?.items[2]?.title !== undefined) ? blockData?.imagesCollection?.items[2]?.title : ''}" class="lazyload"/>
-        </div></div><div class="mobilecaption"><p class="content body-2">${blockData?.bodyCopy}</p><a href="${(blockData?.linkUrl) ? blockData?.linkUrl : ''}" class="button button--secondary buttonlink">${blockData?.linkText}</a></div>
+        </div></div><div class="mobilecaption"><p class="content body-2">${(blockData?.bodyCopy && blockData?.bodyCopy !== undefined) ? blockData?.bodyCopy : ''}</p>
+        ${(blockData?.linkUrl && blockData?.linkUrl !== undefined && blockData?.linkText && blockData?.linkText !== undefined) ?
+        `<a href="${(blockData?.linkUrl) ? blockData?.linkUrl : ''}" class="button button--secondary buttonlink">${(blockData?.linkText) ? blockData?.linkText : ''}</a>` : ''}
+        </div>
         <div class="mobilebanner"><img data-src="${blockData?.imagesCollection?.items[0]?.url}" alt="${blockData?.imagesCollection?.items[0]?.title}" class="lazyload"/></div></div></div>`;
 }
 
