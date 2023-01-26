@@ -598,6 +598,36 @@ export default class Global extends PageManager {
                 });
             });
         });
-
+        /*
+        if (this.context.customer) {
+            $.ajax({
+                type: "GET",
+                url: `/account.php?action=account_details`,
+                dataType: 'html',
+                success: response => {
+                    console.log('default wishlist', $(response).find("input[data-label='Default Wishlist']").val());
+                    const wishlistId = $(response).find("input[data-label='Default Wishlist']").val();
+                    $.ajax({
+                        type: "GET",
+                        url: `/wishlist.php?action=add&wishlistid=${wishlistId}&product_id=2708`,
+                        success: response => {
+                            swal.fire({
+                                text: "Product added to wishlist",
+                                icon: 'success',
+                                showCancelButton: false
+                            });
+                        },
+                        error: error => {
+                            console.log(error);
+                        }
+                    });
+                },
+                error: error => {
+                    console.log(error);
+                }
+            });
+        }
+        */
+        
     }
 }
