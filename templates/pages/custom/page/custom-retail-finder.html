@@ -41,7 +41,7 @@
                     <div class="form-field filter">
                         <span class="form-label">{{lang 'request_appointment.firstName'}} <span class="asterisk">*</span></span>
     
-                        <input required class="form-input" type="text" name="firstName"
+                        <input required class="form-input" type="text" name="firstName" oninvalid="this.setCustomValidity('THIS FIELD IS REQUIRED'); this.setCustomValidity.style.background='#000'" onchange="try{setCustomValidity('')}catch(e){};"
                             placeholder="{{lang 'request_appointment.firstName'}}">
     
                     </div>
@@ -65,7 +65,7 @@
                     <div class="form-field filter">
                         <span class="form-label">{{lang 'request_appointment.phone'}} <span class="asterisk">*</span></span>
 
-                        <input id="phone" required class="form-input" type="tel" name="phoneNumber"
+                        <input id="phone" required class="form-input" type="tel" minlength="10" name="phoneNumber"
                             placeholder="{{lang 'request_appointment.phone'}}"/>
 
                     </div>
@@ -190,7 +190,7 @@
                     <div class="form-field filter">
                         <span class="form-label">{{lang 'request_appointment.peopleAttending'}} <span class="asterisk">*</span></span>
     
-                        <input class="form-input" type="number" name="noOfPeopleAttending"
+                        <input class="form-input" type="number" min="0" name="noOfPeopleAttending"
                             placeholder="{{lang 'request_appointment.peopleAttending'}}">
     
                     </div>
@@ -373,9 +373,8 @@
 
             //get unmasked phone number
             var unmaskedPhone = Inputmask.unmask(phone, { "mask": "(999) 999-9999" });
-
             // validate the form values
-            if (!firstName || !lastName || !email || !phone || !address1 || !city || !state || !zip || !eventDate || !noOfPeopleAttending || !preferredDates) {
+            if (!firstName || !lastName || !email || !phone || unmaskedPhone.length < 10 || !address1 || !city || !state || !zip || !eventDate || !noOfPeopleAttending || !preferredDates) {
                 // show an error message if any of the required fields are empty
                 alert('Please fill out all the required fields.');
                 return;
@@ -439,20 +438,17 @@
         if(appointmentDate){
             appointmentDate.flatpickr({
                 disable: [
-                    { from: "1900-01-01", to: new Date().toISOString().split('T')[0] },
-                    "2016-08-24",
+                    { from: "1900-01-01", to: new Date().toISOString().split('T')[0] }
                 ]
             });
         }
         if(eventDate){
             eventDate.flatpickr({
                 disable: [
-                    { from: "1900-01-01", to: new Date().toISOString().split('T')[0] },
-                    "2016-08-24",
+                    { from: "1900-01-01", to: new Date().toISOString().split('T')[0] }
                 ]
             });
         }
-
     });
 
 </script>
