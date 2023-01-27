@@ -175,7 +175,7 @@
                         <span class="form-label">{{lang 'request_appointment.zip'}} <span class="asterisk">*</span></span>
 
                         <input id="zip" maxlength="5" class="form-input" type="text" name="zip"
-                            placeholder="{{lang 'request_appointment.zip'}}">
+                            placeholder="{{lang 'request_appointment.zip'}}" onkeyup="this.value=this.value.replace(/[a-zA-Z]/,'');">
 
                     </div>
                 </div>
@@ -190,8 +190,8 @@
                     <div class="form-field filter">
                         <span class="form-label">{{lang 'request_appointment.peopleAttending'}} <span class="asterisk">*</span></span>
     
-                        <input class="form-input" type="number" min="0" name="noOfPeopleAttending"
-                            placeholder="{{lang 'request_appointment.peopleAttending'}}">
+                        <input class="form-input" type="number" min="1" name="noOfPeopleAttending"
+                            placeholder="{{lang 'request_appointment.peopleAttending'}}" onkeyup="this.value=this.value.replace(/[$&+,:;=?[\]@#|{}'<>.^*()%!-/]/,'');">
     
                     </div>
                 </div>
