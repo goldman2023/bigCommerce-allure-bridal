@@ -112,7 +112,7 @@
     display: none;
 
     @include breakpoint("medium") {
-        display: block; // 1
+        display: none; // 1
     }
 }
 

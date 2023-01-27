@@ -35,11 +35,10 @@
         </div>
         <div class="page category-container-block-section" >
             <div class="pagefilterheader">
-                <div></div>
-                <div class="rightside"> 
-                    <span>Showing  {{category.total_products}} product<span>{{#if category.total_products '>=' 1}}s{{/if}}</span></span>
-                    <button class="hideshowfilter"></button>
+                <div class="leftside"> 
+                    <button class="hideshowfilter">Filters</button>
                 </div>
+                <div></div>
             </div>
             <div class="plp-cont">
             {{#if category.faceted_search_enabled}}
