@@ -228,6 +228,13 @@
             &:hover::after {
                 @include wishlist-icon-hover(stencilColor('color-default-primary-1'), stencilColor('color-default-primary-4'));
             }
+            .loadingOverlay::before {
+                height: 20px;
+                width: 20px;
+            }
+            &.is-active .loadingOverlay {
+                display: block;
+            }
         }
     }
 
