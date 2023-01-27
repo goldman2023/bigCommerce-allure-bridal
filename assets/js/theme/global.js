@@ -105,7 +105,7 @@ export default class Global extends PageManager {
         if (mainContent.contains('pages-custom-category-category-listing') || mainContent.contains('category-listing') || mainContent.contains('pages-custom-category-suits-category-listing')) {
             document.querySelectorAll('.sub-category-block').forEach((item)=> {
                 getProductsByCategoryPath(this.context,item.getAttribute('data-path'),response => {
-                    createProductSlider(item,response);
+                    createProductSlider(this.context, item, response);
                     let selectForslider = item.querySelector('.slideradded .productGridslider');
                     applySlider(selectForslider, 4, false, true);
                 });
@@ -136,7 +136,6 @@ export default class Global extends PageManager {
             productDeatilMetaData(this.context,productId, response => {
                 let metadata = response.contentFul;
                 let relatedPro = response.related;
-                console.log(metadata);
                 if(Object.keys(metadata).length === 0) {
                     $('.contentBlocksCollection').hide();
                 } else {
@@ -222,12 +221,12 @@ export default class Global extends PageManager {
                 });
 
                 if(Object.keys(relatedPro).length > 0) {
-                    if(relatedPro.thePerfectMatch.length > 0) {
+                    if(relatedPro?.thePerfectMatch?.length > 0) {
                         let perfectmatch = relatedPro.thePerfectMatch.map((item) => item.bc_product_id).filter((a) => a);
                         getProducts(contentId,'.thePerfectMatch .prodData', perfectmatch);
                         $('#thePerfectMatch').removeClass('hide');
                     }
-                    if(relatedPro.youMightAlsoLike.length > 0) {
+                    if(relatedPro?.youMightAlsoLike?.length > 0) {
                         let youmaylike = relatedPro.youMightAlsoLike.map((item) => item.bc_product_id).filter((a) => a);
                         getProducts(contentId,'.youMightalsoLike .prodData', youmaylike);
                         $('#youMightalsoLike').removeClass('hide');
@@ -302,7 +301,7 @@ export default class Global extends PageManager {
                                     document.querySelector('.productSlider .descrip').style.display = 'none';
                                 }
                             }
-                            let blocksCollections = element.contentBlocksCollection.items.map(ele => {
+                            let blocksCollections = element?.contentBlocksCollection?.items?.map(ele => {
                                 
                                 if (ele.__typename === "BlockElementCollectionPreview") {
                                     return collectionPreview(ele);
@@ -367,7 +366,7 @@ export default class Global extends PageManager {
                                 }
                             });
 
-                            document.getElementById('contentBlocksCollection').innerHTML = blocksCollections.join('');
+                            document.getElementById('contentBlocksCollection').innerHTML = (blocksCollections && blocksCollections !== undefined) ? blocksCollections?.join('') : '';
 
                             document.querySelectorAll('.imageWithContentSlider ul').forEach((item) => {
                                 applySlider(item, 1, false, true);
@@ -503,7 +502,7 @@ export default class Global extends PageManager {
                     dots: false,
                     infinite: false,
                     speed: 300,
-                    slidesToShow: tabs.length > 6 ? 6 : tabs.length,
+                    slidesToShow: tabs.length > 9 ? 9 : tabs.length,
                     slidesToScroll: 1,
                     centerMode: false,
                     arrows: true,
