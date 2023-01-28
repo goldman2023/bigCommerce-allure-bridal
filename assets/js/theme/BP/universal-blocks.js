@@ -714,7 +714,7 @@ export function globalblockElementFullscreenVideo(element) {
         videoURL = `https://www.youtube.com/embed/${element.videoUrl.split('=')[1]}`;
         return `<div class="blockElementFullscreenVideo block-item full-size" ><div><iframe type="text/html" src="${videoURL}"  frameborder="0" id="colbannerVideo" controls=0></iframe></div></div>`;
     } else {
-          return `<div class="blockElementFullscreenVideo block-item full-size" ><div><video autoplay loop muted plays-inline="" id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div></div>`;
+          return `<div class="blockElementFullscreenVideo block-item full-size" ><div><video autoplay loop muted playsinline plays-inline="" id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div></div>`;
     }
 }
 
