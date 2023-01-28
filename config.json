@@ -108,6 +108,7 @@
     "productthumb_size": "100x100",
     "thumb_size": "100x100",
     "zoom_size": "1280x1280",
+    "pop_size": "2500x2500",
     "blog_size": "190x250",
     "default_image_brand": "img/BrandDefault.gif",
     "default_image_product": "img/notfound.png",

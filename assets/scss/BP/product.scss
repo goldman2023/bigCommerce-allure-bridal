@@ -47,22 +47,24 @@
   .pdpimagemodal {
     display: none; 
     position: fixed; 
-    z-index: 1;
-    padding-top: 50px;
     left: 0;
     top: 0;
-    width: 100%;
+    z-index: 1000;
+    width: 100vw;
+    min-height: 100vh;
+    overflow: auto;
     height: 100%;
-    overflow: auto; 
-    z-index: 9999;
     background-color: rgba(0,0,0,0.4);
   }
   
   .pdpimagemodal .modal-content {
     margin: auto;
     display: block;
-    width: 80%;
-    max-width: 700px;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: top;
+    width: 100vw;
+    height: auto;
   }
 
   .pdpimagemodal .modal-content {  
