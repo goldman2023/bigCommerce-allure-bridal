@@ -394,6 +394,15 @@ body {
                 .caption {
                     h1 {
                         color: stencilColor('color-disney-primary-1');
+                        &::after {
+                            @include disneyDivider();
+                            width: 13px;
+                            height: 13px;
+                            transform: unset;
+                            outline: unset;
+                            right: 28px;
+                            top: 40%;
+                        }
                     }
 
                     p {
@@ -475,9 +484,6 @@ body {
                     .blockrow {
                         background: stencilColor('color-disney-accent-1');
                         .caption {
-                            .title {
-                                margin: 0 0 8px;
-                            }
                             .title, .content {
                                 text-shadow: unset;
                                 color: stencilColor('color-black');
@@ -579,7 +585,7 @@ body {
                     margin: auto;
                     background: unset;
                     transform: unset;
-                    bottom: -6px;
+                    bottom: -7px;
                     background-color: transparent;
                     outline: unset;
                     @include disneyDivider();
@@ -602,7 +608,7 @@ body {
                 height: 13px;
                 background: unset;
                 transform: unset;
-                bottom: -6px;
+                bottom: -7px;
                 background-color: transparent;
                 outline: unset;
                 @include disneyDivider();
