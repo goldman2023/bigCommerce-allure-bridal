@@ -283,6 +283,7 @@ export default class Global extends PageManager {
         if (mainContent.contains('pages-custom-category-category-landing') || mainContent.contains('category-landing')) {
             let geturl = document.getElementById('categoryLanding').getAttribute('data-url')
             getCategorySpecificMetaData(this.context, geturl, response => {
+                console.log(response);
                 for (const categoryData of response) {
                     if (categoryData.key === "Contentful Data") {
                         let contentfulData = categoryData?.value;
@@ -292,6 +293,7 @@ export default class Global extends PageManager {
                                 if (element.collectionBannerImage1) {
                                     blockElementFullscreenVideo('blockElementFullscreenVideo', element.collectionBannerImage1);
                                 }
+                                
                                 let heading = element.collectionHeadline;
                                 let lastword = heading?.split(" ")?.reverse()[0];
                                 document.querySelector('.productSlider .heading').innerHTML = `${(heading?.replace(lastword, '') !== undefined) ? heading?.replace(lastword, '') : ''} <span class="lastword h1-italic">${(lastword !== undefined) ? lastword : ''}</span>`;

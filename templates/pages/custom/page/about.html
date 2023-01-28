@@ -10,28 +10,27 @@
         </div>
         <ul class="productGridslider aboutcategorylist" >
             {{#each categories}}
-            {{#each children}}
-            <li class="catlist product" data-path="{{url}}">
-                <article class="card">
-                    <figure class="card-figure">
-                        <a href="{{url}}">
-                            <div class="card-img-container">
-                                <img class="cardimage" src="https://via.placeholder.com/150x250?Text=No-Image" alt="{{name}}">
+                {{#each children}}
+                    <li class="catlist product" data-path="{{url}}">
+                        <article class="card">
+                            <figure class="card-figure">
+                                <a href="{{url}}">
+                                    <div class="card-img-container">
+                                        <img class="cardimage" src={{cdn 'assets/img/notfound.png'}}" alt="{{name}}">
+                                    </div>
+                                </a>
+                            </figure>
+                            <div class="card-body">
+                                <h3 class="card-title">
+                                    <a href="{{url}}" class="h4">
+                                        {{name}}               
+                                    </a>
+                                </h3>
                             </div>
-                        </a>
-                    </figure>
-                    <div class="card-body">
-                        <h3 class="card-title">
-                            <a href="{{url}}" class="h4">
-                                {{name}}               
-                            </a>
-                        </h3>
-                    </div>
-                </article>
-          </li>
+                        </article>
+                    </li>
+                {{/each}}
             {{/each}}
-        {{/each}}
-            
         </ul>
        </div>
        <div class="instaFeedDiv">

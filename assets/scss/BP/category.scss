@@ -1,4 +1,8 @@
 .bp-category {
+    .accordion-size {
+        display: none;
+    }
+
     .sidebarBlock+.sidebarBlock {
         padding-top: 60px;
 
@@ -651,5 +655,13 @@ body {
             width: 100%;
         }
     }
+    }
+}
+
+.categor-page-dresses {
+    .bp-cat-content {
+        .page-heading {
+            display: none;
+        }
     }
 }
