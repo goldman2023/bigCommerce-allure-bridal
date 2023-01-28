@@ -684,7 +684,7 @@ export function getProducts(context, selector, prodList, slidescroll) {
                 const productArray = productsData.data.site.products.edges;
                 let prdlist = [];
                 if (productArray.length > 0) {
-                    prdlist = productCard(productArray);
+                    prdlist = productCard(context, productArray);
                     if (slidescroll) {
                         document.querySelector(selector).innerHTML = `<ul class="productSliderGrid" data-slick='{"slidesToShow": ${slidescroll}, "slidesToScroll": 1}'>${prdlist.join('')}</ul>`;
                     } else {
@@ -759,11 +759,11 @@ export function events(blockData) {
                     <label>Date</label>
                     <p class="colored">${new Date(item.eventStartDate).toLocaleDateString().replaceAll('/','.')} - ${new Date(item.eventEndDate).toLocaleDateString().replaceAll('/','.')}</p>
                     <label>Collections</label>
-                    <p class="colored">${item.collectionsAvailable.map((col)=> `${col}`).join("  ")}</p>
+                    <p class="colored">${item.collectionsAvailable.map((col)=> `${col}`).join(", ")}</p>
                     <label>address</label>
                     <span>${item.locationAddressStreet}</span>
                     <span>${item.locationAddressCityStateZip}</span>
-                    <p><a class="colored" href="http://maps.google.com/?q=${item.locationAddressStreet} ${item.locationAddressCityStateZip}">GET DIRECTION</a></p>
+                    <p><a class="colored" href="http://maps.google.com/?q=${item.locationAddressStreet} ${item.locationAddressCityStateZip}">GET DIRECTIONS</a></p>
                     <label>Phone</label>
                     <p>${item.locationPhoneNumber}</p>
                     <label>website</label>
@@ -802,9 +802,12 @@ export function blockElementDiscover(blockData) {
                         <div class="rightcol">${blockData?.imagesCollection?.items[2]?.url ? `<img  class="lazyload third" data-src="${blockData?.imagesCollection?.items[2]?.url}"  alt="${blockData?.imagesCollection?.items[2]?.title}" />` : '' }</div>
                     </div>
                     <div class="caption">
-                        <h1 class="h1-italic">${blockData?.blocktitle}</h1>
-                        <p class="content body-1">${blockData?.bodyCopy}</p>
-                        <a href="${blockData?.linkUrl}" class="button button--secondary buttonlink">${blockData?.linkText}</a>
+                        ${(blockData?.blocktitle && blockData?.blocktitle !== undefined) ?
+                        `<h1 class="h1-italic">${blockData?.blocktitle}</h1>` : ''}
+                        ${(blockData?.bodyCopy && blockData?.bodyCopy !== undefined) ?
+                        `<p class="content body-1">${blockData?.bodyCopy}</p>` : ''}
+                        ${(blockData?.linkUrl && blockData?.linkUrl !== undefined) ?
+                        `<a href="${blockData?.linkUrl}" class="button button--secondary buttonlink">${blockData?.linkText}</a>`: ''}
                     </div>
                 </div>
             </div>`;
@@ -845,7 +848,7 @@ export function imageWithContentSlider(blockData) {
         return `<li><div class="blockrow"><div class="leftblock block">
         <img data-src="${item?.imagesCollection?.items[0]?.url}" alt="image left block" class="lazyload"/>
         </div><div class="rightblock block"><div class="caption">
-        <h1 class="title h1-italic">${item?.title}</h1><p class="content body-light-1">${(item.bodyCopy) ? item.bodyCopy : ''}</p>${item.linkUrl ? `<a href="${(item.linkUrl) ? item.linkUrl : ''}" class="buttonlink body-3">${(item.linkText) ? item.linkText : ''}</a>` : ''}
+        <h2 class="title h2-italic">${item?.title}</h2><p class="content body-light-1">${(item.bodyCopy) ? item.bodyCopy : ''}</p>${item.linkUrl ? `<a href="${(item.linkUrl) ? item.linkUrl : ''}" class="buttonlink body-3">${(item.linkText) ? item.linkText : ''}</a>` : ''}
         </div></div></div></li>`
     });
     return `<div class="imageWithContentSlider block-item full-size" id="imageWithContentSlider"><ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1,"infinite": true}'>${sliderLi.join('')}</ul></div>`;
@@ -933,13 +936,14 @@ export function blockElementVerticalGallery(blockData) {
     }
 };
 
-function productCard(products) {
+function productCard(context, products) {
     return products.map((item) => {
         return `<li class="product"><article class="card" data-test="card-271"><figure class="card-figure">
-                    <a href="${item?.node?.path}" class="card-figure__link"><div class="card-img-container">
-                            <img data-src="${item?.node?.defaultImage ? item?.node?.defaultImage?.url :  '/stencil/00000000-0000-0000-0000-000000000001/img/ProductDefault.gif'}" alt="${item?.node?.name}" title="${item?.node?.name}" data-sizes="auto" 
-                            srcset="${item?.node?.defaultImage ? item?.node?.defaultImage?.url :  '/stencil/00000000-0000-0000-0000-000000000001/img/ProductDefault.gif'} 80w, ${item?.node?.defaultImage ? item?.node?.defaultImage?.url :  '/stencil/00000000-0000-0000-0000-000000000001/img/ProductDefault.gif'} 160w, ${item?.node?.defaultImage ? item?.node?.defaultImage?.url :  '/stencil/00000000-0000-0000-0000-000000000001/img/ProductDefault.gif'} 320w, ${item?.node?.defaultImage ? item?.node?.defaultImage?.url :  '/stencil/00000000-0000-0000-0000-000000000001/img/ProductDefault.gif'} 640w, ${item?.node?.defaultImage ? item?.node?.defaultImage?.url :  '/stencil/00000000-0000-0000-0000-000000000001/img/ProductDefault.gif'} 960w, ${item?.node?.defaultImage ? item?.node?.defaultImage?.url :  '/stencil/00000000-0000-0000-0000-000000000001/img/ProductDefault.gif'} 1280w, ${item?.node?.defaultImage ? item?.node?.defaultImage?.url :  '/stencil/00000000-0000-0000-0000-000000000001/img/ProductDefault.gif'} 1920w, ${item?.node?.defaultImage ? item?.node?.defaultImage?.url :  '/stencil/00000000-0000-0000-0000-000000000001/img/ProductDefault.gif'} 2560w" 
-                            data-srcset="${item?.node?.defaultImage ? item?.node?.defaultImage?.url :  '/stencil/00000000-0000-0000-0000-000000000001/img/ProductDefault.gif'} 80w, ${item?.node?.defaultImage ? item?.node?.defaultImage?.url :  '/stencil/00000000-0000-0000-0000-000000000001/img/ProductDefault.gif'} 160w, ${item?.node?.defaultImage ? item?.node?.defaultImage?.url :  '/stencil/00000000-0000-0000-0000-000000000001/img/ProductDefault.gif'} 320w, ${item?.node?.defaultImage ? item?.node?.defaultImage?.url :  '/stencil/00000000-0000-0000-0000-000000000001/img/ProductDefault.gif'} 640w, ${item?.node?.defaultImage ? item?.node?.defaultImage?.url :  '/stencil/00000000-0000-0000-0000-000000000001/img/ProductDefault.gif'} 960w, ${item?.node?.defaultImage ? item?.node?.defaultImage?.url :  '/stencil/00000000-0000-0000-0000-000000000001/img/ProductDefault.gif'} 1280w, ${item?.node?.defaultImage ? item?.node?.defaultImage?.url :  '/stencil/00000000-0000-0000-0000-000000000001/img/ProductDefault.gif'} 1920w,${item?.node?.defaultImage ? item?.node?.defaultImage?.url :  '/stencil/00000000-0000-0000-0000-000000000001/img/ProductDefault.gif'} 2560w" class="card-image lazyautosizes lazyload">
+                    <a href="${item?.node?.path}" class="card-figure__link"><div class="card-img-container ddd">
+                            ${ (item?.node?.defaultImage?.url && item?.node?.defaultImage?.url !== undefined) ? 
+                                `<img data-src="${item?.node?.defaultImage?.url}" alt="${item?.node?.name}" title="${item?.node?.name}" data-sizes="auto" 
+                                srcset="${item?.node?.defaultImage?.url} 80w, ${item?.node?.defaultImage?.url} 160w, ${item?.node?.defaultImage?.url} 320w, ${item?.node?.defaultImage?.url} 640w, ${item?.node?.defaultImage?.url} 960w, ${item?.node?.defaultImage?.url} 1280w, ${item?.node?.defaultImage?.url} 1920w, ${item?.node?.defaultImage?.url} 2560w" 
+                                data-srcset="${item?.node?.defaultImage?.url} 80w, ${item?.node?.defaultImage?.url} 160w, ${item?.node?.defaultImage?.url} 320w, ${item?.node?.defaultImage?.url} 640w, ${item?.node?.defaultImage?.url} 960w, ${item?.node?.defaultImage?.url} 1280w, ${item?.node?.defaultImage?.url} 1920w,${item?.node?.defaultImage?.url} 2560w" class="card-image lazyautosizes lazyload">` : `<img data-src="${context.notFoundImg}" title="${item?.node?.name}" class="card-image lazyautosizes lazyload" />`
                         </div></a><div class="card-body"><h4 class="card-title"><a aria-label="${item?.node?.name}" "="" href="${item?.node?.path}" class="name h4">${item?.node?.name}</a>
                     <a href="/wishlist.php?action=addwishlist&product_id=${item?.node?.entityId}" class="titleIcon"></a></h4><div class="card-text body-3" data-test-info-type="price">${item?.node?.description}</div></article>
                 </li>`;
@@ -963,10 +967,10 @@ export function leftTextBlock(selectorId,blockData) {
     document.getElementById(selectorId).innerHTML = contentStructure;
 };
 
-export function createProductSlider(block,blockData) {
+export function createProductSlider(context, block, blockData) {
     let prdlist = [];
     if(blockData?.products?.edges?.length > 0 ){
-        prdlist = productCard(blockData?.products?.edges);
+        prdlist = productCard(context, blockData?.products?.edges);
         block.querySelector('.sub-products').innerHTML = `<ul class="productGridslider" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>${prdlist?.join('')}</ul>`;
     } else {
         block.querySelector('.sub-products').innerHTML = `<p data-no-products-notification role="alert" aria-live="assertive"tabindex="-1">There are no products listed under this category.</p>`;
@@ -1056,14 +1060,21 @@ export function referencedBlockHomepageCollections(blockData) {
             <div class="blockElementDiscover">
                 <div class="discovery-section">
                     <div class="imageflex">
-                        <div class="leftcol">${item?.imageLeft.url ? `<img class="lazyload first" data-src="${item?.imageLeft.url}" alt="${item?.imageLeft.title}" />` : ''}
-                        ${item?.imageCenter.url ? `<img class="lazyload second" data-src="${item?.imageCenter.url}" alt="${item?.imageCenter.title}"/>` : ''}</div>
-                        <div class="rightcol">${item?.imageRight.url ? `<img  class="lazyload third" data-src="${item?.imageRight.url}"  alt="${item?.imageRight.title}" />` : '' }</div>
+                        <div class="leftcol">
+                            ${(item?.imageLeft?.url && item?.imageLeft?.url !== undefined) ? `<img class="lazyload first" data-src="${item?.imageLeft?.url}" alt="${item?.imageLeft.title}" />` : ''}
+                            ${(item?.imageCenter?.url && item?.imageCenter?.url !== undefined) ? `<img class="lazyload second" data-src="${item?.imageCenter?.url}" alt="${item?.imageCenter?.title}"/>` : ''}
+                        </div>
+                        <div class="rightcol">
+                            ${(item?.imageRight.url && item?.imageRight.url !== undefined) ? `<img  class="lazyload third" data-src="${item?.imageRight.url}"  alt="${item?.imageRight.title}" />` : '' }
+                        </div>
                     </div>
                     <div class="caption">
-                        <h1 class="h1-italic">${item?.collectionName}</h1>
-                        <p class="content body-1">${item?.description}</p>
-                        <a href="${item?.linkUrl}" class="button button--secondary buttonlink">${item?.linkText}</a>
+                        ${(item?.collectionName && item?.collectionName !== undefined) ?
+                            `<h1 class="h1-italic">${item?.collectionName}</h1>` : ''}
+                        ${(item?.description && item?.description !== undefined) ?
+                            `<p class="content body-1">${item?.description}</p>` : ''}
+                        ${(item?.linkUrl && item?.linkUrl !== undefined) ?
+                            `<a href="${item?.linkUrl}" class="button button--secondary buttonlink">${item?.linkText}</a>` : ''}
                     </div>
                 </div>
             </div>
