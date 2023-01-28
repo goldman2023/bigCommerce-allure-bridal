@@ -184,13 +184,18 @@
         font-family: stencilFontFamily('default-font-bold');
         font-style: normal;
         font-weight: 600;
-        font-size: 10px;
-        line-height: 15px;
+        font-size: 8px;
+        line-height: 9px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
         color: #D9D3D3;
         border-bottom: 1px solid #D9D3D3;
         text-align: center;
+        word-wrap: break-word;
+        @media screen and (min-width: 381px) {
+            font-size: 10px;
+            line-height: 15px;
+        }
         @include breakpoint("small") {
             font-size: 12px;
             padding: 12px 15px;
