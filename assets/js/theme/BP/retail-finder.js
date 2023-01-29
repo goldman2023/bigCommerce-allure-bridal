@@ -107,7 +107,10 @@ export default class RetailFinder extends PageManager {
       if (!place.geometry || !place.geometry.location) {
         // User entered the name of a Place that was not suggested and
         // pressed the Enter key, or the Place Details request failed.
-        window.alert("No details available for input: '" + place.name + "'");
+        const retailerInfoElem = document.getElementById('results-info');
+        retailerInfoElem.innerText = 'No Results found. Try widening your search.';
+        const retailFinderResults = document.getElementById('retail-finder-results');
+        retailFinderResults.innerHTML = "";
         return;
       }
       if (place) {
