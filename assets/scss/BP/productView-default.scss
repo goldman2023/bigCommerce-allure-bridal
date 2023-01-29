@@ -164,6 +164,16 @@
             }
             .form-option-wrapper {
                 margin-right: 8px;
+                .swatchvalue {
+                    display: none;
+                }
+                &.is-hover {
+                    .swatchvalue {
+                        display: block;
+                        position: absolute;
+                        top: 11px;
+                    }
+                }
             }
         }
         .color-selected-value {

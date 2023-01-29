@@ -717,7 +717,7 @@ export function globalblockElementFullscreenVideo(element) {
         videoURL = `https://www.youtube.com/embed/${element.videoUrl.split('=')[1]}`;
         return `<div class="blockElementFullscreenVideo block-item full-size" ><div><iframe type="text/html" src="${videoURL}"  frameborder="0" id="colbannerVideo" controls=0></iframe></div></div>`;
     } else {
-          return `<div class="blockElementFullscreenVideo block-item full-size" ><div><video autoplay loop muted plays-inline="" id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div></div>`;
+          return `<div class="blockElementFullscreenVideo block-item full-size" ><div><video autoplay loop muted playsinline plays-inline="" id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div></div>`;
     }
 }
 
@@ -779,7 +779,8 @@ export function events(blockData) {
     </div>`;
 }
 export function blockElementFullscreenImage(blockData) {
-    return `<div class="blockElementFullscreenImage block-item ${(blockData?.contentOrScreenWidth !== 'Screen Width') ? 'full-size' : ''}" id="blockElementFullscreenImage"><div class="mainImage"><img data-src="${blockData?.backgroundImage?.url}" alt="${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>
+    console.log(blockData?.contentOrScreenWidth);
+    return `<div class="blockElementFullscreenImage block-item ${(blockData?.contentOrScreenWidth === 'Screen Width') ? 'full-size' : ''}" id="blockElementFullscreenImage"><div class="mainImage"><img data-src="${blockData?.backgroundImage?.url}" alt="${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>
     ${blockData?.bodyCopy !== null ? `<div class="homepageCaption"><div class="content"><div class="bannercap"><h4>${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}</h4><p>${(blockData?.bodyCopy && blockData?.bodyCopy !== undefined) ? blockData?.bodyCopy : ''}</p><a href="${blockData?.linkUrl}">${blockData?.linkText}</a></div>` : ''}</div></div></div></div>`;
 }
 
@@ -950,7 +951,8 @@ function productCard(context, products) {
                                 `<img data-src="${context.notFoundImg}" title="${item?.node?.name}" class="card-image lazyautosizes lazyload" />` 
                             }
                         </div></a><div class="card-body"><h4 class="card-title"><a aria-label="${item?.node?.name}" "="" href="${item?.node?.path}" class="name h4">${item?.node?.name}</a>
-                    <a href="/wishlist.php?action=addwishlist&product_id=${item?.node?.entityId}" class="titleIcon"></a></h4><div class="card-text body-3" data-test-info-type="price">${item?.node?.description}</div></article>
+                    <a href="/wishlist.php?action=addwishlist&product_id=${item?.node?.entityId}" data-id="${item?.node?.entityId}" class="titleIcon">
+                    <div class="loadingOverlay"></div></a></h4><div class="card-text body-3" data-test-info-type="price">${item?.node?.description}</div></article>
                 </li>`;
     });
 };
@@ -977,11 +979,11 @@ export function createProductSlider(context, block, blockData) {
     if(blockData?.products?.edges?.length > 0 ){
         prdlist = productCard(context, blockData?.products?.edges);
         block.querySelector('.sub-products').innerHTML = `<ul class="productGridslider" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>${prdlist?.join('')}</ul>`;
+        block.querySelector('.sub-products').classList.add("slideradded");
     } else {
         block.querySelector('.sub-products').innerHTML = `<p data-no-products-notification role="alert" aria-live="assertive"tabindex="-1">There are no products listed under this category.</p>`;
     }
     block.querySelector('.sub-description').innerHTML = blockData?.description;
-    block.querySelector('.sub-products').classList.add("slideradded");
 };
 
 export function blogpostTopBanner(selectorID,title,heading,imageHeading,date){

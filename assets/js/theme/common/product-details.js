@@ -111,18 +111,23 @@ export default class ProductDetails extends ProductDetailsBase {
         document.querySelector('.buttonOnOff').addEventListener("click", this.viewVideoToggle);
 
         var modal = document.getElementById("pdpimagemodal");
-
-        // Get the image and insert it inside the modal - use its "alt" text as a caption
-        var img = document.querySelector("#pdpmainimage img");
+        var img = document.querySelector("#pdpmainimage");
         var modalImg = document.getElementById("img01");
         img.onclick = function(){
             modal.style.display = "block";
-            modalImg.src = this.src;
+            modalImg.src = this.href;
         }
         var span = document.getElementsByClassName("close")[0];
         span.onclick = function() { 
         modal.style.display = "none";
         }
+
+        $('.form-option-wrapper').mouseover(function(){
+            $(this).addClass('is-hover');
+        });
+        $('.form-option-wrapper').mouseout(function(){
+            $(this).removeClass('is-hover');
+        });
     }
     viewVideoToggle(){
         let checkboxstatus = document.getElementById('viewvideocheckbox').checked;

@@ -20,7 +20,7 @@
             aria-label="{{lang 'products.none'}}"
         >
         <label class="form-option form-option-swatch" for="attribute_swatch_{{id}}_none">
-            <span class='form-option-variant form-option-variant--none' title="{{lang 'products.none'}}">{{lang 'products.none'}}</span>
+            <span class='form-option-variant form-option-variant--none' data-title="{{lang 'products.none'}}">{{lang 'products.none'}}</span>
         </label>
     {{/unless}}
 
@@ -37,19 +37,19 @@
         >
         <label class="form-option form-option-swatch" for="attribute_swatch_{{../id}}_{{id}}" data-product-attribute-value="{{id}}">
             {{#if image}}
-                <span class='form-option-variant form-option-variant--pattern' title="{{this.label}}" style="background-image: url('{{getImage image "swatch_option_size"}}');"></span>
+                <span class='form-option-variant form-option-variant--pattern' data-title="{{this.label}}" style="background-image: url('{{getImage image "swatch_option_size"}}');"></span>
             {{/if}}
             {{#if data.[2]}}
-                <span class='form-option-variant form-option-variant--color' title="{{this.label}}" style="background-color: #{{data.[0]}}"></span>
-                <span class='form-option-variant form-option-variant--color' title="{{this.label}}" style="background-color: #{{data.[1]}}"></span>
-                <span class='form-option-variant form-option-variant--color' title="{{this.label}}" style="background-color: #{{data.[2]}}"></span>
+                <span class='form-option-variant form-option-variant--color' data-title="{{this.label}}" style="background-color: #{{data.[0]}}"></span>
+                <span class='form-option-variant form-option-variant--color' data-title="{{this.label}}" style="background-color: #{{data.[1]}}"></span>
+                <span class='form-option-variant form-option-variant--color' data-title="{{this.label}}" style="background-color: #{{data.[2]}}"></span>
             {{else}}
                 {{#if data.[1]}}
-                    <span class='form-option-variant form-option-variant--color' title="{{this.label}}" style="background-color: #{{data.[0]}}"></span>
-                    <span class='form-option-variant form-option-variant--color' title="{{this.label}}" style="background-color: #{{data.[1]}}"></span>
+                    <span class='form-option-variant form-option-variant--color' data-title="{{this.label}}" style="background-color: #{{data.[0]}}"></span>
+                    <span class='form-option-variant form-option-variant--color' data-title="{{this.label}}" style="background-color: #{{data.[1]}}"></span>
                 {{else}}
                     {{#if data.[0]}}
-                        <span class='form-option-variant form-option-variant--color' title="{{this.label}}" style="background-color: #{{data.[0]}}"></span>
+                        <span class='form-option-variant form-option-variant--color' data-title="{{this.label}}" style="background-color: #{{data.[0]}}"></span>
                     {{/if}}
                 {{/if}}
             {{/if}}
@@ -59,6 +59,7 @@
                 </span>
             {{/if}}
         </label>
+        <div class="swatchvalue color-selected-value">{{this.label}}</div>
     </div>
     {{/each}}
 

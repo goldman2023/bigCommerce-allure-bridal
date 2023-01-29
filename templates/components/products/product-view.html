@@ -266,7 +266,7 @@
                         {{#if product.main_image}}
                             <!-- <a href="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size}}"
                                 target="_blank"> -->
-                                 <a id="pdpmainimage" href="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1}}"
+                                 <a id="pdpmainimage" href="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.pop_size }}"
                                 target="_blank">
                         {{/if}}
                         {{> components/common/responsive-img
@@ -308,9 +308,9 @@
                             > -->
                             <a
                             class="productView-thumbnail-link {{#if @index '===' 0}}is-active{{/if}}"
-                            href="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1}}"
+                            href="{{getImageSrcset this (cdn ../theme_settings.default_image_product)}}"
                             data-image-gallery-item
-                            data-image-gallery-new-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1}}"
+                            data-image-gallery-new-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product)}}"
                             data-image-gallery-new-image-srcset="{{getImageSrcset this use_default_sizes=true}}"
                         >
                             {{> components/common/responsive-img
