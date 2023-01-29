@@ -264,7 +264,7 @@ export default class Global extends PageManager {
             $('.prod-option.color .form-select').customSelect();
 
         } else {
-            $('select').customSelect();
+            $('select:not(#sortSelect)').customSelect();
 
         }
         //Product Detail page end

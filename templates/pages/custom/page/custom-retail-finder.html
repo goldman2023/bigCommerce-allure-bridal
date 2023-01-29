@@ -433,19 +433,22 @@
                 });
         });
 
-        // var appointmentDate = document.querySelector(".pages-custom-retail-submission-form .form-input.multiple-dates");
-        // var eventDate = document.querySelector(".pages-custom-retail-submission-form #eventDate");
-        // if(appointmentDate){
-        //     appointmentDate.flatpickr({
-        //         minDate: "today",
-        //         mode: "multiple",
-        //     });
-        // }
-        // if(eventDate){
-        //     eventDate.flatpickr({
-        //         minDate: "today"
-        //     });
-        // }
+        document.getElementById("retail-finder-form").addEventListener('invalid', (function(){
+            return function(e) {
+                //prevent the browser from showing default error bubble / hint
+                e.preventDefault();
+                var errorDiv = document.createElement("span");
+                errorDiv.classList.add("error-message");
+                errorDiv.innerText = "This Field is required";
+
+                insertAfter(errorDiv,  e.target);
+
+                function insertAfter(newNode, existingNode) {
+                    existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+                }
+            };
+        })(), true);
+
     });
 
 </script>
