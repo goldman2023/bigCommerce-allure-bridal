@@ -978,11 +978,11 @@ export function createProductSlider(context, block, blockData) {
     if(blockData?.products?.edges?.length > 0 ){
         prdlist = productCard(context, blockData?.products?.edges);
         block.querySelector('.sub-products').innerHTML = `<ul class="productGridslider" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>${prdlist?.join('')}</ul>`;
+        block.querySelector('.sub-products').classList.add("slideradded");
     } else {
         block.querySelector('.sub-products').innerHTML = `<p data-no-products-notification role="alert" aria-live="assertive"tabindex="-1">There are no products listed under this category.</p>`;
     }
     block.querySelector('.sub-description').innerHTML = blockData?.description;
-    block.querySelector('.sub-products').classList.add("slideradded");
 };
 
 export function blogpostTopBanner(selectorID,title,heading,imageHeading,date){
