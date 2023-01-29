@@ -706,6 +706,9 @@ export function blockElementFullscreenVideo(selectorID, element) {
             document.getElementById(selectorID).innerHTML = `<div><video autoplay playsinline loop muted plays-inline="" id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div>`;
         }
     }
+    if (element?.backgroundImage?.url && element?.backgroundImage?.url !== undefined) {
+        document.getElementById(selectorID).innerHTML = `<img alt="${element?.backgroundImage?.title}" data-src="${element?.backgroundImage?.url}" class="lazyload"/>`;
+    }
 }
 
 export function globalblockElementFullscreenVideo(element) {
@@ -849,7 +852,7 @@ export function imageWithContentSlider(blockData) {
         return `<li><div class="blockrow"><div class="leftblock block">
         <img data-src="${item?.imagesCollection?.items[0]?.url}" alt="image left block" class="lazyload"/>
         </div><div class="rightblock block"><div class="caption">
-        <h2 class="title h2-italic">${item?.title}</h2><p class="content body-light-1">${(item.bodyCopy) ? item.bodyCopy : ''}</p>${item.linkUrl ? `<a href="${(item.linkUrl) ? item.linkUrl : ''}" class="buttonlink body-3">${(item.linkText) ? item.linkText : ''}</a>` : ''}
+        <h1 class="title h1-italic">${item?.title}</h1><p class="content body-light-1">${(item.bodyCopy) ? item.bodyCopy : ''}</p>${item.linkUrl ? `<a href="${(item.linkUrl) ? item.linkUrl : ''}" class="buttonlink body-3">${(item.linkText) ? item.linkText : ''}</a>` : ''}
         </div></div></div></li>`
     });
     return `<div class="imageWithContentSlider block-item full-size" id="imageWithContentSlider"><ul data-slick='{"slidesToShow": 1, "slidesToScroll": 1,"infinite": true}'>${sliderLi.join('')}</ul></div>`;
@@ -940,7 +943,7 @@ export function blockElementVerticalGallery(blockData) {
 function productCard(context, products) {
     return products.map((item) => {
         return `<li class="product"><article class="card" data-test="card-271"><figure class="card-figure">
-                    <a href="${item?.node?.path}" class="card-figure__link"><div class="card-img-container ddd">
+                    <a href="${item?.node?.path}" class="card-figure__link"><div class="card-img-container">
                             ${ (item?.node?.defaultImage?.url && item?.node?.defaultImage?.url !== undefined) ? 
                                 `<img data-src="${item?.node?.defaultImage?.url}" alt="${item?.node?.name}" title="${item?.node?.name}" data-sizes="auto" 
                                 srcset="${item?.node?.defaultImage?.url} 80w, ${item?.node?.defaultImage?.url} 160w, ${item?.node?.defaultImage?.url} 320w, ${item?.node?.defaultImage?.url} 640w, ${item?.node?.defaultImage?.url} 960w, ${item?.node?.defaultImage?.url} 1280w, ${item?.node?.defaultImage?.url} 1920w, ${item?.node?.defaultImage?.url} 2560w" 
