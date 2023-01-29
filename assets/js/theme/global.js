@@ -512,7 +512,7 @@ export default class Global extends PageManager {
                         {
                             breakpoint: 1100,
                             settings: {
-                                slidesToShow: 6,
+                                slidesToShow: tabs.length > 6 ? 6 : tabs.length,
                                 slidesToScroll: 1,
                                 infinite: false,
                                 centerMode: false,
@@ -523,7 +523,7 @@ export default class Global extends PageManager {
                         {
                             breakpoint: 1024,
                             settings: {
-                                slidesToShow: 3,
+                                slidesToShow: tabs.length > 3 ? 3 : tabs.length,
                                 slidesToScroll: 1,
                                 infinite: false,
                                 centerMode: true,
@@ -534,7 +534,7 @@ export default class Global extends PageManager {
                         {
                             breakpoint: 1023,
                             settings: {
-                                slidesToShow: 3,
+                                slidesToShow: tabs.length > 3 ? 3 : tabs.length,
                                 slidesToScroll: 1,
                                 centerMode: false,
                                 infinite: false,
