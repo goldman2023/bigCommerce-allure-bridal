@@ -776,7 +776,8 @@ export function events(blockData) {
     </div>`;
 }
 export function blockElementFullscreenImage(blockData) {
-    return `<div class="blockElementFullscreenImage block-item ${(blockData?.contentOrScreenWidth !== 'Screen Width') ? 'full-size' : ''}" id="blockElementFullscreenImage"><div class="mainImage"><img data-src="${blockData?.backgroundImage?.url}" alt="${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>
+    console.log(blockData?.contentOrScreenWidth);
+    return `<div class="blockElementFullscreenImage block-item ${(blockData?.contentOrScreenWidth === 'Screen Width') ? 'full-size' : ''}" id="blockElementFullscreenImage"><div class="mainImage"><img data-src="${blockData?.backgroundImage?.url}" alt="${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>
     ${blockData?.bodyCopy !== null ? `<div class="homepageCaption"><div class="content"><div class="bannercap"><h4>${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}</h4><p>${(blockData?.bodyCopy && blockData?.bodyCopy !== undefined) ? blockData?.bodyCopy : ''}</p><a href="${blockData?.linkUrl}">${blockData?.linkText}</a></div>` : ''}</div></div></div></div>`;
 }
 
