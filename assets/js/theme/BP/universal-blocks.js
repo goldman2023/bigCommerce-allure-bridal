@@ -951,7 +951,8 @@ function productCard(context, products) {
                                 `<img data-src="${context.notFoundImg}" title="${item?.node?.name}" class="card-image lazyautosizes lazyload" />` 
                             }
                         </div></a><div class="card-body"><h4 class="card-title"><a aria-label="${item?.node?.name}" "="" href="${item?.node?.path}" class="name h4">${item?.node?.name}</a>
-                    <a href="/wishlist.php?action=addwishlist&product_id=${item?.node?.entityId}" class="titleIcon"></a></h4><div class="card-text body-3" data-test-info-type="price">${item?.node?.description}</div></article>
+                    <a href="/wishlist.php?action=addwishlist&product_id=${item?.node?.entityId}" data-id="${item?.node?.entityId}" class="titleIcon">
+                    <div class="loadingOverlay"></div></a></h4><div class="card-text body-3" data-test-info-type="price">${item?.node?.description}</div></article>
                 </li>`;
     });
 };
