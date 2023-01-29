@@ -126,6 +126,11 @@ export default class Global extends PageManager {
                     }
                 });
             });
+            $(window).on('load', function() {
+                if ($('#leftTextbanner').is(':empty')){
+                    $('.customBanner').hide();
+                }
+            });
         }
         //Category Listing page end
 
@@ -136,6 +141,7 @@ export default class Global extends PageManager {
             productDeatilMetaData(this.context,productId, response => {
                 let metadata = response.contentFul;
                 let relatedPro = response.related;
+                console.log("product",metadata);
                 if(Object.keys(metadata).length === 0) {
                     $('.contentBlocksCollection').hide();
                 } else {
@@ -149,7 +155,6 @@ export default class Global extends PageManager {
                 }
                 
                 let blocksCollections = metadata?.contentBlocksCollection?.items?.map(element => {
-                    console.log('response', element);
                     if(element.__typename === "BlockElementStoryBlock"){
                         return blockElementStory(element);
                     }
@@ -429,6 +434,12 @@ export default class Global extends PageManager {
                     ielement.customSelect();
                 }
             }, 3000);
+            if(mainContent.contains("pages-account-edit")) {
+                $('#editforminaccount input[type=password]').each(function() {
+                    console.log($(this).val());
+                    $(this).val('');
+                });
+            }
         });
 
         function applySlider(selector,slide,centerM,infinity) {
@@ -625,5 +636,6 @@ export default class Global extends PageManager {
                 window.location.href = `/login.php?from=wishlist.php%3Faction%3Daddwishlist%26product_id%${prodid}`;
             }
         });
+        
     }
 }
