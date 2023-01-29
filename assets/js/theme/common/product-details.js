@@ -121,6 +121,13 @@ export default class ProductDetails extends ProductDetailsBase {
         span.onclick = function() { 
         modal.style.display = "none";
         }
+
+        $('.form-option-wrapper').mouseover(function(){
+            $(this).addClass('is-hover');
+        });
+        $('.form-option-wrapper').mouseout(function(){
+            $(this).removeClass('is-hover');
+        });
     }
     viewVideoToggle(){
         let checkboxstatus = document.getElementById('viewvideocheckbox').checked;
