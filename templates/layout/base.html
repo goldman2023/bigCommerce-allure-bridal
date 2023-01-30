@@ -181,8 +181,8 @@
     {{!-- End Google Tag Manager --}}
 </head>
 
-<body class="{{ page_type }}-type {{#if template '===' 'pages\custom\product\suits-product'}}suitsProduct{{/if}} {{#if template '===' 'pages\custom\page\retail-finder'}}retailer-finder-lp{{/if}}">
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDMVGVL" height="0" width="0"
+<body class="{{ page_type }}-type {{#if template '===' 'pages\custom\product\suits-product'}}suitsProduct{{/if}} {{#contains template 'retail'}} retailer-finder-lp{{/contains}}">
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDMVGVL" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
     <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>
 
