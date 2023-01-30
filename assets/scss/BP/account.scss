@@ -127,7 +127,19 @@
 }
 .editaccount {
     .form {
-        width: 70%;
+        @include breakpoint("medium") {
+            width: 70%;
+        }
+    }
+    .form-row {
+        @media screen and (max-width: 600px) {
+            margin: 0;
+        }
+    }
+    .form .form-field {
+        @media screen and (max-width: 600px) {
+            padding: 10px 0;
+        }
     }
     .form .form-field .form-label {
         font-family: stencilFontFamily('default-font-bold');

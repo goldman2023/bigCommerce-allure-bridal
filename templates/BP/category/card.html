@@ -71,7 +71,7 @@
                     class="card-image"
                     fallback_size=theme_settings.productgallery_size
                     lazyload=theme_settings.lazyload_mode
-                    default_image=theme_settings.default_image_product
+                    default_image='assets/img/notfound.png'
                 }}
             </div>
         </a>
@@ -84,7 +84,9 @@
             >
              {{name}}
             </a>
-            <a href="/wishlist.php?action=addwishlist&product_id={{id}}" data-id="{{id}}" class="titleIcon"></a>
+            <a href="/wishlist.php?action=addwishlist&product_id={{id}}" data-id="{{id}}" class="titleIcon">
+                <div class="loadingOverlay"></div>
+            </a>
         </h4>
 
         <div class="card-text body-3" data-test-info-type="price">

@@ -42,7 +42,7 @@ export default class Blog extends PageManager {
             "Mon": "Monday",
             'Tue' : "Tuesday",
             "Wed": "Wednesday",
-            'Thu' : "Thrusday",
+            'Thu' : "Thursday",
             "Fri": "Friday",
             "Sat": "Saturday",
         }

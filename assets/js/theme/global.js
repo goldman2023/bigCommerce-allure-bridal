@@ -57,11 +57,11 @@ import {
 
 export default class Global extends PageManager {
     onReady() {
-        
         const {
             channelId, cartId, productId, categoryId, secureBaseUrl, maintenanceModeSettings, adminBarLanguage,
         } = this.context;
         let contentId = this.context;
+        let customerdetails = this.context.customer;
         let mainContent = document.getElementById('main-content').classList;
         cartPreview(secureBaseUrl, cartId);
         quickSearch();
@@ -105,7 +105,7 @@ export default class Global extends PageManager {
         if (mainContent.contains('pages-custom-category-category-listing') || mainContent.contains('category-listing') || mainContent.contains('pages-custom-category-suits-category-listing')) {
             document.querySelectorAll('.sub-category-block').forEach((item)=> {
                 getProductsByCategoryPath(this.context,item.getAttribute('data-path'),response => {
-                    createProductSlider(item,response);
+                    createProductSlider(this.context, item, response);
                     let selectForslider = item.querySelector('.slideradded .productGridslider');
                     applySlider(selectForslider, 4, false, true);
                 });
@@ -126,6 +126,11 @@ export default class Global extends PageManager {
                     }
                 });
             });
+            $(window).on('load', function() {
+                if ($('#leftTextbanner').is(':empty')){
+                    $('.customBanner').hide();
+                }
+            });
         }
         //Category Listing page end
 
@@ -136,7 +141,7 @@ export default class Global extends PageManager {
             productDeatilMetaData(this.context,productId, response => {
                 let metadata = response.contentFul;
                 let relatedPro = response.related;
-                console.log(metadata);
+                console.log("product",metadata);
                 if(Object.keys(metadata).length === 0) {
                     $('.contentBlocksCollection').hide();
                 } else {
@@ -150,7 +155,6 @@ export default class Global extends PageManager {
                 }
                 
                 let blocksCollections = metadata?.contentBlocksCollection?.items?.map(element => {
-                    console.log('response', element);
                     if(element.__typename === "BlockElementStoryBlock"){
                         return blockElementStory(element);
                     }
@@ -222,12 +226,12 @@ export default class Global extends PageManager {
                 });
 
                 if(Object.keys(relatedPro).length > 0) {
-                    if(relatedPro.thePerfectMatch.length > 0) {
+                    if(relatedPro?.thePerfectMatch?.length > 0) {
                         let perfectmatch = relatedPro.thePerfectMatch.map((item) => item.bc_product_id).filter((a) => a);
                         getProducts(contentId,'.thePerfectMatch .prodData', perfectmatch);
                         $('#thePerfectMatch').removeClass('hide');
                     }
-                    if(relatedPro.youMightAlsoLike.length > 0) {
+                    if(relatedPro?.youMightAlsoLike?.length > 0) {
                         let youmaylike = relatedPro.youMightAlsoLike.map((item) => item.bc_product_id).filter((a) => a);
                         getProducts(contentId,'.youMightalsoLike .prodData', youmaylike);
                         $('#youMightalsoLike').removeClass('hide');
@@ -284,6 +288,7 @@ export default class Global extends PageManager {
         if (mainContent.contains('pages-custom-category-category-landing') || mainContent.contains('category-landing')) {
             let geturl = document.getElementById('categoryLanding').getAttribute('data-url')
             getCategorySpecificMetaData(this.context, geturl, response => {
+                console.log(response);
                 for (const categoryData of response) {
                     if (categoryData.key === "Contentful Data") {
                         let contentfulData = categoryData?.value;
@@ -293,6 +298,7 @@ export default class Global extends PageManager {
                                 if (element.collectionBannerImage1) {
                                     blockElementFullscreenVideo('blockElementFullscreenVideo', element.collectionBannerImage1);
                                 }
+                                
                                 let heading = element.collectionHeadline;
                                 let lastword = heading?.split(" ")?.reverse()[0];
                                 document.querySelector('.productSlider .heading').innerHTML = `${(heading?.replace(lastword, '') !== undefined) ? heading?.replace(lastword, '') : ''} <span class="lastword h1-italic">${(lastword !== undefined) ? lastword : ''}</span>`;
@@ -302,7 +308,7 @@ export default class Global extends PageManager {
                                     document.querySelector('.productSlider .descrip').style.display = 'none';
                                 }
                             }
-                            let blocksCollections = element.contentBlocksCollection.items.map(ele => {
+                            let blocksCollections = element?.contentBlocksCollection?.items?.map(ele => {
                                 
                                 if (ele.__typename === "BlockElementCollectionPreview") {
                                     return collectionPreview(ele);
@@ -367,7 +373,7 @@ export default class Global extends PageManager {
                                 }
                             });
 
-                            document.getElementById('contentBlocksCollection').innerHTML = blocksCollections.join('');
+                            document.getElementById('contentBlocksCollection').innerHTML = (blocksCollections && blocksCollections !== undefined) ? blocksCollections?.join('') : '';
 
                             document.querySelectorAll('.imageWithContentSlider ul').forEach((item) => {
                                 applySlider(item, 1, false, true);
@@ -428,6 +434,12 @@ export default class Global extends PageManager {
                     ielement.customSelect();
                 }
             }, 3000);
+            if(mainContent.contains("pages-account-edit")) {
+                $('#editforminaccount input[type=password]').each(function() {
+                    console.log($(this).val());
+                    $(this).val('');
+                });
+            }
         });
 
         function applySlider(selector,slide,centerM,infinity) {
@@ -503,7 +515,7 @@ export default class Global extends PageManager {
                     dots: false,
                     infinite: false,
                     speed: 300,
-                    slidesToShow: tabs.length > 6 ? 6 : tabs.length,
+                    slidesToShow: tabs.length > 9 ? 9 : tabs.length,
                     slidesToScroll: 1,
                     centerMode: false,
                     arrows: true,
@@ -511,7 +523,7 @@ export default class Global extends PageManager {
                         {
                             breakpoint: 1100,
                             settings: {
-                                slidesToShow: 6,
+                                slidesToShow: tabs.length > 6 ? 6 : tabs.length,
                                 slidesToScroll: 1,
                                 infinite: false,
                                 centerMode: false,
@@ -522,7 +534,7 @@ export default class Global extends PageManager {
                         {
                             breakpoint: 1024,
                             settings: {
-                                slidesToShow: 3,
+                                slidesToShow: tabs.length > 3 ? 3 : tabs.length,
                                 slidesToScroll: 1,
                                 infinite: false,
                                 centerMode: true,
@@ -533,7 +545,7 @@ export default class Global extends PageManager {
                         {
                             breakpoint: 1023,
                             settings: {
-                                slidesToShow: 3,
+                                slidesToShow: tabs.length > 3 ? 3 : tabs.length,
                                 slidesToScroll: 1,
                                 centerMode: false,
                                 infinite: false,
@@ -580,62 +592,50 @@ export default class Global extends PageManager {
         }, 1000);
         $('.card .titleIcon').on('click', function(e){
             e.preventDefault();
+            $(this).addClass('is-active');
             let prodid = $(this).attr('data-id');
-            fetch("/api/storefront/form-fields?filter=customerAccount", {
-                "method": "GET",
-                "headers": {
-                    "Content-Type": "application/json"
-                }
-            })
-            .then((response) => response.json()).then((data) => {
-                console.log(data);
+            if (customerdetails) {
                 $.ajax({
-                    type: "POST",
-                    url: `/wishlist.php?action=add&wishlistid=107&product_id=${prodid}`,
+                    type: "GET",
+                    url: `/account.php?action=account_details`,
+                    dataType: 'html',
                     success: response => {
-                        swal.fire({
-                            text: "Product added to wishlist",
-                            icon: 'success',
-                            showCancelButton: false
-                        })
-                       window.location.href = '/account.php?action=account_details';
+                        const wishlistId = $(response).find("input[data-label='Default Wishlist']").val();
+                        if(wishlistId) {
+                            $.ajax({
+                                type: "POST",
+                                url: `/wishlist.php?action=add&wishlistid=${wishlistId}&product_id=${prodid}`,
+                                success: response => {
+                                    $(this).removeClass('is-active');
+                                    swal.fire({
+                                        text: "Product added to wishlist",
+                                        icon: 'success',
+                                        showCancelButton: false
+                                    });
+                                    window.location.href = `/wishlist.php?action=viewwishlistitems&wishlistid=${wishlistId}`;
+                                },
+                                error: error => {
+                                    $(this).removeClass('is-active');
+                                    console.log(error);
+                                }
+                            });
+                        } else {
+                            swal.fire({
+                                text: "Wishlist not found, please create a wishlist",
+                                icon: 'error',
+                                showCancelButton: false
+                            });
+                            window.location.href = `/wishlist.php?action=addwishlist&product_id=${prodid}`;
+                        }
                     },
                     error: error => {
                         console.log(error);
                     }
                 });
-            });
+            } else {
+                window.location.href = `/login.php?from=wishlist.php%3Faction%3Daddwishlist%26product_id%${prodid}`;
+            }
         });
-        /*
-        if (this.context.customer) {
-            $.ajax({
-                type: "GET",
-                url: `/account.php?action=account_details`,
-                dataType: 'html',
-                success: response => {
-                    console.log('default wishlist', $(response).find("input[data-label='Default Wishlist']").val());
-                    const wishlistId = $(response).find("input[data-label='Default Wishlist']").val();
-                    $.ajax({
-                        type: "GET",
-                        url: `/wishlist.php?action=add&wishlistid=${wishlistId}&product_id=2708`,
-                        success: response => {
-                            swal.fire({
-                                text: "Product added to wishlist",
-                                icon: 'success',
-                                showCancelButton: false
-                            });
-                        },
-                        error: error => {
-                            console.log(error);
-                        }
-                    });
-                },
-                error: error => {
-                    console.log(error);
-                }
-            });
-        }
-        */
         
     }
 }

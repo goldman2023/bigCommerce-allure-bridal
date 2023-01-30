@@ -394,6 +394,15 @@ body {
                 .caption {
                     h1 {
                         color: stencilColor('color-disney-primary-1');
+                        &::after {
+                            @include disneyDivider();
+                            width: 13px;
+                            height: 13px;
+                            transform: unset;
+                            outline: unset;
+                            right: 28px;
+                            top: 40%;
+                        }
                     }
 
                     p {
@@ -450,13 +459,13 @@ body {
             border-color: stencilColor('color-disney-neutral-4');
 
             &::after {
-                width: 36px;
-                height: 36px;
+                width: 13px;
+                height: 13px;
                 background: unset;
                 transform: unset;
-                top: -19px;
+                top: -8px;
                 background-color: stencilColor('color-white');
-                @include disneyDivider(stencilColor('color-disney-neutral-2'));
+                @include disneyDivider();
             }
         }
         
@@ -473,7 +482,19 @@ body {
             ul {
                 li {
                     .blockrow {
-                        background: stencilColor('color-disney-primary-1');
+                        background: stencilColor('color-disney-accent-1');
+                        .caption {
+                            .title, .content {
+                                text-shadow: unset;
+                                color: stencilColor('color-black');
+                            }
+                            .buttonlink {
+                                color: stencilColor('color-black');
+                                &::after {
+                                    @include arrow(stencilColor('color-black'));
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -492,8 +513,13 @@ body {
         .productSlider {
             h2 {
                 &.heading {
+                    color: stencilColor('color-black');
                     .lastword {
-                        color: stencilColor('color-disney-primary-1');
+                        color: stencilColor('color-black');
+                        font-family: inherit;
+                        font-size: inherit;
+                        font-weight: inherit;
+                        margin: 0;
                     }
                 }
             }
@@ -552,17 +578,17 @@ body {
             &.is-active {
                 border-bottom-color: stencilColor('color-disney-neutral-4');
                 &::after {
-                    width: 36px;
-                    height: 36px;
+                    width: 13px;
+                    height: 13px;
                     left: 0;
                     right: 0;
                     margin: auto;
                     background: unset;
                     transform: unset;
-                    bottom: -18.2px;
+                    bottom: -7px;
                     background-color: transparent;
                     outline: unset;
-                    @include disneyDivider(stencilColor('color-disney-neutral-2'));
+                    @include disneyDivider();
                 }
             }
         }
@@ -578,14 +604,14 @@ body {
             border-bottom-color: stencilColor('color-disney-neutral-4');
             
             &::after {
-                width: 36px;
-                height: 36px;
+                width: 13px;
+                height: 13px;
                 background: unset;
                 transform: unset;
-                bottom: -18.2px;
+                bottom: -7px;
                 background-color: transparent;
                 outline: unset;
-                @include disneyDivider(stencilColor('color-disney-neutral-2'));
+                @include disneyDivider();
             }
         }
     }

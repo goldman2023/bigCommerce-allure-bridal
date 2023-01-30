@@ -265,6 +265,11 @@
                         display: block;
                         position: relative;
                     }
+                    a {
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
                     .colored {
                         font-family: stencilFontFamily('default-font-regular');
                         font-style: normal;

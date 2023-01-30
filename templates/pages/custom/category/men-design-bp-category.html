@@ -16,7 +16,7 @@
         {{{region name="category_below_header"}}}
     {{/unless}}
 
-    <div class="bp-category" >
+    <div class="bp-category categor-page-{{dashcase category.name}}">
         <div class="bp-category-header {{#if category.image}}has-image{{/if}}">
             <div class="bp-cat-content">
                 <h3 class="page-heading">{{category.name}}</h3>
@@ -35,11 +35,10 @@
         </div>
         <div class="page category-container-block-section" >
             <div class="pagefilterheader">
-                <div></div>
-                <div class="rightside"> 
-                    <span>Showing  {{category.total_products}} product<span>{{#if category.total_products '>=' 1}}s{{/if}}</span></span>
-                    <button class="hideshowfilter"></button>
+                <div class="leftside"> 
+                    <button class="hideshowfilter">Filters</button>
                 </div>
+                <div></div>
             </div>
             <div class="plp-cont">
             {{#if category.faceted_search_enabled}}

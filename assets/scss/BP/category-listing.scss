@@ -192,7 +192,7 @@
     }
     h2.heading {
         color: stencilColor("color-default-neutral-3");
-        margin: 50px 0 0 0;
+        margin: 0 0 24px;
         text-align: center;
         .lastword { 
             color: stencilColor("color-default-primary-1");
@@ -208,7 +208,7 @@
     .productGridSection {
         margin-left: 0;
         width: 100%;
-        margin-top: 20px;
+        margin-top: 40px;
         .productSliderGrid {
             margin: 0 !important;
             li.product {
