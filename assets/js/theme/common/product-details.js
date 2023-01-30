@@ -197,7 +197,25 @@ export default class ProductDetails extends ProductDetailsBase {
         .then(function(res) {
             if(res.data.site.product.metafields.edges.length > 0) {
                 const prodData = JSON.parse(res.data.site.product.metafields.edges[0]?.node?.value);
+                console.log(prodData);
                 const sizeGuide = prodData?.sizeGuideCollection;
+                let coatOptions = prodData?.coatOptions;
+                let trouserStyles = prodData?.trouserStyles;
+                let shortdes = prodData?.shortDescription;
+
+                if(shortdes !== '' || shortdes !== null || shortdes !== undefined) {
+                    document.querySelector('.customshortdesc').innerHTML = shortdes;
+                    document.querySelector('.customshortdesc').style.display = 'block';
+                }
+                if (coatOptions.length > 0 || trouserStyles.length > 0) {
+                    let customoptionstructure = `<div class="custom-op-values">
+                    <div class="coatOptions"><label class="form-label form-label--alternate form-label--inlineSmall" >Coat Options</label>${coatOptions.map(coatOption=>`<div class="option"><span class="styleop"><span></span>${coatOption.split('-')[0].trim()}</span><span class="label">${coatOption.split('-')[1].trim()}</span></div>`).join('')}</div>
+                    <div class="trouserStyles"><label class="form-label form-label--alternate form-label--inlineSmall" >Trouser Options</label>${trouserStyles.map(trouserStyle=>`<div class="option"><span class="styleop"><span></span>${trouserStyle.split('-')[0].trim()}</span><span class="label">${trouserStyle.split('-')[1].trim()}</span></div>`).join('')}</div>
+                    </div>`;
+                    document.querySelector('.custom-option-pdp').innerHTML = customoptionstructure;
+                    document.querySelector('.prod-option.custom-ops').style.display = 'block';
+                }
+
                 document.querySelector('.sizeChart .description').innerHTML = sizeGuide?.items[0]?.description;
                 let sizeTableContent = `${sizeGuide?.items?.map((item,i)=>{ return `<input type="radio" id="${item.sizeChartName.toLowerCase().replaceAll(' ','')}" name="css-tabs" ${i === 0 ? 'checked' : ''}>`}).join('')}<ul class="tabs">${sizeGuide?.items?.map((item,i)=>{  return `<li class="tab"><label for="${item.sizeChartName.toLowerCase().replaceAll(' ','')}">${item.sizeChartName}</label></li>`}).join('')}</ul>${sizeGuide?.items?.map((item,i)=>{ return `<div class="tab-content" class="${item.sizeChartName.toLowerCase().replaceAll(' ','')}" >
                 <p class="tableheading"></p><div class="tablestructure">${item.sizingData.replace(/[\r\n]/gm, '?').split('?').map((element,i)=> {
