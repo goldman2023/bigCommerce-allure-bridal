@@ -557,6 +557,7 @@ export default class RetailFinder extends PageManager {
             items {
                 retailerName
                 retailerCity
+                website
                 state
                 bridalLiveRetailerId
                 location {
@@ -743,6 +744,15 @@ export default class RetailFinder extends PageManager {
     phoneNumber.innerText = retailer.phoneNumber;
     phone.append(phoneNumber)
     detailElement.append(phone);
+
+    var retailerUrl = document.createElement('div');
+    retailerUrl.classList.add('retailer-url');
+    const retailerUrlLink = document.createElement('a');
+    retailerUrlLink.setAttribute("href", `${retailer.website}`);
+    retailerUrlLink.setAttribute("target", "_blank");
+    retailerUrlLink.innerText = retailer.website;
+    retailerUrl.append(retailerUrlLink);
+    detailElement.append(retailerUrl);
 
     const scheduleBtn = document.createElement('button');
     scheduleBtn.setAttribute('type', 'button');
