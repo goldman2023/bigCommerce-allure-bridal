@@ -202,6 +202,13 @@ export default class ProductDetails extends ProductDetailsBase {
                 let coatOptions = prodData?.coatOptions;
                 let trouserStyles = prodData?.trouserStyles;
                 let shortdes = prodData?.shortDescription;
+                let customButtonUrl = prodData?.customButtonUrl;
+                if(customButtonUrl !== '' || customButtonUrl !== null || customButtonUrl !== undefined) {
+                    console.log("custombtnurl");
+                    document.querySelector('.custombuttontryon').setAttribute("href", customButtonUrl);
+                    document.querySelector('.custombuttontryon').text = prodData?.customButtonLabel;
+                    document.querySelector('.custombuttontryon').setAttribute("target", "_blank");
+                }
 
                 if(shortdes !== '' || shortdes !== null || shortdes !== undefined) {
                     document.querySelector('.customshortdesc').innerHTML = shortdes;
