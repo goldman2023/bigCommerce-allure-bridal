@@ -174,6 +174,11 @@
           left: 13px;
         }
       }
+      .error-message{
+        display: inline-block;
+        color: stencilColor('color-error');
+        margin: 6px 0;
+      }
     }
   }
   .form-input {
@@ -431,12 +436,5 @@ text-transform: uppercase;
         }
     }
   }
-
-.pac-container {
-  margin-top: 410px !important;
-  @include breakpoint('medium') {
-    margin-top: 460px !important;
-  }
-}
   
     

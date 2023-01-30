@@ -107,7 +107,10 @@ export default class RetailFinder extends PageManager {
       if (!place.geometry || !place.geometry.location) {
         // User entered the name of a Place that was not suggested and
         // pressed the Enter key, or the Place Details request failed.
-        window.alert("No details available for input: '" + place.name + "'");
+        const retailerInfoElem = document.getElementById('results-info');
+        retailerInfoElem.innerText = 'No Results found. Try widening your search.';
+        const retailFinderResults = document.getElementById('retail-finder-results');
+        retailFinderResults.innerHTML = "";
         return;
       }
       if (place) {
@@ -231,7 +234,6 @@ export default class RetailFinder extends PageManager {
     retailFinderResults.innerHTML = "";
     const total = retailerData.length;
     this.retailers = retailerData;
-    console.log(retailerData.length);
     retailerData.forEach((retailerData, idx) => {
       const retailerItem = this.createRetailerItem(retailerData, total, idx);
       retailFinderResults.append(retailerItem);
@@ -364,36 +366,54 @@ export default class RetailFinder extends PageManager {
   };
 
   filterRetailers = () => {
-    const toRemove = [];
-    this.retailers = [...this.originalRetailers];
-    this.retailers.forEach(
-      (retailer) => {
-        Object.entries(this.appliedFilters).forEach(([filterName, value]) => {
-          if (filterName === 'distance' && this.selectedPlace) {
-            const selectedLocation = {
-              lat: this.selectedPlace.geometry.location.lat(),
-              lon: this.selectedPlace.geometry.location.lng(),
+    var self = this;
+    var addr = document.querySelector(".location-typeahead");
+    // Get geocoder instance
+    var geocoder = new google.maps.Geocoder();
+      
+    // Geocode the address
+    geocoder.geocode({
+        'address': addr.value
+    }, function(results, status) {
+        if (status === google.maps.GeocoderStatus.OK && results.length > 0) {    
+          var toRemove = [];
+          self.retailers = [...self.originalRetailers];
+          self.retailers.forEach(
+            (retailer) => {
+              Object.entries(self.appliedFilters).forEach(([filterName, value]) => {
+                if (filterName === 'distance' && self.selectedPlace) {
+                  const selectedLocation = {
+                    lat: self.selectedPlace.geometry.location.lat(),
+                    lon: self.selectedPlace.geometry.location.lng(),
+                  }
+                  const distanceAway = self.getDistanceBtwnTwoPts(selectedLocation, retailer.location);
+                  if (distanceAway > value) {
+                    toRemove.push(retailer.retailerName);
+                  }
+                };
+                if (filterName === 'collection' && value !== 'All') {
+                  const retailersWithSelected = self.collectionsByRetailers[value];
+                  if (!retailersWithSelected.includes(retailer.retailerName)) {
+                    toRemove.push(retailer.retailerName);
+                  }
+                };
+              });
             }
-            const distanceAway = this.getDistanceBtwnTwoPts(selectedLocation, retailer.location);
-            if (distanceAway > value) {
-              toRemove.push(retailer.retailerName);
-            }
-          };
-          if (filterName === 'collection' && value !== 'All') {
-            const retailersWithSelected = this.collectionsByRetailers[value];
-            if (!retailersWithSelected.includes(retailer.retailerName)) {
-              toRemove.push(retailer.retailerName);
-            }
-          };
-        });
-      }
-    );
-    this.retailers = this.retailers.filter(
-      (retailer) => !toRemove.includes(retailer.retailerName)
-    );
-    this.sortRetailers();
-    this.paintMapAndRetailers(this.retailers);
-    this.updateResultsInfo();
+          );
+          self.retailers = self.retailers.filter(
+            (retailer) => !toRemove.includes(retailer.retailerName)
+          );
+          self.sortRetailers();
+          self.paintMapAndRetailers(self.retailers);
+          self.updateResultsInfo();
+        } else {
+          // show an error if it's not
+          const retailerInfoElem = document.getElementById('results-info');
+          retailerInfoElem.innerText = 'No Results found. Try widening your search.';
+          const retailFinderResults = document.getElementById('retail-finder-results');
+          retailFinderResults.innerHTML = "";
+        }
+    });
   };
 
   updateResultsInfo = () => {
