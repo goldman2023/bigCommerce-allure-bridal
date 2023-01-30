@@ -41,7 +41,7 @@
                     <div class="form-field filter">
                         <span class="form-label">{{lang 'request_appointment.firstName'}} <span class="asterisk">*</span></span>
     
-                        <input required class="form-input" type="text" name="firstName"
+                        <input required class="form-input" type="text" name="firstName" oninvalid="this.setCustomValidity('THIS FIELD IS REQUIRED'); this.setCustomValidity.style.background='#000'" onchange="try{setCustomValidity('')}catch(e){};"
                             placeholder="{{lang 'request_appointment.firstName'}}">
     
                     </div>
@@ -65,7 +65,7 @@
                     <div class="form-field filter">
                         <span class="form-label">{{lang 'request_appointment.phone'}} <span class="asterisk">*</span></span>
 
-                        <input id="phone" required class="form-input" type="tel" name="phoneNumber"
+                        <input id="phone" required class="form-input" type="tel" minlength="10" name="phoneNumber"
                             placeholder="{{lang 'request_appointment.phone'}}"/>
 
                     </div>
@@ -175,7 +175,7 @@
                         <span class="form-label">{{lang 'request_appointment.zip'}} <span class="asterisk">*</span></span>
 
                         <input id="zip" maxlength="5" class="form-input" type="text" name="zip"
-                            placeholder="{{lang 'request_appointment.zip'}}">
+                            placeholder="{{lang 'request_appointment.zip'}}" onkeyup="this.value=this.value.replace(/[a-zA-Z]/,'');">
 
                     </div>
                 </div>
@@ -190,8 +190,8 @@
                     <div class="form-field filter">
                         <span class="form-label">{{lang 'request_appointment.peopleAttending'}} <span class="asterisk">*</span></span>
     
-                        <input class="form-input" type="number" name="noOfPeopleAttending"
-                            placeholder="{{lang 'request_appointment.peopleAttending'}}">
+                        <input class="form-input" type="number" min="1" name="noOfPeopleAttending"
+                            placeholder="{{lang 'request_appointment.peopleAttending'}}" onkeyup="this.value=this.value.replace(/[$&+,:;=?[\]@#|{}'<>.^*()%!-/]/,'');">
     
                     </div>
                 </div>
@@ -315,10 +315,10 @@
         //     document.getElementById('administrative_area_level_1').value = place.address_components[5].short_name;
         // });
         // Initialize the date picker on load
-        flatpickr('.date-picker', { position: 'below', monthSelectorType: 'static' })
-        flatpickr('.inline-picker', { inline: true, monthSelectorType: 'static' })
+        flatpickr('.date-picker', { position: 'below', monthSelectorType: 'static', minDate: "today" })
+        flatpickr('.inline-picker', { inline: true, monthSelectorType: 'static', minDate: "today" })
         flatpickr('.multiple-dates', {
-            monthSelectorType: 'static',
+            monthSelectorType: 'static', minDate: "today",
             mode: 'multiple', position: 'below', onChange: function (selectedDates, dateStr, instance) {
                 var selectedDatesStr = selectedDates.reduce(function (acc, ele) {
                     var str = instance.formatDate(ele, "d/m/Y");
@@ -373,9 +373,8 @@
 
             //get unmasked phone number
             var unmaskedPhone = Inputmask.unmask(phone, { "mask": "(999) 999-9999" });
-
             // validate the form values
-            if (!firstName || !lastName || !email || !phone || !address1 || !city || !state || !zip || !eventDate || !noOfPeopleAttending || !preferredDates) {
+            if (!firstName || !lastName || !email || !phone || unmaskedPhone.length < 10 || !address1 || !city || !state || !zip || !eventDate || !noOfPeopleAttending || !preferredDates) {
                 // show an error message if any of the required fields are empty
                 alert('Please fill out all the required fields.');
                 return;
@@ -434,24 +433,21 @@
                 });
         });
 
-        var appointmentDate = document.querySelector(".pages-custom-retail-submission-form .form-input.multiple-dates");
-        var eventDate = document.querySelector(".pages-custom-retail-submission-form #eventDate");
-        if(appointmentDate){
-            appointmentDate.flatpickr({
-                disable: [
-                    { from: "1900-01-01", to: new Date().toISOString().split('T')[0] },
-                    "2016-08-24",
-                ]
-            });
-        }
-        if(eventDate){
-            eventDate.flatpickr({
-                disable: [
-                    { from: "1900-01-01", to: new Date().toISOString().split('T')[0] },
-                    "2016-08-24",
-                ]
-            });
-        }
+        document.getElementById("retail-finder-form").addEventListener('invalid', (function(){
+            return function(e) {
+                //prevent the browser from showing default error bubble / hint
+                e.preventDefault();
+                var errorDiv = document.createElement("span");
+                errorDiv.classList.add("error-message");
+                errorDiv.innerText = "This Field is required";
+
+                insertAfter(errorDiv,  e.target);
+
+                function insertAfter(newNode, existingNode) {
+                    existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+                }
+            };
+        })(), true);
 
     });
 
