@@ -416,7 +416,7 @@
           margin-bottom: 28px;
 
           &::before {
-            content: url('/assets/icons/location.svg');
+            content: url('../icons/location.svg');
           }
         }
       }
@@ -428,10 +428,18 @@
       }
 
       .phone {
-        margin-bottom: 48px;
+        margin-bottom: 24px;
         a.retailer-detail{
           color: stencilColor('color-allure-bridals-primary-1');
           letter-spacing: .1em;
+          text-decoration: none;
+        }
+      }
+
+      .retailer-url{
+        margin-bottom: 48px;
+        a{
+          color: stencilColor('color-allure-bridals-primary-1');
           text-decoration: none;
         }
       }
@@ -478,13 +486,13 @@
   margin-right: 4px;
 
   &::after {
-    content: url('/assets/icons/retailer-featured.svg');
+    content: url('../icons/retailer-featured.svg');
   }
 }
 
 .disney {
   &::after {
-    content: url('/assets/icons/platinum-collection.svg');
+    content: url('../icons/platinum-collection.svg');
   }
 }
 @media (min-width: 1261px) {

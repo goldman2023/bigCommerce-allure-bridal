@@ -41,14 +41,14 @@
                     <div class="form-field filter">
                         <span class="form-label">{{lang 'request_appointment.firstName'}} <span class="asterisk">*</span></span>
     
-                        <input required class="form-input" type="text" name="firstName" oninvalid="this.setCustomValidity('THIS FIELD IS REQUIRED'); this.setCustomValidity.style.background='#000'" onchange="try{setCustomValidity('')}catch(e){};"
+                        <input class="form-input required" type="text" name="firstName"
                             placeholder="{{lang 'request_appointment.firstName'}}">
     
                     </div>
                     <div class=" form-field filter">
                         <span class="form-label">{{lang 'request_appointment.lastName'}} <span class="asterisk">*</span></span>
     
-                        <input required class="form-input" type="text" name="lastName"
+                        <input class="form-input required" type="text" name="lastName"
                             placeholder="{{lang 'request_appointment.lastName'}}">
     
                     </div>
@@ -58,14 +58,14 @@
                         <div class="form-field filter">
                             <span class="form-label">{{lang 'request_appointment.email'}} <span class="asterisk">*</span></span>
 
-                            <input required class="form-input" type="email" name="email"
+                            <input class="form-input required" type="email" name="email"
                                 placeholder="{{lang 'request_appointment.email'}}"/>
 
                         </div>
                     <div class="form-field filter">
                         <span class="form-label">{{lang 'request_appointment.phone'}} <span class="asterisk">*</span></span>
 
-                        <input id="phone" required class="form-input" type="tel" minlength="10" name="phoneNumber"
+                        <input id="phone" class="form-input required" type="tel" minlength="10" name="phoneNumber"
                             placeholder="{{lang 'request_appointment.phone'}}"/>
 
                     </div>
@@ -183,7 +183,7 @@
                     <div class="form-field filter flatpickr">
                         <span class="form-label">{{lang 'request_appointment.preferedAppointment'}} <span class="asterisk">*</span></span>
 
-                        <input required class="form-input multiple-dates " name="preferredDates" type="text"
+                        <input class="form-input multiple-dates required " name="preferredDates" type="text"
                             placeholder="MM/DD/YYYY">
                         <div class="disclaimer">Selected dates are not guarenteed.</div>
                     </div>
@@ -201,7 +201,7 @@
                     <div id="eventDate" class="form-field filter flatpickr">
                         <span class="form-label">{{lang 'request_appointment.eventDate'}} <span class="asterisk">*</span></span>
 
-                        <input required name="eventDate" class="form-input date-picker " type="text"
+                        <input name="eventDate" class="form-input date-picker required " type="text"
                             placeholder="MM/DD/YYYY">
 
                     </div>
@@ -339,9 +339,59 @@
         //Initialize Inputmask 
         Inputmask({ "mask": "(999) 999-9999" }).mask(document.getElementById("phone"));
 
+        document.getElementById("retail-finder-form").addEventListener('invalid', (function(){
+            return function(e) {
+                //prevent the browser from showing default error bubble / hint
+                e.preventDefault();
+                // var errorDiv = document.createElement("span");
+                // errorDiv.classList.add("error-message");
+                // errorDiv.innerText = "This Field is required";
+
+                // insertAfter(errorDiv,  e.target);
+
+                // function insertAfter(newNode, existingNode) {
+                //     existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+                // }
+            };
+        })(), true);
+
         const form = document.getElementById('retail-finder-form');
         form.addEventListener('submit', (event) => {
             event.preventDefault(); // prevent the form from being submitted
+
+            // var retailFinderFormInputs = document.querySelectorAll("#retail-finder-form .form-input");
+            var retailFinderFormInputs = form.querySelectorAll(".form-input");
+            if(retailFinderFormInputs){
+                for(let i=0; i<retailFinderFormInputs.length; i++){
+                    // console.log(retailFinderFormInputs.length);
+                    if(retailFinderFormInputs[i].classList.contains("required")){
+                        console.log(retailFinderFormInputs[i].value.length , retailFinderFormInputs[i]);
+                        if(retailFinderFormInputs[i].value.length > 0){
+                            var retailFinderFormError = retailFinderFormInputs[i].closest('.form-field').querySelector(".error-message");
+                            // for(let j=0; j<retailFinderFormError.length; j++){
+                                if(retailFinderFormError){
+                                    retailFinderFormError.remove();
+                                }
+                            // }
+                        } else {                            
+                            if(retailFinderFormInputs[i].closest('.form-field').querySelectorAll(".error-message").length > 0){
+                                console.log("Field Doesn't Found");
+                            } else {
+                                var errorDiv = document.createElement("span");
+                                errorDiv.classList.add("error-message");
+                                errorDiv.innerText = "This Field is required";
+                
+                                insertAfter(errorDiv,  retailFinderFormInputs[i]);
+                
+                                function insertAfter(newNode, existingNode) {
+                                    existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
 
             // get the form values
             const firstName = form.elements.firstName.value;
@@ -369,7 +419,7 @@
             //get retailer id from querystring
             const retailerId = new URLSearchParams(window.location.search).get('retailerId');
 
-
+            
 
             //get unmasked phone number
             var unmaskedPhone = Inputmask.unmask(phone, { "mask": "(999) 999-9999" });
@@ -433,21 +483,7 @@
                 });
         });
 
-        document.getElementById("retail-finder-form").addEventListener('invalid', (function(){
-            return function(e) {
-                //prevent the browser from showing default error bubble / hint
-                e.preventDefault();
-                var errorDiv = document.createElement("span");
-                errorDiv.classList.add("error-message");
-                errorDiv.innerText = "This Field is required";
-
-                insertAfter(errorDiv,  e.target);
-
-                function insertAfter(newNode, existingNode) {
-                    existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
-                }
-            };
-        })(), true);
+ 
 
     });
 
