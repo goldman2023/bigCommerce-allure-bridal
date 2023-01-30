@@ -48,7 +48,7 @@
             <section class="productView-details product-data">
                 <div class="productView-product">
                     <h1 class="productView-title">{{product.title}}</h1>
-                    {{#if product.description}}
+                    <!-- {{#if product.description}}
                         <div 
                             class="productView-subheading" 
                             {{#if settings.data_tag_enabled}}   
@@ -57,7 +57,8 @@
                         >
                             {{{product.description}}}
                         </div>
-                    {{/if}}
+                    {{/if}} -->
+                    <div class="productView-subheading customshortdesc" ></div>
                     {{> BP/components/common/divider}}
 
 
@@ -200,7 +201,7 @@
                           data-cart-item-add>
                         <input type="hidden" name="action" value="add">
                         <input type="hidden" name="product_id" value="{{product.id}}"/>
-                        <div data-product-option-change style="display:none;">
+                        <div data-product-option-change style="display:none;" class="prodOption-container">
                             {{inject 'showSwatchNames' theme_settings.show_product_swatch_names}}
                             {{#each product.options}}
                             <div class="prod-option {{dashcase this.display_name}}">
@@ -208,6 +209,10 @@
                                 <div class="divider"></div>
                             </div>
                             {{/each}}
+                            <div class="prod-option custom-ops">
+                                <div class="custom-option-pdp"></div>
+                                <div class="divider"></div>
+                            </div>
                         </div>
                         <div class="form-field form-field--stock{{#unless product.stock_level}} u-hiddenVisually{{/unless}}">
                             <label class="form-label form-label--alternate">
@@ -288,8 +293,8 @@
                           </div>
                     </div>
                 </figure>
-                <ul class="productView-thumbnails"{{#gt product.images.length 5}} data-slick='{
-                        "infinite": false,
+                <ul class="productView-thumbnails"{{#gt product.images.length 4}} data-slick='{
+                        "infinite": true,
                         "mobileFirst": true,
                         "dots": false,
                         "accessibility": false,

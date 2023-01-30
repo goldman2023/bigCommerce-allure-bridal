@@ -148,6 +148,10 @@
             line-height: remCalc(26px);
             letter-spacing: 0.1em;
             color: stencilColor('color-default-neutral-2');
+            &.customshortdesc {
+                display: none;
+                font-family: stencilFontFamily('default-font-light');
+            }
             p {
                 margin: 0;
                 font-style: normal;
@@ -381,5 +385,62 @@
     order: 1;
     @include breakpoint("medium") {
         order: 0;
+    }
+}
+.prodOption-container {
+    .prod-option.custom-ops {
+        display: none;
+    }
+    &.is-active {
+        .prod-option.custom-ops {
+            display: block;
+        }
+    }
+    .custom-option-pdp {
+        .custom-op-values {
+            display: flex;
+            justify-content: space-between;
+            .coatOptions,.trouserStyles {
+                width: 48%;
+                .option {
+                    display: flex;
+                    align-items: center;
+                    margin: 15px 0 30px 0;
+                    .styleop {
+                        position: relative;
+                        width: 50px;
+                        height: 31px;
+                        padding: 10px;
+                        font-style: normal;
+                        font-weight: 500;
+                        font-size: 10px;
+                        line-height: 12px;
+                        letter-spacing: 0.1em;
+                        text-transform: uppercase;
+                        color: #667089;
+                        span {
+                            border: 1px solid #CDD1DB;
+                            transform: rotate(45deg);
+                            position: absolute;
+                            content: "";
+                            top: 0;
+                            left: 0;
+                            width: 31px;
+                            height: 31px;
+                        }
+                    }
+                    .label {
+                        font-style: normal;
+                        font-weight: 500;
+                        font-size: 10px;
+                        line-height: 12px;
+                        text-align: left;
+                        letter-spacing: 0.1em;
+                        text-transform: uppercase;
+                        color: #4F4E55;
+                    }
+                }
+            }
+        }
     }
 }
