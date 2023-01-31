@@ -31,7 +31,7 @@ export default class Inspiration extends PageManager {
             if(unique.length > 0 ) {
                 if(selectedValue !== "") {
                     document.getElementById('filterbuttons').innerHTML = `<li class="tag"><a href="/inspiration/" class="button button--secondary">all</a></li>`+unique.map((tagitem) => {
-                        if (tagitem) {
+                        if (tagitem && tagitem.indexOf('URL-') === -1) {
                             if(tagitem === selectedValue) {
                                 return `<li class="tag"><a href="/inspiration/tag/${encodeURIComponent(tagitem)}" class="button button--primary">${tagitem}</a></li>`;
                             } else {
@@ -41,7 +41,7 @@ export default class Inspiration extends PageManager {
                     }).join('');
                 } else {
                     document.getElementById('filterbuttons').innerHTML = `<li class="tag"><a href="/inspiration/" class="button button--primary">all</a></li>`+unique.map((tagitem) => {
-                        if (tagitem) {
+                        if (tagitem && tagitem.indexOf('URL-') === -1) {
                             return `<li class="tag"><a href="/inspiration/tag/${encodeURIComponent(tagitem)}" class="button button--secondary">${tagitem}</a></li>`;
                         }
                     }).join('');
