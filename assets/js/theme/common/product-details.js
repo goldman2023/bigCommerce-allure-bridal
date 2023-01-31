@@ -197,24 +197,23 @@ export default class ProductDetails extends ProductDetailsBase {
         .then(function(res) {
             if(res.data.site.product.metafields.edges.length > 0) {
                 const prodData = JSON.parse(res.data.site.product.metafields.edges[0]?.node?.value);
-                console.log(prodData);
                 const sizeGuide = prodData?.sizeGuideCollection;
                 let coatOptions = prodData?.coatOptions;
                 let trouserStyles = prodData?.trouserStyles;
                 let shortdes = prodData?.shortDescription;
                 let customButtonUrl = prodData?.customButtonUrl;
-                if(customButtonUrl !== '' || customButtonUrl !== null || customButtonUrl !== undefined) {
-                    console.log("custombtnurl");
+                if (customButtonUrl !== null && customButtonUrl !== '' && customButtonUrl !== undefined) {
                     document.querySelector('.custombuttontryon').setAttribute("href", customButtonUrl);
                     document.querySelector('.custombuttontryon').text = prodData?.customButtonLabel;
                     document.querySelector('.custombuttontryon').setAttribute("target", "_blank");
                 }
 
-                if(shortdes !== '' || shortdes !== null || shortdes !== undefined) {
+                if(shortdes !== '' && shortdes !== null && shortdes !== undefined) {
                     document.querySelector('.customshortdesc').innerHTML = shortdes;
                     document.querySelector('.customshortdesc').style.display = 'block';
                 }
-                if (coatOptions.length > 0 || trouserStyles.length > 0) {
+                
+                if (coatOptions?.length > 0 && trouserStyles?.length > 0) {
                     let customoptionstructure = `<div class="custom-op-values">
                     <div class="coatOptions"><label class="form-label form-label--alternate form-label--inlineSmall" >Coat Options</label>${coatOptions.map(coatOption=>`<div class="option"><span class="styleop"><span></span>${coatOption.split('-')[0].trim()}</span><span class="label">${coatOption.split('-')[1].trim()}</span></div>`).join('')}</div>
                     <div class="trouserStyles"><label class="form-label form-label--alternate form-label--inlineSmall" >Trouser Options</label>${trouserStyles.map(trouserStyle=>`<div class="option"><span class="styleop"><span></span>${trouserStyle.split('-')[0].trim()}</span><span class="label">${trouserStyle.split('-')[1].trim()}</span></div>`).join('')}</div>

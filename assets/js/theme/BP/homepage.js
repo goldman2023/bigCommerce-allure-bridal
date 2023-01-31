@@ -29,7 +29,6 @@ export default class Homepage extends PageManager {
         let allcontentData = document.getElementById('homecontentdata').value;
         let jsContext = JSON.parse(allcontentData.replace( /(<([^>]+)>)/ig, ''));
         let blocksCollections = jsContext[0].contentBlocksCollection.items.map((element ,i)=> {
-            console.log('element', element);
             if(element.__typename === "BlockElementVerticalGallery"){
                 return blockElementVerticalGallery(element);
             }

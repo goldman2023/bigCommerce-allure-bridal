@@ -141,27 +141,26 @@ export default class Global extends PageManager {
             productDeatilMetaData(this.context,productId, response => {
                 let metadata = response.contentFul;
                 let relatedPro = response.related;
-                console.log("product",metadata);
-                if(Object.keys(metadata).length === 0) {
+                if (Object.keys(metadata).length === 0) {
                     $('.contentBlocksCollection').hide();
                 } else {
                     $('.contentBlocksCollection').show();
                 }
 
-                if(Object.keys(relatedPro).length === 0) {
+                if (Object.keys(relatedPro).length === 0) {
                     $('.productsrelate').hide();
                 } else {
                     $('.contentBlocksCollection').show();
                 }
                 
                 let blocksCollections = metadata?.contentBlocksCollection?.items?.map(element => {
-                    if(element.__typename === "BlockElementStoryBlock"){
+                    if (element.__typename === "BlockElementStoryBlock"){
                         return blockElementStory(element);
                     }
-                    if(element.__typename === "BlockElementFullscreenImage"){
+                    if (element.__typename === "BlockElementFullscreenImage"){
                         return blockElementFullscreenImage(element);
                     }
-                    if(element.__typename === "BlockElement3ImagesScreenWidth"){
+                    if (element.__typename === "BlockElement3ImagesScreenWidth"){
                         return blockElement3ImagesScreenWidth(element);
                     }
                     if (element.__typename === "BlockElementCollectionPreview") {
@@ -302,7 +301,7 @@ export default class Global extends PageManager {
                                 let heading = element.collectionHeadline;
                                 let lastword = heading?.split(" ")?.reverse()[0];
                                 document.querySelector('.productSlider .heading').innerHTML = `${(heading?.replace(lastword, '') !== undefined) ? heading?.replace(lastword, '') : ''} <span class="lastword h1-italic">${(lastword !== undefined) ? lastword : ''}</span>`;
-                                if(element.collectionDescription != null || element.collectionDescription != undefined) {
+                                if(element.collectionDescription != null && element.collectionDescription != undefined) {
                                     document.querySelector('.productSlider .descrip').innerHTML = `${element.collectionDescription}`;
                                 } else {
                                     document.querySelector('.productSlider .descrip').style.display = 'none';
@@ -386,7 +385,9 @@ export default class Global extends PageManager {
                         for (const relatedProduct of relatedProducts) {
                             relatedProductIds.push(relatedProduct.bc_product_id);
                         }
-                        getProducts(this.context, '.productSlider .productGridSection', relatedProductIds, 5);
+                        if (relatedProductIds.length > 0) {
+                            getProducts(this.context, '.productSlider .productGridSection', relatedProductIds, 5);
+                        }
                     }
                 }
                 

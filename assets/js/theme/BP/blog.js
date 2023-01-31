@@ -60,22 +60,15 @@ export default class Blog extends PageManager {
             "Nov": "Nov",
             'Dec' : "Dec",
         }
-        let datevar = {
-            '1' : "st",
-            "2": "nd",
-            '3' : "rd",
-            '22' : "nd",
-            '23' : "rd",
-        }
-        let dateformatted = `${dayvariable[formatdate[0]]}, ${monthVariable[formatdate[1]]} ${datevar[formatdate[2]] ? `${formatdate[2]}${datevar[formatdate[2]]}` : `${formatdate[2]}th`}, ${formatdate[3]}`;
+        let dateformatted = `${dayvariable[formatdate[0]]}, ${monthVariable[formatdate[1]]} ${formatdate[2]}, ${formatdate[3]}`;
 
-        function applySlider(selector,slide,centerM,infinity) {
+        function applySlider(selector, slide, centerM, infinity) {
             let centermood = false;
             let infinitymode = false;
-            if(centerM){
+            if (centerM){
                 centermood = centerM;
             }
-            if(infinity) {
+            if (infinity) {
                 infinitymode = infinity;
             }
             $(selector).slick({

@@ -911,7 +911,8 @@ export function blockElementVerticalGallery(blockData) {
                 if(item.description === '') {
                     leftData += `<div class="contentDiv"><img data-src="${item.url}" alt="${item.title}" class="lazyload"/></div>`;
                 } else {
-                    let descriptionArr = (item.description) ? item.description.split('—') : '';
+                    let descriptionArr = (item.description) ? item.description.split('-') : '';
+                    console.log(descriptionArr);
                     let descriptionHtml = '';
                     if (descriptionArr.length > 0) {
                         descriptionHtml = `<p class="caption body-1">${descriptionArr[0]} ${(descriptionArr[1] != null && descriptionArr[1] != undefined) ? `<span class="author body-light-2">-${descriptionArr[1]}</span>` : ''}</p>`;
@@ -921,14 +922,15 @@ export function blockElementVerticalGallery(blockData) {
             }
         });
         let rightData = '';
-        blockData?.imagesCollection?.items?.map((item,i) => {
+        blockData?.imagesCollection?.items?.map((item, i) => {
             if (i % 2 !== 0) {
                 if(item.description === '') {
                     rightData += `<div class="contentDiv"><img data-src="${item.url}" alt="${item.title}" class="lazyload"/></div>`;
                 } else {
                     let descriptionHtml = '';
                     if (item.description) {
-                        let descriptionArr = item.description.split('—');
+                        let descriptionArr = item.description.split('-');
+                        console.log(descriptionArr);
                         descriptionHtml = `<p class="caption body-1">${descriptionArr[0]} ${(descriptionArr[1] != null && descriptionArr[1] != undefined) ? `<span class="author body-light-2">-${descriptionArr[1]}</span>` : ''}</p>`;
                     }
                     
@@ -986,7 +988,7 @@ export function createProductSlider(context, block, blockData) {
     block.querySelector('.sub-description').innerHTML = blockData?.description;
 };
 
-export function blogpostTopBanner(selectorID,title,heading,imageHeading,date){
+export function blogpostTopBanner(selectorID, title, heading, imageHeading, date){
     let contentStructure = `<div class="topbannerSection"><img data-src="${imageHeading?.url}" alt="${title}" class="lazyload"/><div class="overlay"></div><div class="caption"><h2>${title ? title : ''}</h2><span class="date body-3">${date ? date : ''}<div class="divider"></div></span><p class="subheading">${heading ? heading : ''}</p></div></div>`;
     document.getElementById(selectorID).innerHTML = contentStructure;
 };

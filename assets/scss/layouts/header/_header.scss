@@ -339,6 +339,7 @@ header.header {
 header.header{
     ul {
         margin: 0;
+        flex: 1;
         &.sub-site__navigation-collections {
             display: flex;
             flex-flow: wrap;
@@ -356,9 +357,6 @@ header.header{
                     
                 }
             }
-        }
-        &.sub-site__navigation-styles, &.sub-site__navigation-accessories {
-            flex: 1;
         }
     }
     .sub-site__navigation-image {
