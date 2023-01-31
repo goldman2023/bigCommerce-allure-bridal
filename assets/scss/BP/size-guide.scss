@@ -312,6 +312,15 @@
             line-height: 1; 
         }
     }
+    .max-w-narrow {
+        max-width: 680px;
+        margin: 0 auto;
+        h3 {
+            font-size: 18px;
+            margin-bottom: 0;
+            font-weight: 700;
+        }
+    }
     h1 {
         font-size: 36px;
         border-bottom: 1px solid rgb(229, 229, 229);
@@ -320,7 +329,12 @@
         font-size: 22px;
         text-transform: uppercase;
     }
-
+    .size-chart table tbody tr th {
+        position: sticky;
+        left: 0;
+        z-index: 2;
+        text-align: left;
+    }
     .size-chart {
         position: relative;
         overflow: hidden;
@@ -340,7 +354,8 @@
         position: absolute;
         top: 0;
         right: 0;
-        display: flex;
+        // display: flex; 
+        display: none;
         justify-content: center;
         align-items: center;
         padding: 1rem;
@@ -362,16 +377,33 @@
         tr:first-child td ,th{
             font-weight: 700;
             background: #f5f6f7;
-            padding: 2rem;
+            padding: 22px;
+        }
+        tr:first-child td {
+            &:hover {
+                color: black;
+            }
         }
         td {
-            padding: 2rem;
+            padding: 22px;
+            position: relative;
+            border: 1px solid #f5f6f7;
+            text-align: center;
+            line-height: 1;
             &:hover {
                 background: black;
                 color: white;
-                text-align: center;
-                border: 1px solid #f5f6f7;
-                line-height: 1;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    display: block;
+                    height: 10000px;
+                    width: 100%;
+                    left: 0;
+                    top: -5000px;
+                    z-index: -1;
+                    background-color: #ffffe0;
+                }
             }
         }
     }
