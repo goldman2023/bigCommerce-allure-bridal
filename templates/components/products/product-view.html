@@ -255,23 +255,15 @@
                 {{#if product.images.length '>' 1 }}
                 {{> components/carousel-content-announcement}}
                 {{/if}}
-                <!-- <figure class="productView-image"
-                        data-image-gallery-main
-                        {{#if product.main_image}}
-                        data-zoom-image="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size }}"
-                        {{/if}}
-                        > -->
-                    <figure class="productView-image"
-                        data-image-gallery-main
-                        {{#if product.main_image}}
-                        {{/if}}
-                        >
+                <figure class="productView-image"
+                    data-image-gallery-main
+                    {{#if product.main_image}}
+                    {{/if}}
+                    >
                     <div class="productView-img-container">
                         {{!-- Remove the surrounding a-element if there is no main image. --}}
                         {{#if product.main_image}}
-                            <!-- <a href="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size}}"
-                                target="_blank"> -->
-                                 <a id="pdpmainimage" href="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.pop_size }}"
+                            <a id="pdpmainimage" href="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.pop_size }}"
                                 target="_blank">
                         {{/if}}
                         {{> components/common/responsive-img
@@ -293,24 +285,16 @@
                           </div>
                     </div>
                 </figure>
-                <ul class="productView-thumbnails"{{#gt product.images.length 4}} data-slick='{
+                <ul class="productView-thumbnails" data-slick='{
                         "infinite": true,
                         "mobileFirst": true,
                         "dots": false,
                         "accessibility": false,
-                        "slidesToShow": 5,
-                        "slidesToScroll": 5
-                    }'{{/gt}}>
+                        "slidesToShow": {{ product.images.length }},
+                        "slidesToScroll": {{ product.images.length }}
+                    }'>
                     {{#each product.images}}
                         <li class="productView-thumbnail">
-                            <!-- <a
-                                class="productView-thumbnail-link"
-                                href="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
-                                data-image-gallery-item
-                                data-image-gallery-new-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.product_size}}"
-                                data-image-gallery-new-image-srcset="{{getImageSrcset this use_default_sizes=true}}"
-                                data-image-gallery-zoom-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
-                            > -->
                             <a
                             class="productView-thumbnail-link {{#if @index '===' 0}}is-active{{/if}}"
                             href="{{getImageSrcset this (cdn ../theme_settings.default_image_product)}}"

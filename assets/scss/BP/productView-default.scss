@@ -380,6 +380,11 @@
             }
         }
     }
+    .productView-thumbnails {
+        .slick-list {
+            margin: 10px 0 20px;
+        }
+    }
 }
 .productView--left {
     order: 1;
