@@ -254,8 +254,47 @@
                 --}}
                 {{#if product.images.length '>' 1 }}
                 {{> components/carousel-content-announcement}}
-                {{/if}}
+                {{/if}} 
                 <figure class="productView-image"
+                    data-image-gallery-main
+                    {{#if product.main_image}}
+                    {{/if}}
+                    >
+                    <div class="productView-img-container">
+                        {{!-- Remove the surrounding a-element if there is no main image. --}}
+                        {{#if product.main_image}}
+                            <a  href="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.pop_size }}"
+                                target="_blank">
+                        {{/if}}
+                        {{> components/common/responsive-img
+                            image=product.main_image
+                            class="productView-image--default"
+                            fallback_size=theme_settings.product_size
+                            lazyload=theme_settings.lazyload_mode
+                            default_image=theme_settings.default_image_product
+                            otherAttributes="data-main-image"
+                        }}
+                        {{!-- Remove the surrounding a-element if there is no main image. --}}
+                        {{#if product.main_image}}
+                            </a>
+                        {{/if}}
+                    </div>
+                </figure>
+                <div class="prodimageslider slid-{{product.images.length}} slider-for" >
+                    {{#each product.images}}
+                    <div class="pdpmainimage" data-src="{{strReplace this.data '{:size}' '2500x2500'}}">
+                        {{> components/common/responsive-img image=this fallback_size=../theme_settings.productview_thumb_size lazyload=../theme_settings.lazyload_mode }}
+                    </div>
+                    {{/each}}
+                </div>
+                <div id="pdpimagemodal" class="pdpimagemodal" >
+                    <span class="close">&times;</span>
+                    <div class="prodimageslider slider-nav" >
+                        {{#each product.images}}
+                            <div><img src="{{strReplace this.data '{:size}' '2500x2500'}}" style="width: 100%;"/></div>
+                        {{/each}}
+                  </div>
+                <!-- <figure class="productView-image"
                     data-image-gallery-main
                     {{#if product.main_image}}
                     {{/if}}
@@ -310,7 +349,7 @@
                             </a>
                         </li>
                     {{/each}}
-                </ul>
+                </ul> -->
             </section>
         </div>
     </div>

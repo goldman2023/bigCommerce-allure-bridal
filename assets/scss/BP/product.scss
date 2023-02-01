@@ -52,6 +52,17 @@
     overflow: auto;
     height: 100%;
     background-color: rgba(0,0,0,0.4);
+    .prodimageslider , .prodimageslider img {
+      //width: 100vw;
+      min-height: 100vh;
+      height: 100%;
+    }
+    .slick-next,.slick-prev ,.close {
+      position: fixed;
+    }
+    .close {
+      color: #bbb;
+    }
   }
   
   .pdpimagemodal .modal-content {
@@ -88,6 +99,7 @@
     font-size: 30px;
     font-weight: normal;
     transition: 0.3s;
+    z-index: 999;
   }
   
   .close:hover,
