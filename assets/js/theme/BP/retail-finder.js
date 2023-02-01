@@ -101,6 +101,27 @@ export default class RetailFinder extends PageManager {
     // the google places input look up and runs async..
     // could break this out but deadline is nearing... 
     const needsInitialFilter = !this.autocomplete;
+    /*** wait for element to exist ***/
+    function waitForElement(selector, callback) {
+      if (document.querySelector(selector) !== null) {
+        callback();
+      } else {
+      setTimeout(function() {
+        waitForElement(selector, callback);
+        }, 100);
+      }
+    };
+    waitForElement('#location-typeahead.pac-target-input',function() {
+        const checkInputLength = setInterval(checkInput, 500);
+        function checkInput() {
+          if(document.querySelector("#location-typeahead.pac-target-input")){
+            if(document.querySelector("#location-typeahead.pac-target-input").value.length > 0){
+              submitBtn.click();
+              clearInterval(checkInputLength);
+            }
+          }
+        }
+    });
     autocomplete.bindTo("bounds", this.map);
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
@@ -191,7 +212,7 @@ export default class RetailFinder extends PageManager {
 
     const distance = document.createElement('span');
     distance.classList.add('retailer-distance');
-    distance.innerText = `${retailer.distanceFromUser} miles away`;
+    distance.innerText = parseInt(`${retailer.distanceAway}`)+` miles away`;
     container.append(distance);
 
     const numCollections = document.createElement('span');
@@ -387,6 +408,7 @@ export default class RetailFinder extends PageManager {
                     lon: self.selectedPlace.geometry.location.lng(),
                   }
                   const distanceAway = self.getDistanceBtwnTwoPts(selectedLocation, retailer.location);
+                  retailer.distanceAway = distanceAway;
                   if (distanceAway > value) {
                     toRemove.push(retailer.retailerName);
                   }
@@ -448,7 +470,7 @@ export default class RetailFinder extends PageManager {
     distanceFilterLabel.innerText = 'Within';
     distanceFilter.append(distanceFilterLabel);
     const distanceFilterDropdown = document.createElement('select');
-    distanceFilterDropdown.id = FILTER_IDS.distance;
+    distanceFilterDropdown.id = FILTER_IDS.distance;    
     distanceFilterDropdown.classList.add('form-select');
     distanceFilterDropdown.classList.add('selector-dropdown');
     [10, 25, 50, 100, 500].forEach(
@@ -574,6 +596,7 @@ export default class RetailFinder extends PageManager {
                 disneyPlatinumCollection
                 retailerStreet
                 phoneNumber
+                requestAppointment
             }
         }
     }`
@@ -635,11 +658,10 @@ export default class RetailFinder extends PageManager {
       content: '',
       disableAutoPan: true,
     });
-
     const markers = retailerData.map((retailer) => {
       const display = `
         ${retailer.retailerName} <br/>
-        ${retailer.distanceFromUser} miles away
+        ${retailer.distanceAway} miles away
       `
       return this.getMarker(retailer.location, display, infoWindow, retailer.bridalLiveRetailerId, centerRetailer);
     });
@@ -776,7 +798,9 @@ export default class RetailFinder extends PageManager {
     requestBtn.append(requestBtnText);
     requestBtn.addEventListener('click', () => this.openRequestForm(retailer));
 
-    detailElement.append(requestBtn);
+    if(retailer.requestAppointment){
+      detailElement.append(requestBtn);
+    }
 
 
     const modal = defaultModal({ size: 'normal', skipCache: true });
@@ -987,11 +1011,8 @@ export default class RetailFinder extends PageManager {
   }
   openRequestForm = (retailer) => {
     let elem;
-    console.log(retailer.bridalLiveRetailerId + "Test" +retailer.retailerName);
     if(retailer.bridalLiveRetailerId) {
         window.location.href = '/request-appointment?retailerId=' + retailer.bridalLiveRetailerId + '&retailerName=' + retailer.retailerName;
-
-     
       //redirect to custom form appending query string
 
     } else {

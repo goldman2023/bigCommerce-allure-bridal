@@ -191,7 +191,7 @@
                         <span class="form-label">{{lang 'request_appointment.peopleAttending'}} <span class="asterisk">*</span></span>
     
                         <input class="form-input" type="number" min="1" name="noOfPeopleAttending"
-                            placeholder="{{lang 'request_appointment.peopleAttending'}}" onkeyup="this.value=this.value.replace(/[$&+,:;=?[\]@#|{}'<>.^*()%!-/]/,'');">
+                            placeholder="{{lang 'request_appointment.peopleAttending'}}" onkeyup="this.value=this.value.replace(/[$&+,:;=?[\]@#|{}'<>.^*()%!-/0]/,'');">
     
                     </div>
                 </div>
@@ -363,9 +363,7 @@
             var retailFinderFormInputs = form.querySelectorAll(".form-input");
             if(retailFinderFormInputs){
                 for(let i=0; i<retailFinderFormInputs.length; i++){
-                    // console.log(retailFinderFormInputs.length);
                     if(retailFinderFormInputs[i].classList.contains("required")){
-                        console.log(retailFinderFormInputs[i].value.length , retailFinderFormInputs[i]);
                         if(retailFinderFormInputs[i].value.length > 0){
                             var retailFinderFormError = retailFinderFormInputs[i].closest('.form-field').querySelector(".error-message");
                             // for(let j=0; j<retailFinderFormError.length; j++){
