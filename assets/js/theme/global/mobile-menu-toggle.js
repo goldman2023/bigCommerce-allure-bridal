@@ -98,7 +98,7 @@ export class MobileMenuToggle {
         this.$header.addClass('is-open');
         if($('.navPages-quickSearch.mobile-only').attr('style') === "display: block;") {
             $('.navPages-quickSearch.mobile-only').hide();
-            $('.header-shadow').removeClass('opensearch');
+            //$('.header-shadow').removeClass('opensearch');
         }
         this.$scrollView.scrollTop(0);
 

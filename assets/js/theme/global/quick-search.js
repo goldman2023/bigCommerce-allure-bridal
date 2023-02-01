@@ -12,11 +12,11 @@ export default function () {
     const stencilDropDownExtendables = {
         hide: () => {
             $quickSearchExpand.attr('aria-expanded', false);
-            $searchQuery.trigger('blur');
+            //$searchQuery.trigger('blur');
         },
         show: (event) => {
             $quickSearchExpand.attr('aria-expanded', true);
-            $searchQuery.trigger('focus');
+            //$searchQuery.trigger('focus');
             event.stopPropagation();
         },
     };
