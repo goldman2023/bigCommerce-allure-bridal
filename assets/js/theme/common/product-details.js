@@ -212,11 +212,32 @@ export default class ProductDetails extends ProductDetailsBase {
                     document.querySelector('.customshortdesc').innerHTML = shortdes;
                     document.querySelector('.customshortdesc').style.display = 'block';
                 }
-                
+
                 if (coatOptions?.length > 0 && trouserStyles?.length > 0) {
                     let customoptionstructure = `<div class="custom-op-values">
-                    <div class="coatOptions"><label class="form-label form-label--alternate form-label--inlineSmall" >Coat Options</label>${coatOptions.map(coatOption=>`<div class="option"><span class="styleop"><span></span>${coatOption.split('-')[0].trim()}</span><span class="label">${coatOption.split('-')[1].trim()}</span></div>`).join('')}</div>
-                    <div class="trouserStyles"><label class="form-label form-label--alternate form-label--inlineSmall" >Trouser Options</label>${trouserStyles.map(trouserStyle=>`<div class="option"><span class="styleop"><span></span>${trouserStyle.split('-')[0].trim()}</span><span class="label">${trouserStyle.split('-')[1].trim()}</span></div>`).join('')}</div>
+                    <div class="coatOptions"><label class="form-label form-label--alternate form-label--inlineSmall" >Coat Options</label>${coatOptions.map(coatOption =>
+                        `<div class="option">
+                        <span class="styleop">
+                            <span></span>
+                            ${(coatOption.split('-')[1] !== null && coatOption.split('-')[1] !== undefined) ? coatOption.split('-')[0]?.trim() : coatOption.split('-')[0]?.trim().charAt(0) }
+                        </span>
+                        <span class="label">
+                            ${(coatOption.split('-')[1] !== null && coatOption.split('-')[1] !== undefined) ? coatOption.split('-')[1]?.trim() : coatOption.split('-')[0]?.trim() }
+                        </span>
+                        </div>`).join('')} 
+                    </div>
+                    <div class="trouserStyles"><label class="form-label form-label--alternate form-label--inlineSmall" >Trouser Options</label>
+                        ${trouserStyles.map(trouserStyle=>
+                            `<div class="option">
+                                <span class="styleop">
+                                    <span></span>
+                                    ${(trouserStyle.split('-')[1] !== null && trouserStyle.split('-')[1] !== undefined) ? trouserStyle.split('-')[0]?.trim() : trouserStyle.split('-')[0]?.trim().charAt(0) }
+                                </span>
+                                <span class="label">
+                                    ${(trouserStyle.split('-')[1] !== null && trouserStyle.split('-')[1] !== undefined) ? trouserStyle.split('-')[1]?.trim() : trouserStyle.split('-')[0]?.trim() }
+                                </span>
+                            </div>`).join('')}
+                        </div>
                     </div>`;
                     document.querySelector('.custom-option-pdp').innerHTML = customoptionstructure;
                     document.querySelector('.prod-option.custom-ops').style.display = 'block';
