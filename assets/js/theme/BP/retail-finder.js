@@ -596,6 +596,7 @@ export default class RetailFinder extends PageManager {
                 disneyPlatinumCollection
                 retailerStreet
                 phoneNumber
+                requestAppointment
             }
         }
     }`
@@ -797,7 +798,9 @@ export default class RetailFinder extends PageManager {
     requestBtn.append(requestBtnText);
     requestBtn.addEventListener('click', () => this.openRequestForm(retailer));
 
-    detailElement.append(requestBtn);
+    if(retailer.requestAppointment){
+      detailElement.append(requestBtn);
+    }
 
 
     const modal = defaultModal({ size: 'normal', skipCache: true });
