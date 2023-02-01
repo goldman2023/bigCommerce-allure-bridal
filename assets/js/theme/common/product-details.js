@@ -51,10 +51,55 @@ export default class ProductDetails extends ProductDetailsBase {
             }
         };
 
+        $('.slider-for').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: true,
+            dots: true,
+            asNavFor: '.slider-nav',
+            responsive: [
+                {
+                    breakpoint: 600,
+                    settings: {
+                        arrows: false,
+                    }
+                }
+            ]
+          });
+          $('.productView-image').hide();
+          $('.slider-for').show();
+
+          $('.slider-nav').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            asNavFor: '.slider-for',
+            dots: false,
+            arrows: true,
+          });
+
+          $('.slider-nav').on('afterChange', function(currentSlide){
+            let windowwidth = "width: "+$(window).width() + "px;";
+            $('#pdpimagemodal .slick-track').attr('style', windowwidth);
+            $(`#pdpimagemodal [data-slick-index="${currentSlide}"]`).attr('style', windowwidth);
+          });
+          
+          $(window).resize(function(){
+            addWidthToModalSlider();
+          });
+
+          addWidthToModalSlider();
+
+
         $(window).on('load', () => {
             this.registerAddToCartValidation();
             $.each($productSwatchLabels, placeSwatchLabelImage);
+            addWidthToModalSlider();
         });
+
+        function addWidthToModalSlider() {
+            $('#pdpimagemodal .slick-track').attr('style', "width: "+$(window).width() + "px;");
+            $('#pdpimagemodal .slick-active').attr('style', "width: "+$(window).width() + "px;");
+        }
 
         if (context.showSwatchNames) {
             this.$swatchOptionMessage.removeClass('u-hidden');
@@ -111,15 +156,15 @@ export default class ProductDetails extends ProductDetailsBase {
         document.querySelector('.buttonOnOff').addEventListener("click", this.viewVideoToggle);
 
         var modal = document.getElementById("pdpimagemodal");
-        var img = document.querySelector("#pdpmainimage");
-        var modalImg = document.getElementById("img01");
-        img.onclick = function(){
-            modal.style.display = "block";
-            modalImg.src = this.href;
-        }
+        document.querySelectorAll(".pdpmainimage").forEach((ele) => {
+            ele.addEventListener("click", (e) => {
+                modal.style.display = "block";
+                addWidthToModalSlider();
+            });
+        });
         var span = document.getElementsByClassName("close")[0];
         span.onclick = function() { 
-        modal.style.display = "none";
+            modal.style.display = "none";
         }
 
         $('.form-option-wrapper').mouseover(function(){

@@ -73,24 +73,150 @@
                     flex-basis: 50%;
                     max-width: 50%;
                 }
+                .prodimageslider {
+                    &.slider-for {
+                        display: none;
+                    }
+                    .slick-next {
+                        right: 0;
+                        width: 52px;
+                        height: 52px;
+                        padding: 0 14px;
+                        &::before {
+                            mask-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yLjE5NzUxIDEwLjU0MzZDMS45MDAyNCAxMC41NDM2IDEuNjY2NjcgMTAuMzEgMS42NjY2NyAxMC4wMTI3QzEuNjY2NjcgOS43MjYwNiAxLjkwMDI0IDkuNDgxODcgMi4xOTc1MSA5LjQ4MTg3SDE2Ljg0ODhMMTIuNDQyOCA1LjA3NTg2QzEyLjI0MTEgNC44NjM1MiAxMi4yNDExIDQuNTM0NCAxMi40NDI4IDQuMzIyMDZDMTIuNjU1MiA0LjEwOTcyIDEyLjk4NDMgNC4xMjAzNCAxMy4xOTY2IDQuMzIyMDZMMTguNDczMiA5LjU5ODY1QzE4LjU5IDkuNjk0MjEgMTguNjY0MyA5Ljg0Mjg0IDE4LjY2NDMgMTAuMDAyMUMxOC42NjQzIDEwLjE1MDcgMTguNjAwNiAxMC4yOTk0IDE4LjQ5NDUgMTAuMzk0OUwxMy4xOTY2IDE1LjY4MjFDMTIuOTg0MyAxNS44ODM5IDEyLjY1NTIgMTUuODgzOSAxMi40NDI4IDE1LjY4MjFDMTIuMjQxMSAxNS40ODA0IDEyLjI0MTEgMTUuMTQwNyAxMi40NDI4IDE0LjkzOUwxNi44NDg4IDEwLjU0MzZIMi4xOTc1MVoiIGZpbGw9IiNCQzgzNzIiLz4KPC9zdmc+Cg==");
+                            mask-repeat: no-repeat;
+                            mask-size: 100%;
+                            mask-position: 50%;
+                            background-image: none;
+                            background-color: stencilColor('color-default-primary-1');
+                        }
+                    }
+                    .slick-prev {
+                        left: 0;
+                        width: 52px;
+                        height: 52px;
+                        padding: 0 14px;
+                        &::before {
+                            mask-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xOC4xMzM0IDkuNDU2NjFDMTguNDMwNyA5LjQ1NjYxIDE4LjY2NDIgOS42OTAxOSAxOC42NjQyIDkuOTg3NDZDMTguNjY0MiAxMC4yNzQxIDE4LjQzMDcgMTAuNTE4MyAxOC4xMzM0IDEwLjUxODNMMy40ODIwOCAxMC41MTgzTDcuODg4MSAxNC45MjQzQzguMDg5ODIgMTUuMTM2NyA4LjA4OTgyIDE1LjQ2NTggNy44ODgxIDE1LjY3ODFDNy42NzU3NiAxNS44OTA1IDcuMzQ2NjMgMTUuODc5OCA3LjEzNDMgMTUuNjc4MUwxLjg1NzcgMTAuNDAxNUMxLjc0MDkxIDEwLjMwNiAxLjY2NjYgMTAuMTU3MyAxLjY2NjYgOS45OTgwOEMxLjY2NjYgOS44NDk0NCAxLjczMDMgOS43MDA4IDEuODM2NDYgOS42MDUyNUw3LjEzNDMgNC4zMTgwNEM3LjM0NjYzIDQuMTE2MzIgNy42NzU3NiA0LjExNjMyIDcuODg4MSA0LjMxODA0QzguMDg5ODIgNC41MTk3NiA4LjA4OTgyIDQuODU5NSA3Ljg4ODEgNS4wNjEyMkwzLjQ4MjA4IDkuNDU2NjFMMTguMTMzNCA5LjQ1NjYxWiIgZmlsbD0iI0JDODM3MiIvPgo8L3N2Zz4K");
+                            mask-repeat: no-repeat;
+                            mask-size:  100%;
+                            mask-position: 50%;
+                            background-image: none;
+                            background-color: stencilColor('color-default-primary-1');
+                        }
+                    }
+                    img {
+                        width: 100%;
+                    }
+                    &.slid-2 {
+                        .slick-dots li {
+                            width: 100%;
+                        }
+                    }
+                    &.slid-2 {
+                        .slick-dots li {
+                            width: 50%;
+                        }
+                    }
+                    &.slid-3 {
+                        .slick-dots li {
+                            width: 33.33%;
+                        }
+                    }
+                    &.slid-4 {
+                        .slick-dots li {
+                            width: 25%;
+                        }
+                    }
+                    &.slid-5 {
+                        .slick-dots li {
+                            width: 20%;
+                        }
+                    }
+                    &.slid-6 {
+                        .slick-dots li {
+                            width: 16.66%;
+                        }
+                    }
+                    &.slid-7 {
+                        .slick-dots li {
+                            width: 14.28%;
+                        }
+                    }
+                    &.slid-8 {
+                        .slick-dots li {
+                            width: 12.5%;
+                        }
+                    }
+                    &.slid-9 {
+                        .slick-dots li {
+                            width: 11.11%;
+                        }
+                    }
+                    &.slid-10 {
+                        .slick-dots li {
+                            width: 10%;
+                        }
+                    }
+                    .slick-dots {
+                        bottom: -13.5px;
+                        li {
+                            button{
+                                border: 0;
+                                border-top: 1px solid #F0EBE6;
+                                border-radius: 0;
+                                width: 100%;
+                                
+                                &::before {
+                                    display: none;
+                                }
+                                &::after {
+                                    position: absolute;
+                                    content: "";
+                                    right: 50%;
+                                    top: -2.5px;
+                                    width: 4px;
+                                    height: 4px;
+                                    background: #D1B3AB;
+                                    transform: rotate(45deg);
+                                    outline: 3px solid white;
+                                }
+                            }
+                            &.slick-active button{
+                                border-top: 1px solid #C8C6C6;
+                                &::after {
+                                    background: #BA8476;
+                                }
+                            }
+                        }
+                    }
+                    .carousel-tooltip {
+                        display: none !important;
+                    }
+                }
                 .productView-images {
                     float: none;
                     width: auto;
                     clear: both;
                     margin: 0;
                     .productView-thumbnail {
-                        height: 12px !important;
+                        //height: 12px !important;
                         padding: 0;
                         border: 0;
                         margin: 0 8px;
+                        height: auto;
+
                         a {
                             border: 0;
                             border-top: 1px solid #F0EBE6;
-                            height:24px;
+                            //height:24px;
                             margin-top: 7px;
                             margin-right: 0;
+                            height: auto;
+
                             img {
-                                height: 0;
+                               // height: 0;
+                               width: 100%;
                             }
 
                             &::before {
@@ -114,22 +240,27 @@
                         }
                     }
                 }
-                .slick-next {
-                    right: 5px;
-                }
-                .slick-prev {
-                    left: 5px;
-                }
-                .slick-next,
-                .slick-prev {
-                    margin-top: 0;
-                    background: transparent;
-                    width: 12px;
-                    height: 10px;
-                    padding: 0;
-                    &::before {
-                        height: 12px;
-                        width: auto;
+                // .slick-next {
+                //     right: 5px;
+                // }
+                // .slick-prev {
+                //     left: 5px;
+                // }
+                // .slick-next,
+                // .slick-prev {
+                //     margin-top: 0;
+                //     background: transparent;
+                //     width: 12px;
+                //     height: 10px;
+                //     padding: 0;
+                //     &::before {
+                //         height: 12px;
+                //         width: auto;
+                //     }
+                // }
+                .slick-arrow {
+                    .carousel-tooltip {
+                        display: none !important;
                     }
                 }
             }
