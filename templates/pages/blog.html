@@ -24,7 +24,11 @@ blog:
             {{#each blog.posts}}
                     <div class="block">
                         <div class="image-block">
-                            <p class="postdate mobileonly"><span class="datespan">{{date_published}}</span></p>
+                            <p class="postdate mobileonly">
+                                <span class="datespan">
+                                    {{strReplace (strReplace (strReplace (strReplace date_published "th" ",") "rd" ",") "st" ",") "nd" ","}}
+                                </span>
+                            </p>
                             {{#JSONparse (sanitize this.summary)}}
                                 {{#each this}}
                                     {{#if @index '===' 0}}
@@ -33,7 +37,11 @@ blog:
                                     {{/if}}
                                 {{/each}}
                             {{/JSONparse}}
-                            <p class="postdate desktoponly"><span class="datespan">{{date_published}}</span></p>
+                            <p class="postdate desktoponly">
+                                <span class="datespan">
+                                    {{strReplace (strReplace (strReplace (strReplace date_published "th" ",") "rd" ",") "st" ",") "nd" ","}}
+                                </span>
+                            </p>
                         </div>
                         <div class="content-block">
                             <div class="caption">

@@ -476,7 +476,7 @@ export function renderHeaderFooter (context) {
                     navigationHtmlMobile += `<div class="navPage-subMenu" id="navPages-${index}" aria-hidden="true" tabindex="-1">
                     <ul class="navPage-subMenu-list">`;
 
-                    navigationHtml += `<div class="sub-site__navigation">`;
+                    navigationHtml += `<div class="sub-site__navigation"><div class="sub-site__navigation-inner">`;
 
                     for (const secondNav of topNav.sectionChildNavigationCollection.items) {
                         navigationHtmlMobile += `<li class="navPage-subMenu-item">
@@ -536,7 +536,7 @@ export function renderHeaderFooter (context) {
                         <div class="sub-site__navigation-image">
                             <img data-src="${topNav.megaMenuImage.url}" class="lazyload">
                         </div>
-                    </div>`;
+                    </div></div>`;
 
                     navigationHtmlMobile += `</ul><div class="sub-site__navigation-image">
                     <img data-src="${topNav.megaMenuImage.url}" class="lazyload">
@@ -819,7 +819,6 @@ export function blockElementDiscover(blockData) {
 
 export function blockElementStory(blockData) {
     return `<div class="blockElementStory block-item" id="blockElementStory">
-    <div class="caption" ><h2>Inspiration</h2><p class="body-light-1">Allure Bridals real customer’s fantastic wedding stories. These should be your wedding inspiration.</p></div>
     <div class="flexdata"><div class="heading-section"><h1 class="title h1-italic">${blockData?.blockname}</h1>${(blockData?.displayedate != undefined && blockData?.displayedate != null) ? `<p class="date body-3"><span class="borderdate"></span><span class="originaldate">${blockData?.displayedate}</span></p>` : `<p></p></br>`}<div class="leftBottom">
         <img data-src="${blockData?.imagesCollection?.items[0]?.url}" alt="${blockData?.imagesCollection?.items[0]?.title}" class="lazyload"/>
         </div></div><div class="rightside-section"><div class="rightcol">
