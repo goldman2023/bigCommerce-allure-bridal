@@ -461,7 +461,7 @@
           border: 1px solid stencilColor('color-allure-bridals-primary-5');
           border-radius: 3px;
         }
-        .schedule-btn:hover {
+        &:hover {
           background: stencilColor('color-allure-bridals-primary-1');
           span{
             color: stencilColor('color-white');

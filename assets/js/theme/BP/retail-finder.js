@@ -112,11 +112,15 @@ export default class RetailFinder extends PageManager {
       }
     };
     waitForElement('#location-typeahead.pac-target-input',function() {
-        setTimeout(function() {
-          if(locationTypeahead.value.length > 0){
-            submitBtn.click();
+        const checkInputLength = setInterval(checkInput, 500);
+        function checkInput() {
+          if(document.querySelector("#location-typeahead.pac-target-input")){
+            if(document.querySelector("#location-typeahead.pac-target-input").value.length > 0){
+              submitBtn.click();
+              clearInterval(checkInputLength);
+            }
           }
-        }, 1500);
+        }
     });
     autocomplete.bindTo("bounds", this.map);
     autocomplete.addListener("place_changed", () => {
