@@ -457,7 +457,7 @@ export function renderHeaderFooter (context) {
             for (const topNav of topNavs) {
                 navigationHtml += `<li class="site-navigation__link"><a href="${topNav.topNavLinkUrl}">${topNav.topNavLinkName}</a>`;
 
-                navigationHtmlMobile += `<li class="navPages-item">
+                navigationHtmlMobile += `<li class="navPages-item ${topNav.topNavLinkName.replaceAll(" ", "-").toLowerCase()}">
                     <a href="${topNav.topNavLinkUrl}" 
                             data-collapsible="navPages-${index}" 
                             aria-controls="navPages-${index}" 
@@ -584,6 +584,13 @@ export function renderHeaderFooter (context) {
                     mobileNavItem.classList.toggle('is-open');
                     mobileNavItem.nextElementSibling.classList.toggle('is-open');
                 }, false);
+            });
+
+            const designerEventEl = document.querySelector(".designer-events");
+            const mobileToggleEl = document.querySelector(".mobileMenu-toggle");
+
+            designerEventEl.addEventListener("click", function() {
+                mobileToggleEl.click();
             });
         }, 500);
 
@@ -751,8 +758,17 @@ export function events(blockData) {
     return `<div class="events block-item" id="events">
     <h2>Upcoming Designer Events</h2>
     <div class="eventsGrid">
-        ${blockData.trunkShowsCollection.items.map((item)=> 
-            `<div class="eventsCard">
+        ${blockData.trunkShowsCollection.items.map((item)=> {
+            //start date format
+            let startDate = (item.eventStartDate).split('T');
+            let startDateObj = new Date(`${startDate[0]}T00:00`);
+            let startDateFormatted = startDateObj.toLocaleDateString().replaceAll('/', '.');
+            //end date format
+            let endDate = (item.eventEndDate).split('T');
+            let endDateObj = new Date(`${endDate[0]}T00:00`);
+            let endDateFormatted = endDateObj.toLocaleDateString().replaceAll('/', '.');
+            
+            return `<div class="eventsCard">
               <div class="block">
                 <div class="imageblock col"><img data-src="${item.eventImage.url}" alt="${item.retailerName}" class="lazyload"/></div>
                 <div class="contentBlock col">
@@ -760,7 +776,9 @@ export function events(blockData) {
                     <p class="addressp">${item.location}</p>
                     <div class="divider"></div>
                     <label>Date</label>
-                    <p class="colored">${new Date(item.eventStartDate).toLocaleDateString().replaceAll('/','.')} - ${new Date(item.eventEndDate).toLocaleDateString().replaceAll('/','.')}</p>
+                    <p class="colored">
+                        ${startDateFormatted} - ${endDateFormatted}
+                    </p>
                     <label>Collections</label>
                     <p class="colored">${item.collectionsAvailable.map((col)=> `${col}`).join(", ")}</p>
                     <label>address</label>
@@ -773,7 +791,8 @@ export function events(blockData) {
                     <a href="${item.locationWebsiteUrl}" target="_blank" class="colored">${item.locationWebsiteUrl}</a>
                 </div>
               </div>
-            </div>`).join('')}
+            </div>`;
+        }).join('')}
     </div>
     ${blockData.containerButtonUrl !== null ? `<a href="${blockData.containerButtonUrl}" class="button button--secondary" >${blockData.containerButtonText}</a>` : ''}
     </div>`;
