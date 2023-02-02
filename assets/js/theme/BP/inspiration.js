@@ -6,7 +6,7 @@ export default class Inspiration extends PageManager {
 
     onReady() {
         let self = this;
-        fetch(this.context.workatoApiPathTags, {
+        fetch(`${this.context.workatoApiPathB2C}/blog/tags`, {
             method: 'GET',
             credentials: 'same-origin',
             headers: {"API-TOKEN": self.context.workatoApiToken},

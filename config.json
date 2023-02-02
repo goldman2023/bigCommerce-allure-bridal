@@ -45,7 +45,7 @@
     "Firefox ESR"
   ],
   "settings": {
-    "workato_api_path_tags": "https://apim.workato.com/allure/allure-b2c-website/blog/tags",
+    "workato_api_path_b2c": "https://apim.workato.com/allure/allure-b2c-website",
     "workato_api_path": "https://apim.workato.com/allure/wedding-studio/",
     "workato_api_token": "c0bce025e1792e283cfbd229321ecc423ae60257cf462c8d262d7b10fd9e41f9",
     "contentful_api_path": "https://graphql.contentful.com/content/v1/spaces/y49u4slmhh3t/",
