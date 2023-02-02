@@ -109,6 +109,10 @@
           display: flex;
           flex-wrap: wrap;
 
+          .hide-retailer-item.retailer-item-container {
+            display: none;
+          }
+
           .retailer-item-container {
             width: 33%;
 

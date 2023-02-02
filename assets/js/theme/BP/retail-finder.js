@@ -186,6 +186,22 @@ export default class RetailFinder extends PageManager {
 
   createRetailerItem = (retailer, total, idx) => {
     const mainContainer = document.createElement('div');
+    const carryValue = document.getElementById("collectionFilterSelect");
+    if(carryValue.value){
+      if(carryValue.value === "All"){
+        const collectionNames = retailer.collectionsAvailableCollection.items;
+        if(collectionNames){
+          for(let i=0; i<collectionNames.length; i++) {
+            if(collectionNames[i]){
+              console.log(collectionNames[i].collectionName);
+              if(collectionNames[i].collectionName == "Allure Men"){
+                mainContainer.classList.add('hide-retailer-item');
+              }
+            }
+          }
+        }
+      }
+    }
     mainContainer.classList.add('retailer-item-container');
     const container = document.createElement('div');
     container.classList.add('retailer-item');
@@ -256,8 +272,8 @@ export default class RetailFinder extends PageManager {
     const total = retailerData.length;
     this.retailers = retailerData;
     retailerData.forEach((retailerData, idx) => {
-      const retailerItem = this.createRetailerItem(retailerData, total, idx);
-      retailFinderResults.append(retailerItem);
+        const retailerItem = this.createRetailerItem(retailerData, total, idx);
+        retailFinderResults.append(retailerItem);
     });
   }
 
