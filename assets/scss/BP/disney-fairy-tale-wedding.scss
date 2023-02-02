@@ -271,6 +271,25 @@ body {
                 }
             }
         }
+        .productView .productView--inner .productView--right .prodimageslider .slick-next::before,.productView .productView--inner .productView--right .prodimageslider .slick-prev::before {
+            background: stencilColor('color-disney-primary-1');
+        }
+        .productView .productView--inner .productView--right .prodimageslider .slick-dots li {
+            button {
+                border-color: stencilColor('color-disney-primary-4');
+
+                &::after {
+                    background-color: stencilColor('color-disney-primary-3');
+                }
+            }
+            &.slick-active button {
+                border-color: stencilColor('color-disney-primary-2');
+
+                &::after {
+                    background-color: stencilColor('color-disney-primary-1');
+                }
+            }
+        }
 
         .productView {
             .productView-customElements {
@@ -524,6 +543,7 @@ body {
                 }
             }
         }
+
 
         .productGridslider {
             .slick-prev {
