@@ -193,7 +193,6 @@ export default class RetailFinder extends PageManager {
         if(collectionNames){
           for(let i=0; i<collectionNames.length; i++) {
             if(collectionNames[i]){
-              console.log(collectionNames[i].collectionName);
               if(collectionNames[i].collectionName == "Allure Men"){
                 mainContainer.classList.add('hide-retailer-item');
               }
@@ -737,13 +736,15 @@ export default class RetailFinder extends PageManager {
     const collectionsList = document.createElement('div');
     collectionsList.classList.add('collections-list');
     for (const collection of retailer.collectionsAvailableCollection.items) {
-      const collectionItem = document.createElement('a');
-      collectionItem.setAttribute("href", collection.collectionButtonUrl);
-      collectionItem.setAttribute("target", "_blank");
-      collectionItem.classList.add('collection-item');
-      collectionItem.classList.add('retailer-detail');
-      collectionItem.innerText = collection.collectionName;
-      collectionsList.append(collectionItem);      
+      if(collection){
+        var collectionItem = document.createElement('a');
+        collectionItem.setAttribute("href", collection.collectionButtonUrl);
+        collectionItem.setAttribute("target", "_blank");
+        collectionItem.classList.add('collection-item');
+        collectionItem.classList.add('retailer-detail');
+        collectionItem.innerText = collection.collectionName;
+        collectionsList.append(collectionItem);      
+      }
     };
     collections.append(collectionsList);
     detailElement.append(collections);
