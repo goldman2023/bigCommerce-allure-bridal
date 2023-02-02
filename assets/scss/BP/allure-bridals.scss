@@ -272,6 +272,26 @@ body {
             }
         }
 
+        .productView .productView--inner .productView--right .prodimageslider .slick-next::before,.productView .productView--inner .productView--right .prodimageslider .slick-prev::before {
+            background: stencilColor('color-allure-bridals-primary-1');
+        }
+        .productView .productView--inner .productView--right .prodimageslider .slick-dots li {
+            button {
+                border-color: stencilColor('color-allure-bridals-primary-4');
+
+                &::after {
+                    background-color: stencilColor('color-allure-bridals-primary-3');
+                }
+            }
+            &.slick-active button {
+                border-color: stencilColor('color-allure-bridals-primary-2');
+
+                &::after {
+                    background-color: stencilColor('color-allure-bridals-primary-1');
+                }
+            }
+        }
+
         .productView {
             .productView-customElements {
                 .productView-customElement {
@@ -483,6 +503,8 @@ body {
                 }
             }
         }
+
+        
 
         .productGridslider {
             .slick-prev {
