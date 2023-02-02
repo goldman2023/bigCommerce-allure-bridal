@@ -738,8 +738,12 @@ export default class RetailFinder extends PageManager {
     for (const collection of retailer.collectionsAvailableCollection.items) {
       if(collection){
         var collectionItem = document.createElement('a');
-        collectionItem.setAttribute("href", collection.collectionButtonUrl);
-        collectionItem.setAttribute("target", "_blank");
+        if(collection.collectionButtonUrl == null){
+          collectionItem.setAttribute("href", "#");
+        } else {
+          collectionItem.setAttribute("href", collection.collectionButtonUrl);
+          collectionItem.setAttribute("target", "_blank");
+        }
         collectionItem.classList.add('collection-item');
         collectionItem.classList.add('retailer-detail');
         collectionItem.innerText = collection.collectionName;
