@@ -397,7 +397,6 @@ export default class Global extends PageManager {
 
         $('.alertBox .close').on('click', e => {
             e.target.closest('.alertBox').style.display = 'none';
-            console.log(e);
         });
 
         $(window).on('load', function() {
@@ -437,7 +436,6 @@ export default class Global extends PageManager {
             }, 3000);
             if(mainContent.contains("pages-account-edit")) {
                 $('#editforminaccount input[type=password]').each(function() {
-                    console.log($(this).val());
                     $(this).val('');
                 });
             }
