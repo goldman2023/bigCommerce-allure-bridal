@@ -186,6 +186,21 @@ export default class RetailFinder extends PageManager {
 
   createRetailerItem = (retailer, total, idx) => {
     const mainContainer = document.createElement('div');
+    const carryValue = document.getElementById("collectionFilterSelect");
+    if(carryValue.value){
+      if(carryValue.value === "All"){
+        const collectionNames = retailer.collectionsAvailableCollection.items;
+        if(collectionNames){
+          for(let i=0; i<collectionNames.length; i++) {
+            if(collectionNames[i]){
+              if(collectionNames[i].collectionName == "Allure Men"){
+                mainContainer.classList.add('hide-retailer-item');
+              }
+            }
+          }
+        }
+      }
+    }
     mainContainer.classList.add('retailer-item-container');
     const container = document.createElement('div');
     container.classList.add('retailer-item');
@@ -256,8 +271,8 @@ export default class RetailFinder extends PageManager {
     const total = retailerData.length;
     this.retailers = retailerData;
     retailerData.forEach((retailerData, idx) => {
-      const retailerItem = this.createRetailerItem(retailerData, total, idx);
-      retailFinderResults.append(retailerItem);
+        const retailerItem = this.createRetailerItem(retailerData, total, idx);
+        retailFinderResults.append(retailerItem);
     });
   }
 
@@ -721,13 +736,19 @@ export default class RetailFinder extends PageManager {
     const collectionsList = document.createElement('div');
     collectionsList.classList.add('collections-list');
     for (const collection of retailer.collectionsAvailableCollection.items) {
-      const collectionItem = document.createElement('a');
-      collectionItem.setAttribute("href", collection.collectionButtonUrl);
-      collectionItem.setAttribute("target", "_blank");
-      collectionItem.classList.add('collection-item');
-      collectionItem.classList.add('retailer-detail');
-      collectionItem.innerText = collection.collectionName;
-      collectionsList.append(collectionItem);      
+      if(collection){
+        var collectionItem = document.createElement('a');
+        if(collection.collectionButtonUrl == null){
+          collectionItem.setAttribute("href", "#");
+        } else {
+          collectionItem.setAttribute("href", collection.collectionButtonUrl);
+          collectionItem.setAttribute("target", "_blank");
+        }
+        collectionItem.classList.add('collection-item');
+        collectionItem.classList.add('retailer-detail');
+        collectionItem.innerText = collection.collectionName;
+        collectionsList.append(collectionItem);      
+      }
     };
     collections.append(collectionsList);
     detailElement.append(collections);
