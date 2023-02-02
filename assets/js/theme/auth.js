@@ -26,7 +26,7 @@ export default class Auth extends PageManager {
         const loginModel = forms;
 
         this.loginValidator = nod({
-            submit: '.login-form input[type="submit"]',
+            submit: '.login-form button[type="submit"]',
             tap: announceInputErrorMessage,
         });
 
@@ -55,6 +55,7 @@ export default class Auth extends PageManager {
             this.loginValidator.performCheck();
 
             if (this.loginValidator.areAll('valid')) {
+                localStorage.setItem('loginEvent', true);
                 return;
             }
 

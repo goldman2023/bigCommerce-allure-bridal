@@ -109,8 +109,33 @@ export default class Account extends PageManager {
             sessionStorage.removeItem('editopen');
         });
         
+        if (localStorage.getItem('loginEvent')) {
+            this.loginEvent(response => {
+                console.log('response', response);
+                localStorage.removeItem('loginEvent')
+            });
+        }
     }
 
+    loginEvent () {
+        fetch(`${this.context.workatoApiPathB2C}/login/customer`, {
+            method: 'POST',
+            headers: { "API-TOKEN": this.context.workatoApiToken},
+            body: JSON.stringify({
+                "scope": "string",
+                "id": this.context.customer.id
+            })
+        })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (res) {
+            if (typeof callback == 'function') {
+                callback.call(this, res);
+            }
+        })
+        .catch(error => console.error(error));
+    }
     /**
      * Binds a submit hook to ensure the customer receives a confirmation dialog before deleting an address
      */
