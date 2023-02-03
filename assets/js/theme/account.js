@@ -110,13 +110,12 @@ export default class Account extends PageManager {
         });
         
         if (localStorage.getItem('loginEvent')) {
-            this.loginEvent(response => {
-                localStorage.removeItem('loginEvent');
-            });
+            localStorage.removeItem('loginEvent');
+            this.loginEvent();
         }
     }
 
-    loginEvent(callback) {
+    loginEvent() {
         fetch(`${this.context.workatoApiPathB2C}/login/customer`, {
             method: 'POST',
             headers: { "API-TOKEN": this.context.workatoApiToken},
@@ -129,9 +128,7 @@ export default class Account extends PageManager {
             return response.json();
         })
         .then(function (res) {
-            if (typeof callback == 'function') {
-                callback.call(this, res);
-            }
+            console.log('Login Event', res);
         })
         .catch(function  (error) {
             console.log('error', error);

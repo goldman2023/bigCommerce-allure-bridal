@@ -589,53 +589,52 @@ export default class Global extends PageManager {
                     });
                 }
             }
-        }, 1000);
-        $('.card .titleIcon').on('click', function(e){
-            e.preventDefault();
-            $(this).addClass('is-active');
-            let prodid = $(this).attr('data-id');
-            if (customerdetails) {
-                $.ajax({
-                    type: "GET",
-                    url: `/account.php?action=account_details`,
-                    dataType: 'html',
-                    success: response => {
-                        const wishlistId = $(response).find("input[data-label='Default Wishlist']").val();
-                        if(wishlistId) {
-                            $.ajax({
-                                type: "POST",
-                                url: `/wishlist.php?action=add&wishlistid=${wishlistId}&product_id=${prodid}`,
-                                success: response => {
-                                    $(this).removeClass('is-active');
-                                    swal.fire({
-                                        text: "Product added to wishlist",
-                                        icon: 'success',
-                                        showCancelButton: false
-                                    });
-                                    window.location.href = `/wishlist.php?action=viewwishlistitems&wishlistid=${wishlistId}`;
-                                },
-                                error: error => {
-                                    $(this).removeClass('is-active');
-                                    console.log(error);
-                                }
-                            });
-                        } else {
-                            swal.fire({
-                                text: "Wishlist not found, please create a wishlist",
-                                icon: 'error',
-                                showCancelButton: false
-                            });
-                            window.location.href = `/wishlist.php?action=addwishlist&product_id=${prodid}`;
+            $('.card .titleIcon').on('click', function (e) {
+                e.preventDefault();
+                $(this).addClass('is-active');
+                let prodid = $(this).attr('data-id');
+                if (customerdetails) {
+                    $.ajax({
+                        type: "GET",
+                        url: `/account.php?action=account_details`,
+                        dataType: 'html',
+                        success: response => {
+                            const wishlistId = $(response).find("input[data-label='Default Wishlist']").val();
+                            if (wishlistId) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: `/wishlist.php?action=add&wishlistid=${wishlistId}&product_id=${prodid}`,
+                                    success: response => {
+                                        $(this).removeClass('is-active');
+                                        swal.fire({
+                                            text: "Product added to wishlist",
+                                            icon: 'success',
+                                            showCancelButton: false
+                                        });
+                                        window.location.href = `/wishlist.php?action=viewwishlistitems&wishlistid=${wishlistId}`;
+                                    },
+                                    error: error => {
+                                        $(this).removeClass('is-active');
+                                        console.log(error);
+                                    }
+                                });
+                            } else {
+                                swal.fire({
+                                    text: "Wishlist not found, please create a wishlist",
+                                    icon: 'error',
+                                    showCancelButton: false
+                                });
+                                window.location.href = `/wishlist.php?action=addwishlist&product_id=${prodid}`;
+                            }
+                        },
+                        error: error => {
+                            console.log(error);
                         }
-                    },
-                    error: error => {
-                        console.log(error);
-                    }
-                });
-            } else {
-                window.location.href = `/login.php?from=wishlist.php%3Faction%3Daddwishlist%26product_id%${prodid}`;
-            }
-        });
-        
+                    });
+                } else {
+                    window.location.href = `/login.php?from=wishlist.php%3Faction%3Daddwishlist%26product_id%${prodid}`;
+                }
+            });
+        }, 1000);
     }
 }
