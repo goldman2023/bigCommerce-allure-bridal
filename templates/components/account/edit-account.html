@@ -32,11 +32,11 @@
                 <input type="number" class="form-input" name="account_phone" id="account_phone" value="{{trim forms.edit_account.phone}}">
             </div>
             {{#each forms.edit_account.fields}}
-            {{#if label '!==' "Wedding Party Id"}}
-                {{#if label '!=='  "Default Wishlist"}}
-                    {{{dynamicComponent 'components/common/forms'}}}
+                {{#if label '!==' "Wedding Party Id"}}
+                    {{#if label '!=='  "Default Wishlist"}}
+                        {{{dynamicComponent 'components/common/forms'}}}
+                    {{/if}}
                 {{/if}}
-            {{/if}}
             {{/each}}
         </div>
     </fieldset>
