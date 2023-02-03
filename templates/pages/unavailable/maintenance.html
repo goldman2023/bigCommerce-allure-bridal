@@ -1,14 +1,42 @@
 {{#partial "head"}}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        @font-face {
+            font-family: "Inter Regular";
+            font-style: normal;
+            font-weight: 500;
+            src: url("{{cdn 'webdav:fonts/Inter-Regular.ttf'}}");
+        }
+
+        @font-face {
+            font-family: "Prata";
+            font-style: normal;
+            font-weight: 400;
+            src: url("{{cdn 'webdav:fonts/Prata-Regular.ttf'}}");
+        }
+    </style>
     {{{stylesheet 'assets/css/maintenance.css'}}}
+    
 {{/partial}}
 
 {{#partial "page"}}
     <main>
-        <header>
-            <h1>{{lang 'maintenance.down'}}</h1>
-        </header>
-        <section><p>{{{settings.maintenance.message}}}</p></section>
-        <section></section>
+        <section>
+            <div class="txt-wrapper">
+                <div class="store-img">
+                    <img src="{{cdn 'assets/icons/store-logo.svg'}}"
+                        alt="{{settings.store_logo.title}}" title="{{settings.store_logo.title}}"
+                    >
+                </div>
+                <div class="maintenance-msg">
+                    {{{settings.maintenance.message}}}
+                </div>
+            </div>
+            <div class="img-wrapper">
+                <img src="https://cdn11.bigcommerce.com/s-7kdijiqhnq/images/stencil/original/image-manager/maintenance.png" alt="maintenance">
+            </div>
+        </section>
+        
         <footer><small></small></footer>
     </main>
 {{/partial}}
