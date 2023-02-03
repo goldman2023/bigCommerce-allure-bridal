@@ -111,13 +111,12 @@ export default class Account extends PageManager {
         
         if (localStorage.getItem('loginEvent')) {
             this.loginEvent(response => {
-                console.log('response', response);
-                localStorage.removeItem('loginEvent')
+                localStorage.removeItem('loginEvent');
             });
         }
     }
 
-    loginEvent () {
+    loginEvent(callback) {
         fetch(`${this.context.workatoApiPathB2C}/login/customer`, {
             method: 'POST',
             headers: { "API-TOKEN": this.context.workatoApiToken},
@@ -134,7 +133,9 @@ export default class Account extends PageManager {
                 callback.call(this, res);
             }
         })
-        .catch(error => console.error(error));
+        .catch(function  (error) {
+            console.log('error', error);
+        });
     }
     /**
      * Binds a submit hook to ensure the customer receives a confirmation dialog before deleting an address
