@@ -315,10 +315,10 @@
         //     document.getElementById('administrative_area_level_1').value = place.address_components[5].short_name;
         // });
         // Initialize the date picker on load
-        flatpickr('.date-picker', { position: 'below', monthSelectorType: 'static', minDate: "today" })
-        flatpickr('.inline-picker', { inline: true, monthSelectorType: 'static', minDate: "today" })
+        flatpickr('.date-picker', { position: 'below', monthSelectorType: 'static', minDate: "today", dateFormat: "m-d-Y"})
+        flatpickr('.inline-picker', { inline: true, monthSelectorType: 'static', minDate: "today", dateFormat: "n-d-Y" })
         flatpickr('.multiple-dates', {
-            monthSelectorType: 'static', minDate: "today",
+            monthSelectorType: 'static', minDate: "today", dateFormat: "m-d-Y",
             mode: 'multiple', position: 'below', onChange: function (selectedDates, dateStr, instance) {
                 var selectedDatesStr = selectedDates.reduce(function (acc, ele) {
                     var str = instance.formatDate(ele, "d/m/Y");
@@ -448,15 +448,16 @@
                 City: city,
                 State: state,
                 PostalCode: zip,
-                AppointmentDate: eventDate,
+                EventDate: eventDate,
                 NumberPeopleinAppointment: parseInt(noOfPeopleAttending),
                 EmailOptin: emailAlerts,
                 RetailerName: retailerName,
                 RetailerId: retailerId ? parseInt(retailerId) : 0,
                 DirectBook: "true",
-                PreferredAppointmentDates: preferredDates
+                AppointmentDates: preferredDates
             };
-
+            console.log(formData);
+            //return false;
             fetch(url, {
                 method: method,
                 headers: {
