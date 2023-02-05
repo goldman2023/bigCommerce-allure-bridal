@@ -270,6 +270,8 @@ export default class RetailFinder extends PageManager {
     retailFinderResults.innerHTML = "";
     const total = retailerData.length;
     this.retailers = retailerData;
+    retailerData.sort((a, b) => (a.sort_order > b.sort_order) ? 1 : -1)
+
     retailerData.forEach((retailerData, idx) => {
         const retailerItem = this.createRetailerItem(retailerData, total, idx);
         retailFinderResults.append(retailerItem);
@@ -627,6 +629,8 @@ export default class RetailFinder extends PageManager {
     )
     const latLoc = await results.json();
     const retailers = latLoc.data.retailersCollection.items;
+    console.log(retailers);
+    console.log(latLoc);
     return this.setupFilterData(retailers);
   };
 
@@ -737,12 +741,12 @@ export default class RetailFinder extends PageManager {
     collectionsList.classList.add('collections-list');
     for (const collection of retailer.collectionsAvailableCollection.items) {
       if(collection){
-        var collectionItem = document.createElement('a');
+        var collectionItem = document.createElement('span');
         if(collection.collectionButtonUrl == null){
-          collectionItem.setAttribute("href", "#");
+          //collectionItem.setAttribute("href", "#");
         } else {
-          collectionItem.setAttribute("href", collection.collectionButtonUrl);
-          collectionItem.setAttribute("target", "_blank");
+          //collectionItem.setAttribute("href", collection.collectionButtonUrl);
+          //collectionItem.setAttribute("target", "_blank");
         }
         collectionItem.classList.add('collection-item');
         collectionItem.classList.add('retailer-detail');
