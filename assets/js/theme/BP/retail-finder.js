@@ -271,11 +271,22 @@ export default class RetailFinder extends PageManager {
     const total = retailerData.length;
     this.retailers = retailerData;
     retailerData.sort((a, b) => (a.sort_order > b.sort_order) ? 1 : -1)
-
+    let i = 1;
+    let first_retailer = false;
     retailerData.forEach((retailerData, idx) => {
         const retailerItem = this.createRetailerItem(retailerData, total, idx);
         retailFinderResults.append(retailerItem);
+        if(retailerData && retailerData.requestAppointment && i == 1){
+          first_retailer = retailerData;
+        }
+        i = i+1;
     });
+    if(first_retailer){
+      this.openDetailsModal(first_retailer);
+    }
+
+
+
   }
 
   getMarker = (latLong, display, infoWindow, id = null, centerRetailer = null) => {
