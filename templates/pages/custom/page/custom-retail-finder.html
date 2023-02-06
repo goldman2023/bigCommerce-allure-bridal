@@ -315,10 +315,10 @@
         //     document.getElementById('administrative_area_level_1').value = place.address_components[5].short_name;
         // });
         // Initialize the date picker on load
-        flatpickr('.date-picker', { position: 'below', monthSelectorType: 'static', minDate: "today", dateFormat: "m-d-Y"})
-        flatpickr('.inline-picker', { inline: true, monthSelectorType: 'static', minDate: "today", dateFormat: "n-d-Y" })
+        flatpickr('.date-picker', { position: 'below', monthSelectorType: 'static', minDate: "today" })
+        flatpickr('.inline-picker', { inline: true, monthSelectorType: 'static', minDate: "today" })
         flatpickr('.multiple-dates', {
-            monthSelectorType: 'static', minDate: "today", dateFormat: "m-d-Y",
+            monthSelectorType: 'static', minDate: "today",
             mode: 'multiple', position: 'below', onChange: function (selectedDates, dateStr, instance) {
                 var selectedDatesStr = selectedDates.reduce(function (acc, ele) {
                     var str = instance.formatDate(ele, "d/m/Y");
@@ -457,7 +457,6 @@
                 AppointmentDates: preferredDates
             };
             console.log(formData);
-            //return false;
             fetch(url, {
                 method: method,
                 headers: {
