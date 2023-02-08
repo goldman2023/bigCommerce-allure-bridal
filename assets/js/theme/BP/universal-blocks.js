@@ -496,7 +496,7 @@ export function renderHeaderFooter (context) {
                         </span>`: ''}</a>
                         `;
 
-                        navigationHtml += `<ul class="sub-site__navigation-${secondNav.navSectionName.toLowerCase()}">
+                        navigationHtml += `<ul class="sub-site__navigation-${secondNav.navSectionName.toLowerCase().replaceAll(' ', '-')}">
                                 <li class="sub-site__title">
                                     <a href="${secondNav.navSectionUrl}">
                                         ${secondNav.navSectionName}

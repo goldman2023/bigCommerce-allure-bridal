@@ -134,6 +134,9 @@ export default class Search extends CatalogPage {
     }
 
     onReady() {
+         //added to fix issue PDP Back to List Button
+        localStorage.setItem('lastVisitedCategoryUrl', 'SRP');
+
         compareProducts(this.context);
         this.arrangeFocusOnSortBy();
 

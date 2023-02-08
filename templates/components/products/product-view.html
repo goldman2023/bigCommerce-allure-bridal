@@ -29,35 +29,17 @@
             {{> components/common/alert/alert-success success}}
         {{/if}}
     {{/each}}
-    <!-- {{#each breadcrumbs}}
-        {{#contains product.category this.name}}
-            <div class="productView--top">
-                <a href="{{this.url}}">{{lang 'products.back_to_list'}}</a>
-            </div>
-        {{/contains}}
-    {{/each}} -->
-
-    <div class="productView--top">
-        <a href="/{{#each product.category}}{{#if @last}}{{lowercase (hyphenate this)}}{{else}}{{this}}, {{/if}}{{/each}}">{{lang 'products.back_to_list'}}</a>
-    </div>
     
-
+    <div class="productView--top">
+        <a href="/">{{lang 'products.back_to_list'}}</a>
+    </div>
     
     <div class="productView--inner">
         <div class="productView--left">
             <section class="productView-details product-data">
                 <div class="productView-product">
                     <h1 class="productView-title">{{product.title}}</h1>
-                    <!-- {{#if product.description}}
-                        <div 
-                            class="productView-subheading" 
-                            {{#if settings.data_tag_enabled}}   
-                                data-event-type="product" 
-                            {{/if}}
-                        >
-                            {{{product.description}}}
-                        </div>
-                    {{/if}} -->
+                    
                     <div class="productView-subheading customshortdesc" ></div>
                     {{> BP/components/common/divider}}
 

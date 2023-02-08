@@ -174,3 +174,12 @@ header {
         justify-content: space-evenly;
     }
 }
+.sub-site__navigation-bridal-trends {
+    li {
+        &:first-child {
+            a {
+                pointer-events: none;
+            }
+        }
+    }
+}
