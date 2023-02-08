@@ -692,7 +692,7 @@ export default class RetailFinder extends PageManager {
     const markers = retailerData.map((retailer) => {
       const display = `
         ${retailer.retailerName} <br/>
-        ${retailer.distanceAway} miles away
+        ${retailer.distanceAway.toFixed(2)} miles away
       `
       return this.getMarker(retailer.location, display, infoWindow, retailer.bridalLiveRetailerId, centerRetailer);
     });
