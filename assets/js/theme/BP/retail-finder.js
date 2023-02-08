@@ -282,7 +282,8 @@ export default class RetailFinder extends PageManager {
         i = i+1;
     });
     if(first_retailer){
-      this.openDetailsModal(first_retailer);
+      //this.openDetailsModal(first_retailer);
+      console.log(first_retailer);
     }
 
 
