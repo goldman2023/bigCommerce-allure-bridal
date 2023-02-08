@@ -28,6 +28,8 @@ export default class Category extends CatalogPage {
     }
 
     onReady() {
+        //added to fix issue PDP Back to List Button
+        localStorage.setItem('lastVisitedCategoryUrl', window.location.href);
         this.arrangeFocusOnSortBy();
 
         $('[data-button-type="add-cart"]').on('click', (e) => this.setLiveRegionAttributes($(e.currentTarget).next(), 'status', 'polite'));

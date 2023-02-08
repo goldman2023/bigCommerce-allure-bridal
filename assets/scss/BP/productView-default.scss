@@ -301,7 +301,7 @@
             .form-option-wrapper {
                 margin-right: 8px;
                 .swatchvalue {
-                    display: none;
+                    display: none !important;
                 }
                 &.is-hover {
                     .swatchvalue {

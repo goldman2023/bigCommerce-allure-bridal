@@ -19,6 +19,18 @@ export default class Product extends PageManager {
     }
 
     onReady() {
+        //Update PDP Back to List Button
+        const breadcrumbLink = document.querySelector('.breadcrumbs .breadcrumb:nth-last-child(2) a').getAttribute('href');
+        console.log('breadcrumbs', breadcrumbLink);
+
+        const backToList = document.querySelector('.productView--top a');
+        const lastVisitedCategoryUrl = localStorage.getItem('lastVisitedCategoryUrl');
+        if (lastVisitedCategoryUrl && lastVisitedCategoryUrl !== 'SRP') {
+            backToList.setAttribute('href', lastVisitedCategoryUrl);
+        } else {
+            backToList.setAttribute('href', breadcrumbLink);
+        }
+        
         // Listen for foundation modal close events to sanitize URL after review.
         $(document).on('close.fndtn.reveal', () => {
             if (this.url.indexOf('#write_review') !== -1 && typeof window.history.replaceState === 'function') {
