@@ -1079,7 +1079,7 @@ export function collectionHeaderContent(element) {
 export function referencedBlockHomepageCollections(blockData) {
 
     let logoStructure = blockData.homepageCollectionsCollection?.items?.map((item,i) => {
-        return `<div class="tab ${item?.slug} ${i === 0 ? 'is-active' : ''}" role="presentation">${item?.logoImage.url ? `<img class="first lazyload" data-src="${item?.logoImage.url}" alt="${item?.logoImage.title}" />` : ''}</div>`;
+        return `<div class="tab ${item?.slug} ${i === 0 ? 'is-active' : ''}" role="presentation">${item?.logoImage.url ? `<img class="first" src="${item?.logoImage.url}" alt="${item?.logoImage.title}" />` : ''}</div>`;
     });
 
     let contentStructure = blockData.homepageCollectionsCollection?.items?.map((item,i) => {
@@ -1088,11 +1088,11 @@ export function referencedBlockHomepageCollections(blockData) {
                 <div class="discovery-section">
                     <div class="imageflex">
                         <div class="leftcol">
-                            ${(item?.imageLeft?.url && item?.imageLeft?.url !== undefined) ? `<img class="lazyload first" data-src="${item?.imageLeft?.url}" alt="${item?.imageLeft.title}" />` : ''}
-                            ${(item?.imageCenter?.url && item?.imageCenter?.url !== undefined) ? `<img class="lazyload second" data-src="${item?.imageCenter?.url}" alt="${item?.imageCenter?.title}"/>` : ''}
+                            ${(item?.imageLeft?.url && item?.imageLeft?.url !== undefined) ? `<img class="first" src="${item?.imageLeft?.url}" alt="${item?.imageLeft.title}" />` : ''}
+                            ${(item?.imageCenter?.url && item?.imageCenter?.url !== undefined) ? `<img class="second" src="${item?.imageCenter?.url}" alt="${item?.imageCenter?.title}"/>` : ''}
                         </div>
                         <div class="rightcol">
-                            ${(item?.imageRight.url && item?.imageRight.url !== undefined) ? `<img  class="lazyload third" data-src="${item?.imageRight.url}"  alt="${item?.imageRight.title}" />` : '' }
+                            ${(item?.imageRight.url && item?.imageRight.url !== undefined) ? `<img  class="third" src="${item?.imageRight.url}"  alt="${item?.imageRight.title}" />` : '' }
                         </div>
                     </div>
                     <div class="caption">

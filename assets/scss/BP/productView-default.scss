@@ -24,17 +24,8 @@
         }
         .productView--top {
             margin: 10px 0 27px;
+            padding-left: 20px;
             position: relative;
-            &::before {
-                position: absolute;
-                content: "";
-                width: 20px;
-                height: 20px;
-                top: 3px;
-                background-size: 17px 12px;
-                background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yMS43NiAxMS4zNDc4QzIyLjExNjcgMTEuMzQ3OCAyMi4zOTcgMTEuNjI4MSAyMi4zOTcgMTEuOTg0OEMyMi4zOTcgMTIuMzI4OCAyMi4xMTY3IDEyLjYyMTkgMjEuNzYgMTIuNjIxOUw0LjE3ODM4IDEyLjYyMTlMOS40NjU1OSAxNy45MDkxQzkuNzA3NjYgMTguMTYzOSA5LjcwNzY2IDE4LjU1ODggOS40NjU1OSAxOC44MTM2QzkuMjEwNzkgMTkuMDY4NCA4LjgxNTg0IDE5LjA1NTcgOC41NjEwNCAxOC44MTM2TDIuMjI5MTIgMTIuNDgxN0MyLjA4ODk3IDEyLjM2NyAxLjk5OTc5IDEyLjE4ODcgMS45OTk3OSAxMS45OTc2QzEuOTk5NzkgMTEuODE5MiAyLjA3NjIzIDExLjY0MDkgMi4yMDM2NCAxMS41MjYyTDguNTYxMDQgNS4xODE1M0M4LjgxNTg0IDQuOTM5NDcgOS4yMTA3OSA0LjkzOTQ3IDkuNDY1NTkgNS4xODE1M0M5LjcwNzY2IDUuNDIzNiA5LjcwNzY2IDUuODMxMjkgOS40NjU1OSA2LjA3MzM1TDQuMTc4MzggMTEuMzQ3OEwyMS43NiAxMS4zNDc4WiIgZmlsbD0iIzI4MjgyOCIvPgo8L3N2Zz4K");
-                background-repeat: no-repeat;
-            }
             a {
                 font-family: stencilFontFamily('default-font-regular');
                 font-size: remCalc(12px);
@@ -42,8 +33,18 @@
                 color: stencilColor('color-default-neutral-3');
                 letter-spacing: 0.1em;
                 text-transform: uppercase;
-                padding-left: 20px;
                 text-decoration: none;
+                &::before {
+                    position: absolute;
+                    content: "";
+                    width: 20px;
+                    height: 20px;
+                    top: 3px;
+                    left: 0;
+                    background-size: 17px 12px;
+                    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yMS43NiAxMS4zNDc4QzIyLjExNjcgMTEuMzQ3OCAyMi4zOTcgMTEuNjI4MSAyMi4zOTcgMTEuOTg0OEMyMi4zOTcgMTIuMzI4OCAyMi4xMTY3IDEyLjYyMTkgMjEuNzYgMTIuNjIxOUw0LjE3ODM4IDEyLjYyMTlMOS40NjU1OSAxNy45MDkxQzkuNzA3NjYgMTguMTYzOSA5LjcwNzY2IDE4LjU1ODggOS40NjU1OSAxOC44MTM2QzkuMjEwNzkgMTkuMDY4NCA4LjgxNTg0IDE5LjA1NTcgOC41NjEwNCAxOC44MTM2TDIuMjI5MTIgMTIuNDgxN0MyLjA4ODk3IDEyLjM2NyAxLjk5OTc5IDEyLjE4ODcgMS45OTk3OSAxMS45OTc2QzEuOTk5NzkgMTEuODE5MiAyLjA3NjIzIDExLjY0MDkgMi4yMDM2NCAxMS41MjYyTDguNTYxMDQgNS4xODE1M0M4LjgxNTg0IDQuOTM5NDcgOS4yMTA3OSA0LjkzOTQ3IDkuNDY1NTkgNS4xODE1M0M5LjcwNzY2IDUuNDIzNiA5LjcwNzY2IDUuODMxMjkgOS40NjU1OSA2LjA3MzM1TDQuMTc4MzggMTEuMzQ3OEwyMS43NiAxMS4zNDc4WiIgZmlsbD0iIzI4MjgyOCIvPgo8L3N2Zz4K");
+                    background-repeat: no-repeat;
+                }
             }
         }
         .productView--inner {
