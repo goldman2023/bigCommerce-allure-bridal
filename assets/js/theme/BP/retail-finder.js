@@ -27,7 +27,7 @@ const FILTER_IDS = {
   collection: 'collectionFilterSelect',
 };
 
-const DEFAULT_ZOOM_LEVEL = 10;
+const DEFAULT_ZOOM_LEVEL = 4;
 
 const MARKER_HOVER_EVENT = 'markerHoverEvent';
 const RETAILER_ITEM_HOVER_EVENT = 'retailerItemHoverEvent';
@@ -102,26 +102,26 @@ export default class RetailFinder extends PageManager {
     // could break this out but deadline is nearing... 
     const needsInitialFilter = !this.autocomplete;
     /*** wait for element to exist ***/
-    function waitForElement(selector, callback) {
-      if (document.querySelector(selector) !== null) {
-        callback();
-      } else {
-      setTimeout(function() {
-        waitForElement(selector, callback);
-        }, 100);
-      }
-    };
-    waitForElement('#location-typeahead.pac-target-input',function() {
-        const checkInputLength = setInterval(checkInput, 500);
-        function checkInput() {
-          if(document.querySelector("#location-typeahead.pac-target-input")){
-            if(document.querySelector("#location-typeahead.pac-target-input").value.length > 0){
-              submitBtn.click();
-              clearInterval(checkInputLength);
-            }
-          }
-        }
-    });
+    // function waitForElement(selector, callback) {
+    //   if (document.querySelector(selector) !== null) {
+    //     callback();
+    //   } else {
+    //   setTimeout(function() {
+    //     waitForElement(selector, callback);
+    //     }, 100);
+    //   }
+    // };
+    // waitForElement('#location-typeahead.pac-target-input',function() {
+    //     const checkInputLength = setInterval(checkInput, 500);
+    //     function checkInput() {
+    //       if(document.querySelector("#location-typeahead.pac-target-input")){
+    //         if(document.querySelector("#location-typeahead.pac-target-input").value.length > 0){
+    //           submitBtn.click();
+    //           clearInterval(checkInputLength);
+    //         }
+    //       }
+    //     }
+    // });
     autocomplete.bindTo("bounds", this.map);
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
@@ -282,7 +282,7 @@ export default class RetailFinder extends PageManager {
         i = i+1;
     });
     if(first_retailer){
-      //this.openDetailsModal(first_retailer);
+      // this.openDetailsModal(first_retailer);
       console.log(first_retailer);
     }
 
@@ -371,7 +371,7 @@ export default class RetailFinder extends PageManager {
           }
         }
         this.originalUserLocationName = userLocationName;
-        this.setOriginalLocation();
+        // this.setOriginalLocation();
       });
     }
   };

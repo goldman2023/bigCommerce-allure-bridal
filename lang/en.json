@@ -1085,6 +1085,6 @@
         "eventDate": "Date of Event",
         "preferedAppointment": "Preferred Appointment Dates (choose 3)",
         "peopleAttending": "# of Appointment Attendees",
-        "agreeTerms": "I accept the terms and conditions"
+        "agreeTerms": "I accept the &nbsp;<a href=\"/privacy-policy/\">terms and conditions</a>"
     }
 }
