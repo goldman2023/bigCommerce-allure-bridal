@@ -383,16 +383,18 @@ export default class Global extends PageManager {
                     if (categoryData.key === "Related Products") {
                         const relatedProducts = categoryData.value;
                         const relatedProductIds = [];
-                        for (const relatedProduct of relatedProducts) {
-                            relatedProductIds.push(relatedProduct.bc_product_id);
+                        if (relatedProducts && relatedProducts?.length > 0) {
+                            for (const relatedProduct of relatedProducts) {
+                                relatedProductIds.push(relatedProduct.bc_product_id);
+                            }
+                            if (relatedProductIds.length > 0) {
+                                getProducts(this.context, '.productSlider .productGridSection', relatedProductIds, 5);
+                            }
+                            const dividerEl = document.createElement('div');
+                            dividerEl.classList.add('divider')
+                            const productGrid = document.querySelector('.productSlider');
+                            productGrid.parentNode.insertBefore(dividerEl, productGrid);
                         }
-                        if (relatedProductIds.length > 0) {
-                            getProducts(this.context, '.productSlider .productGridSection', relatedProductIds, 5);
-                        }
-                        const dividerEl = document.createElement('div');
-                        dividerEl.classList.add('divider')
-                        const productGrid = document.querySelector('.productSlider');
-                        productGrid.parentNode.insertBefore(dividerEl, productGrid);
                     }
                 }
             });
