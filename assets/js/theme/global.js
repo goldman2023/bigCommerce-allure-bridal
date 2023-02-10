@@ -238,7 +238,8 @@ export default class Global extends PageManager {
                 }
                 
                 //Added recently product using localstorage
-                if (document.getElementById('recentlyViewed')) {
+                const recentlyViewedEl = document.getElementById('recentlyViewed');
+                if (recentlyViewedEl) {
                     const recentlyProduct = (localStorage.getItem("recentlyProduct")) ? (localStorage.getItem("recentlyProduct")).split(',') : [];
                     const updatedRecentlyProduct = recentlyProduct.slice();
                     if (updatedRecentlyProduct.length > 0) {
@@ -388,9 +389,12 @@ export default class Global extends PageManager {
                         if (relatedProductIds.length > 0) {
                             getProducts(this.context, '.productSlider .productGridSection', relatedProductIds, 5);
                         }
+                        const dividerEl = document.createElement('div');
+                        dividerEl.classList.add('divider')
+                        const productGrid = document.querySelector('.productSlider');
+                        productGrid.parentNode.insertBefore(dividerEl, productGrid);
                     }
                 }
-                
             });
         }
         //category Landing page end
