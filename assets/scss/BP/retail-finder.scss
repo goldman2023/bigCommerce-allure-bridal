@@ -58,7 +58,8 @@
 
           .sort-dropdown {
             margin-left: auto;
-            display: flex;
+            display: none;
+            // display: flex;
             font-family: stencilFontFamily('default-font-regular');
             font-style: normal;
             font-weight: 500;
@@ -314,6 +315,12 @@
   }
 }
 
+.modal-close{
+  &:focus::after,
+  &:focus::before{
+    display: none;
+  }
+}
 
 .modal--large {
   display: flex !important;

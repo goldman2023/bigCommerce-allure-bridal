@@ -27,7 +27,8 @@ const FILTER_IDS = {
   collection: 'collectionFilterSelect',
 };
 
-const DEFAULT_ZOOM_LEVEL = 10;
+const DEFAULT_ZOOM_LEVEL = 4;
+const HOVER_DEFAULT_ZOOM_LEVEL = 10;
 
 const MARKER_HOVER_EVENT = 'markerHoverEvent';
 const RETAILER_ITEM_HOVER_EVENT = 'retailerItemHoverEvent';
@@ -102,26 +103,26 @@ export default class RetailFinder extends PageManager {
     // could break this out but deadline is nearing... 
     const needsInitialFilter = !this.autocomplete;
     /*** wait for element to exist ***/
-    function waitForElement(selector, callback) {
-      if (document.querySelector(selector) !== null) {
-        callback();
-      } else {
-      setTimeout(function() {
-        waitForElement(selector, callback);
-        }, 100);
-      }
-    };
-    waitForElement('#location-typeahead.pac-target-input',function() {
-        const checkInputLength = setInterval(checkInput, 500);
-        function checkInput() {
-          if(document.querySelector("#location-typeahead.pac-target-input")){
-            if(document.querySelector("#location-typeahead.pac-target-input").value.length > 0){
-              submitBtn.click();
-              clearInterval(checkInputLength);
-            }
-          }
-        }
-    });
+    // function waitForElement(selector, callback) {
+    //   if (document.querySelector(selector) !== null) {
+    //     callback();
+    //   } else {
+    //   setTimeout(function() {
+    //     waitForElement(selector, callback);
+    //     }, 100);
+    //   }
+    // };
+    // waitForElement('#location-typeahead.pac-target-input',function() {
+    //     const checkInputLength = setInterval(checkInput, 500);
+    //     function checkInput() {
+    //       if(document.querySelector("#location-typeahead.pac-target-input")){
+    //         if(document.querySelector("#location-typeahead.pac-target-input").value.length > 0){
+    //           submitBtn.click();
+    //           clearInterval(checkInputLength);
+    //         }
+    //       }
+    //     }
+    // });
     autocomplete.bindTo("bounds", this.map);
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
@@ -178,7 +179,7 @@ export default class RetailFinder extends PageManager {
       if (retailer) {
         // TODO debounce if needed, doesnt seem that bad without it.
         this.map.setCenter({ lat: retailer.location.lat, lng: retailer.location.lon });
-        this.map.setZoom(DEFAULT_ZOOM_LEVEL);
+        this.map.setZoom(HOVER_DEFAULT_ZOOM_LEVEL);
         this.paintMapAndRetailers(this.retailers, retailer);
       }
     });
@@ -187,20 +188,20 @@ export default class RetailFinder extends PageManager {
   createRetailerItem = (retailer, total, idx) => {
     const mainContainer = document.createElement('div');
     const carryValue = document.getElementById("collectionFilterSelect");
-    if(carryValue.value){
-      if(carryValue.value === "All"){
-        const collectionNames = retailer.collectionsAvailableCollection.items;
-        if(collectionNames){
-          for(let i=0; i<collectionNames.length; i++) {
-            if(collectionNames[i]){
-              if(collectionNames[i].collectionName == "Allure Men"){
-                mainContainer.classList.add('hide-retailer-item');
-              }
-            }
-          }
-        }
-      }
-    }
+    // if(carryValue.value){
+    //   if(carryValue.value === "All"){
+    //     const collectionNames = retailer.collectionsAvailableCollection.items;
+    //     if(collectionNames){
+    //       for(let i=0; i<collectionNames.length; i++) {
+    //         if(collectionNames[i]){
+    //           if(collectionNames[i].collectionName == "Allure Men"){
+    //             mainContainer.classList.add('hide-retailer-item');
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
     mainContainer.classList.add('retailer-item-container');
     const container = document.createElement('div');
     container.classList.add('retailer-item');
@@ -282,12 +283,9 @@ export default class RetailFinder extends PageManager {
         i = i+1;
     });
     if(first_retailer){
-      //this.openDetailsModal(first_retailer);
-      console.log(first_retailer);
+      this.openDetailsModal(first_retailer);
+      // console.log(first_retailer);
     }
-
-
-
   }
 
   getMarker = (latLong, display, infoWindow, id = null, centerRetailer = null) => {
@@ -371,7 +369,7 @@ export default class RetailFinder extends PageManager {
           }
         }
         this.originalUserLocationName = userLocationName;
-        this.setOriginalLocation();
+        // this.setOriginalLocation();
       });
     }
   };
@@ -402,6 +400,9 @@ export default class RetailFinder extends PageManager {
 
     // adjust zoom for convenience in distance changes  
     const distanceToZoomLevels = {
+      10: 10,
+      25: 10,
+      50:  8,
       100: 8,
       500: 5,
     };
@@ -410,7 +411,7 @@ export default class RetailFinder extends PageManager {
       if (newZoomLevel) {
         this.map.setZoom(newZoomLevel);
       } else {
-        this.map.setZoom(DEFAULT_ZOOM_LEVEL);
+        this.map.setZoom(HOVER_DEFAULT_ZOOM_LEVEL);
       }
     };
   };
@@ -448,12 +449,31 @@ export default class RetailFinder extends PageManager {
                     toRemove.push(retailer.retailerName);
                   }
                 };
+                  
+
               });
             }
           );
           self.retailers = self.retailers.filter(
             (retailer) => !toRemove.includes(retailer.retailerName)
           );
+          self.retailers.map((retailer) =>{
+            var testlocation = retailer.collectionsAvailableCollection.items;
+            // console.log(testlocation);
+            testlocation.map((collection) => {
+              var testCollection = collection.collectionName;
+                  // console.log(testCollection);
+                  if(testCollection == "Allure Men"){
+                    const index = self.retailers.indexOf(retailer);
+                    if (index > -1) {
+                      self.retailers.splice(index, 1);
+                    }
+                    // self.retailers.pop(retailer);
+                  }
+                // });
+            });
+          });
+          
           self.sortRetailers();
           self.paintMapAndRetailers(self.retailers);
           self.updateResultsInfo();
@@ -469,7 +489,7 @@ export default class RetailFinder extends PageManager {
 
   updateResultsInfo = () => {
     const retailerInfoElem = document.getElementById('results-info');
-    const resultsInfoText = this.retailers.length ? 'PRODUCT STYLES AND AVAILABILITY BY RETAILER' : 'No Results found. Try widening your search.';
+    const resultsInfoText = this.retailers.length ? 'PRODUCT STYLES AND AVAILABILITY VARY BY RETAILER' : 'No Results found. Try widening your search.';
     retailerInfoElem.innerText = resultsInfoText;
   };
 
@@ -482,11 +502,35 @@ export default class RetailFinder extends PageManager {
       const value = this.appliedFilters[filter];
       element.value = value;
     };
-    this.selectedPlace = this.originalUserLocationPlace;
-    this.autocomplete.set('place', this.originalUserLocationPlace);
-    this.map.setCenter({ lat: this.userLocation.lat, lng: this.userLocation.lon });
+    // this.selectedPlace = this.originalUserLocationPlace;
+    // console.log(this.selectedPlace);
+    // this.autocomplete.set('place', this.originalUserLocationPlace);
+    // this.map.setCenter({ lat: this.userLocation.lat, lng: this.userLocation.lon });
+
+    const latLng = new google.maps.LatLng(location.lat, location.lon);
+    if (!this.originalUserLocationName) {
+      this.geocoder.geocode({
+        'latLng': latLng,
+      }).then((res) => {
+        let userLocationName;
+        for (let i = res.results.length - 1; i >= 0; i--) {
+          const component = res.results[i];
+          if (component.types.includes('postal_code')) {
+            userLocationName = component.formatted_address;
+            break;
+          } else if (component.types.includes('neighborhood')) {
+            userLocationName = component.formatted_address;
+          }
+        }
+        this.originalUserLocationName = userLocationName;
+        this.setOriginalLocation();
+      });
+    }
+
     this.map.setZoom(DEFAULT_ZOOM_LEVEL);
     this.filterRetailers();
+    const locationTypeahead = document.getElementById('location-typeahead');
+    locationTypeahead.value = '';
   };
 
   createFilterElements = () => {
@@ -641,8 +685,6 @@ export default class RetailFinder extends PageManager {
     )
     const latLoc = await results.json();
     const retailers = latLoc.data.retailersCollection.items;
-    console.log(retailers);
-    console.log(latLoc);
     return this.setupFilterData(retailers);
   };
 
@@ -679,8 +721,9 @@ export default class RetailFinder extends PageManager {
   // retailer marker needs to be centered and highlighted
   paintMapAndRetailers = (retailerData, centerRetailer = null) => {
     const map = this.map || new google.maps.Map(document.getElementById('map'), {
-      zoom: DEFAULT_ZOOM_LEVEL,
-      center: { lat: this.userLocation.lat, lng: this.userLocation.lon },
+      zoom: 2,
+      // center: { lat: this.userLocation.lat, lng: this.userLocation.lon },
+      center: { lat: 36, lng: -60 },
     });
     if (!this.map) {
       this.map = map;
@@ -697,8 +740,8 @@ export default class RetailFinder extends PageManager {
       return this.getMarker(retailer.location, display, infoWindow, retailer.bridalLiveRetailerId, centerRetailer);
     });
     // Add a marker clusterer to manage the markers.
-    const userLocationMarker = this.getMarker(this.userLocation, 'Your Location', infoWindow);
-    markers.push(userLocationMarker);
+    // const userLocationMarker = this.getMarker(this.userLocation, 'Your Location', infoWindow);
+    // markers.push(userLocationMarker);
     if (!this.markerClusterer) {
       this.markerClusterer = new MarkerClusterer({ markers: markers, map })
     } else {
