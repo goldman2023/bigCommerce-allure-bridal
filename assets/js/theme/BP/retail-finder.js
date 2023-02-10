@@ -153,6 +153,7 @@ export default class RetailFinder extends PageManager {
       }
 
     });
+    /*
     locationTypeahead.addEventListener('change', (e) => {
       if (!e.target.value) {
         this.selectedPlace = null;
@@ -160,6 +161,7 @@ export default class RetailFinder extends PageManager {
         locationTypeahead.classList.add('error');
       }
     });
+    */
     this.autocomplete = autocomplete;
 
     // hover events
@@ -283,7 +285,7 @@ export default class RetailFinder extends PageManager {
         i = i+1;
     });
     if(first_retailer){
-      this.openDetailsModal(first_retailer);
+      //this.openDetailsModal(first_retailer);
       // console.log(first_retailer);
     }
   }
