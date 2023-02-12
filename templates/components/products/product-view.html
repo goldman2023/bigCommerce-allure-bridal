@@ -9,16 +9,6 @@
         {{#if @last}}{{this}}{{else}}{{this}}, {{/if}}
     {{/each}}"
     data-product-brand="{{product.brand.name}}"
-    data-product-price="
-    {{#or customer (unless theme_settings.restrict_to_login)}}
-        {{#if product.price.with_tax}}
-            {{product.price.with_tax.value}}
-        {{else}}
-            {{product.price.without_tax.value}}
-        {{/if}}
-    {{else}}
-        {{lang 'common.login_for_pricing'}}
-    {{/or}}"
     data-product-variant="single-product-option"{{/if}}>
 
     {{#each product.reviews.messages}}
@@ -49,19 +39,6 @@
                             <a href="{{product.brand.url}}"><span>{{product.brand.name}}</span></a>
                         </h2>
                     {{/if}}
-                    {{#if product.call_for_price}}
-                        <p class="productView-price">
-                            <span>{{product.call_for_price}}</span>
-                        </p>
-                    {{/if}}
-                    <div class="productView-price">
-                        {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
-                            {{> components/products/price price=product.price}}
-                        {{else}}
-                            {{> components/common/login-for-pricing}}
-                        {{/or}}
-                    </div>
-                    {{{region name="product_below_price"}}}
                     <div class="productView-rating">
                         {{#if settings.show_product_rating}}
                             {{> components/products/ratings rating=product.rating}}
@@ -142,26 +119,6 @@
                         {{#if product.gift_wrapping_available}}
                             <dt class="productView-info-name">{{lang 'products.gift_wrapping'}}</dt>
                             <dd class="productView-info-value">{{lang 'products.gift_wrapping_available'}}</dd>
-                        {{/if}}
-                        {{#if product.shipping}}
-                            {{#if product.shipping.calculated}}
-                                <dt class="productView-info-name">{{lang 'products.shipping'}}</dt>
-                                <dd class="productView-info-value">{{lang 'products.shipping_calculated'}}</dd>
-                            {{else}}
-                                {{#if product.shipping.price.value '===' 0}}
-                                    <dt class="productView-info-name">{{lang 'products.shipping'}}</dt>
-                                    <dd class="productView-info-value">{{lang 'products.shipping_free'}}</dd>
-                                {{else}}
-                                    <dt class="productView-info-name">{{lang 'products.shipping'}}</dt>
-                                    <dd class="productView-info-value">{{lang 'products.shipping_fixed' amount=product.shipping.price.formatted}}</dd>
-                                {{/if}}
-                            {{/if}}
-                        {{/if}}
-        
-                        {{#if settings.bulk_discount_enabled}}
-                            <div class="productView-info-bulkPricing">
-                                {{> components/products/bulk-discount-rates bulk_discount_rates=product.bulk_discount_rates}}
-                            </div>
                         {{/if}}
         
                         {{#if theme_settings.show_custom_fields_tabs '!==' true}}
