@@ -13,12 +13,12 @@
         {{{region name="product_below_content"}}}
 
         {{#if product.videos.list.length}}
-        {{> components/products/videos product.videos}}
+            {{> components/products/videos product.videos}}
         {{/if}}
 
         {{#all settings.show_product_reviews theme_settings.show_product_reviews (if
         theme_settings.show_product_details_tabs '!==' true)}}
-        {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
+            {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
         {{/all}}
         <div class="productsrelate">
             <div class="youMightalsoLike hide" id="youMightalsoLike">
