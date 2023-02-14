@@ -464,6 +464,9 @@ export default class RetailFinder extends PageManager {
 
         const filteredRetailers = [...self.originalRetailers];
 
+        // this still doesnt account for retailers that for some reason have the same `retailerId` 
+        // we're figuring out why that's the case, if the client can fix it to be unique
+        // if not, we can run some hack on duplicate ids by appending -<count> to it i guess
         self.retailers = filteredRetailers.filter(
           (retailer) => !toRemove.includes(retailer.retailerId)
         );
