@@ -154,7 +154,7 @@ export default class RetailFinder extends PageManager {
       }
 
     });
-    
+
     locationTypeahead.addEventListener('change', (e) => {
       if (!e.target.value) {
         this.selectedPlace = null;
@@ -162,7 +162,7 @@ export default class RetailFinder extends PageManager {
         locationTypeahead.classList.add('error');
       }
     });
-    
+
     this.autocomplete = autocomplete;
 
     // hover events
@@ -231,7 +231,7 @@ export default class RetailFinder extends PageManager {
 
     const distance = document.createElement('span');
     distance.classList.add('retailer-distance');
-    distance.innerText = parseInt(`${retailer.distanceAway}`)+` miles away`;
+    distance.innerText = parseInt(`${retailer.distanceAway}`) + ` miles away`;
     container.append(distance);
 
     const numCollections = document.createElement('span');
@@ -278,16 +278,15 @@ export default class RetailFinder extends PageManager {
     let i = 1;
     let first_retailer = false;
     retailerData.forEach((retailerData, idx) => {
-        const retailerItem = this.createRetailerItem(retailerData, total, idx);
-        retailFinderResults.append(retailerItem);
-        if(retailerData && retailerData.requestAppointment && i == 1){
-          first_retailer = retailerData;
-        }
-        i = i+1;
+      const retailerItem = this.createRetailerItem(retailerData, total, idx);
+      retailFinderResults.append(retailerItem);
+      if (retailerData && retailerData.requestAppointment && i == 1) {
+        first_retailer = retailerData;
+      }
+      i = i + 1;
     });
-    if(first_retailer){
+    if (first_retailer) {
       this.openDetailsModal(first_retailer);
-      // console.log(first_retailer);
     }
   }
 
@@ -405,7 +404,7 @@ export default class RetailFinder extends PageManager {
     const distanceToZoomLevels = {
       10: 10,
       25: 10,
-      50:  8,
+      50: 8,
       100: 8,
       500: 5,
     };
@@ -424,69 +423,61 @@ export default class RetailFinder extends PageManager {
     var addr = document.querySelector(".location-typeahead");
     // Get geocoder instance
     var geocoder = new google.maps.Geocoder();
-      
+
     // Geocode the address
     geocoder.geocode({
-        'address': addr.value
-    }, function(results, status) {
-        if (status === google.maps.GeocoderStatus.OK && results.length > 0) {    
-          var toRemove = [];
-          self.retailers = [...self.originalRetailers];
-          self.retailers.forEach(
-            (retailer) => {
-              Object.entries(self.appliedFilters).forEach(([filterName, value]) => {
-                if (filterName === 'distance' && self.selectedPlace) {
-                  const selectedLocation = {
-                    lat: self.selectedPlace.geometry.location.lat(),
-                    lon: self.selectedPlace.geometry.location.lng(),
-                  }
-                  const distanceAway = self.getDistanceBtwnTwoPts(selectedLocation, retailer.location);
-                  retailer.distanceAway = distanceAway;
-                  if (distanceAway > value) {
-                    toRemove.push(retailer.retailerName);
-                  }
-                };
-                if (filterName === 'collection' && value !== 'All') {
-                  const retailersWithSelected = self.collectionsByRetailers[value];
-                  if (!retailersWithSelected.includes(retailer.retailerName)) {
-                    toRemove.push(retailer.retailerName);
-                  }
-                };
-                  
+      'address': addr.value
+    }, function (results, status) {
+      if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+        let toRemove = [];
 
-              });
-            }
-          );
-          self.retailers = self.retailers.filter(
-            (retailer) => !toRemove.includes(retailer.retailerName)
-          );
-          self.retailers.map((retailer) =>{
-            var testlocation = retailer.collectionsAvailableCollection.items;
-            // console.log(testlocation);
-            testlocation.map((collection) => {
-              var testCollection = collection.collectionName;
-                  // console.log(testCollection);
-                  if(testCollection == "Allure Men"){
-                    const index = self.retailers.indexOf(retailer);
-                    if (index > -1) {
-                      self.retailers.splice(index, 1);
-                    }
-                    // self.retailers.pop(retailer);
-                  }
-                // });
+        self.retailers = [...self.originalRetailers];
+        self.originalRetailers.forEach(
+          (retailer) => {
+            Object.entries(self.appliedFilters).forEach(([filterName, value]) => {
+              if (filterName === 'distance' && self.selectedPlace) {
+                const selectedLocation = {
+                  lat: self.selectedPlace.geometry.location.lat(),
+                  lon: self.selectedPlace.geometry.location.lng(),
+                }
+                const distanceAway = self.getDistanceBtwnTwoPts(selectedLocation, retailer.location);
+                retailer.distanceAway = distanceAway;
+                if (distanceAway > value) {
+                  toRemove.push(retailer.retailerId);
+                }
+              };
+              if (filterName === 'collection' && value !== 'All') {
+                const retailersWithSelected = self.collectionsByRetailers[value];
+                if (!retailersWithSelected.includes(retailer.retailerName)) {
+                  toRemove.push(retailer.retailerId);
+                }
+                // business case to filter retailers with Allure Men if collection is set to all
+              } else if (filterName === 'collection' && value === 'All') {
+                const retailersWithAllureMen = self.collectionsByRetailers['Allure Men'];
+                if (retailersWithAllureMen.includes(retailer.retailerName)) {
+                  toRemove.push(retailer.retailerId);
+                }
+              }
             });
-          });
-          
-          self.sortRetailers();
-          self.paintMapAndRetailers(self.retailers);
-          self.updateResultsInfo();
-        } else {
-          // show an error if it's not
-          const retailerInfoElem = document.getElementById('results-info');
-          retailerInfoElem.innerText = 'No Results found. Try widening your search.';
-          const retailFinderResults = document.getElementById('retail-finder-results');
-          retailFinderResults.innerHTML = "";
-        }
+          }
+        );
+
+        const filteredRetailers = [...self.originalRetailers];
+
+        self.retailers = filteredRetailers.filter(
+          (retailer) => !toRemove.includes(retailer.retailerId)
+        );
+
+        self.sortRetailers();
+        self.paintMapAndRetailers(self.retailers);
+        self.updateResultsInfo();
+      } else {
+        // show an error if it's not
+        const retailerInfoElem = document.getElementById('results-info');
+        retailerInfoElem.innerText = 'No Results found. Try widening your search.';
+        const retailFinderResults = document.getElementById('retail-finder-results');
+        retailFinderResults.innerHTML = "";
+      }
     });
   };
 
@@ -546,7 +537,7 @@ export default class RetailFinder extends PageManager {
     distanceFilterLabel.innerText = 'Within';
     distanceFilter.append(distanceFilterLabel);
     const distanceFilterDropdown = document.createElement('select');
-    distanceFilterDropdown.id = FILTER_IDS.distance;    
+    distanceFilterDropdown.id = FILTER_IDS.distance;
     distanceFilterDropdown.classList.add('form-select');
     distanceFilterDropdown.classList.add('selector-dropdown');
     [10, 25, 50, 100, 500].forEach(
@@ -677,6 +668,7 @@ export default class RetailFinder extends PageManager {
         }
     }`
     const results = await fetch(
+      // this ought to be in config
       'https://allure-integration.azurewebsites.net/leads',
       {
         method: 'POST',
@@ -798,9 +790,9 @@ export default class RetailFinder extends PageManager {
     const collectionsList = document.createElement('div');
     collectionsList.classList.add('collections-list');
     for (const collection of retailer.collectionsAvailableCollection.items) {
-      if(collection){
+      if (collection) {
         var collectionItem = document.createElement('span');
-        if(collection.collectionButtonUrl == null){
+        if (collection.collectionButtonUrl == null) {
           //collectionItem.setAttribute("href", "#");
         } else {
           //collectionItem.setAttribute("href", collection.collectionButtonUrl);
@@ -809,7 +801,7 @@ export default class RetailFinder extends PageManager {
         collectionItem.classList.add('collection-item');
         collectionItem.classList.add('retailer-detail');
         collectionItem.innerText = collection.collectionName;
-        collectionsList.append(collectionItem);      
+        collectionsList.append(collectionItem);
       }
     };
     collections.append(collectionsList);
@@ -881,7 +873,7 @@ export default class RetailFinder extends PageManager {
     requestBtn.append(requestBtnText);
     requestBtn.addEventListener('click', () => this.openRequestForm(retailer));
 
-    if(retailer.requestAppointment){
+    if (retailer.requestAppointment) {
       detailElement.append(requestBtn);
     }
 
@@ -945,7 +937,7 @@ export default class RetailFinder extends PageManager {
 
     const phoneFieldRow = document.createElement('div');
     phoneFieldRow.classList.add('field-row');
-    
+
     const phoneNumberField = document.createElement('div');
     phoneNumberField.classList.add('form-field');
     const phoneLabel = document.createElement('span');
@@ -977,7 +969,7 @@ export default class RetailFinder extends PageManager {
 
     const eventRow = document.createElement('div');
     eventRow.classList.add('field-row');
-    
+
     const eventDateField = document.createElement('div');
     eventDateField.classList.add('form-field');
     const eventDateLabel = document.createElement('span');
@@ -992,7 +984,7 @@ export default class RetailFinder extends PageManager {
 
     eventRow.append(eventDateField);
     bookingForm.append(eventRow);
-    
+
     const viaText = document.createElement('input');
     viaText.classList.add('form-checkbox');
     viaText.id = 'viaText';
@@ -1049,7 +1041,7 @@ export default class RetailFinder extends PageManager {
       label.classList.add('form-label');
       label.innerText = field.label;
       fieldElem.append(label);
-      if(field.type !== 'select') {
+      if (field.type !== 'select') {
         const inputElem = document.createElement('input');
         inputElem.classList.add('form-input');
         inputElem.setAttribute('type', field.type);
@@ -1074,13 +1066,13 @@ export default class RetailFinder extends PageManager {
     };
     return bookingForm;
   };
-  
+
 
   openScheduler = (retailer) => {
     const modal = defaultModal({ size: 'large', skipCache: true });
     modal.open();
     let elem;
-    if(retailer.bridalLiveRetailerId) {
+    if (retailer.bridalLiveRetailerId) {
       elem = this.getDirectBookingElem(retailer.bridalLiveRetailerId);
     } else {
       // TODO style this form
@@ -1094,13 +1086,13 @@ export default class RetailFinder extends PageManager {
   }
   openRequestForm = (retailer) => {
     let elem;
-    if(retailer.bridalLiveRetailerId) {
-        window.location.href = '/request-appointment?retailerId=' + retailer.bridalLiveRetailerId + '&retailerName=' + retailer.retailerName;
+    if (retailer.bridalLiveRetailerId) {
+      window.location.href = '/request-appointment?retailerId=' + retailer.bridalLiveRetailerId + '&retailerName=' + retailer.retailerName;
       //redirect to custom form appending query string
 
     } else {
-        window.location.href = '/request-appointment?retailerName=' + retailer.retailerName;
+      window.location.href = '/request-appointment?retailerName=' + retailer.retailerName;
     }
-   
+
   }
 };
