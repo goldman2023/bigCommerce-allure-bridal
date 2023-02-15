@@ -102,27 +102,7 @@ export default class RetailFinder extends PageManager {
     // the google places input look up and runs async..
     // could break this out but deadline is nearing... 
     const needsInitialFilter = !this.autocomplete;
-    /*** wait for element to exist ***/
-    // function waitForElement(selector, callback) {
-    //   if (document.querySelector(selector) !== null) {
-    //     callback();
-    //   } else {
-    //   setTimeout(function() {
-    //     waitForElement(selector, callback);
-    //     }, 100);
-    //   }
-    // };
-    // waitForElement('#location-typeahead.pac-target-input',function() {
-    //     const checkInputLength = setInterval(checkInput, 500);
-    //     function checkInput() {
-    //       if(document.querySelector("#location-typeahead.pac-target-input")){
-    //         if(document.querySelector("#location-typeahead.pac-target-input").value.length > 0){
-    //           submitBtn.click();
-    //           clearInterval(checkInputLength);
-    //         }
-    //       }
-    //     }
-    // });
+
     autocomplete.bindTo("bounds", this.map);
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
@@ -169,7 +149,7 @@ export default class RetailFinder extends PageManager {
     document.addEventListener(MARKER_HOVER_EVENT, (evt) => {
       const retailerId = evt.detail;
       if (retailerId) {
-        const retailerItem = document.querySelector(`[data-retailer-id=${retailerId}]`);
+        const retailerItem = document.getElementById(retailerId);
         retailerItem.classList.add('hovered');
       } else {
         const anyHovered = document.querySelectorAll('.retailer-item.hovered');
@@ -184,31 +164,20 @@ export default class RetailFinder extends PageManager {
         this.map.setCenter({ lat: retailer.location.lat, lng: retailer.location.lon });
         this.map.setZoom(HOVER_DEFAULT_ZOOM_LEVEL);
         this.paintMapAndRetailers(this.retailers, retailer);
+      } else {
+        this.paintMapAndRetailers(this.retailers, null, true);
       }
     });
   };
 
   createRetailerItem = (retailer, total, idx) => {
     const mainContainer = document.createElement('div');
-    const carryValue = document.getElementById("collectionFilterSelect");
-    // if(carryValue.value){
-    //   if(carryValue.value === "All"){
-    //     const collectionNames = retailer.collectionsAvailableCollection.items;
-    //     if(collectionNames){
-    //       for(let i=0; i<collectionNames.length; i++) {
-    //         if(collectionNames[i]){
-    //           if(collectionNames[i].collectionName == "Allure Men"){
-    //             mainContainer.classList.add('hide-retailer-item');
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
+
     mainContainer.classList.add('retailer-item-container');
     const container = document.createElement('div');
     container.classList.add('retailer-item');
-    container.dataset.retailerId = retailer.bridalLiveRetailerId;
+    // set the id to allow querying when hovering on markers
+    container.id = retailer.id;
     // any of last three which would be in the last row doesnt need a border
     const rowsWithBorder = Math.floor(total / 3);
     const firstIdxWithoutBorder = rowsWithBorder * 3
@@ -258,7 +227,7 @@ export default class RetailFinder extends PageManager {
       document.dispatchEvent(retailerHoveredEvent);
     });
 
-    mainContainer.addEventListener('mouseext', () => {
+    mainContainer.addEventListener('mouseleave', () => {
       const retailerExitEvent = new CustomEvent(RETAILER_ITEM_HOVER_EVENT, { detail: null });
       document.dispatchEvent(retailerExitEvent);
     });
@@ -296,7 +265,7 @@ export default class RetailFinder extends PageManager {
       lng: latLong.lon
     };
     let icon = MAP_MARKER_BLACK;
-    if (id && centerRetailer && id === centerRetailer.bridalLiveRetailerId) {
+    if (id && centerRetailer && id === centerRetailer.id) {
       icon = MAP_MARKER_ORANGE;
     }
     const marker = new google.maps.Marker({
@@ -443,19 +412,19 @@ export default class RetailFinder extends PageManager {
                 const distanceAway = self.getDistanceBtwnTwoPts(selectedLocation, retailer.location);
                 retailer.distanceAway = distanceAway;
                 if (distanceAway > value) {
-                  toRemove.push(retailer.retailerId);
+                  toRemove.push(retailer.id);
                 }
               };
               if (filterName === 'collection' && value !== 'All') {
                 const retailersWithSelected = self.collectionsByRetailers[value];
                 if (!retailersWithSelected.includes(retailer.retailerName)) {
-                  toRemove.push(retailer.retailerId);
+                  toRemove.push(retailer.id);
                 }
                 // business case to filter retailers with Allure Men if collection is set to all
               } else if (filterName === 'collection' && value === 'All') {
                 const retailersWithAllureMen = self.collectionsByRetailers['Allure Men'];
                 if (retailersWithAllureMen.includes(retailer.retailerName)) {
-                  toRemove.push(retailer.retailerId);
+                  toRemove.push(retailer.id);
                 }
               }
             });
@@ -463,12 +432,8 @@ export default class RetailFinder extends PageManager {
         );
 
         const filteredRetailers = [...self.originalRetailers];
-
-        // this still doesnt account for retailers that for some reason have the same `retailerId` 
-        // we're figuring out why that's the case, if the client can fix it to be unique
-        // if not, we can run some hack on duplicate ids by appending -<count> to it i guess
         self.retailers = filteredRetailers.filter(
-          (retailer) => !toRemove.includes(retailer.retailerId)
+          (retailer) => !toRemove.includes(retailer.id)
         );
 
         self.sortRetailers();
@@ -499,10 +464,6 @@ export default class RetailFinder extends PageManager {
       const value = this.appliedFilters[filter];
       element.value = value;
     };
-    // this.selectedPlace = this.originalUserLocationPlace;
-    // console.log(this.selectedPlace);
-    // this.autocomplete.set('place', this.originalUserLocationPlace);
-    // this.map.setCenter({ lat: this.userLocation.lat, lng: this.userLocation.lon });
 
     const latLng = new google.maps.LatLng(location.lat, location.lon);
     if (!this.originalUserLocationName) {
@@ -647,6 +608,7 @@ export default class RetailFinder extends PageManager {
       query {
         retailersCollection {
             items {
+                id
                 retailerName
                 retailerCity
                 website
@@ -717,7 +679,7 @@ export default class RetailFinder extends PageManager {
   // or if we want to center a specific marker, in the case of a hover event
   // so this method is called anytime the data to show changes or when a 
   // retailer marker needs to be centered and highlighted
-  paintMapAndRetailers = (retailerData, centerRetailer = null) => {
+  paintMapAndRetailers = (retailerData, centerRetailer = null, skipRetailerInfo = false) => {
     const map = this.map || new google.maps.Map(document.getElementById('map'), {
       zoom: 2,
       // center: { lat: this.userLocation.lat, lng: this.userLocation.lon },
@@ -735,7 +697,7 @@ export default class RetailFinder extends PageManager {
         ${retailer.retailerName} <br/>
         ${retailer.distanceAway.toFixed(2)} miles away
       `
-      return this.getMarker(retailer.location, display, infoWindow, retailer.bridalLiveRetailerId, centerRetailer);
+      return this.getMarker(retailer.location, display, infoWindow, retailer.id, centerRetailer);
     });
     // Add a marker clusterer to manage the markers.
     // const userLocationMarker = this.getMarker(this.userLocation, 'Your Location', infoWindow);
@@ -748,7 +710,7 @@ export default class RetailFinder extends PageManager {
     }
     // when we have a center retailer we are highlighting on an existing retailerInfo already
     // so no neeed to recreate - also creates infinite loop with event handling
-    if (!centerRetailer) {
+    if (!centerRetailer && !skipRetailerInfo) {
       this.addRetailerInfo(retailerData);
     }
   };
@@ -886,9 +848,9 @@ export default class RetailFinder extends PageManager {
     modal.updateContent(detailElement, { wrap: true });
   };
 
-  getDirectBookingElem = (retailerId) => {
+  getDirectBookingElem = (bridalLiveRetailerId) => {
     const scheduler = document.createElement('iframe');
-    scheduler.setAttribute('src', `https://app.bridallive.com/forms.html?formType=scheduler&retailerId=${retailerId}`);
+    scheduler.setAttribute('src', `https://app.bridallive.com/forms.html?formType=scheduler&retailerId=${bridalLiveRetailerId}`);
     scheduler.setAttribute('width', '100%');
     scheduler.setAttribute('height', '100%');
     return scheduler
@@ -1088,7 +1050,6 @@ export default class RetailFinder extends PageManager {
     modal.updateContent(elem);
   }
   openRequestForm = (retailer) => {
-    let elem;
     if (retailer.bridalLiveRetailerId) {
       window.location.href = '/request-appointment?retailerId=' + retailer.bridalLiveRetailerId + '&retailerName=' + retailer.retailerName;
       //redirect to custom form appending query string
