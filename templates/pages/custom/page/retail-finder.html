@@ -1,7 +1,5 @@
 {{#partial "page"}}
 {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
-<script>
-</script>
 <section class="page">
     <div class="content">
         <div class="map-filters">
@@ -24,8 +22,8 @@
         </div>
         <div class="map-and-retailers">
             <div id="map"></div>
-            <script async
-                src="https://maps.googleapis.com/maps/api/js?key={{ theme_settings.google_api_token }}&libraries=places">
+            <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?key={{ theme_settings.google_api_token }}&libraries=places&callback=Function.prototype">
                 </script>
             <div class="available-retailers">
                 <div class="top">

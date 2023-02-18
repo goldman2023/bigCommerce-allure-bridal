@@ -53,7 +53,6 @@ export default class RetailFinder extends PageManager {
     this.originalRetailers = [];
     this.retailers = [];
     this.retailersById = {};
-    this.retailersByDistance = {};
     this.collectionsByRetailers = {};
     this.originalFilters = {
       distance: 25,
@@ -63,14 +62,11 @@ export default class RetailFinder extends PageManager {
       ...this.originalFilters
     };
     this.selectedPlace = null;
-    this.userLocation = {};
     this.markerClusterer = null;
     this.page = 1;
     this.perPage = 9;
     this.sortBy = 'distance';
     this.geocoder = new google.maps.Geocoder();
-    this.originalUserLocationName = null;
-    this.originalUserLocationPlace = null;
     this.autocomplete = null;
   };
 
@@ -79,17 +75,6 @@ export default class RetailFinder extends PageManager {
     this.originalRetailers = [...retailerData];
     this.addSortSelectOptions();
     this.addEventHandlers();
-  };
-
-  setOriginalLocation = () => {
-    const placesService = new google.maps.places.PlacesService(this.map);
-    placesService.textSearch({
-      query: this.originalUserLocationName
-    }, (places) => {
-      const [place] = places;
-      this.originalUserLocationPlace = place;
-      this.autocomplete.set('place', place);
-    });
   };
 
   addEventHandlers = () => {
@@ -317,55 +302,6 @@ export default class RetailFinder extends PageManager {
     return distance // in miles
   };
 
-  setUserLocation = (location) => {
-    const latLng = new google.maps.LatLng(location.lat, location.lon);
-    // this is a pretty hacky putting this in here...
-    // only reason is because it's in a convenient spot and the calls underneath
-    // need to be called after getting user location          
-    // re-evaluate putting the bottom stuff in onReady();
-    if (!this.originalUserLocationName) {
-      this.geocoder.geocode({
-        'latLng': latLng,
-      }).then((res) => {
-        let userLocationName;
-        // go backwards b/c it's highest to most specific and we want neighborhood before street address
-        for (let i = res.results.length - 1; i >= 0; i--) {
-          const component = res.results[i];
-          //hopefully we have at least one of these, if not keep going, do later
-          if (component.types.includes('postal_code')) {
-            userLocationName = component.formatted_address;
-            break;
-          } else if (component.types.includes('neighborhood')) {
-            userLocationName = component.formatted_address;
-          }
-        }
-        this.originalUserLocationName = userLocationName;
-        // this.setOriginalLocation();
-      });
-    }
-  };
-
-  getUserLocation = async () =>
-    new Promise(async (resolve, reject) => {
-      const accessToken = this.context.ipstackAccessToken;
-      if (!accessToken) {
-        alert("Unable to identify location.");
-        return reject(err);
-      }
-      // use ipstack to get estimate with ip address      
-      // TODO use https when we have a prod token
-      const results = await fetch(
-        `https://api.ipstack.com/check?access_key=${accessToken}`,
-      )
-      const ipLocationInfo = await results.json();
-      const location = {
-        lat: ipLocationInfo.latitude,
-        lon: ipLocationInfo.longitude,
-      };
-      this.setUserLocation(location);
-      resolve(location);
-    });
-
   applyFilters = (filterType, evt) => {
     this.appliedFilters[filterType] = evt.target.value;
 
@@ -417,13 +353,13 @@ export default class RetailFinder extends PageManager {
               };
               if (filterName === 'collection' && value !== 'All') {
                 const retailersWithSelected = self.collectionsByRetailers[value];
-                if (!retailersWithSelected.includes(retailer.retailerName)) {
+                if (!retailersWithSelected.includes(retailer.id)) {
                   toRemove.push(retailer.id);
                 }
                 // business case to filter retailers with Allure Men if collection is set to all
               } else if (filterName === 'collection' && value === 'All') {
                 const retailersWithAllureMen = self.collectionsByRetailers['Allure Men'];
-                if (retailersWithAllureMen.includes(retailer.retailerName)) {
+                if (retailersWithAllureMen.includes(retailer.id)) {
                   toRemove.push(retailer.id);
                 }
               }
@@ -464,26 +400,6 @@ export default class RetailFinder extends PageManager {
       const value = this.appliedFilters[filter];
       element.value = value;
     };
-
-    const latLng = new google.maps.LatLng(location.lat, location.lon);
-    if (!this.originalUserLocationName) {
-      this.geocoder.geocode({
-        'latLng': latLng,
-      }).then((res) => {
-        let userLocationName;
-        for (let i = res.results.length - 1; i >= 0; i--) {
-          const component = res.results[i];
-          if (component.types.includes('postal_code')) {
-            userLocationName = component.formatted_address;
-            break;
-          } else if (component.types.includes('neighborhood')) {
-            userLocationName = component.formatted_address;
-          }
-        }
-        this.originalUserLocationName = userLocationName;
-        this.setOriginalLocation();
-      });
-    }
 
     this.map.setZoom(DEFAULT_ZOOM_LEVEL);
     this.filterRetailers();
@@ -571,16 +487,7 @@ export default class RetailFinder extends PageManager {
   };
 
   setupFilterData = async (rawRetailers) => {
-    const userLocation = await this.getUserLocation();
-    this.userLocation = userLocation;
-    // filter cuz bad data
-    this.retailersByDistance = rawRetailers.filter((retailer) => !!retailer.location).map((retailer) => {
-      const withDistance = { ...retailer };
-      const { location: storeLocation } = retailer;
-      const distance = this.getDistanceBtwnTwoPts(storeLocation, userLocation);
-      withDistance.distanceFromUser = parseInt(`${distance}`);
-      return withDistance;
-    });
+
     const collectionsByRetailers = {};
     const retailersById = {};
     rawRetailers.forEach(
@@ -589,7 +496,7 @@ export default class RetailFinder extends PageManager {
         retailer.collectionsAvailableCollection.items.forEach((collection) => {
           if (collection) {
             const retailersWithCollection = collectionsByRetailers[collection.collectionName] || [];
-            retailersWithCollection.push(retailer.retailerName);
+            retailersWithCollection.push(retailer.id);
             collectionsByRetailers[collection.collectionName] = retailersWithCollection;
           }
         });
@@ -598,9 +505,7 @@ export default class RetailFinder extends PageManager {
     this.collectionsByRetailers = collectionsByRetailers;
     this.retailersById = retailersById;
     this.createFilterElements();
-    // top caller needs retailer by distance
-    // could use instance var but  flows better just popping it back up
-    return this.retailersByDistance;
+    return rawRetailers;
   }
 
   getRetailerData = async () => {
@@ -682,7 +587,6 @@ export default class RetailFinder extends PageManager {
   paintMapAndRetailers = (retailerData, centerRetailer = null, skipRetailerInfo = false) => {
     const map = this.map || new google.maps.Map(document.getElementById('map'), {
       zoom: 2,
-      // center: { lat: this.userLocation.lat, lng: this.userLocation.lon },
       center: { lat: 36, lng: -60 },
     });
     if (!this.map) {
@@ -700,8 +604,6 @@ export default class RetailFinder extends PageManager {
       return this.getMarker(retailer.location, display, infoWindow, retailer.id, centerRetailer);
     });
     // Add a marker clusterer to manage the markers.
-    // const userLocationMarker = this.getMarker(this.userLocation, 'Your Location', infoWindow);
-    // markers.push(userLocationMarker);
     if (!this.markerClusterer) {
       this.markerClusterer = new MarkerClusterer({ markers: markers, map })
     } else {
@@ -786,9 +688,8 @@ export default class RetailFinder extends PageManager {
     const directions = document.createElement('a');
     directions.classList.add('directions');
     directions.innerText = 'GET DIRECTIONS'
-    const start = this.originalUserLocationName.replaceAll(',', '').replaceAll(' ', '+');
     const destination = retailer.retailerStreet.replaceAll(',', '').replaceAll(' ', '+');
-    directions.setAttribute('href', `https://www.google.com/maps?saddr=${start}&daddr=${destination}`);
+    directions.setAttribute('href', `https://www.google.com/maps?daddr=${destination}`);
     directions.setAttribute('target', '_blank');
     directions.setAttribute('rel', 'noopener noreferrer');
     address.append(directions);
