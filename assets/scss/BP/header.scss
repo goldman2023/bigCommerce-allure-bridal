@@ -29,6 +29,12 @@ header {
                     justify-content: flex-end;
                     gap: 10px;
                     flex: 2;
+                    .account-modal {
+                        display: none;
+                    }
+                    &.open-account .account-modal {
+                        display: block;
+                    }
                 }
                 .header-navigation__cta {
                     display: flex;

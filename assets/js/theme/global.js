@@ -79,6 +79,11 @@ export default class Global extends PageManager {
         //header footer data 	
         renderHeaderFooter(this.context);
 
+        $('.headeraccount').on('click', function(e){
+            e.preventDefault();
+            $('.header-navigation__cta-links').toggleClass('open-account');
+        });
+
         $('.mobileMenu-icons.searchIcon').on('click', function(e){
             e.preventDefault();
             $('.navPages-quickSearch.mobile-only').toggle();
@@ -89,6 +94,7 @@ export default class Global extends PageManager {
         if (mainContent.contains('pages-custom-category-bp-category') || mainContent.contains('bp-category') || mainContent.contains('pages-custom-category-suits-bp-category')) {
             contentFullmetaData(this.context, response => {
                 let metadata = response[0].value;
+                console.log("pages-custom-category-bp-category",metadata);
                 metadata.contentBlocksCollection.items.forEach(element => {
                     if(mainContent.contains('bp-category') && element.__typename === "ReferencedBlockCategoryBanners"){
                         leftTextBlock('leftTextbanner',element);
@@ -141,6 +147,7 @@ export default class Global extends PageManager {
             productDeatilMetaData(this.context,productId, response => {
                 let metadata = response.contentFul;
                 let relatedPro = response.related;
+                console.log(metadata);
                 if (Object.keys(metadata).length === 0) {
                     $('.contentBlocksCollection').hide();
                 } else {
