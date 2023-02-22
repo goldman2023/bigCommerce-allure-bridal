@@ -1,16 +1,19 @@
 {{inject 'passwordRequirements' settings.password_requirements}}
 {{inject 'recaptchaTitle' (lang 'create_account.recaptcha_title')}}
 {{#partial "page"}}
-    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
 
-    <div class="account account--fixed">
+    <div class="account signinpage">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+        <div class="account-login">
         <div class="account-body register-page">
             <!-- <div class="loadingOverlay" style="display: block;"></div> -->
             <h2 class="form-heading">{{lang 'create_account.heading'}}</h2>
             <p class="form-sub_heading">{{{lang 'create_account.subheading'}}}</p>
-            <svg class="login-diamond" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <!-- <svg class="login-diamond" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <rect x="5.99991" y="1.58603" width="6" height="6" transform="rotate(45 5.99991 1.58603)" fill="#695C5C" stroke="white" stroke-width="2"></rect>
-            </svg>
+            </svg> -->
+            <div class="divider"></div>
             {{#if forms.create_account.error}}
                 {{> components/common/alert/alert-error forms.create_account.error}}
             {{/if}}
@@ -76,11 +79,24 @@
                     </div>
                     {{{ forms.create_account.recaptcha.markup}}}
 
-                    <button type="submit" class="button button--secondary" id="createBTn">{{lang 'login.new_customer.create_account'}}</button>
+                    <button type="submit" class="button button--primary" id="createBTn">{{lang 'login.new_customer.create_account'}}</button>
                     </form>
                 </div>
             {{/if}}
+            <div class="createaccountblock">
+                <div class="divider"></div>
+                <p>New to Allure Bridals?</p>
+                <a href="/login.php?action=create_account"><button class="button">Create Account</button></a>
+            </div>
+        </div>
+        <div class="new-login">
+            <div class="register-form form">
+                <h2 class="form-heading">Are You a Retailer?</h2>
+                <p class="form-sub_heading">If you are an existing customer looking to login to the Allure Customer Service retail portal, log in here.</p>
+                <a href="https://allurecustomerservice.com/login.php" ><button class="button">Retailer Login -></button></a>
+            </div>
         </div>
     </div>
+</div>
 {{/partial}}
 {{> layout/base}}
