@@ -268,5 +268,13 @@ export default class Auth extends PageManager {
             this.regcreateAccountValidator($createAccountFormCustom);
         }
 
+        $('#register_pass-policy').on('change', function(){
+            if($(this).is(':checked')) {
+                if($('.register_pass-policy').parent().parent().parent().hasClass('form-field--error')) {
+                    $('.register_pass-policy').parent().parent().parent().removeClass('form-field--error');
+                }
+            }
+        });
+
     }
 }
