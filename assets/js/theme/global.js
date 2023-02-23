@@ -87,6 +87,18 @@ export default class Global extends PageManager {
         $('.mobileMenu-icons.searchIcon').on('click', function(e){
             e.preventDefault();
             $('.navPages-quickSearch.mobile-only').toggle();
+            if($('.header').hasClass('is-open')) {
+                $('body').removeClass('has-activeNavPages');
+
+                $('.mobileMenu-toggle').removeClass('is-open').attr('aria-expanded', false);
+
+                $('#menu').removeClass('is-open');
+
+                $('.header').removeClass('is-open');
+
+                $('.navPages-list.navPages-list-depth-max').find('.is-hidden').removeClass('is-hidden');
+                $('.navPages-list.navPages-list-depth-max').removeClass('subMenu-is-open');
+            }
             //$('.header-shadow').toggleClass('opensearch');
         });       
 
