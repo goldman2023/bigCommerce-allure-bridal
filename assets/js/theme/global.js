@@ -614,7 +614,7 @@ export default class Global extends PageManager {
                     });
                 }
             }
-            $('.card .titleIcon').on('click', function (e) {
+            $(document).on('click', '.card .titleIcon', function (e) {
                 e.preventDefault();
                 $(this).addClass('is-active');
                 let prodid = $(this).attr('data-id');
