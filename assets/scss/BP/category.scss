@@ -596,9 +596,7 @@ body {
     }
 }
 .pagefilterheader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: none;
     font-family: stencilFontFamily('default-font-regular');
     font-style: normal;
     font-weight: 400;
@@ -606,6 +604,11 @@ body {
     line-height: remCalc(15px);
     letter-spacing: 0.1em;
     text-transform: capitalize;
+    @include breakpoint("medium") {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
     .leftside {
         display: flex;
     }
