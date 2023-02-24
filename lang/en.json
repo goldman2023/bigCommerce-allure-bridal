@@ -266,6 +266,10 @@
     },
     "create_account": {
         "heading": "Register",
+        "newaccount": "New to Allure Bridals?",
+        "retailer": "Are You a Retailer?",
+        "retailerbtn": "Retailer Login ->",
+        "subretailer": "If you are an existing customer looking to login to the Allure Customer Service retail portal, log in here.",
         "subheading": "If you don't have Allure Bridals account, use this option to create new account.",
         "created": {
             "heading": "Your account has been created",
