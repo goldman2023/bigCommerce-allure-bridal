@@ -1,6 +1,6 @@
 <div id="facetedSearch" class="facetedSearch sidebarBlock">
     {{> components/faceted-search/selected-facets selected}}
-
+<div class="mobFilter">
     <a href="#facetedSearch-navList" role="button" class="facetedSearch-toggle toggleLink" data-collapsible>
         <span class="facetedSearch-toggle-text">
             {{#if facets.length '>' 2}}
@@ -28,6 +28,8 @@
             </span>
         </span>
     </a>
+    <div class="middlemob"></div>
+    </div>
 
     {{#any facets visible=true}}
         <div id="facetedSearch-navList"

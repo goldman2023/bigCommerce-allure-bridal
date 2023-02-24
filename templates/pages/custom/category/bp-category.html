@@ -44,7 +44,12 @@ category:
             <div class="leftside"> 
                 <button class="hideshowfilter">Filters</button>
             </div>
-            <div></div>
+            <div class="middle">{{length category.products}} ITEMS</div>
+            <div class="rightSide">
+                {{#if category.products}}
+                    {{> components/products/filter sort=pagination.category.sort}}
+                {{/if}}
+            </div>
         </div>
         <div class="plp-cont">
         {{#if category.faceted_search_enabled}}

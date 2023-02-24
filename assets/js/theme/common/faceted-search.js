@@ -364,6 +364,8 @@ class FacetedSearch {
     }
 
     onSortBySubmit(event, currentTarget) {
+        console.log(event);
+        console.log(currentTarget);
         const url = Url.parse(window.location.href, true);
         const queryParams = $(currentTarget).serialize().split('=');
 
