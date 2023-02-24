@@ -79,7 +79,7 @@ export default class RetailFinder extends PageManager {
 
   addEventHandlers = () => {
     const locationTypeahead = document.getElementById('location-typeahead');
-    const autocomplete = new google.maps.places.Autocomplete(locationTypeahead);
+    const autocomplete = new google.maps.places.Autocomplete(locationTypeahead,{types: ['(regions)']});
     const submitBtnContainer = document.getElementById('filterButton');
     const submitBtn = submitBtnContainer.querySelector('button');
     // hacking a switch to know whether or not we should filter on first page load
