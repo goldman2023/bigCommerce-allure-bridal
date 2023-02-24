@@ -44,6 +44,59 @@ function headerFooterQuery (context, callback) {
     })
     .catch(error => console.error(error));
 }
+function eventsData(context,callback) {
+    const query = `
+    query referencedBlockTrunkShowsCollectionQuery {
+        referencedBlockTrunkShowsCollection {
+          items {
+            sys {
+              id
+            }
+            retailerName
+            location
+                  eventStartDate
+                  eventEndDate
+                  collectionsAvailable
+                  locationAddressStreet
+                  locationAddressCityStateZip
+                  locationPhoneNumber
+                  locationWebsiteUrl
+            eventImage{
+              url
+            }
+            # add the fields you want to query
+          }
+        }
+      }`
+    fetch(
+    'https://graphql.contentful.com/content/v1/spaces/y49u4slmhh3t/',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization:
+            `Bearer ${context.contentfulApiToken}`,
+        },
+        body: JSON.stringify({ query }),
+      }
+    ).then(function(response) {
+        return response.json();
+    })
+    .then(function(res) {
+        if (typeof callback == 'function') {
+            callback.call(this, res);
+        }
+    })
+    .catch(error => console.error(error));
+};
+
+export function getEvents(context, callback) {
+    eventsData(context, response => {
+        if (response !== undefined) {
+            callback.call(this, response);
+        }
+    });
+}
 function productDetailMetadata (context,prodID, callback) {
     let prodductId = 170;
     if(prodID) {
@@ -754,11 +807,12 @@ export function blockElementSpacer24Px() {
     return '<div class="blockElementSpacer24Px spacer24"></div>';
 }
 
-export function events(blockData) {
+export function events(blockData,page) {
+    let datastru = blockData.trunkShowsCollection ?  blockData.trunkShowsCollection : blockData.referencedBlockTrunkShowsCollection;
     return `<div class="events block-item" id="events">
     <h2>Upcoming Designer Events</h2>
     <div class="eventsGrid">
-        ${blockData.trunkShowsCollection.items.map((item)=> {
+        ${datastru.items.map((item)=> {
             //start date format
             let startDate = (item.eventStartDate).split('T');
             let startDateObj = new Date(`${startDate[0]}T00:00`);
@@ -794,7 +848,7 @@ export function events(blockData) {
             </div>`;
         }).join('')}
     </div>
-    ${blockData.containerButtonUrl !== null ? `<a href="${blockData.containerButtonUrl}" class="button button--secondary" >${blockData.containerButtonText}</a>` : ''}
+    ${page === 'home' ? (blockData.containerButtonUrl !== null ? `<a href="${blockData.containerButtonUrl}" class="button button--secondary" >${blockData.containerButtonText}</a>` : '') : ''}
     </div>`;
 }
 export function blockElementFullscreenImage(blockData) {
