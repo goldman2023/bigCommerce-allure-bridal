@@ -48,7 +48,7 @@ export default class Homepage extends PageManager {
                 return blockElement3ImagesScreenWidth(element);
             }
             if(element.__typename === "ReferencedBlockTrunkShowContainer"){
-                return events(element);
+                return events(element,'home');
             }
             if(element.__typename === "BlockElementImages2ColumnRight"){
                 return blockElementImages2ColumnRight(element);
