@@ -983,7 +983,6 @@ export function blockElementVerticalGallery(blockData) {
                     leftData += `<div class="contentDiv"><img data-src="${item.url}" alt="${item.title}" class="lazyload"/></div>`;
                 } else {
                     let descriptionArr = (item.description) ? item.description.split('-') : '';
-                    console.log(descriptionArr);
                     let descriptionHtml = '';
                     if (descriptionArr.length > 0) {
                         descriptionHtml = `<p class="caption body-1">${descriptionArr[0]} ${(descriptionArr[1] != null && descriptionArr[1] != undefined) ? `<span class="author body-light-2">-${descriptionArr[1]}</span>` : ''}</p>`;

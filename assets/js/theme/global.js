@@ -104,10 +104,8 @@ export default class Global extends PageManager {
 
         //Product Listing page start
         if (mainContent.contains('pages-custom-category-bp-category') || mainContent.contains('bp-category') || mainContent.contains('pages-custom-category-suits-bp-category')) {
-            console.log('hihihi');
             contentFullmetaData(this.context, response => {
                 let metadata = response[0].value;
-                console.log("pages-custom-category-bp-category",metadata);
                 metadata.contentBlocksCollection.items.forEach(element => {
                     if(mainContent.contains('bp-category') && element.__typename === "ReferencedBlockCategoryBanners"){
                         leftTextBlock('leftTextbanner',element);
