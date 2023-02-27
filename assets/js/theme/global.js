@@ -52,7 +52,9 @@ import {
     blockElementDivider,
     blockElementSpacer,
     blockElementSpacer24Px,
-    referencedBlockHomepageCollections
+    referencedBlockHomepageCollections,
+    getPLPContentfullData,
+    plpleftTextBlockglobal
 } from './BP/universal-blocks';
 
 export default class Global extends PageManager {
@@ -104,6 +106,20 @@ export default class Global extends PageManager {
 
         //Product Listing page start
         if (mainContent.contains('pages-custom-category-bp-category') || mainContent.contains('bp-category') || mainContent.contains('pages-custom-category-suits-bp-category')) {
+            getPLPContentfullData(this.context, `/dresses/abella-dresses/`, response => {
+                let contentFulData = response?.metafields?.edges[0]?.node.value;
+                let parsedData = JSON.parse(contentFulData.replace( /(<([^>]+)>)/ig, ''));
+                parsedData.items.forEach(element => {
+                    element.categoryBannersCollection.items.forEach(ele => {
+                        if (ele.slug === "the-perfect-match-left" && ele.layoutOrientation === "Image Left"){
+                            plpleftTextBlockglobal('rightTextbanner',ele);
+                        }
+                        if(ele.slug === "the-perfect-match-right" && ele.layoutOrientation === "Image Right"){
+                            plpleftTextBlockglobal('leftTextbanner',ele); 
+                        }
+                    });
+                });
+            });
             contentFullmetaData(this.context, response => {
                 let metadata = response[0].value;
                 metadata.contentBlocksCollection.items.forEach(element => {
