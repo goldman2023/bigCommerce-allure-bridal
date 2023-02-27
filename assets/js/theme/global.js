@@ -120,17 +120,17 @@ export default class Global extends PageManager {
                     });
                 });
             });
-            contentFullmetaData(this.context, response => {
-                let metadata = response[0].value;
-                metadata.contentBlocksCollection.items.forEach(element => {
-                    if(mainContent.contains('bp-category') && element.__typename === "ReferencedBlockCategoryBanners"){
-                        leftTextBlock('leftTextbanner',element);
-                    }
-                    if(mainContent.contains('pages-custom-category-suits-bp-category') && element.__typename === "ReferencedBlockCategoryBanners" && element.layoutOrientation === "Image Right"){
-                        leftTextBlock('rightTextbanner',element);
-                    }
-                });
-            });
+            // contentFullmetaData(this.context, response => {
+            //     let metadata = response[0].value;
+            //     metadata.contentBlocksCollection.items.forEach(element => {
+            //         if(mainContent.contains('bp-category') && element.__typename === "ReferencedBlockCategoryBanners"){
+            //             leftTextBlock('leftTextbanner',element);
+            //         }
+            //         if(mainContent.contains('pages-custom-category-suits-bp-category') && element.__typename === "ReferencedBlockCategoryBanners" && element.layoutOrientation === "Image Right"){
+            //             leftTextBlock('rightTextbanner',element);
+            //         }
+            //     });
+            // });
         }
         //Product Listing page end
 

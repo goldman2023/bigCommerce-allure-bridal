@@ -208,7 +208,7 @@ export default class Auth extends PageManager {
                                 icon: 'success',
                                 showCancelButton: false
                             })
-                           window.location.href = '/account.php?action=account_details';
+                           window.location.href = '/thank-you/';
                         },
                         error: error => {
                             console.log(error.responseJSON.Error.split('".customer_create":"')[1].replace(`"}}'`, ''));
