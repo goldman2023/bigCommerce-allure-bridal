@@ -852,7 +852,6 @@ export function events(blockData,page) {
     </div>`;
 }
 export function blockElementFullscreenImage(blockData) {
-    console.log(blockData?.contentOrScreenWidth);
     return `<div class="blockElementFullscreenImage block-item ${(blockData?.contentOrScreenWidth === 'Screen Width') ? 'full-size' : ''}" id="blockElementFullscreenImage"><div class="mainImage"><img data-src="${blockData?.backgroundImage?.url}" alt="${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>
     ${blockData?.bodyCopy !== null ? `<div class="homepageCaption"><div class="content"><div class="bannercap"><h4>${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}</h4><p>${(blockData?.bodyCopy && blockData?.bodyCopy !== undefined) ? blockData?.bodyCopy : ''}</p><a href="${blockData?.linkUrl}">${blockData?.linkText}</a></div>` : ''}</div></div></div></div>`;
 }
@@ -1002,7 +1001,6 @@ export function blockElementVerticalGallery(blockData) {
                     let descriptionHtml = '';
                     if (item.description) {
                         let descriptionArr = item.description.split('-');
-                        console.log(descriptionArr);
                         descriptionHtml = `<p class="caption body-1">${descriptionArr[0]} ${(descriptionArr[1] != null && descriptionArr[1] != undefined) ? `<span class="author body-light-2">-${descriptionArr[1]}</span>` : ''}</p>`;
                     }
                     

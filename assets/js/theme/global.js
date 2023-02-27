@@ -104,6 +104,7 @@ export default class Global extends PageManager {
 
         //Product Listing page start
         if (mainContent.contains('pages-custom-category-bp-category') || mainContent.contains('bp-category') || mainContent.contains('pages-custom-category-suits-bp-category')) {
+            console.log('hihihi');
             contentFullmetaData(this.context, response => {
                 let metadata = response[0].value;
                 console.log("pages-custom-category-bp-category",metadata);
@@ -159,7 +160,6 @@ export default class Global extends PageManager {
             productDeatilMetaData(this.context,productId, response => {
                 let metadata = response.contentFul;
                 let relatedPro = response.related;
-                console.log(metadata);
                 if (Object.keys(metadata).length === 0) {
                     $('.contentBlocksCollection').hide();
                 } else {
@@ -307,7 +307,6 @@ export default class Global extends PageManager {
         if (mainContent.contains('pages-custom-category-category-landing') || mainContent.contains('category-landing')) {
             let geturl = document.getElementById('categoryLanding').getAttribute('data-url')
             getCategorySpecificMetaData(this.context, geturl, response => {
-                console.log(response);
                 for (const categoryData of response) {
                     if (categoryData.key === "Contentful Data") {
                         let contentfulData = categoryData?.value;
@@ -366,7 +365,6 @@ export default class Global extends PageManager {
                                     return leftTextBlockglobal('rightTextbanner', ele);
                                 }
                                 if (ele.__typename === "BlockElementCopyBlock") {
-                                    console.log(ele);
                                     return blockElementCopyBlock(ele);
                                 }
                                 if (ele.__typename === "ReferencedBlockLogoRow") {
