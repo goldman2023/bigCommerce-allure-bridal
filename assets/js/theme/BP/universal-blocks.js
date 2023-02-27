@@ -327,7 +327,51 @@ function categoryByPath (context, categoryPath, callback) {
     .catch(error => console.error(error));
 }
 
-
+function plpQuery (context, categoryPath, callback){
+    let query = `query CategoryByUrl {
+        site {
+          route(path: "${categoryPath}") {
+            node {
+              id
+              ... on Category {
+                name
+                entityId
+                description
+                metafields(namespace:"Contentful Data") {
+                  edges {
+                    node {
+                      id
+                      key
+                      value
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }`;
+      fetch('/graphql', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${context.graphQlToken}`
+        },
+        body: JSON.stringify({
+            query: query
+        })
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(res) {
+        if (typeof callback == 'function') {
+            callback.call(this, res);
+        }
+    })
+    .catch(error => console.error(error));
+}
 function categoryQueryByPath (context, categoryPath, callback) {
     let query = `
     query CategoryByUrl {
@@ -665,6 +709,14 @@ export function getFirstprodImageFromCategory(context,path, callback) {
     });
 }
 
+export function getPLPContentfullData(context,path, callback) { 
+    plpQuery(context, path, response => {
+        if (response.data.site.route.node !== undefined) {
+            callback.call(this, response.data.site.route.node);
+        }
+    });
+}
+
 export function createCategorySlider(block,blockdata) {
     if(blockdata?.products?.edges?.length > 0) {
         if (blockdata.products.edges[0].node.defaultImage !== null) {
@@ -972,6 +1024,12 @@ export function leftTextBlockglobal(selectorId, blockData) {
 
     return `<div id="${selectorId} block-item" class="${selectorId}"><img data-src="${blockData.backgroundImage.url}" alt="category banner" class="lazyload desktoponly"/><img data-src="${blockData?.mobileImage?.url}" alt="category banner" class="lazyload mobileonly"/>
         <div class="overlay"></div><div class="content-wrapper"><div class="caption"><h1 class="title h1-italic">${blockData.bannerTitle}</h1><p class="content body-light-2">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink body-3">${blockData.linkText}</a></div></div></div>`;
+};
+
+export function plpleftTextBlockglobal(selectorId, blockData) {
+    let contentStructure = `<div class="${selectorId} plpbanner" id="${selectorId}"><img data-src="${blockData.backgroundImage.url}" alt="category banner" class="lazyload desktoponly"/><img data-src="${blockData?.mobileImage?.url}" alt="category banner" class="lazyload mobileonly"/>
+        <div class="overlay"></div><div class="content-wrapper"><div class="caption"><h1 class="title h1-italic">${blockData.bannerTitle}</h1><p class="content body-light-2">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink body-3">${blockData.linkText}</a></div></div></div><div class="divider"></div>`;
+        document.querySelector('.customBanner').innerHTML = contentStructure;
 };
 
 export function blockElementVerticalGallery(blockData) {

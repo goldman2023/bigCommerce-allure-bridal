@@ -45,7 +45,7 @@ form.form.forgot-password-form {
         justify-content: unset;
         align-items: unset;
     }
-    .login-reset, .new-login {
+    .login-reset, .new-login,.register-page {
         width: 50% !important;
     }
 }
@@ -322,7 +322,7 @@ form.form.forgot-password-form {
 
     svg.login-diamond {
         width: 100%;
-        margin-top: -6.5px;
+        margin: 40px;
     }
 
     input#email {
@@ -370,16 +370,19 @@ h2.form-heading {
     line-height: 30px;
     color: $color-default-neutral-2;
 }
-
+#customregistration,#createBTn {
+    margin-bottom: 0;
+}
 p.form-sub_heading {
     font-family: $inter;
     font-weight: 400;
     font-size: 12px;
     line-height: 20px;
     color: $color-default-neutral-5;
-    border-bottom: solid 1px $color-border;
-    padding-bottom: 13.5px;
+    // border-bottom: solid 1px $color-border;
+    // padding-bottom: 13.5px;
     margin: 0;
+    padding: 0;
 
     strong {
         color: $color-default-neutral-2;
@@ -389,6 +392,9 @@ p.form-sub_heading {
 svg.login-diamond {
     width: 100%;
     margin-top: -6.5px;
+}
+.divider {
+    margin: 40px 0;
 }
 
 .form-row.form-row--half {
@@ -481,5 +487,28 @@ svg.login-diamond {
     border: 0 !important;
     .sendemail {
         display: none;
+    }
+}
+.register-page {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;  
+}
+.createaccountblock {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    .divider {
+        margin: 40px 0;
+    }
+    p {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 26px;
+        color: #615D5D;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    a {
+        text-decoration: none;
     }
 }

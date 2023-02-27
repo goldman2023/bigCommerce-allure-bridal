@@ -52,7 +52,9 @@ import {
     blockElementDivider,
     blockElementSpacer,
     blockElementSpacer24Px,
-    referencedBlockHomepageCollections
+    referencedBlockHomepageCollections,
+    getPLPContentfullData,
+    plpleftTextBlockglobal
 } from './BP/universal-blocks';
 
 export default class Global extends PageManager {
@@ -79,14 +81,45 @@ export default class Global extends PageManager {
         //header footer data 	
         renderHeaderFooter(this.context);
 
+        $('.headeraccount').on('click', function(e){
+            e.preventDefault();
+            $('.header-navigation__cta-links').toggleClass('open-account');
+        });
+
         $('.mobileMenu-icons.searchIcon').on('click', function(e){
             e.preventDefault();
             $('.navPages-quickSearch.mobile-only').toggle();
+            if($('.header').hasClass('is-open')) {
+                $('body').removeClass('has-activeNavPages');
+
+                $('.mobileMenu-toggle').removeClass('is-open').attr('aria-expanded', false);
+
+                $('#menu').removeClass('is-open');
+
+                $('.header').removeClass('is-open');
+
+                $('.navPages-list.navPages-list-depth-max').find('.is-hidden').removeClass('is-hidden');
+                $('.navPages-list.navPages-list-depth-max').removeClass('subMenu-is-open');
+            }
             //$('.header-shadow').toggleClass('opensearch');
         });       
 
         //Product Listing page start
         if (mainContent.contains('pages-custom-category-bp-category') || mainContent.contains('bp-category') || mainContent.contains('pages-custom-category-suits-bp-category')) {
+            getPLPContentfullData(this.context, `/dresses/abella-dresses/`, response => {
+                let contentFulData = response?.metafields?.edges[0]?.node.value;
+                let parsedData = JSON.parse(contentFulData.replace( /(<([^>]+)>)/ig, ''));
+                parsedData.items.forEach(element => {
+                    element.categoryBannersCollection.items.forEach(ele => {
+                        if (ele.slug === "the-perfect-match-left" && ele.layoutOrientation === "Image Left"){
+                            plpleftTextBlockglobal('rightTextbanner',ele);
+                        }
+                        if(ele.slug === "the-perfect-match-right" && ele.layoutOrientation === "Image Right"){
+                            plpleftTextBlockglobal('leftTextbanner',ele); 
+                        }
+                    });
+                });
+            });
             contentFullmetaData(this.context, response => {
                 let metadata = response[0].value;
                 metadata.contentBlocksCollection.items.forEach(element => {
@@ -202,6 +235,7 @@ export default class Global extends PageManager {
                     if (element.__typename === "BlockElementFullscreenVideo") {
                         return globalblockElementFullscreenVideo(element);
                     }
+                    
                     if (element.__typename === "BlockElementDivider") {
                         return blockElementDivider();
                     }
@@ -268,7 +302,7 @@ export default class Global extends PageManager {
             $('.prod-option.color .form-select').customSelect();
 
         } else {
-            $('select:not(#sortSelect)').customSelect();
+          //  $('select:not(#sortSelect)').customSelect();
 
         }
         //Product Detail page end
@@ -288,7 +322,6 @@ export default class Global extends PageManager {
         if (mainContent.contains('pages-custom-category-category-landing') || mainContent.contains('category-landing')) {
             let geturl = document.getElementById('categoryLanding').getAttribute('data-url')
             getCategorySpecificMetaData(this.context, geturl, response => {
-                console.log(response);
                 for (const categoryData of response) {
                     if (categoryData.key === "Contentful Data") {
                         let contentfulData = categoryData?.value;
@@ -347,7 +380,6 @@ export default class Global extends PageManager {
                                     return leftTextBlockglobal('rightTextbanner', ele);
                                 }
                                 if (ele.__typename === "BlockElementCopyBlock") {
-                                    console.log(ele);
                                     return blockElementCopyBlock(ele);
                                 }
                                 if (ele.__typename === "ReferencedBlockLogoRow") {
@@ -595,7 +627,7 @@ export default class Global extends PageManager {
                     });
                 }
             }
-            $('.card .titleIcon').on('click', function (e) {
+            $(document).on('click', '.card .titleIcon', function (e) {
                 e.preventDefault();
                 $(this).addClass('is-active');
                 let prodid = $(this).attr('data-id');

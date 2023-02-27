@@ -79,6 +79,10 @@
                     &.slider-for {
                         display: none;
                     }
+                    .slick-track {
+                        display: flex;
+                        align-items: center;
+                    }
                     .slick-next {
                         right: 0;
                         width: 52px;
