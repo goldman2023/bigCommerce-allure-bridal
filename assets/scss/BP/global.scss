@@ -492,7 +492,7 @@ body {
 ol {
     &.breadcrumbs {
         text-align: left;
-        border-bottom: 2px solid stencilColor('color-default-neutral-4');
+        border-bottom: 1px solid stencilColor('color-default-neutral-4');
         .breadcrumb {
             position: relative;
             padding-right: 12px;
