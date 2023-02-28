@@ -39,7 +39,7 @@
         <li class="navBar-item {{#if account_page '===' 'settings'}}is-active{{/if}}">
             <a class="navBar-action" href="{{urls.account.details}}">
                 <svg id="person">
-                    <use xlink:href="#icon-person" />
+                    <use xlink:href="#icon-person{{#if account_page '===' 'settings'}}2{{/if}}" />
                 </svg>
                 <span>{{lang 'common.personalinfo'}}</span>
             </a>
