@@ -170,6 +170,22 @@ export default class RetailFinder extends PageManager {
     if (idx < firstIdxWithoutBorder) {
       mainContainer.classList.add('bordered');
     }
+
+    const badgeCollections = document.createElement('div');
+
+    if (retailer.featured) {
+      const featuredCollections = document.createElement('span');
+      featuredCollections.classList.add('featured');
+      badgeCollections.append(featuredCollections);
+    }
+
+    if (retailer.disneyPlatinumCollection) {
+      const disneyCollections = document.createElement('span');
+      disneyCollections.classList.add('disney');
+      badgeCollections.append(disneyCollections);
+    };
+
+    container.append(badgeCollections)
     mainContainer.append(container);
     const nameHeader = document.createElement('div');
     nameHeader.classList.add('retailer-title');
@@ -184,28 +200,49 @@ export default class RetailFinder extends PageManager {
     locationInfo.append(cityState);
     container.append(locationInfo);
 
+    const distanceDirection = document.createElement('div');
+    distanceDirection.classList.add('retailer-distanceDirection')
     const distance = document.createElement('span');
     distance.classList.add('retailer-distance');
-    distance.innerText = parseInt(`${retailer.distanceAway}`) + ` miles away`;
-    container.append(distance);
+    distance.innerText = parseInt(`${retailer.distanceAway}`) + ` miles`;
+    distanceDirection.append(distance)
+    
+    const directions = document.createElement('a');
+    directions.classList.add('directions');
+    directions.innerText = 'DIRECTIONS'
+    const destination = retailer.retailerStreet.replaceAll(',', '').replaceAll(' ', '+');
+    directions.setAttribute('href', `https://www.google.com/maps?daddr=${destination}`);
+    directions.setAttribute('target', '_blank');
+    directions.setAttribute('rel', 'noopener noreferrer');
+    distanceDirection.append(directions);
 
-    const numCollections = document.createElement('span');
-    numCollections.classList.add('retailer-collection-count');
-    numCollections.innerText = `Carries ${retailer.collectionsAvailableCollection.items.length} collections`;
-    container.append(numCollections)
+    container.append(distanceDirection);
 
-    if (retailer.featured) {
-      const featuredCollections = document.createElement('div');
-      featuredCollections.classList.add('featured');
-      container.append(featuredCollections);
+    const collections = document.createElement('span');
+    collections.classList.add('retailer-collections');
+    
+    //retailer's collection array to simple array.
+    let collectionItems = [];
+    retailer.collectionsAvailableCollection.items.forEach(item => {
+      collectionItems.push(item.collectionName)
+    })
+    
+    collections.innerText = `${collectionItems.join(', ')}`;
+    container.append(collections)
+
+    const requestBtn = document.createElement('button');
+    requestBtn.setAttribute('type', 'button');
+    requestBtn.classList.add('schedule-btn');
+
+    const requestBtnText = document.createElement('span');
+    requestBtnText.innerText = 'REQUEST AN APPOINTMENT'
+    requestBtn.append(requestBtnText);
+    // requestBtn.addEventListener('click', () => this.openRequestForm(retailer));
+    requestBtn.addEventListener('click', (event) => {console.log("CLicked appoint btn"); event.stopPropagation();});
+
+    if (retailer.requestAppointment) {
+      container.append(requestBtn);
     }
-
-
-    if (retailer.disneyPlatinumCollection) {
-      const disneyCollections = document.createElement('div');
-      disneyCollections.classList.add('disney');
-      container.append(disneyCollections);
-    };
 
     // hover events
     mainContainer.addEventListener('mouseenter', () => {
