@@ -11,7 +11,9 @@
         "info": "Info",
         "categories": "Categories",
         "call_us": "Call us at {phone_number}",
-        "powered_by": "Powered by"
+        "powered_by": "Powered by",
+        "designed_by": "Designed and maintained by",
+        "designed_by_name": "badpixel®"
     },
     "home": {
         "heading": "Home"
