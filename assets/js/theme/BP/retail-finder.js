@@ -420,7 +420,7 @@ export default class RetailFinder extends PageManager {
     distanceFilterDropdown.id = FILTER_IDS.distance;
     distanceFilterDropdown.classList.add('form-select');
     distanceFilterDropdown.classList.add('selector-dropdown');
-    [10, 25, 50, 100, 500].forEach(
+    [10, 25, 50, 100, 250].forEach(
       (distance) => {
         const distanceOption = document.createElement('option');
         distanceOption.setAttribute('value', distance);
