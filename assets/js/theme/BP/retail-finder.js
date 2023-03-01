@@ -463,7 +463,7 @@ export default class RetailFinder extends PageManager {
       }
     );
     collectionFilter.append(collectionFilterDropdown);
-    collectionContainer.append(collectionFilter);
+    // collectionContainer.append(collectionFilter);
 
     collectionFilterDropdown.addEventListener('change', (e) => this.applyFilters('collection', e));
 

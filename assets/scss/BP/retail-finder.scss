@@ -5,11 +5,22 @@
 
   .content {
     display: flex;
-
+    
     .map-filters {
-      width: 20%;
+      width: 30%;
       margin-right: 40px;
+      .geo-filters {
+        display: flex;
 
+        .filter {
+          width: 50%;
+
+          &:first-child {
+            margin-right: 16px;
+          }
+        }
+
+      }
       .form {
         position: relative;
 
@@ -29,7 +40,7 @@
     }
 
     .map-and-retailers {
-      width: 80%;
+      width: 70%;
 
       #map {
         min-height: 600px;
@@ -191,7 +202,7 @@
         background: stencilColor('color-theme');
         border: 1px solid stencilColor('color-theme');
         color: stencilColor('color-white');
-
+        max-width: 100% !important;
         &:hover {
           background: stencilColor('color-white');
           color: stencilColor('color-theme');
