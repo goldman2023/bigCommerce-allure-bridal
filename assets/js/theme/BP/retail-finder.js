@@ -24,7 +24,8 @@ const MAP_MARKER_ORANGE = {
 // original/applied filter instance properties
 const FILTER_IDS = {
   distance: 'distanceFilterSelect',
-  collection: 'collectionFilterSelect',
+  // collection: 'collectionFilterSelect',
+  locationOrcode : "location-typeahead"
 };
 
 const DEFAULT_ZOOM_LEVEL = 4;
@@ -311,7 +312,7 @@ export default class RetailFinder extends PageManager {
       25: 10,
       50: 8,
       100: 8,
-      500: 5,
+      250: 5,
     };
     if (filterType === 'distance') {
       const newZoomLevel = distanceToZoomLevels[evt.target.value];
@@ -398,13 +399,10 @@ export default class RetailFinder extends PageManager {
     for (const [filter, elementId] of Object.entries(FILTER_IDS)) {
       const element = document.getElementById(elementId);
       const value = this.appliedFilters[filter];
-      element.value = value;
+      element.value = !!!value ? '': value;
     };
-
     this.map.setZoom(DEFAULT_ZOOM_LEVEL);
     this.filterRetailers();
-    const locationTypeahead = document.getElementById('location-typeahead');
-    locationTypeahead.value = '';
   };
 
   createFilterElements = () => {
@@ -466,6 +464,9 @@ export default class RetailFinder extends PageManager {
     // collectionContainer.append(collectionFilter);
 
     collectionFilterDropdown.addEventListener('change', (e) => this.applyFilters('collection', e));
+
+    // locationOrcode filter
+
 
     //submit btn
     const submitBtnContainer = document.getElementById('filterButton');
