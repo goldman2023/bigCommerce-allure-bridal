@@ -779,6 +779,9 @@ body {
 }
 .mobFilter {
     display: flex;
+    @include breakpoint("medium") {
+        display: none;
+    }
     .middlemob {
         padding: 10px;
     }
