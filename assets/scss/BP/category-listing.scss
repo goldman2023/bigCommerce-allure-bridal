@@ -45,7 +45,15 @@
                 }
                 display: block;
                 .sub-description {
-                    width: calc(100% - 285px);
+                    width: 100%;
+                    position: relative;
+                    display: block;
+                    margin-bottom: 10px;
+                    @include breakpoint("small") {
+                        width: calc(100% - 285px);
+                        margin-bottom: auto;
+                        display: inline;
+                    }
                     p {
                         margin: 0 0 20px 0;
                         @include breakpoint("medium") {
