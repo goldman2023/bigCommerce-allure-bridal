@@ -7,7 +7,7 @@
     display: flex;
     
     .map-filters {
-      width: 30%;
+      width: 35%;
       margin-right: 40px;
       .geo-filters {
         display: flex;
@@ -23,30 +23,20 @@
       }
       .form {
         position: relative;
-
+        margin-bottom: 2.5rem;
         .location-typeahead {
           color: stencilColor("color-allure-bridals-neutral-1") !important;
-
+          
           &:focus {
             outline: none !important;
           }
-
+          
           &.error {
             outline: red 1px solid;
-
+            
           }
         }
       }
-    }
-
-    .map-and-retailers {
-      width: 70%;
-
-      #map {
-        min-height: 600px;
-        margin-bottom: 40px;
-      }
-
       .available-retailers {
         .top {
           width: 100%;
@@ -54,19 +44,18 @@
           align-items: center;
           border-bottom: 1px solid stencilColor('color-men-design-primary-2');
           padding-bottom: 22px;
-          margin-bottom: 30px;
           position: relative;
-
+  
           svg {
             position: absolute;
             bottom: -7px;
             left: 50%;
           }
-
+  
           .retailers {
             margin-bottom: 0;
           }
-
+  
           .sort-dropdown {
             margin-left: auto;
             display: none;
@@ -78,26 +67,26 @@
             color: stencilColor('allure-bridals-neutral-2');
             line-height: 15px;
             /* identical to box height */
-
+  
             text-align: center;
             letter-spacing: 0.1em;
-
+  
             .sort-label {
               width: 100px;
               display: flex;
               align-items: center;
             }
-
+  
             .sort-select {
               border: none;
-
+  
               &:focus {
                 outline: none !important;
               }
             }
           }
         }
-
+  
         .results-divider {
           display: flex;
           padding: 12px 32px;
@@ -107,59 +96,60 @@
           padding: 1rem;
           font-size: 14px;
           line-height: 22px;
-          margin-bottom: 25px;
-
+          margin: 10px 0px 10px 0px;
+  
           .important-icon {
             width: 20px;
             height: 20px;
             margin-right: 11px;
           }
         }
-
+  
         .retailer-results {
           color: stencilColor('allure-bridals-neutral-1');
           display: flex;
           flex-wrap: wrap;
-
+  
           .hide-retailer-item.retailer-item-container {
             display: none;
           }
-
+  
           .retailer-item-container {
-            width: 33%;
-
-            &.bordered {
-              border-bottom: 1px solid #C8C6C6;
-              padding-bottom: 24px;
-              margin-bottom: 30px;
-            }
-
-
+            width: 100%;
+  
+            // &.bordered {
+            //   border-bottom: 1px solid #C8C6C6;
+            //   padding-bottom: 24px;
+            //   margin-bottom: 30px;
+            // }
+  
+  
             .retailer-item {
               display: flex;
               padding: 24px;
+              padding-left: 10px;
               flex-direction: column;
               height: 100%;
               cursor: pointer;
               line-height: 20px;
-
+  
               &:hover,
               &.hovered {
                 background-color: #FBF8F8;
               }
-
+  
               &:not(:nth-child(3n)) {
                 padding-right: 50px;
-
+  
               }
-
+  
               .retailer-title {
                 font-family: 'Prata';
                 font-weight: 400;
                 font-size: 22px;
                 line-height: 30px;
               }
-
+  
               .retailer-location {
                 font-weight: 400;
                 font-size: 14px;
@@ -167,18 +157,18 @@
                 display: flex;
                 align-items: center;
                 margin-bottom: 2px;
-
+  
                 .retailer-city-state {
                   margin-right: 25px;
-
+  
                 }
               }
-
+  
               .retailer-distance {
                 margin-bottom: 8px;
                 color: stencilColor('color-allure-bridals-primary-1');
               }
-
+  
               .retailer-collection-count {
                 font-size: 14px;
                 line-height: 22px;
@@ -186,10 +176,20 @@
               }
             }
           }
-
+  
         }
-
+  
       }
+    }
+
+    .map-and-retailers {
+      width: 65%;
+
+      #map {
+        min-height: 600px;
+        margin-bottom: 40px;
+      }
+
 
     }
 

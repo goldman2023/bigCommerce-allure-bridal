@@ -19,15 +19,9 @@
                 <div class="filter-button-container" id="filterButton"></div>
                 <div class="reset-button-container" id="resetButton"></div>
             </div>
-        </div>
-        <div class="map-and-retailers">
-            <div id="map"></div>
-            <script type="text/javascript"
-                src="https://maps.googleapis.com/maps/api/js?key={{ theme_settings.google_api_token }}&libraries=places&callback=Function.prototype">
-                </script>
             <div class="available-retailers">
                 <div class="top">
-                    <h2 class="header-title retailers">Wedding Retailers Near You</h2>
+                    <h2 class="header-title retailers">Retailers Near You</h2>
                     <div class="sort-dropdown">
                         <span class="sort-label">SORT BY:</span>
                         <select class="sort-select" id="sortSelect">
@@ -43,7 +37,14 @@
                 </div>
                 <div id="retail-finder-results" class="retailer-results"></div>
             </div>
+    
         </div>
+        <div class="map-and-retailers">
+            <div id="map"></div>
+            <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?key={{ theme_settings.google_api_token }}&libraries=places&callback=Function.prototype">
+                </script>
+      </div>
     </div>
 </section>
 
