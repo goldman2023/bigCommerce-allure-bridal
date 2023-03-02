@@ -45,6 +45,11 @@
     "Firefox ESR"
   ],
   "settings": {
+    "the-brunswick": "/suits-and-tuxedos/the-brunswick/",
+    "the-ridge": "/suits-and-tuxedos/the-ridge/",
+    "the-tuxedo": "/suits-and-tuxedos/the-tuxedo/",
+    "the-venice-velvet": "/suits-and-tuxedos/the-venice-velvet/",
+    "the-vows": "https://www.generationtux.com/vowscollection?utm_source=ALLUREBRIDALS&utm_campaign=Allure-Vows-Collection&utm_medium=PUBLISHERS&Ref_Source=PUBLISHERS&RefDet1=ALLUREBRIDALS&RefDet2=PROSPECTING&RefDet3=Allure-Vows-Collection&RefDet4=",
     "designedBy":"https://www.badpixel.io/",
     "workato_api_path_b2c": "https://apim.workato.com/allure/allure-b2c-website",
     "workato_api_path": "https://apim.workato.com/allure/wedding-studio/",
