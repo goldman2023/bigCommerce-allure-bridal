@@ -74,7 +74,7 @@ export default class RetailFinder extends PageManager {
     const retailerData = await this.getRetailerData();
     this.originalRetailers = [...retailerData];
     this.addSortSelectOptions();
-    this.addEventHandlers();
+    // this.addEventHandlers();
   };
 
   addEventHandlers = () => {

@@ -22,6 +22,7 @@
 .pages-custom-category-suits-bp-category,
 .pages-blog-post,
 .pages-blog,
+.pages-custom-page-designer-events,
 .suits-product,
 .pages-custom-page-about,
 .pages-custom-page-custom-form {
@@ -32,10 +33,12 @@
             max-width: 350px;
         }
     }
+
     .container {
         padding: 0;
         max-width: 100%;
     }
+
     .block-item,
     .sub-category-block,
     .customBanner,
@@ -45,24 +48,31 @@
         max-width: 91.71429rem;
         margin: 0 auto;
         padding: 0 1.5rem;
+
         @include breakpoint("medium") {
             margin: 0 auto;
         }
-        @media only screen and (min-width: 1600px)  {
+
+        @media only screen and (min-width: 1600px) {
             max-width: 100rem;
         }
+
         @media only screen and (min-width: 2000px) {
             max-width: 120rem;
         }
+
         @media only screen and (min-width: 2600px) {
             max-width: 140rem;
         }
+
         @media only screen and (min-width: 3000px) {
             max-width: 170rem;
         }
+
         &.full-size {
-            width:100%;
+            width: 100%;
             padding: 0;
+
             @include breakpoint("medium") {
                 width: 100%;
                 max-width: 100%;
@@ -71,24 +81,30 @@
             }
         }
     }
+
     .custombread {
         @include breakpoint("medium") {
             margin: 0 auto !important;
         }
+
         ol.breadcrumbs {
             margin: 0;
         }
     }
+
     .bp-category {
         @include breakpoint("medium") {
             margin: 20px auto !important;
         }
     }
+
     .blockElementFullscreenImage .mainImage {
         min-height: auto;
+
         @include breakpoint("medium") {
             min-height: auto;
         }
+
         img {
             @media only screen and (min-width: 600px) {
                 width: 100%;
@@ -97,18 +113,25 @@
             }
         }
     }
-    .blockElementDiscover,.events.block-item,.blockElementLookbook2,.blockElementStory {
+
+    .blockElementDiscover,
+    .events.block-item,
+    .blockElementLookbook2,
+    .blockElementStory {
         @include breakpoint("medium") {
             margin: 0 auto;
         }
     }
 }
+
 .events.block-item {
     padding: 0 !important;
+
     @include breakpoint("small") {
         padding: 0 1.5rem !important;
     }
 }
+
 .pages-product,
 .product-type,
 .wilderly-bride,
@@ -119,9 +142,10 @@
 .abella-design,
 .suits-product {
     .custombread {
-            padding: 0 !important;
+        padding: 0 !important;
     }
 }
+
 .product-type,
 .pages-product,
 .wilderly-bride,
@@ -135,21 +159,28 @@
         .block-item {
             padding: 0 !important;
         }
-        @media only screen and (max-width: 600px)  {
-            padding: 0 !important; 
+
+        @media only screen and (max-width: 600px) {
+            padding: 0 !important;
+
             .productView {
                 padding: 0 1.5rem;
             }
         }
     }
+
     .breadcrumbs {
         padding: 0 1.5rem;
+
         @include breakpoint("small") {
             padding: 0;
         }
     }
-    .youMightalsoLike,.thePerfectMatch,.recentlyViewed {
-        @media only screen and (max-width: 600px)  {
+
+    .youMightalsoLike,
+    .thePerfectMatch,
+    .recentlyViewed {
+        @media only screen and (max-width: 600px) {
             max-width: 91.71429rem;
             margin: 20px auto;
             padding: 0 1.5rem;
@@ -157,37 +188,46 @@
     }
 
     .blockElementFullscreenImage .mainImage img {
-        @media only screen and (max-width: 600px)  {
+        @media only screen and (max-width: 600px) {
             width: 100%;
         }
     }
 }
-.pages-custom-category-bp-category,.pages-custom-category-suits-bp-category {
+
+.pages-custom-category-bp-category,
+.pages-custom-category-suits-bp-category {
     .customBanner {
         padding: 0 0.75rem !important;
         margin: 10px auto !important;
+
         .leftTextbanner .caption .title {
             font-size: remCalc(33px);
             line-height: remCalc(40px);
         }
     }
 }
+
 .logoTabs {
     border-bottom: 1px solid transparent;
-    @media only screen and (min-width: 601px) and (max-width: 1024px)  {
+
+    @media only screen and (min-width: 601px) and (max-width: 1024px) {
         margin-bottom: 50px;
     }
+
     .slick-list {
         padding: 0 !important;
     }
+
     .slick-track {
         display: flex;
         justify-content: center;
     }
+
     .slick-slide img {
         width: auto;
         min-width: 130px;
     }
+
     .tab {
         margin-bottom: 10px;
         min-height: 46px;
@@ -195,20 +235,31 @@
         display: inline-block;
         border: 0;
         border-bottom: 1px solid #F7F4F0;
+
         @include breakpoint("medium") {
             display: flex;
             align-items: center;
             justify-content: center;
         }
     }
-    input:focus, button:focus, textarea:focus, select:focus, details:focus, [href]:focus, [tabindex]:not([tabindex="-1"]):focus, [contenteditable="true"]:focus {
+
+    input:focus,
+    button:focus,
+    textarea:focus,
+    select:focus,
+    details:focus,
+    [href]:focus,
+    [tabindex]:not([tabindex="-1"]):focus,
+    [contenteditable="true"]:focus {
         outline: 2px solid transparent !important;
         outline-offset: 1px !important;
     }
+
     .tab.is-active {
         border: 1px solid transparent;
         border-bottom: 1px solid #c8c6c6;
     }
+
     .tab.is-active::after {
         position: absolute;
         content: "";
@@ -221,6 +272,7 @@
         transform: rotate(45deg);
     }
 }
+
 .pages-custom-page-custom-home-page {
     .logoTabs {
         .tab {
@@ -237,17 +289,19 @@
         width: unset;
     }
 }
+
 .category-landing {
     .blockElementHeaderContent {
         @include breakpoint("medium") {
             padding: 80px 0;
         }
-        padding: 40px 10px; 
-    }
-}
-.logotabsblocksection {
-    @media only screen and (max-width: 900px)  {
-        padding: 0 !important;
+
+        padding: 40px 10px;
     }
 }
 
+.logotabsblocksection {
+    @media only screen and (max-width: 900px) {
+        padding: 0 !important;
+    }
+}
