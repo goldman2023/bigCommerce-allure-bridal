@@ -785,6 +785,19 @@ export default class RetailFinder extends PageManager {
       detailElement.append(requestBtn);
     }
 
+    //Add See More Stores Button
+    const moreBtn = document.createElement('button');
+    moreBtn.setAttribute('type', 'button');
+    moreBtn.classList.add('more-btn');
+
+    const moreBtnText = document.createElement('span');
+    moreBtnText.innerText = 'See More Stores'
+    moreBtn.append(moreBtnText);
+    moreBtn.addEventListener('click', () => modal.close());
+
+    detailElement.append(moreBtn);
+
+
 
     const modal = defaultModal({ size: 'normal', skipCache: true });
     modal.open();

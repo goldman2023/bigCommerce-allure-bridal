@@ -428,12 +428,12 @@
 
       .geo-filters {
         display: flex;
-
+        flex-wrap: wrap;
         .filter {
-          width: 50%;
+          width: 100% !important;
 
           &:first-child {
-            margin-right: 16px;
+            margin-right: 0px !important;
           }
         }
 
@@ -643,13 +643,38 @@
       }
 
       .schedule-btn {
-        color: stencilColor('color-allure-bridals-primary-1');
+        background: stencilColor('color-allure-bridals-primary-1');
+        color: stencilColor('color-white');
         border: 1px solid stencilColor('color-allure-bridals-primary-1');
         width: 100%;
         border-radius: 3px;
         padding: 2px;
         display: flex;
         margin-top: 1rem;
+        &.book-appt{
+          display: none;
+        }
+        span {
+          padding: 14px 0;
+          width: 100%;
+          border: 1px solid stencilColor('color-allure-bridals-primary-5');
+          border-radius: 3px;
+        }
+        &:hover {
+          background: stencilColor('color-allure-bridals-primary-2');
+          span{
+            color: stencilColor('color-white');
+          }
+        }
+      }
+      .more-btn {
+        width: 100%;
+        border-radius: 3px;
+        padding: 2px;
+        display: flex;
+        margin-top: 1rem;
+        color: stencilColor('color-allure-bridals-primary-1');
+        border: 1px solid stencilColor('color-allure-bridals-primary-1');
         &.book-appt{
           display: none;
         }
@@ -695,3 +720,4 @@
   margin-bottom: spacing("double") * 0;
 }
 }
+
