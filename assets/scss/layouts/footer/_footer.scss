@@ -136,6 +136,9 @@ footer.footer {
         text-decoration: none;
         margin-top: 10px;
     }
+    .designed-by a:hover {
+        text-decoration: underline;
+    }
 
     input#nl_email::placeholder {
         font-family: $font-family;

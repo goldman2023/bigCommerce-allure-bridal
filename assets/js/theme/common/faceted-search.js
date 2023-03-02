@@ -335,6 +335,10 @@ class FacetedSearch {
 
         // Update URL
         urlUtils.goToUrl(url);
+
+        setTimeout(()=>{
+            updateItems();
+        },6000);
     }
 
     onToggleClick(event) {
@@ -361,6 +365,20 @@ class FacetedSearch {
         if (this.options.modalOpen) {
             this.options.modal.close();
         }
+        
+        setTimeout(()=>{
+            updateItems();
+        },6000);
+    }
+
+    updateItems() {
+        if($('.product').length <= 1) {
+            $('.middlemob').html($('.product').length+' Item'); 
+            $('.pagefilterheader .middle').html($('.product').length+' Items');
+        } else {
+            $('.middlemob').html($('.product').length+' Item'); 
+            $('.pagefilterheader .middle').html($('.product').length+' Items');
+        }
     }
 
     onSortBySubmit(event, currentTarget) {
@@ -377,6 +395,9 @@ class FacetedSearch {
         event.preventDefault();
 
         urlUtils.goToUrl(Url.format({ pathname: url.pathname, search: urlUtils.buildQueryString(urlQueryParams) }));
+        setTimeout(()=>{
+            updateItems();
+        },6000);
     }
 
     onRangeSubmit(event, currentTarget) {
@@ -401,6 +422,9 @@ class FacetedSearch {
         Object.assign(urlQueryParams, url.query);
 
         urlUtils.goToUrl(Url.format({ pathname: url.pathname, search: urlUtils.buildQueryString(urlQueryParams) }));
+        setTimeout(()=>{
+            updateItems();
+        },6000);
     }
 
     onStateChange() {
@@ -430,6 +454,10 @@ class FacetedSearch {
             window.history.replaceState({}, document.title, updatedLinkUrl);
         }
         $(window).trigger('statechange');
+
+        setTimeout(()=>{
+            updateItems();
+        },6000);
     }
 }
 
