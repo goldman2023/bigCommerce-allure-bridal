@@ -237,8 +237,12 @@ export default class RetailFinder extends PageManager {
     const requestBtnText = document.createElement('span');
     requestBtnText.innerText = 'REQUEST AN APPOINTMENT'
     requestBtn.append(requestBtnText);
-    // requestBtn.addEventListener('click', () => this.openRequestForm(retailer));
-    requestBtn.addEventListener('click', (event) => {console.log("CLicked appoint btn"); event.stopPropagation();});
+
+    //Prevent parent's onclick event.
+    requestBtn.addEventListener('click', (event) => {
+      this.openRequestForm(retailer);
+      event.stopPropagation();}
+    );
 
     if (retailer.requestAppointment) {
       container.append(requestBtn);
@@ -687,7 +691,7 @@ export default class RetailFinder extends PageManager {
 
     const collections = document.createElement('div');
     collections.classList.add('collections');
-    const collectionsHeader = document.createElement('span');
+    const collectionsHeader = document.createElement('div');
     collectionsHeader.classList.add('retailer-label');
     collectionsHeader.innerText = 'COLLECTIONS';
     collections.append(collectionsHeader);
@@ -714,7 +718,7 @@ export default class RetailFinder extends PageManager {
 
     const address = document.createElement('div');
     address.classList.add('retailer-address');
-    const addressLabel = document.createElement('span');
+    const addressLabel = document.createElement('div');
     addressLabel.classList.add('retailer-label');
     addressLabel.innerText = 'ADDRESS';
     address.append(addressLabel);
@@ -751,7 +755,7 @@ export default class RetailFinder extends PageManager {
     const retailerUrlLink = document.createElement('a');
     retailerUrlLink.setAttribute("href", `${retailer.website}`);
     retailerUrlLink.setAttribute("target", "_blank");
-    retailerUrlLink.innerText = retailer.website;
+    retailerUrlLink.innerText = "Visit Retailer Website";
     retailerUrl.append(retailerUrlLink);
     detailElement.append(retailerUrl);
 
