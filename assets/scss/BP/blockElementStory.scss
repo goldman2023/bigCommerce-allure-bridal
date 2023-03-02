@@ -406,6 +406,7 @@
                 text-align: left;
                 color: stencilColor("color-allure-bridals-primary-1");
                 position: relative;
+                font-size: 50px;
                 @include breakpoint("small") { 
                     &::before {
                         position: absolute;
