@@ -57,7 +57,8 @@ export default class DesignerEvents extends PageManager {
         this.collectionsByEventIds = {};
         this.originalFilters = {
             distance: 10,
-            collection: 'All'
+            collection: 'All',
+            retailerName: '',
         };
         this.appliedFilters = {
             ...this.originalFilters
@@ -212,6 +213,21 @@ export default class DesignerEvents extends PageManager {
             }
         });
 
+        const otherFiltersToggle = document.getElementById('otherFiltersToggle');
+        otherFiltersToggle.addEventListener('click', () => {
+            const otherFilters = document.getElementById('otherFilters');
+            if(otherFilters.style.display === 'none') {
+                otherFilters.style.display = 'inherit';
+            } else {
+                otherFilters.style.display = 'none';
+            }
+        });
+        
+        // name filter
+        const storeNameFilter = document.getElementById('storeNameFilter');
+        storeNameFilter.addEventListener('change', (e) => {
+            this.applyFilters('retailerName', e);
+        });
 
         // dropdown filters
         // TODO not working b/c change isnt firing on the select -.-
