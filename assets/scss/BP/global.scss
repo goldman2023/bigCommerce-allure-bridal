@@ -492,7 +492,7 @@ body {
 ol {
     &.breadcrumbs {
         text-align: left;
-        border-bottom: 2px solid stencilColor('color-default-neutral-4');
+        border-bottom: 1px solid stencilColor('color-default-neutral-4');
         .breadcrumb {
             position: relative;
             padding-right: 12px;
@@ -621,4 +621,27 @@ input:-internal-autofill-selected {
             margin-left: 5px;
         }
     }
+}
+.account_phone,input[type=number]  {
+    // -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+    -moz-appearance: textfield;
+
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  input[type="number"]:hover,
+  input[type="number"]:focus {
+    -moz-appearance: number-input;
+  }
+.eapps-instagram-feed-popup-inner {
+    padding-bottom: 0 !important;
 }

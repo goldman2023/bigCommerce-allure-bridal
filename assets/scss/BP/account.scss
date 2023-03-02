@@ -66,6 +66,7 @@
                     width: 20px;
                     height: 20px;
                     stroke: stencilColor("color-default-neutral-3");
+                    fill: none;
                     &#person, &#logout {
                         stroke: none;
                     }
@@ -77,9 +78,15 @@
                     color: stencilColor("color-default-primary-1");
                     svg {
                         stroke: stencilColor("color-default-primary-1");
-                        &#person, &#logout {
+                        &#logout {
                             use {
                                 stroke: stencilColor("color-default-primary-1");
+                            }
+                        }
+                        &#person {
+                            fill: stencilColor("color-default-primary-1");
+                            use {
+                                fill: stencilColor("color-default-primary-1");
                             }
                         }
                     }
@@ -224,7 +231,7 @@
     .button {
         @include breakpoint("medium") {
             width: auto !important;
-        }        
+        }
     }
 }
 .asterisk {
