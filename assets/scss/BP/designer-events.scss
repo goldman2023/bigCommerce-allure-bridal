@@ -4,19 +4,23 @@
 .pages-custom-page-designer-events {
     padding-left: 24px;
 
-    .header {
-        margin-bottom: 50px;
-        border-bottom: unset;
-    }
-
     .content {
         display: flex;
+        flex-wrap: wrap;
         height: 100vh;
+        margin-top: 24px;
 
         .left {
             flex-basis: 40%;
             padding-right: 24px;
             overflow-y: auto;
+
+            .header {
+                margin-bottom: 50px;
+                border-bottom: unset;
+            }
+
+
             .map-filters {
                 margin-right: 4px;
 
@@ -389,6 +393,13 @@
 
 // mobile overrides
 @media (max-width: '900px') {
+    .left {
+        order: 2;
+    }
+
+    .right {
+        margin-bottom: 24px;
+    }
 
     .content {
         flex-direction: column;

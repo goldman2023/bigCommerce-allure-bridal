@@ -53,8 +53,12 @@ export default class DesignerEvents extends PageManager {
         super(context);
         this.map = null;
         this.pageContent = document.querySelector('.page-content');
+        // all events pre-loaded
         this.originalEvents = [];
+        // events that are filtered by sub filters (name search, collections)
         this.events = [];
+        // events that are filtered by initial location / radius search
+        this.eventsFilteredByLocation = [];
         this.eventsById = {};
         this.collectionsByEventIds = {};
         this.originalFilters = {
@@ -167,7 +171,7 @@ export default class DesignerEvents extends PageManager {
     addEventHandlers = () => {
         const searchButton = document.getElementById('searchButton');
         searchButton.addEventListener('click', () => {
-            this.filterEvents();
+            this.filterEventsByLocation();
         });
 
         const locationTypeahead = document.getElementById('locationTypeahead');
@@ -225,23 +229,19 @@ export default class DesignerEvents extends PageManager {
         const otherFiltersToggle = document.getElementById('otherFiltersToggle');
         otherFiltersToggle.addEventListener('click', () => {
             const otherFilters = document.getElementById('otherFilters');
-            if(otherFilters.style.display === 'none') {
+            if (otherFilters.style.display === 'none') {
                 otherFilters.style.display = 'inherit';
             } else {
                 otherFilters.style.display = 'none';
             }
         });
-        
+
         // name filter
         const storeNameFilter = document.getElementById('storeNameFilter');
         const debounceTimeout = 500;
         const searchByStoreName = (e) => {
             this.applyFilters('retailerName', e);
-            if(e.target.value) {
-                this.filterEvents(this.events);
-            } else {
-                this.filterEvents(this.originalEvents);
-            }
+            this.filterEvents();
         };
         const debouncedSearch = debounce(searchByStoreName, debounceTimeout);
 
@@ -396,90 +396,94 @@ export default class DesignerEvents extends PageManager {
         };
     };
 
-    filterEvents = (events) => {
-        var self = this;
-        var addr = document.getElementById("locationTypeahead");
+
+    filterEventsByLocation = () => {
+        const addr = document.getElementById("locationTypeahead");
         // Get geocoder instance
-        var geocoder = new google.maps.Geocoder();
-        const eventsToFilter = events || this.originalEvents;
-        // Geocode the address  
+        const geocoder = new google.maps.Geocoder();
+
+        // Geocode the address
         geocoder.geocode({
             'address': addr.value
-        }, function (results, status) {
+        }, (results, status) => {
             if (status === google.maps.GeocoderStatus.OK && results.length) {
                 let toRemove = [];
 
-                self.events = [...eventsToFilter];
-                eventsToFilter.forEach(
+                this.originalEvents.forEach(
                     (event) => {
-                        Object.entries(self.appliedFilters).forEach(([filterName, value]) => {
-                            // could make this more extensible with an object to function mapping
-                            // but need to move faster
-                            if (filterName === 'distance' && self.selectedPlace) {
-                                const selectedLocation = {
-                                    lat: self.selectedPlace.geometry.location.lat(),
-                                    lon: self.selectedPlace.geometry.location.lng(),
-                                };
-                                // TODO FIX WHEN BAD DATA IS CLEANED UP
-                                if (!event.eventAddress) {
-                                    toRemove.push(event.sys.id);
-                                } else {
-                                    const distanceAway = self.getDistanceBtwnTwoPts(selectedLocation, event.eventAddress);
-                                    event.distanceAway = distanceAway;
-                                    if (distanceAway > value) {
-                                        toRemove.push(event.sys.id);
-                                    }
-                                }
-
-                            };
-                            if (filterName === 'collection' && value !== 'All') {
-                                const eventsWithSelected = self.collectionsByEventIds[value];
-                                if (!eventsWithSelected.includes(event.sys.id)) {
-                                    toRemove.push(event.sys.id);
-                                }
-                            };
-                            console.log("fitlering", filterName, value)
-                            if (filterName === 'retailerName' && value && event.retailerName.search(value) < 0) {
-                                console.log("shoudl filter out", event)
-                                toRemove.push(event.sys.id)
+                        const selectedLocation = {
+                            lat: this.selectedPlace.geometry.location.lat(),
+                            lon: this.selectedPlace.geometry.location.lng(),
+                        };
+                        // TODO FIX WHEN BAD DATA IS CLEANED UP
+                        if (!event.eventAddress) {
+                            toRemove.push(event.sys.id);
+                        } else {
+                            const distanceAway = this.getDistanceBtwnTwoPts(selectedLocation, event.eventAddress);
+                            event.distanceAway = distanceAway;
+                            if (distanceAway > this.appliedFilters.distance) {
+                                toRemove.push(event.sys.id);
                             }
-                        });
+                        }
                     }
                 );
-
-                const filteredEvents = [...eventsToFilter];
-                self.events = filteredEvents.filter(
+                const filteredEvents = [...this.originalEvents];
+                this.eventsFilteredByLocation = filteredEvents.filter(
                     (event) => !toRemove.includes(event.sys.id)
                 );
-                // self.sortEvents();
-                self.paintEventMapMarkers(self.events);
-                self.updateResultsInfo();
-                self.addEventInfo(self.events);
-                self.updateFilters();
-            } else {
-                // show an error if it's not
-                const eventInfoElem = document.getElementById('results-info');
-                eventInfoElem.innerText = 'No Results found. Try widening your search.';
-                const eventFinderResults = document.getElementById('eventResults');
-                eventFinderResults.innerHTML = "";
+                this.paintEventMapMarkers(this.eventsFilteredByLocation);
+                this.updateResultsInfo(this.eventsFilteredByLocation);
+                this.addEventInfo(this.eventsFilteredByLocation);
+                this.updateFilters(this.eventsFilteredByLocation);
+
             }
         });
+    }
+
+    filterEvents = () => {
+        let toRemove = [];
+        this.eventsFilteredByLocation.forEach(
+            (event) => {
+                Object.entries(this.appliedFilters).forEach(([filterName, value]) => {
+                    // could make this more extensible with an object to function mapping
+                    // but need to move faster
+                    if (filterName === 'collection' && value !== 'All') {
+                        const eventsWithSelected = self.collectionsByEventIds[value];
+                        if (!eventsWithSelected.includes(event.sys.id)) {
+                            toRemove.push(event.sys.id);
+                        }
+                    };
+                    if (filterName === 'retailerName' && value && event.retailerName.toLowerCase().search(value.toLowerCase()) < 0) {
+                        toRemove.push(event.sys.id)
+                    }
+                });
+            }
+        );
+
+        const filteredEvents = [...this.eventsFilteredByLocation];
+        this.events = filteredEvents.filter(
+            (event) => !toRemove.includes(event.sys.id)
+        );
+        this.paintEventMapMarkers(this.events);
+        this.updateResultsInfo(this.events);
+        this.addEventInfo(this.events);
+        this.updateFilters(this.events);
     };
 
-    updateFilters = () => {
+    updateFilters = (events) => {
         const otherFiltersToggle = document.getElementById('otherFiltersToggle');
-        if(this.events.length) {
+        if (events.length) {
             otherFiltersToggle.style.display = 'flex';
         } else {
             otherFiltersToggle.style.display = 'none';
         }
-        
+
         this.createCollectionListItems();
     }
 
-    updateResultsInfo = () => {
+    updateResultsInfo = (events) => {
         const eventInfoElem = document.getElementById('results-info');
-        const resultsInfoText = this.events.length ? 'PRODUCT STYLES AND AVAILABILITY VARY BY RETAILER' : 'No Results found. Try widening your search.';
+        const resultsInfoText = events.length ? 'PRODUCT STYLES AND AVAILABILITY VARY BY RETAILER' : 'No Results found. Try widening your search.';
         eventInfoElem.innerText = resultsInfoText;
     };
 
