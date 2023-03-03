@@ -136,6 +136,14 @@ export default class Global extends PageManager {
 
         //Category Listing page start
         if (mainContent.contains('pages-custom-category-category-listing') || mainContent.contains('category-listing') || mainContent.contains('pages-custom-category-suits-category-listing')) {
+            if(mainContent.contains('pages-custom-category-men-design-category-listing')) {
+                $('.viewCategory').each(function() {
+                    if($(this).attr('href') === "") {
+                        $(this).attr('href', $(this).attr('data-url'));
+                    }
+                })
+            }
+            
             document.querySelectorAll('.sub-category-block').forEach((item)=> {
                 getProductsByCategoryPath(this.context,item.getAttribute('data-path'),response => {
                     createProductSlider(this.context, item, response);
