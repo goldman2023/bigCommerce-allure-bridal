@@ -343,8 +343,8 @@
         margin: 0;
       }
       .map-toggle{
-        display: flex;
         align-items: center;
+        display: none;
       }
       .toggle-label{
         font-family: 'Inter Regular';
@@ -394,10 +394,10 @@
         transition: .4s;
       }
       
-      input:checked + .slider {
+      input:checked + .slider  {
         background-color: stencilColor("color-allure-bridals-primary-1");
       }
-      
+
       input:checked + .slider:before {
         -webkit-transform: translateX(15px);
         background-color: stencilColor("color-white");
@@ -488,9 +488,12 @@
         }
       }
     }
-
+    .map-toggle{
+      display: flex !important;
+    }
     .map-and-retailers {
       width: 100% !important;
+      display: none;
       order: 1 !important;
       #map {
         min-height: 400px !important;

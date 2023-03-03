@@ -540,6 +540,19 @@ export default class RetailFinder extends PageManager {
     resetBtn.innerHTML = 'CLEAR SEARCH';
     resetBtnContainer.append(resetBtn);
     resetBtn.addEventListener('click', this.resetFilters);
+
+    //show on/off  map
+    const checkbox = document.querySelector("input[type='checkbox']");
+    checkbox.addEventListener('change', (event) => {
+
+      let element = document.querySelector('.map-and-retailers');
+      if (event.target.checked) {
+        element.style.setProperty('display', 'block');
+      } else {
+        element.style.setProperty('display', 'none');
+
+      }
+    });
   };
 
   setupFilterData = async (rawRetailers) => {
