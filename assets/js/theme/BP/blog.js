@@ -21,7 +21,8 @@ import {
     blockElementDivider,
     blockElementSpacer,
     blockElementSpacer24Px,
-    referencedBlockHomepageCollections
+    referencedBlockHomepageCollections,
+    globalblockElementFullscreenVideo
 } from '../BP/universal-blocks';
 export default class Blog extends PageManager {
     constructor(context) {
@@ -117,6 +118,9 @@ export default class Blog extends PageManager {
             }
             if(element.__typename === "BlockElementStoryBlock"){
                 return blockElementStory(element); 
+            }
+            if (element.__typename === "BlockElementFullscreenVideo") {
+                return globalblockElementFullscreenVideo(element);
             }
             if (element.__typename === "BlockElementCollectionPreview") {
                 return collectionPreview(element);
