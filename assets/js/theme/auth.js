@@ -211,8 +211,7 @@ export default class Auth extends PageManager {
                            window.location.href = '/thank-you/';
                         },
                         error: error => {
-                            console.log(error.responseJSON.Error.split('".customer_create":"')[1].replace(`"}}'`, ''));
-                            let jsondata = error.responseJSON.Error.split('".customer_create":"')[1].replace(`"}}'`, '');
+                            let jsondata = error?.responseJSON?.Error?.split('".customer_create":"')[1]?.replace(`"}}'`, '');
                             swal.fire({
                                 text: jsondata,
                                 icon: 'error',
