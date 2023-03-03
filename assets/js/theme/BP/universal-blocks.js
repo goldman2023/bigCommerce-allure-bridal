@@ -900,7 +900,7 @@ export function events(blockData,page) {
             </div>`;
         }).join('')}
     </div>
-    ${page === 'home' ? (blockData.containerButtonUrl !== null ? `<a href="${blockData.containerButtonUrl}" class="button button--secondary" >${blockData.containerButtonText}</a>` : '') : ''}
+    <a href="/designer-events-list/" class="button button--secondary" >View All Designer Events</a>
     </div>`;
 }
 export function blockElementFullscreenImage(blockData) {
