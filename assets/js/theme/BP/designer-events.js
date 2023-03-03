@@ -1,6 +1,8 @@
+import { debounce } from 'lodash';
 import { MarkerClusterer } from '@googlemaps/markerclusterer'
 // import is required by client, not by code
 import regeneratorRuntime, { async } from 'regenerator-runtime'
+
 
 import { defaultModal } from '../global/modal';
 import PageManager from '../page-manager'
@@ -82,16 +84,16 @@ export default class DesignerEvents extends PageManager {
         this.addEventHandlers();
     };
 
-    setupCollections = () => {
+    createCollectionListItems = () => {
         let allCollections = [];
-        for (const event of this.originalEvents) {
+        for (const event of this.events) {
             const eventCollections = event.collectionsAvailable || [];
             allCollections = allCollections.concat(eventCollections);
-            this.collectionsByEventIds[event.sys.id] = eventCollections;
         };
         // create the filter for the collections
         const uniqueSortedCollections = Array.from(new Set(allCollections)).sort();
         const collectionFilterList = document.getElementById('collections');
+        collectionFilterList.innerHTML = '';
         uniqueSortedCollections.forEach((collection) => {
             const collectionItem = document.createElement('li');
             collectionItem.classList.add('collection');
@@ -107,6 +109,13 @@ export default class DesignerEvents extends PageManager {
             collectionItem.append(collectionItemLabel);
             collectionFilterList.append(collectionItem);
         });
+    }
+
+    setupCollections = () => {
+        for (const event of this.originalEvents) {
+            const eventCollections = event.collectionsAvailable || [];
+            this.collectionsByEventIds[event.sys.id] = eventCollections;
+        };
     };
 
     getDesignerEvents = async () => {
@@ -140,7 +149,7 @@ export default class DesignerEvents extends PageManager {
                     }
             }}`
         const results = await fetch(
-            'https://graphql.contentful.com/content/v1/spaces/y49u4slmhh3t/',
+            'https://graphql.contentful.com/content/v1/spaces/y49u4slmhh3t/environments/staging',
             {
                 method: 'POST',
                 headers: {
@@ -225,9 +234,18 @@ export default class DesignerEvents extends PageManager {
         
         // name filter
         const storeNameFilter = document.getElementById('storeNameFilter');
-        storeNameFilter.addEventListener('change', (e) => {
+        const debounceTimeout = 500;
+        const searchByStoreName = (e) => {
             this.applyFilters('retailerName', e);
-        });
+            if(e.target.value) {
+                this.filterEvents(this.events);
+            } else {
+                this.filterEvents(this.originalEvents);
+            }
+        };
+        const debouncedSearch = debounce(searchByStoreName, debounceTimeout);
+
+        storeNameFilter.addEventListener('keyup', debouncedSearch);
 
         // dropdown filters
         // TODO not working b/c change isnt firing on the select -.-
@@ -261,7 +279,6 @@ export default class DesignerEvents extends PageManager {
     };
 
     createEventItem = (event) => {
-
         const container = document.createElement('div');
         container.classList.add('event-item');
         // set the id to allow querying when hovering on markers
@@ -327,7 +344,6 @@ export default class DesignerEvents extends PageManager {
     };
 
     addEventInfo = (eventData) => {
-        console.log("showing events", eventData)
         const eventFinderResults = document.getElementById('eventResults');
         eventFinderResults.innerHTML = "";
         // eventData.sort((a, b) => (a.sort_order > b.sort_order) ? 1 : -1)
@@ -360,7 +376,6 @@ export default class DesignerEvents extends PageManager {
     };
 
     applyFilters = (filterType, evt) => {
-        console.log("APPLYING", filterType, evt.target.value);
         this.appliedFilters[filterType] = evt.target.value;
 
         // adjust zoom for convenience in distance changes  
@@ -381,30 +396,30 @@ export default class DesignerEvents extends PageManager {
         };
     };
 
-    filterEvents = () => {
+    filterEvents = (events) => {
         var self = this;
         var addr = document.getElementById("locationTypeahead");
         // Get geocoder instance
         var geocoder = new google.maps.Geocoder();
-
-        // Geocode the address
+        const eventsToFilter = events || this.originalEvents;
+        // Geocode the address  
         geocoder.geocode({
             'address': addr.value
         }, function (results, status) {
             if (status === google.maps.GeocoderStatus.OK && results.length) {
                 let toRemove = [];
 
-                self.events = [...self.originalEvents];
-                self.originalEvents.forEach(
+                self.events = [...eventsToFilter];
+                eventsToFilter.forEach(
                     (event) => {
                         Object.entries(self.appliedFilters).forEach(([filterName, value]) => {
-                            console.log("filter name", filterName, "value", value)
+                            // could make this more extensible with an object to function mapping
+                            // but need to move faster
                             if (filterName === 'distance' && self.selectedPlace) {
                                 const selectedLocation = {
                                     lat: self.selectedPlace.geometry.location.lat(),
                                     lon: self.selectedPlace.geometry.location.lng(),
                                 };
-                                console.log("selected ", selectedLocation, event);
                                 // TODO FIX WHEN BAD DATA IS CLEANED UP
                                 if (!event.eventAddress) {
                                     toRemove.push(event.sys.id);
@@ -419,24 +434,28 @@ export default class DesignerEvents extends PageManager {
                             };
                             if (filterName === 'collection' && value !== 'All') {
                                 const eventsWithSelected = self.collectionsByEventIds[value];
-                                if (!eventsWithSelected.includes(event.id)) {
-                                    toRemove.push(event.id);
+                                if (!eventsWithSelected.includes(event.sys.id)) {
+                                    toRemove.push(event.sys.id);
                                 }
+                            };
+                            console.log("fitlering", filterName, value)
+                            if (filterName === 'retailerName' && value && event.retailerName.search(value) < 0) {
+                                console.log("shoudl filter out", event)
+                                toRemove.push(event.sys.id)
                             }
                         });
                     }
                 );
 
-                const filteredEvents = [...self.originalEvents];
+                const filteredEvents = [...eventsToFilter];
                 self.events = filteredEvents.filter(
                     (event) => !toRemove.includes(event.sys.id)
                 );
-
-                console.log("EVENTS", self.events);
                 // self.sortEvents();
                 self.paintEventMapMarkers(self.events);
                 self.updateResultsInfo();
                 self.addEventInfo(self.events);
+                self.updateFilters();
             } else {
                 // show an error if it's not
                 const eventInfoElem = document.getElementById('results-info');
@@ -446,6 +465,17 @@ export default class DesignerEvents extends PageManager {
             }
         });
     };
+
+    updateFilters = () => {
+        const otherFiltersToggle = document.getElementById('otherFiltersToggle');
+        if(this.events.length) {
+            otherFiltersToggle.style.display = 'flex';
+        } else {
+            otherFiltersToggle.style.display = 'none';
+        }
+        
+        this.createCollectionListItems();
+    }
 
     updateResultsInfo = () => {
         const eventInfoElem = document.getElementById('results-info');

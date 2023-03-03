@@ -16,7 +16,7 @@
         .left {
             flex-basis: 40%;
             padding-right: 24px;
-
+            overflow-y: auto;
             .map-filters {
                 margin-right: 4px;
 
@@ -88,8 +88,9 @@
                         align-items: center;
                         width: 50%;
 
-                        span {
-                            width: 25%;
+                        .sort-filter-label {
+                            width: 30%;
+                            margin-right: 8px;
                         }
 
                         &:hover {
@@ -108,7 +109,7 @@
                     }
 
                     .other-filters-toggle {
-                        display: flex;
+                        display: none;
                         align-items: center;
                         cursor: pointer;
 
