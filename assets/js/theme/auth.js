@@ -267,7 +267,17 @@ export default class Auth extends PageManager {
         if ($createAccountFormCustom.length) {
             this.regcreateAccountValidator($createAccountFormCustom);
         }
-
+        var dtToday = new Date();
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+            day = '0' + day.toString();
+        
+        var minDate= year + '-' + month + '-' + day;
+        $('#login_weddingdate').attr('min',minDate);
         $('#register_pass-policy').on('change', function(){
             if($(this).is(':checked')) {
                 if($('.register_pass-policy').parent().parent().parent().hasClass('form-field--error')) {
