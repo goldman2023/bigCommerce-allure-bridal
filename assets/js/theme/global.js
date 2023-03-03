@@ -322,6 +322,7 @@ export default class Global extends PageManager {
         if (mainContent.contains('pages-custom-category-category-landing') || mainContent.contains('category-landing')) {
             let geturl = document.getElementById('categoryLanding').getAttribute('data-url')
             getCategorySpecificMetaData(this.context, geturl, response => {
+                console.log("response", response);
                 for (const categoryData of response) {
                     if (categoryData.key === "Contentful Data") {
                         let contentfulData = categoryData?.value;

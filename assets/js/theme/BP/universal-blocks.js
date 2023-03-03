@@ -825,11 +825,13 @@ export function blockElementFullscreenVideo(selectorID, element) {
 
 export function globalblockElementFullscreenVideo(element) {
     let videoURL = '';
-    if(element.videoUrl.includes('youtube')) {
-        videoURL = `https://www.youtube.com/embed/${element.videoUrl.split('=')[1]}`;
+    if (element?.bfvideo[0]?.cdn_url !== undefined && element?.bfvideo[0]?.cdn_url !== null) {
+        return `<div class="blockElementFullscreenVideo block-item full-size" ><div><video autoplay loop muted playsinline plays-inline="" id="colbannerVideo"><source src="${element?.bfvideo[0]?.cdn_url}" type="video/mp4"><source src="${element?.bfvideo[0]?.cdn_url}" type="video/ogg">Your browser does not support HTML video.</video></div></div>`;
+    } else if (element?.videoUrl?.includes('youtube') !== undefined && element?.videoUrl?.includes('youtube') !== null) {
+        videoURL = `https://www.youtube.com/embed/${element?.videoUrl?.split('=')[1]}`;
         return `<div class="blockElementFullscreenVideo block-item full-size" ><div><iframe type="text/html" src="${videoURL}"  frameborder="0" id="colbannerVideo" controls=0></iframe></div></div>`;
-    } else {
-          return `<div class="blockElementFullscreenVideo block-item full-size" ><div><video autoplay loop muted playsinline plays-inline="" id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div></div>`;
+    } else if (element?.videoUrl !== undefined && element?.videoUrl !== null) {
+        return `<div class="blockElementFullscreenVideo block-item full-size" ><div><video autoplay loop muted playsinline plays-inline="" id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div></div>`;
     }
 }
 
@@ -904,8 +906,17 @@ export function events(blockData,page) {
     </div>`;
 }
 export function blockElementFullscreenImage(blockData) {
-    return `<div class="blockElementFullscreenImage block-item ${(blockData?.contentOrScreenWidth === 'Screen Width') ? 'full-size' : ''}" id="blockElementFullscreenImage"><div class="mainImage"><img data-src="${blockData?.backgroundImage?.url}" alt="${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>
-    ${blockData?.bodyCopy !== null ? `<div class="homepageCaption"><div class="content"><div class="bannercap"><h4>${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}</h4><p>${(blockData?.bodyCopy && blockData?.bodyCopy !== undefined) ? blockData?.bodyCopy : ''}</p><a href="${blockData?.linkUrl}">${blockData?.linkText}</a></div>` : ''}</div></div></div></div>`;
+    let fullImageBlock = `<div class="blockElementFullscreenImage block-item ${(blockData?.contentOrScreenWidth === 'Screen Width') ? 'full-size' : ''}" id="blockElementFullscreenImage"><div class="mainImage">`;
+
+    if (blockData?.bfBackgroundImage[0]?.cdn_url !== undefined && blockData?.bfBackgroundImage[0]?.cdn_url !== null) {
+        fullImageBlock += `<img data-src="${blockData?.bfBackgroundImage[0]?.cdn_url}" alt="${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>`;
+    } else {
+        fullImageBlock += `<img data-src="${blockData?.backgroundImage?.url}" alt="${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>`;
+    }
+    
+    fullImageBlock += `${ blockData?.bodyCopy !== null ? `<div class="homepageCaption"><div class="content"><div class="bannercap"><h4>${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}</h4><p>${(blockData?.bodyCopy && blockData?.bodyCopy !== undefined) ? blockData?.bodyCopy : ''}</p><a href="${blockData?.linkUrl}">${blockData?.linkText}</a></div>` : '' }</div ></div ></div ></div >`;
+
+    return fullImageBlock;
 }
 
 export function blockElementCopyBlock(blockData) {
