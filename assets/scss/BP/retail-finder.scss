@@ -23,6 +23,9 @@
             margin-right: 16px;
           }
         }
+        .name-filter{
+          width: 100%;
+        }
 
       }
       .form {
@@ -415,6 +418,46 @@
   .buttons-container {
     margin: 1rem;
   }
+}
+
+
+/* Hide the folder icon */
+.jstree-icon.jstree-folder-icon {
+  display: none;
+}
+
+/* Hide the dotline view */
+.jstree-icon.jstree-ocl {
+  display: none;
+}
+
+.jstree-default .jstree-clicked{
+  background: none;
+  box-shadow: none;
+}
+.jstree-default .jstree-node{
+  background: no-repeat;
+}
+
+.jstree-anchor:hover {
+  background-color: transparent !important;
+}
+
+.jstree-anchor > .jstree-themeicon{
+  display: none !important;
+}
+
+.jstree-checkbox .jstree-undetermined:before,
+.jstree-checkbox .jstree-clicked:before,
+.jstree-checkbox .jstree-unchecked:before {
+  color: blue;
+}
+
+/* Change the background of the checkbox */
+.jstree-checkbox .jstree-undetermined,
+.jstree-checkbox .jstree-clicked,
+.jstree-checkbox .jstree-unchecked {
+  background-color: green;
 }
 
 // mobile overrides

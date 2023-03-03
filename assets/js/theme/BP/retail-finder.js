@@ -4,7 +4,8 @@ import regeneratorRuntime from 'regenerator-runtime'
 
 import { defaultModal } from '../global/modal';
 import PageManager from '../page-manager'
-
+import $ from 'jquery';
+import 'jstree';
 
 const MAP_MARKER_BLACK = {
   path: 'M10 0C4.5 0 0 4.5 0 10c0 7.4 9.1 13.6 9.4 13.8.2.1.4.2.6.2s.4-.1.6-.2c.3-.2 9.4-6.4 9.4-13.8 0-5.5-4.5-10-10-10zm0 14c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z',
@@ -508,6 +509,19 @@ export default class RetailFinder extends PageManager {
 
     // locationOrcode filter
 
+      var jsondata = [
+                         { "id": "ajson1", "parent": "#", "text": "Simple root node" },
+                         { "id": "ajson2", "parent": "#", "text": "Root node 2" },
+                         { "id": "ajson3", "parent": "ajson2", "text": "Child 1" },
+                         { "id": "ajson4", "parent": "ajson2", "text": "Child 2" },
+          ];
+
+      $('#SimpleJSTree').jstree({
+              'core': {
+                  'data': jsondata
+              },
+              "plugins": ["checkbox"]
+      });
 
     //submit btn
     const submitBtnContainer = document.getElementById('filterButton');

@@ -1,4 +1,6 @@
 {{#partial "page"}}
+{{{ stylesheet '/assets/scss/vendor/jstree/style.css' }}}
+
 <!-- {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}} -->
 <section class="page">
     <div class="content">
@@ -38,6 +40,25 @@
                     </div>
                     <use xlink:href="#icon-diamond-accent" />
                 </div>
+
+                <div class="option-filters">
+                    <div class="form">
+                        <div class="geo-filters">
+                            <div class="form-field name-filter">
+                                <span class="form-label">Store Name</span>
+                                <div id="pac-container">
+                                    <input class="form-input" type="text"
+                                        id="location-typeahead" placeholder="Store Name" />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="collectionsFilter">
+                            <label class="collectionsFilterFree" >COLLECTIONS:</label>
+                            <div id="SimpleJSTree"></div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="results-divider">
                     <svg class="important-icon">
                         <use xlink:href="#icon-important" />
