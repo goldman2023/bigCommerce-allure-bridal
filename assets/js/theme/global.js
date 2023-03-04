@@ -136,6 +136,14 @@ export default class Global extends PageManager {
 
         //Category Listing page start
         if (mainContent.contains('pages-custom-category-category-listing') || mainContent.contains('category-listing') || mainContent.contains('pages-custom-category-suits-category-listing')) {
+            if(mainContent.contains('pages-custom-category-men-design-category-listing')) {
+                $('.viewCategory').each(function() {
+                    if($(this).attr('href') === "") {
+                        $(this).attr('href', $(this).attr('data-url'));
+                    }
+                })
+            }
+            
             document.querySelectorAll('.sub-category-block').forEach((item)=> {
                 getProductsByCategoryPath(this.context,item.getAttribute('data-path'),response => {
                     createProductSlider(this.context, item, response);
@@ -552,70 +560,76 @@ export default class Global extends PageManager {
                         dots: false,
                         infinite: false,
                         speed: 300,
-                        slidesToShow: 5,
+                        slidesToShow: tabs.length > 9 ? 9 : tabs.length,
                         slidesToScroll: 1,
-                        arrows: true,
+                        arrows: false,
                         responsive: [
-                        {
-                            breakpoint: 1100,
-                            settings: {
-                            slidesToShow: 5,
-                            slidesToScroll: 1,
-                            infinite: false,
-                            arrows: true,
-                            dots: false
+                            {
+                                breakpoint: 1100,
+                                settings: {
+                                    slidesToShow: tabs.length > 6 ? 6 : tabs.length,
+                                    slidesToScroll: 1,
+                                    infinite: false,
+                                    centerMode: false,
+                                    arrows: false,
+                                    dots: false
+                                }
+                            },
+                            {
+                                breakpoint: 1024,
+                                settings: {
+                                    slidesToShow: tabs.length > 3 ? 3 : tabs.length,
+                                    slidesToScroll: 1,
+                                    infinite: false,
+                                    centerMode: true,
+                                    arrows: false,
+                                    dots: false
+                                }
+                            },
+                            {
+                                breakpoint: 1023,
+                                settings: {
+                                    slidesToShow: tabs.length > 3 ? 3 : tabs.length,
+                                    slidesToScroll: 1,
+                                    centerMode: false,
+                                    infinite: false,
+                                    dots: false,
+                                    arrows: false
+                                }
+                            },
+                            {
+                                breakpoint: 900,
+                                settings: {
+                                    slidesToShow: 3,
+                                    slidesToScroll: 1,
+                                    centerMode: false,
+                                    infinite: false,
+                                    dots: false,
+                                    arrows: false
+                                }
+                            },
+                            {
+                                breakpoint: 800,
+                                settings: {
+                                    slidesToShow: 3,
+                                    slidesToScroll: 1,
+                                    centerMode: false,
+                                    infinite: false,
+                                    dots: false,
+                                    arrows: false
+                                }
+                            },
+                            {
+                                breakpoint: 600,
+                                settings: {
+                                    slidesToShow: 2,
+                                    slidesToScroll: 2,
+                                    centerMode: false,
+                                    infinite: true,
+                                    dots: false,
+                                    arrows: false
+                                }
                             }
-                        },
-                        {
-                            breakpoint: 1024,
-                            settings: {
-                                slidesToShow: 4,
-                                slidesToScroll: 1,
-                                infinite: false,
-                                arrows: true,
-                                dots: false
-                            }
-                        },
-                        {
-                            breakpoint: 1023,
-                            settings: {
-                                slidesToShow: 4,
-                                slidesToScroll: 1,
-                                infinite: false,
-                                dots: false,
-                                arrows: true
-                            }
-                        },
-                        {
-                            breakpoint: 900,
-                            settings: {
-                                slidesToShow: 4,
-                                slidesToScroll: 1,
-                                infinite: false,
-                                dots: false,
-                                arrows: true
-                            }
-                        },
-                        {
-                            breakpoint: 800,
-                            settings: {
-                                slidesToShow: 4,
-                                slidesToScroll: 1,
-                                infinite: false,
-                                dots: false,
-                                arrows: true
-                            }
-                        },
-                        {
-                            breakpoint: 600,
-                            settings: {
-                                slidesToShow: 2,
-                                slidesToScroll: 2,
-                                infinite: true,
-                                dots: false,
-                                arrows: false
-                            }
-                        }
                         ]
                     });
                 }

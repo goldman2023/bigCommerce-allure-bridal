@@ -28,7 +28,7 @@
                             <h3>{{name}}</h3>
                             <p>
                                 <span class="sub-description body-light-3"></span>
-                                <a href="{{getVar (dashcase (lowercase name))}}" target="_blank" class="viewCategory body-light-3">View {{name}} </a>
+                                <a href="{{getVar (dashcase (lowercase name))}}" {{#if name '===' 'The Vows'}}target="_blank"{{/if}} class="viewCategory body-light-3" data-url="{{url}}">View {{name}} </a>
                             </p>
                         </div>
                         <div class="sub-products"></div>
