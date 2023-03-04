@@ -191,7 +191,7 @@ export default class Auth extends PageManager {
                         email: $('#login_email').val(),
                         first_name: $('#register_first').val(),
                         last_name: $('#register_last').val(),
-                        phone: "",
+                        phone: $('#login_phone').val(),
                         authentication: {
                             force_password_reset: true,
                             new_password: $('#register_pass').val()
@@ -199,8 +199,8 @@ export default class Auth extends PageManager {
                     };
                     $.ajax({
                         type: "POST",
-                        url: `https://apim.workato.com/allure/allure-b2c-website/login/createaccount`,
-                        headers: {"API-TOKEN": self.context.workatoApiToken},
+                        url: `${self.context.createAccountApiPath}`,
+                        headers: { "API-TOKEN": self.context.workatoApiToken, "Content-Type": "application/json"},
                         data: JSON.stringify(formData),
                         success: response => {
                             swal.fire({
@@ -211,8 +211,7 @@ export default class Auth extends PageManager {
                            window.location.href = '/thank-you/';
                         },
                         error: error => {
-                            console.log(error.responseJSON.Error.split('".customer_create":"')[1].replace(`"}}'`, ''));
-                            let jsondata = error.responseJSON.Error.split('".customer_create":"')[1].replace(`"}}'`, '');
+                            let jsondata = error?.responseJSON?.Error?.split('".customer_create":"')[1]?.replace(`"}}'`, '');
                             swal.fire({
                                 text: jsondata,
                                 icon: 'error',
