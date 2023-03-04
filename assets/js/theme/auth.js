@@ -200,7 +200,7 @@ export default class Auth extends PageManager {
                     $.ajax({
                         type: "POST",
                         url: `${self.context.createAccountApiPath}`,
-                        headers: {"API-TOKEN": self.context.workatoApiToken},
+                        headers: { "API-TOKEN": self.context.workatoApiToken, "Content-Type": "application/json"},
                         data: JSON.stringify(formData),
                         success: response => {
                             swal.fire({
