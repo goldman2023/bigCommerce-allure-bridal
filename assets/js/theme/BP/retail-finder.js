@@ -492,14 +492,17 @@ export default class RetailFinder extends PageManager {
       'All',
       ...Object.keys(this.collectionsByRetailers).sort()
     ];
+    var collectionData = [];
 
     collectionsSorted.forEach(
-      (collection) => {
+      (collection, index) => {
         const collectionOption = document.createElement('option');
         collectionOption.innerText = collection;
         collectionFilterDropdown.append(
           collectionOption
         );
+
+        collectionData.push({"id": index, "parent": "#", "text" : collection})
       }
     );
     collectionFilter.append(collectionFilterDropdown);
@@ -509,18 +512,27 @@ export default class RetailFinder extends PageManager {
 
     // locationOrcode filter
 
-      var jsondata = [
-                         { "id": "ajson1", "parent": "#", "text": "Simple root node" },
-                         { "id": "ajson2", "parent": "#", "text": "Root node 2" },
-                         { "id": "ajson3", "parent": "ajson2", "text": "Child 1" },
-                         { "id": "ajson4", "parent": "ajson2", "text": "Child 2" },
-          ];
+      // var jsondata = [
+      //                    { "id": "ajson1", "parent": "#", "text": "Simple root node" },
+      //                    { "id": "ajson2", "parent": "#", "text": "Root node 2" },
+      //                    { "id": "ajson3", "parent": "ajson2", "text": "Child 1" },
+      //                    { "id": "ajson4", "parent": "ajson2", "text": "Child 2" },
+      //     ];
+
 
       $('#SimpleJSTree').jstree({
               'core': {
-                  'data': jsondata
+                  'data': collectionData
               },
-              "plugins": ["checkbox"]
+              "types" : {
+                "default" : {
+                    "icon" : "fa fa-folder text-warning"
+                },
+                "file" : {
+                    "icon" : "fa fa-file  text-warning"
+                }
+            },
+              "plugins": ["types"]
       });
 
     //submit btn
