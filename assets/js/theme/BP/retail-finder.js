@@ -510,8 +510,6 @@ export default class RetailFinder extends PageManager {
 
     collectionFilterDropdown.addEventListener('change', (e) => this.applyFilters('collection', e));
 
-    // locationOrcode filter
-
       // var jsondata = [
       //                    { "id": "ajson1", "parent": "#", "text": "Simple root node" },
       //                    { "id": "ajson2", "parent": "#", "text": "Root node 2" },
@@ -534,6 +532,26 @@ export default class RetailFinder extends PageManager {
             },
               "plugins": ["types"]
       });
+
+      //filter button by store name
+      const nameFilter = document.getElementById("name-typeahead");
+
+      nameFilter.addEventListener("input", (event) => {
+        const searchTerm = event.target.value.toLowerCase();
+        const dataItems = Array.from(document.getElementsByClassName("retailer-item"));
+      
+        const filteredData = dataItems.filter(function (dataItem) {
+          const dataItemText = dataItem.getElementsByClassName('retailer-title')[0].textContent.toLowerCase();
+          return dataItemText.includes(searchTerm);
+        });
+        dataItems.forEach(function (dataItem) {
+          if (filteredData.includes(dataItem)) {
+            dataItem.style.display = "";
+          } else {
+            dataItem.style.display = "none";
+          }
+        });
+      })
 
     //submit btn
     const submitBtnContainer = document.getElementById('filterButton');
