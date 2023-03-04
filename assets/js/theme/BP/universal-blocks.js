@@ -809,11 +809,15 @@ export function blockElementSpacer24Px() {
 
 export function events(blockData,page) {
     let datastru = blockData.trunkShowsCollection ?  blockData.trunkShowsCollection : blockData.referencedBlockTrunkShowsCollection;
-    let sorteddatastru = datastru.items.sort((a,b) => new Date(a.eventStartDate) - new Date(b.eventStartDate));
+    datastru.items.sort((a, b) => {
+        let da = new Date(a.eventStartDate),
+            db = new Date(b.eventStartDate);
+        return da - db;
+    });
     return `<div class="events block-item" id="events">
     <h2>Upcoming Designer Events</h2>
     <div class="eventsGrid">
-        ${sorteddatastru.items.map((item)=> {
+        ${datastru.items.map((item)=> {
             //start date format
             let startDate = (item.eventStartDate).split('T');
             let startDateObj = new Date(`${startDate[0]}T00:00`);
