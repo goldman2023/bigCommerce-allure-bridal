@@ -863,10 +863,11 @@ export function blockElementSpacer24Px() {
 
 export function events(blockData,page) {
     let datastru = blockData.trunkShowsCollection ?  blockData.trunkShowsCollection : blockData.referencedBlockTrunkShowsCollection;
+    let sorteddatastru = datastru.items.sort((a,b) =>  new Date(a.eventStartDate) - new Date(b.eventStartDate));
     return `<div class="events block-item" id="events">
     <h2>Upcoming Designer Events</h2>
     <div class="eventsGrid">
-        ${datastru.items.map((item)=> {
+        ${sorteddatastru.map((item)=> {
             //start date format
             let startDate = (item.eventStartDate).split('T');
             let startDateObj = new Date(`${startDate[0]}T00:00`);
@@ -902,7 +903,7 @@ export function events(blockData,page) {
             </div>`;
         }).join('')}
     </div>
-    ${page === 'home' ? (blockData.containerButtonUrl !== null ? `<a href="${blockData.containerButtonUrl}" class="button button--secondary" >${blockData.containerButtonText}</a>` : '') : ''}
+    ${page === 'home' ? `<a href="/designer-events-list/" class="button button--secondary" >View All Designer Events</a>` : ''}
     </div>`;
 }
 export function blockElementFullscreenImage(blockData) {
