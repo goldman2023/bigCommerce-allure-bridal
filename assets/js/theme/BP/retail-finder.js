@@ -492,7 +492,6 @@ export default class RetailFinder extends PageManager {
       'All',
       ...Object.keys(this.collectionsByRetailers).sort()
     ];
-    var collectionData = [];
 
     collectionsSorted.forEach(
       (collection, index) => {
@@ -501,57 +500,77 @@ export default class RetailFinder extends PageManager {
         collectionFilterDropdown.append(
           collectionOption
         );
-
-        collectionData.push({"id": index, "parent": "#", "text" : collection})
       }
     );
     collectionFilter.append(collectionFilterDropdown);
-    // collectionContainer.append(collectionFilter);
+    collectionContainer.append(collectionFilter);
 
     collectionFilterDropdown.addEventListener('change', (e) => this.applyFilters('collection', e));
 
-      // var jsondata = [
-      //                    { "id": "ajson1", "parent": "#", "text": "Simple root node" },
-      //                    { "id": "ajson2", "parent": "#", "text": "Root node 2" },
-      //                    { "id": "ajson3", "parent": "ajson2", "text": "Child 1" },
-      //                    { "id": "ajson4", "parent": "ajson2", "text": "Child 2" },
-      //     ];
-
-
-      $('#SimpleJSTree').jstree({
-              'core': {
-                  'data': collectionData
-              },
-              "types" : {
-                "default" : {
-                    "icon" : "fa fa-folder text-warning"
-                },
-                "file" : {
-                    "icon" : "fa fa-file  text-warning"
-                }
-            },
-              "plugins": ["types"]
+    const jsondata = [
+            { "id": "0", "parent": "#", "text": "All Collections" },
+            { "id": "1", "parent": "#", "text": "Abella" },
+            { "id": "2", "parent": "#", "text": "Allure Bridals" },
+            { "id": "3", "parent": "#", "text": "Allure Couture" },
+            { "id": "4", "parent": "#", "text": "Allure Men" },
+            { "id": "5", "parent": "#", "text": "Allure Modest" },
+            { "id": "6", "parent": "#", "text": "Allure Romance" },
+            { "id": "7", "parent": "#", "text": "Allure Women" },
+            { "id": "8", "parent": "#", "text": "Bridesmaids" },
+            { "id": "10", "parent": "#", "text": "Disney Fairy Tale Weddings" },
+            { "id": "11", "parent": "#", "text": "Suits & Tuxedos" },
+            { "id": "12", "parent": "11", "text": "Ridge" },
+            { "id": "13", "parent": "11", "text": "Brunswick" },
+            { "id": "14", "parent": "11", "text": "Vows" },
+            { "id": "15", "parent": "11", "text": "Venice Velvet" },
+            { "id": "16", "parent": "11", "text": "The Tuxedo" },
+      ];
+    $('#SimpleJSTree').jstree({
+      'core': {
+        'data': jsondata,
+        "themes": {
+          "variant": "large"
+        }
+      },
+      "plugins": ["checkbox"]
+    }).on("changed.jstree", function (e, data) {
+      const selectedCollections = $('#SimpleJSTree').jstree('get_checked').map((id) => {
+        return $('#' + id).text().toLowerCase().trim();
       });
+      const dataItems = Array.from(document.getElementsByClassName("retailer-item"));
 
-      //filter button by store name
-      const nameFilter = document.getElementById("name-typeahead");
+      const filteredData = dataItems.filter( (dataItem) => {
+        const dataItemArr = dataItem.getElementsByClassName('retailer-collections')[0].textContent.toLowerCase().split(",").map(item => item.trim());
+        return selectedCollections.some((element) => dataItemArr.includes(element)); 
+      });
+      dataItems.forEach(function (dataItem) {
+        if (filteredData.includes(dataItem)) {
+          dataItem.style.display = "";
+        } else {
+          dataItem.style.display = "none";
+        }
+      });
+    });
 
-      nameFilter.addEventListener("input", (event) => {
-        const searchTerm = event.target.value.toLowerCase();
-        const dataItems = Array.from(document.getElementsByClassName("retailer-item"));
-      
-        const filteredData = dataItems.filter(function (dataItem) {
-          const dataItemText = dataItem.getElementsByClassName('retailer-title')[0].textContent.toLowerCase();
-          return dataItemText.includes(searchTerm);
-        });
-        dataItems.forEach(function (dataItem) {
-          if (filteredData.includes(dataItem)) {
-            dataItem.style.display = "";
-          } else {
-            dataItem.style.display = "none";
-          }
-        });
-      })
+    //filter button by store name
+    const nameFilter = document.getElementById("name-typeahead");
+
+    nameFilter.addEventListener("input", (event) => {
+      const searchTerm = event.target.value.toLowerCase();
+      const dataItems = Array.from(document.getElementsByClassName("retailer-item"));
+    
+      const filteredData = dataItems.filter(function (dataItem) {
+        const dataItemText = dataItem.getElementsByClassName('retailer-title')[0].textContent.toLowerCase();
+        return dataItemText.includes(searchTerm);
+      });
+      dataItems.forEach(function (dataItem) {
+        if (filteredData.includes(dataItem)) {
+          dataItem.style.display = "";
+        } else {
+          dataItem.style.display = "none";
+        }
+      });
+    })
 
     //submit btn
     const submitBtnContainer = document.getElementById('filterButton');

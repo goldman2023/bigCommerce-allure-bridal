@@ -24,6 +24,7 @@
           }
         }
         .name-filter{
+          margin-top: 10px;
           width: 100%;
         }
 
@@ -441,6 +442,8 @@
 
 .jstree-anchor:hover {
   background-color: transparent !important;
+  border: none;
+  box-shadow: none;
 }
 
 .jstree-anchor > .jstree-themeicon{
