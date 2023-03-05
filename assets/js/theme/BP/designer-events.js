@@ -26,7 +26,6 @@ const MAP_MARKER_ORANGE = {
 // original/applied filter instance properties
 const FILTER_IDS = {
     distance: 'distanceFilterSelect',
-    collection: 'collectionFilterSelect',
 };
 
 const DEFAULT_ZOOM_LEVEL = 4;
@@ -60,10 +59,10 @@ export default class DesignerEvents extends PageManager {
         // events that are filtered by initial location / radius search
         this.eventsFilteredByLocation = [];
         this.eventsById = {};
-        this.collectionsByEventIds = {};
+        this.eventsByCollections = {};
         this.originalFilters = {
             distance: 10,
-            collection: 'All',
+            collections: [],
             retailerName: '',
         };
         this.appliedFilters = {
@@ -88,12 +87,13 @@ export default class DesignerEvents extends PageManager {
         this.addEventHandlers();
     };
 
-    createCollectionListItems = () => {
+    createCollectionListItems = (events) => {
         let allCollections = [];
-        for (const event of this.events) {
+        for (const event of events) {
             const eventCollections = event.collectionsAvailable || [];
             allCollections = allCollections.concat(eventCollections);
         };
+        const self = this;
         // create the filter for the collections
         const uniqueSortedCollections = Array.from(new Set(allCollections)).sort();
         const collectionFilterList = document.getElementById('collections');
@@ -112,13 +112,30 @@ export default class DesignerEvents extends PageManager {
             collectionItemLabel.innerHTML = collection;
             collectionItem.append(collectionItemLabel);
             collectionFilterList.append(collectionItem);
+            collectionItemCheckbox.addEventListener('change', function()  {
+                console.log("APPLIED FILTERS", self.appliedFilters, this.checked);
+                const collections = [...self.appliedFilters.collections];
+                if(this.checked && collections.indexOf(collection) < 0) {
+                    collections.push(collection);
+                // we can assume it's in the list since it doesnt fire initially so it had to have been unchecked
+                } else {
+                    const removeIdx = collections.indexOf(collection);
+                    collections.splice(removeIdx, 1);
+                }
+                self.applyFilters('collections', null, collections);
+                self.filterEvents();
+            });
         });
     }
 
     setupCollections = () => {
         for (const event of this.originalEvents) {
-            const eventCollections = event.collectionsAvailable || [];
-            this.collectionsByEventIds[event.sys.id] = eventCollections;
+            const eventCollections = event.collectionsAvailable || [];            
+            for(const collection of eventCollections) {
+                const eventsWithCollection = this.eventsByCollections[collection] || [];
+                eventsWithCollection.push(event.sys.id);
+                this.eventsByCollections[collection] = eventsWithCollection;
+            }
         };
     };
 
@@ -375,8 +392,8 @@ export default class DesignerEvents extends PageManager {
         return distance // in miles
     };
 
-    applyFilters = (filterType, evt) => {
-        this.appliedFilters[filterType] = evt.target.value;
+    applyFilters = (filterType, evt, overrideValue=undefined) => {
+        this.appliedFilters[filterType] = overrideValue || evt.target.value;
 
         // adjust zoom for convenience in distance changes  
         const distanceToZoomLevels = {
@@ -447,9 +464,13 @@ export default class DesignerEvents extends PageManager {
                 Object.entries(this.appliedFilters).forEach(([filterName, value]) => {
                     // could make this more extensible with an object to function mapping
                     // but need to move faster
-                    if (filterName === 'collection' && value !== 'All') {
-                        const eventsWithSelected = self.collectionsByEventIds[value];
-                        if (!eventsWithSelected.includes(event.sys.id)) {
+                    if (filterName === 'collections' && value.length) {
+                        let eventsWithCollections = []
+                        for (const collection of value) {
+                            eventsWithCollections = eventsWithCollections.concat(this.eventsByCollections[collection]);
+                        }
+                        console.log("event with collections", eventsWithCollections)
+                        if (!eventsWithCollections.includes(event.sys.id)) {
                             toRemove.push(event.sys.id);
                         }
                     };
@@ -478,7 +499,7 @@ export default class DesignerEvents extends PageManager {
             otherFiltersToggle.style.display = 'none';
         }
 
-        this.createCollectionListItems();
+        this.createCollectionListItems(events);
     }
 
     updateResultsInfo = (events) => {
@@ -513,134 +534,6 @@ export default class DesignerEvents extends PageManager {
         // trigger manual change event to ensure button handlers are fired 
         const changeEvent = new Event('change');
         locationTypeahead.dispatchEvent(changeEvent);
-    };
-
-    createFilterElements = () => {
-        // distance filter
-        const distanceContainer = document.getElementById('distanceFilter');
-        const distanceFilter = document.createElement('div');
-        distanceFilter.classList.add('form-field');
-        const distanceFilterLabel = document.createElement('div');
-        distanceFilterLabel.classList.add('form-label');
-        distanceFilterLabel.innerText = 'Within';
-        distanceFilter.append(distanceFilterLabel);
-        const distanceFilterDropdown = document.createElement('select');
-        distanceFilterDropdown.id = FILTER_IDS.distance;
-        distanceFilterDropdown.classList.add('form-select');
-        distanceFilterDropdown.classList.add('selector-dropdown');
-        [10, 25, 50, 100, 500].forEach(
-            (distance) => {
-                const distanceOption = document.createElement('option');
-                distanceOption.setAttribute('value', distance);
-                distanceOption.innerText = `${distance} Miles`;
-                distanceFilterDropdown.append(
-                    distanceOption
-                );
-            }
-        );
-        distanceFilter.append(distanceFilterDropdown);
-        distanceFilterDropdown.value = this.appliedFilters.distance;
-        distanceContainer.append(distanceFilter);
-
-        distanceFilterDropdown.addEventListener('change', (e) => this.applyFilters('distance', e));
-
-        // collections filter
-        const collectionContainer = document.getElementById('collectionsFilter');
-        const collectionFilter = document.createElement('div');
-        collectionFilter.classList.add('form-field');
-        const collectionFilterLabel = document.createElement('div');
-        collectionFilterLabel.classList.add('form-label');
-        collectionFilterLabel.innerText = 'Carrying';
-        collectionFilter.append(collectionFilterLabel);
-        const collectionFilterDropdown = document.createElement('select');
-        collectionFilterDropdown.id = FILTER_IDS.collection;
-        collectionFilterDropdown.classList.add('form-select');
-        collectionFilterDropdown.classList.add('selector-dropdown');
-        const collectionsSorted = [
-            'All',
-            ...Object.keys(this.collectionsByEventIds).sort()
-        ];
-
-        collectionsSorted.forEach(
-            (collection) => {
-                const collectionOption = document.createElement('option');
-                collectionOption.innerText = collection;
-                collectionFilterDropdown.append(
-                    collectionOption
-                );
-            }
-        );
-        collectionFilter.append(collectionFilterDropdown);
-        collectionContainer.append(collectionFilter);
-
-        collectionFilterDropdown.addEventListener('change', (e) => this.applyFilters('collection', e));
-    };
-
-    setupFilterData = async (rawEvents) => {
-
-        const collectionsByEventIds = {};
-        const eventsById = {};
-        rawEvents.forEach(
-            (event) => {
-                eventsById[event.bridalLiveEventId] = event;
-                event.collectionsAvailableCollection.items.forEach((collection) => {
-                    if (collection) {
-                        const eventsWithCollection = collectionsByEventIds[collection.collectionName] || [];
-                        eventsWithCollection.push(event.id);
-                        collectionsByEventIds[collection.collectionName] = eventsWithCollection;
-                    }
-                });
-            }
-        );
-        this.collectionsByEventIds = collectionsByEventIds;
-        this.eventsById = eventsById;
-        this.createFilterElements();
-        return rawEvents;
-    }
-
-    getEventData = async () => {
-        const query = `
-      query {
-        eventsCollection {
-            items {
-                id
-                eventName
-                eventCity
-                website
-                state
-                bridalLiveEventId
-                location {
-                    lat
-                    lon
-                }
-                collectionsAvailableCollection {
-                    items {
-                        collectionName
-                        collectionButtonUrl
-                    }
-                }
-                featured
-                disneyPlatinumCollection
-                eventStreet
-                phoneNumber
-                requestAppointment
-            }
-        }
-    }`
-        const results = await fetch(
-            // this ought to be in config
-            'https://allure-integration.azurewebsites.net/leads',
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ query }),
-            }
-        )
-        const latLoc = await results.json();
-        const events = latLoc.data.eventsCollection.items;
-        return this.setupFilterData(events);
     };
 
     sortEvents = (evt, override = null) => {
@@ -737,137 +630,137 @@ export default class DesignerEvents extends PageManager {
         }
     };
 
-    openDetailsModal = (event) => {
-        const detailElement = document.createElement('div');
-        detailElement.classList.add('event-details');
+    // openDetailsModal = (event) => {
+    //     const detailElement = document.createElement('div');
+    //     detailElement.classList.add('event-details');
 
-        const header = document.createElement('div');
-        header.classList.add('event-header');
+    //     const header = document.createElement('div');
+    //     header.classList.add('event-header');
 
-        if (event.featured) {
-            const featuredElement = document.createElement('span');
-            featuredElement.classList.add('featured');
-            header.append(featuredElement);
-        }
+    //     if (event.featured) {
+    //         const featuredElement = document.createElement('span');
+    //         featuredElement.classList.add('featured');
+    //         header.append(featuredElement);
+    //     }
 
-        if (event.disneyPlatinumCollection) {
-            const dpcElement = document.createElement('span');
-            dpcElement.classList.add('disney');
-            header.append(dpcElement);
-        }
+    //     if (event.disneyPlatinumCollection) {
+    //         const dpcElement = document.createElement('span');
+    //         dpcElement.classList.add('disney');
+    //         header.append(dpcElement);
+    //     }
 
-        const nameElement = document.createElement('h2');
-        nameElement.classList.add('header-title');
-        nameElement.innerText = event.eventName;
-        header.append(nameElement);
+    //     const nameElement = document.createElement('h2');
+    //     nameElement.classList.add('header-title');
+    //     nameElement.innerText = event.eventName;
+    //     header.append(nameElement);
 
-        const locationElement = document.createElement('span');
-        locationElement.classList.add('location');
-        locationElement.innerText = `${event.eventCity}, ${event.state}`;
-        header.append(locationElement);
-        detailElement.append(header);
+    //     const locationElement = document.createElement('span');
+    //     locationElement.classList.add('location');
+    //     locationElement.innerText = `${event.eventCity}, ${event.state}`;
+    //     header.append(locationElement);
+    //     detailElement.append(header);
 
-        const collections = document.createElement('div');
-        collections.classList.add('collections');
-        const collectionsHeader = document.createElement('span');
-        collectionsHeader.classList.add('event-label');
-        collectionsHeader.innerText = 'COLLECTIONS';
-        collections.append(collectionsHeader);
+    //     const collections = document.createElement('div');
+    //     collections.classList.add('collections');
+    //     const collectionsHeader = document.createElement('span');
+    //     collectionsHeader.classList.add('event-label');
+    //     collectionsHeader.innerText = 'COLLECTIONS';
+    //     collections.append(collectionsHeader);
 
-        const collectionsList = document.createElement('div');
-        collectionsList.classList.add('collections-list');
-        for (const collection of event.collectionsAvailableCollection.items) {
-            if (collection) {
-                var collectionItem = document.createElement('span');
-                if (collection.collectionButtonUrl == null) {
-                    //collectionItem.setAttribute("href", "#");
-                } else {
-                    //collectionItem.setAttribute("href", collection.collectionButtonUrl);
-                    //collectionItem.setAttribute("target", "_blank");
-                }
-                collectionItem.classList.add('collection-item');
-                collectionItem.classList.add('event-detail');
-                collectionItem.innerText = collection.collectionName;
-                collectionsList.append(collectionItem);
-            }
-        };
-        collections.append(collectionsList);
-        detailElement.append(collections);
+    //     const collectionsList = document.createElement('div');
+    //     collectionsList.classList.add('collections-list');
+    //     for (const collection of event.collectionsAvailableCollection.items) {
+    //         if (collection) {
+    //             const collectionItem = document.createElement('span');
+    //             if (collection.collectionButtonUrl == null) {
+    //                 //collectionItem.setAttribute("href", "#");
+    //             } else {
+    //                 //collectionItem.setAttribute("href", collection.collectionButtonUrl);
+    //                 //collectionItem.setAttribute("target", "_blank");
+    //             }
+    //             collectionItem.classList.add('collection-item');
+    //             collectionItem.classList.add('event-detail');
+    //             collectionItem.innerText = collection.collectionName;
+    //             collectionsList.append(collectionItem);
+    //         }
+    //     };
+    //     collections.append(collectionsList);
+    //     detailElement.append(collections);
 
-        const address = document.createElement('div');
-        address.classList.add('event-address');
-        const addressLabel = document.createElement('span');
-        addressLabel.classList.add('event-label');
-        addressLabel.innerText = 'ADDRESS';
-        address.append(addressLabel);
-        const streetAddress = document.createElement('div');
-        streetAddress.classList.add('street-address');
-        streetAddress.classList.add('event-detail');
-        streetAddress.innerText = event.eventStreet;
-        address.append(streetAddress);
-        const directions = document.createElement('a');
-        directions.classList.add('directions');
-        directions.innerText = 'GET DIRECTIONS'
-        const destination = event.eventStreet.replaceAll(',', '').replaceAll(' ', '+');
-        directions.setAttribute('href', `https://www.google.com/maps?daddr=${destination}`);
-        directions.setAttribute('target', '_blank');
-        directions.setAttribute('rel', 'noopener noreferrer');
-        address.append(directions);
-        detailElement.append(address);
+    //     const address = document.createElement('div');
+    //     address.classList.add('event-address');
+    //     const addressLabel = document.createElement('span');
+    //     addressLabel.classList.add('event-label');
+    //     addressLabel.innerText = 'ADDRESS';
+    //     address.append(addressLabel);
+    //     const streetAddress = document.createElement('div');
+    //     streetAddress.classList.add('street-address');
+    //     streetAddress.classList.add('event-detail');
+    //     streetAddress.innerText = event.eventStreet;
+    //     address.append(streetAddress);
+    //     const directions = document.createElement('a');
+    //     directions.classList.add('directions');
+    //     directions.innerText = 'GET DIRECTIONS'
+    //     const destination = event.eventStreet.replaceAll(',', '').replaceAll(' ', '+');
+    //     directions.setAttribute('href', `https://www.google.com/maps?daddr=${destination}`);
+    //     directions.setAttribute('target', '_blank');
+    //     directions.setAttribute('rel', 'noopener noreferrer');
+    //     address.append(directions);
+    //     detailElement.append(address);
 
-        const phone = document.createElement('div');
-        phone.classList.add('phone');
-        const phoneLabel = document.createElement('div');
-        phoneLabel.classList.add('event-label');
-        phoneLabel.innerText = 'PHONE';
-        phone.append(phoneLabel);
-        const phoneNumber = document.createElement('a');
-        phoneNumber.setAttribute("href", `tel:${event.phoneNumber}`);
-        phoneNumber.classList.add('event-detail');
-        phoneNumber.innerText = event.phoneNumber;
-        phone.append(phoneNumber)
-        detailElement.append(phone);
+    //     const phone = document.createElement('div');
+    //     phone.classList.add('phone');
+    //     const phoneLabel = document.createElement('div');
+    //     phoneLabel.classList.add('event-label');
+    //     phoneLabel.innerText = 'PHONE';
+    //     phone.append(phoneLabel);
+    //     const phoneNumber = document.createElement('a');
+    //     phoneNumber.setAttribute("href", `tel:${event.phoneNumber}`);
+    //     phoneNumber.classList.add('event-detail');
+    //     phoneNumber.innerText = event.phoneNumber;
+    //     phone.append(phoneNumber)
+    //     detailElement.append(phone);
 
-        var eventUrl = document.createElement('div');
-        eventUrl.classList.add('event-url');
-        const eventUrlLink = document.createElement('a');
-        eventUrlLink.setAttribute("href", `${event.website}`);
-        eventUrlLink.setAttribute("target", "_blank");
-        eventUrlLink.innerText = event.website;
-        eventUrl.append(eventUrlLink);
-        detailElement.append(eventUrl);
+    //     var eventUrl = document.createElement('div');
+    //     eventUrl.classList.add('event-url');
+    //     const eventUrlLink = document.createElement('a');
+    //     eventUrlLink.setAttribute("href", `${event.website}`);
+    //     eventUrlLink.setAttribute("target", "_blank");
+    //     eventUrlLink.innerText = event.website;
+    //     eventUrl.append(eventUrlLink);
+    //     detailElement.append(eventUrl);
 
-        const scheduleBtn = document.createElement('button');
-        scheduleBtn.setAttribute('type', 'button');
-        scheduleBtn.classList.add('schedule-btn');
-        scheduleBtn.classList.add('book-appt');
+    //     const scheduleBtn = document.createElement('button');
+    //     scheduleBtn.setAttribute('type', 'button');
+    //     scheduleBtn.classList.add('schedule-btn');
+    //     scheduleBtn.classList.add('book-appt');
 
-        const btnText = document.createElement('span');
-        btnText.innerText = 'BOOK AN APPOINTMENT'
-        scheduleBtn.append(btnText);
-        scheduleBtn.addEventListener('click', () => this.openScheduler(event));
+    //     const btnText = document.createElement('span');
+    //     btnText.innerText = 'BOOK AN APPOINTMENT'
+    //     scheduleBtn.append(btnText);
+    //     scheduleBtn.addEventListener('click', () => this.openScheduler(event));
 
-        detailElement.append(scheduleBtn);
+    //     detailElement.append(scheduleBtn);
 
-        //Add Request Appointment Button
-        const requestBtn = document.createElement('button');
-        requestBtn.setAttribute('type', 'button');
-        requestBtn.classList.add('schedule-btn');
+    //     //Add Request Appointment Button
+    //     const requestBtn = document.createElement('button');
+    //     requestBtn.setAttribute('type', 'button');
+    //     requestBtn.classList.add('schedule-btn');
 
-        const requestBtnText = document.createElement('span');
-        requestBtnText.innerText = 'REQUEST AN APPOINTMENT'
-        requestBtn.append(requestBtnText);
-        requestBtn.addEventListener('click', () => this.openRequestForm(event));
+    //     const requestBtnText = document.createElement('span');
+    //     requestBtnText.innerText = 'REQUEST AN APPOINTMENT'
+    //     requestBtn.append(requestBtnText);
+    //     requestBtn.addEventListener('click', () => this.openRequestForm(event));
 
-        if (event.requestAppointment) {
-            detailElement.append(requestBtn);
-        }
+    //     if (event.requestAppointment) {
+    //         detailElement.append(requestBtn);
+    //     }
 
 
-        const modal = defaultModal({ size: 'normal', skipCache: true });
-        modal.open();
-        modal.updateContent(detailElement, { wrap: true });
-    };
+    //     const modal = defaultModal({ size: 'normal', skipCache: true });
+    //     modal.open();
+    //     modal.updateContent(detailElement, { wrap: true });
+    // };
 
     getDirectBookingElem = (bridalLiveEventId) => {
         const scheduler = document.createElement('iframe');
