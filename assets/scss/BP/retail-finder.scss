@@ -27,23 +27,6 @@
           margin-top: 10px;
           width: 100%;
         }
-
-      }
-      .form {
-        position: relative;
-        margin-bottom: 2.5rem;
-        .location-typeahead {
-          color: stencilColor("color-allure-bridals-neutral-1") !important;
-          
-          &:focus {
-            outline: none !important;
-          }
-          
-          &.error {
-            outline: red 1px solid;
-            
-          }
-        }
       }
       .available-retailers {
         .top {
@@ -247,7 +230,93 @@
           }
   
         }
+
+        .option-filters{
+          font-family: 'Inter Regular';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 20px;
+          .collections-label{
+            font-family: 'Inter Regular';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 16px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+          }
+          .jstree-container-ul {
+            margin-left: -8px;
+          }
+          .jstree-anchor {
+            & > .jstree-themeicon{
+              display: none !important;
+            }
+            &:hover {
+              background-color: transparent !important;
+              border: none;
+              box-shadow: none;
+            }
+          }
+          .jstree-default-large {
+            .jstree-closed > .jstree-ocl {
+              order: 0;
+            }
   
+            .jstree-open > .jstree-ocl {
+              order: 0;
+            }
+  
+            .jstree-anchor {
+              order: -1;
+            }
+
+            .jstree-leaf > .jstree-ocl {
+              display: none;
+            }
+          }
+          .jstree {
+            .jstree-open > .jstree-children {
+              order: 1;
+              width: 100% !important;
+            }
+  
+            .jstree-closed > .jstree-children {
+              order: 1;
+              width: 100% !important;
+            }
+          }
+          .jstree-default{
+            & > .jstree-container-ul > .jstree-node {
+              display: flex;
+              flex-wrap: wrap;
+            }
+            .jstree-clicked{
+              background: none;
+              box-shadow: none;
+            }
+            .jstree-node{
+              background: no-repeat;
+            }
+          }
+        }
+      }
+      .form {
+        position: relative;
+        margin-bottom: 2.5rem;
+        .location-typeahead {
+          color: stencilColor("color-allure-bridals-neutral-1") !important;
+          
+          &:focus {
+            outline: none !important;
+          }
+          
+          &.error {
+            outline: red 1px solid;
+            
+          }
+        }
       }
     }
 
@@ -258,10 +327,7 @@
         min-height: 600px;
         margin-bottom: 40px;
         height: 100%;
-
       }
-
-
     }
 
     .filter-button-container {
@@ -421,109 +487,7 @@
   }
 }
 
-
-/* Hide the folder icon */
-.jstree-icon.jstree-folder-icon {
-  display: none;
-}
-
-/* Hide the dotline view */
-.jstree-icon.jstree-ocl {
-  display: none;
-}
-
-.jstree-default .jstree-clicked{
-  background: none;
-  box-shadow: none;
-}
-.jstree-default .jstree-node{
-  background: no-repeat;
-}
-
-.jstree-anchor:hover {
-  background-color: transparent !important;
-  border: none;
-  box-shadow: none;
-}
-
-.jstree-anchor > .jstree-themeicon{
-  display: none !important;
-}
-
-// mobile overrides
-@media (max-width: '900px') {
-
-  .content {
-    flex-direction: column;
-
-    .map-filters {
-      width: 100% !important;
-
-      .geo-filters {
-        display: flex;
-        flex-wrap: wrap;
-        .filter {
-          width: 100% !important;
-
-          &:first-child {
-            margin-right: 0px !important;
-          }
-        }
-
-      }
-
-      .filter-button-container {
-        button {
-          max-width: 100%;
-        }
-      }
-    }
-    .map-toggle{
-      display: flex !important;
-    }
-    .map-and-retailers {
-      width: 100% !important;
-      display: none;
-      order: 1 !important;
-      #map {
-        min-height: 400px !important;
-      }
-
-      .top {
-        flex-direction: column;
-        align-items: flex-start !important;
-
-        .sort-dropdown {
-          margin-left: 0 !important;
-          margin-top: 10px;
-        }
-      }
-
-      .retailer-results {
-        flex-direction: column;
-
-        .retailer-item-container {
-          width: 100% !important;
-        }
-      }
-    }
-  }
-  .map-filters{
-    max-height: 100% !important;
-  }
-  .modal--large {
-    .modal-close {
-      display: none;
-    }
-  }
-
-  .schedule-btn {
-    max-width: 100% !important;
-  }
-  .phone{
-    display: block !important;
-  }
-}
+//modal styles
 
 .modal-close{
   &:focus::after,
@@ -732,6 +696,7 @@
   }
 }
 
+// badge url
 .featured {
   margin-right: 4px;
   // width: 20px;
@@ -739,7 +704,6 @@
     content: url('../icons/retailer-featured_updated.svg');
   }
 }
-
 .disney {
   // width: 20px;
 
@@ -747,11 +711,88 @@
     content: url('../icons/platinum-collection.svg');
   }
 }
+
+// mobile overrides
+@media (max-width: '900px') {
+
+  .content {
+    flex-direction: column;
+
+    .map-filters {
+      width: 100% !important;
+
+      .geo-filters {
+        display: flex;
+        flex-wrap: wrap;
+        .filter {
+          width: 100% !important;
+
+          &:first-child {
+            margin-right: 0px !important;
+          }
+        }
+
+      }
+
+      .filter-button-container {
+        button {
+          max-width: 100%;
+        }
+      }
+    }
+    .map-toggle{
+      display: flex !important;
+    }
+    .map-and-retailers {
+      width: 100% !important;
+      display: none;
+      order: 1 !important;
+      #map {
+        min-height: 400px !important;
+      }
+
+      .top {
+        flex-direction: column;
+        align-items: flex-start !important;
+
+        .sort-dropdown {
+          margin-left: 0 !important;
+          margin-top: 10px;
+        }
+      }
+
+      .retailer-results {
+        flex-direction: column;
+
+        .retailer-item-container {
+          width: 100% !important;
+        }
+      }
+    }
+  }
+  .map-filters{
+    max-height: 100% !important;
+  }
+  .modal--large {
+    .modal-close {
+      display: none;
+    }
+  }
+
+  .schedule-btn {
+    max-width: 100% !important;
+  }
+  .phone{
+    display: block !important;
+  }
+}
+
 @media (min-width: 1261px) {
   .modal--large {
     max-width: 900px !important; 
   }
 }
+
 .body {
   margin-bottom: spacing("double") * 0;
 }

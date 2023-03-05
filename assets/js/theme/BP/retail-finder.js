@@ -6,6 +6,7 @@ import { defaultModal } from '../global/modal';
 import PageManager from '../page-manager'
 import $ from 'jquery';
 import 'jstree';
+import { uniq } from 'lodash';
 
 const MAP_MARKER_BLACK = {
   path: 'M10 0C4.5 0 0 4.5 0 10c0 7.4 9.1 13.6 9.4 13.8.2.1.4.2.6.2s.4-.1.6-.2c.3-.2 9.4-6.4 9.4-13.8 0-5.5-4.5-10-10-10zm0 14c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z',
@@ -27,6 +28,14 @@ const FILTER_IDS = {
   distance: 'distanceFilterSelect',
   // collection: 'collectionFilterSelect',
   locationOrcode : "location-typeahead"
+};
+
+const DISTANCE_TO_ZOOMLEVELS = {
+  10: 10,
+  25: 10,
+  50: 8,
+  100: 8,
+  250: 5,
 };
 
 const DEFAULT_ZOOM_LEVEL = 4;
@@ -58,7 +67,7 @@ export default class RetailFinder extends PageManager {
     this.collectionsByRetailers = {};
     this.originalFilters = {
       distance: 25,
-      collection: 'All'
+      collection: ['Allure Bridals'],
     };
     this.appliedFilters = {
       ...this.originalFilters
@@ -346,24 +355,22 @@ export default class RetailFinder extends PageManager {
   };
 
   applyFilters = (filterType, evt) => {
-    this.appliedFilters[filterType] = evt.target.value;
-
-    // adjust zoom for convenience in distance changes  
-    const distanceToZoomLevels = {
-      10: 10,
-      25: 10,
-      50: 8,
-      100: 8,
-      250: 5,
-    };
-    if (filterType === 'distance') {
-      const newZoomLevel = distanceToZoomLevels[evt.target.value];
-      if (newZoomLevel) {
-        this.map.setZoom(newZoomLevel);
-      } else {
-        this.map.setZoom(HOVER_DEFAULT_ZOOM_LEVEL);
-      }
-    };
+    switch (filterType) {
+      case "distance":
+        // adjust zoom for convenience in distance changes 
+        const newZoomLevel = DISTANCE_TO_ZOOMLEVELS[evt.target.value];
+        if (newZoomLevel) {
+          this.map.setZoom(newZoomLevel);
+        } else {
+          this.map.setZoom(HOVER_DEFAULT_ZOOM_LEVEL);
+        }
+        break;
+      case "collection":
+          this.appliedFilters[filterType] = evt;
+          break;
+      default:
+        break;
+    }
   };
 
   filterRetailers = () => {
@@ -377,43 +384,34 @@ export default class RetailFinder extends PageManager {
       'address': addr.value
     }, function (results, status) {
       if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
-        let toRemove = [];
 
+        let filteredRetailers = [];
         self.retailers = [...self.originalRetailers];
-        self.originalRetailers.forEach(
-          (retailer) => {
-            Object.entries(self.appliedFilters).forEach(([filterName, value]) => {
-              if (filterName === 'distance' && self.selectedPlace) {
-                const selectedLocation = {
-                  lat: self.selectedPlace.geometry.location.lat(),
-                  lon: self.selectedPlace.geometry.location.lng(),
-                }
-                const distanceAway = self.getDistanceBtwnTwoPts(selectedLocation, retailer.location);
-                retailer.distanceAway = distanceAway;
-                if (distanceAway > value) {
-                  toRemove.push(retailer.id);
-                }
-              };
-              if (filterName === 'collection' && value !== 'All') {
-                const retailersWithSelected = self.collectionsByRetailers[value];
-                if (!retailersWithSelected.includes(retailer.id)) {
-                  toRemove.push(retailer.id);
-                }
-                // business case to filter retailers with Allure Men if collection is set to all
-              } else if (filterName === 'collection' && value === 'All') {
-                const retailersWithAllureMen = self.collectionsByRetailers['Allure Men'];
-                if (retailersWithAllureMen.includes(retailer.id)) {
-                  toRemove.push(retailer.id);
-                }
+        Object.entries(self.appliedFilters).forEach(([filterName, filterValue]) => {
+          if (filterName === 'distance' && self.selectedPlace) {
+            const selectedLocation = {
+              lat: self.selectedPlace.geometry.location.lat(),
+              lon: self.selectedPlace.geometry.location.lng(),
+            }
+            filteredRetailers = self.originalRetailers.filter( retailer => {
+              let distanceAway = self.getDistanceBtwnTwoPts(selectedLocation, retailer.location);
+              retailer.distanceAway = distanceAway;
+              return distanceAway <= filterValue
+            })
+          };
+          if (filterName === 'collection') {
+            let temp = filteredRetailers;
+            console.log(filterValue)
+            filteredRetailers = temp.filter( (dataItem) => {
+              if(filterValue[0] === "Show All Collections"){
+                return dataItem.collectionsAvailableCollection.items.filter( item => self.originalFilters.collection.includes(item.collectionName)).length > 0
+              }else{
+                return dataItem.collectionsAvailableCollection.items.filter( item => filterValue.includes(item.collectionName)).length > 0
               }
             });
-          }
-        );
-
-        const filteredRetailers = [...self.originalRetailers];
-        self.retailers = filteredRetailers.filter(
-          (retailer) => !toRemove.includes(retailer.id)
-        );
+          } 
+        });
+        self.retailers = filteredRetailers;
 
         self.sortRetailers();
         self.paintMapAndRetailers(self.retailers);
@@ -443,6 +441,7 @@ export default class RetailFinder extends PageManager {
       const value = this.appliedFilters[filter];
       element.value = !!!value ? '': value;
     };
+    $("#SimpleJSTree").jstree(true).uncheck_all();
     this.map.setZoom(DEFAULT_ZOOM_LEVEL);
     this.filterRetailers();
   };
@@ -476,55 +475,32 @@ export default class RetailFinder extends PageManager {
 
     distanceFilterDropdown.addEventListener('change', (e) => this.applyFilters('distance', e));
 
-    // collections filter
-    const collectionContainer = document.getElementById('collectionsFilter');
-    const collectionFilter = document.createElement('div');
-    collectionFilter.classList.add('form-field');
-    const collectionFilterLabel = document.createElement('div');
-    collectionFilterLabel.classList.add('form-label');
-    collectionFilterLabel.innerText = 'Carrying';
-    collectionFilter.append(collectionFilterLabel);
-    const collectionFilterDropdown = document.createElement('select');
-    collectionFilterDropdown.id = FILTER_IDS.collection;
-    collectionFilterDropdown.classList.add('form-select');
-    collectionFilterDropdown.classList.add('selector-dropdown');
-    const collectionsSorted = [
-      'All',
-      ...Object.keys(this.collectionsByRetailers).sort()
-    ];
-
-    collectionsSorted.forEach(
-      (collection, index) => {
-        const collectionOption = document.createElement('option');
-        collectionOption.innerText = collection;
-        collectionFilterDropdown.append(
-          collectionOption
-        );
-      }
-    );
-    collectionFilter.append(collectionFilterDropdown);
-    collectionContainer.append(collectionFilter);
-
-    collectionFilterDropdown.addEventListener('change', (e) => this.applyFilters('collection', e));
-
     const jsondata = [
-            { "id": "0", "parent": "#", "text": "All Collections" },
-            { "id": "1", "parent": "#", "text": "Abella" },
-            { "id": "2", "parent": "#", "text": "Allure Bridals" },
-            { "id": "3", "parent": "#", "text": "Allure Couture" },
-            { "id": "4", "parent": "#", "text": "Allure Men" },
-            { "id": "5", "parent": "#", "text": "Allure Modest" },
-            { "id": "6", "parent": "#", "text": "Allure Romance" },
-            { "id": "7", "parent": "#", "text": "Allure Women" },
-            { "id": "8", "parent": "#", "text": "Bridesmaids" },
-            { "id": "10", "parent": "#", "text": "Disney Fairy Tale Weddings" },
-            { "id": "11", "parent": "#", "text": "Suits & Tuxedos" },
-            { "id": "12", "parent": "11", "text": "Ridge" },
-            { "id": "13", "parent": "11", "text": "Brunswick" },
-            { "id": "14", "parent": "11", "text": "Vows" },
-            { "id": "15", "parent": "11", "text": "Venice Velvet" },
-            { "id": "16", "parent": "11", "text": "The Tuxedo" },
+        { "id": "collection0", "parent": "#", "text": "Show All Collections",'state' : {
+          'selected' : true
+        },},
+        { "id": "collection1", "parent": "#", "text": "Abella" },
+        { "id": "collection2", "parent": "#", "text": "Allure Bridals" },
+        { "id": "collection3", "parent": "#", "text": "Allure Couture" },
+        { "id": "collection4", "parent": "#", "text": "Allure Men" },
+        { "id": "collection5", "parent": "#", "text": "Allure Modest" },
+        { "id": "collection6", "parent": "#", "text": "Allure Romance" },
+        { "id": "collection7", "parent": "#", "text": "Allure Women" },
+        { "id": "collection8", "parent": "#", "text": "Bridesmaids" },
+        { "id": "collection9", "parent": "#", "text": "Disney Fairy Tale Weddings" },
+        { "id": "collection10", "parent": "#", "text": "Suits & Tuxedos", 'state' : {
+          'opened' : true,
+        }, },
+        { "id": "collection11", "parent": "collection10", "text": "Ridge" },
+        { "id": "collection12", "parent": "collection10", "text": "Brunswick" },
+        { "id": "collection13", "parent": "collection10", "text": "Vows" },
+        { "id": "collection14", "parent": "collection10", "text": "Venice Velvet" },
+        { "id": "collection15", "parent": "collection10", "text": "The Tuxedo" },
       ];
+
+    // referrence of this
+    const self = this;
+    
     $('#SimpleJSTree').jstree({
       'core': {
         'data': jsondata,
@@ -534,27 +510,21 @@ export default class RetailFinder extends PageManager {
       },
       "plugins": ["checkbox"]
     }).on("changed.jstree", function (e, data) {
-      const selectedCollections = $('#SimpleJSTree').jstree('get_checked').map((id) => {
-        return $('#' + id).text().toLowerCase().trim();
-      });
-      const dataItems = Array.from(document.getElementsByClassName("retailer-item"));
+      // const jstreeInstance = $('#SimpleJSTree').jstree(true);
 
-      const filteredData = dataItems.filter( (dataItem) => {
-        const dataItemArr = dataItem.getElementsByClassName('retailer-collections')[0].textContent.toLowerCase().split(",").map(item => item.trim());
-        return selectedCollections.some((element) => dataItemArr.includes(element)); 
+      // if(jstreeInstance.get_node("collection0").state.selected){
+      //   jstreeInstance.check_all();
+      // }
+
+      const selectedCollections = $('#SimpleJSTree').jstree('get_checked').map((id) => {
+        return $('#' + id).text().trim();
       });
-      dataItems.forEach(function (dataItem) {
-        if (filteredData.includes(dataItem)) {
-          dataItem.style.display = "";
-        } else {
-          dataItem.style.display = "none";
-        }
-      });
+      self.applyFilters('collection', selectedCollections);
+      self.filterRetailers()
     });
 
     //filter button by store name
     const nameFilter = document.getElementById("name-typeahead");
-
     nameFilter.addEventListener("input", (event) => {
       const searchTerm = event.target.value.toLowerCase();
       const dataItems = Array.from(document.getElementsByClassName("retailer-item"));
