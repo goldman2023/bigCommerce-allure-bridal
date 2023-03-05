@@ -35,6 +35,9 @@ const HOVER_DEFAULT_ZOOM_LEVEL = 10;
 const MARKER_HOVER_EVENT = 'markerHoverEvent';
 const RETAILER_ITEM_HOVER_EVENT = 'eventItemHoverEvent';
 
+MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+
+
 export default class DesignerEvents extends PageManager {
     SORTABLES = [
         {
@@ -112,12 +115,11 @@ export default class DesignerEvents extends PageManager {
             collectionItemLabel.innerHTML = collection;
             collectionItem.append(collectionItemLabel);
             collectionFilterList.append(collectionItem);
-            collectionItemCheckbox.addEventListener('change', function()  {
-                console.log("APPLIED FILTERS", self.appliedFilters, this.checked);
+            collectionItemCheckbox.addEventListener('change', function () {
                 const collections = [...self.appliedFilters.collections];
-                if(this.checked && collections.indexOf(collection) < 0) {
+                if (this.checked && collections.indexOf(collection) < 0) {
                     collections.push(collection);
-                // we can assume it's in the list since it doesnt fire initially so it had to have been unchecked
+                    // we can assume it's in the list since it doesnt fire initially so it had to have been unchecked
                 } else {
                     const removeIdx = collections.indexOf(collection);
                     collections.splice(removeIdx, 1);
@@ -130,8 +132,8 @@ export default class DesignerEvents extends PageManager {
 
     setupCollections = () => {
         for (const event of this.originalEvents) {
-            const eventCollections = event.collectionsAvailable || [];            
-            for(const collection of eventCollections) {
+            const eventCollections = event.collectionsAvailable || [];
+            for (const collection of eventCollections) {
                 const eventsWithCollection = this.eventsByCollections[collection] || [];
                 eventsWithCollection.push(event.sys.id);
                 this.eventsByCollections[collection] = eventsWithCollection;
@@ -264,10 +266,24 @@ export default class DesignerEvents extends PageManager {
 
         storeNameFilter.addEventListener('keyup', debouncedSearch);
 
-        // dropdown filters
-        // TODO not working b/c change isnt firing on the select -.-
-        const distanceFilterDropdown = document.getElementById('distanceFilterSelect');
-        distanceFilterDropdown.addEventListener('change', (e) => this.applyFilters('distance', e));
+        // distance filter
+        const distanceFilterButtons = document.querySelectorAll('.custom-select__option:not(.custom-select__option--value)');
+        const allMiles = [10, 25, 50, 100, 500];
+        const distanceFilterBtnHandler = (_, idx) => {
+            // this is insanely hacky
+            // but the css theme modifies the button in place before the event handler triggers
+            // so if user clicks 10 it actually shows 25 as miles since it got replaced    
+            // so respect the array without the current value
+            const allMilesCopy = [...allMiles]
+            const milesWithoutCurrentIdx = allMiles.indexOf(this.appliedFilters.distance);
+            allMilesCopy.splice(milesWithoutCurrentIdx, 1);
+            const actualMilesClicked = allMilesCopy[idx];
+            this.applyFilters('distance', null, actualMilesClicked);
+        };
+        for (let idx = 0; idx < distanceFilterButtons.length; idx++) {
+            const btn = distanceFilterButtons[idx];
+            btn.addEventListener('click', (e) => distanceFilterBtnHandler(e, idx));
+        }
 
 
         // // hover events
@@ -392,8 +408,9 @@ export default class DesignerEvents extends PageManager {
         return distance // in miles
     };
 
-    applyFilters = (filterType, evt, overrideValue=undefined) => {
-        this.appliedFilters[filterType] = overrideValue || evt.target.value;
+    applyFilters = (filterType, evt, overrideValue = undefined) => {
+        const value = overrideValue || evt.target.value;
+        this.appliedFilters[filterType] = value;
 
         // adjust zoom for convenience in distance changes  
         const distanceToZoomLevels = {
@@ -404,7 +421,7 @@ export default class DesignerEvents extends PageManager {
             500: 5,
         };
         if (filterType === 'distance') {
-            const newZoomLevel = distanceToZoomLevels[evt.target.value];
+            const newZoomLevel = distanceToZoomLevels[value];
             if (newZoomLevel) {
                 this.map.setZoom(newZoomLevel);
             } else {
@@ -469,7 +486,6 @@ export default class DesignerEvents extends PageManager {
                         for (const collection of value) {
                             eventsWithCollections = eventsWithCollections.concat(this.eventsByCollections[collection]);
                         }
-                        console.log("event with collections", eventsWithCollections)
                         if (!eventsWithCollections.includes(event.sys.id)) {
                             toRemove.push(event.sys.id);
                         }
