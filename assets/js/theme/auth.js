@@ -188,19 +188,21 @@ export default class Auth extends PageManager {
                 let validform = customValidation();
                 if(validform) {
                     const formData = {
-                        email: $('#login_email').val(),
-                        first_name: $('#register_first').val(),
-                        last_name: $('#register_last').val(),
-                        phone: $('#login_phone').val(),
-                        authentication: {
-                            force_password_reset: true,
-                            new_password: $('#register_pass').val()
+                        "email": $('#login_email').val(),
+                        "first_name": $('#register_first').val(),
+                        "last_name": $('#register_last').val(),
+                        "phone": $('#login_phone').val(),
+                        "authentication": {
+                            "force_password_reset": true,
+                            "new_password": $('#register_pass').val()
                         }
                     };
                     $.ajax({
                         type: "POST",
-                        url: `${self.context.createAccountApiPath}`,
-                        headers: { "API-TOKEN": self.context.workatoApiToken, "Content-Type": "application/json"},
+                        url: self.context.createAccountApiPath,
+                        headers: { 
+                            "API-TOKEN": self.context.workatoApiToken
+                        },
                         data: JSON.stringify(formData),
                         success: response => {
                             swal.fire({
@@ -208,15 +210,25 @@ export default class Auth extends PageManager {
                                 icon: 'success',
                                 showCancelButton: false
                             })
-                           window.location.href = '/thank-you/';
+                            window.location.href = '/thank-you/';
                         },
                         error: error => {
-                            let jsondata = error?.responseJSON?.Error?.split('".customer_create":"')[1]?.replace(`"}}'`, '');
-                            swal.fire({
-                                text: jsondata,
-                                icon: 'error',
-                                showCancelButton: false
-                            })
+                            console.log('error', error);
+                            if (error.status == 200) {
+                                swal.fire({
+                                    text: "Your account has been created",
+                                    icon: 'success',
+                                    showCancelButton: false
+                                })
+                                window.location.href = '/thank-you/';
+                            } else {
+                                let jsondata = error?.responseJSON?.Error?.split('".customer_create":"')[1]?.replace(`"}}'`, '');
+                                swal.fire({
+                                    text: jsondata,
+                                    icon: 'error',
+                                    showCancelButton: false
+                                });
+                            }
                         }
                     });
                 }
