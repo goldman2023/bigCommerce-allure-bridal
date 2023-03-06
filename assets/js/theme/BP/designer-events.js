@@ -91,14 +91,21 @@ export default class DesignerEvents extends PageManager {
     };
 
     createCollectionListItems = (events) => {
-        let allCollections = [];
+        console.log("CURRENT", this.appliedFilters.collections);
+        // TODO it's wiping it out cuz it calls it once its clicked via filtering
+        // maybe only create if not already there?
+        const newCollectionFilters = [];
         for (const event of events) {
             const eventCollections = event.collectionsAvailable || [];
-            allCollections = allCollections.concat(eventCollections);
+            for (const collection of eventCollections) {
+                if(!this.appliedFilters.collections.includes(collection)) {
+                    newCollectionFilters.push(collection);
+                }
+            }
         };
         const self = this;
         // create the filter for the collections
-        const uniqueSortedCollections = Array.from(new Set(allCollections)).sort();
+        const uniqueSortedCollections = Array.from(new Set(newCollectionFilters)).sort();
         const collectionFilterList = document.getElementById('collections');
         collectionFilterList.innerHTML = '';
         uniqueSortedCollections.forEach((collection) => {
@@ -430,6 +437,14 @@ export default class DesignerEvents extends PageManager {
         };
     };
 
+    updateEventUi = (events, updateResultText=true) => {    
+        this.paintEventMapMarkers(events);
+        this.addEventInfo(events);
+        this.updateFilters(events);
+        if(updateResultText) {
+            this.updateResultsInfo(events);
+        }
+    }
 
     filterEventsByLocation = () => {
         const addr = document.getElementById("locationTypeahead");
@@ -465,10 +480,7 @@ export default class DesignerEvents extends PageManager {
                 this.eventsFilteredByLocation = filteredEvents.filter(
                     (event) => !toRemove.includes(event.sys.id)
                 );
-                this.paintEventMapMarkers(this.eventsFilteredByLocation);
-                this.updateResultsInfo(this.eventsFilteredByLocation);
-                this.addEventInfo(this.eventsFilteredByLocation);
-                this.updateFilters(this.eventsFilteredByLocation);
+                this.updateEventUi(this.eventsFilteredByLocation);
 
             }
         });
@@ -501,10 +513,7 @@ export default class DesignerEvents extends PageManager {
         this.events = filteredEvents.filter(
             (event) => !toRemove.includes(event.sys.id)
         );
-        this.paintEventMapMarkers(this.events);
-        this.updateResultsInfo(this.events);
-        this.addEventInfo(this.events);
-        this.updateFilters(this.events);
+        this.updateEventUi(this.events);
     };
 
     updateFilters = (events) => {
@@ -550,6 +559,9 @@ export default class DesignerEvents extends PageManager {
         // trigger manual change event to ensure button handlers are fired 
         const changeEvent = new Event('change');
         locationTypeahead.dispatchEvent(changeEvent);
+        this.events = [];
+        this.eventsFilteredByLocation = [];
+        this.updateEventUi([], false);
     };
 
     sortEvents = (evt, override = null) => {
@@ -641,6 +653,7 @@ export default class DesignerEvents extends PageManager {
         if (!this.markerClusterer) {
             this.markerClusterer = new MarkerClusterer({ markers: markers, map: this.map })
         } else {
+            console.log("cleaering")
             this.markerClusterer.clearMarkers();
             this.markerClusterer.addMarkers(markers);
         }
