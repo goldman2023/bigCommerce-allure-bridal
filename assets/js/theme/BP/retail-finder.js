@@ -81,6 +81,10 @@ const TEMPDATA = [
 ]
 
 const DEFAULT_ZOOM_LEVEL = 4;
+const INITIAL_MAP = {
+    zoom: 2,
+    center: { lat: 36, lng: -60 },
+}
 const HOVER_DEFAULT_ZOOM_LEVEL = 10;
 
 const MARKER_HOVER_EVENT = 'markerHoverEvent';
@@ -445,7 +449,7 @@ export default class RetailFinder extends PageManager {
         if (newZoomLevel) {
           this.map.setZoom(newZoomLevel);
         } else {
-          this.map.setZoom(HOVER_DEFAULT_ZOOM_LEVEL);
+          this.map.setZoom(DEFAULT_ZOOM_LEVEL);
         }
         break;
       case "collection":
@@ -538,13 +542,16 @@ export default class RetailFinder extends PageManager {
       element.value = !!!value ? '': value;
     };
     $("#collectionFilters").jstree(true).check_all();
-    $("#name-typeahead").val("")
-    this.map.setZoom(DEFAULT_ZOOM_LEVEL);
-    this.paintMapAndRetailers([], null, true);
+    $("#name-typeahead").val("");
+
+    //set default map
+    this.map.setZoom(INITIAL_MAP.zoom);
+    this.map.setCenter({ lat: INITIAL_MAP.center.lat, lng: INITIAL_MAP.center.lng })
+    this.paintMapAndRetailers([])
+
     $("#filterButton .button").attr("disabled", true);
     this.filterRetailers();
   };
-
   createFilterElements = () => {
     // distance filter
     const distanceContainer = document.getElementById('distanceFilter');
@@ -742,10 +749,7 @@ export default class RetailFinder extends PageManager {
   // so this method is called anytime the data to show changes or when a 
   // retailer marker needs to be centered and highlighted
   paintMapAndRetailers = (retailerData, centerRetailer = null, skipRetailerInfo = false) => {
-    const map = this.map || new google.maps.Map(document.getElementById('map'), {
-      zoom: 2,
-      center: { lat: 36, lng: -60 },
-    });
+    const map = this.map || new google.maps.Map(document.getElementById('map'), INITIAL_MAP);
     if (!this.map) {
       this.map = map;
     }
