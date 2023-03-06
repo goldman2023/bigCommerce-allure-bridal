@@ -150,10 +150,10 @@ export default class Auth extends PageManager {
             {
                 selector: phoneSelector,
                 validate: (cb, val) => {
-                    const result = forms.notEmpty(val);
+                    const result = forms.notEmpty(val) & val.length == 10;
                     cb(result);
                 },
-                errorMessage: 'Phone Number cannot be empty',
+                errorMessage: 'Phone must not be greater than or less than 10 digits.',
             },
             {
                 selector: weddingDateSelector,
