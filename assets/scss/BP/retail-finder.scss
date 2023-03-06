@@ -8,8 +8,8 @@
     flex-wrap: wrap;
     .map-filters {
       order: 3;
-      width: 35%;
-      margin-right: 2%;
+      width: 39%;
+      margin-right: 1%;
       padding-right: 5px;
       padding-Left: 5px;
       max-height:  900px;
@@ -30,54 +30,38 @@
       }
       .available-retailers {
         .top {
-          width: 100%;
           display: flex;
+          flex-direction: row;
           align-items: center;
+          justify-content: space-between;
           border-bottom: 1px solid stencilColor('color-men-design-primary-2');
-          padding-bottom: 22px;
-          position: relative;
-  
-          svg {
-            position: absolute;
-            bottom: -7px;
-            left: 50%;
-          }
-  
-          .retailers {
-            margin-bottom: 0;
-          }
-  
-          .sort-dropdown {
-            margin-left: auto;
+          padding: 22px 0px 22px 0px;
+          .sort-dropdown{
             display: none;
-            // display: flex;
-            font-family: stencilFontFamily('default-font-regular');
-            font-style: normal;
+          }
+          .filter-visible{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: end;
             font-weight: 500;
             font-size: 12px;
-            color: stencilColor('allure-bridals-neutral-2');
             line-height: 15px;
-            /* identical to box height */
-  
-            text-align: center;
             letter-spacing: 0.1em;
-  
-            .sort-label {
-              width: 100px;
-              display: flex;
-              align-items: center;
-            }
-  
-            .sort-select {
-              border: none;
-  
-              &:focus {
-                outline: none !important;
-              }
+            text-transform: uppercase;
+            cursor: pointer;
+            &::before{
+              padding-right: 5px;
+              padding-top: 2px;
+              content: url('../icons/filter-show-hide.svg');
             }
           }
-        }
   
+  
+          .retailers {
+            margin: 0;
+          }        
+        }
         .results-divider {
           display: flex;
           padding: 12px 32px;
@@ -232,11 +216,12 @@
         }
 
         .option-filters{
-          font-family: 'Inter Regular';
-          font-style: normal;
-          font-weight: 400;
-          font-size: 12px;
-          line-height: 20px;
+            border-bottom: 1px solid #828ca6;
+            font-family: 'Inter Regular';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 20px;
           .collections-label{
             font-family: 'Inter Regular';
             font-style: normal;
@@ -301,6 +286,19 @@
             }
           }
         }
+
+        // specific dot
+        .header-svg__border {
+          position: relative;
+          svg {
+              position: absolute;
+              top: 0;
+              right: 0;
+              left: 0;
+              margin: auto;
+              bottom: 0;
+          }
+        }
       }
       .form {
         position: relative;
@@ -321,7 +319,7 @@
     }
 
     .map-and-retailers {
-      width: 63%;
+      width: 60%;
       order: 4;
       #map {
         min-height: 600px;
@@ -544,7 +542,6 @@
       .retailer-header {
         border-bottom: 1px solid #e5e5e5;
         padding-bottom: 30px;
-        margin-bottom: 30px;
 
         .featured {
           color: stencilColor('color-default-primary-1');
@@ -565,9 +562,24 @@
           letter-spacing: 0.1em;
 
         }
+
+       
+      }
+      // specific dot
+      .header-svg__border {
+        position: relative;
+        svg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
+            bottom: 0;
+        }
       }
 
       .collections {
+        margin-top: 30px;
         margin-bottom: 24px;
 
 
@@ -712,6 +724,7 @@
   }
 }
 
+
 // mobile overrides
 @media (max-width: '900px') {
 
@@ -745,7 +758,7 @@
     }
     .map-and-retailers {
       width: 100% !important;
-      display: none;
+      // display: none;
       order: 1 !important;
       #map {
         min-height: 400px !important;

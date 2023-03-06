@@ -359,6 +359,7 @@ export default class RetailFinder extends PageManager {
       case "distance":
         // adjust zoom for convenience in distance changes 
         const newZoomLevel = DISTANCE_TO_ZOOMLEVELS[evt.target.value];
+        this.appliedFilters[filterType] = evt.target.value
         if (newZoomLevel) {
           this.map.setZoom(newZoomLevel);
         } else {
@@ -401,7 +402,6 @@ export default class RetailFinder extends PageManager {
           };
           if (filterName === 'collection') {
             let temp = filteredRetailers;
-            console.log(filterValue)
             filteredRetailers = temp.filter( (dataItem) => {
               if(filterValue[0] === "Show All Collections"){
                 return dataItem.collectionsAvailableCollection.items.filter( item => self.originalFilters.collection.includes(item.collectionName)).length > 0
@@ -474,73 +474,137 @@ export default class RetailFinder extends PageManager {
     distanceContainer.append(distanceFilter);
 
     distanceFilterDropdown.addEventListener('change', (e) => this.applyFilters('distance', e));
-
+      //use temp data
     const jsondata = [
         { "id": "collection0", "parent": "#", "text": "Show All Collections",'state' : {
-          'selected' : true
+          'selected' : true,
         },},
-        { "id": "collection1", "parent": "#", "text": "Abella" },
-        { "id": "collection2", "parent": "#", "text": "Allure Bridals" },
-        { "id": "collection3", "parent": "#", "text": "Allure Couture" },
-        { "id": "collection4", "parent": "#", "text": "Allure Men" },
-        { "id": "collection5", "parent": "#", "text": "Allure Modest" },
-        { "id": "collection6", "parent": "#", "text": "Allure Romance" },
-        { "id": "collection7", "parent": "#", "text": "Allure Women" },
-        { "id": "collection8", "parent": "#", "text": "Bridesmaids" },
-        { "id": "collection9", "parent": "#", "text": "Disney Fairy Tale Weddings" },
+        { "id": "collection1", "parent": "#", "text": "Abella",'state' : {
+          'selected' : true
+        } },
+        { "id": "collection2", "parent": "#", "text": "Allure Bridals",'state' : {
+          'selected' : true
+        }},
+        { "id": "collection3", "parent": "#", "text": "Allure Couture",'state' : {
+          'selected' : true
+        } },
+        { "id": "collection4", "parent": "#", "text": "Allure Men",'state' : {
+          'selected' : true
+        } },
+        { "id": "collection5", "parent": "#", "text": "Allure Modest",'state' : {
+          'selected' : true
+        } },
+        { "id": "collection6", "parent": "#", "text": "Allure Romance",'state' : {
+          'selected' : true
+        } },
+        { "id": "collection7", "parent": "#", "text": "Allure Women",'state' : {
+          'selected' : true
+        }},
+        { "id": "collection8", "parent": "#", "text": "Bridesmaids",'state' : {
+          'selected' : true
+        } },
+        { "id": "collection9", "parent": "#", "text": "Disney Fairy Tale Weddings",'state' : {
+          'selected' : true
+        } },
         { "id": "collection10", "parent": "#", "text": "Suits & Tuxedos", 'state' : {
           'opened' : true,
+          'selected' : true
         }, },
         { "id": "collection11", "parent": "collection10", "text": "Ridge" },
         { "id": "collection12", "parent": "collection10", "text": "Brunswick" },
         { "id": "collection13", "parent": "collection10", "text": "Vows" },
         { "id": "collection14", "parent": "collection10", "text": "Venice Velvet" },
         { "id": "collection15", "parent": "collection10", "text": "The Tuxedo" },
-      ];
-
-    // referrence of this
+      ]
+    // reference of this
     const self = this;
     
     $('#SimpleJSTree').jstree({
       'core': {
         'data': jsondata,
+        
+
         "themes": {
           "variant": "large"
-        }
+        },
+        
+      },
+      " checkbox" :{
+        "three_state" : true
       },
       "plugins": ["checkbox"]
-    }).on("changed.jstree", function (e, data) {
-      // const jstreeInstance = $('#SimpleJSTree').jstree(true);
+   
+      
+    }).bind("deselect_node.jstree select_node.jstree", function (e, data) {
+      const instanceTree = $("#SimpleJSTree").jstree();
+      const checkedNode = $('#SimpleJSTree').jstree("get_checked");
+      switch (data.node.id) {
+        case "collection0":
+          if (data.node.state.selected) {
+            instanceTree.check_all(true) ;
 
-      // if(jstreeInstance.get_node("collection0").state.selected){
-      //   jstreeInstance.check_all();
-      // }
+          }else{
+            
+            $('#collection0').find('.jstree-checkbox').css("background-position", "-160px, 0")
+            instanceTree.uncheck_all(true) ;
+          }
+          break;
+        default:
+          if(checkedNode.length === jsondata.length && data.node.state.selected ){
+            instanceTree.check_all(true) ;
+          } else if(checkedNode.length === jsondata.length -1  && checkedNode.sort()[0] !== "collection0"){
+            instanceTree.check_all(true) ;
+          } else if(checkedNode.length === 0 ){
+            // instanceTree.uncheck_all(true) ;
+            $('#collection0').find('.jstree-checkbox').css("background-position", "-160px, 0")
+          }else if(checkedNode.length === 1 && checkedNode.sort()[0] === "collection0"){
+            instanceTree.uncheck_all(true) ;
+            $('#collection0').find('.jstree-checkbox').css("background-position", "-160px, 0")
 
+          } else{
+            $('#collection0').find('.jstree-checkbox').css("background-position", "-192px 0")
+          }
+          break;
+      }
+      //fitering
       const selectedCollections = $('#SimpleJSTree').jstree('get_checked').map((id) => {
         return $('#' + id).text().trim();
       });
       self.applyFilters('collection', selectedCollections);
       self.filterRetailers()
     });
+   
+    $(".filter-visible").click(function(){
 
+      if ($(this).text() === 'HIDE FILTER') {
+        $(this).text('SHOW FILTER');
+      } else {
+        $(this).text('HIDE FILTER');
+      }
+      $(".option-filters").toggle(function (){
+        $(this).animate({height: "0px"}, 300);
+      }, function () { 
+        $(this).animate({height: "auto"}, 300);
+      });
+    });  
     //filter button by store name
     const nameFilter = document.getElementById("name-typeahead");
     nameFilter.addEventListener("input", (event) => {
-      const searchTerm = event.target.value.toLowerCase();
-      const dataItems = Array.from(document.getElementsByClassName("retailer-item"));
-    
-      const filteredData = dataItems.filter(function (dataItem) {
-        const dataItemText = dataItem.getElementsByClassName('retailer-title')[0].textContent.toLowerCase();
-        return dataItemText.includes(searchTerm);
-      });
-      dataItems.forEach(function (dataItem) {
-        if (filteredData.includes(dataItem)) {
-          dataItem.style.display = "";
-        } else {
-          dataItem.style.display = "none";
-        }
-      });
-    })
+    const searchTerm = event.target.value.toLowerCase();
+    const dataItems = Array.from(document.getElementsByClassName("retailer-item"));
+  
+    const filteredData = dataItems.filter(function (dataItem) {
+      const dataItemText = dataItem.getElementsByClassName('retailer-title')[0].textContent.toLowerCase();
+      return dataItemText.includes(searchTerm);
+    });
+    dataItems.forEach(function (dataItem) {
+      if (filteredData.includes(dataItem)) {
+        dataItem.style.display = "";
+      } else {
+        dataItem.style.display = "none";
+      }
+    });
+  })
 
     //submit btn
     const submitBtnContainer = document.getElementById('filterButton');
@@ -711,7 +775,6 @@ export default class RetailFinder extends PageManager {
 
     const header = document.createElement('div');
     header.classList.add('retailer-header');
-
     if (retailer.featured) {
       const featuredElement = document.createElement('span');
       featuredElement.classList.add('featured');
@@ -734,6 +797,9 @@ export default class RetailFinder extends PageManager {
     locationElement.innerText = `${retailer.retailerCity}, ${retailer.state}`;
     header.append(locationElement);
     detailElement.append(header);
+    const dot = document.querySelector('.header-svg__border');
+    const clone = dot.cloneNode(true)
+    detailElement.append(clone);
 
     const collections = document.createElement('div');
     collections.classList.add('collections');
