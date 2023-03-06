@@ -51,14 +51,25 @@
     min-height: 100vh;
     overflow: auto;
     height: 100%;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.9);
     .prodimageslider , .prodimageslider img {
-      //width: 100vw;
-      min-height: 100vh;
-      height: 100%;
+      @include breakpoint("medium") {
+        //width: 100vw;
+        min-height: 100vh;
+        height: 100%;
+      }
+    }
+    .prodimageslider {
+      @media screen and (max-width: 1024px) {
+        display: flex;
+        align-items: center;
+        height: 100vh;
+      }
     }
     .slick-next,.slick-prev ,.close {
-      position: fixed;
+      @include breakpoint("medium") {
+        position: fixed;
+      }
     }
     .close {
       color: #bbb;
