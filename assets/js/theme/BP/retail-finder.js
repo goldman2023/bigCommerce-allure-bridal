@@ -527,7 +527,8 @@ export default class RetailFinder extends PageManager {
       const value = this.appliedFilters[filter];
       element.value = !!!value ? '': value;
     };
-    $("#collectionFilters").jstree(true).uncheck_all();
+    $("#collectionFilters").jstree(true).check_all();
+    $("#name-typeahead").val("")
     this.map.setZoom(DEFAULT_ZOOM_LEVEL);
     this.filterRetailers();
   };
