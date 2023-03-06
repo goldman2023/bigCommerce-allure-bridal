@@ -6,7 +6,6 @@ import { defaultModal } from '../global/modal';
 import PageManager from '../page-manager'
 import $ from 'jquery';
 import 'jstree';
-import { filter, uniq } from 'lodash';
 
 const MAP_MARKER_BLACK = {
   path: 'M10 0C4.5 0 0 4.5 0 10c0 7.4 9.1 13.6 9.4 13.8.2.1.4.2.6.2s.4-.1.6-.2c.3-.2 9.4-6.4 9.4-13.8 0-5.5-4.5-10-10-10zm0 14c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z',
@@ -157,6 +156,14 @@ export default class RetailFinder extends PageManager {
         element.hide();
       }
     });
+    //get enter event
+    $(document).keypress(function(event){
+      var keycode = (event.keyCode ? event.keyCode : event.which);
+      if(keycode === 13){
+        self.filterRetailers();
+        $("#filterButton .button").click()
+      }
+    });
 
   };
 
@@ -203,11 +210,14 @@ export default class RetailFinder extends PageManager {
 
     });
 
-    locationTypeahead.addEventListener('change', (e) => {
+    locationTypeahead.addEventListener('input', (e) => {
       if (!e.target.value) {
         this.selectedPlace = null;
         submitBtn.disabled = true;
         locationTypeahead.classList.add('error');
+      } else {
+        submitBtn.disabled = false;
+        locationTypeahead.classList.remove('error');
       }
     });
 
@@ -530,6 +540,8 @@ export default class RetailFinder extends PageManager {
     $("#collectionFilters").jstree(true).check_all();
     $("#name-typeahead").val("")
     this.map.setZoom(DEFAULT_ZOOM_LEVEL);
+    this.paintMapAndRetailers([], null, true);
+    $("#filterButton .button").attr("disabled", true);
     this.filterRetailers();
   };
 
@@ -616,6 +628,7 @@ export default class RetailFinder extends PageManager {
     submitBtn.classList.add('button');
     submitBtn.setAttribute('type', 'button');
     submitBtn.innerHTML = 'SEARCH';
+    submitBtn.disabled = true;
     submitBtnContainer.append(submitBtn);
     submitBtn.addEventListener('click', this.filterRetailers);
 
