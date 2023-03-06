@@ -8,7 +8,7 @@
             <div class="map-toggle">
                 <label class="toggle-label">SHOW MAP</label>
                 <label class="switch">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" class="on-off-map" checked>
                     <span class="slider round"></span>
                   </label>
             </div>
@@ -57,7 +57,7 @@
                         </div>
                         <div clsss="collections">
                             <div class="collections-label">COLLECTIONS:</div>
-                            <div id="SimpleJSTree" class="collections-filter"></div>
+                            <div id="collectionFilters" class="collections-filter"></div>
                         </div>
                     </div>
                     <div class="header-svg__border">
@@ -76,7 +76,7 @@
             </div>
     
         </div>
-        <div class="map-and-retailers">
+        <div class="map">
             <div id="map"></div>
             <script type="text/javascript"
                 src="https://maps.googleapis.com/maps/api/js?key={{ theme_settings.google_api_token }}&libraries=places&callback=Function.prototype">

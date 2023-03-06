@@ -6,7 +6,7 @@ import { defaultModal } from '../global/modal';
 import PageManager from '../page-manager'
 import $ from 'jquery';
 import 'jstree';
-import { uniq } from 'lodash';
+import { filter, uniq } from 'lodash';
 
 const MAP_MARKER_BLACK = {
   path: 'M10 0C4.5 0 0 4.5 0 10c0 7.4 9.1 13.6 9.4 13.8.2.1.4.2.6.2s.4-.1.6-.2c.3-.2 9.4-6.4 9.4-13.8 0-5.5-4.5-10-10-10zm0 14c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z',
@@ -37,6 +37,49 @@ const DISTANCE_TO_ZOOMLEVELS = {
   100: 8,
   250: 5,
 };
+
+// use temp data for collections
+const TEMPDATA = [
+  { "id": "collection0", "parent": "#", "text": "Show All Collections",'state' : {
+    'selected' : true,
+  },},
+  { "id": "collection1", "parent": "#", "text": "Abella",'state' : {
+    'selected' : true
+  } },
+  { "id": "collection2", "parent": "#", "text": "Allure Bridals",'state' : {
+    'selected' : true
+  }},
+  { "id": "collection3", "parent": "#", "text": "Allure Couture",'state' : {
+    'selected' : true
+  } },
+  { "id": "collection4", "parent": "#", "text": "Allure Men",'state' : {
+    'selected' : true
+  } },
+  { "id": "collection5", "parent": "#", "text": "Allure Modest",'state' : {
+    'selected' : true
+  } },
+  { "id": "collection6", "parent": "#", "text": "Allure Romance",'state' : {
+    'selected' : true
+  } },
+  { "id": "collection7", "parent": "#", "text": "Allure Women",'state' : {
+    'selected' : true
+  }},
+  { "id": "collection8", "parent": "#", "text": "Bridesmaids",'state' : {
+    'selected' : true
+  } },
+  { "id": "collection9", "parent": "#", "text": "Disney Fairy Tale Weddings",'state' : {
+    'selected' : true
+  } },
+  { "id": "collection10", "parent": "#", "text": "Suits & Tuxedos", 'state' : {
+    'opened' : true,
+    'selected' : true
+  }, },
+  { "id": "collection11", "parent": "collection10", "text": "Ridge" },
+  { "id": "collection12", "parent": "collection10", "text": "Brunswick" },
+  { "id": "collection13", "parent": "collection10", "text": "Vows" },
+  { "id": "collection14", "parent": "collection10", "text": "Venice Velvet" },
+  { "id": "collection15", "parent": "collection10", "text": "The Tuxedo" },
+]
 
 const DEFAULT_ZOOM_LEVEL = 4;
 const HOVER_DEFAULT_ZOOM_LEVEL = 10;
@@ -86,6 +129,35 @@ export default class RetailFinder extends PageManager {
     this.originalRetailers = [...retailerData];
     this.addSortSelectOptions();
     this.addEventHandlers();
+
+    // reference of this
+    const self = this;
+    
+    // show on/off collection filter part
+    $(".filter-visible").click(function(){
+      $(".option-filters").slideToggle(300);
+      $(this).text(function(i, text){
+        return text === 'HIDE FILTER' ? 'SHOW FILTER' : 'HIDE FILTER';
+      });
+    });
+
+    //filter button by store name
+    $("#name-typeahead").on("input", function() {
+      const searchTerm = $(this).val().toLowerCase();
+      self.applyFilters('name', searchTerm);
+      // self.filterRetailers();
+    });
+
+    //show on/off  map
+    $(".on-off-map").change(function(){
+      let element = $('.map');
+      if ($(this).is(':checked')) {
+        element.show();
+      } else {
+        element.hide();
+      }
+    });
+
   };
 
   addEventHandlers = () => {
@@ -369,6 +441,9 @@ export default class RetailFinder extends PageManager {
       case "collection":
           this.appliedFilters[filterType] = evt;
           break;
+      case "name":
+          this.appliedFilters[filterType] = evt;
+          break;
       default:
         break;
     }
@@ -389,6 +464,7 @@ export default class RetailFinder extends PageManager {
         let filteredRetailers = [];
         self.retailers = [...self.originalRetailers];
         Object.entries(self.appliedFilters).forEach(([filterName, filterValue]) => {
+          // filter by distance
           if (filterName === 'distance' && self.selectedPlace) {
             const selectedLocation = {
               lat: self.selectedPlace.geometry.location.lat(),
@@ -400,6 +476,7 @@ export default class RetailFinder extends PageManager {
               return distanceAway <= filterValue
             })
           };
+          //filter by collections
           if (filterName === 'collection') {
             let temp = filteredRetailers;
             filteredRetailers = temp.filter( (dataItem) => {
@@ -409,10 +486,19 @@ export default class RetailFinder extends PageManager {
                 return dataItem.collectionsAvailableCollection.items.filter( item => filterValue.includes(item.collectionName)).length > 0
               }
             });
+          }
+          //filter by name
+          if(filterName === "name"){
+            let temp = filteredRetailers;
+            if(filterValue.length !== 0){
+              filteredRetailers = temp.filter( (dataItem) => {
+                  return dataItem.retailerName.toLowerCase().includes(filterValue)
+              });
+            }
           } 
         });
+        
         self.retailers = filteredRetailers;
-
         self.sortRetailers();
         self.paintMapAndRetailers(self.retailers);
         self.updateResultsInfo();
@@ -441,7 +527,7 @@ export default class RetailFinder extends PageManager {
       const value = this.appliedFilters[filter];
       element.value = !!!value ? '': value;
     };
-    $("#SimpleJSTree").jstree(true).uncheck_all();
+    $("#collectionFilters").jstree(true).uncheck_all();
     this.map.setZoom(DEFAULT_ZOOM_LEVEL);
     this.filterRetailers();
   };
@@ -474,138 +560,55 @@ export default class RetailFinder extends PageManager {
     distanceContainer.append(distanceFilter);
 
     distanceFilterDropdown.addEventListener('change', (e) => this.applyFilters('distance', e));
-      //use temp data
-    const jsondata = [
-        { "id": "collection0", "parent": "#", "text": "Show All Collections",'state' : {
-          'selected' : true,
-        },},
-        { "id": "collection1", "parent": "#", "text": "Abella",'state' : {
-          'selected' : true
-        } },
-        { "id": "collection2", "parent": "#", "text": "Allure Bridals",'state' : {
-          'selected' : true
-        }},
-        { "id": "collection3", "parent": "#", "text": "Allure Couture",'state' : {
-          'selected' : true
-        } },
-        { "id": "collection4", "parent": "#", "text": "Allure Men",'state' : {
-          'selected' : true
-        } },
-        { "id": "collection5", "parent": "#", "text": "Allure Modest",'state' : {
-          'selected' : true
-        } },
-        { "id": "collection6", "parent": "#", "text": "Allure Romance",'state' : {
-          'selected' : true
-        } },
-        { "id": "collection7", "parent": "#", "text": "Allure Women",'state' : {
-          'selected' : true
-        }},
-        { "id": "collection8", "parent": "#", "text": "Bridesmaids",'state' : {
-          'selected' : true
-        } },
-        { "id": "collection9", "parent": "#", "text": "Disney Fairy Tale Weddings",'state' : {
-          'selected' : true
-        } },
-        { "id": "collection10", "parent": "#", "text": "Suits & Tuxedos", 'state' : {
-          'opened' : true,
-          'selected' : true
-        }, },
-        { "id": "collection11", "parent": "collection10", "text": "Ridge" },
-        { "id": "collection12", "parent": "collection10", "text": "Brunswick" },
-        { "id": "collection13", "parent": "collection10", "text": "Vows" },
-        { "id": "collection14", "parent": "collection10", "text": "Venice Velvet" },
-        { "id": "collection15", "parent": "collection10", "text": "The Tuxedo" },
-      ]
+
     // reference of this
     const self = this;
-    
-    $('#SimpleJSTree').jstree({
-      'core': {
-        'data': jsondata,
-        
-
-        "themes": {
-          "variant": "large"
+    // jsTree configuration and add actions
+    $('#collectionFilters').jstree({
+      core: {
+        data: TEMPDATA,
+        themes: {
+          variant: "large"
         },
-        
       },
-      " checkbox" :{
-        "three_state" : true
+      checkbox: {
+        three_state: true
       },
-      "plugins": ["checkbox"]
-   
+      plugins: ["checkbox"]
+    }).on("select_node.jstree deselect_node.jstree", function (e, data) {
+      const instanceTree = $("#collectionFilters").jstree();
+      const checkedNode = $('#collectionFilters').jstree("get_checked");
       
-    }).bind("deselect_node.jstree select_node.jstree", function (e, data) {
-      const instanceTree = $("#SimpleJSTree").jstree();
-      const checkedNode = $('#SimpleJSTree').jstree("get_checked");
-      switch (data.node.id) {
-        case "collection0":
-          if (data.node.state.selected) {
-            instanceTree.check_all(true) ;
-
-          }else{
-            
-            $('#collection0').find('.jstree-checkbox').css("background-position", "-160px, 0")
-            instanceTree.uncheck_all(true) ;
-          }
-          break;
-        default:
-          if(checkedNode.length === jsondata.length && data.node.state.selected ){
-            instanceTree.check_all(true) ;
-          } else if(checkedNode.length === jsondata.length -1  && checkedNode.sort()[0] !== "collection0"){
-            instanceTree.check_all(true) ;
-          } else if(checkedNode.length === 0 ){
-            // instanceTree.uncheck_all(true) ;
-            $('#collection0').find('.jstree-checkbox').css("background-position", "-160px, 0")
-          }else if(checkedNode.length === 1 && checkedNode.sort()[0] === "collection0"){
-            instanceTree.uncheck_all(true) ;
-            $('#collection0').find('.jstree-checkbox').css("background-position", "-160px, 0")
-
-          } else{
-            $('#collection0').find('.jstree-checkbox').css("background-position", "-192px 0")
-          }
-          break;
+      if (data.node.id === "collection0") {
+        if (data.node.state.selected) {
+          instanceTree.check_all(true);
+        } else {
+          $('#collection0 .jstree-checkbox').css("background-position", "-160px, 0")
+          instanceTree.uncheck_all(true);
+        }
+      } else {
+        if (checkedNode.length === TEMPDATA.length && data.node.state.selected) {
+          instanceTree.check_all(true);
+        } else if (checkedNode.length === TEMPDATA.length - 1 && checkedNode.sort()[0] !== "collection0") {
+          instanceTree.check_all(true);
+        } else if (checkedNode.length === 0) {
+          $('#collection0 .jstree-checkbox').css("background-position", "-160px, 0")
+        } else if (checkedNode.length === 1 && checkedNode.sort()[0] === "collection0") {
+          instanceTree.uncheck_all(true);
+          $('#collection0 .jstree-checkbox').css("background-position", "-160px, 0")
+        } else {
+          $('#collection0 .jstree-checkbox').css("background-position", "-192px 0")
+        }
       }
-      //fitering
-      const selectedCollections = $('#SimpleJSTree').jstree('get_checked').map((id) => {
+    
+      //filtering
+      const selectedCollections = $('#collectionFilters').jstree('get_checked').map((id) => {
         return $('#' + id).text().trim();
       });
       self.applyFilters('collection', selectedCollections);
-      self.filterRetailers()
+      self.filterRetailers();
     });
-   
-    $(".filter-visible").click(function(){
-
-      if ($(this).text() === 'HIDE FILTER') {
-        $(this).text('SHOW FILTER');
-      } else {
-        $(this).text('HIDE FILTER');
-      }
-      $(".option-filters").toggle(function (){
-        $(this).animate({height: "0px"}, 300);
-      }, function () { 
-        $(this).animate({height: "auto"}, 300);
-      });
-    });  
-    //filter button by store name
-    const nameFilter = document.getElementById("name-typeahead");
-    nameFilter.addEventListener("input", (event) => {
-    const searchTerm = event.target.value.toLowerCase();
-    const dataItems = Array.from(document.getElementsByClassName("retailer-item"));
-  
-    const filteredData = dataItems.filter(function (dataItem) {
-      const dataItemText = dataItem.getElementsByClassName('retailer-title')[0].textContent.toLowerCase();
-      return dataItemText.includes(searchTerm);
-    });
-    dataItems.forEach(function (dataItem) {
-      if (filteredData.includes(dataItem)) {
-        dataItem.style.display = "";
-      } else {
-        dataItem.style.display = "none";
-      }
-    });
-  })
-
+    
     //submit btn
     const submitBtnContainer = document.getElementById('filterButton');
     const submitBtn = document.createElement('button');
@@ -624,18 +627,6 @@ export default class RetailFinder extends PageManager {
     resetBtnContainer.append(resetBtn);
     resetBtn.addEventListener('click', this.resetFilters);
 
-    //show on/off  map
-    const checkbox = document.querySelector("input[type='checkbox']");
-    checkbox.addEventListener('change', (event) => {
-
-      let element = document.querySelector('.map-and-retailers');
-      if (event.target.checked) {
-        element.style.setProperty('display', 'block');
-      } else {
-        element.style.setProperty('display', 'none');
-
-      }
-    });
   };
 
   setupFilterData = async (rawRetailers) => {

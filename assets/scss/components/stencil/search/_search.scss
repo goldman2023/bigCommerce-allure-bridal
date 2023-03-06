@@ -25,8 +25,6 @@
 
 .quickSearchResults {
     margin-top: spacing("single");
-    // overflow: scroll;
-    height: 100vh;
     @include breakpoint("medium") {
         margin-top: 0;
     }
