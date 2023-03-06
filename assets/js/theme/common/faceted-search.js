@@ -373,10 +373,10 @@ class FacetedSearch {
 
     updateItems() {
         if($('.product').length <= 1) {
-            $('.middlemob').html($('.product').length+' Item'); 
+            // $('.middlemob').html($('.product').length+' Item'); 
             $('.pagefilterheader .middle').html($('.product').length+' Items');
         } else {
-            $('.middlemob').html($('.product').length+' Item'); 
+            // $('.middlemob').html($('.product').length+' Item'); 
             $('.pagefilterheader .middle').html($('.product').length+' Items');
         }
     }

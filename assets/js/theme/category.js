@@ -89,9 +89,9 @@ export default class Category extends CatalogPage {
         });
 
 
-        $(window).load(function(){
-            $('.middlemob').html($('.pagefilterheader .middle').html());        
-        });
+        // $(window).load(function(){
+        //     $('.middlemob').html($('.pagefilterheader .middle').html());        
+        // });
     }
 
     ariaNotifyNoProducts() {
