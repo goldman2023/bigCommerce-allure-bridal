@@ -75,7 +75,7 @@ export default class DesignerEvents extends PageManager {
         this.markerClusterer = null;
         this.page = 1;
         this.perPage = 9;
-        this.sortBy = 'distance';
+        this.sortBy = 'asc';
         this.geocoder = new google.maps.Geocoder();
         this.autocomplete = null;
     };
@@ -85,27 +85,18 @@ export default class DesignerEvents extends PageManager {
         this.originalEvents = await this.getDesignerEvents();
         this.setupCollections();
         this.initMap();
-        // this.addEventInfo(this.originalEvents);
-        // this.addSortSelectOptions();
         this.addEventHandlers();
     };
 
     createCollectionListItems = (events) => {
-        console.log("CURRENT", this.appliedFilters.collections);
-        // TODO it's wiping it out cuz it calls it once its clicked via filtering
-        // maybe only create if not already there?
-        const newCollectionFilters = [];
+        let allCollectionFilters = [];
         for (const event of events) {
             const eventCollections = event.collectionsAvailable || [];
-            for (const collection of eventCollections) {
-                if(!this.appliedFilters.collections.includes(collection)) {
-                    newCollectionFilters.push(collection);
-                }
-            }
+            allCollectionFilters = allCollectionFilters.concat(eventCollections);
         };
         const self = this;
         // create the filter for the collections
-        const uniqueSortedCollections = Array.from(new Set(newCollectionFilters)).sort();
+        const uniqueSortedCollections = Array.from(new Set(allCollectionFilters)).sort();
         const collectionFilterList = document.getElementById('collections');
         collectionFilterList.innerHTML = '';
         uniqueSortedCollections.forEach((collection) => {
@@ -115,6 +106,9 @@ export default class DesignerEvents extends PageManager {
             collectionItemCheckbox.setAttribute('type', 'checkbox');
             collectionItemCheckbox.setAttribute('id', collection);
             collectionItemCheckbox.setAttribute('name', collection);
+            if(this.appliedFilters.collections.includes(collection)) {
+                collectionItemCheckbox.setAttribute('checked', true);
+            }
             collectionItem.append(collectionItemCheckbox);
 
             const collectionItemLabel = document.createElement('label');
@@ -197,6 +191,8 @@ export default class DesignerEvents extends PageManager {
     addEventHandlers = () => {
         const searchButton = document.getElementById('searchButton');
         searchButton.addEventListener('click', () => {
+            const storeNameFilter = document.getElementById('storeNameFilter');
+            storeNameFilter.value = '';
             this.filterEventsByLocation();
         });
 
@@ -255,8 +251,8 @@ export default class DesignerEvents extends PageManager {
         const otherFiltersToggle = document.getElementById('otherFiltersToggle');
         otherFiltersToggle.addEventListener('click', () => {
             const otherFilters = document.getElementById('otherFilters');
-            if (otherFilters.style.display === 'none') {
-                otherFilters.style.display = 'inherit';
+            if (otherFilters.style.display === 'none' || !otherFilters.style.display) {
+                otherFilters.style.display = 'block';
             } else {
                 otherFilters.style.display = 'none';
             }
@@ -292,6 +288,13 @@ export default class DesignerEvents extends PageManager {
             btn.addEventListener('click', (e) => distanceFilterBtnHandler(e, idx));
         }
 
+        //sorting
+        const sortSelect = document.getElementById('sortSelect');
+        sortSelect.addEventListener('change', (e) => {
+            this.sortBy = e.target.value;
+            const eventsToSort = this.events.length ? this.events: this.eventsFilteredByLocation;
+            this.sortEvents(eventsToSort);
+        });
 
         // // hover events
         // document.addEventListener(MARKER_HOVER_EVENT, (evt) => {
@@ -480,6 +483,7 @@ export default class DesignerEvents extends PageManager {
                 this.eventsFilteredByLocation = filteredEvents.filter(
                     (event) => !toRemove.includes(event.sys.id)
                 );
+                this.sortEvents(this.eventsFilteredByLocation);
                 this.updateEventUi(this.eventsFilteredByLocation);
 
             }
@@ -513,6 +517,7 @@ export default class DesignerEvents extends PageManager {
         this.events = filteredEvents.filter(
             (event) => !toRemove.includes(event.sys.id)
         );
+        this.sortEvents(this.events);
         this.updateEventUi(this.events);
     };
 
@@ -523,7 +528,6 @@ export default class DesignerEvents extends PageManager {
         } else {
             otherFiltersToggle.style.display = 'none';
         }
-
         this.createCollectionListItems(events);
     }
 
@@ -564,30 +568,18 @@ export default class DesignerEvents extends PageManager {
         this.updateEventUi([], false);
     };
 
-    sortEvents = (evt, override = null) => {
-        const sortBy = override || evt?.target?.value || this.sortBy;
-        this.sortBy = sortBy;
-        if (sortBy === 'name') {
-            this.events = this.events.sort((a, b) => a.eventName.localeCompare(b.eventName));
-        } else if (sortBy === 'distance') {
-            this.events = this.events.sort((a, b) => parseFloat(a.distanceFromUser) - parseFloat(b.distanceFromUser));
-        }
-        this.paintEventMapMarkers(this.events);
-    };
+    sortEvents = (events) => {
+        if (this.sortBy === 'asc') {
+            events = events.sort((a, b) => a.eventName.localeCompare(b.eventName));
+        } else if (this.sortBy === 'desc') {
+            events = events.sort((a, b) => b.eventName.localeCompare(a.eventName));
+        } else if(this.sortBy === 'nearest') {
+            events = events.sort((a, b) => parseFloat(a.distanceAway) - parseFloat(b.distanceAway));
 
-    addSortSelectOptions = () => {
-        const sortSelect = document.getElementById('sortSelect');
-        sortSelect.addEventListener('change', this.sortEvents);
-        this.SORTABLES.forEach((sortable) => {
-            const sortOption = document.createElement('option');
-            sortOption.value = sortable.value;
-            sortOption.innerText = sortable.display;
-            sortSelect.append(sortOption);
-        });
-        // default to distance
-        const initialSort = this.SORTABLES[1].value;
-        sortSelect.value = initialSort;
-        this.sortEvents(null, initialSort);
+        } else if (this.sortBy === 'farthest') {
+            events = events.sort((a, b) => parseFloat(b.distanceAway) - parseFloat(a.distanceAway));
+        }
+        this.updateEventUi(events);
     };
 
 
@@ -653,7 +645,6 @@ export default class DesignerEvents extends PageManager {
         if (!this.markerClusterer) {
             this.markerClusterer = new MarkerClusterer({ markers: markers, map: this.map })
         } else {
-            console.log("cleaering")
             this.markerClusterer.clearMarkers();
             this.markerClusterer.addMarkers(markers);
         }
