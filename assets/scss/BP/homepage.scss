@@ -229,6 +229,7 @@
         min-width: calc(100% - 40px) !important;
         .slick-track {
             display: flex;
+            width: 100% !important;
             @include breakpoint("medium") {
                 justify-content: center;
             }
