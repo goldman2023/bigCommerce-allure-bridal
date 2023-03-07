@@ -106,7 +106,7 @@ export default class DesignerEvents extends PageManager {
             collectionItemCheckbox.setAttribute('type', 'checkbox');
             collectionItemCheckbox.setAttribute('id', collection);
             collectionItemCheckbox.setAttribute('name', collection);
-            if(this.appliedFilters.collections.includes(collection)) {
+            if (this.appliedFilters.collections.includes(collection)) {
                 collectionItemCheckbox.setAttribute('checked', true);
             }
             collectionItem.append(collectionItemCheckbox);
@@ -292,7 +292,7 @@ export default class DesignerEvents extends PageManager {
         const sortSelect = document.getElementById('sortSelect');
         sortSelect.addEventListener('change', (e) => {
             this.sortBy = e.target.value;
-            const eventsToSort = this.events.length ? this.events: this.eventsFilteredByLocation;
+            const eventsToSort = this.events.length ? this.events : this.eventsFilteredByLocation;
             this.sortEvents(eventsToSort);
         });
 
@@ -440,11 +440,11 @@ export default class DesignerEvents extends PageManager {
         };
     };
 
-    updateEventUi = (events, updateResultText=true) => {    
+    updateEventUi = (events, updateResultText = true) => {
         this.paintEventMapMarkers(events);
         this.addEventInfo(events);
         this.updateFilters(events);
-        if(updateResultText) {
+        if (updateResultText) {
             this.updateResultsInfo(events);
         }
     }
@@ -485,7 +485,10 @@ export default class DesignerEvents extends PageManager {
                 );
                 this.sortEvents(this.eventsFilteredByLocation);
                 this.updateEventUi(this.eventsFilteredByLocation);
-
+                const otherFilters = document.getElementById('otherFilters');
+                if (!this.eventsFilteredByLocation) {
+                    otherFilters.style.display = 'none';
+                }
             }
         });
     }
@@ -533,8 +536,17 @@ export default class DesignerEvents extends PageManager {
 
     updateResultsInfo = (events) => {
         const eventInfoElem = document.getElementById('results-info');
-        const resultsInfoText = events.length ? 'PRODUCT STYLES AND AVAILABILITY VARY BY RETAILER' : 'No Results found. Try widening your search.';
-        eventInfoElem.innerText = resultsInfoText;
+        const collectionsFilter = document.getElementById('collectionFilter');
+        if (events.length) {
+            eventInfoElem.innerText = 'PRODUCT STYLES AND AVAILABILITY VARY BY RETAILER';
+            collectionsFilter.style.display = 'inherit';
+        } else {
+            eventInfoElem.innerText = 'No Results found. Try widening your search.';
+            // doesnt make sense to show a bare label
+            collectionsFilter.style.display = 'none';
+        }
+
+
     };
 
     resetFilters = () => {
@@ -573,7 +585,7 @@ export default class DesignerEvents extends PageManager {
             events = events.sort((a, b) => a.eventName.localeCompare(b.eventName));
         } else if (this.sortBy === 'desc') {
             events = events.sort((a, b) => b.eventName.localeCompare(a.eventName));
-        } else if(this.sortBy === 'nearest') {
+        } else if (this.sortBy === 'nearest') {
             events = events.sort((a, b) => parseFloat(a.distanceAway) - parseFloat(b.distanceAway));
 
         } else if (this.sortBy === 'farthest') {
