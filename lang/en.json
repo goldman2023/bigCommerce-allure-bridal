@@ -1100,5 +1100,24 @@
         "preferedAppointment": "Preferred Appointment Dates (choose 3)",
         "peopleAttending": "# of Appointment Attendees",
         "agreeTerms": "I accept the &nbsp;<a href=\"/privacy-policy/\">terms and conditions</a>"
+    },
+    "request_event_appointment": {
+        "title": "Request an Event Appointment",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "phone": "Phone Number",
+        "phoneType": "Type",
+        "smsAlerts": "Receive text alerts",
+        "emailAlerts": "Receive Email and Text alerts",
+        "address1": "Address 1",
+        "address2": "Address 2",
+        "city": "City",
+        "state": "State/Province/Country",
+        "zip": "Zip Code",
+        "eventDate": "Date of Event",
+        "peopleAttending": "# of Appointment Attendees",
+        "agreeTerms": "I accept the &nbsp;<a href=\"/privacy-policy/\">terms and conditions</a>",
+        "thankYou": "Thank you for requesting an appointment!"
     }
 }
