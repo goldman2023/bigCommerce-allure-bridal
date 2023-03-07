@@ -77,6 +77,7 @@ export default class Global extends PageManager {
         adminBar(secureBaseUrl, channelId, maintenanceModeSettings, JSON.parse(adminBarLanguage), productId, categoryId);
         loadingProgressBar();
         svgInjector();
+        console.log("test staging");
         
         //header footer data 	
         renderHeaderFooter(this.context);
