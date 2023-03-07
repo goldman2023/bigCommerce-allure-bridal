@@ -4,7 +4,8 @@ import regeneratorRuntime from 'regenerator-runtime'
 
 import { defaultModal } from '../global/modal';
 import PageManager from '../page-manager'
-
+import $ from 'jquery';
+import 'jstree';
 
 const MAP_MARKER_BLACK = {
   path: 'M10 0C4.5 0 0 4.5 0 10c0 7.4 9.1 13.6 9.4 13.8.2.1.4.2.6.2s.4-.1.6-.2c.3-.2 9.4-6.4 9.4-13.8 0-5.5-4.5-10-10-10zm0 14c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z',
@@ -24,10 +25,66 @@ const MAP_MARKER_ORANGE = {
 // original/applied filter instance properties
 const FILTER_IDS = {
   distance: 'distanceFilterSelect',
-  collection: 'collectionFilterSelect',
+  // collection: 'collectionFilterSelect',
+  locationOrcode : "location-typeahead"
 };
 
+const DISTANCE_TO_ZOOMLEVELS = {
+  10: 10,
+  25: 10,
+  50: 8,
+  100: 8,
+  250: 5,
+};
+
+// use temp data for collections
+const TEMPDATA = [
+  { "id": "collection0", "parent": "#", "text": "Show All Collections",'state' : {
+    'selected' : true,
+  },},
+  { "id": "collection1", "parent": "#", "text": "Abella",'state' : {
+    'selected' : true
+  } },
+  { "id": "collection2", "parent": "#", "text": "Allure Bridals",'state' : {
+    'selected' : true
+  }},
+  { "id": "collection3", "parent": "#", "text": "Allure Couture",'state' : {
+    'selected' : true
+  } },
+  { "id": "collection4", "parent": "#", "text": "Allure Men",'state' : {
+    'selected' : true
+  } },
+  { "id": "collection5", "parent": "#", "text": "Allure Modest",'state' : {
+    'selected' : true
+  } },
+  { "id": "collection6", "parent": "#", "text": "Allure Romance",'state' : {
+    'selected' : true
+  } },
+  { "id": "collection7", "parent": "#", "text": "Allure Women",'state' : {
+    'selected' : true
+  }},
+  { "id": "collection8", "parent": "#", "text": "Bridesmaids",'state' : {
+    'selected' : true
+  } },
+  { "id": "collection9", "parent": "#", "text": "Disney Fairy Tale Weddings",'state' : {
+    'selected' : true
+  } },
+  { "id": "collection10", "parent": "#", "text": "Suits & Tuxedos", 'state' : {
+    'opened' : true,
+    'selected' : true
+  }, },
+  { "id": "collection11", "parent": "collection10", "text": "Ridge" },
+  { "id": "collection12", "parent": "collection10", "text": "Brunswick" },
+  { "id": "collection13", "parent": "collection10", "text": "Vows" },
+  { "id": "collection14", "parent": "collection10", "text": "Venice Velvet" },
+  { "id": "collection15", "parent": "collection10", "text": "The Tuxedo" },
+]
+
 const DEFAULT_ZOOM_LEVEL = 4;
+const INITIAL_MAP = {
+    zoom: 2,
+    center: { lat: 36, lng: -60 },
+}
 const HOVER_DEFAULT_ZOOM_LEVEL = 10;
 
 const MARKER_HOVER_EVENT = 'markerHoverEvent';
@@ -56,7 +113,7 @@ export default class RetailFinder extends PageManager {
     this.collectionsByRetailers = {};
     this.originalFilters = {
       distance: 25,
-      collection: 'All'
+      collection: ['Allure Bridals'],
     };
     this.appliedFilters = {
       ...this.originalFilters
@@ -75,6 +132,43 @@ export default class RetailFinder extends PageManager {
     this.originalRetailers = [...retailerData];
     this.addSortSelectOptions();
     this.addEventHandlers();
+
+    // reference of this
+    const self = this;
+    
+    // show on/off collection filter part
+    $(".filter-visible").click(function(){
+      $(".option-filters").slideToggle(300);
+      $(this).text(function(i, text){
+        return text === 'HIDE FILTER' ? 'SHOW FILTER' : 'HIDE FILTER';
+      });
+    });
+
+    //filter button by store name
+    $("#name-typeahead").on("input", function() {
+      const searchTerm = $(this).val().toLowerCase();
+      self.applyFilters('name', searchTerm);
+      // self.filterRetailers();
+    });
+
+    //show on/off  map
+    $(".on-off-map").change(function(){
+      let element = $('.map');
+      if ($(this).is(':checked')) {
+        element.show();
+      } else {
+        element.hide();
+      }
+    });
+    //get enter event
+    $(document).keypress(function(event){
+      var keycode = (event.keyCode ? event.keyCode : event.which);
+      if(keycode === 13){
+        self.filterRetailers();
+        $("#filterButton .button").click()
+      }
+    });
+
   };
 
   addEventHandlers = () => {
@@ -120,11 +214,14 @@ export default class RetailFinder extends PageManager {
 
     });
 
-    locationTypeahead.addEventListener('change', (e) => {
+    locationTypeahead.addEventListener('input', (e) => {
       if (!e.target.value) {
         this.selectedPlace = null;
         submitBtn.disabled = true;
         locationTypeahead.classList.add('error');
+      } else {
+        submitBtn.disabled = false;
+        locationTypeahead.classList.remove('error');
       }
     });
 
@@ -169,6 +266,22 @@ export default class RetailFinder extends PageManager {
     if (idx < firstIdxWithoutBorder) {
       mainContainer.classList.add('bordered');
     }
+
+    const badgeCollections = document.createElement('div');
+
+    if (retailer.featured) {
+      const featuredCollections = document.createElement('span');
+      featuredCollections.classList.add('featured');
+      badgeCollections.append(featuredCollections);
+    }
+
+    if (retailer.disneyPlatinumCollection) {
+      const disneyCollections = document.createElement('span');
+      disneyCollections.classList.add('disney');
+      badgeCollections.append(disneyCollections);
+    };
+
+    container.append(badgeCollections)
     mainContainer.append(container);
     const nameHeader = document.createElement('div');
     nameHeader.classList.add('retailer-title');
@@ -183,28 +296,53 @@ export default class RetailFinder extends PageManager {
     locationInfo.append(cityState);
     container.append(locationInfo);
 
+    const distanceDirection = document.createElement('div');
+    distanceDirection.classList.add('retailer-distanceDirection')
     const distance = document.createElement('span');
     distance.classList.add('retailer-distance');
-    distance.innerText = parseInt(`${retailer.distanceAway}`) + ` miles away`;
-    container.append(distance);
+    distance.innerText = parseInt(`${retailer.distanceAway}`) + ` miles`;
+    distanceDirection.append(distance)
+    
+    const directions = document.createElement('a');
+    directions.classList.add('directions');
+    directions.innerText = 'DIRECTIONS'
+    const destination = retailer.retailerStreet.replaceAll(',', '').replaceAll(' ', '+');
+    directions.setAttribute('href', `https://www.google.com/maps?daddr=${destination}`);
+    directions.setAttribute('target', '_blank');
+    directions.setAttribute('rel', 'noopener noreferrer');
+    distanceDirection.append(directions);
 
-    const numCollections = document.createElement('span');
-    numCollections.classList.add('retailer-collection-count');
-    numCollections.innerText = `Carries ${retailer.collectionsAvailableCollection.items.length} collections`;
-    container.append(numCollections)
+    container.append(distanceDirection);
 
-    if (retailer.featured) {
-      const featuredCollections = document.createElement('div');
-      featuredCollections.classList.add('featured');
-      container.append(featuredCollections);
+    const collections = document.createElement('span');
+    collections.classList.add('retailer-collections');
+    
+    //retailer's collection array to simple array.
+    let collectionItems = [];
+    retailer.collectionsAvailableCollection.items.forEach(item => {
+      collectionItems.push(item.collectionName)
+    })
+    
+    collections.innerText = `${collectionItems.join(', ')}`;
+    container.append(collections)
+
+    const requestBtn = document.createElement('button');
+    requestBtn.setAttribute('type', 'button');
+    requestBtn.classList.add('schedule-btn');
+
+    const requestBtnText = document.createElement('span');
+    requestBtnText.innerText = 'REQUEST AN APPOINTMENT'
+    requestBtn.append(requestBtnText);
+
+    //Prevent parent's onclick event.
+    requestBtn.addEventListener('click', (event) => {
+      this.openRequestForm(retailer);
+      event.stopPropagation();}
+    );
+
+    if (retailer.requestAppointment) {
+      container.append(requestBtn);
     }
-
-
-    if (retailer.disneyPlatinumCollection) {
-      const disneyCollections = document.createElement('div');
-      disneyCollections.classList.add('disney');
-      container.append(disneyCollections);
-    };
 
     // hover events
     mainContainer.addEventListener('mouseenter', () => {
@@ -303,24 +441,26 @@ export default class RetailFinder extends PageManager {
   };
 
   applyFilters = (filterType, evt) => {
-    this.appliedFilters[filterType] = evt.target.value;
-
-    // adjust zoom for convenience in distance changes  
-    const distanceToZoomLevels = {
-      10: 10,
-      25: 10,
-      50: 8,
-      100: 8,
-      500: 5,
-    };
-    if (filterType === 'distance') {
-      const newZoomLevel = distanceToZoomLevels[evt.target.value];
-      if (newZoomLevel) {
-        this.map.setZoom(newZoomLevel);
-      } else {
-        this.map.setZoom(HOVER_DEFAULT_ZOOM_LEVEL);
-      }
-    };
+    switch (filterType) {
+      case "distance":
+        // adjust zoom for convenience in distance changes 
+        const newZoomLevel = DISTANCE_TO_ZOOMLEVELS[evt.target.value];
+        this.appliedFilters[filterType] = evt.target.value
+        if (newZoomLevel) {
+          this.map.setZoom(newZoomLevel);
+        } else {
+          this.map.setZoom(DEFAULT_ZOOM_LEVEL);
+        }
+        break;
+      case "collection":
+          this.appliedFilters[filterType] = evt;
+          break;
+      case "name":
+          this.appliedFilters[filterType] = evt;
+          break;
+      default:
+        break;
+    }
   };
 
   filterRetailers = () => {
@@ -334,44 +474,45 @@ export default class RetailFinder extends PageManager {
       'address': addr.value
     }, function (results, status) {
       if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
-        let toRemove = [];
 
+        let filteredRetailers = [];
         self.retailers = [...self.originalRetailers];
-        self.originalRetailers.forEach(
-          (retailer) => {
-            Object.entries(self.appliedFilters).forEach(([filterName, value]) => {
-              if (filterName === 'distance' && self.selectedPlace) {
-                const selectedLocation = {
-                  lat: self.selectedPlace.geometry.location.lat(),
-                  lon: self.selectedPlace.geometry.location.lng(),
-                }
-                const distanceAway = self.getDistanceBtwnTwoPts(selectedLocation, retailer.location);
-                retailer.distanceAway = distanceAway;
-                if (distanceAway > value) {
-                  toRemove.push(retailer.id);
-                }
-              };
-              if (filterName === 'collection' && value !== 'All') {
-                const retailersWithSelected = self.collectionsByRetailers[value];
-                if (!retailersWithSelected.includes(retailer.id)) {
-                  toRemove.push(retailer.id);
-                }
-                // business case to filter retailers with Allure Men if collection is set to all
-              } else if (filterName === 'collection' && value === 'All') {
-                const retailersWithAllureMen = self.collectionsByRetailers['Allure Men'];
-                if (retailersWithAllureMen.includes(retailer.id)) {
-                  toRemove.push(retailer.id);
-                }
+        Object.entries(self.appliedFilters).forEach(([filterName, filterValue]) => {
+          // filter by distance
+          if (filterName === 'distance' && self.selectedPlace) {
+            const selectedLocation = {
+              lat: self.selectedPlace.geometry.location.lat(),
+              lon: self.selectedPlace.geometry.location.lng(),
+            }
+            filteredRetailers = self.originalRetailers.filter( retailer => {
+              let distanceAway = self.getDistanceBtwnTwoPts(selectedLocation, retailer.location);
+              retailer.distanceAway = distanceAway;
+              return distanceAway <= filterValue
+            })
+          };
+          //filter by collections
+          if (filterName === 'collection') {
+            let temp = filteredRetailers;
+            filteredRetailers = temp.filter( (dataItem) => {
+              if(filterValue[0] === "Show All Collections"){
+                return dataItem.collectionsAvailableCollection.items.filter( item => self.originalFilters.collection.includes(item.collectionName)).length > 0
+              }else{
+                return dataItem.collectionsAvailableCollection.items.filter( item => filterValue.includes(item.collectionName)).length > 0
               }
             });
           }
-        );
-
-        const filteredRetailers = [...self.originalRetailers];
-        self.retailers = filteredRetailers.filter(
-          (retailer) => !toRemove.includes(retailer.id)
-        );
-
+          //filter by name
+          if(filterName === "name"){
+            let temp = filteredRetailers;
+            if(filterValue.length !== 0){
+              filteredRetailers = temp.filter( (dataItem) => {
+                  return dataItem.retailerName.toLowerCase().includes(filterValue)
+              });
+            }
+          } 
+        });
+        
+        self.retailers = filteredRetailers;
         self.sortRetailers();
         self.paintMapAndRetailers(self.retailers);
         self.updateResultsInfo();
@@ -398,15 +539,19 @@ export default class RetailFinder extends PageManager {
     for (const [filter, elementId] of Object.entries(FILTER_IDS)) {
       const element = document.getElementById(elementId);
       const value = this.appliedFilters[filter];
-      element.value = value;
+      element.value = !!!value ? '': value;
     };
+    $("#collectionFilters").jstree(true).check_all();
+    $("#name-typeahead").val("");
 
-    this.map.setZoom(DEFAULT_ZOOM_LEVEL);
+    //set default map
+    this.map.setZoom(INITIAL_MAP.zoom);
+    this.map.setCenter({ lat: INITIAL_MAP.center.lat, lng: INITIAL_MAP.center.lng })
+    this.paintMapAndRetailers([])
+
+    $("#filterButton .button").attr("disabled", true);
     this.filterRetailers();
-    const locationTypeahead = document.getElementById('location-typeahead');
-    locationTypeahead.value = '';
   };
-
   createFilterElements = () => {
     // distance filter
     const distanceContainer = document.getElementById('distanceFilter');
@@ -420,7 +565,7 @@ export default class RetailFinder extends PageManager {
     distanceFilterDropdown.id = FILTER_IDS.distance;
     distanceFilterDropdown.classList.add('form-select');
     distanceFilterDropdown.classList.add('selector-dropdown');
-    [10, 25, 50, 100, 500].forEach(
+    [10, 25, 50, 100, 250].forEach(
       (distance) => {
         const distanceOption = document.createElement('option');
         distanceOption.setAttribute('value', distance);
@@ -436,43 +581,61 @@ export default class RetailFinder extends PageManager {
 
     distanceFilterDropdown.addEventListener('change', (e) => this.applyFilters('distance', e));
 
-    // collections filter
-    const collectionContainer = document.getElementById('collectionsFilter');
-    const collectionFilter = document.createElement('div');
-    collectionFilter.classList.add('form-field');
-    const collectionFilterLabel = document.createElement('div');
-    collectionFilterLabel.classList.add('form-label');
-    collectionFilterLabel.innerText = 'Carrying';
-    collectionFilter.append(collectionFilterLabel);
-    const collectionFilterDropdown = document.createElement('select');
-    collectionFilterDropdown.id = FILTER_IDS.collection;
-    collectionFilterDropdown.classList.add('form-select');
-    collectionFilterDropdown.classList.add('selector-dropdown');
-    const collectionsSorted = [
-      'All',
-      ...Object.keys(this.collectionsByRetailers).sort()
-    ];
-
-    collectionsSorted.forEach(
-      (collection) => {
-        const collectionOption = document.createElement('option');
-        collectionOption.innerText = collection;
-        collectionFilterDropdown.append(
-          collectionOption
-        );
+    // reference of this
+    const self = this;
+    // jsTree configuration and add actions
+    $('#collectionFilters').jstree({
+      core: {
+        data: TEMPDATA,
+        themes: {
+          variant: "large"
+        },
+      },
+      checkbox: {
+        three_state: true
+      },
+      plugins: ["checkbox"]
+    }).on("select_node.jstree deselect_node.jstree", function (e, data) {
+      const instanceTree = $("#collectionFilters").jstree();
+      const checkedNode = $('#collectionFilters').jstree("get_checked");
+      
+      if (data.node.id === "collection0") {
+        if (data.node.state.selected) {
+          instanceTree.check_all(true);
+        } else {
+          $('#collection0 .jstree-checkbox').css("background-position", "-160px, 0")
+          instanceTree.uncheck_all(true);
+        }
+      } else {
+        if (checkedNode.length === TEMPDATA.length && data.node.state.selected) {
+          instanceTree.check_all(true);
+        } else if (checkedNode.length === TEMPDATA.length - 1 && checkedNode.sort()[0] !== "collection0") {
+          instanceTree.check_all(true);
+        } else if (checkedNode.length === 0) {
+          $('#collection0 .jstree-checkbox').css("background-position", "-160px, 0")
+        } else if (checkedNode.length === 1 && checkedNode.sort()[0] === "collection0") {
+          instanceTree.uncheck_all(true);
+          $('#collection0 .jstree-checkbox').css("background-position", "-160px, 0")
+        } else {
+          $('#collection0 .jstree-checkbox').css("background-position", "-192px 0")
+        }
       }
-    );
-    collectionFilter.append(collectionFilterDropdown);
-    collectionContainer.append(collectionFilter);
-
-    collectionFilterDropdown.addEventListener('change', (e) => this.applyFilters('collection', e));
-
+    
+      //filtering
+      const selectedCollections = $('#collectionFilters').jstree('get_checked').map((id) => {
+        return $('#' + id).text().trim();
+      });
+      self.applyFilters('collection', selectedCollections);
+      self.filterRetailers();
+    });
+    
     //submit btn
     const submitBtnContainer = document.getElementById('filterButton');
     const submitBtn = document.createElement('button');
     submitBtn.classList.add('button');
     submitBtn.setAttribute('type', 'button');
     submitBtn.innerHTML = 'SEARCH';
+    submitBtn.disabled = true;
     submitBtnContainer.append(submitBtn);
     submitBtn.addEventListener('click', this.filterRetailers);
 
@@ -484,6 +647,7 @@ export default class RetailFinder extends PageManager {
     resetBtn.innerHTML = 'CLEAR SEARCH';
     resetBtnContainer.append(resetBtn);
     resetBtn.addEventListener('click', this.resetFilters);
+
   };
 
   setupFilterData = async (rawRetailers) => {
@@ -585,10 +749,7 @@ export default class RetailFinder extends PageManager {
   // so this method is called anytime the data to show changes or when a 
   // retailer marker needs to be centered and highlighted
   paintMapAndRetailers = (retailerData, centerRetailer = null, skipRetailerInfo = false) => {
-    const map = this.map || new google.maps.Map(document.getElementById('map'), {
-      zoom: 2,
-      center: { lat: 36, lng: -60 },
-    });
+    const map = this.map || new google.maps.Map(document.getElementById('map'), INITIAL_MAP);
     if (!this.map) {
       this.map = map;
     }
@@ -623,7 +784,6 @@ export default class RetailFinder extends PageManager {
 
     const header = document.createElement('div');
     header.classList.add('retailer-header');
-
     if (retailer.featured) {
       const featuredElement = document.createElement('span');
       featuredElement.classList.add('featured');
@@ -646,10 +806,13 @@ export default class RetailFinder extends PageManager {
     locationElement.innerText = `${retailer.retailerCity}, ${retailer.state}`;
     header.append(locationElement);
     detailElement.append(header);
+    const dot = document.querySelector('.header-svg__border');
+    const clone = dot.cloneNode(true)
+    detailElement.append(clone);
 
     const collections = document.createElement('div');
     collections.classList.add('collections');
-    const collectionsHeader = document.createElement('span');
+    const collectionsHeader = document.createElement('div');
     collectionsHeader.classList.add('retailer-label');
     collectionsHeader.innerText = 'COLLECTIONS';
     collections.append(collectionsHeader);
@@ -676,7 +839,7 @@ export default class RetailFinder extends PageManager {
 
     const address = document.createElement('div');
     address.classList.add('retailer-address');
-    const addressLabel = document.createElement('span');
+    const addressLabel = document.createElement('div');
     addressLabel.classList.add('retailer-label');
     addressLabel.innerText = 'ADDRESS';
     address.append(addressLabel);
@@ -713,7 +876,7 @@ export default class RetailFinder extends PageManager {
     const retailerUrlLink = document.createElement('a');
     retailerUrlLink.setAttribute("href", `${retailer.website}`);
     retailerUrlLink.setAttribute("target", "_blank");
-    retailerUrlLink.innerText = retailer.website;
+    retailerUrlLink.innerText = "Visit Retailer Website";
     retailerUrl.append(retailerUrlLink);
     detailElement.append(retailerUrl);
 
@@ -742,6 +905,19 @@ export default class RetailFinder extends PageManager {
     if (retailer.requestAppointment) {
       detailElement.append(requestBtn);
     }
+
+    //Add See More Stores Button
+    const moreBtn = document.createElement('button');
+    moreBtn.setAttribute('type', 'button');
+    moreBtn.classList.add('more-btn');
+
+    const moreBtnText = document.createElement('span');
+    moreBtnText.innerText = 'See More Stores'
+    moreBtn.append(moreBtnText);
+    moreBtn.addEventListener('click', () => modal.close());
+
+    detailElement.append(moreBtn);
+
 
 
     const modal = defaultModal({ size: 'normal', skipCache: true });
