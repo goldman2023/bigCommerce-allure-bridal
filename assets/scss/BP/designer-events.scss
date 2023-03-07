@@ -16,6 +16,29 @@
             overflow-y: auto;
             height: 100%;
 
+            /* width */
+            &::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            /* Track */
+            &::-webkit-scrollbar-track {
+                background: stencilColor('color-default-neutral-4');
+                border-radius: 5px;
+
+            }
+
+            /* Handle */
+            &::-webkit-scrollbar-thumb {
+                background: stencilColor('color-default-primary-2');
+                border-radius: 5px;
+            }
+
+            /* Handle on hover */
+            &::-webkit-scrollbar-thumb:hover {
+                background: stencilColor('color-default-primary-1');
+            }
+
             .header {
                 margin-bottom: 50px;
                 border-bottom: unset;
