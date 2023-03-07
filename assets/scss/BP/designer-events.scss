@@ -266,34 +266,7 @@
                             }
                         }
 
-                        .event-schedule {
-                            color: stencilColor('color-allure-bridals-primary-1');
-                            border: 1px solid stencilColor('color-allure-bridals-primary-1');
-                            width: 50%;
-                            border-radius: 3px;
-                            padding: 2px;
-                            display: flex;
-                            margin-top: 1rem;
 
-                            &.book-appt {
-                                display: none;
-                            }
-
-                            span {
-                                padding: 14px 0;
-                                width: 100%;
-                                border: 1px solid stencilColor('color-allure-bridals-primary-5');
-                                border-radius: 3px;
-                            }
-
-                            &:hover {
-                                background: stencilColor('color-allure-bridals-primary-1');
-
-                                span {
-                                    color: stencilColor('color-white');
-                                }
-                            }
-                        }
 
                     }
 
@@ -349,28 +322,6 @@
             }
 
         }
-
-        .filter-button-container {
-
-            .button {
-                min-width: 100%;
-                background: stencilColor('color-theme');
-                border: 1px solid stencilColor('color-theme');
-                color: stencilColor('color-white');
-
-                &:hover {
-                    background: stencilColor('color-white');
-                    color: stencilColor('color-theme');
-                    border: 1px solid stencilColor('color-theme');
-                }
-
-                &:disabled {
-                    pointer-events: none;
-                    opacity: 0.5;
-                }
-            }
-        }
-
 
         .link-button {
             font-family: stencilFontFamily("default-font-regular");
@@ -445,11 +396,6 @@
 
             }
 
-            .filter-button-container {
-                button {
-                    max-width: 100%;
-                }
-            }
         }
 
         .map-and-events {
@@ -486,6 +432,38 @@
     }
 }
 
+
+
+//page globals
+.event-schedule {
+    color: stencilColor('color-allure-bridals-primary-1');
+    border: 1px solid stencilColor('color-allure-bridals-primary-1');
+    width: 50%;
+    border-radius: 3px;
+    padding: 2px;
+    display: flex;
+    margin-top: 1rem;
+
+    &.book-appt {
+        display: none;
+    }
+
+    span {
+        padding: 14px 0;
+        width: 100%;
+        border: 1px solid stencilColor('color-allure-bridals-primary-5');
+        border-radius: 3px;
+    }
+
+    &:hover {
+        background: stencilColor('color-allure-bridals-primary-1');
+
+        span {
+            color: stencilColor('color-white');
+        }
+    }
+}
+
 .modal-close {
 
     &:focus::after,
@@ -510,7 +488,7 @@
 
 
 .modal:not(.modal--large) {
-    max-width: 500px;
+    max-width: 700px;
 
     .modal-close {
         top: 37px;
@@ -529,6 +507,7 @@
             padding-left: 40px;
 
             .event-label {
+                display: block;
                 margin-bottom: 4px;
                 font-style: normal;
                 font-weight: 500;
@@ -561,74 +540,102 @@
                 }
             }
 
-            .collections {
-                margin-bottom: 24px;
+            .event-content {
+                display: flex;
+                flex-wrap: wrap;
 
+                >button {
+                    width: 100%;
+                }
 
-                .collections-list {
-                    display: flex;
-                    flex-wrap: wrap;
-                    column-gap: 67px;
-                    row-gap: 4px;
+                .content-left {
+                    width: 50%;
+                    margin-right: 24px;
 
-                    .collection-item {
-                        color: stencilColor('color-default-primary-1');
-                        flex: 1 1 40%;
-                        max-width: 40%;
-                        text-decoration: none;
+                    img {
+                        height: 75%;
                     }
                 }
-            }
 
-            .event-address {
-                .street-address {
-                    margin-bottom: 8px;
-                }
+                .content-right {
+                    width: 40%;
+                    flex: 1;
 
-                .directions {
-                    color: stencilColor('color-default-primary-1');
-                    font-style: normal;
-                    font-weight: 500;
-                    font-size: 10px;
-                    line-height: 12px;
-                    text-align: center;
-                    letter-spacing: 0.1em;
-                    text-decoration: none;
-                    display: flex;
-                    align-items: center;
-                    margin-bottom: 28px;
+                    .event-info {
+                        margin-bottom: 24px;
 
-                    &::before {
-                        content: url('../icons/location.svg');
+                        .collections-list {
+                            display: flex;
+                            flex-wrap: wrap;
+                            column-gap: 67px;
+                            row-gap: 4px;
+
+                            .collection-item {
+                                flex: 1 1 40%;
+                                max-width: 40%;
+                                text-decoration: none;
+                            }
+                        }
+
+                        .street-address {
+                            margin-bottom: 8px;
+                        }
+
+                        .directions {
+                            color: stencilColor('color-default-primary-1');
+                            font-style: normal;
+                            font-weight: 500;
+                            font-size: 10px;
+                            line-height: 12px;
+                            text-align: center;
+                            letter-spacing: 0.1em;
+                            text-decoration: none;
+                            display: flex;
+                            align-items: center;
+                            margin-bottom: 28px;
+
+                            &::before {
+                                content: url('../icons/location.svg');
+                            }
+                        }
+
+                        .event-detail {
+                            font-weight: 400;
+                            font-size: 14px;
+                            line-height: 22px;
+                            color: stencilColor('color-default-primary-1');
+
+                        }
+
+
+                        a {
+                            color: stencilColor('color-allure-bridals-primary-1');
+                            text-decoration: none;
+                        }
                     }
-                }
-            }
 
-            .event-detail {
-                font-weight: 400;
-                font-size: 14px;
-                line-height: 22px;
-            }
-
-            .phone {
-                margin-bottom: 24px;
-
-                a.event-detail {
-                    color: stencilColor('color-allure-bridals-primary-1');
-                    letter-spacing: .1em;
-                    text-decoration: none;
-                }
-            }
-
-            .event-url {
-                margin-bottom: 48px;
-
-                a {
-                    color: stencilColor('color-allure-bridals-primary-1');
-                    text-decoration: none;
                 }
             }
         }
+
+    }
+}
+
+.primary-button {
+    min-width: 100%;
+    background: stencilColor('color-theme') !important;
+    border: 1px solid stencilColor('color-theme');
+    color: stencilColor('color-white') !important;
+
+    &:hover {
+        background: stencilColor('color-white') !important;
+        color: stencilColor('color-theme') !important;
+        border: 1px solid stencilColor('color-theme');
+    }
+
+    &:disabled {
+        pointer-events: none;
+        opacity: 0.5;
     }
 }
 

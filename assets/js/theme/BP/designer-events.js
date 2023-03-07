@@ -88,6 +88,41 @@ export default class DesignerEvents extends PageManager {
         this.addEventHandlers();
     };
 
+    checkEventCanRequestAppt = async (event) => {
+        const checkUrl = 'https://allure-integration.azurewebsites.net/leads/stage/verify';
+        // TODO move to config.json
+        const checkReq = await fetch(
+            checkUrl,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    RetailerID: event.retailerId,
+                    zip: event.zipCode
+                }),
+            }
+        );
+        try {
+            const res = await checkReq.json();
+            let canRequestAppt = false;
+            if (!res.error) {
+                // not sure why it returns an array of one item but /shrug
+                canRequestAppt = res[0].request_appointment;
+            }
+            return {
+                ...event,
+                canRequestAppt
+            }
+        } catch {
+            return {
+                ...event,
+                canRequestAppt: false
+            }
+        }
+    }
+
     createCollectionListItems = (events) => {
         let allCollectionFilters = [];
         for (const event of events) {
@@ -357,31 +392,30 @@ export default class DesignerEvents extends PageManager {
         `;
         container.append(numCollections)
 
-        // TODO put behind if check of flag
-        const requestBtn = document.createElement('button');
-        requestBtn.setAttribute('type', 'button');
-        requestBtn.classList.add('event-schedule');
-        const requestBtnText = document.createElement('span');
-        requestBtnText.innerText = 'REQUEST AN APPOINTMENT'
-        requestBtn.append(requestBtnText);
-        requestBtn.addEventListener('click', () => this.openRequestForm(event));
-        container.append(requestBtn)
+        if (event.canRequestAppt) {
+            const requestBtn = document.createElement('button');
+            requestBtn.setAttribute('type', 'button');
+            requestBtn.classList.add('event-schedule');
+            const requestBtnText = document.createElement('span');
+            requestBtnText.innerText = 'REQUEST AN APPOINTMENT'
+            requestBtn.append(requestBtnText);
+            requestBtn.addEventListener('click', () => this.openRequestForm(event));
+            container.append(requestBtn)
+        }
 
-        // if (event.requestAppointment) {
-        //     detailElement.append(requestBtn);
-        // }
-
-
+        container.addEventListener('click', () => {
+            this.openDetailsModal(event);
+        });
         // hover events
-        container.addEventListener('mouseenter', () => {
-            const eventHoveredEvent = new CustomEvent(RETAILER_ITEM_HOVER_EVENT, { detail: event });
-            document.dispatchEvent(eventHoveredEvent);
-        });
+        // container.addEventListener('mouseenter', () => {
+        //     const eventHoveredEvent = new CustomEvent(RETAILER_ITEM_HOVER_EVENT, { detail: event });
+        //     document.dispatchEvent(eventHoveredEvent);
+        // });
 
-        container.addEventListener('mouseleave', () => {
-            const eventExitEvent = new CustomEvent(RETAILER_ITEM_HOVER_EVENT, { detail: null });
-            document.dispatchEvent(eventExitEvent);
-        });
+        // container.addEventListener('mouseleave', () => {
+        //     const eventExitEvent = new CustomEvent(RETAILER_ITEM_HOVER_EVENT, { detail: null });
+        //     document.dispatchEvent(eventExitEvent);
+        // });
 
         return container;
     };
@@ -457,10 +491,9 @@ export default class DesignerEvents extends PageManager {
         // Geocode the address
         geocoder.geocode({
             'address': addr.value
-        }, (results, status) => {
+        }, async (results, status) => {
             if (status === google.maps.GeocoderStatus.OK && results.length) {
                 let toRemove = [];
-
                 this.originalEvents.forEach(
                     (event) => {
                         const selectedLocation = {
@@ -479,14 +512,20 @@ export default class DesignerEvents extends PageManager {
                         }
                     }
                 );
-                const filteredEvents = [...this.originalEvents];
-                this.eventsFilteredByLocation = filteredEvents.filter(
+                let filteredEvents = [...this.originalEvents];
+                filteredEvents = filteredEvents.filter(
                     (event) => !toRemove.includes(event.sys.id)
                 );
-                this.sortEvents(this.eventsFilteredByLocation);
-                this.updateEventUi(this.eventsFilteredByLocation);
+                const withApptData = [];
+                for (const evt of filteredEvents) {
+                    const event = await this.checkEventCanRequestAppt(evt);
+                    withApptData.push(event);
+                }
+                this.eventsFilteredByLocation = withApptData;
+                this.sortEvents(withApptData);
+                this.updateEventUi(withApptData);
                 const otherFilters = document.getElementById('otherFilters');
-                if (!this.eventsFilteredByLocation) {
+                if (!withApptData) {
                     otherFilters.style.display = 'none';
                 }
             }
@@ -662,137 +701,157 @@ export default class DesignerEvents extends PageManager {
         }
     };
 
-    // openDetailsModal = (event) => {
-    //     const detailElement = document.createElement('div');
-    //     detailElement.classList.add('event-details');
+    openDetailsModal = (event) => {
+        const detailElement = document.createElement('div');
+        detailElement.classList.add('event-details');
 
-    //     const header = document.createElement('div');
-    //     header.classList.add('event-header');
+        const header = document.createElement('div');
+        header.classList.add('event-header');
 
-    //     if (event.featured) {
-    //         const featuredElement = document.createElement('span');
-    //         featuredElement.classList.add('featured');
-    //         header.append(featuredElement);
-    //     }
+        const nameElement = document.createElement('h2');
+        nameElement.classList.add('header-title');
+        nameElement.innerText = event.eventName;
+        header.append(nameElement);
 
-    //     if (event.disneyPlatinumCollection) {
-    //         const dpcElement = document.createElement('span');
-    //         dpcElement.classList.add('disney');
-    //         header.append(dpcElement);
-    //     }
+        const locationElement = document.createElement('span');
+        locationElement.classList.add('location');
+        locationElement.innerText = `${event.retailerName} • ${event.city}, ${event.state}`;
+        header.append(locationElement);
+        detailElement.append(header);
 
-    //     const nameElement = document.createElement('h2');
-    //     nameElement.classList.add('header-title');
-    //     nameElement.innerText = event.eventName;
-    //     header.append(nameElement);
+        const content = document.createElement('div');
+        content.classList.add('event-content');
+        if (event.brandFolderImage && event.brandFolderImage.length) {
 
-    //     const locationElement = document.createElement('span');
-    //     locationElement.classList.add('location');
-    //     locationElement.innerText = `${event.eventCity}, ${event.state}`;
-    //     header.append(locationElement);
-    //     detailElement.append(header);
+            const contentLeft = document.createElement('div');
+            contentLeft.classList.add('content-left');
+            const eventImg = document.createElement('img');
+            eventImg.src = event.brandFolderImage[0].cdn_url;
+            eventImg.classList.add('event-image');
+            contentLeft.append(eventImg);
+            content.append(contentLeft);
+        }
 
-    //     const collections = document.createElement('div');
-    //     collections.classList.add('collections');
-    //     const collectionsHeader = document.createElement('span');
-    //     collectionsHeader.classList.add('event-label');
-    //     collectionsHeader.innerText = 'COLLECTIONS';
-    //     collections.append(collectionsHeader);
+        detailElement.append(content);
 
-    //     const collectionsList = document.createElement('div');
-    //     collectionsList.classList.add('collections-list');
-    //     for (const collection of event.collectionsAvailableCollection.items) {
-    //         if (collection) {
-    //             const collectionItem = document.createElement('span');
-    //             if (collection.collectionButtonUrl == null) {
-    //                 //collectionItem.setAttribute("href", "#");
-    //             } else {
-    //                 //collectionItem.setAttribute("href", collection.collectionButtonUrl);
-    //                 //collectionItem.setAttribute("target", "_blank");
-    //             }
-    //             collectionItem.classList.add('collection-item');
-    //             collectionItem.classList.add('event-detail');
-    //             collectionItem.innerText = collection.collectionName;
-    //             collectionsList.append(collectionItem);
-    //         }
-    //     };
-    //     collections.append(collectionsList);
-    //     detailElement.append(collections);
+        const contentRight = document.createElement('div');
+        contentRight.classList.add('content-right');
+        content.append(contentRight);
 
-    //     const address = document.createElement('div');
-    //     address.classList.add('event-address');
-    //     const addressLabel = document.createElement('span');
-    //     addressLabel.classList.add('event-label');
-    //     addressLabel.innerText = 'ADDRESS';
-    //     address.append(addressLabel);
-    //     const streetAddress = document.createElement('div');
-    //     streetAddress.classList.add('street-address');
-    //     streetAddress.classList.add('event-detail');
-    //     streetAddress.innerText = event.eventStreet;
-    //     address.append(streetAddress);
-    //     const directions = document.createElement('a');
-    //     directions.classList.add('directions');
-    //     directions.innerText = 'GET DIRECTIONS'
-    //     const destination = event.eventStreet.replaceAll(',', '').replaceAll(' ', '+');
-    //     directions.setAttribute('href', `https://www.google.com/maps?daddr=${destination}`);
-    //     directions.setAttribute('target', '_blank');
-    //     directions.setAttribute('rel', 'noopener noreferrer');
-    //     address.append(directions);
-    //     detailElement.append(address);
+        const eventDate = document.createElement('div');
+        eventDate.classList.add('event-info');
+        const eventDateLabel = document.createElement('span');
+        eventDateLabel.classList.add('event-label');
+        eventDateLabel.innerText = 'DATE';
+        eventDate.append(eventDateLabel);
 
-    //     const phone = document.createElement('div');
-    //     phone.classList.add('phone');
-    //     const phoneLabel = document.createElement('div');
-    //     phoneLabel.classList.add('event-label');
-    //     phoneLabel.innerText = 'PHONE';
-    //     phone.append(phoneLabel);
-    //     const phoneNumber = document.createElement('a');
-    //     phoneNumber.setAttribute("href", `tel:${event.phoneNumber}`);
-    //     phoneNumber.classList.add('event-detail');
-    //     phoneNumber.innerText = event.phoneNumber;
-    //     phone.append(phoneNumber)
-    //     detailElement.append(phone);
-
-    //     var eventUrl = document.createElement('div');
-    //     eventUrl.classList.add('event-url');
-    //     const eventUrlLink = document.createElement('a');
-    //     eventUrlLink.setAttribute("href", `${event.website}`);
-    //     eventUrlLink.setAttribute("target", "_blank");
-    //     eventUrlLink.innerText = event.website;
-    //     eventUrl.append(eventUrlLink);
-    //     detailElement.append(eventUrl);
-
-    //     const scheduleBtn = document.createElement('button');
-    //     scheduleBtn.setAttribute('type', 'button');
-    //     scheduleBtn.classList.add('schedule-btn');
-    //     scheduleBtn.classList.add('book-appt');
-
-    //     const btnText = document.createElement('span');
-    //     btnText.innerText = 'BOOK AN APPOINTMENT'
-    //     scheduleBtn.append(btnText);
-    //     scheduleBtn.addEventListener('click', () => this.openScheduler(event));
-
-    //     detailElement.append(scheduleBtn);
-
-    //     //Add Request Appointment Button
-    //     const requestBtn = document.createElement('button');
-    //     requestBtn.setAttribute('type', 'button');
-    //     requestBtn.classList.add('schedule-btn');
-
-    //     const requestBtnText = document.createElement('span');
-    //     requestBtnText.innerText = 'REQUEST AN APPOINTMENT'
-    //     requestBtn.append(requestBtnText);
-    //     requestBtn.addEventListener('click', () => this.openRequestForm(event));
-
-    //     if (event.requestAppointment) {
-    //         detailElement.append(requestBtn);
-    //     }
+        const eventDateText = document.createElement('span');
+        eventDateText.classList.add('event-detail');
+        eventDateText.innerText = `${new Date(event.eventStartDate).toLocaleDateString()} - ${new Date(event.eventEndDate).toLocaleDateString()}`;
+        eventDate.append(eventDateText);
+        contentRight.append(eventDate);
 
 
-    //     const modal = defaultModal({ size: 'normal', skipCache: true });
-    //     modal.open();
-    //     modal.updateContent(detailElement, { wrap: true });
-    // };
+        const collections = document.createElement('div');
+        collections.classList.add('event-info');
+        const collectionsHeader = document.createElement('span');
+        collectionsHeader.classList.add('event-label');
+        collectionsHeader.innerText = 'COLLECTIONS';
+        collections.append(collectionsHeader);
+
+        const collectionsList = document.createElement('div');
+        collectionsList.classList.add('collections-list');
+        const evtCollections = event.collectionsAvailable || [];
+        for (const collection of evtCollections) {
+            const collectionItem = document.createElement('span');
+            if (collection.collectionButtonUrl == null) {
+                //collectionItem.setAttribute("href", "#");
+            } else {
+                //collectionItem.setAttribute("href", collection.collectionButtonUrl);
+                //collectionItem.setAttribute("target", "_blank");
+            }
+            collectionItem.classList.add('collection-item');
+            collectionItem.classList.add('event-detail');
+            collectionItem.innerText = collection;
+            collectionsList.append(collectionItem);
+        };
+        collections.append(collectionsList);
+        contentRight.append(collections);
+
+        const address = document.createElement('div');
+        address.classList.add('event-info');
+        const addressLabel = document.createElement('span');
+        addressLabel.classList.add('event-label');
+        addressLabel.innerText = 'ADDRESS';
+        address.append(addressLabel);
+        const streetAddress = document.createElement('div');
+        streetAddress.classList.add('street-address');
+        streetAddress.innerText = event.streetName;
+        address.append(streetAddress);
+        const directions = document.createElement('a');
+        directions.classList.add('directions');
+        directions.innerText = 'GET DIRECTIONS'
+        let destination = event.streetName.replaceAll(',', '').replaceAll(' ', '+');
+        destination += `+${event.city}+${event.state}`
+        directions.setAttribute('href', `https://www.google.com/maps?daddr=${destination}`);
+        directions.setAttribute('target', '_blank');
+        directions.setAttribute('rel', 'noopener noreferrer');
+        address.append(directions);
+        contentRight.append(address);
+
+        const phone = document.createElement('div');
+        phone.classList.add('event-info');
+        const phoneLabel = document.createElement('div');
+        phoneLabel.classList.add('event-label');
+        phoneLabel.innerText = 'PHONE';
+        phone.append(phoneLabel);
+        const phoneNumber = document.createElement('a');
+        phoneNumber.setAttribute("href", `tel:${event.phone}`);
+        phoneNumber.classList.add('event-detail');
+        phoneNumber.innerText = event.phone;
+        phone.append(phoneNumber)
+        contentRight.append(phone);
+
+        const eventUrl = document.createElement('div');
+        eventUrl.classList.add('event-info');
+        const urlLabel = document.createElement('div');
+        urlLabel.classList.add('event-label');
+        urlLabel.innerText = 'WEBSITE';
+        eventUrl.append(urlLabel);
+        const eventUrlLink = document.createElement('a');
+        eventUrlLink.setAttribute("href", `${event.website}`);
+        eventUrlLink.setAttribute("target", "_blank");
+        eventUrlLink.innerText = event.website;
+        eventUrl.append(eventUrlLink);
+        contentRight.append(eventUrl);
+
+        if (event.canRequestAppt) {
+            const scheduleBtn = document.createElement('button');
+            scheduleBtn.setAttribute('type', 'button');
+            scheduleBtn.classList.add('button')
+            scheduleBtn.classList.add('primary-button');
+            const btnText = document.createElement('span');
+            btnText.innerText = 'REQUEST AN EVENT APPOINTMENT'
+            scheduleBtn.append(btnText);
+            scheduleBtn.addEventListener('click', () => this.openRequestForm(event));
+            content.append(scheduleBtn);
+        }
+
+        const modal = defaultModal({ size: 'normal', skipCache: true });
+        const requestBtn = document.createElement('button');
+        requestBtn.setAttribute('type', 'button');
+        requestBtn.classList.add('event-schedule');
+
+        const requestBtnText = document.createElement('span');
+        requestBtnText.innerText = 'SEE MORE EVENTS';
+        requestBtn.append(requestBtnText);
+        requestBtn.addEventListener('click', () => modal.close());
+        content.append(requestBtn);
+
+        modal.open();
+
+        modal.updateContent(detailElement, { wrap: true });
+    };
 
     getDirectBookingElem = (bridalLiveEventId) => {
         const scheduler = document.createElement('iframe');
