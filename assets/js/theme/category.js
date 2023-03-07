@@ -87,11 +87,6 @@ export default class Category extends CatalogPage {
 
             urlUtils.goToUrl(Url.format({ pathname: url.pathname, search: urlUtils.buildQueryString(urlQueryParams) }));
         });
-
-
-        // $(window).load(function(){
-        //     $('.middlemob').html($('.pagefilterheader .middle').html());        
-        // });
     }
 
     ariaNotifyNoProducts() {
