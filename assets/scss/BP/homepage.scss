@@ -163,7 +163,7 @@
         }
     }
 }
-.pages-custom-category-bp-category,.pages-custom-category-suits-bp-category {
+.bp-category {
     .customBanner {
         padding: 0 0.75rem !important;
         margin: 10px auto !important;
@@ -184,7 +184,7 @@
     }
     .slick-track {
         display: flex;
-        justify-content: center;
+        justify-content: left;
     }
     .slick-slide img {
         width: auto;
@@ -229,7 +229,10 @@
         min-width: calc(100% - 40px) !important;
         .slick-track {
             display: flex;
-            justify-content: left;
+            width: 100% !important;
+            @include breakpoint("medium") {
+                justify-content: center;
+            }
         }
         .slick-next {
             right: -20px;

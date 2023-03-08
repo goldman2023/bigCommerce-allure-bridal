@@ -36,9 +36,7 @@
             </div>
             {{#each forms.edit_account.fields}}
                 {{#if label '!==' "Wedding Party Id"}}
-                    {{#if label '!=='  "Default Wishlist"}}
-                        {{{dynamicComponent 'components/common/forms'}}}
-                    {{/if}}
+                    {{{dynamicComponent 'components/common/forms'}}}
                 {{/if}}
             {{/each}}
         </div>

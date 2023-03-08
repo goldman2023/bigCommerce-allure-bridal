@@ -99,6 +99,12 @@
         @include breakpoint("medium") {
             flex-basis: 70%;
         }
+        .card {
+            margin-bottom: 0;
+        }
+        .product .card-title > a, .productCarousel-slide .card-title > a {
+            height: 75px;
+        }
         .section-title {
             font-family: stencilFontFamily('prata-font');
             font-style: normal;
@@ -278,5 +284,13 @@
                 margin: 0;
             }
         }
+    }
+    .form-field--default-wishlist {
+        display: none;
+    }
+}
+.pages-account-wishlist-details {
+    .titleIcon {
+        pointer-events: none;
     }
 }
