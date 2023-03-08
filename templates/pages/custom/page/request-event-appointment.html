@@ -233,14 +233,14 @@
         </div>
 
         <div class="form-retail-row">
-          <div id="eventDate" class="form-field filter flatpickr">
+          <div id="weddingDate" class="form-field filter flatpickr">
             <span class="form-label">
               {{lang 'request_event_appointment.weddingDate'}}
               <span class="asterisk">*</span>
             </span>
 
             <input
-              name="eventDate"
+              name="weddingDate"
               class="form-input date-picker required"
               type="text"
               placeholder="mm/dd/yyyy"
@@ -268,11 +268,22 @@
           {{{lang 'request_event_appointment.thankYou'}}}
         </h2>
         <p>
-          <span>Someone from {Store Name} will be in touch with you soon.</span>
+          <span>
+            Someone from
+            <span id="eventName"></span>
+            will be in touch with you soon.
+          </span>
         </p>
         <p>
-          <a href="/" class="button" type="button">View Other Events</a>
-          <a href="/" class="button button-white" type="button">
+          <a
+            href="/designer-events"
+            target="_blank"
+            class="button thanks"
+            type="button"
+          >
+            View Other Events
+          </a>
+          <a href="/" class="button button-white thanks" type="button">
             Continue Shopping
           </a>
         </p>
@@ -446,7 +457,6 @@
                   .closest('.form-field')
                   .querySelectorAll('.error-message').length > 0
               ) {
-                console.log("Field Doesn't Found")
               } else {
                 var errorDiv = document.createElement('span')
                 errorDiv.classList.add('error-message')
@@ -481,20 +491,17 @@
       const city = form.elements.city.value
       const state = form.elements.state.value
       const zip = form.elements.zip.value
-      const eventDate = form.elements.eventDate.value
+      const weddingDate = form.elements.weddingDate.value
       //strip out time value from event date, date format being YYYY-MM-DD HH:MM
-      // const eventDateOnly = eventDate.split(' ')[0];
-      // const eventTime = eventDate.split(' ')[1];
+      // const weddingDateOnly = weddingDate.split(' ')[0];
+      // const eventTime = weddingDate.split(' ')[1];
       const noOfPeopleAttending = form.elements.noOfPeopleAttending.value
-      const preferredDates = form.elements.preferredDates.value
       //get retailer name from querystring
-      const retailerName = new URLSearchParams(window.location.search).get(
-        'retailerName',
+      const eventName = new URLSearchParams(window.location.search).get(
+        'eventName',
       )
       //get retailer id from querystring
-      const retailerId = new URLSearchParams(window.location.search).get(
-        'retailerId',
-      )
+      const eventId = new URLSearchParams(window.location.search).get('eventId')
 
       //get unmasked phone number
       var unmaskedPhone = Inputmask.unmask(phone, { mask: '(999) 999-9999' })
@@ -509,9 +516,8 @@
         !city ||
         !state ||
         !zip ||
-        !eventDate ||
-        !noOfPeopleAttending ||
-        !preferredDates
+        !weddingDate ||
+        !noOfPeopleAttending
       ) {
         // show an error message if any of the required fields are empty
         alert('Please fill out all the required fields.')
@@ -539,15 +545,13 @@
         City: city,
         State: state,
         PostalCode: zip,
-        EventDate: eventDate,
+        weddingDate: weddingDate,
         NumberPeopleinAppointment: parseInt(noOfPeopleAttending),
         EmailOptin: emailAlerts,
-        RetailerName: retailerName,
-        RetailerId: retailerId ? parseInt(retailerId) : 0,
+        EventName: eventName,
+        EventId: eventId ? parseInt(eventId) : 0,
         DirectBook: 'true',
-        AppointmentDates: preferredDates,
       }
-      console.log(formData)
       fetch(url, {
         method: method,
         headers: {
@@ -559,17 +563,18 @@
       })
         .then((response) => {
           // do something with the response
-          console.log(response)
+
           //hide form section and show thank you section
           document.getElementById('event-appointment-form').style.display =
             'none'
+          document.getElementById('eventName').innerText = eventName
           document.getElementById('thank-you').style.display = 'block'
           //Go to top of page
           window.scrollTo(0, 0)
         })
         .catch((error) => {
           // handle any errors
-          console.error(error)
+          alert(error)
         })
     })
   })

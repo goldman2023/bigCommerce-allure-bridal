@@ -264,6 +264,11 @@
 
   .header-title {
     margin-top: 1rem;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 34px;
   }
 
   .form-field {
@@ -509,7 +514,6 @@
     background: #bc8372;
     border: 1px solid #bc8372;
     color: #fff;
-
     &:hover {
       background: #fff;
       color: #bc8372;
@@ -526,6 +530,13 @@
       color: #fff;
       border: 1px solid #bc8372;
     }
+  }
+  .thanks {
+    width: 170px;
+    padding: 0;
+  }
+  .submit-btn {
+    width: 88px;
   }
 }
 
