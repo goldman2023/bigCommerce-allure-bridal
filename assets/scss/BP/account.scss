@@ -285,4 +285,12 @@
             }
         }
     }
+    .form-field--default-wishlist {
+        display: none;
+    }
+}
+.pages-account-wishlist-details {
+    .titleIcon {
+        pointer-events: none;
+    }
 }
