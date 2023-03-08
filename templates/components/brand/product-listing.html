@@ -1,4 +1,5 @@
 {{inject 'noCompareMessage' (lang 'compare.no_compare')}}
+<div class="floatmiddle">{{length category.products}} ITEM{{#if category.products.length '>' 1}}S{{/if}}</div>
 
 <div {{#if settings.data_tag_enabled}} data-list-name="Brand: {{brand.name}}" {{/if}}>
     {{#if theme_settings.product_list_display_mode '===' 'grid'}}
