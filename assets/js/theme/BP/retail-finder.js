@@ -1128,11 +1128,11 @@ export default class RetailFinder extends PageManager {
   }
   openRequestForm = (retailer) => {
     if (retailer.bridalLiveRetailerId) {
-      window.location.href = '/request-appointment?retailerId=' + retailer.bridalLiveRetailerId + '&retailerName=' + retailer.retailerName;
+      window.location.href = '/request-appointment/?retailerId=' + retailer.bridalLiveRetailerId + '&retailerName=' + retailer.retailerName;
       //redirect to custom form appending query string
 
     } else {
-      window.location.href = '/request-appointment?retailerName=' + retailer.retailerName;
+      window.location.href = '/request-appointment/?retailerName=' + retailer.retailerName;
     }
 
   }

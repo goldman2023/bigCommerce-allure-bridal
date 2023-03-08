@@ -1,5 +1,5 @@
 {{#partial "page"}}
-<section class="page pages-custom-retail-submission-form">
+<section class="page pages-custom-appointment-submission-form">
   {{{region name="page_builder_content"}}}
 
   <div>
@@ -10,7 +10,7 @@
   </div>
   <div class="container">
     <div class="content login">
-      <form id="retail-finder-form" class="form">
+      <form id="event-appointment-form" class="form">
         <h2 class="header-title">{{lang 'request_event_appointment.title'}}</h2>
         <div class="form-retail-row">
           <div class="form-field filter">
@@ -235,7 +235,7 @@
         <div class="form-retail-row">
           <div id="eventDate" class="form-field filter flatpickr">
             <span class="form-label">
-              {{lang 'request_event_appointment.eventDate'}}
+              {{lang 'request_event_appointment.weddingDate'}}
               <span class="asterisk">*</span>
             </span>
 
@@ -243,7 +243,7 @@
               name="eventDate"
               class="form-input date-picker required"
               type="text"
-              placeholder="MM/DD/YYYY"
+              placeholder="mm/dd/yyyy"
             />
           </div>
         </div>
@@ -256,7 +256,8 @@
                 type="checkbox"
                 class="register_pass-news"
               />
-              {{{lang 'request_event_appointment.agreeTerms'}}}*
+              {{{lang 'request_event_appointment.agreeTerms'}}}
+              <span class="asterisk">*</span>
             </label>
           </div>
         </div>
@@ -269,7 +270,12 @@
         <p>
           <span>Someone from {Store Name} will be in touch with you soon.</span>
         </p>
-        <p><a href="/" class="button" type="button">Continue Shopping</a></p>
+        <p>
+          <a href="/" class="button" type="button">View Other Events</a>
+          <a href="/" class="button button-white" type="button">
+            Continue Shopping
+          </a>
+        </p>
       </div>
     </div>
   </div>
@@ -396,7 +402,7 @@
     //Initialize Inputmask
     Inputmask({ mask: '(999) 999-9999' }).mask(document.getElementById('phone'))
 
-    document.getElementById('retail-finder-form').addEventListener(
+    document.getElementById('event-appointment-form').addEventListener(
       'invalid',
       (function () {
         return function (e) {
@@ -416,11 +422,11 @@
       true,
     )
 
-    const form = document.getElementById('retail-finder-form')
+    const form = document.getElementById('event-appointment-form')
     form.addEventListener('submit', (event) => {
       event.preventDefault() // prevent the form from being submitted
 
-      // var retailFinderFormInputs = document.querySelectorAll("#retail-finder-form .form-input");
+      // var retailFinderFormInputs = document.querySelectorAll("#event-appointment-form .form-input");
       var retailFinderFormInputs = form.querySelectorAll('.form-input')
       if (retailFinderFormInputs) {
         for (let i = 0; i < retailFinderFormInputs.length; i++) {
@@ -555,7 +561,8 @@
           // do something with the response
           console.log(response)
           //hide form section and show thank you section
-          document.getElementById('retail-finder-form').style.display = 'none'
+          document.getElementById('event-appointment-form').style.display =
+            'none'
           document.getElementById('thank-you').style.display = 'block'
           //Go to top of page
           window.scrollTo(0, 0)

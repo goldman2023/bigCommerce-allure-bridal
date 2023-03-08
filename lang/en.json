@@ -1115,9 +1115,9 @@
         "city": "City",
         "state": "State/Province/Country",
         "zip": "Zip Code",
-        "eventDate": "Date of Event",
+        "weddingDate": "Wedding Date",
         "peopleAttending": "# of Appointment Attendees",
         "agreeTerms": "I accept the &nbsp;<a href=\"/privacy-policy/\">terms and conditions</a>",
-        "thankYou": "Thank you for requesting an appointment!"
+        "thankYou": "Thank You For Requesting An Event Appointment!"
     }
 }
