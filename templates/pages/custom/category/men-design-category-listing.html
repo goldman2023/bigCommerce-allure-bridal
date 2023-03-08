@@ -9,26 +9,31 @@
     <div class="category-listing-page">
         {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
         <div id="product-listing-container">
+            {{assignVar "the-brunswick" theme_settings.the-brunswick}}
+            {{assignVar "the-ridge" theme_settings.the-ridge}}
+            {{assignVar "the-tuxedo" theme_settings.the-tuxedo}}
+            {{assignVar "the-venice-velvet" theme_settings.the-venice-velvet}}
+            {{assignVar "the-vows" theme_settings.the-vows}}
+
             {{#if category.subcategories}}
-            {{#each category.subcategories}}
-            {{#if @index '===' 3}}
-            <div class="customBanner">
-                <div class="leftTextbanner" id="leftTextbanner"></div>
-                {{> BP/components/common/divider}}
-            </div>
-            {{/if}}
-            <div class="sub-category-block" data-path="{{url}}">
-                <div class="sub-cat-header">
-                    <h3>{{name}}</h3>
-                    <p>
-                        <span class="sub-description body-light-3"></span>
-                        <a href="{{url}}" class="viewCategory body-light-3">View {{name}} </a>
-                    </p>
-                </div>
-                <div class="sub-products">
-                </div>
-            </div>
-            {{/each}}
+                {{#each category.subcategories}}
+                    {{#if @index '===' 3}}
+                    <div class="customBanner">
+                        <div class="leftTextbanner" id="leftTextbanner"></div>
+                        {{> BP/components/common/divider}}
+                    </div>
+                    {{/if}}
+                    <div class="sub-category-block" data-path="{{url}}">
+                        <div class="sub-cat-header">
+                            <h3>{{name}}</h3>
+                            <p>
+                                <span class="sub-description body-light-3"></span>
+                                <a href="{{getVar (dashcase (lowercase name))}}" {{#if name '===' 'The Vows'}}target="_blank"{{/if}} class="viewCategory body-light-3" data-url="{{url}}">View {{name}} </a>
+                            </p>
+                        </div>
+                        <div class="sub-products"></div>
+                    </div>
+                {{/each}}
             {{/if}}
         </div>
     </div>

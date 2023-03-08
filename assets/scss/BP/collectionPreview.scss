@@ -130,6 +130,13 @@
         color: stencilColor('color-black');
         margin: 0 auto;
         max-width: 91.71429rem;
+        word-break: break-word;
+        @media screen and (max-width: 373px) {
+            font-size: 47px;
+        }
+        @media screen and (max-width: 374px) {
+            font-size: 50px;
+        }
     }
     p {
         text-align: center;

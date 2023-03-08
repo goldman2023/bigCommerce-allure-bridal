@@ -21,7 +21,8 @@ import {
     blockElementDivider,
     blockElementSpacer,
     blockElementSpacer24Px,
-    referencedBlockHomepageCollections
+    referencedBlockHomepageCollections,
+    globalblockElementFullscreenVideo
 } from '../BP/universal-blocks';
 export default class Blog extends PageManager {
     constructor(context) {
@@ -30,9 +31,7 @@ export default class Blog extends PageManager {
 
     onReady() {
         let blogJson = this.context.blogJson;
-        let metadata = JSON.parse(blogJson.replace( /(<([^>]+)>)/ig, ''));
-        console.log("blog post data",metadata[1]);
-        
+        let metadata = JSON.parse(blogJson.replace( /(<([^>]+)>)/ig, ''));        
         let sortDate = (metadata[1]?.sortingDate).split('T');
         let date = new Date(`${sortDate[0]}T00:00`);
         let formatdate = date.toString().split(' ');
@@ -119,6 +118,9 @@ export default class Blog extends PageManager {
             }
             if(element.__typename === "BlockElementStoryBlock"){
                 return blockElementStory(element); 
+            }
+            if (element.__typename === "BlockElementFullscreenVideo") {
+                return globalblockElementFullscreenVideo(element);
             }
             if (element.__typename === "BlockElementCollectionPreview") {
                 return collectionPreview(element);

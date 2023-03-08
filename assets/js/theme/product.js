@@ -21,8 +21,6 @@ export default class Product extends PageManager {
     onReady() {
         //Update PDP Back to List Button
         const breadcrumbLink = document.querySelector('.breadcrumbs .breadcrumb:nth-last-child(2) a').getAttribute('href');
-        console.log('breadcrumbs', breadcrumbLink);
-
         const backToList = document.querySelector('.productView--top a');
         const lastVisitedCategoryUrl = localStorage.getItem('lastVisitedCategoryUrl');
         if (lastVisitedCategoryUrl && lastVisitedCategoryUrl !== 'SRP') {

@@ -208,18 +208,16 @@ export default class Homepage extends PageManager {
                 dots: false,
                 infinite: false,
                 speed: 300,
-                slidesToShow: 6,
+                slidesToShow: 5,
                 slidesToScroll: 1,
-                centerMode: false,
                 arrows: true,
                 responsive: [
                 {
                     breakpoint: 1100,
                     settings: {
-                    slidesToShow: 6,
+                    slidesToShow: 5,
                     slidesToScroll: 1,
                     infinite: false,
-                    centerMode: false,
                     arrows: true,
                     dots: false
                     }
@@ -227,45 +225,41 @@ export default class Homepage extends PageManager {
                 {
                     breakpoint: 1024,
                     settings: {
-                        slidesToShow: 3,
+                        slidesToShow: 4,
                         slidesToScroll: 1,
                         infinite: false,
-                        centerMode: true,
-                        arrows: false,
+                        arrows: true,
                         dots: false
                     }
                 },
                 {
                     breakpoint: 1023,
                     settings: {
-                        slidesToShow: 3,
+                        slidesToShow: 4,
                         slidesToScroll: 1,
-                        centerMode: false,
                         infinite: false,
                         dots: false,
-                        arrows: false
+                        arrows: true
                     }
                 },
                 {
                     breakpoint: 900,
                     settings: {
-                        slidesToShow: 3,
+                        slidesToShow: 4,
                         slidesToScroll: 1,
-                        centerMode: false,
                         infinite: false,
                         dots: false,
-                        arrows: false
+                        arrows: true
                     }
                 },
                 {
                     breakpoint: 800,
                     settings: {
-                        slidesToShow: 3,
+                        slidesToShow: 4,
                         slidesToScroll: 1,
-                        centerMode: false,
                         infinite: false,
                         dots: false,
-                        arrows: false
+                        arrows: true
                     }
                 },
                 {
@@ -273,7 +267,6 @@ export default class Homepage extends PageManager {
                     settings: {
                         slidesToShow: 2,
                         slidesToScroll: 2,
-                        centerMode: false,
                         infinite: true,
                         dots: false,
                         arrows: false

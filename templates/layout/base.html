@@ -138,8 +138,11 @@
     {{~inject 'googleApiToken' theme_settings.google_api_token}}
     {{~inject 'ipstackAccessToken' theme_settings.ipstack_access_token}}
     {{~inject 'workatoApiPath' theme_settings.workato_api_path}}
-    {{~inject 'workatoApiPathB2C' theme_settings.workato_api_path_b2c}}
     {{~inject 'workatoApiToken' theme_settings.workato_api_token}}
+    {{~inject 'workatoApiPathB2C' theme_settings.workato_api_path_b2c}}
+    {{~inject 'workatoApiPathB2C' theme_settings.login_api_path}}
+    {{~inject 'loginApiPath' theme_settings.workato_api_path_b2c}}
+    {{~inject 'createAccountApiPath' theme_settings.create_account_api_path}}
     {{~inject 'contentfulApiPath' theme_settings.contentful_api_path}}
     {{~inject 'contentfulApiToken' theme_settings.contentful_api_token}}
     {{~inject 'leadmgmtApiToken' theme_settings.leadmgmt_api_token}}
@@ -162,7 +165,7 @@
     {{~inject 'carouselArrowAndDotAriaLabel' (lang 'carousel.arrow_and_dot_aria_label')}}
     {{~inject 'carouselActiveDotAriaLabel' (lang 'carousel.active_dot_aria_label')}}
     {{~inject 'carouselContentAnnounceMessage' (lang 'carousel.content_announce_message')}}
-
+    {{~inject 'navigationProductId' theme_settings.navigation_product_id }}
     {{!-- Get this loading ASAP --}}
     <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.main.js'}}" as="script">
 

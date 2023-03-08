@@ -25,7 +25,6 @@
 
 .quickSearchResults {
     margin-top: spacing("single");
-
     @include breakpoint("medium") {
         margin-top: 0;
     }
@@ -36,6 +35,12 @@
         @include breakpoint("medium") {
             display: block;
         }
+    }
+}
+.mobile-only {
+    .quickSearchResults .productGrid {
+         overflow: scroll;
+         height: 80vh;
     }
 }
 

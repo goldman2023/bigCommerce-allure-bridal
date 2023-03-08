@@ -153,7 +153,7 @@
             <h1 class="header-logo header-logo--{{theme_settings.logo-position}}">
                 {{> components/common/store-logo}}
             </h1>
-            <div class="header-navigation__cta-links">
+            <div class="header-navigation__cta-links ">
                 <a href="/retail-finder/" class="header-navigation__cta">
                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="26" viewBox="0 0 21 26" fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M1.69995 10.3333C1.69995 5.45481 5.65476 1.5 10.5333 1.5C15.4118 1.5 19.3666 5.45481 19.3666 10.3333C19.3666 13.6423 17.1419 17.1887 14.8163 19.971C13.6654 21.348 12.513 22.5108 11.6479 23.3296C11.2157 23.7386 10.856 24.0611 10.6051 24.2806L10.5333 24.3432L10.4615 24.2806C10.2106 24.0611 9.85087 23.7386 9.41864 23.3296C8.55354 22.5108 7.4012 21.348 6.25026 19.971C3.92471 17.1887 1.69995 13.6423 1.69995 10.3333ZM10.2156 25.3861C10.2158 25.3863 10.2159 25.3864 10.5333 25L10.2159 25.3864C10.4004 25.5379 10.6662 25.5379 10.8507 25.3864L10.5333 25C10.8507 25.3864 10.8508 25.3863 10.8509 25.3861L10.8514 25.3857L10.853 25.3844L10.8588 25.3797L10.8802 25.3619C10.8918 25.3522 10.9066 25.3398 10.9247 25.3246C10.9357 25.3154 10.9478 25.3051 10.9611 25.2938C11.0315 25.2343 11.1338 25.1467 11.2636 25.0332C11.5231 24.8061 11.8925 24.4749 12.3353 24.0559C13.2202 23.2184 14.4012 22.027 15.5836 20.6123C17.9247 17.8113 20.3666 14.0244 20.3666 10.3333C20.3666 4.90252 15.9641 0.5 10.5333 0.5C5.10248 0.5 0.699951 4.90252 0.699951 10.3333C0.699951 14.0244 3.14186 17.8113 5.48298 20.6123C6.66537 22.027 7.84636 23.2184 8.73126 24.0559C9.17403 24.4749 9.54348 24.8061 9.80299 25.0332C9.93277 25.1467 10.0351 25.2343 10.1054 25.2938C10.1406 25.3236 10.1678 25.3464 10.1864 25.3619L10.2078 25.3797L10.2135 25.3844L10.2151 25.3857L10.2156 25.3861ZM7.03325 10.3333C7.03325 8.40013 8.60006 6.83333 10.5333 6.83333C12.4664 6.83333 14.0333 8.40013 14.0333 10.3333C14.0333 12.2665 12.4664 13.8333 10.5333 13.8333C8.60006 13.8333 7.03325 12.2665 7.03325 10.3333ZM10.5333 5.83333C8.04778 5.83333 6.03325 7.84785 6.03325 10.3333C6.03325 12.8188 8.04778 14.8333 10.5333 14.8333C13.0187 14.8333 15.0333 12.8188 15.0333 10.3333C15.0333 7.84785 13.0187 5.83333 10.5333 5.83333Z" fill="#AC634D"/>
@@ -166,22 +166,21 @@
                     </svg>
                 <span>DRESSING ROOM</span>
                 </a>
-                <a href="{{#if customer}}{{urls.account.details}}{{else}}{{urls.auth.login}}{{/if}}" class="header-navigation__cta">
+                <a href="{{#if customer}}{{urls.account.details}}{{else}}{{urls.auth.login}}{{/if}}" class="header-navigation__cta headeraccount">
                     <svg xmlns="http://www.w3.org/2000/svg" width="27" height="26" viewBox="0 0 27 26" fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M20.1339 22.76C18.2435 24.0474 15.9596 24.8 13.5 24.8C11.0403 24.8 8.75641 24.0474 6.86599 22.76H7.59995C7.59995 19.5015 10.2415 16.86 13.5 16.86C16.7584 16.86 19.4 19.5015 19.4 22.76H20.1339ZM20.3975 22.5751C20.3133 19.3705 18.0441 16.7102 15.025 16.0291C16.9492 15.3903 18.3371 13.5758 18.3371 11.4372C18.3371 8.76564 16.1714 6.59995 13.4999 6.59995C10.8284 6.59995 8.6627 8.76564 8.6627 11.4372C8.6627 13.5758 10.0506 15.3903 11.9749 16.0291C8.95582 16.7102 6.68665 19.3706 6.60238 22.5751C3.63277 20.4322 1.69995 16.9418 1.69995 13C1.69995 6.48299 6.98299 1.19995 13.5 1.19995C20.0169 1.19995 25.3 6.48299 25.3 13C25.3 16.9418 23.3671 20.4322 20.3975 22.5751ZM26.3 13C26.3 20.0692 20.5692 25.8 13.5 25.8C6.43071 25.8 0.699951 20.0692 0.699951 13C0.699951 5.93071 6.43071 0.199951 13.5 0.199951C20.5692 0.199951 26.3 5.93071 26.3 13ZM13.4999 15.2744C15.6191 15.2744 17.3371 13.5564 17.3371 11.4372C17.3371 9.31793 15.6191 7.59995 13.4999 7.59995C11.3807 7.59995 9.6627 9.31793 9.6627 11.4372C9.6627 13.5564 11.3807 15.2744 13.4999 15.2744Z" fill="#AC634D"/>
                     </svg>
                     <span>{{lang 'common.account'}}</span>
                 </a>
                 
-                <div class="account-modal" style="display:none">
+                <div class="account-modal">
                     {{#if customer}}
                         <div class="account-modal__welcome">
                             <div class="account-modal__title">
-                                Welcome!
+                                Hi, {{customer.name}}!
                             </div>
                             <div class="account-modal__cta">
-                                <button class="button button--primary">My Account</button>
-                                <button class="button button--secondary">Sign out</button>
+                                <a class="button button--primary" href="{{#if customer}}{{urls.account.details}}{{else}}{{urls.auth.login}}{{/if}}">My Account</a>
                             </div>
                         </div>
                     {{else}}
@@ -190,12 +189,12 @@
                                 Welcome!
                             </div>
                             <div class="account-modal__cta">
-                                <button class="button button--primary">Create Account</button>
-                                <button class="button button--secondary">Sign in</button>
+                                <a class="button button--primary" href="{{#if customer}}{{urls.account.details}}{{else}}{{urls.auth.login}}{{/if}}">Register or sign in</a>
                             </div>
                         </div>
                     {{/if}}
                     <div class="account-modal__retailers">
+                        <p class="label">Are you a retailer?</p>
                         <a href="https://allurecustomerservice.com/login.php">Retailer Login -></a>
                     </div>
                 </div>

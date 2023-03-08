@@ -116,7 +116,7 @@ export default class Account extends PageManager {
     }
 
     loginEvent() {
-        fetch(`${this.context.workatoApiPathB2C}/login/customer`, {
+        fetch(`${this.context.loginApiPath}`, {
             method: 'POST',
             headers: { "API-TOKEN": this.context.workatoApiToken},
             body: JSON.stringify({

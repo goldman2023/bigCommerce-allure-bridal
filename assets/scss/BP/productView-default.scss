@@ -79,6 +79,10 @@
                     &.slider-for {
                         display: none;
                     }
+                    .slick-track {
+                        display: flex;
+                        align-items: center;
+                    }
                     .slick-next {
                         right: 0;
                         width: 52px;
@@ -306,9 +310,16 @@
                 }
                 &.is-hover {
                     .swatchvalue {
-                        display: block;
+                        display: block !important;
                         position: absolute;
-                        top: 11px;
+                        bottom: -3px;
+                        left: 0;
+                        font-size: 0.71429rem;
+                        line-height: 0.85714rem;
+                        letter-spacing: 0.1em;
+                        color: #4d4d4d;
+                        margin: 16px 0 0;
+                        text-transform: uppercase;
                     }
                 }
             }

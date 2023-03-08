@@ -263,7 +263,7 @@
 }
 
 .actionBar {
-    display: none;
+    //display: none;
 }
 
 .card .titleIcon {
@@ -275,12 +275,14 @@
         border: none;
         padding: 20px 0;
         position: relative;
+        width: 50%;
+        margin: 0;
 
         &::before {
             position: absolute;
-            left: 8px;
+            left: 3px;
             content: "";
-            width: 35px;
+            width: 25px;
             height: 35px;
             background-repeat: no-repeat;
             top: 8px;
@@ -291,7 +293,7 @@
 
         &::after {
             position: absolute;
-            left: 30px;
+            left: 20px;
             content: "Filters";
             width: 70px;
             height: 20px;
@@ -596,9 +598,6 @@ body {
     }
 }
 .pagefilterheader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     font-family: stencilFontFamily('default-font-regular');
     font-style: normal;
     font-weight: 400;
@@ -606,8 +605,49 @@ body {
     line-height: remCalc(15px);
     letter-spacing: 0.1em;
     text-transform: capitalize;
-    .leftside {
+    position: relative;
+    @include breakpoint("medium") {
         display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .leftside {
+        display: none;
+        @include breakpoint("medium") {
+            display: flex;
+            width: 95px;
+        }
+    }
+    .middle {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 15px;
+        text-align: center;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #282828;
+        @media screen and (max-width: 900px) {
+            position: absolute;
+            left: 45%;
+            top: 10px;
+        }
+    }
+    .rightSide {
+        width: 200px;
+        @media screen and (max-width: 900px) {
+            width: 209px;
+            position: absolute;
+            right: 0;
+            z-index: 9999;
+            margin-top: -10px;
+        }
+        .actionBar {
+            width: 200px;
+            .form-fieldset.actionBar-section {
+                display: none;
+            }
+        }
     }
     .hideshowfilter {
         position: relative;
@@ -666,5 +706,98 @@ body {
         .page-heading {
             display: none;
         }
+    }
+}
+
+.custom-sort {
+    position: relative;
+    margin-right: 15px;
+    .customSortLabel {
+        .label {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 15px;
+            text-align: right;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #282828;
+            padding-right: 15px;
+            position: relative;
+            cursor: pointer;
+            &::after {
+                content: '';
+                position: absolute;
+                top: 5px;
+                width: 9px;
+                right: 0;
+                height: 6px;
+                @include chevron(stencilColor('color-default-neutral-1'));
+            }
+        }
+        .sortList {
+            padding: 6px 1px 8px;
+            position: absolute;
+            width: 164px;
+            height: 152px;
+            right: 0;
+            top: 23px;
+            background: #FFFFFF;
+            border: 1px solid #615D5D;
+            box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.14);
+            border-radius: 3px;
+            z-index: 9;
+            list-style: none;
+            margin: 0;
+            display: none;
+            .sortItem {
+                font-style: normal;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 20px;
+                color: #695C5C;
+                padding: 0 0 0 35px;
+                margin: 10px 0;
+                cursor: pointer;
+                position: relative;
+                &::before {
+                    content: '';
+                    width: 12px;
+                    height: 12px;
+                    position: absolute;
+                    left: 12px;
+                    top: 5px;
+                    background: #FFFFFF;
+                    border: 1px solid #BC8372;
+                    border-radius: 50px;
+                }
+                &.active {
+                    &::before {
+                        border: 4px solid #BC8372;
+                    }
+                }
+            }
+        } 
+        &.is-active {
+            .label {
+                color: #BC8372;
+                &::after {
+                    transform: rotate(180deg);
+                    @include chevron(stencilColor('color-default-primary-1'));
+                }
+            }
+            .sortList {
+                display: block;
+            }
+        }
+    }
+}
+.mobFilter {
+    display: flex;
+    @include breakpoint("medium") {
+        display: none;
+    }
+    .middlemob {
+        padding: 10px;
     }
 }
