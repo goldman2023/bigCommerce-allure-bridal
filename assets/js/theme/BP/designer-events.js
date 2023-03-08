@@ -35,7 +35,6 @@ const HOVER_DEFAULT_ZOOM_LEVEL = 10;
 const MARKER_HOVER_EVENT = 'markerHoverEvent';
 const RETAILER_ITEM_HOVER_EVENT = 'eventItemHoverEvent';
 
-MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
 
 export default class DesignerEvents extends PageManager {
@@ -332,28 +331,36 @@ export default class DesignerEvents extends PageManager {
         });
 
         // // hover events
-        // document.addEventListener(MARKER_HOVER_EVENT, (evt) => {
-        //     const eventId = evt.detail;
-        //     if (eventId) {
-        //         const eventItem = document.getElementById(eventId);
-        //         eventItem.classList.add('hovered');
-        //     } else {
-        //         const anyHovered = document.querySelectorAll('.event-item.hovered');
-        //         anyHovered.forEach((elem) => elem.classList.remove('hovered'));
-        //     }
-        // });
+        document.addEventListener(MARKER_HOVER_EVENT, (evt) => {
+            const eventId = evt.detail;
+            if (eventId) {
+                const eventItem = document.getElementById(eventId);
+                eventItem.classList.add('hovered');
+            } else {
+                const anyHovered = document.querySelectorAll('.event-item.hovered');
+                anyHovered.forEach((elem) => elem.classList.remove('hovered'));
+            }
+        });
 
-        // document.addEventListener(RETAILER_ITEM_HOVER_EVENT, (evt) => {
-        //     const event = evt.detail;
-        //     if (event) {
-        //         // TODO debounce if needed, doesnt seem that bad without it.
-        //         this.map.setCenter({ lat: event.location.lat, lng: event.location.lon });
-        //         this.map.setZoom(HOVER_DEFAULT_ZOOM_LEVEL);
-        //         this.paintEventMapMarkers(this.events, event);
-        //     } else {
-        //         this.paintEventMapMarkers(this.events, null, true);
-        //     }
-        // });
+        document.addEventListener(RETAILER_ITEM_HOVER_EVENT, (evt) => {
+            const event = evt.detail;
+            const newEventsToPaint = this.events.length ? this.events : this.eventsFilteredByLocation;
+            if (event && event.eventAddress) {
+                // TODO debounce if needed, doesnt seem that bad without it.
+                this.map.setCenter({ lat: event.eventAddress.lat, lng: event.eventAddress.lon });
+                this.map.setZoom(HOVER_DEFAULT_ZOOM_LEVEL);
+                this.paintEventMapMarkers(newEventsToPaint, event);
+            } else {
+                this.paintEventMapMarkers(newEventsToPaint, null, true);
+            }
+        });
+
+        // map slider
+        const mapToggle = document.getElementById('mapToggle');
+        const map = document.getElementById('map');
+        mapToggle.addEventListener('change', function () {
+            map.style.display = this.checked ? 'block' : 'none';
+        });
     };
 
     createEventItem = (event) => {
@@ -406,16 +413,16 @@ export default class DesignerEvents extends PageManager {
         container.addEventListener('click', () => {
             this.openDetailsModal(event);
         });
-        // hover events
-        // container.addEventListener('mouseenter', () => {
-        //     const eventHoveredEvent = new CustomEvent(RETAILER_ITEM_HOVER_EVENT, { detail: event });
-        //     document.dispatchEvent(eventHoveredEvent);
-        // });
 
-        // container.addEventListener('mouseleave', () => {
-        //     const eventExitEvent = new CustomEvent(RETAILER_ITEM_HOVER_EVENT, { detail: null });
-        //     document.dispatchEvent(eventExitEvent);
-        // });
+        container.addEventListener('mouseenter', () => {
+            const eventHoveredEvent = new CustomEvent(RETAILER_ITEM_HOVER_EVENT, { detail: event });
+            document.dispatchEvent(eventHoveredEvent);
+        });
+
+        container.addEventListener('mouseleave', () => {
+            const eventExitEvent = new CustomEvent(RETAILER_ITEM_HOVER_EVENT, { detail: null });
+            document.dispatchEvent(eventExitEvent);
+        });
 
         return container;
     };
@@ -648,7 +655,7 @@ export default class DesignerEvents extends PageManager {
             lng: latLong.lon,
         };
         let icon = MAP_MARKER_BLACK;
-        if (id && centerEvent && id === centerEvent.id) {
+        if (id && centerEvent && id === centerEvent.sys.id) {
             icon = MAP_MARKER_ORANGE;
         }
         const marker = new google.maps.Marker({
@@ -678,7 +685,7 @@ export default class DesignerEvents extends PageManager {
         return marker;
     };
 
-    paintEventMapMarkers = (eventData) => {
+    paintEventMapMarkers = (eventData, toCenter = null) => {
         const infoWindow = new google.maps.InfoWindow({
             content: '',
             disableAutoPan: true,
@@ -691,7 +698,7 @@ export default class DesignerEvents extends PageManager {
                 ${event.eventName}<br/>
                 Collections: ${(event.collectionsAvailable || []).join(', ')}
             `
-            return this.getMapMarker(event.eventAddress, display, infoWindow, event.sys.id);
+            return this.getMapMarker(event.eventAddress, display, infoWindow, event.sys.id, toCenter);
         });
         if (!this.markerClusterer) {
             this.markerClusterer = new MarkerClusterer({ markers: markers, map: this.map })
