@@ -81,14 +81,14 @@
             font-weight: 500;
             src: url("{{cdn 'webdav:fonts//Raleway-Regular.ttf'}}");
         }
-        
+
         @font-face {
             font-family: "British";
             font-style: normal;
             font-weight: 500;
             src: url("{{cdn 'webdav:fonts//British-Virgin.ttf'}}");
         }
-        
+
         @font-face {
             font-family: "P22 Corinthia";
             font-style: normal;
@@ -109,7 +109,6 @@
             font-weight: 500;
             src: url("{{cdn 'webdav:fonts//Corinthia-Regular.ttf'}}");
         }
-
     </style>
 
     <script>
@@ -146,7 +145,7 @@
     {{~inject 'createAccountApiPath' theme_settings.create_account_api_path}}
     {{~inject 'contentfulApiPath' theme_settings.contentful_api_path}}
     {{~inject 'contentfulApiToken' theme_settings.contentful_api_token}}
-    {{~inject 'leadmgmtApiToken' theme_settings.leadmgmt_api_token}}    
+    {{~inject 'leadmgmtApiToken' theme_settings.leadmgmt_api_token}}
     {{~inject 'zoomSize' theme_settings.zoom_size}}
     {{~inject 'productSize' theme_settings.product_size}}
     {{~inject 'genericError' (lang 'common.generic_error')}}
@@ -184,8 +183,9 @@
     {{!-- End Google Tag Manager --}}
 </head>
 
-<body class="{{ page_type }}-type {{#if template '===' 'pages\custom\product\suits-product'}}suitsProduct{{/if}} {{#contains template 'retail'}} retailer-finder-lp{{/contains}}">
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDMVGVL" height="0" width="0"
+<body
+    class="{{ page_type }}-type {{#if template '===' 'pages\custom\product\suits-product'}}suitsProduct{{/if}} {{#contains template 'retail'}} retailer-finder-lp{{/contains}}">
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDMVGVL" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
     <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>
 

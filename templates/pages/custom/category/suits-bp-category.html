@@ -6,6 +6,8 @@ category:
 ---
 {{inject "categoryProductsPerPage" theme_settings.categorypage_products_per_page}}
 {{inject "categoryId" category.id}}
+{{inject "categoryURL" category.url}}
+
 {{#partial "head"}}
     {{#if pagination.category.previous}}
         <link rel="prev" href="{{pagination.category.previous}}">
@@ -22,7 +24,7 @@ category:
     {{{region name="category_below_header"}}}
 {{/unless}}
 
-<div class="bp-category suits-plp categor-page-{{dashcase category.name}}" >
+<div class="bp-category suits-plp categor-page-{{dashcase category.name}}">
         <div class="bp-category-header {{#if category.image}}has-image{{/if}}">
             <div class="bp-cat-content">
                 <h3 class="page-heading">{{category.name}}</h3>
@@ -44,7 +46,7 @@ category:
                 <div class="leftside"> 
                     <button class="hideshowfilter">Filters</button>
                 </div>
-                <div class="middle">{{length category.products}} ITEMS</div>
+                <div class="middle"></div>
                 <div class="rightSide">
                     {{#if category.products}}
                         {{> components/products/filter sort=pagination.category.sort}}
