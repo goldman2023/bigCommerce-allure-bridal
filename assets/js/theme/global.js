@@ -106,9 +106,12 @@ export default class Global extends PageManager {
 
         //Product Listing page start
         if (mainContent.contains('pages-custom-category-bp-category') || mainContent.contains('bp-category') || mainContent.contains('pages-custom-category-suits-bp-category')) {
-            getPLPContentfullData(this.context, `/dresses/abella-dresses/`, response => {
+            let geturlfrom = document.getElementById('geturlfrom').getAttribute('data-url');
+            getPLPContentfullData(this.context, geturlfrom, response => {
                 let contentFulData = response?.metafields?.edges[0]?.node.value;
                 let parsedData = JSON.parse(contentFulData.replace( /(<([^>]+)>)/ig, ''));
+                console.log(parsedData);
+
                 parsedData.items.forEach(element => {
                     element.categoryBannersCollection.items.forEach(ele => {
                         if (ele.slug === "the-perfect-match-left" && ele.layoutOrientation === "Image Left"){
@@ -118,17 +121,6 @@ export default class Global extends PageManager {
                             plpleftTextBlockglobal('leftTextbanner',ele); 
                         }
                     });
-                });
-            });
-            contentFullmetaData(this.context, response => {
-                let metadata = response[0].value;
-                metadata.contentBlocksCollection.items.forEach(element => {
-                    if(mainContent.contains('bp-category') && element.__typename === "ReferencedBlockCategoryBanners"){
-                        leftTextBlock('leftTextbanner',element);
-                    }
-                    if(mainContent.contains('pages-custom-category-suits-bp-category') && element.__typename === "ReferencedBlockCategoryBanners" && element.layoutOrientation === "Image Right"){
-                        leftTextBlock('rightTextbanner',element);
-                    }
                 });
             });
         }
