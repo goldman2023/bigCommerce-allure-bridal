@@ -168,7 +168,6 @@ export default class RetailFinder extends PageManager {
         $("#filterButton .button").click()
       }
     });
-
   };
 
   addEventHandlers = () => {
