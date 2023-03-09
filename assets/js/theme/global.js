@@ -77,7 +77,6 @@ export default class Global extends PageManager {
         adminBar(secureBaseUrl, channelId, maintenanceModeSettings, JSON.parse(adminBarLanguage), productId, categoryId);
         loadingProgressBar();
         svgInjector();
-
         //header footer data 	
         renderHeaderFooter(this.context);
 
@@ -106,22 +105,27 @@ export default class Global extends PageManager {
 
         //Product Listing page start
         if (mainContent.contains('pages-custom-category-bp-category') || mainContent.contains('bp-category') || mainContent.contains('pages-custom-category-suits-bp-category')) {
-            let geturlfrom = document.getElementById('geturlfrom').getAttribute('data-url');
+            let geturlfrom = this.context.categoryURL;
+            console.log('geturlfrom', geturlfrom);
             getPLPContentfullData(this.context, geturlfrom, response => {
-                let contentFulData = response?.metafields?.edges[0]?.node.value;
-                let parsedData = JSON.parse(contentFulData.replace( /(<([^>]+)>)/ig, ''));
-                console.log(parsedData);
-
-                parsedData.items.forEach(element => {
-                    element.categoryBannersCollection.items.forEach(ele => {
-                        if (ele.slug === "the-perfect-match-left" && ele.layoutOrientation === "Image Left"){
-                            plpleftTextBlockglobal('rightTextbanner',ele);
-                        }
-                        if(ele.slug === "the-perfect-match-right" && ele.layoutOrientation === "Image Right"){
-                            plpleftTextBlockglobal('leftTextbanner',ele); 
-                        }
+                console.log(response);
+                if (response?.metafields?.edges?.length > 0) {
+                    let contentFulData = response?.metafields?.edges[0]?.node.value;
+                    let parsedData = JSON.parse(contentFulData?.replace(/(<([^>]+)>)/ig, ''));
+                    console.log(parsedData);
+                    parsedData?.items?.forEach(element => {
+                        element?.categoryBannersCollection?.items?.forEach(ele => {
+                            if (ele.slug === "the-perfect-match-left" || ele.slug === "the-perfect-match-right") {
+                                if (ele.layoutOrientation === "Image Left") {
+                                    plpleftTextBlockglobal('rightTextbanner', ele);
+                                }
+                                if (ele.layoutOrientation === "Image Right") {
+                                    plpleftTextBlockglobal('leftTextbanner', ele);
+                                }
+                            }
+                        });
                     });
-                });
+                }
             });
         }
         //Product Listing page end
