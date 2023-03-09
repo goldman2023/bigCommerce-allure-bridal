@@ -106,13 +106,10 @@ export default class Global extends PageManager {
         //Product Listing page start
         if (mainContent.contains('pages-custom-category-bp-category') || mainContent.contains('bp-category') || mainContent.contains('pages-custom-category-suits-bp-category')) {
             let geturlfrom = this.context.categoryURL;
-            console.log('geturlfrom', geturlfrom);
             getPLPContentfullData(this.context, geturlfrom, response => {
-                console.log(response);
                 if (response?.metafields?.edges?.length > 0) {
                     let contentFulData = response?.metafields?.edges[0]?.node.value;
                     let parsedData = JSON.parse(contentFulData?.replace(/(<([^>]+)>)/ig, ''));
-                    console.log(parsedData);
                     parsedData?.items?.forEach(element => {
                         element?.categoryBannersCollection?.items?.forEach(ele => {
                             if (ele.slug === "the-perfect-match-left" || ele.slug === "the-perfect-match-right") {
@@ -150,6 +147,7 @@ export default class Global extends PageManager {
             });
             contentFullmetaData(this.context, response => {
                 let metadata = response[0].value;
+                
                 metadata.contentBlocksCollection.items.forEach(element => {
                     if(mainContent.contains('category-listing')) {
                         if(element.__typename === "ReferencedBlockCategoryBanners"){
@@ -323,7 +321,7 @@ export default class Global extends PageManager {
 
         //category Landing page start
         if (mainContent.contains('pages-custom-category-category-landing') || mainContent.contains('category-landing')) {
-            let geturl = document.getElementById('categoryLanding').getAttribute('data-url')
+            let geturl = this.context.categoryURL;
             getCategorySpecificMetaData(this.context, geturl, response => {
                 for (const categoryData of response) {
                     if (categoryData.key === "Contentful Data") {
