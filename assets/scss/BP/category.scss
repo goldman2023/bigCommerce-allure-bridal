@@ -631,7 +631,7 @@ body {
             width: 209px;
             position: absolute;
             right: 0;
-            z-index: 9999;
+            z-index: 9;
             margin-top: -10px;
         }
         .actionBar {
@@ -734,7 +734,7 @@ body {
             padding: 6px 1px 8px;
             position: absolute;
             width: 164px;
-            height: 152px;
+            height: auto;
             right: 0;
             top: 23px;
             background: #FFFFFF;
