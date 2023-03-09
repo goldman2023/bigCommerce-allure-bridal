@@ -667,6 +667,9 @@ body {
         }
     }
 }
+.plp-cont {
+    position: relative;
+}
 .category-container-block-section {
     @include breakpoint("medium") {
  
@@ -791,5 +794,17 @@ body {
     }
     .middlemob {
         padding: 10px;
+    }
+}
+.floatmiddle {
+    position: absolute;
+    top: 8px;
+    left: 43%;
+    @include breakpoint("small") {
+        left: 45%;
+    }
+    @include breakpoint("medium") {
+        top: -40px;
+        left: 50%;
     }
 }
