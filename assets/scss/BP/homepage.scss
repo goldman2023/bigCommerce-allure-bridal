@@ -203,8 +203,16 @@
         margin: 10px auto !important;
 
         .leftTextbanner .caption .title {
-            font-size: remCalc(33px);
-            line-height: remCalc(40px);
+            font-size: remCalc(28px);
+            line-height: remCalc(33px);
+            @media only screen and (max-width: 400px) {
+                font-size: remCalc(30px);
+                line-height: remCalc(36px);
+            }
+            @include breakpoint("small") {
+                font-size: remCalc(33px);
+                line-height: remCalc(40px);
+            }
         }
     }
 }
