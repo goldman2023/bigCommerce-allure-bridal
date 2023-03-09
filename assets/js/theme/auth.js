@@ -150,7 +150,7 @@ export default class Auth extends PageManager {
             {
                 selector: phoneSelector,
                 validate: (cb, val) => {
-                    const result = forms.notEmpty(val) & val.length == 10;
+                    const result = forms.notEmpty(val) & val.length == 10 && val.match(`/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/`);
                     cb(result);
                 },
                 errorMessage: 'Phone must not be greater than or less than 10 digits.',
