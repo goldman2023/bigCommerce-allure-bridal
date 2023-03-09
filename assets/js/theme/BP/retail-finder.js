@@ -139,7 +139,7 @@ const TEMPDATA = [
 
 const DEFAULT_ZOOM_LEVEL = 4
 const INITIAL_MAP = {
-  zoom: 2.5,
+  zoom: 2,
   center: { lat: 36, lng: -60 },
 }
 const HOVER_DEFAULT_ZOOM_LEVEL = 10
@@ -194,10 +194,16 @@ export default class RetailFinder extends PageManager {
 
     // show on/off collection filter part
     $('.filter-visible').click(function () {
-      $('.option-filters').slideToggle(300)
       $(this).text(function (i, text) {
-        return text === 'HIDE FILTER' ? 'SHOW FILTER' : 'HIDE FILTER'
+        if (text === 'HIDE FILTER') {
+          $('.map-filters').animate({ maxHeight: '1050px' }, 300)
+          return 'SHOW FILTER'
+        } else {
+          $('.map-filters').animate({ maxHeight: '1700px' }, 300)
+          return 'HIDE FILTER'
+        }
       })
+      $('.option-filters').slideToggle(300)
     })
 
     //filter button by store name
