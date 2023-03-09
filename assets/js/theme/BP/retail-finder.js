@@ -39,7 +39,7 @@ const DISTANCE_TO_ZOOMLEVELS = {
   250: 5,
 }
 
-// use temp data for collections
+// use temp data for collections before API done
 const TEMPDATA = [
   {
     id: 'collection0',
@@ -716,31 +716,44 @@ export default class RetailFinder extends PageManager {
         },
         plugins: ['checkbox'],
       })
+      .on('loaded.jstree', function (e, data) {
+        // At first render, check the params from pdp page
+        const pdpCollection = new URLSearchParams(window.location.search).get(
+          'collection',
+        )
+        const initialCollection = TEMPDATA.find((item) => {
+          return item.text.toLowerCase() === pdpCollection?.toLowerCase()
+        })
+
+        //if there is initialCollection from pdp page, only default collection checked
+        if (!!pdpCollection && !!initialCollection) {
+          // if there is valid collection, expande filter field, check initial collection
+          $('.filter-visible').click()
+          data.instance.uncheck_all()
+          data.instance.check_node(initialCollection.id)
+        }
+      })
       .on('select_node.jstree deselect_node.jstree', function (e, data) {
-        const instanceTree = $('#collectionFilters').jstree()
         const checkedNode = $('#collectionFilters').jstree('get_checked')
 
         if (data.node.id === 'collection0') {
           if (data.node.state.selected) {
-            instanceTree.check_all(true)
+            data.instance.check_all(true)
           } else {
             $('#collection0 .jstree-checkbox').css(
               'background-position',
               '-160px, 0',
             )
-            instanceTree.uncheck_all(true)
+            data.instance.uncheck_all(true)
           }
         } else {
-          if (
-            checkedNode.length === TEMPDATA.length &&
-            data.node.state.selected
-          ) {
-            instanceTree.check_all(true)
+          if (checkedNode.length === TEMPDATA.length) {
+            data.instance.check_all(true)
           } else if (
             checkedNode.length === TEMPDATA.length - 1 &&
-            checkedNode.sort()[0] !== 'collection0'
+            !checkedNode.includes('collection0')
           ) {
-            instanceTree.check_all(true)
+            data.instance.check_all(true)
           } else if (checkedNode.length === 0) {
             $('#collection0 .jstree-checkbox').css(
               'background-position',
@@ -748,9 +761,9 @@ export default class RetailFinder extends PageManager {
             )
           } else if (
             checkedNode.length === 1 &&
-            checkedNode.sort()[0] === 'collection0'
+            checkedNode.includes('collection0')
           ) {
-            instanceTree.uncheck_all(true)
+            data.instance.uncheck_all(true)
             $('#collection0 .jstree-checkbox').css(
               'background-position',
               '-160px, 0',
@@ -762,7 +775,6 @@ export default class RetailFinder extends PageManager {
             )
           }
         }
-
         //filtering
         const selectedCollections = $('#collectionFilters')
           .jstree('get_checked')
