@@ -6,14 +6,37 @@
         <a href="/account.php?action=account_details" class="button button--secondary button--small">{{lang 'create_account.thankyou.myaccountbtn'}}</a>
         <a href="/" class="button button--primary button--small">{{lang 'create_account.thankyou.continueBtn'}}</a>
     </div>
-    <div id="contentBlocksCollection">
-        <div class="recentlyViewed hide" id="recentlyViewed">
-            {{> BP/components/common/divider}}
-            <div class="block-item">
-                <h4 class="title">{{lang 'products.recentlyViewed'}}</h4>
-                <div class="prodData"></div>
+    <div id="contentBlocksCollection" class="regithank">
+        <div class="divider"></div>
+        <div class="our-col block-item">
+            <div class="captionheader">
+                <h3>{{lang 'page.about.collection_heading'}}</h3> 
             </div>
-        </div>
+            <ul class="productGridslider aboutcategorylist" >
+                {{#each categories}}
+                    {{#each children}}
+                        <li class="catlist product" data-path="{{url}}">
+                            <article class="card">
+                                <figure class="card-figure">
+                                    <a href="{{url}}">
+                                        <div class="card-img-container">
+                                            <img class="cardimage" src={{cdn 'assets/img/notfound.png'}}" alt="{{name}}">
+                                        </div>
+                                    </a>
+                                </figure>
+                                <div class="card-body">
+                                    <h3 class="card-title">
+                                        <a href="{{url}}" class="h4">
+                                            {{name}}               
+                                        </a>
+                                    </h3>
+                                </div>
+                            </article>
+                        </li>
+                    {{/each}}
+                {{/each}}
+            </ul>
+           </div>
     </div>
 </section>
 {{/partial}}
