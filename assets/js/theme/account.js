@@ -110,7 +110,7 @@ export default class Account extends PageManager {
         });
         
         if (localStorage.getItem('loginEvent')) {
-            //localStorage.removeItem('loginEvent');
+            localStorage.removeItem('loginEvent');
             this.loginEvent();
         }
     }
