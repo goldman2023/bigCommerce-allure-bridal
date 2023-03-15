@@ -28,7 +28,7 @@ const FILTER_IDS = {
     distance: 'distanceFilterSelect',
 };
 
-const DEFAULT_ZOOM_LEVEL = 4;
+const DEFAULT_ZOOM_LEVEL = 2;
 const LOCATION_CHANGE_ZOOM_LEVEL = 8;
 const HOVER_DEFAULT_ZOOM_LEVEL = 10;
 
@@ -643,9 +643,9 @@ export default class DesignerEvents extends PageManager {
 
     initMap = () => {
         this.map = new google.maps.Map(document.getElementById('map'), {
-            // arbitrarily pick center of US
+            // arbitrarily center the map
             zoom: DEFAULT_ZOOM_LEVEL,
-            center: { lat: 39, lng: -98 }
+            center: { lat: 36, lng: -60 }
         });
     };
 

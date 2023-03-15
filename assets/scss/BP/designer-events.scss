@@ -2,7 +2,16 @@
 // and when that goes to v2 it'll be pretty much the same
 // so look into using just one file
 .pages-custom-page-designer-events {
-    padding: 0 24px;
+    padding: 0 1.5rem;
+    // display: flex;
+    // justify-content: center;
+    max-width: 91.71429rem;
+    width: 100%;
+    margin: auto;
+    
+    .custombread {
+        display: none;
+    }
 
     .content {
         display: flex;
@@ -43,12 +52,13 @@
             .header {
                 flex-wrap: wrap;
                 margin-bottom: 50px;
+                border-bottom: unset;
+                
 
                 .header-top {
                     display: flex;
                     align-items: center;
                     // margin-bottom: 50px;
-                    border-bottom: unset;
 
                     .map-toggle {
                         display: none;
@@ -379,6 +389,13 @@
         margin: 1rem;
     }
 }
+
+// larger screen override
+@media (min-width: 1600px) {
+    .pages-custom-page-designer-events {
+        max-width: 100rem;
+    }
+}  
 
 // mobile overrides
 @media (max-width: '900px') {

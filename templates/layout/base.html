@@ -109,6 +109,15 @@
             font-weight: 500;
             src: url("{{cdn 'webdav:fonts//Corinthia-Regular.ttf'}}");
         }
+        @font-face {
+            font-family: "Silhouette Aesthetic Calligraphy";
+            font-style: normal;
+            font-weight: 500;
+            src: url("{{cdn 'webdav:fonts//Silhouette.ttf'}}") format('truetype'),
+                 url("{{cdn 'webdav:fonts//Silhouette.otf'}}") format('opentype')
+                 url("{{cdn 'webdav:fonts//Silhouette.woff2'}}") format('woff2'),
+                 url("{{cdn 'webdav:fonts//Silhouette.woff'}}") format('woff');
+        }
     </style>
 
     <script>
@@ -140,8 +149,7 @@
     {{~inject 'workatoApiPath' theme_settings.workato_api_path}}
     {{~inject 'workatoApiToken' theme_settings.workato_api_token}}
     {{~inject 'workatoApiPathB2C' theme_settings.workato_api_path_b2c}}
-    {{~inject 'workatoApiPathB2C' theme_settings.login_api_path}}
-    {{~inject 'loginApiPath' theme_settings.workato_api_path_b2c}}
+    {{~inject 'loginApiPath' theme_settings.login_api_path}}
     {{~inject 'createAccountApiPath' theme_settings.create_account_api_path}}
     {{~inject 'contentfulApiPath' theme_settings.contentful_api_path}}
     {{~inject 'contentfulApiToken' theme_settings.contentful_api_token}}

@@ -1,32 +1,17 @@
 import PageManager from '../page-manager';
-import {getProducts} from './universal-blocks';
+import {getFirstprodImageFromCategory,createCategorySlider} from './universal-blocks';
 export default class RegistrationThankYou extends PageManager {
     constructor(context) {
         super(context);
     }
     onReady() {
         let contentId = this.context;
-        const recentlyViewedEl = document.getElementById('recentlyViewed');
-        if (recentlyViewedEl) {
-            const recentlyProduct = (localStorage.getItem("recentlyProduct")) ? (localStorage.getItem("recentlyProduct")).split(',') : [];
-            const updatedRecentlyProduct = recentlyProduct.slice();
-            if (updatedRecentlyProduct.length > 0) {
-                const currentProductIndex = recentlyProduct.indexOf(this.context.productId);
-                updatedRecentlyProduct.splice(currentProductIndex, 1);
-                getProducts(contentId, '.recentlyViewed .prodData', updatedRecentlyProduct);
-                (updatedRecentlyProduct.length > 0) ? $('#recentlyViewed').removeClass('hide') : '';
-            }
-            if (recentlyProduct.indexOf(this.context.productId) !== -1) {
-                const index = recentlyProduct.indexOf(this.context.productId);
-                recentlyProduct.splice(index, 1);
-            }
-            if (recentlyProduct.length >= 12) {
-                recentlyProduct.pop();
-            }
-            recentlyProduct.unshift(this.context.productId);
-            localStorage.setItem("recentlyProduct", recentlyProduct.join(','));
-        }
-        $('.productGrid').slick({
+        document.querySelectorAll('.catlist').forEach((item) => {
+            getFirstprodImageFromCategory(contentId,item.getAttribute('data-path'),response => {
+                createCategorySlider(item,response);
+            });
+        });
+        $('.aboutcategorylist').slick({
             dots: false,
             infinite: false,
             speed: 300,
