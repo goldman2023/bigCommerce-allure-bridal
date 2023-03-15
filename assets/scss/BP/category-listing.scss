@@ -45,7 +45,15 @@
                 }
                 display: block;
                 .sub-description {
-                    width: calc(100% - 285px);
+                    width: 100%;
+                    position: relative;
+                    display: block;
+                    margin-bottom: 10px;
+                    @include breakpoint("small") {
+                        width: calc(100% - 285px);
+                        margin-bottom: auto;
+                        display: inline;
+                    }
                     p {
                         margin: 0 0 20px 0;
                         @include breakpoint("medium") {
@@ -222,18 +230,16 @@
         color: stencilColor("color-default-neutral-2");
     }
     .product .card-text {
-        font-family: stencilFontFamily('prata-font');
-        font-size:  remCalc(22px);
-        line-height:  remCalc(30px);
+        font-size: remCalc(12px);
         font-style: normal;
         font-weight: 400;
-        color: stencilColor("color-default-neutral-2");
+        line-height: 20px;
+        color: stencilColor("color-default-neutral-1");
         overflow: hidden;
-        text-overflow: hidden;
+        text-overflow: ellipsis;
         display: -webkit-box;
-        -webkit-line-clamp: 1;
-        max-width: 300px;
-        margin: 0 auto;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
     }
     .slick-track {
         margin-left: 0;

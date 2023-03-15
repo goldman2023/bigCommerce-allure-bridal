@@ -121,21 +121,20 @@ export default class Auth extends PageManager {
         const $firstNameElement = $(firstNameSelector);
         const lastNameSelector = `${this.formCreateSelectorCustom} input[name='register_last']`;
         const $lastNameElement = $(lastNameSelector);
-
+        const phoneSelector = `${this.formCreateSelectorCustom} input[name='register_phone']`;
+        const weddingDateSelector = `${this.formCreateSelectorCustom} input[name='register_weddingdate']`;
         const emailSelector = `${this.formCreateSelectorCustom} input[name='register_email']`;
         const $emailElement = $(emailSelector);
         const passwordSelector = `${this.formCreateSelectorCustom} input[name='register_pass']`;
         const $passwordElement = $(passwordSelector);
         const password2Selector = `${this.formCreateSelectorCustom} input[name='register_pass-confirm']`;
         const $password2Element = $(password2Selector);
-
         createAccountValidator.add(validationModel);
         createAccountValidator.add([
             {
                 selector: firstNameSelector,
                 validate: (cb, val) => {
                     const result = forms.notEmpty(val);
-
                     cb(result);
                 },
                 errorMessage: 'First Name cannot be empty',
@@ -144,21 +143,33 @@ export default class Auth extends PageManager {
                 selector: lastNameSelector,
                 validate: (cb, val) => {
                     const result = forms.notEmpty(val);
-
                     cb(result);
                 },
                 errorMessage: 'Last Name cannot be empty',
             },
+            {
+                selector: phoneSelector,
+                validate: (cb, val) => {
+                    const result = forms.notEmpty(val) & val.length == 10;
+                    cb(result);
+                },
+                errorMessage: 'Phone must not be greater than or less than 10 digits.',
+            },
+            {
+                selector: weddingDateSelector,
+                validate: (cb, val) => {
+                    const result = forms.notEmpty(val);
+                    cb(result);
+                },
+                errorMessage: 'Wedding Date cannot be empty',
+            },
         ]);
-        
         if ($emailElement) {
             createAccountValidator.remove(emailSelector);
             Validators.setEmailValidation(createAccountValidator, emailSelector, this.validationDictionary.valid_email);
         }
-
         if ($passwordElement && $password2Element) {
             const { password: enterPassword, password_match: matchPassword } = this.validationDictionary;
-
             createAccountValidator.remove(passwordSelector);
             createAccountValidator.remove(password2Selector);
             Validators.setPasswordValidation(
@@ -169,30 +180,29 @@ export default class Auth extends PageManager {
                 createPasswordValidationErrorTextObject(enterPassword, enterPassword, matchPassword, this.passwordRequirements.error),
             );
         }
-
         let self = this;
         $createAccountFormCustom.on('submit', function(e){
             e.preventDefault();
-
             createAccountValidator.performCheck();
-
             if (createAccountValidator.areAll('valid')) {
                 let validform = customValidation();
                 if(validform) {
                     const formData = {
-                        email: $('#login_email').val(),
-                        first_name: $('#register_first').val(),
-                        last_name: $('#register_last').val(),
-                        phone: "",
-                        authentication: {
-                            force_password_reset: true,
-                            new_password: $('#register_pass').val()
+                        "email": $('#login_email').val(),
+                        "first_name": $('#register_first').val(),
+                        "last_name": $('#register_last').val(),
+                        "phone": $('#login_phone').val(),
+                        "authentication": {
+                            "force_password_reset": true,
+                            "new_password": $('#register_pass').val()
                         }
                     };
                     $.ajax({
                         type: "POST",
-                        url: `https://apim.workato.com/allure/allure-b2c-website/login/createaccount`,
-                        headers: {"API-TOKEN": self.context.workatoApiToken},
+                        url: self.context.createAccountApiPath,
+                        headers: { 
+                            "API-TOKEN": self.context.workatoApiToken
+                        },
                         data: JSON.stringify(formData),
                         success: response => {
                             swal.fire({
@@ -200,16 +210,25 @@ export default class Auth extends PageManager {
                                 icon: 'success',
                                 showCancelButton: false
                             })
-                           window.location.href = '/account.php?action=account_details';
+                            window.location.href = '/thank-you/';
                         },
                         error: error => {
-                            console.log(error.responseJSON.Error.split('".customer_create":"')[1].replace(`"}}'`, ''));
-                            let jsondata = error.responseJSON.Error.split('".customer_create":"')[1].replace(`"}}'`, '');
-                            swal.fire({
-                                text: jsondata,
-                                icon: 'error',
-                                showCancelButton: false
-                            })
+                            console.log('error', error);
+                            if (error.status == 200) {
+                                swal.fire({
+                                    text: "Your account has been created",
+                                    icon: 'success',
+                                    showCancelButton: false
+                                })
+                                window.location.href = '/thank-you/';
+                            } else {
+                                let jsondata = error?.responseJSON?.Error?.split('".customer_create":"')[1]?.replace(`"}}'`, '');
+                                swal.fire({
+                                    text: jsondata,
+                                    icon: 'error',
+                                    showCancelButton: false
+                                });
+                            }
                         }
                     });
                 }
@@ -259,6 +278,24 @@ export default class Auth extends PageManager {
         if ($createAccountFormCustom.length) {
             this.regcreateAccountValidator($createAccountFormCustom);
         }
+        var dtToday = new Date();
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+            day = '0' + day.toString();
+        
+        var minDate= year + '-' + month + '-' + day;
+        $('#login_weddingdate').attr('min',minDate);
+        $('#register_pass-policy').on('change', function(){
+            if($(this).is(':checked')) {
+                if($('.register_pass-policy').parent().parent().parent().hasClass('form-field--error')) {
+                    $('.register_pass-policy').parent().parent().parent().removeClass('form-field--error');
+                }
+            }
+        });
 
     }
 }

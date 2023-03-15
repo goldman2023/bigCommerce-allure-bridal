@@ -10,6 +10,7 @@
 .pages-custom-page-page-disney-fairy-tale-wedding,
 .pages-custom-page-page-madison-james,
 .pages-custom-page-page-wilderly-bride,
+.pages-custom-page-registration-thank-you,
 .pages-product,
 .suits-product,
 .wilderly-bride,
@@ -22,6 +23,7 @@
 .pages-custom-category-suits-bp-category,
 .pages-blog-post,
 .pages-blog,
+.pages-custom-page-designer-events,
 .suits-product,
 .pages-custom-page-about,
 .pages-custom-page-custom-form {
@@ -32,10 +34,12 @@
             max-width: 350px;
         }
     }
+
     .container {
         padding: 0;
         max-width: 100%;
     }
+
     .block-item,
     .sub-category-block,
     .customBanner,
@@ -45,24 +49,31 @@
         max-width: 91.71429rem;
         margin: 0 auto;
         padding: 0 1.5rem;
+
         @include breakpoint("medium") {
             margin: 0 auto;
         }
-        @media only screen and (min-width: 1600px)  {
+
+        @media only screen and (min-width: 1600px) {
             max-width: 100rem;
         }
+
         @media only screen and (min-width: 2000px) {
             max-width: 120rem;
         }
+
         @media only screen and (min-width: 2600px) {
             max-width: 140rem;
         }
+
         @media only screen and (min-width: 3000px) {
             max-width: 170rem;
         }
+
         &.full-size {
-            width:100%;
+            width: 100%;
             padding: 0;
+
             @include breakpoint("medium") {
                 width: 100%;
                 max-width: 100%;
@@ -71,24 +82,30 @@
             }
         }
     }
+
     .custombread {
         @include breakpoint("medium") {
             margin: 0 auto !important;
         }
+
         ol.breadcrumbs {
             margin: 0;
         }
     }
+
     .bp-category {
         @include breakpoint("medium") {
             margin: 20px auto !important;
         }
     }
+
     .blockElementFullscreenImage .mainImage {
         min-height: auto;
+
         @include breakpoint("medium") {
             min-height: auto;
         }
+
         img {
             @media only screen and (min-width: 600px) {
                 width: 100%;
@@ -97,18 +114,25 @@
             }
         }
     }
-    .blockElementDiscover,.events.block-item,.blockElementLookbook2,.blockElementStory {
+
+    .blockElementDiscover,
+    .events.block-item,
+    .blockElementLookbook2,
+    .blockElementStory {
         @include breakpoint("medium") {
             margin: 0 auto;
         }
     }
 }
+
 .events.block-item {
     padding: 0 !important;
+
     @include breakpoint("small") {
         padding: 0 1.5rem !important;
     }
 }
+
 .pages-product,
 .product-type,
 .wilderly-bride,
@@ -119,9 +143,10 @@
 .abella-design,
 .suits-product {
     .custombread {
-            padding: 0 !important;
+        padding: 0 !important;
     }
 }
+
 .product-type,
 .pages-product,
 .wilderly-bride,
@@ -135,21 +160,28 @@
         .block-item {
             padding: 0 !important;
         }
-        @media only screen and (max-width: 600px)  {
-            padding: 0 !important; 
+
+        @media only screen and (max-width: 600px) {
+            padding: 0 !important;
+
             .productView {
                 padding: 0 1.5rem;
             }
         }
     }
+
     .breadcrumbs {
         padding: 0 1.5rem;
+
         @include breakpoint("small") {
             padding: 0;
         }
     }
-    .youMightalsoLike,.thePerfectMatch,.recentlyViewed {
-        @media only screen and (max-width: 600px)  {
+
+    .youMightalsoLike,
+    .thePerfectMatch,
+    .recentlyViewed {
+        @media only screen and (max-width: 600px) {
             max-width: 91.71429rem;
             margin: 20px auto;
             padding: 0 1.5rem;
@@ -157,37 +189,55 @@
     }
 
     .blockElementFullscreenImage .mainImage img {
-        @media only screen and (max-width: 600px)  {
+        @media only screen and (max-width: 600px) {
             width: 100%;
         }
     }
 }
-.pages-custom-category-bp-category,.pages-custom-category-suits-bp-category {
+
+.pages-custom-category-bp-category,
+.pages-custom-category-suits-bp-category,
+.bp-category {
     .customBanner {
         padding: 0 0.75rem !important;
         margin: 10px auto !important;
+
         .leftTextbanner .caption .title {
-            font-size: remCalc(33px);
-            line-height: remCalc(40px);
+            font-size: remCalc(28px);
+            line-height: remCalc(33px);
+            @media only screen and (max-width: 400px) {
+                font-size: remCalc(30px);
+                line-height: remCalc(36px);
+            }
+            @include breakpoint("small") {
+                font-size: remCalc(33px);
+                line-height: remCalc(40px);
+            }
         }
     }
 }
+
 .logoTabs {
     border-bottom: 1px solid transparent;
-    @media only screen and (min-width: 601px) and (max-width: 1024px)  {
+
+    @media only screen and (min-width: 601px) and (max-width: 1024px) {
         margin-bottom: 50px;
     }
+
     .slick-list {
         padding: 0 !important;
     }
+
     .slick-track {
         display: flex;
-        justify-content: center;
+        justify-content: left;
     }
+
     .slick-slide img {
         width: auto;
         min-width: 130px;
     }
+
     .tab {
         margin-bottom: 10px;
         min-height: 46px;
@@ -195,20 +245,31 @@
         display: inline-block;
         border: 0;
         border-bottom: 1px solid #F7F4F0;
+
         @include breakpoint("medium") {
             display: flex;
             align-items: center;
             justify-content: center;
         }
     }
-    input:focus, button:focus, textarea:focus, select:focus, details:focus, [href]:focus, [tabindex]:not([tabindex="-1"]):focus, [contenteditable="true"]:focus {
+
+    input:focus,
+    button:focus,
+    textarea:focus,
+    select:focus,
+    details:focus,
+    [href]:focus,
+    [tabindex]:not([tabindex="-1"]):focus,
+    [contenteditable="true"]:focus {
         outline: 2px solid transparent !important;
         outline-offset: 1px !important;
     }
+
     .tab.is-active {
         border: 1px solid transparent;
         border-bottom: 1px solid #c8c6c6;
     }
+
     .tab.is-active::after {
         position: absolute;
         content: "";
@@ -221,7 +282,49 @@
         transform: rotate(45deg);
     }
 }
+
 .pages-custom-page-custom-home-page {
+    .logoTabs {
+        margin: 0 auto;
+        min-width: calc(100% - 40px) !important;
+        .slick-track {
+            display: flex;
+            width: 100% !important;
+            @include breakpoint("medium") {
+                justify-content: center;
+            }
+        }
+        .slick-next {
+            right: -20px;
+            top: 70%;
+            width: 40px;
+            height: 44px;
+            padding: 0 14px;
+            &::before {
+                mask-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yLjE5NzUxIDEwLjU0MzZDMS45MDAyNCAxMC41NDM2IDEuNjY2NjcgMTAuMzEgMS42NjY2NyAxMC4wMTI3QzEuNjY2NjcgOS43MjYwNiAxLjkwMDI0IDkuNDgxODcgMi4xOTc1MSA5LjQ4MTg3SDE2Ljg0ODhMMTIuNDQyOCA1LjA3NTg2QzEyLjI0MTEgNC44NjM1MiAxMi4yNDExIDQuNTM0NCAxMi40NDI4IDQuMzIyMDZDMTIuNjU1MiA0LjEwOTcyIDEyLjk4NDMgNC4xMjAzNCAxMy4xOTY2IDQuMzIyMDZMMTguNDczMiA5LjU5ODY1QzE4LjU5IDkuNjk0MjEgMTguNjY0MyA5Ljg0Mjg0IDE4LjY2NDMgMTAuMDAyMUMxOC42NjQzIDEwLjE1MDcgMTguNjAwNiAxMC4yOTk0IDE4LjQ5NDUgMTAuMzk0OUwxMy4xOTY2IDE1LjY4MjFDMTIuOTg0MyAxNS44ODM5IDEyLjY1NTIgMTUuODgzOSAxMi40NDI4IDE1LjY4MjFDMTIuMjQxMSAxNS40ODA0IDEyLjI0MTEgMTUuMTQwNyAxMi40NDI4IDE0LjkzOUwxNi44NDg4IDEwLjU0MzZIMi4xOTc1MVoiIGZpbGw9IiNCQzgzNzIiLz4KPC9zdmc+Cg==");
+                mask-repeat: no-repeat;
+                mask-size: 100%;
+                mask-position: 50%;
+                background-image: none;
+                background-color: stencilColor('color-default-neutral-5');
+            }
+        }
+        .slick-prev {
+            left: -20px;
+            top: 70%;
+            width: 40px;
+            height: 44px;
+            padding: 0;
+            &::before {
+                mask-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xOC4xMzM0IDkuNDU2NjFDMTguNDMwNyA5LjQ1NjYxIDE4LjY2NDIgOS42OTAxOSAxOC42NjQyIDkuOTg3NDZDMTguNjY0MiAxMC4yNzQxIDE4LjQzMDcgMTAuNTE4MyAxOC4xMzM0IDEwLjUxODNMMy40ODIwOCAxMC41MTgzTDcuODg4MSAxNC45MjQzQzguMDg5ODIgMTUuMTM2NyA4LjA4OTgyIDE1LjQ2NTggNy44ODgxIDE1LjY3ODFDNy42NzU3NiAxNS44OTA1IDcuMzQ2NjMgMTUuODc5OCA3LjEzNDMgMTUuNjc4MUwxLjg1NzcgMTAuNDAxNUMxLjc0MDkxIDEwLjMwNiAxLjY2NjYgMTAuMTU3MyAxLjY2NjYgOS45OTgwOEMxLjY2NjYgOS44NDk0NCAxLjczMDMgOS43MDA4IDEuODM2NDYgOS42MDUyNUw3LjEzNDMgNC4zMTgwNEM3LjM0NjYzIDQuMTE2MzIgNy42NzU3NiA0LjExNjMyIDcuODg4MSA0LjMxODA0QzguMDg5ODIgNC41MTk3NiA4LjA4OTgyIDQuODU5NSA3Ljg4ODEgNS4wNjEyMkwzLjQ4MjA4IDkuNDU2NjFMMTguMTMzNCA5LjQ1NjYxWiIgZmlsbD0iI0JDODM3MiIvPgo8L3N2Zz4K");
+                mask-repeat: no-repeat;
+                mask-size:  100%;
+                mask-position: 50%;
+                background-image: none;
+                background-color: stencilColor('color-default-neutral-5');
+            }
+        }
+    }
     .logoTabs {
         .tab {
             @include breakpoint("medium") {
@@ -237,17 +340,19 @@
         width: unset;
     }
 }
+
 .category-landing {
     .blockElementHeaderContent {
         @include breakpoint("medium") {
             padding: 80px 0;
         }
-        padding: 40px 10px; 
-    }
-}
-.logotabsblocksection {
-    @media only screen and (max-width: 900px)  {
-        padding: 0 !important;
+
+        padding: 40px 10px;
     }
 }
 
+.logotabsblocksection {
+    @media only screen and (max-width: 900px) {
+        padding: 0 !important;
+    }
+}

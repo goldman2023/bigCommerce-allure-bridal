@@ -169,9 +169,11 @@ export default class ProductDetails extends ProductDetailsBase {
 
         $('.form-option-wrapper').mouseover(function(){
             $(this).addClass('is-hover');
+            $('.color-selected-value').attr('style', 'visibility: hidden;');
         });
         $('.form-option-wrapper').mouseout(function(){
             $(this).removeClass('is-hover');
+            $('.color-selected-value').attr('style', 'visibility: visible;');
         });
     }
     viewVideoToggle(){

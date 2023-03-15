@@ -66,6 +66,7 @@
                     width: 20px;
                     height: 20px;
                     stroke: stencilColor("color-default-neutral-3");
+                    fill: none;
                     &#person, &#logout {
                         stroke: none;
                     }
@@ -77,9 +78,15 @@
                     color: stencilColor("color-default-primary-1");
                     svg {
                         stroke: stencilColor("color-default-primary-1");
-                        &#person, &#logout {
+                        &#logout {
                             use {
                                 stroke: stencilColor("color-default-primary-1");
+                            }
+                        }
+                        &#person {
+                            fill: stencilColor("color-default-primary-1");
+                            use {
+                                fill: stencilColor("color-default-primary-1");
                             }
                         }
                     }
@@ -91,6 +98,12 @@
         flex-basis: 100%;
         @include breakpoint("medium") {
             flex-basis: 70%;
+        }
+        .card {
+            margin-bottom: 0;
+        }
+        .product .card-title > a, .productCarousel-slide .card-title > a {
+            height: 75px;
         }
         .section-title {
             font-family: stencilFontFamily('prata-font');
@@ -224,7 +237,7 @@
     .button {
         @include breakpoint("medium") {
             width: auto !important;
-        }        
+        }
     }
 }
 .asterisk {
@@ -271,5 +284,13 @@
                 margin: 0;
             }
         }
+    }
+    .form-field--default-wishlist {
+        display: none;
+    }
+}
+.pages-account-wishlist-details {
+    .titleIcon {
+        pointer-events: none;
     }
 }

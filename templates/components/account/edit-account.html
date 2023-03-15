@@ -9,6 +9,7 @@
                 <label class="form-label" for="account_firstname">
                     {{lang 'account.settings.first_name' }}
                     <small>{{lang 'common.required' }}</small>
+                    <span class="asterisk">*</span>
                 </label>
                 <input type="text" class="form-input" name="account_firstname" id="account_firstname" value="{{trim forms.edit_account.first_name}}">
             </div>
@@ -16,6 +17,7 @@
                 <label class="form-label" for="account_lastname">
                     {{lang 'account.settings.last_name' }}
                     <small>{{lang 'common.required' }}</small>
+                    <span class="asterisk">*</span>
                 </label>
                 <input type="text" class="form-input" name="account_lastname" id="account_lastname" value="{{trim forms.edit_account.last_name}}">
             </div>
@@ -28,14 +30,13 @@
             <div class="form-field">
                 <label class="form-label" for="account_phone">
                     {{lang 'account.settings.phone' }}
+                    <span class="asterisk">*</span>
                 </label>
                 <input type="number" class="form-input" name="account_phone" id="account_phone" value="{{trim forms.edit_account.phone}}">
             </div>
             {{#each forms.edit_account.fields}}
                 {{#if label '!==' "Wedding Party Id"}}
-                    {{#if label '!=='  "Default Wishlist"}}
-                        {{{dynamicComponent 'components/common/forms'}}}
-                    {{/if}}
+                    {{{dynamicComponent 'components/common/forms'}}}
                 {{/if}}
             {{/each}}
         </div>

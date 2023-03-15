@@ -11,7 +11,9 @@
         "info": "Info",
         "categories": "Categories",
         "call_us": "Call us at {phone_number}",
-        "powered_by": "Powered by"
+        "powered_by": "Powered by",
+        "designed_by": "Designed and maintained by",
+        "designed_by_name": "badpixel®"
     },
     "home": {
         "heading": "Home"
@@ -184,7 +186,7 @@
         "next": "Next",
         "sorter": {
             "relevance": "Relevance",
-            "sort_by": "Sort By:",
+            "sort_by": "Sort By",
             "featured": "Featured Items",
             "top_sellers": "Best Selling",
             "newest": "Newest Items",
@@ -266,7 +268,17 @@
     },
     "create_account": {
         "heading": "Register",
+        "newaccount": "New to Allure Bridals?",
+        "alreadyhave": "Already have an account?",
+        "retailer": "Are You a Retailer?",
+        "retailerbtn": "Retailer Login ->",
+        "subretailer": "If you are an existing customer looking to login to the Allure Customer Service retail portal, log in here.",
         "subheading": "If you don't have Allure Bridals account, use this option to create new account.",
+        "thankyou": {
+            "heading": "Thank You for Registering with Allure Bridals!",
+            "myaccountbtn": "go to my account",
+            "continueBtn": "CONTINUE shopping"
+        },
         "created": {
             "heading": "Your account has been created",
             "intro": "Thank you for creating your account at {store_name}. Your account details have been emailed to <strong>{email}</strong>",
@@ -293,6 +305,8 @@
         "heading": "Sign in",
         "subheading": "Welcome back to <strong class='sub_heading-site'>Allurebridals.com</strong> Please sign in.",
         "field_email": "Email Address",
+        "field_phone": "Mobile number",
+        "field_weddingdate": "Wedding date",
         "field_password": "Password",
         "submit_value": "Sign in",
         "forgot_password": "Forgot your password?",

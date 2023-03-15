@@ -57,6 +57,8 @@ const customClasses = {
     'pages/custom/page/manage-members': () => import('./theme/BP/manage-members'),
     'pages/custom/page/retail-finder': () => import('./theme/BP/retail-finder'), // Mac/Linux
     'pages\\custom\\page\\retail-finder': () => import('./theme/BP/retail-finder'), // Windows
+    'pages/custom/page/designer-events': () => import('./theme/BP/designer-events'), // Mac/Linux
+    'pages\\custom\\page\\designer-events': () => import('./theme/BP/designer-events'), // Windows
     'pages/custom/page/all-content-blocks': () => import('./theme/BP/all-content-blocks'), // Mac/Linux
     'pages\\custom\\page\\all-content-blocks': () => import('./theme/BP/all-content-blocks'), // Windows
     'pages/custom/page/page-men-design': () => import('./theme/BP/all-content-blocks'), // Mac/Linux
@@ -77,6 +79,8 @@ const customClasses = {
     'pages\\custom\\page\\about': () => import('./theme/BP/all-content-blocks'), // Windows
     'pages/custom/page/designer-event-list': () => import('./theme/BP/designer-event-list'), // Mac/Linux
     'pages\\custom\\page\\designer-event-list': () => import('./theme/BP/designer-event-list'), // Windows
+    'pages/custom/page/registration-thank-you': () => import('./theme/BP/registration-thank-you'), // Mac/Linux
+    'pages\\custom\\page\\registration-thank-you': () => import('./theme/BP/registration-thank-you'), // Windows
 };
 
 /**

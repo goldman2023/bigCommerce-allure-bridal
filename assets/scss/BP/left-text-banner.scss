@@ -3,7 +3,7 @@
     position: relative;
     img {
         width: 100%;
-        min-height: 480px;
+        min-height: 200px;
         @include breakpoint("medium") {
             min-height: unset;
         }
@@ -86,6 +86,7 @@
     img {
         width: 100%;
     }
+    
     .overlay {
         background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0)); 
         width:100%;
@@ -151,5 +152,20 @@
     .customBanner {
         padding-left: 0.75rem;
         padding-right: 0.75rem;
+    }
+}
+
+.customBanner {
+    .desktoponly {
+        display: none;
+        @include breakpoint("medium") {
+            display: block;
+        }
+    }
+    .mobileonly {
+        display: block;
+        @include breakpoint("medium") {
+            display: none;
+        }
     }
 }

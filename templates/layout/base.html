@@ -81,14 +81,14 @@
             font-weight: 500;
             src: url("{{cdn 'webdav:fonts//Raleway-Regular.ttf'}}");
         }
-        
+
         @font-face {
             font-family: "British";
             font-style: normal;
             font-weight: 500;
             src: url("{{cdn 'webdav:fonts//British-Virgin.ttf'}}");
         }
-        
+
         @font-face {
             font-family: "P22 Corinthia";
             font-style: normal;
@@ -109,7 +109,6 @@
             font-weight: 500;
             src: url("{{cdn 'webdav:fonts//Corinthia-Regular.ttf'}}");
         }
-
     </style>
 
     <script>
@@ -139,11 +138,13 @@
     {{~inject 'googleApiToken' theme_settings.google_api_token}}
     {{~inject 'ipstackAccessToken' theme_settings.ipstack_access_token}}
     {{~inject 'workatoApiPath' theme_settings.workato_api_path}}
-    {{~inject 'workatoApiPathB2C' theme_settings.workato_api_path_b2c}}
     {{~inject 'workatoApiToken' theme_settings.workato_api_token}}
+    {{~inject 'workatoApiPathB2C' theme_settings.workato_api_path_b2c}}
+    {{~inject 'loginApiPath' theme_settings.login_api_path}}
+    {{~inject 'createAccountApiPath' theme_settings.create_account_api_path}}
     {{~inject 'contentfulApiPath' theme_settings.contentful_api_path}}
     {{~inject 'contentfulApiToken' theme_settings.contentful_api_token}}
-    {{~inject 'leadmgmtApiToken' theme_settings.leadmgmt_api_token}}    
+    {{~inject 'leadmgmtApiToken' theme_settings.leadmgmt_api_token}}
     {{~inject 'zoomSize' theme_settings.zoom_size}}
     {{~inject 'productSize' theme_settings.product_size}}
     {{~inject 'genericError' (lang 'common.generic_error')}}
@@ -163,7 +164,7 @@
     {{~inject 'carouselArrowAndDotAriaLabel' (lang 'carousel.arrow_and_dot_aria_label')}}
     {{~inject 'carouselActiveDotAriaLabel' (lang 'carousel.active_dot_aria_label')}}
     {{~inject 'carouselContentAnnounceMessage' (lang 'carousel.content_announce_message')}}
-
+    {{~inject 'navigationProductId' theme_settings.navigation_product_id }}
     {{!-- Get this loading ASAP --}}
     <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.main.js'}}" as="script">
 
@@ -181,8 +182,9 @@
     {{!-- End Google Tag Manager --}}
 </head>
 
-<body class="{{ page_type }}-type {{#if template '===' 'pages\custom\product\suits-product'}}suitsProduct{{/if}} {{#contains template 'retail'}} retailer-finder-lp{{/contains}}">
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDMVGVL" height="0" width="0"
+<body
+    class="{{ page_type }}-type {{#if template '===' 'pages\custom\product\suits-product'}}suitsProduct{{/if}} {{#contains template 'retail'}} retailer-finder-lp{{/contains}}">
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDMVGVL" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
     <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>
 

@@ -401,6 +401,7 @@ class FacetedSearch {
         Object.assign(urlQueryParams, url.query);
 
         urlUtils.goToUrl(Url.format({ pathname: url.pathname, search: urlUtils.buildQueryString(urlQueryParams) }));
+        
     }
 
     onStateChange() {

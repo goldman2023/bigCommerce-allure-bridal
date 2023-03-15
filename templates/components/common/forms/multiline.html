@@ -2,6 +2,7 @@
     <label class="form-label" for="{{id}}_input">{{label}}
         {{#if required}}
             <small>{{lang 'common.required' }}</small>
+            <span class="asterisk">*</span>
         {{/if}}
     </label>
     <textarea name="{{name}}"

@@ -1,7 +1,7 @@
 <ul class="productGrid">
     {{#each products}}
     {{#if @index '===' 6}}
-        <div class="customBanner"><div class="rightTextbanner" id="rightTextbanner"></div></div> 
+        <div class="customBanner"><div class="rightTextbanner plpbanner" id="rightTextbanner"></div></div> 
     {{/if}} 
     <li class="product">
             {{>BP/category/card settings=../settings show_compare=../show_compare show_rating=../settings.show_product_rating theme_settings=../theme_settings customer=../customer event=../event position=(add @index 1)}}

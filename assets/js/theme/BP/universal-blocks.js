@@ -2,7 +2,7 @@ function headerFooterQuery (context, callback) {
     let query = `
         query ProductsQuery {
             site {
-                product(entityId: 287) {
+                product(entityId: ${context.navigationProductId}) {
                     entityId
                     description
                     metafields (
@@ -327,7 +327,51 @@ function categoryByPath (context, categoryPath, callback) {
     .catch(error => console.error(error));
 }
 
-
+function plpQuery (context, categoryPath, callback){
+    let query = `query CategoryByUrl {
+        site {
+          route(path: "${categoryPath}") {
+            node {
+              id
+              ... on Category {
+                name
+                entityId
+                description
+                metafields(namespace:"Contentful Data") {
+                  edges {
+                    node {
+                      id
+                      key
+                      value
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }`;
+      fetch('/graphql', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${context.graphQlToken}`
+        },
+        body: JSON.stringify({
+            query: query
+        })
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(res) {
+        if (typeof callback == 'function') {
+            callback.call(this, res);
+        }
+    })
+    .catch(error => console.error(error));
+}
 function categoryQueryByPath (context, categoryPath, callback) {
     let query = `
     query CategoryByUrl {
@@ -665,6 +709,14 @@ export function getFirstprodImageFromCategory(context,path, callback) {
     });
 }
 
+export function getPLPContentfullData(context,path, callback) { 
+    plpQuery(context, path, response => {
+        if (response.data.site.route.node !== undefined) {
+            callback.call(this, response.data.site.route.node);
+        }
+    });
+}
+
 export function createCategorySlider(block,blockdata) {
     if(blockdata?.products?.edges?.length > 0) {
         if (blockdata.products.edges[0].node.defaultImage !== null) {
@@ -758,26 +810,31 @@ export function getProducts(context, selector, prodList, slidescroll) {
 
 export function blockElementFullscreenVideo(selectorID, element) {
     let videoURL = '';
-    if (element.videoUrl) {
-        if (element.videoUrl.includes('youtube')) {
-            videoURL = `https://www.youtube.com/embed/${element.videoUrl.split('=')[1]}`;
-            document.getElementById(selectorID).innerHTML = `<div><iframe type="text/html" src="${videoURL}"  frameborder="0" id="colbannerVideo" controls=0></iframe></div>`;
-        } else {
-            document.getElementById(selectorID).innerHTML = `<div><video autoplay playsinline loop muted plays-inline="" id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div>`;
-        }
+    if (element?.bfvideo !== undefined && element?.bfvideo !== null) {
+        document.getElementById(selectorID).innerHTML = `<video autoplay loop muted playsinline plays-inline="" id="colbannerVideo"><source src="${element?.bfvideo[0]?.cdn_url}" type="video/mp4"><source src="${element?.bfvideo[0]?.cdn_url}" type="video/ogg">Your browser does not support HTML video.</video>`;
+    } else if (element?.videoUrl?.includes('youtube')) {
+        videoURL = `https://www.youtube.com/embed/${element?.videoUrl?.split('=')[1]}`;
+        document.getElementById(selectorID).innerHTML = `<div><iframe type="text/html" src="${videoURL}"  frameborder="0" id="colbannerVideo" controls=0></iframe></div>`;
+    } else {
+        document.getElementById(selectorID).innerHTML = `<div><video autoplay playsinline loop muted plays-inline="" id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div>`;
     }
-    if (element?.backgroundImage?.url && element?.backgroundImage?.url !== undefined) {
+    
+    if (element?.bfBackgroundImage !== undefined && element?.bfBackgroundImage !== null) {
+        document.getElementById(selectorID).innerHTML = `<img data-src="${element?.bfBackgroundImage[0]?.cdn_url}" alt="${(element?.subheadline && element?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>`;
+    } else if (element?.backgroundImage?.url && element?.backgroundImage?.url !== undefined) {
         document.getElementById(selectorID).innerHTML = `<img alt="${element?.backgroundImage?.title}" data-src="${element?.backgroundImage?.url}" class="lazyload"/>`;
     }
 }
 
 export function globalblockElementFullscreenVideo(element) {
     let videoURL = '';
-    if(element.videoUrl.includes('youtube')) {
-        videoURL = `https://www.youtube.com/embed/${element.videoUrl.split('=')[1]}`;
+    if (element?.bfvideo !== undefined && element?.bfvideo !== null) {
+        return `<div class="blockElementFullscreenVideo block-item full-size" ><div><video autoplay loop muted playsinline plays-inline="" id="colbannerVideo"><source src="${element?.bfvideo[0]?.cdn_url}" type="video/mp4"><source src="${element?.bfvideo[0]?.cdn_url}" type="video/ogg">Your browser does not support HTML video.</video></div></div>`;
+    } else if (element?.videoUrl?.includes('youtube')) {
+        videoURL = `https://www.youtube.com/embed/${element?.videoUrl?.split('=')[1]}`;
         return `<div class="blockElementFullscreenVideo block-item full-size" ><div><iframe type="text/html" src="${videoURL}"  frameborder="0" id="colbannerVideo" controls=0></iframe></div></div>`;
-    } else {
-          return `<div class="blockElementFullscreenVideo block-item full-size" ><div><video autoplay loop muted playsinline plays-inline="" id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div></div>`;
+    } else if (element?.videoUrl !== undefined && element?.videoUrl !== null) {
+        return `<div class="blockElementFullscreenVideo block-item full-size" ><div><video autoplay loop muted playsinline plays-inline="" id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div></div>`;
     }
 }
 
@@ -809,15 +866,11 @@ export function blockElementSpacer24Px() {
 
 export function events(blockData,page) {
     let datastru = blockData.trunkShowsCollection ?  blockData.trunkShowsCollection : blockData.referencedBlockTrunkShowsCollection;
-    datastru.items.sort((a, b) => {
-        let da = new Date(a.eventStartDate),
-            db = new Date(b.eventStartDate);
-        return da - db;
-    });
+    let sorteddatastru = datastru.items.sort((a,b) =>  new Date(a.eventStartDate) - new Date(b.eventStartDate));
     return `<div class="events block-item" id="events">
     <h2>Upcoming Designer Events</h2>
     <div class="eventsGrid">
-        ${datastru.items.map((item)=> {
+        ${sorteddatastru.map((item)=> {
             //start date format
             let startDate = (item.eventStartDate).split('T');
             let startDateObj = new Date(`${startDate[0]}T00:00`);
@@ -853,13 +906,21 @@ export function events(blockData,page) {
             </div>`;
         }).join('')}
     </div>
-    ${page === 'home' ? (blockData.containerButtonUrl !== null ? `<a href="${blockData.containerButtonUrl}" class="button button--secondary" >${blockData.containerButtonText}</a>` : '') : ''}
+    ${page === 'home' ? `<a href="/designer-events-list/" class="button button--secondary" >View All Designer Events</a>` : ''}
     </div>`;
 }
 export function blockElementFullscreenImage(blockData) {
-    console.log(blockData?.contentOrScreenWidth);
-    return `<div class="blockElementFullscreenImage block-item ${(blockData?.contentOrScreenWidth === 'Screen Width') ? 'full-size' : ''}" id="blockElementFullscreenImage"><div class="mainImage"><img data-src="${blockData?.backgroundImage?.url}" alt="${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>
-    ${blockData?.bodyCopy !== null ? `<div class="homepageCaption"><div class="content"><div class="bannercap"><h4>${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}</h4><p>${(blockData?.bodyCopy && blockData?.bodyCopy !== undefined) ? blockData?.bodyCopy : ''}</p><a href="${blockData?.linkUrl}">${blockData?.linkText}</a></div>` : ''}</div></div></div></div>`;
+    let fullImageBlock = `<div class="blockElementFullscreenImage block-item ${(blockData?.contentOrScreenWidth === 'Screen Width') ? 'full-size' : ''}" id="blockElementFullscreenImage"><div class="mainImage">`;
+
+    if (blockData?.bfBackgroundImage !== undefined && blockData?.bfBackgroundImage !== null) {
+        fullImageBlock += `<img data-src="${blockData?.bfBackgroundImage[0]?.cdn_url}" alt="${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>`;
+    } else {
+        fullImageBlock += `<img data-src="${blockData?.backgroundImage?.url}" alt="${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>`;
+    }
+    
+    fullImageBlock += `${ blockData?.bodyCopy !== null ? `<div class="homepageCaption"><div class="content"><div class="bannercap"><h4>${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}</h4><p>${(blockData?.bodyCopy && blockData?.bodyCopy !== undefined) ? blockData?.bodyCopy : ''}</p><a href="${blockData?.linkUrl}">${blockData?.linkText}</a></div>` : '' }</div ></div ></div ></div >`;
+
+    return fullImageBlock;
 }
 
 export function blockElementCopyBlock(blockData) {
@@ -980,6 +1041,12 @@ export function leftTextBlockglobal(selectorId, blockData) {
         <div class="overlay"></div><div class="content-wrapper"><div class="caption"><h1 class="title h1-italic">${blockData.bannerTitle}</h1><p class="content body-light-2">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink body-3">${blockData.linkText}</a></div></div></div>`;
 };
 
+export function plpleftTextBlockglobal(selectorId, blockData) {
+    let contentStructure = `<div class="${selectorId} plpbanner" id="${selectorId}"><img data-src="${blockData.backgroundImage.url}" alt="category banner" class="lazyload desktoponly"/><img data-src="${blockData?.mobileImage?.url}" alt="category banner" class="lazyload mobileonly"/>
+        <div class="overlay"></div><div class="content-wrapper"><div class="caption"><h1 class="title h1-italic">${blockData.bannerTitle}</h1><p class="content body-light-2">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink body-3">${blockData.linkText}</a></div></div></div><div class="divider"></div>`;
+        document.querySelector('.customBanner').innerHTML = contentStructure;
+};
+
 export function blockElementVerticalGallery(blockData) {
     if(blockData.imagesCollection) {
         let leftData = '';
@@ -989,7 +1056,6 @@ export function blockElementVerticalGallery(blockData) {
                     leftData += `<div class="contentDiv"><img data-src="${item.url}" alt="${item.title}" class="lazyload"/></div>`;
                 } else {
                     let descriptionArr = (item.description) ? item.description.split('-') : '';
-                    console.log(descriptionArr);
                     let descriptionHtml = '';
                     if (descriptionArr.length > 0) {
                         descriptionHtml = `<p class="caption body-1">${descriptionArr[0]} ${(descriptionArr[1] != null && descriptionArr[1] != undefined) ? `<span class="author body-light-2">-${descriptionArr[1]}</span>` : ''}</p>`;
@@ -1007,7 +1073,6 @@ export function blockElementVerticalGallery(blockData) {
                     let descriptionHtml = '';
                     if (item.description) {
                         let descriptionArr = item.description.split('-');
-                        console.log(descriptionArr);
                         descriptionHtml = `<p class="caption body-1">${descriptionArr[0]} ${(descriptionArr[1] != null && descriptionArr[1] != undefined) ? `<span class="author body-light-2">-${descriptionArr[1]}</span>` : ''}</p>`;
                     }
                     
