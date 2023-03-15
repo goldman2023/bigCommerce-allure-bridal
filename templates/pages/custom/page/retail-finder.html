@@ -1,39 +1,72 @@
 {{#partial "page"}}
-{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+{{{ stylesheet '/assets/scss/vendor/jstree/style.css' }}}
+<!-- {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}} -->
 <section class="page">
     <div class="content">
+        <div class="header-sec">
+            <h2 class="header-title">Try It On</h2>
+            <div class="map-toggle">
+                <label class="toggle-label">SHOW MAP</label>
+                <label class="switch">
+                    <input type="checkbox" class="on-off-map" checked>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
         <div class="map-filters">
             <div class="form">
-                <h2 class="header-title">Try It On</h2>
                 <div class="geo-filters">
                     <div id="distanceFilter" class="filter"></div>
                     <div class="form-field filter">
-                        <span class="form-label">of</span>
+                        <span class="form-label">City or zip code</span>
                         <div id="pac-container">
                             <input class="form-input location-typeahead selector-dropdown" type="text"
                                 id="location-typeahead" />
                         </div>
                     </div>
                 </div>
-                <div id="collectionsFilter"></div>
                 <div class="filter-button-container" id="filterButton"></div>
                 <div class="reset-button-container" id="resetButton"></div>
             </div>
-        </div>
-        <div class="map-and-retailers">
-            <div id="map"></div>
-            <script type="text/javascript"
-                src="https://maps.googleapis.com/maps/api/js?key={{ theme_settings.google_api_token }}&libraries=places&callback=Function.prototype">
-                </script>
             <div class="available-retailers">
                 <div class="top">
-                    <h2 class="header-title retailers">Wedding Retailers Near You</h2>
+                    <h2 class="header-title retailers">Retailers Near You</h2>
                     <div class="sort-dropdown">
                         <span class="sort-label">SORT BY:</span>
                         <select class="sort-select" id="sortSelect">
                         </select>
                     </div>
                     <use xlink:href="#icon-diamond-accent" />
+                    <div class="filter-visible">HIDE FILTER</div>
+                </div>
+                <div class="header-svg__border">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <rect x="5.99991" y="1.58603" width="6" height="6" transform="rotate(45 5.99991 1.58603)"
+                            fill="#695C5C" stroke="white" stroke-width="2" />
+                    </svg>
+                </div>
+                <div class="option-filters">
+                    <div class="form">
+                        <div class="geo-filters">
+                            <div class="form-field name-filter">
+                                <span class="form-label">Store Name</span>
+                                <div id="pac-container">
+                                    <input class="form-input" type="text" id="name-typeahead"
+                                        placeholder="Store Name" />
+                                </div>
+                            </div>
+                        </div>
+                        <div clsss="collections">
+                            <div class="collections-label">COLLECTIONS:</div>
+                            <div id="collectionFilters" class="collections-filter"></div>
+                        </div>
+                    </div>
+                    <div class="header-svg__border">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <rect x="5.99991" y="1.58603" width="6" height="6" transform="rotate(45 5.99991 1.58603)"
+                                fill="#695C5C" stroke="white" stroke-width="2" />
+                        </svg>
+                    </div>
                 </div>
                 <div class="results-divider">
                     <svg class="important-icon">
@@ -43,6 +76,13 @@
                 </div>
                 <div id="retail-finder-results" class="retailer-results"></div>
             </div>
+
+        </div>
+        <div class="map">
+            <div id="map"></div>
+            <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?key={{ theme_settings.google_api_token }}&libraries=places&callback=Function.prototype">
+                </script>
         </div>
     </div>
 </section>
