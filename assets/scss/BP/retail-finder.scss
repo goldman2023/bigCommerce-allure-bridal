@@ -1,89 +1,73 @@
 .retailer-finder-lp {
   .page {
-    margin-top: 40px;
-    min-height: 1200px;
+    margin-top: 20px;
+    min-height: 800px;
 
     .content {
       display: flex;
+      flex-wrap: wrap;
 
       .map-filters {
-        width: 20%;
-        margin-right: 40px;
+        order: 3;
+        width: 39%;
+        margin-right: 1%;
+        padding-right: 10px;
+        padding-Left: 10px;
+        max-height: 900px;
+        overflow: auto;
 
-        .form {
-          position: relative;
+        .geo-filters {
+          display: flex;
 
-          .location-typeahead {
-            color: stencilColor("color-allure-bridals-neutral-1") !important;
+          .filter {
+            width: 50%;
 
-            &:focus {
-              outline: none !important;
-            }
-
-            &.error {
-              outline: red 1px solid;
-
+            &:first-child {
+              margin-right: 16px;
             }
           }
-        }
-      }
 
-      .map-and-retailers {
-        width: 80%;
-
-        #map {
-          min-height: 600px;
-          margin-bottom: 40px;
+          .name-filter {
+            margin-top: 10px;
+            width: 100%;
+          }
         }
 
         .available-retailers {
           .top {
-            width: 100%;
             display: flex;
+            flex-direction: row;
             align-items: center;
+            justify-content: space-between;
             border-bottom: 1px solid stencilColor('color-men-design-primary-2');
-            padding-bottom: 22px;
-            margin-bottom: 30px;
-            position: relative;
-
-            svg {
-              position: absolute;
-              bottom: -7px;
-              left: 50%;
-            }
-
-            .retailers {
-              margin-bottom: 0;
-            }
+            padding: 22px 0px 22px 0px;
 
             .sort-dropdown {
-              margin-left: auto;
               display: none;
-              // display: flex;
-              font-family: stencilFontFamily('default-font-regular');
-              font-style: normal;
+            }
+
+            .filter-visible {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: end;
               font-weight: 500;
               font-size: 12px;
-              color: stencilColor('allure-bridals-neutral-2');
               line-height: 15px;
-              /* identical to box height */
-
-              text-align: center;
               letter-spacing: 0.1em;
+              text-transform: uppercase;
+              cursor: pointer;
 
-              .sort-label {
-                width: 100px;
-                display: flex;
-                align-items: center;
+              &::before {
+                padding-right: 5px;
+                padding-top: 2px;
+                content: url('../icons/filter-show-hide.svg');
               }
+            }
 
-              .sort-select {
-                border: none;
 
-                &:focus {
-                  outline: none !important;
-                }
-              }
+            .retailers {
+              margin: 0;
             }
           }
 
@@ -96,7 +80,7 @@
             padding: 1rem;
             font-size: 14px;
             line-height: 22px;
-            margin-bottom: 25px;
+            margin: 10px 0px 10px 0px;
 
             .important-icon {
               width: 20px;
@@ -115,18 +99,18 @@
             }
 
             .retailer-item-container {
-              width: 33%;
+              width: 100%;
 
-              &.bordered {
-                border-bottom: 1px solid #C8C6C6;
-                padding-bottom: 24px;
-                margin-bottom: 30px;
-              }
-
+              // &.bordered {
+              //   border-bottom: 1px solid #C8C6C6;
+              //   padding-bottom: 24px;
+              //   margin-bottom: 30px;
+              // }
 
               .retailer-item {
                 display: flex;
                 padding: 24px;
+                padding-left: 10px;
                 flex-direction: column;
                 height: 100%;
                 cursor: pointer;
@@ -138,7 +122,7 @@
                 }
 
                 &:not(:nth-child(3n)) {
-                  padding-right: 50px;
+                  padding-right: 10px;
 
                 }
 
@@ -150,36 +134,235 @@
                 }
 
                 .retailer-location {
-                  font-weight: 400;
-                  font-size: 14px;
-                  line-height: 22px;
-                  display: flex;
-                  align-items: center;
-                  margin-bottom: 2px;
+                  margin: 5px 0px 0px 0px;
 
                   .retailer-city-state {
-                    margin-right: 25px;
+                    font-family: 'Inter Regular';
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 12px;
+                    line-height: 16px;
+                    letter-spacing: 0.1em;
+                    text-transform: uppercase;
 
                   }
                 }
 
-                .retailer-distance {
-                  margin-bottom: 8px;
-                  color: stencilColor('color-allure-bridals-primary-1');
+                .retailer-distanceDirection {
+                  display: flex;
+                  align-items: center;
+                  margin: 5px 0px 5px 0px;
+
+                  .retailer-distance {
+                    color: stencilColor('color-allure-bridals-neutral-1');
+
+                    &::after {
+                      padding-left: 10px;
+                      padding-right: 10px;
+                      content: url('../icons/spot.svg');
+                    }
+                  }
+
+                  .directions {
+                    color: stencilColor('color-default-primary-1');
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 12px;
+                    line-height: 12px;
+                    text-align: center;
+                    letter-spacing: 0.1em;
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
+
+                    &::before {
+                      content: url('../icons/location.svg');
+                    }
+                  }
                 }
 
-                .retailer-collection-count {
+                .retailer-collections {
                   font-size: 14px;
                   line-height: 22px;
-                  margin-bottom: 8px;
+                  margin: 8px 0px 0px 0px;
+                  color: stencilColor('color-allure-bridals-neutral-2');
+
+                  &::before {
+                    content: "collections:  ";
+                    color: stencilColor("color-allure-bridals-primary-1");
+                    text-transform: uppercase;
+
+                  }
+                }
+
+                .schedule-btn {
+                  color: stencilColor('color-allure-bridals-primary-1');
+                  border: 1px solid stencilColor('color-allure-bridals-primary-1');
+                  width: 100%;
+                  border-radius: 3px;
+                  padding: 2px;
+                  display: flex;
+                  max-width: 200px;
+                  font-weight: 600;
+                  font-size: 12px;
+                  line-height: 16px;
+                  /* identical to box height, or 133% */
+                  // letter-spacing: 0.05em;
+                  margin-top: 1rem;
+
+                  &.book-appt {
+                    display: none;
+                  }
+
+                  span {
+                    padding: 14px 0;
+                    width: 100%;
+                    border: 1px solid stencilColor('color-allure-bridals-primary-5');
+                    border-radius: 3px;
+                  }
+
+                  &:hover {
+                    background: stencilColor('color-allure-bridals-primary-1');
+
+                    span {
+                      color: stencilColor('color-white');
+                    }
+                  }
                 }
               }
             }
 
           }
 
+          .option-filters {
+            border-bottom: 1px solid #828ca6;
+            font-family: 'Inter Regular';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 20px;
+
+            .collections-label {
+              font-family: 'Inter Regular';
+              font-style: normal;
+              font-weight: 600;
+              font-size: 12px;
+              line-height: 16px;
+              letter-spacing: 0.05em;
+              text-transform: uppercase;
+            }
+
+            .jstree-icon {
+              background-image: url("../img/vendor/jstree/32px-new.png") !important;
+            }
+
+            .jstree-container-ul {
+              margin-left: -8px;
+
+            }
+
+            .jstree-anchor {
+              &>.jstree-themeicon {
+                display: none !important;
+              }
+
+              &:hover {
+                background-color: transparent !important;
+                border: none;
+                box-shadow: none;
+              }
+            }
+
+            .jstree-default-large {
+              .jstree-closed>.jstree-ocl {
+                order: 0;
+              }
+
+              .jstree-open>.jstree-ocl {
+                order: 0;
+              }
+
+              .jstree-anchor {
+                order: -1;
+              }
+
+              .jstree-leaf>.jstree-ocl {
+                display: none;
+              }
+            }
+
+            .jstree {
+              .jstree-open>.jstree-children {
+                order: 1;
+                width: 100% !important;
+              }
+
+              .jstree-closed>.jstree-children {
+                order: 1;
+                width: 100% !important;
+              }
+            }
+
+            .jstree-default {
+              &>.jstree-container-ul>.jstree-node {
+                display: flex;
+                flex-wrap: wrap;
+              }
+
+              .jstree-clicked {
+                background: none;
+                box-shadow: none;
+              }
+
+              .jstree-node {
+                background: no-repeat;
+              }
+            }
+          }
+
+          // specific dot
+          .header-svg__border {
+            position: relative;
+
+            svg {
+              position: absolute;
+              top: 0;
+              right: 0;
+              left: 0;
+              margin: auto;
+              bottom: 0;
+            }
+          }
         }
 
+        .form {
+          position: relative;
+          margin-bottom: 2.5rem;
+
+          .location-typeahead {
+            color: stencilColor("color-allure-bridals-neutral-1") !important;
+
+            &:focus {
+              outline: none !important;
+            }
+
+            &.error {
+              outline: red 1px solid;
+
+            }
+          }
+        }
+      }
+
+      .map {
+        width: 60%;
+        order: 4;
+
+        #map {
+          min-height: 600px;
+          margin-bottom: 40px;
+          height: 100%;
+        }
       }
 
       .filter-button-container {
@@ -191,6 +374,7 @@
           background: stencilColor('color-theme');
           border: 1px solid stencilColor('color-theme');
           color: stencilColor('color-white');
+          max-width: 100% !important;
 
           &:hover {
             background: stencilColor('color-white');
@@ -246,6 +430,98 @@
           }
         }
       }
+
+      .header-sec {
+        display: flex;
+        justify-content: space-between;
+        padding: 0px 5px 5px 5px;
+        align-items: center;
+        width: 100%;
+        order: 2;
+
+        .header-title {
+          font-weight: 400;
+          font-family: 'Prata';
+          font-style: normal;
+          font-size: 22px;
+          line-height: 30px;
+          margin: 0;
+        }
+
+        .map-toggle {
+          align-items: center;
+          display: none;
+        }
+
+        .toggle-label {
+          font-family: 'Inter Regular';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 16px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          margin-right: 5px;
+        }
+
+        .switch {
+          position: relative;
+          display: inline-block;
+          width: 32px;
+          height: 14px;
+        }
+
+        .switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+
+        .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: stencilColor("theme-white");
+          box-shadow: 0 0px 1px 1px stencilColor("color-allure-bridals-primary-1");
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
+
+        .slider:before {
+          position: absolute;
+          content: "";
+          height: 10px;
+          width: 10px;
+          left: 4px;
+          top: 2px;
+          background-color: stencilColor("color-allure-bridals-primary-1");
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
+
+        input:checked+.slider {
+          background-color: stencilColor("color-allure-bridals-primary-1");
+        }
+
+        input:checked+.slider:before {
+          -webkit-transform: translateX(15px);
+          background-color: stencilColor("color-white");
+          -ms-transform: translateX(15px);
+          transform: translateX(15px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+          border-radius: 34px;
+        }
+
+        .slider.round:before {
+          border-radius: 50%;
+        }
+      }
     }
 
     .buttons-container {
@@ -253,68 +529,7 @@
     }
   }
 
-  // mobile overrides
-  @media (max-width: '900px') {
-
-    .content {
-      flex-direction: column;
-
-      .map-filters {
-        width: 100% !important;
-
-        .geo-filters {
-          display: flex;
-
-          .filter {
-            width: 50%;
-
-            &:first-child {
-              margin-right: 16px;
-            }
-          }
-
-        }
-
-        .filter-button-container {
-          button {
-            max-width: 100%;
-          }
-        }
-      }
-
-      .map-and-retailers {
-        width: 100% !important;
-
-        #map {
-          min-height: 400px !important;
-        }
-
-        .top {
-          flex-direction: column;
-          align-items: flex-start !important;
-
-          .sort-dropdown {
-            margin-left: 0 !important;
-            margin-top: 10px;
-          }
-        }
-
-        .retailer-results {
-          flex-direction: column;
-
-          .retailer-item-container {
-            width: 100% !important;
-          }
-        }
-      }
-    }
-
-    .modal--large {
-      .modal-close {
-        display: none;
-      }
-    }
-  }
+  //modal styles
 
   .modal-close {
 
@@ -365,13 +580,13 @@
           font-size: 10px;
           line-height: 12px;
           letter-spacing: 0.1em;
+          font-family: 'Inter Regular';
         }
 
 
         .retailer-header {
           border-bottom: 1px solid #e5e5e5;
           padding-bottom: 30px;
-          margin-bottom: 30px;
 
           .featured {
             color: stencilColor('color-default-primary-1');
@@ -379,19 +594,39 @@
           }
 
           .header-title {
-            margin-bottom: 4px;
+            margin: 0;
           }
 
           .location {
+            font-family: 'Inter Regular';
             font-style: normal;
             font-weight: 400;
             font-size: 12px;
             line-height: 20px;
             margin-bottom: 29px;
+            letter-spacing: 0.1em;
+
+          }
+
+
+        }
+
+        // specific dot
+        .header-svg__border {
+          position: relative;
+
+          svg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
+            bottom: 0;
           }
         }
 
         .collections {
+          margin-top: 30px;
           margin-bottom: 24px;
 
 
@@ -429,6 +664,7 @@
             margin-bottom: 28px;
 
             &::before {
+              margin-left: -1px;
               content: url('../icons/location.svg');
             }
           }
@@ -442,9 +678,10 @@
 
         .phone {
           margin-bottom: 24px;
+          display: none;
 
           a.retailer-detail {
-            color: stencilColor('color-allure-bridals-primary-1');
+            color: #282828;
             letter-spacing: .1em;
             text-decoration: none;
           }
@@ -452,21 +689,58 @@
 
         .retailer-url {
           margin-bottom: 48px;
+          display: flex;
 
           a {
             color: stencilColor('color-allure-bridals-primary-1');
             text-decoration: none;
           }
+
+          &::before {
+            padding-right: 5px;
+            padding-top: 1px;
+            content: url('../icons/visit_url.svg');
+          }
         }
 
         .schedule-btn {
-          color: stencilColor('color-allure-bridals-primary-1');
+          background: stencilColor('color-allure-bridals-primary-1');
+          color: stencilColor('color-white');
           border: 1px solid stencilColor('color-allure-bridals-primary-1');
           width: 100%;
           border-radius: 3px;
           padding: 2px;
           display: flex;
           margin-top: 1rem;
+
+          &.book-appt {
+            display: none;
+          }
+
+          span {
+            padding: 14px 0;
+            width: 100%;
+            border: 1px solid stencilColor('color-allure-bridals-primary-5');
+            border-radius: 3px;
+          }
+
+          &:hover {
+            background: stencilColor('color-allure-bridals-primary-2');
+
+            span {
+              color: stencilColor('color-white');
+            }
+          }
+        }
+
+        .more-btn {
+          width: 100%;
+          border-radius: 3px;
+          padding: 2px;
+          display: flex;
+          margin-top: 1rem;
+          color: stencilColor('color-allure-bridals-primary-1');
+          border: 1px solid stencilColor('color-allure-bridals-primary-1');
 
           &.book-appt {
             display: none;
@@ -487,31 +761,109 @@
             }
           }
         }
+
       }
     }
   }
 
-
-  .header-title {
-    font-weight: 400;
-    font-family: 'Prata';
-    font-style: normal;
-    font-size: 22px;
-    line-height: 30px;
-    margin-top: 0;
-  }
-
+  // badge url
   .featured {
     margin-right: 4px;
 
-    &::after {
-      content: url('../icons/retailer-featured.svg');
+    // width: 20px;
+    &::before {
+      content: url('../icons/retailer-featured_updated.svg');
     }
   }
 
   .disney {
-    &::after {
+    // width: 20px;
+
+    &::before {
       content: url('../icons/platinum-collection.svg');
+    }
+  }
+
+
+  // mobile overrides
+  @media (max-width: '900px') {
+
+    .content {
+      flex-direction: column;
+
+      .map-filters {
+        width: 100% !important;
+
+        .geo-filters {
+          display: flex;
+          flex-wrap: wrap;
+
+          .filter {
+            width: 100% !important;
+
+            &:first-child {
+              margin-right: 0px !important;
+            }
+          }
+
+        }
+
+        .filter-button-container {
+          button {
+            max-width: 100%;
+          }
+        }
+      }
+
+      .map-toggle {
+        display: flex !important;
+      }
+
+      .map {
+        width: 100% !important;
+        // display: none;
+        order: 1 !important;
+
+        #map {
+          min-height: 400px !important;
+        }
+
+        .top {
+          flex-direction: column;
+          align-items: flex-start !important;
+
+          .sort-dropdown {
+            margin-left: 0 !important;
+            margin-top: 10px;
+          }
+        }
+
+        .retailer-results {
+          flex-direction: column;
+
+          .retailer-item-container {
+            width: 100% !important;
+          }
+        }
+      }
+    }
+
+    .map-filters {
+      max-height: 100% !important;
+    }
+
+    .modal--large {
+      .modal-close {
+        display: none;
+      }
+    }
+
+    .schedule-btn {
+      max-width: 100% !important;
+    }
+
+    .phone {
+      display: block !important;
     }
   }
 
@@ -519,5 +871,9 @@
     .modal--large {
       max-width: 900px !important;
     }
+  }
+
+  .body {
+    margin-bottom: spacing("double") * 0;
   }
 }
