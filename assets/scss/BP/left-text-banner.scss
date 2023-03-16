@@ -3,7 +3,7 @@
     position: relative;
     img {
         width: 100%;
-        min-height: 480px;
+        min-height: 200px;
         @include breakpoint("medium") {
             min-height: unset;
         }

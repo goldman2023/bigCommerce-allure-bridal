@@ -1,4 +1,5 @@
 {{inject 'noCompareMessage' (lang 'compare.no_compare')}}
+<div class="floatmiddle">{{category.total_products}} ITEM{{#if category.products.length '>' 1}}S{{/if}}</div>
 
 {{#if category.products}}
     <div {{#if settings.data_tag_enabled}} data-list-name="Category: {{category.name}}" {{/if}}>

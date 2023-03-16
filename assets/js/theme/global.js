@@ -77,8 +77,6 @@ export default class Global extends PageManager {
         adminBar(secureBaseUrl, channelId, maintenanceModeSettings, JSON.parse(adminBarLanguage), productId, categoryId);
         loadingProgressBar();
         svgInjector();
-        console.log("test staging");
-        
         //header footer data 	
         renderHeaderFooter(this.context);
 
@@ -107,30 +105,24 @@ export default class Global extends PageManager {
 
         //Product Listing page start
         if (mainContent.contains('pages-custom-category-bp-category') || mainContent.contains('bp-category') || mainContent.contains('pages-custom-category-suits-bp-category')) {
-            getPLPContentfullData(this.context, `/dresses/abella-dresses/`, response => {
-                let contentFulData = response?.metafields?.edges[0]?.node.value;
-                let parsedData = JSON.parse(contentFulData.replace( /(<([^>]+)>)/ig, ''));
-                parsedData.items.forEach(element => {
-                    element.categoryBannersCollection.items.forEach(ele => {
-                        if (ele.slug === "the-perfect-match-left" && ele.layoutOrientation === "Image Left"){
-                            plpleftTextBlockglobal('rightTextbanner',ele);
-                        }
-                        if(ele.slug === "the-perfect-match-right" && ele.layoutOrientation === "Image Right"){
-                            plpleftTextBlockglobal('leftTextbanner',ele); 
-                        }
+            let geturlfrom = this.context.categoryURL;
+            getPLPContentfullData(this.context, geturlfrom, response => {
+                if (response?.metafields?.edges?.length > 0) {
+                    let contentFulData = response?.metafields?.edges[0]?.node.value;
+                    let parsedData = JSON.parse(contentFulData?.replace(/(<([^>]+)>)/ig, ''));
+                    parsedData?.items?.forEach(element => {
+                        element?.categoryBannersCollection?.items?.forEach(ele => {
+                            if (ele.slug === "the-perfect-match-left" || ele.slug === "the-perfect-match-right") {
+                                if (ele.layoutOrientation === "Image Left") {
+                                    plpleftTextBlockglobal('rightTextbanner', ele);
+                                }
+                                if (ele.layoutOrientation === "Image Right") {
+                                    plpleftTextBlockglobal('leftTextbanner', ele);
+                                }
+                            }
+                        });
                     });
-                });
-            });
-            contentFullmetaData(this.context, response => {
-                let metadata = response[0].value;
-                metadata.contentBlocksCollection.items.forEach(element => {
-                    if(mainContent.contains('bp-category') && element.__typename === "ReferencedBlockCategoryBanners"){
-                        leftTextBlock('leftTextbanner',element);
-                    }
-                    if(mainContent.contains('pages-custom-category-suits-bp-category') && element.__typename === "ReferencedBlockCategoryBanners" && element.layoutOrientation === "Image Right"){
-                        leftTextBlock('rightTextbanner',element);
-                    }
-                });
+                }
             });
         }
         //Product Listing page end
@@ -155,6 +147,7 @@ export default class Global extends PageManager {
             });
             contentFullmetaData(this.context, response => {
                 let metadata = response[0].value;
+                
                 metadata.contentBlocksCollection.items.forEach(element => {
                     if(mainContent.contains('category-listing')) {
                         if(element.__typename === "ReferencedBlockCategoryBanners"){
@@ -328,7 +321,7 @@ export default class Global extends PageManager {
 
         //category Landing page start
         if (mainContent.contains('pages-custom-category-category-landing') || mainContent.contains('category-landing')) {
-            let geturl = document.getElementById('categoryLanding').getAttribute('data-url')
+            let geturl = this.context.categoryURL;
             getCategorySpecificMetaData(this.context, geturl, response => {
                 for (const categoryData of response) {
                     if (categoryData.key === "Contentful Data") {
