@@ -126,3 +126,10 @@
       width: 100%;
     }
   }
+  .product-type {
+    .modal--large .modal-close {
+      left: auto !important;
+      right:40px;
+      display: block;
+    }
+  }
