@@ -15,6 +15,8 @@
             <ul class="productGridslider aboutcategorylist" >
                 {{#each categories}}
                     {{#each children}}
+                    {{#if name '===' 'Bridal'}}
+                    {{#each children}}
                         <li class="catlist product" data-path="{{url}}">
                             <article class="card">
                                 <figure class="card-figure">
@@ -33,6 +35,9 @@
                                 </div>
                             </article>
                         </li>
+                        {{/each}}
+                        {{/if}}
+
                     {{/each}}
                 {{/each}}
             </ul>
