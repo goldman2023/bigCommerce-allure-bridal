@@ -413,6 +413,7 @@ body {
                 .caption {
                     h1 {
                         color: stencilColor('color-disney-primary-1');
+                        font-family: stencilFontFamily('stay-classy-font');
                         &::after {
                             @include disneyDivider();
                             width: 13px;
