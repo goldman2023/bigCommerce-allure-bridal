@@ -88,8 +88,11 @@ export default class DesignerEvents extends PageManager {
     };
 
     checkEventCanRequestAppt = async (event) => {
-        const checkUrl = 'https://allure-integration.azurewebsites.net/leads/stage/verify';
-        // TODO move to config.json
+        // if we've already called it, dont re-request
+        if (event.hasOwnProperty('canRequestAppt')) {
+            return event;
+        }
+        const checkUrl = this.context.checkRetailerAcceptsAppointmentsUrl || 'https://allure-integration.azurewebsites.net/leads/stage/verify';
         const checkReq = await fetch(
             checkUrl,
             {
