@@ -11,6 +11,9 @@ $inter: stencilFontFamily('default-font-regular');
 .login {
     display: flex;
     flex-direction: column;
+    .alertBox .close {
+        z-index: 0;
+    }
 }
 
 .account-login {
@@ -55,7 +58,9 @@ form.form.forgot-password-form {
     width: 100%;
     flex-direction: column;
     position: relative;
-
+    .divider {
+        margin: 10px 0;
+    }
     .reset-account{
         display: none;
     }
@@ -114,7 +119,6 @@ form.form.forgot-password-form {
             font-size: 12px;
             line-height: 20px;
             color: $color-default-neutral-5;
-            border-bottom: solid 1px $color-border;
             padding-bottom: 13.5px;
             margin: 0;
 
@@ -238,7 +242,9 @@ form.form.forgot-password-form {
 
 .new-login {
     width: 100%;
-
+    .divider {
+        margin: 10px 0;
+    }
     div {
         width: 100%;
         margin: 0;
@@ -293,6 +299,10 @@ form.form.forgot-password-form {
         padding: 20px;
         margin: 5% auto;
 
+    .divider {
+        margin: 10px 0;
+    }
+
     h2.form-heading {
         font-family: stencilFontFamily('default-font-bold');
         font-style: normal;
@@ -311,7 +321,6 @@ form.form.forgot-password-form {
         font-size: remCalc(12px);
         line-height:remCalc(20px);
         color: $color-default-neutral-5;
-        border-bottom: solid 1px $color-border;
         padding-bottom: 13.5px;
         margin: 0;
 
@@ -361,41 +370,40 @@ form.form.forgot-password-form {
 .register-page {
     display: flex;
     flex-flow: column;
-
-h2.form-heading {
-    margin: 0px 0px 8px 0px;
-    font-family: $prata-font;
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 30px;
-    color: $color-default-neutral-2;
-}
-#customregistration,#createBTn {
-    margin-bottom: 0;
-}
-p.form-sub_heading {
-    font-family: $inter;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 20px;
-    color: $color-default-neutral-5;
-    // border-bottom: solid 1px $color-border;
-    // padding-bottom: 13.5px;
-    margin: 0;
-    padding: 0;
-
-    strong {
+    h2.form-heading {
+        margin: 0px 0px 8px 0px;
+        font-family: $prata-font;
+        font-weight: 400;
+        font-size: 22px;
+        line-height: 30px;
         color: $color-default-neutral-2;
     }
-}
+    #customregistration,#createBTn {
+        margin-bottom: 0;
+    }
+    p.form-sub_heading {
+        font-family: $inter;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+        color: $color-default-neutral-5;
+        // border-bottom: solid 1px $color-border;
+        // padding-bottom: 13.5px;
+        margin: 0;
+        padding: 0;
 
-svg.login-diamond {
-    width: 100%;
-    margin-top: -6.5px;
-}
-.divider {
-    margin: 40px 0;
-}
+        strong {
+            color: $color-default-neutral-2;
+        }
+    }
+
+    svg.login-diamond {
+        width: 100%;
+        margin-top: -6.5px;
+    }
+    .divider {
+        margin: 40px 0;
+    }
 
 .form-row.form-row--half {
     margin-top: 1rem;
