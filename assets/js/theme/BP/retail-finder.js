@@ -1302,4 +1302,4 @@ export default class RetailFinder extends PageManager {
         '/request-appointment/?retailerName=' + retailer.retailerName
     }
   }
-}
+};
