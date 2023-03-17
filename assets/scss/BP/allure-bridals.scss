@@ -478,7 +478,24 @@ body {
             ul {
                 li {
                     .blockrow {
-                        background: stencilColor('color-allure-bridals-primary-1');
+                        background: stencilColor('color-allure-bridals-accent-1');
+                
+                        .caption {
+                
+                            .title,
+                            .content {
+                                text-shadow: unset;
+                                color: stencilColor('color-black');
+                            }
+                
+                            .buttonlink {
+                                color: stencilColor('color-black');
+                
+                                &::after {
+                                    @include arrow(stencilColor('color-black'));
+                                }
+                            }
+                        }
                     }
                 }
             }

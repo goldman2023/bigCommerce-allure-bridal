@@ -469,7 +469,24 @@ body {
             ul {
                 li {
                     .blockrow {
-                        background: stencilColor('color-abella-design-primary-1');
+                        background: stencilColor('color-abella-design-accent-1');
+
+                        .caption {
+
+                            .title,
+                            .content {
+                                text-shadow: unset;
+                                color: stencilColor('color-black');
+                            }
+
+                            .buttonlink {
+                                color: stencilColor('color-black');
+
+                                &::after {
+                                    @include arrow(stencilColor('color-black'));
+                                }
+                            }
+                        }
                     }
                 }
             }
