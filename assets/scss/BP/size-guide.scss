@@ -179,6 +179,26 @@
         .tab {
             width: 25%;
         }
+        &.size-2 {
+            .tab {
+                width: 40%;
+                > label { 
+                    @media screen and (max-width: 500px) {
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
+        &.size-3 {
+            .tab {
+                width: 33%;
+                > label { 
+                    @media screen and (max-width: 500px) {
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
     }
 
     .tab > label {
