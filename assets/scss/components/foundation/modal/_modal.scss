@@ -55,7 +55,6 @@
     z-index: zIndex("high");
     top: 25px !important;
     right: 30px !important;
-
     @include breakpoint("medium") {
         font-size: 32px;
         right: 40px !important;
