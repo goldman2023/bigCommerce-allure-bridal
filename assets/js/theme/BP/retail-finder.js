@@ -185,6 +185,8 @@ export default class RetailFinder extends PageManager {
   }
 
   onReady = async () => {
+    $('.on-off-map').prop('checked', true)
+
     const retailerData = await this.getRetailerData()
     this.originalRetailers = [...retailerData]
     this.addSortSelectOptions()
@@ -1302,4 +1304,4 @@ export default class RetailFinder extends PageManager {
         '/request-appointment/?retailerName=' + retailer.retailerName
     }
   }
-};
+}
