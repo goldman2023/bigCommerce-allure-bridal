@@ -111,7 +111,7 @@ export default class DesignerEvents extends PageManager {
             let canRequestAppt = false;
             if (!res.error) {
                 // not sure why it returns an array of one item but /shrug
-                canRequestAppt = res[0].request_appointment;
+                canRequestAppt = res[0].optin;
             }
             return {
                 ...event,
