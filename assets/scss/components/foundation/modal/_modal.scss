@@ -11,6 +11,7 @@
   max-width: 95%;
   min-height: 240px;
   outline: none;
+  overflow: hidden;
   padding: 0;
   top: 50% !important;
   transform: translate(-50%, -50%);
@@ -21,7 +22,7 @@
 }
 
 .modal--large {
-  @include breakpoint('large') {
+  @include breakpoint("large") {
     width: $modal-width--large;
   }
 }
@@ -32,11 +33,11 @@
 }
 
 .modal-header-title {
-  font-size: fontSize('large');
+  font-size: fontSize("large");
   text-align: center;
 
-  @include breakpoint('medium') {
-    font-size: fontSize('larger');
+  @include breakpoint("medium") {
+    font-size: fontSize("larger");
   }
 }
 
@@ -44,23 +45,24 @@
   @include square($reveal-close-height);
 
   @include addFocusTooltip;
-  color: stencilColor('icon-color');
+  color: stencilColor("icon-color");
   font-size: 26px;
   line-height: remCalc($reveal-close-height);
   padding: 0;
   position: absolute;
   text-align: center;
   text-decoration: none;
-  z-index: zIndex('high');
+  z-index: zIndex("high");
   top: 25px !important;
   right: 30px !important;
-  @include breakpoint('medium') {
+
+  @include breakpoint("medium") {
     font-size: 32px;
     right: 40px !important;
   }
 
   &:hover {
-    color: stencilColor('icon-color-hover');
+    color: stencilColor("icon-color-hover");
   }
 
   &::before {
