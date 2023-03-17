@@ -11,6 +11,9 @@ $inter: stencilFontFamily('default-font-regular');
 .login {
     display: flex;
     flex-direction: column;
+    .alertBox .close {
+        z-index: 0;
+    }
 }
 
 .account-login {
