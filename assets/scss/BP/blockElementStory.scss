@@ -407,7 +407,6 @@
                 color: stencilColor("color-allure-bridals-primary-1");
                 position: relative;
                 font-size: 50px;
-                font-family: stencilFontFamily('silhouette-font');
                 @include breakpoint("small") { 
                     &::before {
                         position: absolute;
