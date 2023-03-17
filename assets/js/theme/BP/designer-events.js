@@ -28,7 +28,7 @@ const FILTER_IDS = {
     distance: 'distanceFilterSelect',
 };
 
-const DEFAULT_ZOOM_LEVEL = 2;
+const DEFAULT_ZOOM_LEVEL = 3;
 const LOCATION_CHANGE_ZOOM_LEVEL = 8;
 const HOVER_DEFAULT_ZOOM_LEVEL = 10;
 
@@ -88,8 +88,11 @@ export default class DesignerEvents extends PageManager {
     };
 
     checkEventCanRequestAppt = async (event) => {
-        const checkUrl = 'https://allure-integration.azurewebsites.net/leads/stage/verify';
-        // TODO move to config.json
+        // if we've already called it, dont re-request
+        if (event.hasOwnProperty('canRequestAppt')) {
+            return event;
+        }
+        const checkUrl = this.context.checkRetailerAcceptsAppointmentsUrl || 'https://allure-integration.azurewebsites.net/leads/stage/verify';
         const checkReq = await fetch(
             checkUrl,
             {
@@ -108,7 +111,7 @@ export default class DesignerEvents extends PageManager {
             let canRequestAppt = false;
             if (!res.error) {
                 // not sure why it returns an array of one item but /shrug
-                canRequestAppt = res[0].request_appointment;
+                canRequestAppt = res[0].optin;
             }
             return {
                 ...event,
@@ -285,10 +288,13 @@ export default class DesignerEvents extends PageManager {
         const otherFiltersToggle = document.getElementById('otherFiltersToggle');
         otherFiltersToggle.addEventListener('click', () => {
             const otherFilters = document.getElementById('otherFilters');
+            const otherFiltersToggleLabel = otherFiltersToggle.getElementsByClassName('filter-label')[0];
             if (otherFilters.style.display === 'none' || !otherFilters.style.display) {
                 otherFilters.style.display = 'block';
+                otherFiltersToggleLabel.innerHTML = 'HIDE FILTERS';
             } else {
                 otherFilters.style.display = 'none';
+                otherFiltersToggleLabel.innerHTML = 'SHOW FILTERS';
             }
         });
 
@@ -645,7 +651,7 @@ export default class DesignerEvents extends PageManager {
         this.map = new google.maps.Map(document.getElementById('map'), {
             // arbitrarily center the map
             zoom: DEFAULT_ZOOM_LEVEL,
-            center: { lat: 36, lng: -60 }
+            center: { lat: 50, lng: -60 }
         });
     };
 
