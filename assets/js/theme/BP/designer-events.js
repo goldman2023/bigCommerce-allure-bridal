@@ -578,10 +578,13 @@ export default class DesignerEvents extends PageManager {
 
     updateFilters = (events) => {
         const otherFiltersToggle = document.getElementById('otherFiltersToggle');
+        const sortBy = document.getElementById('sortFilter');
         if (events.length) {
             otherFiltersToggle.style.display = 'flex';
+            sortBy.style.display = 'flex';
         } else {
             otherFiltersToggle.style.display = 'none';
+            sortBy.style.display = 'none';
         }
         this.createCollectionListItems(events);
     }
