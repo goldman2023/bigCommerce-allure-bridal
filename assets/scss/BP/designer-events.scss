@@ -135,9 +135,10 @@
 
                     .sort-filter {
                         cursor: pointer;
-                        display: flex;
+                        display: none;
                         align-items: center;
-                        width: 50%;
+                        flex: 65%;
+                        margin-right: 10px;
 
                         .sort-filter-label {
                             width: 30%;
@@ -163,6 +164,7 @@
                         display: none;
                         align-items: center;
                         cursor: pointer;
+                        width: 25%;
 
                         .menu-icon {
                             width: 20px;
@@ -413,7 +415,7 @@
             padding: 0 16px !important;
             overflow: hidden !important;
 
-            .header {
+            .events-header {
                 position: unset;
                 margin-bottom: 30px !important;
                 padding-left: unset;
