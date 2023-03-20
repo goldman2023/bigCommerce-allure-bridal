@@ -169,8 +169,11 @@ export default class RetailFinder extends PageManager {
     this.retailersById = {}
     this.collectionsByRetailers = {}
     this.originalFilters = {
-      distance: 25,
-      collection: ['Allure Bridals'],
+      radius: 25,
+      collections: ['Allure Bridals'],
+      city: '',
+      zip: '',
+      storeName: '',
     }
     this.appliedFilters = {
       ...this.originalFilters,
@@ -186,9 +189,7 @@ export default class RetailFinder extends PageManager {
 
   onReady = async () => {
     $('.on-off-map').prop('checked', true)
-
-    const retailerData = await this.getRetailerData()
-    this.originalRetailers = [...retailerData]
+    this.createFilterElements()
     this.addSortSelectOptions()
     this.addEventHandlers()
     // reference of this
@@ -211,7 +212,7 @@ export default class RetailFinder extends PageManager {
     //filter button by store name
     $('#name-typeahead').on('input', function () {
       const searchTerm = $(this).val().toLowerCase()
-      self.applyFilters('name', searchTerm)
+      self.applyFilters('storeName', searchTerm)
       // self.filterRetailers();
     })
 
@@ -535,7 +536,7 @@ export default class RetailFinder extends PageManager {
 
   applyFilters = (filterType, evt) => {
     switch (filterType) {
-      case 'distance':
+      case 'radius':
         // adjust zoom for convenience in distance changes
         const newZoomLevel = DISTANCE_TO_ZOOMLEVELS[evt.target.value]
         this.appliedFilters[filterType] = evt.target.value
@@ -545,10 +546,10 @@ export default class RetailFinder extends PageManager {
           this.map.setZoom(DEFAULT_ZOOM_LEVEL)
         }
         break
-      case 'collection':
+      case 'collections':
         this.appliedFilters[filterType] = evt
         break
-      case 'name':
+      case 'storeName':
         this.appliedFilters[filterType] = evt
         break
       default:
@@ -559,6 +560,7 @@ export default class RetailFinder extends PageManager {
   filterRetailers = () => {
     var self = this
     var addr = document.querySelector('.location-typeahead')
+    this.appliedFilters['city'] = addr.value
     // Get geocoder instance
     var geocoder = new google.maps.Geocoder()
 
@@ -567,66 +569,68 @@ export default class RetailFinder extends PageManager {
       {
         address: addr.value,
       },
-      function (results, status) {
+      async function (results, status) {
         if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
           let filteredRetailers = []
-          self.retailers = [...self.originalRetailers]
-          Object.entries(self.appliedFilters).forEach(
-            ([filterName, filterValue]) => {
-              // filter by distance
-              if (filterName === 'distance' && self.selectedPlace) {
-                const selectedLocation = {
-                  lat: self.selectedPlace.geometry.location.lat(),
-                  lon: self.selectedPlace.geometry.location.lng(),
-                }
-                filteredRetailers = self.originalRetailers.filter(
-                  (retailer) => {
-                    let distanceAway = self.getDistanceBtwnTwoPts(
-                      selectedLocation,
-                      retailer.location,
-                    )
-                    retailer.distanceAway = distanceAway
-                    return distanceAway <= filterValue
-                  },
-                )
-              }
-              //filter by collections
-              if (filterName === 'collection') {
-                let temp = filteredRetailers
-                filteredRetailers = temp.filter((dataItem) => {
-                  if (filterValue[0] === 'Show All Collections') {
-                    return (
-                      dataItem.collectionsAvailableCollection.items.filter(
-                        (item) =>
-                          self.originalFilters.collection.includes(
-                            item.collectionName,
-                          ),
-                      ).length > 0
-                    )
-                  } else {
-                    return (
-                      dataItem.collectionsAvailableCollection.items.filter(
-                        (item) => filterValue.includes(item.collectionName),
-                      ).length > 0
-                    )
-                  }
-                })
-              }
-              //filter by name
-              if (filterName === 'name') {
-                let temp = filteredRetailers
-                if (filterValue.length !== 0) {
-                  filteredRetailers = temp.filter((dataItem) => {
-                    return dataItem.retailerName
-                      .toLowerCase()
-                      .includes(filterValue)
-                  })
-                }
-              }
-            },
-          )
+          // self.retailers = [...self.originalRetailers]
+          // Object.entries(self.appliedFilters).forEach(
+          //   ([filterName, filterValue]) => {
+          //     // filter by distance
+          //     if (filterName === 'distance' && self.selectedPlace) {
+          //       const selectedLocation = {
+          //         lat: self.selectedPlace.geometry.location.lat(),
+          //         lon: self.selectedPlace.geometry.location.lng(),
+          //       }
+          //       filteredRetailers = self.originalRetailers.filter(
+          //         (retailer) => {
+          //           let distanceAway = self.getDistanceBtwnTwoPts(
+          //             selectedLocation,
+          //             retailer.location,
+          //           )
+          //           retailer.distanceAway = distanceAway
+          //           return distanceAway <= filterValue
+          //         },
+          //       )
+          //     }
+          //     //filter by collections
+          //     if (filterName === 'collection') {
+          //       let temp = filteredRetailers
+          //       filteredRetailers = temp.filter((dataItem) => {
+          //         if (filterValue[0] === 'Show All Collections') {
+          //           return (
+          //             dataItem.collectionsAvailableCollection.items.filter(
+          //               (item) =>
+          //                 self.originalFilters.collection.includes(
+          //                   item.collectionName,
+          //                 ),
+          //             ).length > 0
+          //           )
+          //         } else {
+          //           return (
+          //             dataItem.collectionsAvailableCollection.items.filter(
+          //               (item) => filterValue.includes(item.collectionName),
+          //             ).length > 0
+          //           )
+          //         }
+          //       })
+          //     }
+          //     //filter by name
+          //     if (filterName === 'name') {
+          //       let temp = filteredRetailers
+          //       if (filterValue.length !== 0) {
+          //         filteredRetailers = temp.filter((dataItem) => {
+          //           return dataItem.retailerName
+          //             .toLowerCase()
+          //             .includes(filterValue)
+          //         })
+          //       }
+          //     }
+          //   },
+          // )
+          const res = await self.getRetailerData(self.appliedFilters)
+          console.log(res)
 
-          self.retailers = filteredRetailers
+          self.retailers = res.retailers
           self.sortRetailers()
           self.paintMapAndRetailers(self.retailers)
           self.updateResultsInfo()
@@ -695,11 +699,11 @@ export default class RetailFinder extends PageManager {
       distanceFilterDropdown.append(distanceOption)
     })
     distanceFilter.append(distanceFilterDropdown)
-    distanceFilterDropdown.value = this.appliedFilters.distance
+    distanceFilterDropdown.value = this.appliedFilters.radius
     distanceContainer.append(distanceFilter)
 
     distanceFilterDropdown.addEventListener('change', (e) =>
-      this.applyFilters('distance', e),
+      this.applyFilters('radius', e),
     )
 
     // reference of this
@@ -785,7 +789,7 @@ export default class RetailFinder extends PageManager {
               .text()
               .trim()
           })
-        self.applyFilters('collection', selectedCollections)
+        self.applyFilters('collections', selectedCollections)
         self.filterRetailers()
       })
 
@@ -809,71 +813,36 @@ export default class RetailFinder extends PageManager {
     resetBtn.addEventListener('click', this.resetFilters)
   }
 
-  setupFilterData = async (rawRetailers) => {
-    const collectionsByRetailers = {}
-    const retailersById = {}
-    rawRetailers.forEach((retailer) => {
-      retailersById[retailer.bridalLiveRetailerId] = retailer
-      retailer.collectionsAvailableCollection.items.forEach((collection) => {
-        if (collection) {
-          const retailersWithCollection =
-            collectionsByRetailers[collection.collectionName] || []
-          retailersWithCollection.push(retailer.id)
-          collectionsByRetailers[
-            collection.collectionName
-          ] = retailersWithCollection
-        }
-      })
-    })
-    this.collectionsByRetailers = collectionsByRetailers
-    this.retailersById = retailersById
-    this.createFilterElements()
-    return rawRetailers
-  }
-
-  getRetailerData = async () => {
-    const query = `
-      query {
-        retailersCollection {
-            items {
-                id
-                retailerName
-                retailerCity
-                website
-                state
-                bridalLiveRetailerId
-                location {
-                    lat
-                    lon
-                }
-                collectionsAvailableCollection {
-                    items {
-                        collectionName
-                        collectionButtonUrl
-                    }
-                }
-                featured
-                disneyPlatinumCollection
-                retailerStreet
-                phoneNumber
-                requestAppointment
-            }
-        }
-    }`
-    const results = await fetch(
-      // this ought to be in config
-      'https://allure-integration.azurewebsites.net/leads',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+  getRetailerData = async (requestData) => {
+    try {
+      const response = await fetch(
+        // this ought to be in config
+        'https://allure-integration.azurewebsites.net/leads/stage',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestData),
         },
-        body: JSON.stringify({ query }),
-      },
-    )
-    const latLoc = await results.json()
-    const retailers = latLoc.data.retailersCollection.items
-    return this.setupFilterData(retailers)
+      )
+
+      const res = await response.json()
+
+      if (!response.ok) {
+        throw new Error(res.error.message)
+      }
+
+      return {
+        flag: true,
+        retailers: res.data.retailersCollection.items,
+      }
+    } catch (error) {
+      return {
+        flag: false,
+        message: error.message,
+      }
+    }
   }
 
   sortRetailers = (evt, override = null) => {
@@ -930,7 +899,6 @@ export default class RetailFinder extends PageManager {
     const markers = retailerData.map((retailer) => {
       const display = `
         ${retailer.retailerName} <br/>
-        ${retailer.distanceAway.toFixed(2)} miles away
       `
       return this.getMarker(
         retailer.location,
