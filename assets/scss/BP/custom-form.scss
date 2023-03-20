@@ -63,7 +63,7 @@
     line-height: 16px !important;
     letter-spacing: 0.05em !important;
     text-transform: uppercase !important;
-    color: #1d1b1b !important;
+    color: stencilColor('color-allure-bridals-neutral-1') !important;
   }
 
   #form
@@ -86,7 +86,7 @@
     font-weight: 400 !important;
     font-size: 12px !important;
     line-height: 20px !important;
-    color: #615d5d !important;
+    color: stencilColor('color-allure-bridals-neutral-2') !important;
     text-transform: capitalize !important;
   }
 
@@ -103,13 +103,13 @@
     input[data-role='i123-input']:not([type='radio']):not([type='checkbox']):not([type='reset']):not([type='hidden']):not([data-no-theme]) {
     height: 45px !important;
     background: #ffffff !important;
-    border: 1px solid #d1b3ab !important;
+    border: 1px solid stencilColor('color-allure-bridals-primary-3') !important;
     font-family: 'Inter' !important;
     font-style: normal;
     font-weight: 400 !important;
     font-size: 12px !important;
     line-height: 15px !important;
-    color: #d1b3ab !important;
+    color: stencilColor('color-allure-bridals-primary-3') !important;
   }
 
   #form
@@ -199,8 +199,8 @@
     #form[data-loader-type='viewer']
     div[data-role='control']:not([data-is-drag-source]):not([data-disabled]):not([data-has-errors])
     div[data-role='i123-input']:not([data-type='file']):not([data-disabled]):not([readonly='readonly']):hover {
-    background: #ffffff !important;
-    border: 1px solid #d1b3ab !important;
+    background: stencilColor('color-secondary') !important;
+    border: 1px solid stencilColor('color-allure-bridals-primary-3') !important;
   }
 
   div[data-field-name='flex-text-4'] h5,
@@ -222,8 +222,8 @@
         letter-spacing: 0.05em;
         top: 8px;
         z-index: 9;
-        color: #1d1b1b;
-        font-family: 'Inter Regular';
+        color: stencilColor('color-allure-bridals-neutral-1');
+        font-family: stencilFontFamily('default-font-regular');
         font-style: normal;
         font-weight: 600;
         font-size: 12px;
@@ -243,12 +243,12 @@
   }
 
   .form-input {
-    border: 1px solid #d1b3ab !important;
+    border: 1px solid stencilColor('color-allure-bridals-primary-3') !important;
     border-radius: 3px;
 
     &:focus,
     &:active {
-      border: 1px solid #615d5d !important;
+      border: 1px solid stencilCollor('color-allure-bridals-neutral-2') !important;
       outline: none !important;
     }
   }
@@ -521,14 +521,14 @@
     }
   }
   .button-white {
-    background: #fff;
-    border: 1px solid #bc8372;
-    color: #bc8372;
+    background: stencilColor('color-secondary');
+    border: 1px solid stencilColor('color-default-primary-1');
+    color: stencilColor('color-default-primary-1');
 
     &:hover {
-      background: #bc8372;
-      color: #fff;
-      border: 1px solid #bc8372;
+      background: stencilColor('color-default-primary-1');
+      color: stencilColor('color-secondary');
+      border: 1px solid stencilColor('color-default-primary-1');
     }
   }
   .thanks {
@@ -547,7 +547,7 @@
   }
 
   .flatpickr-weekday {
-    color: #ac634d;
+    color: stencilColor('color-allure-bridals-primary-1');
     font-weight: 600;
     font-size: 12px;
     line-height: 16px;
@@ -561,8 +561,8 @@
 
   .flatpickr-day {
     &.selected {
-      background: #ac634d;
-      border-color: #ac634d;
+      background: stencilColor('color-allure-bridals-primary-1');
+      border-color: stencilColor('color-allure-bridals-primary-1');
     }
   }
 }
