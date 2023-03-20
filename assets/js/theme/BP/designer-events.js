@@ -28,13 +28,19 @@ const FILTER_IDS = {
     distance: 'distanceFilterSelect',
 };
 
-const DEFAULT_ZOOM_LEVEL = 2;
+const DEFAULT_ZOOM_LEVEL = 3;
 const LOCATION_CHANGE_ZOOM_LEVEL = 8;
 const HOVER_DEFAULT_ZOOM_LEVEL = 10;
 
 const MARKER_HOVER_EVENT = 'markerHoverEvent';
 const RETAILER_ITEM_HOVER_EVENT = 'eventItemHoverEvent';
 
+const SORT_LABELS = {
+    'asc': 'A to Z',
+    'desc': 'Z to A',
+    'nearest': 'Distance: Nearest',
+    'farthest': 'Distance: Farthest'
+}
 
 
 export default class DesignerEvents extends PageManager {
@@ -88,8 +94,11 @@ export default class DesignerEvents extends PageManager {
     };
 
     checkEventCanRequestAppt = async (event) => {
-        const checkUrl = 'https://allure-integration.azurewebsites.net/leads/stage/verify';
-        // TODO move to config.json
+        // if we've already called it, dont re-request
+        if (event.hasOwnProperty('canRequestAppt')) {
+            return event;
+        }
+        const checkUrl = this.context.checkRetailerAcceptsAppointmentsUrl || 'https://allure-integration.azurewebsites.net/leads/stage/verify';
         const checkReq = await fetch(
             checkUrl,
             {
@@ -108,7 +117,7 @@ export default class DesignerEvents extends PageManager {
             let canRequestAppt = false;
             if (!res.error) {
                 // not sure why it returns an array of one item but /shrug
-                canRequestAppt = res[0].request_appointment;
+                canRequestAppt = res[0].optin;
             }
             return {
                 ...event,
@@ -273,22 +282,34 @@ export default class DesignerEvents extends PageManager {
 
         // sort / collection toggles
         const sortToggle = document.getElementById('sortFilter');
-        sortToggle.addEventListener('click', () => {
+        const sortOptions = document.getElementById('sortOptions');
+        sortToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
             const isOpen = sortToggle.classList.contains('open');
             if (isOpen) {
                 sortToggle.classList.remove('open');
+                sortOptions.style.display = 'none';
             } else {
                 sortToggle.classList.add('open');
+                sortOptions.style.display = 'block';
             }
+        });
+        // Allow closing dropdown by clicking anywhere
+        document.body.addEventListener('click', () => {
+            sortToggle.classList.remove('open');
+            sortOptions.style.display = 'none';
         });
 
         const otherFiltersToggle = document.getElementById('otherFiltersToggle');
         otherFiltersToggle.addEventListener('click', () => {
             const otherFilters = document.getElementById('otherFilters');
+            const otherFiltersToggleLabel = otherFiltersToggle.getElementsByClassName('filter-label')[0];
             if (otherFilters.style.display === 'none' || !otherFilters.style.display) {
                 otherFilters.style.display = 'block';
+                otherFiltersToggleLabel.innerHTML = 'HIDE FILTERS';
             } else {
                 otherFilters.style.display = 'none';
+                otherFiltersToggleLabel.innerHTML = 'SHOW FILTERS';
             }
         });
 
@@ -323,12 +344,14 @@ export default class DesignerEvents extends PageManager {
         }
 
         //sorting
-        const sortSelect = document.getElementById('sortSelect');
-        sortSelect.addEventListener('change', (e) => {
-            this.sortBy = e.target.value;
-            const eventsToSort = this.events.length ? this.events : this.eventsFilteredByLocation;
-            this.sortEvents(eventsToSort);
-        });
+        const sortSelect = document.getElementsByName('sortBy');
+        for (const sortOption of sortSelect) {
+            sortOption.addEventListener('change', (e) => {
+                this.sortBy = e.target.value;
+                const eventsToSort = this.events.length ? this.events : this.eventsFilteredByLocation;
+                this.sortEvents(eventsToSort);
+            });
+        }
 
         // // hover events
         document.addEventListener(MARKER_HOVER_EVENT, (evt) => {
@@ -485,6 +508,7 @@ export default class DesignerEvents extends PageManager {
         this.paintEventMapMarkers(events);
         this.addEventInfo(events);
         this.updateFilters(events);
+        this.createCollectionListItems(events);
         if (updateResultText) {
             this.updateResultsInfo(events);
         }
@@ -572,13 +596,19 @@ export default class DesignerEvents extends PageManager {
 
     updateFilters = (events) => {
         const otherFiltersToggle = document.getElementById('otherFiltersToggle');
+        const sortBy = document.getElementById('sortFilter');
         if (events.length) {
             otherFiltersToggle.style.display = 'flex';
+            sortBy.style.display = 'flex';
         } else {
             otherFiltersToggle.style.display = 'none';
+            sortBy.style.display = 'none';
         }
-        this.createCollectionListItems(events);
-    }
+
+        const sortLabelDisplay = SORT_LABELS[this.sortBy];
+        const sortLabel = document.getElementById('selectedSort');
+        sortLabel.innerHTML = sortLabelDisplay;
+    };
 
     updateResultsInfo = (events) => {
         const eventInfoElem = document.getElementById('results-info');
@@ -645,7 +675,7 @@ export default class DesignerEvents extends PageManager {
         this.map = new google.maps.Map(document.getElementById('map'), {
             // arbitrarily center the map
             zoom: DEFAULT_ZOOM_LEVEL,
-            center: { lat: 36, lng: -60 }
+            center: { lat: 50, lng: -60 }
         });
     };
 

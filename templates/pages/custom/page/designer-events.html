@@ -3,7 +3,7 @@
 <section>
     <div class="content">
         <div class="left">
-            <div class="header">
+            <div class="events-header">
                 <div class="header-top">
                     <h2 class="header-title">Designer Events</h2>
                     <div class="map-toggle">
@@ -32,7 +32,7 @@
                             </select>
                         </div>
                         <div class="form-field filter">
-                            <span class="form-label">of</span>
+                            <span class="form-label">CITY OR ZIP CODE</span>
                             <div id="pac-container">
                                 <input class="form-input location-typeahead selector-dropdown" type="text"
                                     id="locationTypeahead" />
@@ -52,12 +52,36 @@
                 <div class="result-filters">
                     <div class="sort-filter" id="sortFilter">
                         <span class="sort-filter-label">SORT BY:</span>
-                        <select id="sortSelect">
+                        <div class="sort-dropdown" id="sortOptions">
+                            <ul>
+                                <li>
+                                    <input type="radio" name="sortBy" value="asc" id="asc" checked="checked" />
+                                    <label for="asc">A to Z</label>
+                                </li>
+
+                                <li>
+                                    <input type="radio" name="sortBy" value="desc" id="desc" />
+                                    <label for="desc">Z to A</label>
+                                </li>
+
+                                <li>
+                                    <input type="radio" name="sortBy" value="nearest" id="nearest" />
+                                    <label for="nearest">Distance: Nearest</label>
+                                </li>
+
+                                <li>
+                                    <input type="radio" name="sortBy" value="farthest" id="farthest" />
+                                    <label for="farthest">Distance: Farthest</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <span class="selected-sort" id="selectedSort"></span>
+                        <!-- <select id="sortSelect">
                             <option value="asc">A to Z</option>
                             <option value="desc">Z to A</option>
                             <option value="nearest">Distance: Nearest</option>
                             <option value="farthest">Distance: Farthest</option>
-                        </select>
+                        </select> -->
                     </div>
                     <div class="other-filters-toggle" id="otherFiltersToggle">
                         <svg class="menu-icon">

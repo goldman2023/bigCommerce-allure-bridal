@@ -65,7 +65,7 @@
             font-family: "Calton Elegance Script";
             font-style: normal;
             font-weight: 500;
-            src: url("{{cdn 'webdav:fonts//Calton-Elegance-Sans-Italic.otf'}}");
+            src: url("{{cdn 'webdav:fonts//CaltonEleganceScript.otf'}}");
         }
 
         @font-face {
@@ -109,6 +109,7 @@
             font-weight: 500;
             src: url("{{cdn 'webdav:fonts//Corinthia-Regular.ttf'}}");
         }
+
         @font-face {
             font-family: "Silhouette Aesthetic Calligraphy";
             font-style: normal;
@@ -141,6 +142,7 @@
     {{{stylesheet '/assets/css/theme.css'}}}
 
     {{{head.scripts}}}
+    {{~inject 'checkRetailerAcceptsAppointmentsUrl' theme_settings.check_retailer_accepts_appointments_url}}
     {{~inject 'googleApiToken' theme_settings.google_api_token}}
     {{~inject 'ipstackAccessToken' theme_settings.ipstack_access_token}}
     {{~inject 'workatoApiPath' theme_settings.workato_api_path}}

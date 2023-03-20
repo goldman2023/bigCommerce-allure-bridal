@@ -8,7 +8,7 @@
     max-width: 91.71429rem;
     width: 100%;
     margin: auto;
-    
+
     .custombread {
         display: none;
     }
@@ -49,11 +49,11 @@
             }
 
 
-            .header {
+            .events-header {
                 flex-wrap: wrap;
                 margin-bottom: 50px;
                 border-bottom: unset;
-                
+
 
                 .header-top {
                     display: flex;
@@ -134,35 +134,110 @@
                     border-bottom: 1px solid stencilColor('color-men-design-primary-2');
 
                     .sort-filter {
+                        position: relative;
                         cursor: pointer;
-                        display: flex;
+                        display: none;
                         align-items: center;
-                        width: 50%;
+                        flex: 65%;
+                        margin-right: 10px;
 
-                        .sort-filter-label {
-                            width: 30%;
+                        &:hover {
+                            // lol love our designers
+
+                            .sort-filter-label {
+                                color: stencilColor('color-default-primary-1');
+                            }
+
+                            .selected-sort {
+                                color: stencilColor('color-default-primary-1');
+                            }
+                        }
+
+                        .selected-sort {
                             margin-right: 8px;
                         }
 
-                        &:hover {
-                            color: stencilColor('color-default-primary-1');
+                        .sort-filter-label {
+                            margin-right: 8px;
+
                         }
 
-                        // &::after {
-                        //     content: url('../icons/caret-down.svg');
-                        // }
+                        .sort-dropdown {
+                            display: none;
+                            border: 1px solid stencilColor('allure-bridals-neutral-2');
+                            position: absolute;
+                            padding: 24px 14px;
+                            top: 2rem;
+                            background-color: white;
 
-                        // &.open {
-                        //     &::after {
-                        //         content: url('../icons/caret-up-orange.svg');
-                        //     }
-                        // }
+                            ul {
+                                margin: unset;
+
+                                li {
+
+                                    list-style: none;
+                                    margin-bottom: 12px;
+                                    display: flex;
+                                    align-items: center;
+
+                                    &:last-child {
+                                        margin-bottom: unset;
+                                    }
+
+                                    &:hover {
+                                        color: stencilColor('color-default-primary-1');
+                                    }
+
+                                    input[type='radio'] {
+                                        margin-right: 9px;
+                                    }
+
+                                    input[type='radio']:after {
+                                        width: 12px;
+                                        height: 12px;
+                                        border-radius: 12px;
+                                        top: -1.5px;
+                                        position: relative;
+                                        background-color: white;
+                                        content: '';
+                                        display: inline-block;
+                                        visibility: visible;
+                                        border: 1px solid stencilColor('color-default-primary-1');
+                                    }
+
+                                    input[type='radio']:checked:after {
+                                        width: 12px;
+                                        height: 12px;
+                                        border-radius: 12px;
+                                        top: -1.5px;
+                                        position: relative;
+                                        background-color: white;
+                                        content: '';
+                                        display: inline-block;
+                                        visibility: visible;
+                                        border: 3.5px solid stencilColor('color-default-primary-1');
+                                    }
+                                }
+                            }
+                        }
+
+
+                        &::after {
+                            content: url('../icons/caret-down.svg');
+                        }
+
+                        &.open {
+                            &::after {
+                                content: url('../icons/caret-up.svg');
+                            }
+                        }
                     }
 
                     .other-filters-toggle {
                         display: none;
                         align-items: center;
                         cursor: pointer;
+                        width: 25%;
 
                         .menu-icon {
                             width: 20px;
@@ -216,7 +291,7 @@
                         }
 
                         .event-title {
-                            font-family: 'Prata';
+                            font-family: stencilFontFamily('prata-font');
                             font-weight: 400;
                             font-size: 22px;
                             line-height: 30px;
@@ -395,7 +470,7 @@
     .pages-custom-page-designer-events {
         max-width: 100rem;
     }
-}  
+}
 
 // mobile overrides
 @media (max-width: '900px') {
@@ -413,7 +488,7 @@
             padding: 0 16px !important;
             overflow: hidden !important;
 
-            .header {
+            .events-header {
                 position: unset;
                 margin-bottom: 30px !important;
                 padding-left: unset;
@@ -433,7 +508,7 @@
                     display: block !important;
 
                     .toggle-label {
-                        font-family: 'Inter Regular';
+                        font-family: stencilFontFamily('font-men-design-body');
                         font-style: normal;
                         font-weight: 500;
                         font-size: 12px;
@@ -569,6 +644,10 @@
         .modal-close {
             display: none;
         }
+    }
+
+    .content-left {
+        display: none;
     }
 }
 
@@ -782,7 +861,7 @@
 
 .header-title {
     font-weight: 400;
-    font-family: 'Prata';
+    font-family: stencilFontFamily('prata-font');
     font-style: normal;
     font-size: 22px;
     line-height: 30px;
@@ -803,7 +882,7 @@
 //    }
 //}
 
-@media (min-width: 1261px) {
+@include breakpoint("large") {
     .modal--large {
         max-width: 900px !important;
     }

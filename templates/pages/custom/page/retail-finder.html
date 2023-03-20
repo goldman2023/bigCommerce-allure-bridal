@@ -9,7 +9,7 @@
           {{lang 'retail_finder.toggle_map_label'}}
         </label>
         <label class="switch">
-          <input type="checkbox" class="on-off-map"/>
+          <input type="checkbox" class="on-off-map" />
           <span class="slider round"></span>
         </label>
       </div>
@@ -31,8 +31,16 @@
             </div>
           </div>
         </div>
-        <div class="filter-button-container" id="filterButton"></div>
-        <div class="reset-button-container" id="resetButton"></div>
+        <div class="filter-button-container">
+          <button id="filterButton" class="button" type="button" disabled>
+            SEARCH
+          </button>
+        </div>
+        <div class="reset-button-container">
+          <button id="resetButton" class="link-button" type="button">
+            CLEAR SEARCH
+          </button>
+        </div>
       </div>
       <div class="available-retailers">
         <div class="top">
