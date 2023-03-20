@@ -26,7 +26,7 @@ const MAP_MARKER_ORANGE = {
 // object keys for filter ids must correspond to
 // original/applied filter instance properties
 const FILTER_IDS = {
-  distance: 'distanceFilterSelect',
+  radius: 'distanceFilterSelect',
   // collection: 'collectionFilterSelect',
   locationOrcode: 'location-typeahead',
 }
@@ -170,7 +170,7 @@ export default class RetailFinder extends PageManager {
     this.collectionsByRetailers = {}
     this.originalFilters = {
       radius: 25,
-      collections: ['Allure Bridals'],
+      collections: [],
       city: '',
       zip: '',
       storeName: '',
@@ -241,8 +241,7 @@ export default class RetailFinder extends PageManager {
       locationTypeahead,
       { types: ['(regions)'] },
     )
-    const submitBtnContainer = document.getElementById('filterButton')
-    const submitBtn = submitBtnContainer.querySelector('button')
+    const submitBtn = document.getElementById('filterButton')
     // hacking a switch to know whether or not we should filter on first page load
     // we cant put it after this call b/c the event handler is what sets the
     // the google places input look up and runs async..
@@ -270,7 +269,10 @@ export default class RetailFinder extends PageManager {
           lng: place.geometry.location.lng(),
         })
         this.map?.setZoom(DEFAULT_ZOOM_LEVEL)
-        this.selectedPlace = place
+        this.selectedPlace = {
+          lat: place.geometry.location.lat(),
+          lon: place.geometry.location.lng(),
+        }
         if (needsInitialFilter) {
           // commenting this function to disable the results on input change
           //this.filterRetailers();
@@ -375,7 +377,10 @@ export default class RetailFinder extends PageManager {
     distanceDirection.classList.add('retailer-distanceDirection')
     const distance = document.createElement('span')
     distance.classList.add('retailer-distance')
-    distance.innerText = parseInt(`${retailer.distanceAway}`) + ` miles`
+    distance.innerText =
+      parseInt(
+        `${this.getDistanceBtwnTwoPts(this.selectedPlace, retailer.location)}`,
+      ) + ` miles`
     distanceDirection.append(distance)
 
     const directions = document.createElement('a')
@@ -539,7 +544,7 @@ export default class RetailFinder extends PageManager {
       case 'radius':
         // adjust zoom for convenience in distance changes
         const newZoomLevel = DISTANCE_TO_ZOOMLEVELS[evt.target.value]
-        this.appliedFilters[filterType] = evt.target.value
+        this.appliedFilters[filterType] = Number(evt.target.value)
         if (newZoomLevel) {
           this.map.setZoom(newZoomLevel)
         } else {
@@ -570,69 +575,23 @@ export default class RetailFinder extends PageManager {
         address: addr.value,
       },
       async function (results, status) {
-        if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
-          let filteredRetailers = []
-          // self.retailers = [...self.originalRetailers]
-          // Object.entries(self.appliedFilters).forEach(
-          //   ([filterName, filterValue]) => {
-          //     // filter by distance
-          //     if (filterName === 'distance' && self.selectedPlace) {
-          //       const selectedLocation = {
-          //         lat: self.selectedPlace.geometry.location.lat(),
-          //         lon: self.selectedPlace.geometry.location.lng(),
-          //       }
-          //       filteredRetailers = self.originalRetailers.filter(
-          //         (retailer) => {
-          //           let distanceAway = self.getDistanceBtwnTwoPts(
-          //             selectedLocation,
-          //             retailer.location,
-          //           )
-          //           retailer.distanceAway = distanceAway
-          //           return distanceAway <= filterValue
-          //         },
-          //       )
-          //     }
-          //     //filter by collections
-          //     if (filterName === 'collection') {
-          //       let temp = filteredRetailers
-          //       filteredRetailers = temp.filter((dataItem) => {
-          //         if (filterValue[0] === 'Show All Collections') {
-          //           return (
-          //             dataItem.collectionsAvailableCollection.items.filter(
-          //               (item) =>
-          //                 self.originalFilters.collection.includes(
-          //                   item.collectionName,
-          //                 ),
-          //             ).length > 0
-          //           )
-          //         } else {
-          //           return (
-          //             dataItem.collectionsAvailableCollection.items.filter(
-          //               (item) => filterValue.includes(item.collectionName),
-          //             ).length > 0
-          //           )
-          //         }
-          //       })
-          //     }
-          //     //filter by name
-          //     if (filterName === 'name') {
-          //       let temp = filteredRetailers
-          //       if (filterValue.length !== 0) {
-          //         filteredRetailers = temp.filter((dataItem) => {
-          //           return dataItem.retailerName
-          //             .toLowerCase()
-          //             .includes(filterValue)
-          //         })
-          //       }
-          //     }
-          //   },
-          // )
-          const res = await self.getRetailerData(self.appliedFilters)
-          console.log(res)
+        const res = await self.getRetailerData(self.appliedFilters)
 
-          self.retailers = res.retailers
+        if (
+          status === google.maps.GeocoderStatus.OK &&
+          results.length > 0 &&
+          res.flag &&
+          self.appliedFilters.collections.length
+        ) {
+          if (self.appliedFilters.collections.length === TEMPDATA.length) {
+            self.retailers = res.retailers.filter(
+              (item) => item.Product_Type === 'Bridal',
+            )
+            console.log(self.retailers)
+          } else {
+            self.retailers = res.retailers
+          }
           self.sortRetailers()
-          self.paintMapAndRetailers(self.retailers)
           self.updateResultsInfo()
         } else {
           // show an error if it's not
@@ -643,7 +602,9 @@ export default class RetailFinder extends PageManager {
             'retail-finder-results',
           )
           retailFinderResults.innerHTML = ''
+          self.retailers = []
         }
+        self.paintMapAndRetailers(self.retailers)
       },
     )
   }
@@ -689,7 +650,7 @@ export default class RetailFinder extends PageManager {
     distanceFilterLabel.innerText = 'Within'
     distanceFilter.append(distanceFilterLabel)
     const distanceFilterDropdown = document.createElement('select')
-    distanceFilterDropdown.id = FILTER_IDS.distance
+    distanceFilterDropdown.id = FILTER_IDS.radius
     distanceFilterDropdown.classList.add('form-select')
     distanceFilterDropdown.classList.add('selector-dropdown')
     ;[10, 25, 50, 100, 250].forEach((distance) => {
@@ -738,6 +699,17 @@ export default class RetailFinder extends PageManager {
           data.instance.uncheck_all()
           data.instance.check_node(initialCollection.id)
         }
+
+        const selectedCollections = $('#collectionFilters')
+          .jstree('get_checked')
+          .map((id) => {
+            return $('#' + id)
+              .text()
+              .trim()
+          })
+        self.applyFilters('collections', selectedCollections)
+
+        // self.applyFilters('collections', selectedCollections)
       })
       .on('select_node.jstree deselect_node.jstree', function (e, data) {
         const checkedNode = $('#collectionFilters').jstree('get_checked')
@@ -795,22 +767,11 @@ export default class RetailFinder extends PageManager {
 
     //submit btn
     const submitBtnContainer = document.getElementById('filterButton')
-    const submitBtn = document.createElement('button')
-    submitBtn.classList.add('button')
-    submitBtn.setAttribute('type', 'button')
-    submitBtn.innerHTML = 'SEARCH'
-    submitBtn.disabled = true
-    submitBtnContainer.append(submitBtn)
-    submitBtn.addEventListener('click', this.filterRetailers)
+    submitBtnContainer.addEventListener('click', this.filterRetailers)
 
     // reset btn
     const resetBtnContainer = document.getElementById('resetButton')
-    const resetBtn = document.createElement('button')
-    resetBtn.classList.add('link-button')
-    resetBtn.setAttribute('type', 'button')
-    resetBtn.innerHTML = 'CLEAR SEARCH'
-    resetBtnContainer.append(resetBtn)
-    resetBtn.addEventListener('click', this.resetFilters)
+    resetBtnContainer.addEventListener('click', this.resetFilters)
   }
 
   getRetailerData = async (requestData) => {
@@ -899,6 +860,10 @@ export default class RetailFinder extends PageManager {
     const markers = retailerData.map((retailer) => {
       const display = `
         ${retailer.retailerName} <br/>
+        ${this.getDistanceBtwnTwoPts(
+          this.selectedPlace,
+          retailer.location,
+        ).toFixed(2)} miles away
       `
       return this.getMarker(
         retailer.location,
