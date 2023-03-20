@@ -585,9 +585,9 @@ export default class RetailFinder extends PageManager {
         ) {
           if (self.appliedFilters.collections.length === TEMPDATA.length) {
             self.retailers = res.retailers.filter(
+              //If selected all, only show product type is Bridal
               (item) => item.Product_Type === 'Bridal',
             )
-            console.log(self.retailers)
           } else {
             self.retailers = res.retailers
           }
