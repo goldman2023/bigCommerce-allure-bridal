@@ -674,5 +674,21 @@ export default class Global extends PageManager {
                 }
             });
         }, 1000);
+
+        //to hide default wishlist Delete button
+        if (window.location.pathname == '/wishlist.php') {
+            $.ajax({
+                type: "GET",
+                url: this.context.urls.account.details,
+                dataType: 'html',
+                success: response => {
+                    const wishlistId = $(response).find("input[data-label='Default Wishlist']").val();
+                    document.querySelector(`.wishlist--${wishlistId}`)?.classList?.add('hide');
+                },
+                error: error => {
+                    console.log(error);
+                }
+            });
+        }
     }
 }

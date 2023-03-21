@@ -1,13 +1,13 @@
 .sizeChart {
     display: none;
-    margin: 10px;
     border: 1px solid #E2E2E2;
-    padding: 15px;
     overflow: scroll;
     height: 90vh;
-    @media screen and (max-width: 500px) {
-        margin: 7.5px;
-        padding: 7.5px;
+    margin: 7.5px;
+    padding: 7.5px;
+    @include breakpoint("small") {
+        margin: 10px;
+        padding: 15px;
     }
     @include breakpoint("medium") {
         padding: 80px;
@@ -179,6 +179,16 @@
         .tab {
             width: 25%;
         }
+        &.size-2 {
+            .tab {
+                width: 40%;
+            }
+        }
+        &.size-3 {
+            .tab {
+                width: 33%;
+            }
+        }
     }
 
     .tab > label {
@@ -188,18 +198,14 @@
         font-family: stencilFontFamily('default-font-bold');
         font-style: normal;
         font-weight: 600;
-        font-size: 7px;
-        line-height: 9px;
+        font-size: 10px;
+        line-height: 15px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
         color: #D9D3D3;
         border-bottom: 1px solid #D9D3D3;
         text-align: center;
         word-wrap: break-word;
-        @media screen and (min-width: 500px) {
-            font-size: 10px;
-            line-height: 15px;
-        }
         @include breakpoint("small") {
             font-size: 12px;
             padding: 12px 15px;
