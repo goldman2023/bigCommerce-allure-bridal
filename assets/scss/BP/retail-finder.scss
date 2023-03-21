@@ -90,12 +90,6 @@
             .retailer-item-container {
               width: 100%;
 
-              // &.bordered {
-              //   border-bottom: 1px solid #C8C6C6;
-              //   padding-bottom: 24px;
-              //   margin-bottom: 30px;
-              // }
-
               .retailer-item {
                 display: flex;
                 padding: 24px;
@@ -107,7 +101,7 @@
 
                 &:hover,
                 &.hovered {
-                  background-color: stencilColor('color-theme-lighter');
+                  background-color: stencilColor("color-allure-bridals-accent-4");
                 }
 
                 &:not(:nth-child(3n)) {
