@@ -19,7 +19,7 @@
     position: absolute;
     top: -1px;
     left: 18px;
-    background: #ffffff !important;
+    background: stencilColor("color-secondary") !important;
     z-index: 1;
     padding: 5px;
     text-transform: uppercase;
@@ -28,10 +28,10 @@
 
   h1,
   h4 {
-    font-family: 'Prata';
+    font-family: stencilFontFamily('prata-font');
     font-style: normal;
     font-weight: 400;
-    color: #000000 !important;
+    color: stencilColor("color-black") !important;
   }
 
   h1 {
@@ -47,23 +47,23 @@
   }
 
   h5 {
-    font-family: 'Inter';
+    font-family: stencilFontFamily('default-font-regular');
     font-style: normal;
     font-weight: 400;
     font-size: 16px !important;
     line-height: 26px !important;
-    color: #615D5D !important;
+    color: stencilColor("color-allure-bridals-neutral-2") !important;
   }
 
   label {
-    font-family: 'Inter' !important;
+    font-family: stencilFontFamily('default-font-regular') !important;
     font-style: normal;
     font-weight: 600 !important;
     font-size: 12px !important;
     line-height: 16px !important;
     letter-spacing: 0.05em !important;
     text-transform: uppercase !important;
-    color: #1D1B1B !important;
+    color: stencilColor('color-allure-bridals-neutral-1') !important;
   }
 
   #form div[data-role="control"]:not([data-is-selected]):not([data-disabled]):not([data-has-errors]) div[data-role="input-container"] {
@@ -75,12 +75,12 @@
   }
 
   #form div[data-role="control"] label[data-role="choice"] span[data-role="option-text"] {
-    font-family: 'Inter' !important;
+    font-family: stencilFontFamily('default-font-regular') !important;
     font-style: normal !important;
     font-weight: 400 !important;
     font-size: 12px !important;
     line-height: 20px !important;
-    color: #615D5D !important;
+    color: stencilColor("color-allure-bridals-neutral-2") !important;
     text-transform: capitalize !important;
   }
 
@@ -90,32 +90,32 @@
   #form div[data-role="control"] div[data-role="i123-input"]:not([data-type="file"]),
   #form div[data-role="control"] input[data-role="i123-input"]:not([type=radio]):not([type=checkbox]):not([type=reset]):not([type=hidden]):not([data-no-theme]) {
     height: 45px !important;
-    background: #FFFFFF !important;
-    border: 1px solid #D1B3AB !important;
-    font-family: 'Inter' !important;
+    background: stencilColor("color-secondary") !important;
+    border: 1px solid stencilColor('color-allure-bridals-primary-3') !important;
+    font-family: stencilFontFamily('default-font-regular') !important;
     font-style: normal;
     font-weight: 400 !important;
     font-size: 12px !important;
     line-height: 15px !important;
-    color: #D1B3AB !important;
+    color: stencilColor('color-allure-bridals-primary-3') !important;
   }
 
   #form div[data-role="control"]:not([data-is-selected]):not([data-disabled]):not([data-has-errors]) input[data-role="i123-input"][type=checkbox]+label {
-    background: #FFFFFF !important;
-    border: 1px solid #BA8476 !important;
+    background: stencilColor("color-secondary") !important;
+    border: 1px solid stecilColor("color-allure-bridals-primary-2") !important;
     border-radius: 3px !important;
   }
 
   #form div[data-role="control"][data-type="check-box"] input[data-role="i123-input"][type=checkbox]:checked+label {
-    background-color: #bc8372 !important;
-    border: 1px solid #bc8372 !important;
-    color: white;
+    background-color: stencilColor("color-default-primary-1") !important;
+    border: 1px solid stencilColor("color-default-primary-1") !important;
+    color: stencilColor("color-secondary");
   }
 
   #form button[data-role="submit"] {
-    background-color: #bc8372 !important;
-    border: 1px solid #bc8372 !important;
-    font-family: 'Inter' !important;
+    background-color: stencilColor("color-default-primary-1") !important;
+    border: 1px solid stencilColor("color-default-primary-1") !important;
+    font-family: stencilFontFamily('default-font-regular') !important;
     font-style: normal;
     text-transform: uppercase !important;
     font-weight: 600 !important;
@@ -125,7 +125,7 @@
   }
 
   #form button[data-role="submit"]::before {
-    border: 1px solid #ffffff;
+    border: 1px solid stencilColor("color-secondary");
     position: absolute;
     display: block;
     content: '';
@@ -146,7 +146,7 @@
     position: absolute;
     top: 7px;
     padding: 2px;
-    background: #fff;
+    background: stencilColor("color-secondary");
     z-index: 9;
     left: 15px;
   }
@@ -160,7 +160,7 @@
   }
 
   #form [data-role=control].button-choices [data-role=input-row] .choice-box__label {
-    box-shadow: 0 2px 4px #ffffff !important;
+    box-shadow: 0 2px 4px stencilColor("color-secondary") !important;
     border: 0 !important;
     border-radius: 0 !important;
     border-width: 0 !important;
@@ -172,15 +172,15 @@
 
   body:not([data-mouse-gesture-type]) #form[data-loader-type="viewer"] div[data-role="control"]:not([data-is-drag-source]):not([data-disabled]):not([data-has-errors]) div[data-role="input-container"]:not([data-disabled]):hover,
   body:not([data-mouse-gesture-type]) #form[data-loader-type="viewer"] div[data-role="control"]:not([data-is-drag-source]):not([data-disabled]):not([data-has-errors]) div[data-role="i123-input"]:not([data-type="file"]):not([data-disabled]):not([readonly="readonly"]):hover {
-    background: #FFFFFF !important;
-    border: 1px solid #D1B3AB !important;
+    background: stencilColor("color-secondary") !important;
+    border: 1px solid stencilColor('color-allure-bridals-primary-3') !important;
   }
 
 
   div[data-field-name="flex-text-4"] h5,
   div[data-field-name="flex-text-3"] h5 {
     min-height: 410px !important;
-    background: #F1E8E7 !important;
+    background: stencilColor("color-allure-bridals-primary-5") !important;
     padding: 20px !important;
   }
 }
@@ -190,16 +190,19 @@
   position: relative;
 }
 
-.pages-custom-retail-submission-form {
+.pages-custom-appointment-submission-form {
   .content {
     .form-field {
       .form-label {
         letter-spacing: 0.05em;
         top: 8px;
-        font-size: 11px;
-        left: 8px;
         z-index: 9;
-
+	      color: stencilColor('color-allure-bridals-neutral-1');
+        font-family: stencilFontFamily('default-font-regular');
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 16px;
         @include breakpoint("medium") {
           font-size: 12px;
           left: 13px;
@@ -215,12 +218,12 @@
   }
 
   .form-input {
-    border: 1px solid #D1B3AB !important;
+    border: 1px solid stencilColor('color-allure-bridals-primary-3') !important;
     border-radius: 3px;
 
     &:focus,
     &:active {
-      border: 1px solid #615D5D !important;
+      border: 1px solid stencilCollor('color-allure-bridals-neutral-2') !important;
       outline: none !important;
     }
   }
@@ -236,6 +239,11 @@
 
   .header-title {
     margin-top: 1rem;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 34px;
   }
 
   .form-field {
@@ -263,8 +271,8 @@
       -webkit-appearance: none;
       appearance: none;
       margin: 0;
-      border: 1px solid #bc8372;
-      background-color: white;
+      border: 1px solid stencilColor("color-default-primary-1");
+      background-color: stencilColor("color-secondary");
       border-radius: 3px;
       width: 1.14286rem;
       height: 1.14286rem;
@@ -283,8 +291,8 @@
       width: 1.14286rem;
       height: 1.14286rem;
       background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z' fill='rgba(255, 255, 255, 0.999)' /%3E%3C/svg%3E");
-      border: 1px solid #bc8372;
-      background-color: #bc8372;
+      border: 1px solid stencilColor("color-default-primary-1");
+      background-color: stencilColor("color-default-primary-1");
       background-size: contain;
       border-radius: 3px;
     }
@@ -313,7 +321,7 @@
 
     /* Neutral/400 */
 
-    color: #615d5d;
+    color: stencilColor("color-allure-bridals-neutral-2");
   }
 
   .form-retail-row {
@@ -347,7 +355,7 @@
     font-style: italic;
     font-size: 11px;
     line-height: 14px;
-    color: #615d5d;
+    color: stencilColor("color-allure-bridals-neutral-2");
     margin-bottom: 1rem;
 
     span {
@@ -398,10 +406,10 @@
 
         &:hover {
           background: #ada093;
-          color: #000;
+          color: stencilColor("color-black");
 
           svg {
-            fill: #000;
+            fill: stencilColor("color-black");
           }
         }
       }
@@ -445,8 +453,8 @@
         font-weight: 700;
 
         &.active {
-          background: #ac634d;
-          color: #fff;
+          background: stencilColor("color-allure-bridals-primary-1");
+          color: stencilColor("color-secondary");
         }
       }
     }
@@ -462,8 +470,8 @@
       font-size: 12px;
 
       &.selected {
-        background: #ac634d;
-        color: #fff;
+        background: stencilColor("color-allure-bridals-primary-1");
+        color: stencilColor("color-secondary");
       }
     }
 
@@ -481,15 +489,15 @@
   }
 
   .button {
-    background: #bc8372;
-    border: 1px solid #bc8372;
-    color: #fff;
+    background: stencilColor("color-default-primary-1");
+    border: 1px solid stencilColor("color-default-primary-1");
+    color: stencilColor("color-secondary");
     width: 140px;
 
     &:hover {
-      background: #fff;
-      color: #bc8372;
-      border: 1px solid #bc8372;
+      background: stencilColor("color-secondary");
+      color: stencilColor("color-default-primary-1");
+      border: 1px solid stencilColor("color-default-primary-1");
     }
   }
 }
@@ -501,7 +509,7 @@
   }
 
   .flatpickr-weekday {
-    color: #AC634D;
+    color: stencilColor('color-allure-bridals-primary-1');
     font-weight: 600;
     font-size: 12px;
     line-height: 16px;
@@ -516,8 +524,8 @@
 
   .flatpickr-day {
     &.selected {
-      background: #AC634D;
-      border-color: #AC634D;
+      background: stencilColor( "color-allure-bridals-primary-1");
+      border-color: stencilColor( "color-allure-bridals-primary-1");
     }
   }
 }
