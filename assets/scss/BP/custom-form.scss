@@ -524,8 +524,8 @@
 
   .flatpickr-day {
     &.selected {
-      background: #AC634D;
-      border-color: #AC634D;
+      background: stencilColor( "color-allure-bridals-primary-1");
+      border-color: stencilColor( "color-allure-bridals-primary-1");
     }
   }
 }
