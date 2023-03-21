@@ -909,6 +909,57 @@ export function events(blockData,page) {
     ${page === 'home' ? `<a href="/designer-events-list/" class="button button--secondary" >View All Designer Events</a>` : ''}
     </div>`;
 }
+export function featuredEvents(context,count) {
+    eventsData(context, response => {
+        if (response !== undefined) {
+            let datastru = response.data.referencedBlockTrunkShowsCollection;
+            var sorteddatastru = datastru.items.sort((a,b) =>  new Date(a.eventStartDate) - new Date(b.eventStartDate));
+            if(count) {
+                sorteddatastru = sorteddatastru.slice(0, count);
+            }
+            document.getElementById('events').innerHTML =  `
+            <h2>Upcoming Designer Events</h2>
+            <div class="eventsGrid">
+                ${sorteddatastru.map((item)=> {
+                    //start date format
+                    let startDate = (item.eventStartDate).split('T');
+                    let startDateObj = new Date(`${startDate[0]}T00:00`);
+                    let startDateFormatted = startDateObj.toLocaleDateString().replaceAll('/', '.');
+                    //end date format
+                    let endDate = (item.eventEndDate).split('T');
+                    let endDateObj = new Date(`${endDate[0]}T00:00`);
+                    let endDateFormatted = endDateObj.toLocaleDateString().replaceAll('/', '.');
+                    return `<div class="eventsCard">
+                    <div class="block">
+                        <div class="imageblock col"><img data-src="${item.eventImage.url}" alt="${item.retailerName}" class="lazyload"/></div>
+                        <div class="contentBlock col">
+                            <h4>${item.retailerName}</h4>
+                            <p class="addressp">${item.location}</p>
+                            <div class="divider"></div>
+                            <label>Date</label>
+                            <p class="colored">
+                                ${startDateFormatted} - ${endDateFormatted}
+                            </p>
+                            <label>Collections</label>
+                            <p class="colored">${item.collectionsAvailable.map((col)=> `${col}`).join(", ")}</p>
+                            <label>address</label>
+                            <span>${item.locationAddressStreet}</span>
+                            <span>${item.locationAddressCityStateZip}</span>
+                            <p><a class="colored" href="http://maps.google.com/?q=${item.locationAddressStreet} ${item.locationAddressCityStateZip}">GET DIRECTIONS</a></p>
+                            <label>Phone</label>
+                            <p>${item.locationPhoneNumber}</p>
+                            <label>website</label>
+                            <a href="${item.locationWebsiteUrl}" target="_blank" class="colored">${item.locationWebsiteUrl}</a>
+                        </div>
+                    </div>
+                    </div>`;
+                }).join('')}
+            </div>
+            <a href="/designer-events-list/" class="button button--secondary" >View All Designer Events</a>
+            `;
+        }
+    });
+}
 export function blockElementFullscreenImage(blockData) {
     let fullImageBlock = `<div class="blockElementFullscreenImage block-item ${(blockData?.contentOrScreenWidth === 'Screen Width') ? 'full-size' : ''}" id="blockElementFullscreenImage"><div class="mainImage">`;
 
