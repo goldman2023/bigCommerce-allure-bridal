@@ -479,10 +479,10 @@ export default class RetailFinder extends PageManager {
           this.map.setZoom(DEFAULT_ZOOM_LEVEL);
         }
         break;
-      case "collection":
+      case "collections":
         this.appliedFilters[filterType] = evt;
         break;
-      case "name":
+      case "storeName":
         this.appliedFilters[filterType] = evt;
         break;
       default:
@@ -530,6 +530,7 @@ export default class RetailFinder extends PageManager {
           retailFinderResults.innerHTML = ''
           self.retailers = []
         }
+        console.log(self.retailers)
         self.paintMapAndRetailers(self.retailers)
       },
     )
@@ -584,10 +585,10 @@ export default class RetailFinder extends PageManager {
       }
     );
     distanceFilter.append(distanceFilterDropdown);
-    distanceFilterDropdown.value = this.appliedFilters.distance;
+    distanceFilterDropdown.value = this.appliedFilters.radius;
     distanceContainer.append(distanceFilter);
 
-    distanceFilterDropdown.addEventListener('change', (e) => this.applyFilters('distance', e));
+    distanceFilterDropdown.addEventListener('change', (e) => this.applyFilters('radius', e));
 
     const self = this;
 
@@ -673,7 +674,7 @@ export default class RetailFinder extends PageManager {
       const selectedCollections = $('#collectionFilters').jstree('get_checked').map((id) => {
         return $('#' + id).text().trim();
       });
-      self.applyFilters('collection', selectedCollections);
+      self.applyFilters('collections', selectedCollections);
       self.filterRetailers();
     });
 
