@@ -11,15 +11,15 @@
     padding: 0 !important;
   }
 
-  [data-role='container'] {
+  [data-role="container"] {
     position: relative;
   }
 
-  [data-role='label'] {
+  [data-role="label"] {
     position: absolute;
     top: -1px;
     left: 18px;
-    background: #ffffff !important;
+    background: stencilColor("color-secondary") !important;
     z-index: 1;
     padding: 5px;
     text-transform: uppercase;
@@ -28,10 +28,10 @@
 
   h1,
   h4 {
-    font-family: 'Prata';
+    font-family: stencilFontFamily('prata-font');
     font-style: normal;
     font-weight: 400;
-    color: #000000 !important;
+    color: stencilColor("color-black") !important;
   }
 
   h1 {
@@ -47,16 +47,16 @@
   }
 
   h5 {
-    font-family: 'Inter';
+    font-family: stencilFontFamily('default-font-regular');
     font-style: normal;
     font-weight: 400;
     font-size: 16px !important;
     line-height: 26px !important;
-    color: #615d5d !important;
+    color: stencilColor("color-allure-bridals-neutral-2") !important;
   }
 
   label {
-    font-family: 'Inter' !important;
+    font-family: stencilFontFamily('default-font-regular') !important;
     font-style: normal;
     font-weight: 600 !important;
     font-size: 12px !important;
@@ -66,45 +66,33 @@
     color: stencilColor('color-allure-bridals-neutral-1') !important;
   }
 
-  #form
-    div[data-role='control']:not([data-is-selected]):not([data-disabled]):not([data-has-errors])
-    div[data-role='input-container'] {
+  #form div[data-role="control"]:not([data-is-selected]):not([data-disabled]):not([data-has-errors]) div[data-role="input-container"] {
     border-color: transparent !important;
   }
 
-  div[data-ui-role='ui-element'][data-type='dropdown']
-    > div[data-role='dropdown-skin'] {
+  div[data-ui-role="ui-element"][data-type="dropdown"]>div[data-role="dropdown-skin"] {
     top: 63% !important;
   }
 
-  #form
-    div[data-role='control']
-    label[data-role='choice']
-    span[data-role='option-text'] {
-    font-family: 'Inter' !important;
+  #form div[data-role="control"] label[data-role="choice"] span[data-role="option-text"] {
+    font-family: stencilFontFamily('default-font-regular') !important;
     font-style: normal !important;
     font-weight: 400 !important;
     font-size: 12px !important;
     line-height: 20px !important;
-    color: stencilColor('color-allure-bridals-neutral-2') !important;
+    color: stencilColor("color-allure-bridals-neutral-2") !important;
     text-transform: capitalize !important;
   }
 
-  #form
-    div[data-role='control']
-    div[data-ui-role='ui-element']:not([type='file']),
-  #form div[data-role='control'] div[data-role='input-container'] input,
-  div[data-ui-role='ui-element'][data-type='dropdown'] > select,
-  #form
-    div[data-role='control']
-    div[data-role='i123-input']:not([data-type='file']),
-  #form
-    div[data-role='control']
-    input[data-role='i123-input']:not([type='radio']):not([type='checkbox']):not([type='reset']):not([type='hidden']):not([data-no-theme]) {
+  #form div[data-role="control"] div[data-ui-role="ui-element"]:not([type=file]),
+  #form div[data-role="control"] div[data-role="input-container"] input,
+  div[data-ui-role="ui-element"][data-type="dropdown"]>select,
+  #form div[data-role="control"] div[data-role="i123-input"]:not([data-type="file"]),
+  #form div[data-role="control"] input[data-role="i123-input"]:not([type=radio]):not([type=checkbox]):not([type=reset]):not([type=hidden]):not([data-no-theme]) {
     height: 45px !important;
-    background: #ffffff !important;
+    background: stencilColor("color-secondary") !important;
     border: 1px solid stencilColor('color-allure-bridals-primary-3') !important;
-    font-family: 'Inter' !important;
+    font-family: stencilFontFamily('default-font-regular') !important;
     font-style: normal;
     font-weight: 400 !important;
     font-size: 12px !important;
@@ -112,28 +100,22 @@
     color: stencilColor('color-allure-bridals-primary-3') !important;
   }
 
-  #form
-    div[data-role='control']:not([data-is-selected]):not([data-disabled]):not([data-has-errors])
-    input[data-role='i123-input'][type='checkbox']
-    + label {
-    background: #ffffff !important;
-    border: 1px solid #ba8476 !important;
+  #form div[data-role="control"]:not([data-is-selected]):not([data-disabled]):not([data-has-errors]) input[data-role="i123-input"][type=checkbox]+label {
+    background: stencilColor("color-secondary") !important;
+    border: 1px solid stecilColor("color-allure-bridals-primary-2") !important;
     border-radius: 3px !important;
   }
 
-  #form
-    div[data-role='control'][data-type='check-box']
-    input[data-role='i123-input'][type='checkbox']:checked
-    + label {
-    background-color: #bc8372 !important;
-    border: 1px solid #bc8372 !important;
-    color: white;
+  #form div[data-role="control"][data-type="check-box"] input[data-role="i123-input"][type=checkbox]:checked+label {
+    background-color: stencilColor("color-default-primary-1") !important;
+    border: 1px solid stencilColor("color-default-primary-1") !important;
+    color: stencilColor("color-secondary");
   }
 
-  #form button[data-role='submit'] {
-    background-color: #bc8372 !important;
-    border: 1px solid #bc8372 !important;
-    font-family: 'Inter' !important;
+  #form button[data-role="submit"] {
+    background-color: stencilColor("color-default-primary-1") !important;
+    border: 1px solid stencilColor("color-default-primary-1") !important;
+    font-family: stencilFontFamily('default-font-regular') !important;
     font-style: normal;
     text-transform: uppercase !important;
     font-weight: 600 !important;
@@ -142,8 +124,8 @@
     letter-spacing: 0.1em !important;
   }
 
-  #form button[data-role='submit']::before {
-    border: 1px solid #ffffff;
+  #form button[data-role="submit"]::before {
+    border: 1px solid stencilColor("color-secondary");
     position: absolute;
     display: block;
     content: '';
@@ -160,16 +142,16 @@
     margin: auto;
   }
 
-  #form div[data-role='control'] label[data-role='label'] {
+  #form div[data-role="control"] label[data-role="label"] {
     position: absolute;
     top: 7px;
     padding: 2px;
-    background: #fff;
+    background: stencilColor("color-secondary");
     z-index: 9;
     left: 15px;
   }
 
-  #form [data-role='page'][data-num-children]:not([data-num-children='0']) {
+  #form [data-role="page"][data-num-children]:not([data-num-children="0"]) {
     margin: 0 auto 40px auto !important;
   }
 
@@ -177,11 +159,8 @@
     padding-top: 0 !important;
   }
 
-  #form
-    [data-role='control'].button-choices
-    [data-role='input-row']
-    .choice-box__label {
-    box-shadow: 0 2px 4px #ffffff !important;
+  #form [data-role=control].button-choices [data-role=input-row] .choice-box__label {
+    box-shadow: 0 2px 4px stencilColor("color-secondary") !important;
     border: 0 !important;
     border-radius: 0 !important;
     border-width: 0 !important;
@@ -191,44 +170,40 @@
     width: 300px !important;
   }
 
-  body:not([data-mouse-gesture-type])
-    #form[data-loader-type='viewer']
-    div[data-role='control']:not([data-is-drag-source]):not([data-disabled]):not([data-has-errors])
-    div[data-role='input-container']:not([data-disabled]):hover,
-  body:not([data-mouse-gesture-type])
-    #form[data-loader-type='viewer']
-    div[data-role='control']:not([data-is-drag-source]):not([data-disabled]):not([data-has-errors])
-    div[data-role='i123-input']:not([data-type='file']):not([data-disabled]):not([readonly='readonly']):hover {
-    background: stencilColor('color-secondary') !important;
+  body:not([data-mouse-gesture-type]) #form[data-loader-type="viewer"] div[data-role="control"]:not([data-is-drag-source]):not([data-disabled]):not([data-has-errors]) div[data-role="input-container"]:not([data-disabled]):hover,
+  body:not([data-mouse-gesture-type]) #form[data-loader-type="viewer"] div[data-role="control"]:not([data-is-drag-source]):not([data-disabled]):not([data-has-errors]) div[data-role="i123-input"]:not([data-type="file"]):not([data-disabled]):not([readonly="readonly"]):hover {
+    background: stencilColor("color-secondary") !important;
     border: 1px solid stencilColor('color-allure-bridals-primary-3') !important;
   }
 
-  div[data-field-name='flex-text-4'] h5,
-  div[data-field-name='flex-text-3'] h5 {
+
+  div[data-field-name="flex-text-4"] h5,
+  div[data-field-name="flex-text-3"] h5 {
     min-height: 410px !important;
-    background: #f1e8e7 !important;
+    background: stencilColor("color-allure-bridals-primary-5") !important;
     padding: 20px !important;
   }
 }
 
 .has-activeNavPages {
+
   position: relative;
 }
 
-.pages-custom-appointment-submission-form {
+.pages-custom-retail-submission-form {
   .content {
     .form-field {
       .form-label {
         letter-spacing: 0.05em;
         top: 8px;
         z-index: 9;
-        color: stencilColor('color-allure-bridals-neutral-1');
+	color: stencilColor('color-allure-bridals-neutral-1');
         font-family: stencilFontFamily('default-font-regular');
         font-style: normal;
         font-weight: 600;
         font-size: 12px;
         line-height: 16px;
-        @include breakpoint('medium') {
+        @include breakpoint("medium") {
           font-size: 12px;
           left: 13px;
         }
@@ -296,8 +271,8 @@
       -webkit-appearance: none;
       appearance: none;
       margin: 0;
-      border: 1px solid #bc8372;
-      background-color: white;
+      border: 1px solid stencilColor("color-default-primary-1");
+      background-color: stencilColor("color-secondary");
       border-radius: 3px;
       width: 1.14286rem;
       height: 1.14286rem;
@@ -316,8 +291,8 @@
       width: 1.14286rem;
       height: 1.14286rem;
       background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z' fill='rgba(255, 255, 255, 0.999)' /%3E%3C/svg%3E");
-      border: 1px solid #bc8372;
-      background-color: #bc8372;
+      border: 1px solid stencilColor("color-default-primary-1");
+      background-color: stencilColor("color-default-primary-1");
       background-size: contain;
       border-radius: 3px;
     }
@@ -328,7 +303,7 @@
     }
   }
 
-  .checkbox-field label[for='register_pass-news-terms'] a {
+  .checkbox-field label[for="register_pass-news-terms"] a {
     text-decoration: none;
     color: inherit;
   }
@@ -346,7 +321,7 @@
 
     /* Neutral/400 */
 
-    color: #615d5d;
+    color: stencilColor("color-allure-bridals-neutral-2");
   }
 
   .form-retail-row {
@@ -356,7 +331,7 @@
     justify-content: unset;
     align-items: unset;
 
-    @include breakpoint('medium') {
+    @include breakpoint("medium") {
       flex-flow: row;
       gap: 20px;
     }
@@ -367,9 +342,12 @@
     display: flex;
     flex-flow: column;
 
-    @include breakpoint('medium') {
+    @include breakpoint("medium") {
+
       flex-flow: row;
       gap: 20px;
+
+
     }
   }
 
@@ -377,7 +355,7 @@
     font-style: italic;
     font-size: 11px;
     line-height: 14px;
-    color: #615d5d;
+    color: stencilColor("color-allure-bridals-neutral-2");
     margin-bottom: 1rem;
 
     span {
@@ -428,10 +406,10 @@
 
         &:hover {
           background: #ada093;
-          color: #000;
+          color: stencilColor("color-black");
 
           svg {
-            fill: #000;
+            fill: stencilColor("color-black");
           }
         }
       }
@@ -448,14 +426,14 @@
       display: flex;
       gap: 10px;
 
-      > div {
+      >div {
         flex: 1;
       }
 
       @media screen and (max-width: 768px) {
         flex-direction: column;
 
-        > div {
+        >div {
           flex: unset;
         }
       }
@@ -475,8 +453,8 @@
         font-weight: 700;
 
         &.active {
-          background: #ac634d;
-          color: #fff;
+          background: stencilColor("color-allure-bridals-primary-1");
+          color: stencilColor("color-secondary");
         }
       }
     }
@@ -492,13 +470,13 @@
       font-size: 12px;
 
       &.selected {
-        background: #ac634d;
-        color: #fff;
+        background: stencilColor("color-allure-bridals-primary-1");
+        color: stencilColor("color-secondary");
       }
     }
 
-    .dayContainer > .flatpickr-day:nth-child(7n),
-    .dayContainer > .flatpickr-day:nth-child(7n-6) {
+    .dayContainer>.flatpickr-day:nth-child(7n),
+    .dayContainer>.flatpickr-day:nth-child(7n-6) {
       background: #dad4ce;
       //   font-size: 20px;
     }
@@ -511,32 +489,16 @@
   }
 
   .button {
-    background: #bc8372;
-    border: 1px solid #bc8372;
-    color: #fff;
-    &:hover {
-      background: #fff;
-      color: #bc8372;
-      border: 1px solid #bc8372;
-    }
-  }
-  .button-white {
-    background: stencilColor('color-secondary');
-    border: 1px solid stencilColor('color-default-primary-1');
-    color: stencilColor('color-default-primary-1');
+    background: stencilColor("color-default-primary-1");
+    border: 1px solid stencilColor("color-default-primary-1");
+    color: stencilColor("color-secondary");
+    width: 140px;
 
     &:hover {
-      background: stencilColor('color-default-primary-1');
-      color: stencilColor('color-secondary');
-      border: 1px solid stencilColor('color-default-primary-1');
+      background: stencilColor("color-secondary");
+      color: stencilColor("color-default-primary-1");
+      border: 1px solid stencilColor("color-default-primary-1");
     }
-  }
-  .thanks {
-    width: 170px;
-    padding: 0;
-  }
-  .submit-btn {
-    width: 88px;
   }
 }
 
@@ -553,6 +515,7 @@
     line-height: 16px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+
   }
 
   .cur-year {
@@ -561,8 +524,8 @@
 
   .flatpickr-day {
     &.selected {
-      background: stencilColor('color-allure-bridals-primary-1');
-      border-color: stencilColor('color-allure-bridals-primary-1');
+      background: #AC634D;
+      border-color: #AC634D;
     }
   }
 }
