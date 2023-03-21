@@ -9,11 +9,10 @@
 
       .map-filters {
         order: 3;
-        width: 39%;
-        margin-right: 1%;
-        padding-right: 10px;
-        padding-Left: 10px;
-        max-height: 900px;
+        width: 36%;
+        padding-right: 13px;
+        padding-left: 13px;
+        max-height: 1050px;
         overflow: auto;
 
         .geo-filters {
@@ -127,7 +126,7 @@
                 }
 
                 .retailer-title {
-                  font-family: 'Prata';
+                  font-family: stencilFontFamily('prata-font');
                   font-weight: 400;
                   font-size: 22px;
                   line-height: 30px;
@@ -137,7 +136,7 @@
                   margin: 5px 0px 0px 0px;
 
                   .retailer-city-state {
-                    font-family: 'Inter Regular';
+                    font-family: stencilFontFamily('default-font-regular');
                     font-style: normal;
                     font-weight: 500;
                     font-size: 12px;
@@ -235,15 +234,16 @@
           }
 
           .option-filters {
-            border-bottom: 1px solid #828ca6;
-            font-family: 'Inter Regular';
+            display: none;
+            border-bottom: 1px solid stencil('color-men-design-primary-2');
+            font-family: stencilFontFamily('default-font-regular');
             font-style: normal;
             font-weight: 400;
             font-size: 12px;
             line-height: 20px;
 
             .collections-label {
-              font-family: 'Inter Regular';
+              font-family: stencilFontFamily('default-font-regular');
               font-style: normal;
               font-weight: 600;
               font-size: 12px;
@@ -347,15 +347,14 @@
             }
 
             &.error {
-              outline: red 1px solid;
-
+              outline: stencilColor('color-error') 1px solid;
             }
           }
         }
       }
 
       .map {
-        width: 60%;
+        width: 64%;
         order: 4;
 
         #map {
@@ -434,14 +433,14 @@
       .header-sec {
         display: flex;
         justify-content: space-between;
-        padding: 0px 5px 5px 5px;
+        padding: 0px 13px 13px 13px;
         align-items: center;
         width: 100%;
         order: 2;
 
         .header-title {
           font-weight: 400;
-          font-family: 'Prata';
+          font-family: stencilFontFamily('prata-font');
           font-style: normal;
           font-size: 22px;
           line-height: 30px;
@@ -454,7 +453,7 @@
         }
 
         .toggle-label {
-          font-family: 'Inter Regular';
+          font-family: stencilFontFamily('default-font-regular');
           font-style: normal;
           font-weight: 500;
           font-size: 12px;
@@ -530,6 +529,9 @@
   }
 
   //modal styles
+  .modal {
+    overflow: auto;
+  }
 
   .modal-close {
 
@@ -580,7 +582,7 @@
           font-size: 10px;
           line-height: 12px;
           letter-spacing: 0.1em;
-          font-family: 'Inter Regular';
+          font-family: stencilFontFamily('default-font-regular');
         }
 
 
@@ -598,7 +600,7 @@
           }
 
           .location {
-            font-family: 'Inter Regular';
+            font-family: stencilFontFamily('default-font-regular');
             font-style: normal;
             font-weight: 400;
             font-size: 12px;
@@ -820,12 +822,12 @@
       }
 
       .map {
+        padding: 0px 13px 0px 13px;
         width: 100% !important;
-        // display: none;
         order: 1 !important;
 
         #map {
-          min-height: 400px !important;
+          min-height: 300px !important;
         }
 
         .top {
@@ -872,7 +874,24 @@
       max-width: 900px !important;
     }
   }
-
+  .container {
+    padding: 0px 1.5rem;
+    @include breakpoint('medium') {
+      margin: 0 auto;
+    }
+    @media only screen and (min-width: 1600px) {
+      max-width: 100rem;
+    }
+    @media only screen and (min-width: 2000px) {
+      max-width: 120rem;
+    }
+    @media only screen and (min-width: 2600px) {
+      max-width: 140rem;
+    }
+    @media only screen and (min-width: 3000px) {
+      max-width: 170rem;
+    }
+  }
   .body {
     margin-bottom: spacing("double") * 0;
   }
