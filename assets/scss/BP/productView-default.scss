@@ -80,8 +80,12 @@
                         display: none;
                     }
                     .slick-track {
-                        display: flex;
-                        align-items: center;
+                        display: inline-block;
+                    }
+                    .slick-slide {
+                        display: inline-block;
+                        vertical-align: middle;
+                        float:none;
                     }
                     .slick-next {
                         right: 0;
