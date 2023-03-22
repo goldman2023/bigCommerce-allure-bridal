@@ -809,20 +809,23 @@ export function getProducts(context, selector, prodList, slidescroll) {
 };
 
 export function blockElementFullscreenVideo(selectorID, element) {
-    let videoURL = '';
-    if (element?.bfvideo !== undefined && element?.bfvideo !== null) {
-        document.getElementById(selectorID).innerHTML = `<video autoplay loop muted playsinline plays-inline="" id="colbannerVideo"><source src="${element?.bfvideo[0]?.cdn_url}" type="video/mp4"><source src="${element?.bfvideo[0]?.cdn_url}" type="video/ogg">Your browser does not support HTML video.</video>`;
-    } else if (element?.videoUrl?.includes('youtube')) {
-        videoURL = `https://www.youtube.com/embed/${element?.videoUrl?.split('=')[1]}`;
-        document.getElementById(selectorID).innerHTML = `<div><iframe type="text/html" src="${videoURL}"  frameborder="0" id="colbannerVideo" controls=0></iframe></div>`;
-    } else {
-        document.getElementById(selectorID).innerHTML = `<div><video autoplay playsinline loop muted plays-inline="" id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div>`;
+    if(element.__typename === "BlockElementFullscreenVideo") {
+        let videoURL = '';
+        if (element?.bfvideo !== undefined && element?.bfvideo !== null) {
+            document.getElementById(selectorID).innerHTML = `<video autoplay loop muted playsinline plays-inline="" id="colbannerVideo"><source src="${element?.bfvideo[0]?.cdn_url}" type="video/mp4"><source src="${element?.bfvideo[0]?.cdn_url}" type="video/ogg">Your browser does not support HTML video.</video>`;
+        } else if (element?.videoUrl?.includes('youtube')) {
+            videoURL = `https://www.youtube.com/embed/${element?.videoUrl?.split('=')[1]}`;
+            document.getElementById(selectorID).innerHTML = `<div><iframe type="text/html" src="${videoURL}"  frameborder="0" id="colbannerVideo" controls=0></iframe></div>`;
+        } else {
+            document.getElementById(selectorID).innerHTML = `<div><video autoplay playsinline loop muted plays-inline="" id="colbannerVideo"><source src="${element.videoUrl}" type="video/mp4"><source src="${element.videoUrl}" type="video/ogg">Your browser does not support HTML video.</video></div>`;
+        }
     }
-    
-    if (element?.bfBackgroundImage !== undefined && element?.bfBackgroundImage !== null) {
-        document.getElementById(selectorID).innerHTML = `<img data-src="${element?.bfBackgroundImage[0]?.cdn_url}" alt="${(element?.subheadline && element?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>`;
-    } else if (element?.backgroundImage?.url && element?.backgroundImage?.url !== undefined) {
-        document.getElementById(selectorID).innerHTML = `<img alt="${element?.backgroundImage?.title}" data-src="${element?.backgroundImage?.url}" class="lazyload"/>`;
+    if(element.__typename === "BlockElementFullscreenImage") {
+        if (element?.bfBackgroundImage !== undefined && element?.bfBackgroundImage !== null) {
+            document.getElementById(selectorID).innerHTML = `<img data-src="${element?.bfBackgroundImage[0]?.cdn_url}" alt="${(element?.subheadline && element?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>`;
+        } else if (element?.backgroundImage?.url && element?.backgroundImage?.url !== undefined) {
+            document.getElementById(selectorID).innerHTML = `<img alt="${element?.backgroundImage?.title}" data-src="${element?.backgroundImage?.url}" class="lazyload"/>`;
+        }
     }
 }
 
