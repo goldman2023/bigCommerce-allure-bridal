@@ -90,6 +90,58 @@ function eventsData(context,callback) {
     .catch(error => console.error(error));
 };
 
+function designerEventsData(context,callback) {
+    const query = `
+            query 
+                sectionDesignerEventsCollectionQuery {
+                    sectionDesignerEventsCollection {
+                    items {
+                        sys {
+                        id
+                        }
+                    eventName
+                    eventStartDate
+                    eventEndDate
+                    brandFolderImage
+                    retailerId
+                    retailerName
+                    featured
+                    phone
+                    website
+                    eventAddress{
+                        lon
+                        lat
+                    }
+                    collectionsAvailable
+                    streetName
+                    city
+                    zipCode
+                    state
+                    country  
+                    }
+            }}`;
+    fetch(
+    'https://graphql.contentful.com/content/v1/spaces/y49u4slmhh3t/environments/staging',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization:
+            `Bearer ${context.contentfulApiToken}`,
+        },
+        body: JSON.stringify({ query }),
+      }
+    ).then(function(response) {
+        return response.json();
+    })
+    .then(function(res) {
+        if (typeof callback == 'function') {
+            callback.call(this, res);
+        }
+    })
+    .catch(error => console.error(error));
+};
+
 export function getEvents(context, callback) {
     eventsData(context, response => {
         if (response !== undefined) {
@@ -913,10 +965,10 @@ export function events(blockData,page) {
     </div>`;
 }
 export function featuredEvents(context,count) {
-    eventsData(context, response => {
+    designerEventsData(context, response => {
         if (response !== undefined) {
-            let datastru = response.data.referencedBlockTrunkShowsCollection;
-            var sorteddatastru = datastru.items.sort((a,b) =>  new Date(a.eventStartDate) - new Date(b.eventStartDate));
+            let datastru = response.data.sectionDesignerEventsCollection.items.filter((item)=> item.featured);
+            var sorteddatastru = datastru.sort((a,b) =>  new Date(a.eventStartDate) - new Date(b.eventStartDate));
             if(count) {
                 sorteddatastru = sorteddatastru.slice(0, count);
             }
@@ -934,10 +986,10 @@ export function featuredEvents(context,count) {
                     let endDateFormatted = endDateObj.toLocaleDateString().replaceAll('/', '.');
                     return `<div class="eventsCard">
                     <div class="block">
-                        <div class="imageblock col"><img data-src="${item.eventImage.url}" alt="${item.retailerName}" class="lazyload"/></div>
+                        <div class="imageblock col"><img data-src="${item?.brandFolderImage[0]?.cdn_url}" alt="${item.retailerName}" class="lazyload"/></div>
                         <div class="contentBlock col">
                             <h4>${item.retailerName}</h4>
-                            <p class="addressp">${item.location}</p>
+                            <p class="addressp">${item.city}, ${item.state}</p>
                             <div class="divider"></div>
                             <label>Date</label>
                             <p class="colored">
@@ -946,19 +998,19 @@ export function featuredEvents(context,count) {
                             <label>Collections</label>
                             <p class="colored">${item.collectionsAvailable.map((col)=> `${col}`).join(", ")}</p>
                             <label>address</label>
-                            <span>${item.locationAddressStreet}</span>
-                            <span>${item.locationAddressCityStateZip}</span>
-                            <p><a class="colored" href="http://maps.google.com/?q=${item.locationAddressStreet} ${item.locationAddressCityStateZip}">GET DIRECTIONS</a></p>
+                            <span>${item.streetName}</span>
+                            <span>${item.city}, ${item.state}${item.zipCode}</span>
+                            <p><a class="colored" href="http://maps.google.com/?q=${item.streetName} ${item.city} ${item.state}${item.zipCode}">GET DIRECTIONS</a></p>
                             <label>Phone</label>
-                            <p>${item.locationPhoneNumber}</p>
+                            <p>${item.phone}</p>
                             <label>website</label>
-                            <a href="${item.locationWebsiteUrl}" target="_blank" class="colored">${item.locationWebsiteUrl}</a>
+                            <a href="${item.website}" target="_blank" class="colored">${item.website}</a>
                         </div>
                     </div>
                     </div>`;
                 }).join('')}
             </div>
-            <a href="/designer-events-list/" class="button button--secondary" >View All Designer Events</a>
+            <a href="/designer-events" class="button button--secondary" >View All Designer Events</a>
             `;
         }
     });
