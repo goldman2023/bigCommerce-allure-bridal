@@ -913,6 +913,7 @@ export default class RetailFinder extends PageManager {
     moreBtn.append(moreBtnText);
     moreBtn.addEventListener('click', () => modal.close());
 
+
     detailElement.append(moreBtn);
 
 
