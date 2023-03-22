@@ -199,8 +199,6 @@
                   font-weight: 600;
                   font-size: 12px;
                   line-height: 16px;
-                  /* identical to box height, or 133% */
-                  // letter-spacing: 0.05em;
                   margin-top: 1rem;
 
                   &.book-appt {
@@ -314,7 +312,6 @@
             }
           }
 
-          // specific dot
           .header-svg__border {
             position: relative;
 
@@ -522,7 +519,6 @@
     }
   }
 
-  //modal styles
   .modal {
     overflow: auto;
   }
@@ -607,7 +603,6 @@
 
         }
 
-        // specific dot
         .header-svg__border {
           position: relative;
 
@@ -624,18 +619,20 @@
         .collections {
           margin-top: 30px;
           margin-bottom: 24px;
+          display: flex;
+          flex-wrap: wrap;
 
-
+          .retailer-label{
+            width: 100%;
+          }
           .collections-list {
+            width: 50%;
             display: flex;
             flex-wrap: wrap;
-            column-gap: 67px;
-            row-gap: 4px;
+            flex-direction: column;
 
             .collection-item {
               color: stencilColor('color-default-primary-1');
-              flex: 1 1 40%;
-              max-width: 40%;
               text-decoration: none;
             }
           }
@@ -669,7 +666,7 @@
         .retailer-detail {
           font-weight: 400;
           font-size: 14px;
-          line-height: 22px;
+          line-height: 29px;
         }
 
         .phone {
@@ -762,18 +759,15 @@
     }
   }
 
-  // badge url
   .featured {
     margin-right: 4px;
 
-    // width: 20px;
     &::before {
       content: url('../icons/retailer-featured_updated.svg');
     }
   }
 
   .disney {
-    // width: 20px;
 
     &::before {
       content: url('../icons/platinum-collection.svg');
@@ -781,7 +775,6 @@
   }
 
 
-  // mobile overrides
   @media (max-width: '900px') {
 
     .content {
@@ -854,6 +847,13 @@
       }
     }
 
+    .modal{
+      .collections{
+        .collections-list{
+          width: 100% !important;
+        }
+      }
+    }
     .schedule-btn {
       max-width: 100% !important;
     }

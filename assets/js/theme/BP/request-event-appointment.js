@@ -13,8 +13,6 @@ export default class RequestEventAppointment extends PageManager {
     this.address1Field = document.querySelector('#address1')
     this.address2Field = document.querySelector('#address2')
     this.postalField = document.querySelector('#zip')
-    // Create the autocomplete object, restricting the search predictions to
-    // addresses in the US and Canada.
     this.autocomplete = new google.maps.places.Autocomplete(this.address1Field, {
       componentRestrictions: { country: ['us', 'ca'] },
       fields: ['address_components', 'geometry'],
@@ -65,6 +63,15 @@ export default class RequestEventAppointment extends PageManager {
   }
 
    onReady = () => {
+    const url= this.context.requestEventAppointmentUrl;
+    const googleApiToken = this.context.googleApiToken;
+
+
+    const script = document.createElement('script');
+    script.setAttribute('async', '');
+    script.setAttribute('src', `https://maps.googleapis.com/maps/api/js?key=${googleApiToken}&callback=initAutocomplete&libraries=places`);
+    document.head.appendChild(script);
+
     window.initAutocomplete = this.initAutocomplete.bind(this);
     flatpickr('.date-picker', {
       position: 'below',
@@ -100,7 +107,6 @@ export default class RequestEventAppointment extends PageManager {
         ])
       },
     })
-    //Initialize Inputmask
     Inputmask({ mask: '(999) 999-9999' }).mask(document.getElementById('phone'))
 
     document.getElementById('event-appointment-form').addEventListener(
@@ -115,9 +121,7 @@ export default class RequestEventAppointment extends PageManager {
 
     const form = document.getElementById('event-appointment-form')
     form.addEventListener('submit', (event) => {
-      event.preventDefault() // prevent the form from being submitted
-
-      // var retailFinderFormInputs = document.querySelectorAll("#event-appointment-form .form-input");
+      event.preventDefault();
       var retailFinderFormInputs = form.querySelectorAll('.form-input')
       if (retailFinderFormInputs) {
         for (let i = 0; i < retailFinderFormInputs.length; i++) {
@@ -126,11 +130,9 @@ export default class RequestEventAppointment extends PageManager {
               var retailFinderFormError = retailFinderFormInputs[i]
                 .closest('.form-field')
                 .querySelector('.error-message')
-              // for(let j=0; j<retailFinderFormError.length; j++){
               if (retailFinderFormError) {
-                retailFinderFormError.remove()
+                retailFinderFormError.remove();
               }
-              // }
             } else {
               if (
                 retailFinderFormInputs[i]
@@ -156,14 +158,10 @@ export default class RequestEventAppointment extends PageManager {
         }
       }
 
-      // get the form values
       const firstName = form.elements.firstName.value
       const lastName = form.elements.lastName.value
       const email = form.elements.email.value
-
       const phone = form.elements.phoneNumber.value
-      //const phoneType = form.elements.phoneType.value;
-      // const smsAlerts = form.elements.smsAlerts.checked;
       const emailAlerts = form.elements.emailAlerts.checked
       const terms = form.elements.termsAndCond.checked
       const address1 = form.elements.address1.value
@@ -175,12 +173,10 @@ export default class RequestEventAppointment extends PageManager {
 
 
       const noOfPeopleAttending = form.elements.noOfPeopleAttending.value
-      const eventName = new URLSearchParams(window.location.search).get(
-        'eventName',
-      )
-      const eventId = new URLSearchParams(window.location.search).get('eventId')
+      const eventName = new URLSearchParams(window.location.search).get('eventName');
+      const eventId = new URLSearchParams(window.location.search).get('eventId');
+
       var unmaskedPhone = Inputmask.unmask(phone, { mask: '(999) 999-9999' })
-      // validate the form values
       if (
         !firstName ||
         !lastName ||
@@ -194,22 +190,14 @@ export default class RequestEventAppointment extends PageManager {
         !weddingDate ||
         !noOfPeopleAttending
       ) {
-        // show an error message if any of the required fields are empty
         alert('Please fill out all the required fields.')
         return
       }
 
       if (!terms) {
-        // show an error message if the "I Agree" checkbox is not checked
         alert('You must agree to the terms and conditions to continue.')
         return
       }
-
-      // submit the form using fetch
-      const url =
-        'https://apim.workato.com/allure/allure-b2c-website/retailer/appointmentrequest' // get the form action url
-      const method = 'POST' // get the form method (POST, GET, etc.)
-      //Generate form data
       const formData = {
         FirstName: firstName,
         LastName: lastName,
@@ -220,35 +208,30 @@ export default class RequestEventAppointment extends PageManager {
         City: city,
         State: state,
         PostalCode: zip,
-        weddingDate: weddingDate,
+        EventDate: weddingDate,
         NumberPeopleinAppointment: parseInt(noOfPeopleAttending),
         EmailOptin: emailAlerts,
         EventName: eventName,
-        EventId: eventId ? parseInt(eventId) : 0,
+        id: eventId ? parseInt(eventId) : 0,
         DirectBook: 'true',
       }
       fetch(url, {
-        method: method,
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'API-TOKEN':
-            'c0bce025e1792e283cfbd229321ecc423ae60257cf462c8d262d7b10fd9e41f9',
         },
         body: JSON.stringify(formData),
       })
         .then((response) => {
-          // do something with the response
-
-          //hide form section and show thank you section
+       
           document.getElementById('event-appointment-form').style.display =
             'none'
           document.getElementById('eventName').innerText = eventName
           document.getElementById('thank-you').style.display = 'block'
-          //Go to top of page
+      
           window.scrollTo(0, 0)
         })
         .catch((error) => {
-          // handle any errors
           alert(error)
         })
     })

@@ -814,24 +814,22 @@ export default class RetailFinder extends PageManager {
     collectionsHeader.innerText = 'COLLECTIONS';
     collections.append(collectionsHeader);
 
-    const collectionsList = document.createElement('div');
-    collectionsList.classList.add('collections-list');
-    for (const collection of retailer.collectionsAvailableCollection.items) {
+    const collectionsList1 = document.createElement('div');
+    const collectionsList2 = document.createElement('div');
+    collectionsList1.classList.add('collections-list');
+    collectionsList2.classList.add('collections-list');
+    retailer.collectionsAvailableCollection.items.forEach((collection, index) => {
       if (collection) {
         var collectionItem = document.createElement('span');
-        if (collection.collectionButtonUrl == null) {
-          //collectionItem.setAttribute("href", "#");
-        } else {
-          //collectionItem.setAttribute("href", collection.collectionButtonUrl);
-          //collectionItem.setAttribute("target", "_blank");
-        }
         collectionItem.classList.add('collection-item');
         collectionItem.classList.add('retailer-detail');
         collectionItem.innerText = collection.collectionName;
-        collectionsList.append(collectionItem);
+        index % 2 === 0 ? collectionsList1.append(collectionItem) : collectionsList2.append(collectionItem);
       }
-    };
-    collections.append(collectionsList);
+    })
+     
+    collections.append(collectionsList1);
+    collections.append(collectionsList2);
     detailElement.append(collections);
 
     const address = document.createElement('div');
@@ -843,11 +841,11 @@ export default class RetailFinder extends PageManager {
     const streetAddress = document.createElement('div');
     streetAddress.classList.add('street-address');
     streetAddress.classList.add('retailer-detail');
-    streetAddress.innerText = retailer.retailerStreet;
+    streetAddress.innerText = `${retailer.retailerStreet}\n${retailer.retailerCity}, ${retailer.state}`;
     address.append(streetAddress);
     const directions = document.createElement('a');
     directions.classList.add('directions');
-    directions.innerText = 'GET DIRECTIONS'
+    directions.innerText = 'GET DIRECTIONS';
     const destination = retailer.retailerStreet.replaceAll(',', '').replaceAll(' ', '+');
     directions.setAttribute('href', `https://www.google.com/maps?daddr=${destination}`);
     directions.setAttribute('target', '_blank');
