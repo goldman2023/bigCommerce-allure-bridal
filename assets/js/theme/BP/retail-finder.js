@@ -909,7 +909,7 @@ export default class RetailFinder extends PageManager {
     moreBtn.classList.add('more-btn');
 
     const moreBtnText = document.createElement('span');
-    moreBtnText.innerText = 'See More Stores'
+    moreBtnText.innerText = 'SEE MORE STORES'
     moreBtn.append(moreBtnText);
     moreBtn.addEventListener('click', () => modal.close());
 

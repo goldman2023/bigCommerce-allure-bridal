@@ -117,7 +117,7 @@
 
                 &:hover,
                 &.hovered {
-                  background-color: #FBF8F8;
+                  background-color: #F9F6F5;
                 }
 
                 &:not(:nth-child(3n)) {
@@ -235,7 +235,7 @@
 
           .option-filters {
             display: none;
-            border-bottom: 1px solid stencil('color-men-design-primary-2');
+            border-bottom: 1px solid stencilColor('color-men-design-primary-2');
             font-family: stencilFontFamily('default-font-regular');
             font-style: normal;
             font-weight: 400;
