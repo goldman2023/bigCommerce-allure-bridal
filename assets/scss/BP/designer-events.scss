@@ -705,6 +705,10 @@
     }
 }
 
+.modal-body {
+    -webkit-overflow-scrolling: touch;
+}
+
 
 .modal:not(.modal--large) {
     max-width: 700px;
