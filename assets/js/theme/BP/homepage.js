@@ -19,7 +19,8 @@ import {
     blockElementDivider, 
     blockElementSpacer,
     blockElementSpacer24Px,
-    referencedBlockHomepageCollections
+    referencedBlockHomepageCollections,
+    featuredEvents
 } from './universal-blocks';
 export default class Homepage extends PageManager {
     constructor(context) {
@@ -91,6 +92,10 @@ export default class Homepage extends PageManager {
             }
             if (element.__typename === "BlockElementSpacer24Px") {
                 return blockElementSpacer24Px();
+            }
+            if(element.__typename === "FeaturedDesignerEvents"){
+                featuredEvents(this.context,element.count);
+                return `<div class="events block-item" id="events"></div>`;
             }
         }).join('');
 
