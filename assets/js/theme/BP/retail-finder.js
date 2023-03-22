@@ -530,7 +530,6 @@ export default class RetailFinder extends PageManager {
           retailFinderResults.innerHTML = ''
           self.retailers = []
         }
-        console.log(self.retailers)
         self.paintMapAndRetailers(self.retailers)
       },
     )
@@ -543,23 +542,18 @@ export default class RetailFinder extends PageManager {
   };
 
   resetFilters = () => {
-    this.appliedFilters = {
-      ...this.originalFilters
-    };
-    for (const [filter, elementId] of Object.entries(FILTER_IDS)) {
-      const element = document.getElementById(elementId);
-      const value = this.appliedFilters[filter];
-      element.value = !!!value ? '' : value;
-    };
+    $("#location-typeahead").val("");
+    $("#distanceFilterSelect").val("25");
     $("#collectionFilters").jstree(true).check_all();
     $("#name-typeahead").val("");
-
+    $("#filterButton").attr("disabled", true);
+    const selectedCollections = $('#collectionFilters').jstree('get_checked').map((id) => {
+      return $('#' + id).text().trim();
+    });
+    this.applyFilters('collections', selectedCollections);
     this.map.setZoom(INITIAL_MAP.zoom);
     this.map.setCenter({ lat: INITIAL_MAP.center.lat, lng: INITIAL_MAP.center.lng })
-    this.paintMapAndRetailers([])
-
-    $("#filterButton .button").attr("disabled", true);
-    this.filterRetailers();
+    this.paintMapAndRetailers([]);
   };
   createFilterElements = () => {
     // distance filter
@@ -571,7 +565,7 @@ export default class RetailFinder extends PageManager {
     distanceFilterLabel.innerText = 'Within';
     distanceFilter.append(distanceFilterLabel);
     const distanceFilterDropdown = document.createElement('select');
-    distanceFilterDropdown.id = FILTER_IDS.distance;
+    distanceFilterDropdown.id = FILTER_IDS.radius;
     distanceFilterDropdown.classList.add('form-select');
     distanceFilterDropdown.classList.add('selector-dropdown');
     [10, 25, 50, 100, 250].forEach(
