@@ -84,8 +84,14 @@
                     }
                     .slick-slide {
                         display: inline-block;
+                        vertical-align: top;
+                    }
+                    &.slider-for .slick-slide {
                         vertical-align: middle;
                         float:none;
+                    }
+                    &.slider-nav {
+                        height: 100vh;
                     }
                     .slick-next {
                         right: 0;

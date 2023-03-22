@@ -79,7 +79,6 @@ export default class ProductDetails extends ProductDetailsBase {
 
           $('.slider-nav').on('afterChange', function(currentSlide){
             let windowwidth = "width: "+$(window).width() + "px;";
-            $('#pdpimagemodal .slick-track').attr('style', windowwidth);
             $(`#pdpimagemodal [data-slick-index="${currentSlide}"]`).attr('style', windowwidth);
           });
           
@@ -97,7 +96,6 @@ export default class ProductDetails extends ProductDetailsBase {
         });
 
         function addWidthToModalSlider() {
-            $('#pdpimagemodal .slick-track').attr('style', "width: "+$(window).width() + "px;");
             $('#pdpimagemodal .slick-active').attr('style', "width: "+$(window).width() + "px;");
         }
 
