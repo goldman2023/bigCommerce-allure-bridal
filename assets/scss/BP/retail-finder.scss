@@ -6,6 +6,7 @@
     .content {
       display: flex;
       flex-wrap: wrap;
+
       .map-filters {
         order: 3;
         width: 36%;
@@ -13,8 +14,10 @@
         padding-left: 13px;
         max-height: 1050px;
         overflow: auto;
+
         .geo-filters {
           display: flex;
+
           .filter {
             width: 50%;
 
@@ -22,11 +25,13 @@
               margin-right: 16px;
             }
           }
+
           .name-filter {
             margin-top: 10px;
             width: 100%;
           }
         }
+
         .available-retailers {
           .top {
             display: flex;
@@ -35,9 +40,11 @@
             justify-content: space-between;
             border-bottom: 1px solid stencilColor('color-men-design-primary-2');
             padding: 22px 0px 22px 0px;
+
             .sort-dropdown {
               display: none;
             }
+
             .filter-visible {
               display: flex;
               flex-direction: row;
@@ -49,6 +56,7 @@
               letter-spacing: 0.1em;
               text-transform: uppercase;
               cursor: pointer;
+
               &::before {
                 padding-right: 5px;
                 padding-top: 2px;
@@ -56,10 +64,12 @@
               }
             }
 
+
             .retailers {
               margin: 0;
             }
           }
+
           .results-divider {
             display: flex;
             padding: 12px 32px;
@@ -107,11 +117,12 @@
 
                 &:hover,
                 &.hovered {
-                  background-color: stencilColor('color-theme-lighter');
+                  background-color: #F9F6F5;
                 }
 
                 &:not(:nth-child(3n)) {
                   padding-right: 10px;
+
                 }
 
                 .retailer-title {
@@ -132,20 +143,25 @@
                     line-height: 16px;
                     letter-spacing: 0.1em;
                     text-transform: uppercase;
+
                   }
                 }
+
                 .retailer-distanceDirection {
                   display: flex;
                   align-items: center;
                   margin: 5px 0px 5px 0px;
+
                   .retailer-distance {
                     color: stencilColor('color-allure-bridals-neutral-1');
+
                     &::after {
                       padding-left: 10px;
                       padding-right: 10px;
                       content: url('../icons/spot.svg');
                     }
                   }
+
                   .directions {
                     color: stencilColor('color-default-primary-1');
                     font-style: normal;
@@ -163,6 +179,7 @@
                     }
                   }
                 }
+
                 .retailer-collections {
                   font-size: 14px;
                   line-height: 22px;
@@ -170,15 +187,16 @@
                   color: stencilColor('color-allure-bridals-neutral-2');
 
                   &::before {
-                    content: 'collections:  ';
-                    color: stencilColor('color-allure-bridals-primary-1');
+                    content: "collections:  ";
+                    color: stencilColor("color-allure-bridals-primary-1");
                     text-transform: uppercase;
+
                   }
                 }
+
                 .schedule-btn {
                   color: stencilColor('color-allure-bridals-primary-1');
-                  border: 1px solid
-                    stencilColor('color-allure-bridals-primary-1');
+                  border: 1px solid stencilColor('color-allure-bridals-primary-1');
                   width: 100%;
                   border-radius: 3px;
                   padding: 2px;
@@ -190,18 +208,21 @@
                   /* identical to box height, or 133% */
                   // letter-spacing: 0.05em;
                   margin-top: 1rem;
+
                   &.book-appt {
                     display: none;
                   }
+
                   span {
                     padding: 14px 0;
                     width: 100%;
-                    border: 1px solid
-                      stencilColor('color-allure-bridals-primary-5');
+                    border: 1px solid stencilColor('color-allure-bridals-primary-5');
                     border-radius: 3px;
                   }
+
                   &:hover {
                     background: stencilColor('color-allure-bridals-primary-1');
+
                     span {
                       color: stencilColor('color-white');
                     }
@@ -209,16 +230,18 @@
                 }
               }
             }
+
           }
 
           .option-filters {
             display: none;
-            border-bottom: 1px solid stencil('color-men-design-primary-2');
+            border-bottom: 1px solid stencilColor('color-men-design-primary-2');
             font-family: stencilFontFamily('default-font-regular');
             font-style: normal;
             font-weight: 400;
             font-size: 12px;
             line-height: 20px;
+
             .collections-label {
               font-family: stencilFontFamily('default-font-regular');
               font-style: normal;
@@ -230,27 +253,32 @@
             }
 
             .jstree-icon {
-              background-image: url('../img/vendor/jstree/32px-new.png') !important;
+              background-image: url("../img/vendor/jstree/32px-new.png") !important;
             }
+
             .jstree-container-ul {
               margin-left: -8px;
+
             }
+
             .jstree-anchor {
-              & > .jstree-themeicon {
+              &>.jstree-themeicon {
                 display: none !important;
               }
+
               &:hover {
                 background-color: transparent !important;
                 border: none;
                 box-shadow: none;
               }
             }
+
             .jstree-default-large {
-              .jstree-closed > .jstree-ocl {
+              .jstree-closed>.jstree-ocl {
                 order: 0;
               }
 
-              .jstree-open > .jstree-ocl {
+              .jstree-open>.jstree-ocl {
                 order: 0;
               }
 
@@ -258,30 +286,34 @@
                 order: -1;
               }
 
-              .jstree-leaf > .jstree-ocl {
+              .jstree-leaf>.jstree-ocl {
                 display: none;
               }
             }
+
             .jstree {
-              .jstree-open > .jstree-children {
+              .jstree-open>.jstree-children {
                 order: 1;
                 width: 100% !important;
               }
 
-              .jstree-closed > .jstree-children {
+              .jstree-closed>.jstree-children {
                 order: 1;
                 width: 100% !important;
               }
             }
+
             .jstree-default {
-              & > .jstree-container-ul > .jstree-node {
+              &>.jstree-container-ul>.jstree-node {
                 display: flex;
                 flex-wrap: wrap;
               }
+
               .jstree-clicked {
                 background: none;
                 box-shadow: none;
               }
+
               .jstree-node {
                 background: no-repeat;
               }
@@ -291,6 +323,7 @@
           // specific dot
           .header-svg__border {
             position: relative;
+
             svg {
               position: absolute;
               top: 0;
@@ -301,11 +334,13 @@
             }
           }
         }
+
         .form {
           position: relative;
           margin-bottom: 2.5rem;
+
           .location-typeahead {
-            color: stencilColor('color-allure-bridals-neutral-1') !important;
+            color: stencilColor("color-allure-bridals-neutral-1") !important;
 
             &:focus {
               outline: none !important;
@@ -321,6 +356,7 @@
       .map {
         width: 64%;
         order: 4;
+
         #map {
           min-height: 600px;
           margin-bottom: 40px;
@@ -338,6 +374,7 @@
           border: 1px solid stencilColor('color-theme');
           color: stencilColor('color-white');
           max-width: 100% !important;
+
           &:hover {
             background: stencilColor('color-white');
             color: stencilColor('color-theme');
@@ -356,13 +393,13 @@
         justify-content: center;
 
         .link-button {
-          font-family: stencilFontFamily('default-font-regular');
+          font-family: stencilFontFamily("default-font-regular");
           font-size: 12px;
           font-weight: 600;
           line-height: 15px;
           letter-spacing: 0.1em;
           text-align: center;
-          color: stencilColor('color-allure-bridals-primary-1');
+          color: stencilColor("color-allure-bridals-primary-1");
           text-decoration: underline;
 
           &:focus {
@@ -374,8 +411,9 @@
       .form-field {
         padding: 10px 15px 0 0;
         margin: 0 0 1.5rem;
+
         .form-label {
-          color: stencilColor('color-allure-bridals-neutral-1');
+          color: stencilColor("color-allure-bridals-neutral-1");
           font-family: stencilFontFamily('default-font-regular');
           font-style: normal;
           font-weight: 600;
@@ -399,6 +437,7 @@
         align-items: center;
         width: 100%;
         order: 2;
+
         .header-title {
           font-weight: 400;
           font-family: stencilFontFamily('prata-font');
@@ -407,10 +446,12 @@
           line-height: 30px;
           margin: 0;
         }
+
         .map-toggle {
           align-items: center;
           display: none;
         }
+
         .toggle-label {
           font-family: stencilFontFamily('default-font-regular');
           font-style: normal;
@@ -421,6 +462,7 @@
           text-transform: uppercase;
           margin-right: 5px;
         }
+
         .switch {
           position: relative;
           display: inline-block;
@@ -441,35 +483,35 @@
           left: 0;
           right: 0;
           bottom: 0;
-          background-color: stencilColor('theme-white');
-          box-shadow: 0 0px 1px 1px
-            stencilColor('color-allure-bridals-primary-1');
-          -webkit-transition: 0.4s;
-          transition: 0.4s;
+          background-color: stencilColor("theme-white");
+          box-shadow: 0 0px 1px 1px stencilColor("color-allure-bridals-primary-1");
+          -webkit-transition: .4s;
+          transition: .4s;
         }
 
         .slider:before {
           position: absolute;
-          content: '';
+          content: "";
           height: 10px;
           width: 10px;
           left: 4px;
           top: 2px;
-          background-color: stencilColor('color-allure-bridals-primary-1');
-          -webkit-transition: 0.4s;
-          transition: 0.4s;
+          background-color: stencilColor("color-allure-bridals-primary-1");
+          -webkit-transition: .4s;
+          transition: .4s;
         }
 
-        input:checked + .slider {
-          background-color: stencilColor('color-allure-bridals-primary-1');
+        input:checked+.slider {
+          background-color: stencilColor("color-allure-bridals-primary-1");
         }
 
-        input:checked + .slider:before {
+        input:checked+.slider:before {
           -webkit-transform: translateX(15px);
-          background-color: stencilColor('color-white');
+          background-color: stencilColor("color-white");
           -ms-transform: translateX(15px);
           transform: translateX(15px);
         }
+
         /* Rounded sliders */
         .slider.round {
           border-radius: 34px;
@@ -492,6 +534,7 @@
   }
 
   .modal-close {
+
     &:focus::after,
     &:focus::before {
       display: none;
@@ -512,12 +555,14 @@
     }
   }
 
+
   .modal:not(.modal--large) {
     max-width: 500px;
 
     .modal-close {
       top: 37px;
       right: 37px;
+
     }
 
     .modal-content {
@@ -526,7 +571,7 @@
       .modal-body {
         height: 100%;
         min-height: fit-content;
-        border: 1px solid stencilColor('color-theme-light');
+        border: 1px solid #E2E2E2;
         padding-top: 48px;
         padding-left: 40px;
 
@@ -540,8 +585,9 @@
           font-family: stencilFontFamily('default-font-regular');
         }
 
+
         .retailer-header {
-          border-bottom: 1px solid stencilColor('color-secondaryDark');
+          border-bottom: 1px solid #e5e5e5;
           padding-bottom: 30px;
 
           .featured {
@@ -561,11 +607,16 @@
             line-height: 20px;
             margin-bottom: 29px;
             letter-spacing: 0.1em;
+
           }
+
+
         }
+
         // specific dot
         .header-svg__border {
           position: relative;
+
           svg {
             position: absolute;
             top: 0;
@@ -579,6 +630,7 @@
         .collections {
           margin-top: 30px;
           margin-bottom: 24px;
+
 
           .collections-list {
             display: flex;
@@ -629,9 +681,10 @@
         .phone {
           margin-bottom: 24px;
           display: none;
+
           a.retailer-detail {
-            color: stencilColor('color-default-neutral-1');
-            letter-spacing: 0.1em;
+            color: #282828;
+            letter-spacing: .1em;
             text-decoration: none;
           }
         }
@@ -644,6 +697,7 @@
             color: stencilColor('color-allure-bridals-primary-1');
             text-decoration: none;
           }
+
           &::before {
             padding-right: 5px;
             padding-top: 1px;
@@ -660,22 +714,27 @@
           padding: 2px;
           display: flex;
           margin-top: 1rem;
+
           &.book-appt {
             display: none;
           }
+
           span {
             padding: 14px 0;
             width: 100%;
             border: 1px solid stencilColor('color-allure-bridals-primary-5');
             border-radius: 3px;
           }
+
           &:hover {
             background: stencilColor('color-allure-bridals-primary-2');
+
             span {
               color: stencilColor('color-white');
             }
           }
         }
+
         .more-btn {
           width: 100%;
           border-radius: 3px;
@@ -684,22 +743,27 @@
           margin-top: 1rem;
           color: stencilColor('color-allure-bridals-primary-1');
           border: 1px solid stencilColor('color-allure-bridals-primary-1');
+
           &.book-appt {
             display: none;
           }
+
           span {
             padding: 14px 0;
             width: 100%;
             border: 1px solid stencilColor('color-allure-bridals-primary-5');
             border-radius: 3px;
           }
+
           &:hover {
             background: stencilColor('color-allure-bridals-primary-1');
+
             span {
               color: stencilColor('color-white');
             }
           }
         }
+
       }
     }
   }
@@ -707,11 +771,13 @@
   // badge url
   .featured {
     margin-right: 4px;
+
     // width: 20px;
     &::before {
       content: url('../icons/retailer-featured_updated.svg');
     }
   }
+
   .disney {
     // width: 20px;
 
@@ -720,8 +786,10 @@
     }
   }
 
+
   // mobile overrides
   @media (max-width: '900px') {
+
     .content {
       flex-direction: column;
 
@@ -731,6 +799,7 @@
         .geo-filters {
           display: flex;
           flex-wrap: wrap;
+
           .filter {
             width: 100% !important;
 
@@ -738,6 +807,7 @@
               margin-right: 0px !important;
             }
           }
+
         }
 
         .filter-button-container {
@@ -746,13 +816,16 @@
           }
         }
       }
+
       .map-toggle {
         display: flex !important;
       }
+
       .map {
         padding: 0px 13px 0px 13px;
         width: 100% !important;
         order: 1 !important;
+
         #map {
           min-height: 300px !important;
         }
@@ -776,9 +849,11 @@
         }
       }
     }
+
     .map-filters {
       max-height: 100% !important;
     }
+
     .modal--large {
       .modal-close {
         display: none;
@@ -788,6 +863,7 @@
     .schedule-btn {
       max-width: 100% !important;
     }
+
     .phone {
       display: block !important;
     }
@@ -817,6 +893,6 @@
     }
   }
   .body {
-    margin-bottom: spacing('double') * 0;
+    margin-bottom: spacing("double") * 0;
   }
 }

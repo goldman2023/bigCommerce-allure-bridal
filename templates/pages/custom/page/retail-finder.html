@@ -1,145 +1,96 @@
 {{#partial "page"}} {{{ stylesheet '/assets/scss/vendor/jstree/style.css' }}}
-<!-- {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}} -->
 <section class="page">
-  <div class="content">
-    <div class="header-sec">
-      <h2 class="header-title">{{lang 'retail_finder.header_title'}}</h2>
-      <div class="map-toggle">
-        <label class="toggle-label">
-          {{lang 'retail_finder.toggle_map_label'}}
-        </label>
-        <label class="switch">
-          <input type="checkbox" class="on-off-map" />
-          <span class="slider round"></span>
-        </label>
-      </div>
-    </div>
-    <div class="map-filters">
-      <div class="form">
-        <div class="geo-filters">
-          <div id="distanceFilter" class="filter"></div>
-          <div class="form-field filter">
-            <span class="form-label">
-              {{lang 'retail_finder.city_or_zip_label'}}
-            </span>
-            <div id="pac-container">
-              <input
-                class="form-input location-typeahead selector-dropdown"
-                type="text"
-                id="location-typeahead"
-              />
+    <div class="content">
+        <div class="header-sec">
+          <h2 class="header-title">{{lang 'retail_finder.header_title'}}</h2>
+            <div class="map-toggle">
+                <label class="toggle-label">{{lang 'retail_finder.toggle_map_label'}}</label>
+                <label class="switch">
+                    <input type="checkbox" class="on-off-map" checked />
+                    <span class="slider round"></span>
+                </label>
             </div>
-          </div>
         </div>
-        <div class="filter-button-container">
-          <button id="filterButton" class="button" type="button" disabled>
-            SEARCH
-          </button>
-        </div>
-        <div class="reset-button-container">
-          <button id="resetButton" class="link-button" type="button">
-            CLEAR SEARCH
-          </button>
-        </div>
-      </div>
-      <div class="available-retailers">
-        <div class="top">
-          <h2 class="header-title retailers">
-            {{lang 'retail_finder.retailer_header_title'}}
-          </h2>
-          <div class="sort-dropdown">
-            <span class="sort-label">{{lang 'retail_finder.sort_by'}}</span>
-            <select class="sort-select" id="sortSelect"></select>
-          </div>
-          <use xlink:href="#icon-diamond-accent" />
-          <div class="filter-visible">
-            {{lang 'retail_finder.toggle_option_filter_label'}}
-          </div>
-        </div>
-        <div class="header-svg__border">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="12"
-            height="12"
-            viewBox="0 0 12 12"
-            fill="none"
-          >
-            <rect
-              x="5.99991"
-              y="1.58603"
-              width="6"
-              height="6"
-              transform="rotate(45 5.99991 1.58603)"
-              fill="#695C5C"
-              stroke="white"
-              stroke-width="2"
-            />
-          </svg>
-        </div>
-        <div class="option-filters">
-          <div class="form">
-            <div class="geo-filters">
-              <div class="form-field name-filter">
-                <span class="form-label">
-                  {{lang 'retail_finder.name_filter_label'}}
-                </span>
-                <div id="pac-container">
-                  <input
-                    class="form-input"
-                    type="text"
-                    id="name-typeahead"
-                    placeholder="Store Name"
-                  />
+        <div class="map-filters">
+            <div class="form">
+                <div class="geo-filters">
+                    <div id="distanceFilter" class="filter"></div>
+                    <div class="form-field filter">
+                        <span class="form-label">{{lang 'retail_finder.city_or_zip_label'}}</span>
+                        <div id="pac-container">
+                            <input class="form-input location-typeahead selector-dropdown" type="text"
+                                id="location-typeahead" />
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <div class="filter-button-container">
+                  <button id="filterButton" class="button" type="button" disabled>
+                    SEARCH
+                  </button>
+                </div>
+                <div class="reset-button-container">
+                  <button id="resetButton" class="link-button" type="button">
+                    CLEAR SEARCH
+                  </button>
+                </div>
             </div>
-            <div clsss="collections">
-              <div class="collections-label">
-                {{lang 'retail_finder.collection_filter_label'}}
-              </div>
-              <div id="collectionFilters" class="collections-filter"></div>
+            <div class="available-retailers">
+                <div class="top">
+                    <h2 class="header-title retailers">{{lang 'retail_finder.retailer_header_title'}}</h2>
+                    <div class="sort-dropdown">
+                        <span class="sort-label">{{lang 'retail_finder.sort_by'}}</span>
+                        <select class="sort-select" id="sortSelect">
+                        </select>
+                    </div>
+                    <use xlink:href="#icon-diamond-accent" />
+                    <div class="filter-visible">{{lang 'retail_finder.toggle_option_filter_label'}}</div>
+                </div>
+                <div class="header-svg__border">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <rect x="5.99991" y="1.58603" width="6" height="6" transform="rotate(45 5.99991 1.58603)"
+                            fill="#695C5C" stroke="white" stroke-width="2" />
+                    </svg>
+                </div>
+                <div class="option-filters">
+                    <div class="form">
+                        <div class="geo-filters">
+                            <div class="form-field name-filter">
+                                <span class="form-label">{{lang 'retail_finder.name_filter_label'}}</span>
+                                <div id="pac-container">
+                                    <input class="form-input" type="text" id="name-typeahead"
+                                        placeholder="Store Name" />
+                                </div>
+                            </div>
+                        </div>
+                        <div clsss="collections">
+                            <div class="collections-label">{{lang 'retail_finder.collection_filter_label'}}</div>
+                            <div id="collectionFilters" class="collections-filter"></div>
+                        </div>
+                    </div>
+                    <div class="header-svg__border">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <rect x="5.99991" y="1.58603" width="6" height="6" transform="rotate(45 5.99991 1.58603)"
+                                fill="#695C5C" stroke="white" stroke-width="2" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="results-divider">
+                    <svg class="important-icon">
+                        <use xlink:href="#icon-important" />
+                    </svg>
+                    <span id="results-info">{{lang 'retail_finder.result_info'}}</span>
+                </div>
+                <div id="retail-finder-results" class="retailer-results"></div>
             </div>
-          </div>
-          <div class="header-svg__border">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="12"
-              height="12"
-              viewBox="0 0 12 12"
-              fill="none"
-            >
-              <rect
-                x="5.99991"
-                y="1.58603"
-                width="6"
-                height="6"
-                transform="rotate(45 5.99991 1.58603)"
-                fill="#695C5C"
-                stroke="white"
-                stroke-width="2"
-              />
-            </svg>
-          </div>
+
         </div>
-        <div class="results-divider">
-          <svg class="important-icon">
-            <use xlink:href="#icon-important" />
-          </svg>
-          <span id="results-info">
-            {{lang 'retail_finder.result_info'}}
-          </span>
+        <div class="map">
+            <div id="map"></div>
+            <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?key={{ theme_settings.google_api_token }}&libraries=places&callback=Function.prototype">
+                </script>
         </div>
-        <div id="retail-finder-results" class="retailer-results"></div>
-      </div>
     </div>
-    <div class="map">
-      <div id="map"></div>
-      <script
-        type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key={{ theme_settings.google_api_token }}&libraries=places&callback=Function.prototype"
-      ></script>
-    </div>
-  </div>
 </section>
 
 {{/partial}} {{> layout/base}}

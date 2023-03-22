@@ -30,5 +30,5 @@
     >
         {{lang 'products.try_it_on'}}
     </button> -->
-    <a href="/retail-finder/" class="button button--primary custombuttontryon" >{{lang 'products.try_it_on'}}</a>
+    <a href='/retail-finder/?collection={{#each product.category}}{{#if @last}}{{#with (split (trim this) "/")}}{{this.[1]}}{{/with}}{{/if}}{{/each}}' class="button button--primary custombuttontryon" >{{lang 'products.try_it_on'}}</a>
 </div>
