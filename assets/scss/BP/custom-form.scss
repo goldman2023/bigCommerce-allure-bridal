@@ -500,6 +500,24 @@
       border: 1px solid stencilColor("color-default-primary-1");
     }
   }
+  .button-white {
+    background: #fff;
+    border: 1px solid #bc8372;
+    color: #bc8372;
+
+    &:hover {
+      background: #bc8372;
+      color: #fff;
+      border: 1px solid #bc8372;
+    }
+  }
+  .thanks {
+    width: 170px;
+    padding: 0;
+  }
+  .submit-btn {
+    width: 88px;
+  }
 }
 
 .flatpickr-calendar {
