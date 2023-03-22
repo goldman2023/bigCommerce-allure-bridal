@@ -8,22 +8,24 @@ export default class RequestEventAppointment extends PageManager {
     this.address1Field = null;
     this.address2Field = null;
     this.postalField = null;
-    this.initAutocomplete = function(){
-      this.address1Field = document.querySelector('#address1')
-      this.address2Field = document.querySelector('#address2')
-      this.postalField = document.querySelector('#zip')
-      // Create the autocomplete object, restricting the search predictions to
-      // addresses in the US and Canada.
-      this.autocomplete = new google.maps.places.Autocomplete(this.address1Field, {
-        componentRestrictions: { country: ['us', 'ca'] },
-        fields: ['address_components', 'geometry'],
-        types: ['address'],
-      })
-      this.address1Field.focus()
-      this.autocomplete.addListener('place_changed', this.fillInAddress)
-    }
-    this.fillInAddress = function () {
-      const place = this.autocomplete.getPlace()
+  }
+  initAutocomplete() {
+    this.address1Field = document.querySelector('#address1')
+    this.address2Field = document.querySelector('#address2')
+    this.postalField = document.querySelector('#zip')
+    // Create the autocomplete object, restricting the search predictions to
+    // addresses in the US and Canada.
+    this.autocomplete = new google.maps.places.Autocomplete(this.address1Field, {
+      componentRestrictions: { country: ['us', 'ca'] },
+      fields: ['address_components', 'geometry'],
+      types: ['address'],
+    })
+    this.address1Field.focus()
+    this.autocomplete.addListener('place_changed', this.fillInAddress.bind(this))
+  }
+
+  fillInAddress() {
+    const place = this.autocomplete.getPlace()
     let address1 = ''
     let postcode = ''
     for (const component of place.address_components) {
@@ -60,11 +62,10 @@ export default class RequestEventAppointment extends PageManager {
     this.address1Field.value = address1
     this.postalField.value = postcode
     this.address2Field.focus()
-    }
   }
 
    onReady = () => {
-    window.initAutocomplete = this.initAutocomplete;
+    window.initAutocomplete = this.initAutocomplete.bind(this);
     flatpickr('.date-picker', {
       position: 'below',
       monthSelectorType: 'static',
