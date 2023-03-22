@@ -429,7 +429,10 @@ export default class DesignerEvents extends PageManager {
             const requestBtnText = document.createElement('span');
             requestBtnText.innerText = 'REQUEST AN APPOINTMENT'
             requestBtn.append(requestBtnText);
-            requestBtn.addEventListener('click', () => this.openRequestForm(event));
+            requestBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.openRequestForm(event);
+            });
             container.append(requestBtn)
         }
 
@@ -801,12 +804,6 @@ export default class DesignerEvents extends PageManager {
         const evtCollections = event.collectionsAvailable || [];
         for (const collection of evtCollections) {
             const collectionItem = document.createElement('span');
-            if (collection.collectionButtonUrl == null) {
-                //collectionItem.setAttribute("href", "#");
-            } else {
-                //collectionItem.setAttribute("href", collection.collectionButtonUrl);
-                //collectionItem.setAttribute("target", "_blank");
-            }
             collectionItem.classList.add('collection-item');
             collectionItem.classList.add('event-detail');
             collectionItem.innerText = collection;
@@ -823,7 +820,10 @@ export default class DesignerEvents extends PageManager {
         address.append(addressLabel);
         const streetAddress = document.createElement('div');
         streetAddress.classList.add('street-address');
-        streetAddress.innerText = event.streetName;
+        streetAddress.innerHTML = `
+            <div>${event.streetName}</div>
+            <div>${event.city}, ${event.state} ${event.zipCode}</div>
+        `;
         address.append(streetAddress);
         const directions = document.createElement('a');
         directions.classList.add('directions');
@@ -1093,11 +1093,11 @@ export default class DesignerEvents extends PageManager {
     }
     openRequestForm = (event) => {
         if (event.bridalLiveEventId) {
-            window.location.href = '/request-appointment?eventId=' + event.bridalLiveEventId + '&eventName=' + event.eventName;
+            window.location.href = '/request-event-appointment/?eventId=' + event.bridalLiveEventId + '&eventName=' + event.eventName;
             //redirect to custom form appending query string
 
         } else {
-            window.location.href = '/request-appointment?eventName=' + event.eventName;
+            window.location.href = '/request-event-appointment/?eventName=' + event.eventName;
         }
 
     }
