@@ -834,19 +834,19 @@ export default class RetailFinder extends PageManager {
     collections.append(collectionsList);
     detailElement.append(collections);
 
-    const address = document.createElement('div');
-    address.classList.add('retailer-address');
-    const addressLabel = document.createElement('div');
-    addressLabel.classList.add('retailer-label');
-    addressLabel.innerText = 'ADDRESS';
-    address.append(addressLabel);
-    const streetAddress = document.createElement('div');
-    streetAddress.classList.add('street-address');
-    streetAddress.classList.add('retailer-detail');
-    streetAddress.innerText = retailer.retailerStreet;
-    address.append(streetAddress);
-    const directions = document.createElement('a');
-    directions.classList.add('directions');
+    const address = document.createElement('div')
+    address.classList.add('retailer-address')
+    const addressLabel = document.createElement('div')
+    addressLabel.classList.add('retailer-label')
+    addressLabel.innerText = 'ADDRESS'
+    address.append(addressLabel)
+    const streetAddress = document.createElement('div')
+    streetAddress.classList.add('street-address')
+    streetAddress.classList.add('retailer-detail')
+    streetAddress.innerText = `${retailer.retailerStreet}\n${retailer.retailerCity}, ${retailer.state}`
+    address.append(streetAddress)
+    const directions = document.createElement('a')
+    directions.classList.add('directions')
     directions.innerText = 'GET DIRECTIONS'
     const destination = retailer.retailerStreet.replaceAll(',', '').replaceAll(' ', '+');
     directions.setAttribute('href', `https://www.google.com/maps?daddr=${destination}`);
