@@ -1093,11 +1093,11 @@ export default class DesignerEvents extends PageManager {
     }
     openRequestForm = (event) => {
         if (event.bridalLiveEventId) {
-            window.location.href = '/request-event-appointment/?eventId=' + event.bridalLiveEventId + '&eventName=' + event.eventName;
+            window.location.href = '/request-event-appointment?eventId=' + event.bridalLiveEventId + '&eventName=' + event.eventName;
             //redirect to custom form appending query string
 
         } else {
-            window.location.href = '/request-event-appointment/?eventName=' + event.eventName;
+            window.location.href = '/request-event-appointment?eventName=' + event.eventName;
         }
 
     }
