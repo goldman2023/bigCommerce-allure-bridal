@@ -609,7 +609,8 @@ export default class RetailFinder extends PageManager {
         'collection',
       )
       const initialCollection = TEMPDATA.find((item) => {
-        return item.text.toLowerCase() === pdpCollection?.toLowerCase()
+        return  pdpCollection?.toLowerCase().includes(item.text.toLowerCase())
+       
       })
 
       if (!!pdpCollection && !!initialCollection) {
