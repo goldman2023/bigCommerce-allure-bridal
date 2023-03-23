@@ -63,6 +63,11 @@ export default class RequestEventAppointment extends PageManager {
   }
 
    onReady = () => {
+    const script = document.createElement('script');
+    script.setAttribute('async', '');
+    script.setAttribute('src', "https://maps.googleapis.com/maps/api/js?key=AIzaSyA68nj5mHdkdbHs0O6JOVfzYoau2oeD-Gs&callback=initAutocomplete&libraries=places");
+    document.head.appendChild(script);
+
     window.initAutocomplete = this.initAutocomplete.bind(this);
     flatpickr('.date-picker', {
       position: 'below',
