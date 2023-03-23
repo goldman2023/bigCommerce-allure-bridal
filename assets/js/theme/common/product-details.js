@@ -93,6 +93,8 @@ export default class ProductDetails extends ProductDetailsBase {
             this.registerAddToCartValidation();
             $.each($productSwatchLabels, placeSwatchLabelImage);
             addWidthToModalSlider();
+            $('.color-selected-value').html($('.swatchvalue:first-child').html());
+            $('.color-selected-value').attr('style', 'visibility: visible;');
         });
 
         function addWidthToModalSlider() {
