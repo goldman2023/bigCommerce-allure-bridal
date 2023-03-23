@@ -207,7 +207,7 @@ export default class RequestEventAppointment extends PageManager {
 
       // submit the form using fetch
       const url =
-        'https://apim.workato.com/allure/allure-b2c-website/retailer/appointmentrequest' // get the form action url
+        'https://allure-integration.azurewebsites.net/leads/stage/acknowledge' // get the form action url
       const method = 'POST' // get the form method (POST, GET, etc.)
       //Generate form data
       const formData = {
@@ -231,8 +231,6 @@ export default class RequestEventAppointment extends PageManager {
         method: method,
         headers: {
           'Content-Type': 'application/json',
-          'API-TOKEN':
-            'c0bce025e1792e283cfbd229321ecc423ae60257cf462c8d262d7b10fd9e41f9',
         },
         body: JSON.stringify(formData),
       })

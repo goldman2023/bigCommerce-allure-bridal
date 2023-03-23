@@ -624,18 +624,22 @@
         .collections {
           margin-top: 30px;
           margin-bottom: 24px;
+          display: flex;
+          flex-wrap: wrap;
 
-
+          .retailer-label{
+            width: 100%;
+          }
           .collections-list {
+            width: 50%;
             display: flex;
             flex-wrap: wrap;
-            column-gap: 67px;
-            row-gap: 4px;
+            flex-direction: column;
 
             .collection-item {
               color: stencilColor('color-default-primary-1');
-              flex: 1 1 40%;
-              max-width: 40%;
+              // flex: 100%;
+              // max-width: 40%;
               text-decoration: none;
             }
           }
@@ -669,7 +673,7 @@
         .retailer-detail {
           font-weight: 400;
           font-size: 14px;
-          line-height: 22px;
+          line-height: 29px;
         }
 
         .phone {
@@ -854,6 +858,13 @@
       }
     }
 
+    .modal{
+      .collections{
+        .collections-list{
+          width: 100% !important;
+        }
+      }
+    }
     .schedule-btn {
       max-width: 100% !important;
     }
