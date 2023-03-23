@@ -501,14 +501,14 @@
     }
   }
   .button-white {
-    background: #fff;
-    border: 1px solid #bc8372;
-    color: #bc8372;
+    background: stencilColor("color-secondary");
+    border: 1px solid stencilColor( "color-default-primary-1");
+    color: stencilColor( "color-default-primary-1");
 
     &:hover {
-      background: #bc8372;
-      color: #fff;
-      border: 1px solid #bc8372;
+      background: stencilColor( "color-default-primary-1");
+      color: stencilColor("color-secondary");
+      border: 1px solid stencilColor( "color-default-primary-1");
     }
   }
   .thanks {
