@@ -83,6 +83,8 @@ const customClasses = {
     'pages\\custom\\page\\registration-thank-you': () => import('./theme/BP/registration-thank-you'), // Windows
     'pages/custom/page/request-event-appointment': () => import('./theme/BP/request-event-appointment'), // Mac/Linux
     'pages\\custom\\page\\request-event-appointment': () => import('./theme/BP/request-event-appointment'), // Windows
+    'pages/custom/page/custom-retail-finder': () => import('./theme/BP/request-appointment'), // Mac/Linux
+    'pages\\custom\\page\\custom-retail-finder': () => import('./theme/BP/request-appointment'), // Windows
 };
 
 /**

@@ -492,7 +492,6 @@
     background: stencilColor("color-default-primary-1");
     border: 1px solid stencilColor("color-default-primary-1");
     color: stencilColor("color-secondary");
-    width: 140px;
 
     &:hover {
       background: stencilColor("color-secondary");
@@ -512,8 +511,8 @@
     }
   }
   .thanks {
-    width: 170px;
-    padding: 0;
+    width: auto;
+    padding: 10px;
   }
   .submit-btn {
     width: 88px;
