@@ -63,9 +63,13 @@ export default class RequestEventAppointment extends PageManager {
   }
 
    onReady = () => {
+    const url= this.context.requestEventAppointmentUrl;
+    const googleApiToken = this.context.googleApiToken;
+
+
     const script = document.createElement('script');
     script.setAttribute('async', '');
-    script.setAttribute('src', "https://maps.googleapis.com/maps/api/js?key=AIzaSyA68nj5mHdkdbHs0O6JOVfzYoau2oeD-Gs&callback=initAutocomplete&libraries=places");
+    script.setAttribute('src', `https://maps.googleapis.com/maps/api/js?key=${googleApiToken}&callback=initAutocomplete&libraries=places`);
     document.head.appendChild(script);
 
     window.initAutocomplete = this.initAutocomplete.bind(this);
@@ -194,7 +198,6 @@ export default class RequestEventAppointment extends PageManager {
         alert('You must agree to the terms and conditions to continue.')
         return
       }
-      const url= this.context.requestEventAppointmentUrl;
       const formData = {
         FirstName: firstName,
         LastName: lastName,
