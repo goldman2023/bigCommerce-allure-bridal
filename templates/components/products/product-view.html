@@ -233,62 +233,6 @@
                             <div><img src="{{strReplace this.data '{:size}' '2500x2500'}}" style="width: 100%;"/></div>
                         {{/each}}
                   </div>
-                <!-- <figure class="productView-image"
-                    data-image-gallery-main
-                    {{#if product.main_image}}
-                    {{/if}}
-                    >
-                    <div class="productView-img-container">
-                        {{!-- Remove the surrounding a-element if there is no main image. --}}
-                        {{#if product.main_image}}
-                            <a id="pdpmainimage" href="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.pop_size }}"
-                                target="_blank">
-                        {{/if}}
-                        {{> components/common/responsive-img
-                            image=product.main_image
-                            class="productView-image--default"
-                            fallback_size=theme_settings.product_size
-                            lazyload=theme_settings.lazyload_mode
-                            default_image=theme_settings.default_image_product
-                            otherAttributes="data-main-image"
-                        }}
-                        {{!-- Remove the surrounding a-element if there is no main image. --}}
-                        {{#if product.main_image}}
-                            </a>
-                        {{/if}}
-                        <div id="pdpimagemodal" class="pdpimagemodal">
-                            <span class="close">&times;</span>
-                            <img class="modal-content" id="img01">
-                            <div id="caption"></div>
-                          </div>
-                    </div>
-                </figure>
-                <ul class="productView-thumbnails" data-slick='{
-                        "infinite": true,
-                        "mobileFirst": true,
-                        "dots": false,
-                        "accessibility": false,
-                        "slidesToShow": {{ product.images.length }},
-                        "slidesToScroll": {{ product.images.length }}
-                    }'>
-                    {{#each product.images}}
-                        <li class="productView-thumbnail">
-                            <a
-                            class="productView-thumbnail-link {{#if @index '===' 0}}is-active{{/if}}"
-                            href="{{getImageSrcset this (cdn ../theme_settings.default_image_product)}}"
-                            data-image-gallery-item
-                            data-image-gallery-new-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product)}}"
-                            data-image-gallery-new-image-srcset="{{getImageSrcset this use_default_sizes=true}}"
-                        >
-                            {{> components/common/responsive-img
-                                image=this
-                                fallback_size=../theme_settings.productview_thumb_size
-                                lazyload=../theme_settings.lazyload_mode
-                            }}
-                            </a>
-                        </li>
-                    {{/each}}
-                </ul> -->
             </section>
         </div>
     </div>
