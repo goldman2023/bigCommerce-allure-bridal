@@ -164,10 +164,9 @@ export default class RequestEventAppointment extends PageManager {
 
 
       const noOfPeopleAttending = form.elements.noOfPeopleAttending.value
-      const eventName = new URLSearchParams(window.location.search).get(
-        'eventName',
-      )
-      const eventId = new URLSearchParams(window.location.search).get('eventId')
+      const eventName = new URLSearchParams(window.location.search).get('eventName');
+      const eventId = new URLSearchParams(window.location.search).get('eventId');
+
       var unmaskedPhone = Inputmask.unmask(phone, { mask: '(999) 999-9999' })
       if (
         !firstName ||
@@ -191,8 +190,6 @@ export default class RequestEventAppointment extends PageManager {
         return
       }
       const url= this.context.requestEventAppointmentUrl;
-
-      console.log(url)
       const formData = {
         FirstName: firstName,
         LastName: lastName,
@@ -203,11 +200,11 @@ export default class RequestEventAppointment extends PageManager {
         City: city,
         State: state,
         PostalCode: zip,
-        weddingDate: weddingDate,
+        EventDate: weddingDate,
         NumberPeopleinAppointment: parseInt(noOfPeopleAttending),
         EmailOptin: emailAlerts,
         EventName: eventName,
-        EventId: eventId ? parseInt(eventId) : 0,
+        id: eventId ? parseInt(eventId) : 0,
         DirectBook: 'true',
       }
       fetch(url, {
