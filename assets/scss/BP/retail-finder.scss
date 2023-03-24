@@ -410,6 +410,10 @@
           font-weight: 600;
           font-size: 12px;
           line-height: 16px;
+          white-space: nowrap;
+          left: 8px;
+          padding: 0 3px 0 3px;
+          letter-spacing: 0.04em;
         }
 
         padding-right: 0;
@@ -869,7 +873,7 @@
     }
   }
   .container {
-    padding: 0px 1.5rem;
+    padding: 0px 1.3rem;
     @include breakpoint('medium') {
       margin: 0 auto;
     }
