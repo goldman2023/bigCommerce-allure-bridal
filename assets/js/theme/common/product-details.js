@@ -93,8 +93,6 @@ export default class ProductDetails extends ProductDetailsBase {
             this.registerAddToCartValidation();
             $.each($productSwatchLabels, placeSwatchLabelImage);
             addWidthToModalSlider();
-            $('.color-selected-value').html($('.swatchvalue:first-child').html());
-            $('.color-selected-value').attr('style', 'visibility: visible;');
         });
 
         function addWidthToModalSlider() {
@@ -175,6 +173,8 @@ export default class ProductDetails extends ProductDetailsBase {
             $(this).removeClass('is-hover');
             $('.color-selected-value').attr('style', 'visibility: visible;');
         });
+        $('.color-selected-value').html($('.prod-option.color .swatchvalue').eq(0).html());
+        $('.color-selected-value').attr('style', 'visibility: visible;');
     }
     viewVideoToggle(){
         let checkboxstatus = document.getElementById('viewvideocheckbox').checked;
