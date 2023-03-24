@@ -49,7 +49,7 @@ export default class RequestAppointment extends PageManager {
           document.querySelector('#city').value = component.long_name
           break
         case 'administrative_area_level_1': {
-          document.querySelector('#state').value = component.short_name
+          document.querySelector("#state").value = component.short_name;
           break
         }
         case 'country':
@@ -65,7 +65,8 @@ export default class RequestAppointment extends PageManager {
    onReady = () => {
     const url= this.context.requestAppointmentUrl;
     const googleApiToken = this.context.googleApiToken;
-
+    document.querySelector("#state").style.display = "block";
+    document.querySelector("#state").nextSibling.remove();
 
     const script = document.createElement('script');
     script.setAttribute('async', '');
@@ -126,8 +127,8 @@ export default class RequestAppointment extends PageManager {
       if (retailFinderFormInputs) {
         for (let i = 0; i < retailFinderFormInputs.length; i++) {
           if (retailFinderFormInputs[i].classList.contains('required')) {
+            var retailFinderFormError = retailFinderFormInputs[i].closest('.form-field').querySelector('.error-message');
             if (retailFinderFormInputs[i].value.length > 0) {
-              var retailFinderFormError = retailFinderFormInputs[i].closest('.form-field').querySelector('.error-message')
               if (retailFinderFormError) {
                 retailFinderFormError.remove();
               }
@@ -135,8 +136,8 @@ export default class RequestAppointment extends PageManager {
               var errorDiv = document.createElement('span');
               errorDiv.classList.add('error-message');
               errorDiv.innerText = 'This Field is required';
-              if(!retailFinderFormInputs[i].getAttribute('type') === "hidden"){
-                retailFinderFormInputs[i].parentNode.insertBefore(errorDiv,retailFinderFormInputs[i].nextSibling)
+              if(retailFinderFormInputs[i].getAttribute('type') !== "hidden" && !retailFinderFormError){
+                retailFinderFormInputs[i].parentNode.insertBefore(errorDiv,retailFinderFormInputs[i].nextSibling);
               }
             }
           }
