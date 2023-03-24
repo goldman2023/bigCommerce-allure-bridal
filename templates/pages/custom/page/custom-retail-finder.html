@@ -420,7 +420,7 @@
             const retailerName = new URLSearchParams(window.location.search).get('retailerName');
             //get retailer id from querystring
             const retailerId = new URLSearchParams(window.location.search).get('retailerId');
-
+            const encodedRetailername = retailerName.replace("%26","&")
 
 
             //get unmasked phone number
@@ -455,7 +455,7 @@
                 EventDate: eventDate,
                 NumberPeopleinAppointment: parseInt(noOfPeopleAttending),
                 EmailOptin: emailAlerts,
-                RetailerName: retailerName,
+                RetailerName: encodedRetailername,
                 RetailerId: retailerId ? parseInt(retailerId) : 0,
                 DirectBook: "true",
                 AppointmentDates: preferredDates

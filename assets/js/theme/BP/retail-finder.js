@@ -951,12 +951,13 @@ export default class RetailFinder extends PageManager {
     modal.updateContent(elem);
   }
   openRequestForm = (retailer) => {
+    let retailerName = retailer.retailerName.replace("&","%26");
     if (retailer.bridalLiveRetailerId) {
-      window.location.href = '/request-appointment?retailerId=' + retailer.bridalLiveRetailerId + '&retailerName=' + retailer.retailerName;
+      window.location.href = '/request-appointment?retailerId=' + retailer.bridalLiveRetailerId + '&retailerName=' + retailerName;
       //redirect to custom form appending query string
 
     } else {
-      window.location.href = '/request-appointment?retailerName=' + retailer.retailerName;
+      window.location.href = '/request-appointment?retailerName=' + retailerName;
     }
 
   }
