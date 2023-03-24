@@ -1,7 +1,7 @@
 import { MarkerClusterer } from '@googlemaps/markerclusterer'
 // import is required by client, not by code
 import regeneratorRuntime from 'regenerator-runtime'
-
+import { debounce } from 'lodash';
 import { defaultModal } from '../global/modal';
 import PageManager from '../page-manager'
 import $ from 'jquery';
@@ -109,7 +109,7 @@ const HOVER_DEFAULT_ZOOM_LEVEL = 10;
 
 const MARKER_HOVER_EVENT = 'markerHoverEvent';
 const RETAILER_ITEM_HOVER_EVENT = 'retailerItemHoverEvent';
-
+const debounceTimeOut = 1000;
 export default class RetailFinder extends PageManager {
   SORTABLES = [
     {
@@ -490,13 +490,14 @@ export default class RetailFinder extends PageManager {
     }
   };
 
-  filterRetailers = () => {
+  filterRetailers = debounce(() => {
     var self = this;
     var addr = document.querySelector(".location-typeahead");
     this.appliedFilters['city'] = addr.value;
+    if(!addr.value.length) return;
     // Get geocoder instance
     var geocoder = new google.maps.Geocoder();
-
+    console.log("here----")
     // Geocode the address
     geocoder.geocode({
         address: addr.value,
@@ -533,7 +534,7 @@ export default class RetailFinder extends PageManager {
         self.paintMapAndRetailers(self.retailers)
       },
     )
-  };
+  }, debounceTimeOut);
 
   updateResultsInfo = () => {
     const retailerInfoElem = document.getElementById('results-info');

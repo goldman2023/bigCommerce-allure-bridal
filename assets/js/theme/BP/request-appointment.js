@@ -127,31 +127,16 @@ export default class RequestAppointment extends PageManager {
         for (let i = 0; i < retailFinderFormInputs.length; i++) {
           if (retailFinderFormInputs[i].classList.contains('required')) {
             if (retailFinderFormInputs[i].value.length > 0) {
-              var retailFinderFormError = retailFinderFormInputs[i]
-                .closest('.form-field')
-                .querySelector('.error-message')
+              var retailFinderFormError = retailFinderFormInputs[i].closest('.form-field').querySelector('.error-message')
               if (retailFinderFormError) {
                 retailFinderFormError.remove();
               }
             } else {
-              if (
-                retailFinderFormInputs[i]
-                  .closest('.form-field')
-                  .querySelectorAll('.error-message').length > 0
-              ) {
-              } else {
-                var errorDiv = document.createElement('span')
-                errorDiv.classList.add('error-message')
-                errorDiv.innerText = 'This Field is required'
-
-                insertAfter(errorDiv, retailFinderFormInputs[i])
-
-                function insertAfter(newNode, existingNode) {
-                  existingNode.parentNode.insertBefore(
-                    newNode,
-                    existingNode.nextSibling,
-                  )
-                }
+              var errorDiv = document.createElement('span');
+              errorDiv.classList.add('error-message');
+              errorDiv.innerText = 'This Field is required';
+              if(!retailFinderFormInputs[i].getAttribute('type') === "hidden"){
+                retailFinderFormInputs[i].parentNode.insertBefore(errorDiv,retailFinderFormInputs[i].nextSibling)
               }
             }
           }
