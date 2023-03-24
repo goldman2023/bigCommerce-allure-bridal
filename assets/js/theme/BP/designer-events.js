@@ -28,7 +28,7 @@ const FILTER_IDS = {
     distance: 'distanceFilterSelect',
 };
 
-const DEFAULT_ZOOM_LEVEL = 3;
+const DEFAULT_ZOOM_LEVEL = 2;
 const LOCATION_CHANGE_ZOOM_LEVEL = 8;
 const HOVER_DEFAULT_ZOOM_LEVEL = 10;
 
@@ -678,7 +678,7 @@ export default class DesignerEvents extends PageManager {
         this.map = new google.maps.Map(document.getElementById('map'), {
             // arbitrarily center the map
             zoom: DEFAULT_ZOOM_LEVEL,
-            center: { lat: 50, lng: -60 }
+            center: { lat: 36, lng: -60 }
         });
     };
 
@@ -858,7 +858,7 @@ export default class DesignerEvents extends PageManager {
         const eventUrlLink = document.createElement('a');
         eventUrlLink.setAttribute("href", `${event.website}`);
         eventUrlLink.setAttribute("target", "_blank");
-        eventUrlLink.innerText = event.website;
+        eventUrlLink.innerText = 'VISIT RETAILER WEBSITE';
         eventUrl.append(eventUrlLink);
         contentRight.append(eventUrl);
 

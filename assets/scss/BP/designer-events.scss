@@ -3,24 +3,24 @@
 // so look into using just one file
 .pages-custom-page-designer-events {
     padding: 0 1.5rem;
-    // display: flex;
-    // justify-content: center;
     max-width: 91.71429rem;
     width: 100%;
     margin: auto;
+
+    min-height: 800px;
+    margin-top: 20px;
 
     .custombread {
         display: none;
     }
 
     .content {
+        margin-top: 20px;
         display: flex;
         flex-wrap: wrap;
-        height: 100vh;
-        margin-top: 24px;
 
         .left {
-            flex-basis: 40%;
+            flex-basis: 36%;
             padding-right: 24px;
             overflow-y: auto;
             height: 100%;
@@ -193,9 +193,9 @@
                                     }
 
                                     input[type='radio']:after {
-                                        width: 12px;
-                                        height: 12px;
-                                        border-radius: 12px;
+                                        width: 15px;
+                                        height: 15px;
+                                        border-radius: 15px;
                                         top: -1.5px;
                                         position: relative;
                                         background-color: white;
@@ -206,9 +206,9 @@
                                     }
 
                                     input[type='radio']:checked:after {
-                                        width: 12px;
-                                        height: 12px;
-                                        border-radius: 12px;
+                                        width: 15px;
+                                        height: 15px;
+                                        border-radius: 15px;
                                         top: -1.5px;
                                         position: relative;
                                         background-color: white;
@@ -277,17 +277,12 @@
                         cursor: pointer;
                         line-height: 20px;
                         padding-top: 24px;
-                        margin-bottom: 40px;
+                        padding-bottom: 40px;
                         padding-left: 24px;
 
                         &:hover,
                         &.hovered {
                             background-color: #FBF8F8;
-                        }
-
-                        &:not(:nth-child(3n)) {
-                            padding-right: 50px;
-
                         }
 
                         .event-title {
@@ -414,6 +409,7 @@
 
         .right {
             flex: 1;
+            min-height: 600px;
 
             #map {
                 height: 100%;
@@ -487,6 +483,14 @@
             order: 2;
             padding: 0 16px !important;
             overflow: hidden !important;
+
+            .event-item {
+                padding-left: unset !important;
+
+                .event-schedule {
+                    width: unset;
+                }
+            }
 
             .events-header {
                 position: unset;
@@ -687,6 +691,11 @@
     overflow: auto;
 }
 
+// unset it because it's already set above, which works better for mobile
+.modal-body {
+    overflow: unset;
+}
+
 .modal-close {
 
     &:focus::after,
@@ -708,11 +717,6 @@
         flex: 1;
     }
 }
-
-.modal-body {
-    -webkit-overflow-scrolling: touch;
-}
-
 
 .modal:not(.modal--large) {
     max-width: 700px;
@@ -838,6 +842,12 @@
                         a {
                             color: stencilColor('color-allure-bridals-primary-1');
                             text-decoration: none;
+
+                            &::before {
+                                padding-right: 5px;
+                                padding-top: 1px;
+                                content: url('../icons/visit_url.svg');
+                            }
                         }
                     }
 
