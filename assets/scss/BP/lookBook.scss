@@ -179,7 +179,7 @@
                 .col {
                     width: 100%;
                     @include breakpoint("medium") { 
-                        width: calc(50% - 20px);
+                        width: calc(50% - 10px);
                     }
                 }
                 .imageblock {
@@ -314,6 +314,13 @@
                             height: 20px;
                             left: 0;
                             top: -2px;
+                        }
+                        &.websitelink{
+                            font-size: 13px;
+                            text-transform: capitalize;
+                            &::before {
+                                background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTMiIHZpZXdCb3g9IjAgMCAxNCAxMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTcuMzc1IDIuNUgyLjVDMS4zOTU0MyAyLjUgMC41IDMuMzk1NDMgMC41IDQuNVYxMC41QzAuNSAxMS42MDQ2IDEuMzk1NDMgMTIuNSAyLjUgMTIuNUg5LjVDMTAuNjA0NiAxMi41IDExLjUgMTEuNjA0NiAxMS41IDEwLjVWNi44NDc4M005IDAuNUgxMy41TTEzLjUgMC41VjVNMTMuNSAwLjVMNy41IDYuNSIgc3Ryb2tlPSIjQUM2MzREIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==");
+                            }
                         }
                     }
                 }
