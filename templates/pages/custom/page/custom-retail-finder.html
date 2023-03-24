@@ -61,7 +61,7 @@
                         <span class="form-label">{{lang 'request_appointment.email'}} <span
                                 class="asterisk">*</span></span>
 
-                        <input class="form-input required" type="email" name="email"
+                        <input class="form-input required" type="text" name="email"
                             placeholder="{{lang 'request_appointment.email'}}" />
 
                     </div>
@@ -119,6 +119,7 @@
                         <span class="form-label">{{lang 'request_appointment.state'}} <span
                                 class="asterisk">*</span></span>
                         <select id="state" name="state" class="form-select selector-dropdown">
+                            <option hidden value="">Select one</option>
                             <option value="AL">AL</option>
                             <option value="AK">AK</option>
                             <option value="AZ">AZ</option>

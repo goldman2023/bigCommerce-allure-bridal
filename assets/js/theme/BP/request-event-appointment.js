@@ -78,6 +78,7 @@ export default class RequestEventAppointment extends PageManager {
       position: 'below',
       monthSelectorType: 'static',
       minDate: 'today',
+      disableMobile: "true"
     })
     flatpickr('.inline-picker', {
       inline: true,
@@ -123,26 +124,6 @@ export default class RequestEventAppointment extends PageManager {
     const form = document.getElementById('event-appointment-form')
     form.addEventListener('submit', (event) => {
       event.preventDefault();
-      var retailFinderFormInputs = form.querySelectorAll('.form-input')
-      if (retailFinderFormInputs) {
-        for (let i = 0; i < retailFinderFormInputs.length; i++) {
-          if (retailFinderFormInputs[i].classList.contains('required')) {
-            var retailFinderFormError = retailFinderFormInputs[i].closest('.form-field').querySelector('.error-message');
-            if (retailFinderFormInputs[i].value.length > 0) {
-              if (retailFinderFormError) {
-                retailFinderFormError.remove();
-              }
-            } else {
-              var errorDiv = document.createElement('span');
-              errorDiv.classList.add('error-message');
-              errorDiv.innerText = 'This Field is required';
-              if(retailFinderFormInputs[i].getAttribute('type') !== "hidden" && !retailFinderFormError){
-                retailFinderFormInputs[i].parentNode.insertBefore(errorDiv,retailFinderFormInputs[i].nextSibling);
-              }
-            }
-          }
-        }
-      }
 
       const firstName = form.elements.firstName.value
       const lastName = form.elements.lastName.value
@@ -156,17 +137,17 @@ export default class RequestEventAppointment extends PageManager {
       const state = form.elements.state.value
       const zip = form.elements.zip.value
       const weddingDate = form.elements.weddingDate.value
-
-
       const noOfPeopleAttending = form.elements.noOfPeopleAttending.value
       const eventName = new URLSearchParams(window.location.search).get('eventName');
       const eventId = new URLSearchParams(window.location.search).get('eventId');
 
-      var unmaskedPhone = Inputmask.unmask(phone, { mask: '(999) 999-9999' })
+      var unmaskedPhone = Inputmask.unmask(phone, { mask: '(999) 999-9999' });
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (
         !firstName ||
         !lastName ||
         !email ||
+        !emailPattern.test(email) ||
         !phone ||
         unmaskedPhone.length < 10 ||
         !address1 ||
@@ -176,7 +157,25 @@ export default class RequestEventAppointment extends PageManager {
         !weddingDate ||
         !noOfPeopleAttending
       ) {
-        alert('Please fill out all the required fields.')
+        alert('Please fill out all the required fields.');
+        form.querySelectorAll('.form-input').forEach(element => {
+          if (element.classList.contains('required')) {
+            let retailFinderFormError = element.closest('.form-field').querySelector('.error-message');
+            let errorDiv = document.createElement('span');
+            errorDiv.classList.add('error-message');
+
+            if (element.value.length > 0) {
+              retailFinderFormError?.remove();
+              if (element.getAttribute('name') === "email" && !emailPattern.test(email)){
+                  errorDiv.innerText = 'Invalid email address';
+                  element.parentNode.insertBefore(errorDiv,element.nextSibling);
+                }
+            } else if(!retailFinderFormError) {
+              errorDiv.innerText = 'This Field is required';
+              element.parentNode.insertBefore(errorDiv,element.nextSibling);
+            }
+          }
+        })
         return
       }
 
