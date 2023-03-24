@@ -170,6 +170,10 @@ export default class RequestEventAppointment extends PageManager {
                   errorDiv.innerText = 'Invalid email address';
                   element.parentNode.insertBefore(errorDiv,element.nextSibling);
                 }
+              if (element.getAttribute('name') === "phoneNumber" && unmaskedPhone.toString().length < 10){
+                errorDiv.innerText = 'Invalid phone number';
+                element.parentNode.insertBefore(errorDiv,element.nextSibling);
+              }
             } else if(!retailFinderFormError) {
               errorDiv.innerText = 'This Field is required';
               element.parentNode.insertBefore(errorDiv,element.nextSibling);
