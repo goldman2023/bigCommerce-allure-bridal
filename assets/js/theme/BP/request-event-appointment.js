@@ -65,7 +65,8 @@ export default class RequestEventAppointment extends PageManager {
    onReady = () => {
     const url= this.context.requestAppointmentUrl;
     const googleApiToken = this.context.googleApiToken;
-
+    document.querySelector("#state").style.display = "block";
+    document.querySelector("#state").nextSibling.remove();
 
     const script = document.createElement('script');
     script.setAttribute('async', '');
@@ -77,6 +78,7 @@ export default class RequestEventAppointment extends PageManager {
       position: 'below',
       monthSelectorType: 'static',
       minDate: 'today',
+      disableMobile: "true"
     })
     flatpickr('.inline-picker', {
       inline: true,
@@ -122,41 +124,6 @@ export default class RequestEventAppointment extends PageManager {
     const form = document.getElementById('event-appointment-form')
     form.addEventListener('submit', (event) => {
       event.preventDefault();
-      var retailFinderFormInputs = form.querySelectorAll('.form-input')
-      if (retailFinderFormInputs) {
-        for (let i = 0; i < retailFinderFormInputs.length; i++) {
-          if (retailFinderFormInputs[i].classList.contains('required')) {
-            if (retailFinderFormInputs[i].value.length > 0) {
-              var retailFinderFormError = retailFinderFormInputs[i]
-                .closest('.form-field')
-                .querySelector('.error-message')
-              if (retailFinderFormError) {
-                retailFinderFormError.remove();
-              }
-            } else {
-              if (
-                retailFinderFormInputs[i]
-                  .closest('.form-field')
-                  .querySelectorAll('.error-message').length > 0
-              ) {
-              } else {
-                var errorDiv = document.createElement('span')
-                errorDiv.classList.add('error-message')
-                errorDiv.innerText = 'This Field is required'
-
-                insertAfter(errorDiv, retailFinderFormInputs[i])
-
-                function insertAfter(newNode, existingNode) {
-                  existingNode.parentNode.insertBefore(
-                    newNode,
-                    existingNode.nextSibling,
-                  )
-                }
-              }
-            }
-          }
-        }
-      }
 
       const firstName = form.elements.firstName.value
       const lastName = form.elements.lastName.value
@@ -170,17 +137,17 @@ export default class RequestEventAppointment extends PageManager {
       const state = form.elements.state.value
       const zip = form.elements.zip.value
       const weddingDate = form.elements.weddingDate.value
-
-
       const noOfPeopleAttending = form.elements.noOfPeopleAttending.value
-      const eventName = new URLSearchParams(window.location.search).get('eventName');
+      const eventName = new URLSearchParams(window.location.search.replace(/&/g, '%26')).get('eventName');
       const eventId = new URLSearchParams(window.location.search).get('eventId');
 
-      var unmaskedPhone = Inputmask.unmask(phone, { mask: '(999) 999-9999' })
+      var unmaskedPhone = Inputmask.unmask(phone, { mask: '(999) 999-9999' });
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (
         !firstName ||
         !lastName ||
         !email ||
+        !emailPattern.test(email) ||
         !phone ||
         unmaskedPhone.length < 10 ||
         !address1 ||
@@ -190,7 +157,29 @@ export default class RequestEventAppointment extends PageManager {
         !weddingDate ||
         !noOfPeopleAttending
       ) {
-        alert('Please fill out all the required fields.')
+        alert('Please fill out all the required fields.');
+        form.querySelectorAll('.form-input').forEach(element => {
+          if (element.classList.contains('required')) {
+            let retailFinderFormError = element.closest('.form-field').querySelector('.error-message');
+            let errorDiv = document.createElement('span');
+            errorDiv.classList.add('error-message');
+
+            if (element.value.length > 0) {
+              retailFinderFormError?.remove();
+              if (element.getAttribute('name') === "email" && !emailPattern.test(email)){
+                  errorDiv.innerText = 'Invalid email address';
+                  element.parentNode.insertBefore(errorDiv,element.nextSibling);
+                }
+              if (element.getAttribute('name') === "phoneNumber" && unmaskedPhone.toString().length < 10){
+                errorDiv.innerText = 'Invalid phone number';
+                element.parentNode.insertBefore(errorDiv,element.nextSibling);
+              }
+            } else if(!retailFinderFormError) {
+              errorDiv.innerText = 'This Field is required';
+              element.parentNode.insertBefore(errorDiv,element.nextSibling);
+            }
+          }
+        })
         return
       }
 
@@ -211,7 +200,7 @@ export default class RequestEventAppointment extends PageManager {
         EventDate: weddingDate,
         NumberPeopleinAppointment: parseInt(noOfPeopleAttending),
         EmailOptin: emailAlerts,
-        EventName: eventName,
+        EventName: this.encodeString(eventName),
         id: eventId ? parseInt(eventId) : 0,
         DirectBook: 'true',
       }
@@ -224,17 +213,17 @@ export default class RequestEventAppointment extends PageManager {
       })
         .then((response) => {
        
-          document.getElementById('event-appointment-form').style.display =
-            'none'
-          document.getElementById('eventName').innerText = eventName
-          document.getElementById('thank-you').style.display = 'block'
-      
-          window.scrollTo(0, 0)
+          document.getElementById('event-appointment-form').style.display ='none';
+          document.getElementById('eventName').innerText = eventName;
+          document.getElementById('thank-you').style.display = 'block';
+          window.scrollTo(0, 0);
         })
         .catch((error) => {
-          alert(error)
+          alert(error);
         })
     })
   };
-
+  encodeString(data) {
+    return encodeURIComponent(data).replace(/%20/g, ' ');
+  }
 };
