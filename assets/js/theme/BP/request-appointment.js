@@ -203,15 +203,14 @@ export default class RequestAppointment extends PageManager {
       })
         .then((response) => {
        
-          document.getElementById('retail-finder-form').style.display =
-            'none'
+          document.getElementById('retail-finder-form').style.display ='none';
           document.getElementById('retailerName').innerText = retailerName;
-          document.getElementById('thank-you').style.display = 'block'
+          document.getElementById('thank-you').style.display = 'block';
       
-          window.scrollTo(0, 0)
+          window.scrollTo(0, 0);
         })
         .catch((error) => {
-          alert(error)
+          alert(error);
         })
     })
   };

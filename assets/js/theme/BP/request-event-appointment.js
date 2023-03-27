@@ -213,15 +213,13 @@ export default class RequestEventAppointment extends PageManager {
       })
         .then((response) => {
        
-          document.getElementById('event-appointment-form').style.display =
-            'none'
-          document.getElementById('eventName').innerText = eventName
-          document.getElementById('thank-you').style.display = 'block'
-      
-          window.scrollTo(0, 0)
+          document.getElementById('event-appointment-form').style.display ='none';
+          document.getElementById('eventName').innerText = eventName;
+          document.getElementById('thank-you').style.display = 'block';
+          window.scrollTo(0, 0);
         })
         .catch((error) => {
-          alert(error)
+          alert(error);
         })
     })
   };
