@@ -2,7 +2,8 @@
     "header": {
         "welcome_back": "Welcome back, {name}",
         "skip_to_main": "Skip to main content",
-        "sign_out": "Sign Out"
+        "sign_out": "Sign Out",
+        "bookappointment": "Book Appointment"
     },
     "footer": {
         "title": "Footer Start",
