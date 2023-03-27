@@ -138,7 +138,7 @@ export default class RequestEventAppointment extends PageManager {
       const zip = form.elements.zip.value
       const weddingDate = form.elements.weddingDate.value
       const noOfPeopleAttending = form.elements.noOfPeopleAttending.value
-      const eventName = new URLSearchParams(window.location.search).get('eventName');
+      const eventName = new URLSearchParams(window.location.search.replace(/&/g, '%26')).get('eventName');
       const eventId = new URLSearchParams(window.location.search).get('eventId');
 
       var unmaskedPhone = Inputmask.unmask(phone, { mask: '(999) 999-9999' });
@@ -200,7 +200,7 @@ export default class RequestEventAppointment extends PageManager {
         EventDate: weddingDate,
         NumberPeopleinAppointment: parseInt(noOfPeopleAttending),
         EmailOptin: emailAlerts,
-        EventName: eventName,
+        EventName: this.encodeString(eventName),
         id: eventId ? parseInt(eventId) : 0,
         DirectBook: 'true',
       }
@@ -225,5 +225,7 @@ export default class RequestEventAppointment extends PageManager {
         })
     })
   };
-
+  encodeString(data) {
+    return encodeURIComponent(data).replace(/%20/g, ' ');
+  }
 };

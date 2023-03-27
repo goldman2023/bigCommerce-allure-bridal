@@ -139,7 +139,7 @@ export default class RequestAppointment extends PageManager {
       const eventDate = form.elements.eventDate.value;
       const noOfPeopleAttending = form.elements.noOfPeopleAttending.value;
       const preferredDates = form.elements.preferredDates.value;
-      const retailerName = new URLSearchParams(window.location.search).get('retailerName');
+      const retailerName = new URLSearchParams(window.location.search.replace(/&/g, '%26')).get('retailerName');
       const retailerId = new URLSearchParams(window.location.search).get('retailerId');
 
       var unmaskedPhone = Inputmask.unmask(phone, { mask: '(999) 999-9999' });
@@ -189,7 +189,7 @@ export default class RequestAppointment extends PageManager {
         EventDate: eventDate,
         NumberPeopleinAppointment: parseInt(noOfPeopleAttending),
         EmailOptin: emailAlerts,
-        RetailerName: retailerName,
+        RetailerName:  this.encodeString(retailerName),
         RetailerId: retailerId ? parseInt(retailerId) : 0,
         DirectBook: "true",
         AppointmentDates: preferredDates
@@ -216,4 +216,7 @@ export default class RequestAppointment extends PageManager {
     })
   };
 
+  encodeString(data) {
+    return encodeURIComponent(data).replace(/%20/g, ' ');
+  }
 };
