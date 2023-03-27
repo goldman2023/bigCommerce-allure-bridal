@@ -600,7 +600,7 @@ export function renderHeaderFooter (context) {
             </svg><span class="navPages-action accountlink">My Account</span></a></li>`;
 
         let index = 0;
-
+        
         for (const navigation of globalData.navigation) {
             const topNavs = navigation.navEntriesCollection.items;
             for (const topNav of topNavs) {
@@ -683,12 +683,12 @@ export function renderHeaderFooter (context) {
                     }
                     navigationHtml += `
                         <div class="sub-site__navigation-image">
-                            <img data-src="${topNav.megaMenuImage.url}" class="lazyload">
+                        ${topNav.megMenuImageUrl ? `<a href="${topNav.megMenuImageUrl}" ><img data-src="${topNav.megaMenuImage.url}" class="lazyload"></a>` : `<img data-src="${topNav.megaMenuImage.url}" class="lazyload">`}
                         </div>
                     </div></div>`;
 
                     navigationHtmlMobile += `</ul><div class="sub-site__navigation-image">
-                    <img data-src="${topNav.megaMenuImage.url}" class="lazyload">
+                    ${topNav.megMenuImageUrl ? `<a href="${topNav.megMenuImageUrl}" ><img data-src="${topNav.megaMenuImage.url}" class="lazyload"></a>` : `<img data-src="${topNav.megaMenuImage.url}" class="lazyload">`}
                 </div></div>`
                 }
                 
