@@ -1004,7 +1004,7 @@ export function featuredEvents(context,count) {
                             <label>Phone</label>
                             <p>${item.phone}</p>
                             <label>website</label>
-                            <a href="${item.website}" target="_blank" class="colored">${item.website}</a>
+                            <a href="${item.website}" target="_blank" class="colored websitelink">Visit Retailer Website</a>
                         </div>
                     </div>
                     </div>`;
