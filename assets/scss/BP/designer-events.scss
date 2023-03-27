@@ -592,9 +592,10 @@
 
         .right {
             margin-bottom: 24px;
+            min-height: unset !important;
 
             #map {
-                height: 200px !important;
+                min-height: 300px !important;
             }
         }
 
