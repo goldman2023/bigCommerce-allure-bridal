@@ -1129,7 +1129,7 @@ export default class RetailFinder extends PageManager {
       //redirect to custom form appending query string
 
     } else {
-      window.location.href = '/request-appointment/?retailerName=' + retailer.retailerName;
+      window.location.href = '/request-appointment/?name=' + retailer.retailerName;
     }
 
   }

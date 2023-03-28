@@ -115,18 +115,22 @@ export default class DesignerEvents extends PageManager {
         try {
             const res = await checkReq.json();
             let canRequestAppt = false;
+            let eventId = null;
             if (!res.error) {
                 // not sure why it returns an array of one item but /shrug
                 canRequestAppt = res[0].optin;
+                eventId=res[0].id
             }
             return {
                 ...event,
-                canRequestAppt
+                canRequestAppt,
+                eventId
             }
         } catch {
             return {
                 ...event,
-                canRequestAppt: false
+                canRequestAppt: false,
+                eventId: null
             }
         }
     }
@@ -1092,12 +1096,12 @@ export default class DesignerEvents extends PageManager {
         modal.updateContent(elem);
     }
     openRequestForm = (event) => {
-        if (event.bridalLiveEventId) {
-            window.location.href = '/request-event-appointment?eventId=' + event.bridalLiveEventId + '&eventName=' + event.eventName;
+        if (event.eventId) {
+            window.location.href = '/request-event-appointment?id=' + event.eventId + '&name=' + event.eventName;
             //redirect to custom form appending query string
 
         } else {
-            window.location.href = '/request-event-appointment?eventName=' + event.eventName;
+            window.location.href = '/request-event-appointment?name=' + event.eventName;
         }
 
     }
