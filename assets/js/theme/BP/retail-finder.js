@@ -1124,8 +1124,8 @@ export default class RetailFinder extends PageManager {
     modal.updateContent(elem);
   }
   openRequestForm = (retailer) => {
-    if (retailer.bridalLiveRetailerId) {
-      window.location.href = '/request-appointment/?retailerId=' + retailer.bridalLiveRetailerId + '&retailerName=' + retailer.retailerName;
+    if (retailer.id) {
+      window.location.href = '/request-appointment/?id=' + retailer.id + '&name=' + retailer.retailerName;
       //redirect to custom form appending query string
 
     } else {

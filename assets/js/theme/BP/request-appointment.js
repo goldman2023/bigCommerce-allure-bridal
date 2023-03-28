@@ -139,8 +139,8 @@ export default class RequestAppointment extends PageManager {
       const eventDate = form.elements.eventDate.value;
       const noOfPeopleAttending = form.elements.noOfPeopleAttending.value;
       const preferredDates = form.elements.preferredDates.value;
-      const retailerName = new URLSearchParams(window.location.search.replace(/&/g, '%26')).get('retailerName');
-      const retailerId = new URLSearchParams(window.location.search).get('retailerId');
+      const retailerName = new URLSearchParams(window.location.search).get('name');
+      const retailerId = new URLSearchParams(window.location.search).get('id');
 
       var unmaskedPhone = Inputmask.unmask(phone, { mask: '(999) 999-9999' });
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -189,12 +189,12 @@ export default class RequestAppointment extends PageManager {
         EventDate: eventDate,
         NumberPeopleinAppointment: parseInt(noOfPeopleAttending),
         EmailOptin: emailAlerts,
-        RetailerName:  this.encodeString(retailerName),
-        RetailerId: retailerId ? parseInt(retailerId) : 0,
+        RetailerName: retailerName,
+        id: retailerId ? parseInt(retailerId) : null,
         DirectBook: "true",
         AppointmentDates: preferredDates
       }
-      fetch(url, {
+       fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -202,8 +202,13 @@ export default class RequestAppointment extends PageManager {
         body: JSON.stringify(formData),
       })
         .then((response) => {
-       
-          document.getElementById('retail-finder-form').style.display ='none';
+          if(!response.ok){
+            return response.json().then((data) => {
+              throw new Error(data.error.message)
+            })
+          }
+          document.getElementById('retail-finder-form').style.display =
+            'none'
           document.getElementById('retailerName').innerText = retailerName;
           document.getElementById('thank-you').style.display = 'block';
       
