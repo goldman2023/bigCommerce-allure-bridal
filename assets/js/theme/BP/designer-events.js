@@ -1097,11 +1097,11 @@ export default class DesignerEvents extends PageManager {
     }
     openRequestForm = (event) => {
         if (event.eventId) {
-            window.location.href = '/request-event-appointment?id=' + event.eventId + '&name=' + event.eventName.replace(/&/g, '%26');
+            window.location.href = '/request-event-appointment/?id=' + event.eventId + '&name=' + event.eventName.replace(/&/g, '%26');
             //redirect to custom form appending query string
 
         } else {
-            window.location.href = '/request-event-appointment?name=' + event.eventName;
+            window.location.href = '/request-event-appointment/?name=' + event.eventName;
         }
 
     }
