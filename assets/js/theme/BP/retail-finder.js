@@ -497,7 +497,6 @@ export default class RetailFinder extends PageManager {
     if(!addr.value.length) return;
     // Get geocoder instance
     var geocoder = new google.maps.Geocoder();
-    console.log("here----")
     // Geocode the address
     geocoder.geocode({
         address: addr.value,
@@ -1124,12 +1123,12 @@ export default class RetailFinder extends PageManager {
     modal.updateContent(elem);
   }
   openRequestForm = (retailer) => {
-    if (retailer.bridalLiveRetailerId) {
-      window.location.href = '/request-appointment/?retailerId=' + retailer.bridalLiveRetailerId + '&retailerName=' + retailer.retailerName;
+    if (retailer.id) {
+      window.location.href = '/request-appointment/?id=' + retailer.id + '&name=' + retailer.retailerName.replace(/&/g, '%26');
       //redirect to custom form appending query string
 
     } else {
-      window.location.href = '/request-appointment/?retailerName=' + retailer.retailerName;
+      window.location.href = '/request-appointment/?name=' + retailer.retailerName;
     }
 
   }
