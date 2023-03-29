@@ -138,9 +138,9 @@ export default class RequestEventAppointment extends PageManager {
       const zip = form.elements.zip.value
       const weddingDate = form.elements.weddingDate.value
       const noOfPeopleAttending = form.elements.noOfPeopleAttending.value
-      const eventName = new URLSearchParams(window.location.search.replace(/&/g, '%26')).get('name');
+      const eventName = new URLSearchParams(window.location.search).get('name');
       const eventId = new URLSearchParams(window.location.search).get('id');
-
+      
       var unmaskedPhone = Inputmask.unmask(phone, { mask: '(999) 999-9999' });
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (
