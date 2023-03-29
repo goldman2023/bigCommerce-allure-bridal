@@ -842,7 +842,7 @@ export default class RetailFinder extends PageManager {
     const streetAddress = document.createElement('div');
     streetAddress.classList.add('street-address');
     streetAddress.classList.add('retailer-detail');
-    streetAddress.innerText = `${retailer.retailerStreet}\n${retailer.retailerCity}, ${retailer.state}`;
+    streetAddress.innerText = `${retailer.retailerStreet}\n${retailer.retailerCity}, ${retailer.state} ${retailer.zip}`;
     address.append(streetAddress);
     const directions = document.createElement('a');
     directions.classList.add('directions');
