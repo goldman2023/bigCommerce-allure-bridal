@@ -2,7 +2,7 @@
 // and when that goes to v2 it'll be pretty much the same
 // so look into using just one file
 .pages-custom-page-designer-events {
-    padding: 0 1.5rem;
+    padding: 0px 1.3rem;
     max-width: 91.71429rem;
     width: 100%;
     margin: auto;
@@ -459,12 +459,20 @@
     .buttons-container {
         margin: 1rem;
     }
-}
-
-// larger screen override
-@media (min-width: 1600px) {
-    .pages-custom-page-designer-events {
+    @include breakpoint('medium') {
+        margin: 0 auto;
+    }
+    @media only screen and (min-width: 1600px) {
         max-width: 100rem;
+    }
+    @media only screen and (min-width: 2000px) {
+        max-width: 120rem;
+    }
+    @media only screen and (min-width: 2600px) {
+        max-width: 140rem;
+    }
+    @media only screen and (min-width: 3000px) {
+        max-width: 170rem;
     }
 }
 
