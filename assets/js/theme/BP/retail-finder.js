@@ -493,7 +493,11 @@ export default class RetailFinder extends PageManager {
   filterRetailers = debounce(() => {
     var self = this;
     var addr = document.querySelector(".location-typeahead");
-    this.appliedFilters['city'] = addr.value;
+    if (/^\d+$/.test(addr)) {
+      this.appliedFilters['zip'] = Number(addr.value);
+    } else {
+      this.appliedFilters['city'] = addr.value;
+    }
     if(!addr.value.length) return;
     // Get geocoder instance
     var geocoder = new google.maps.Geocoder();
@@ -502,25 +506,34 @@ export default class RetailFinder extends PageManager {
         address: addr.value,
       },
       async function (results, status) {
-        const res = await self.getRetailerData(self.appliedFilters)
 
         if (
-          status === google.maps.GeocoderStatus.OK &&
+          ( self.appliedFilters.zip || status === google.maps.GeocoderStatus.OK) &&
           results.length > 0 &&
-          res.flag &&
           self.appliedFilters.collections.length
         ) {
-          if (self.appliedFilters.collections.length === TEMPDATA.length) {
-            self.retailers = res.retailers.filter(
-              (item) => item.Product_Type === 'Bridal',
+          const res = await self.getRetailerData(self.appliedFilters)
+          if (res.flag) {
+            if (self.appliedFilters.collections.length === TEMPDATA.length) {
+              self.retailers = res.retailers.filter(
+                (item) => item.Product_Type === 'Bridal',
+              )
+            } else {
+              self.retailers = res.retailers
+            }
+            self.sortRetailers()
+            self.updateResultsInfo()
+          }else {
+            const retailerInfoElem = document.getElementById('results-info')
+            retailerInfoElem.innerText =
+              'No Results found. Try widening your search.'
+            const retailFinderResults = document.getElementById(
+              'retail-finder-results',
             )
-          } else {
-            self.retailers = res.retailers
+            retailFinderResults.innerHTML = ''
+            self.retailers = []
           }
-          self.sortRetailers()
-          self.updateResultsInfo()
         } else {
-          // show an error if it's not
           const retailerInfoElem = document.getElementById('results-info')
           retailerInfoElem.innerText =
             'No Results found. Try widening your search.'
