@@ -684,9 +684,10 @@ export default class RetailFinder extends PageManager {
   };
 
   getRetailerData = async (requestData) => {
+    let url = this.context.retailFinderFilterUrl
     try {
       const response = await fetch(
-        'https://allure-integration.azurewebsites.net/leads/stage',
+        url,
         {
           method: 'POST',
           headers: {
