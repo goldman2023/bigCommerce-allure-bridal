@@ -862,7 +862,7 @@ export default class DesignerEvents extends PageManager {
         const eventUrlLink = document.createElement('a');
         eventUrlLink.setAttribute("href", `${event.website}`);
         eventUrlLink.setAttribute("target", "_blank");
-        eventUrlLink.innerText = 'VISIT RETAILER WEBSITE';
+        eventUrlLink.innerText = 'Visit Retailer Website';
         eventUrl.append(eventUrlLink);
         contentRight.append(eventUrl);
 
