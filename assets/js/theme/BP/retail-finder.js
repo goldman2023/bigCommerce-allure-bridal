@@ -135,7 +135,7 @@ export default class RetailFinder extends PageManager {
       radius: 25,
       collections: [],
       city: '',
-      zip: '',
+      zip: null,
       storeName: '',
     };
     this.appliedFilters = {
@@ -493,47 +493,36 @@ export default class RetailFinder extends PageManager {
   filterRetailers = debounce(() => {
     var self = this;
     var addr = document.querySelector(".location-typeahead");
-    this.appliedFilters['city'] = addr.value;
     if(!addr.value.length) return;
+    if (/^\d+$/.test(addr.value)) {
+      this.appliedFilters['zip'] = Number(addr.value);
+      this.appliedFilters['city'] = '';
+    }else{
+      this.appliedFilters['zip'] =null;
+      this.appliedFilters['city'] = addr.value;
+    }
     // Get geocoder instance
     var geocoder = new google.maps.Geocoder();
     // Geocode the address
-    geocoder.geocode({
-        address: addr.value,
-      },
-      async function (results, status) {
-        const res = await self.getRetailerData(self.appliedFilters)
-
-        if (
-          status === google.maps.GeocoderStatus.OK &&
-          results.length > 0 &&
-          res.flag &&
-          self.appliedFilters.collections.length
-        ) {
-          if (self.appliedFilters.collections.length === TEMPDATA.length) {
-            self.retailers = res.retailers.filter(
-              (item) => item.Product_Type === 'Bridal',
-            )
-          } else {
-            self.retailers = res.retailers
+    geocoder.geocode({address: addr.value}, async function (results, status) {
+        self.retailers = [];
+        if ((self.appliedFilters.zip || status === google.maps.GeocoderStatus.OK) && results.length > 0 && self.appliedFilters.collections.length){
+          self.selectedPlace = {
+            lat: results[0].geometry.location.lat(),
+            lon: results[0].geometry.location.lng(),
+          };
+          const res = await self.getRetailerData(self.appliedFilters);
+          if (res.flag) {
+            if (self.appliedFilters.collections.length === TEMPDATA.length) {
+              self.retailers = res.retailers.filter((item) => item.Product_Type === 'Bridal');
+            } else {
+              self.retailers = res.retailers;
+            } 
           }
-          self.sortRetailers()
-          self.updateResultsInfo()
-        } else {
-          // show an error if it's not
-          const retailerInfoElem = document.getElementById('results-info')
-          retailerInfoElem.innerText =
-            'No Results found. Try widening your search.'
-          const retailFinderResults = document.getElementById(
-            'retail-finder-results',
-          )
-          retailFinderResults.innerHTML = ''
-          self.retailers = []
         }
-        self.paintMapAndRetailers(self.retailers)
-      },
-    )
-  }, debounceTimeOut);
+        self.updateResultsInfo()
+        self.paintMapAndRetailers(self.retailers);
+    })}, debounceTimeOut);
 
   updateResultsInfo = () => {
     const retailerInfoElem = document.getElementById('results-info');
@@ -684,9 +673,10 @@ export default class RetailFinder extends PageManager {
   };
 
   getRetailerData = async (requestData) => {
+    let url = this.context.retailFinderFilterUrl
     try {
       const response = await fetch(
-        'https://allure-integration.azurewebsites.net/leads/stage',
+        url,
         {
           method: 'POST',
           headers: {
