@@ -293,21 +293,15 @@ export default class RetailFinder extends PageManager {
       mainContainer.classList.add('bordered');
     }
 
-    const badgeCollections = document.createElement('div');
+    const badgeCollectionsForFeatured = document.createElement('div');
 
     if (retailer.featured) {
       const featuredCollections = document.createElement('span');
       featuredCollections.classList.add('featured');
-      badgeCollections.append(featuredCollections);
+      badgeCollectionsForFeatured.append(featuredCollections);
     }
 
-    if (retailer.disneyPlatinumCollection) {
-      const disneyCollections = document.createElement('span');
-      disneyCollections.classList.add('disney');
-      badgeCollections.append(disneyCollections);
-    };
-
-    container.append(badgeCollections)
+    container.append(badgeCollectionsForFeatured)
     mainContainer.append(container);
     const nameHeader = document.createElement('div');
     nameHeader.classList.add('retailer-title');
@@ -343,14 +337,23 @@ export default class RetailFinder extends PageManager {
     const collections = document.createElement('span');
     collections.classList.add('retailer-collections');
 
-    //retailer's collection array to simple array.
     let collectionItems = [];
     retailer.collectionsAvailableCollection.items.forEach(item => {
       collectionItems.push(item.collectionName)
     })
 
     collections.innerText = `${collectionItems.join(', ')}`;
-    container.append(collections)
+    container.append(collections);
+
+    const badgeCollectionsForDisney = document.createElement('div');
+
+    if (retailer.disneyPlatinumCollection) {
+      const disneyCollections = document.createElement('div');
+      disneyCollections.classList.add('disney');
+      badgeCollectionsForDisney.append(disneyCollections);
+    };
+
+    container.append(badgeCollectionsForDisney);
 
     const requestBtn = document.createElement('button');
     requestBtn.setAttribute('type', 'button');
