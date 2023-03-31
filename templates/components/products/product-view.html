@@ -227,11 +227,13 @@
                     {{/each}}
                 </div>
                 <div id="pdpimagemodal" class="pdpimagemodal" >
+                    <div class="mobilecontainer">
                     <span class="close">&times;</span>
                     <div class="prodimageslider slider-nav" >
                         {{#each product.images}}
                             <div><img src="{{strReplace this.data '{:size}' '2500x2500'}}" style="width: 100%;"/></div>
                         {{/each}}
+                    </div>
                   </div>
             </section>
         </div>
