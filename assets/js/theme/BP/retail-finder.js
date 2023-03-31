@@ -1120,6 +1120,5 @@ export default class RetailFinder extends PageManager {
     } else {
       window.location.href = '/request-appointment/?name=' + retailer.retailerName;
     }
-
   }
 };
