@@ -276,6 +276,16 @@ export default class RetailFinder extends PageManager {
         this.paintMapAndRetailers(this.retailers, null, true);
       }
     });
+    const self = this;
+    $("#appointmentFilter").change(function () {
+      let availableAppointment = [...self.retailers];
+
+      if(self.retailers.length)
+       {
+        availableAppointment = self.retailers.filter(item => $(this).is(':checked') ? item.requestAppointment === true : item )
+        self.addRetailerInfo(availableAppointment, true);
+      }
+    });
   };
 
   createRetailerItem = (retailer, total, idx) => {
@@ -391,23 +401,21 @@ export default class RetailFinder extends PageManager {
     return mainContainer;
   };
 
-  addRetailerInfo = (retailerData) => {
+  addRetailerInfo = (retailerData, flag) => {
     const retailFinderResults = document.getElementById('retail-finder-results');
     retailFinderResults.innerHTML = "";
     const total = retailerData.length;
-    this.retailers = retailerData;
+    // this.retailers = retailerData;
     retailerData.sort((a, b) => (a.sort_order > b.sort_order) ? 1 : -1)
-    let i = 1;
     let first_retailer = false;
     retailerData.forEach((retailerData, idx) => {
       const retailerItem = this.createRetailerItem(retailerData, total, idx);
       retailFinderResults.append(retailerItem);
-      if (retailerData && retailerData.requestAppointment && i == 1) {
+      if (retailerData && retailerData.requestAppointment && idx == 0) {
         first_retailer = retailerData;
       }
-      i = i + 1;
     });
-    if (first_retailer) {
+    if (first_retailer && !flag) {
       this.openDetailsModal(first_retailer);
     }
   }
@@ -520,16 +528,20 @@ export default class RetailFinder extends PageManager {
               self.retailers = res.retailers.filter((item) => item.Product_Type === 'Bridal');
             } else {
               self.retailers = res.retailers;
-            } 
+            }
           }
         }
-        self.updateResultsInfo()
-        self.paintMapAndRetailers(self.retailers);
+        let availableAppointment = [...self.retailers];
+        if($("#appointmentFilter").is(':checked')){
+          availableAppointment = [...self.retailers].filter(item => item.requestAppointment === true )
+        }
+        self.paintMapAndRetailers(availableAppointment);
+
     })}, debounceTimeOut);
 
-  updateResultsInfo = () => {
+  updateResultsInfo = (retailerData) => {
     const retailerInfoElem = document.getElementById('results-info');
-    const resultsInfoText = this.retailers.length ? 'PRODUCT STYLES AND AVAILABILITY VARY BY RETAILER' : 'No Results found. Try widening your search.';
+    const resultsInfoText = retailerData.length ? 'PRODUCT STYLES AND AVAILABILITY VARY BY RETAILER' : 'No Results found. Try widening your search.';
     retailerInfoElem.innerText = resultsInfoText;
   };
 
@@ -544,8 +556,9 @@ export default class RetailFinder extends PageManager {
     });
     this.applyFilters('collections', selectedCollections);
     this.map.setZoom(INITIAL_MAP.zoom);
-    this.map.setCenter({ lat: INITIAL_MAP.center.lat, lng: INITIAL_MAP.center.lng })
-    this.paintMapAndRetailers([]);
+    this.map.setCenter({ lat: INITIAL_MAP.center.lat, lng: INITIAL_MAP.center.lng });
+    this.retailers = [];
+    this.paintMapAndRetailers(this.retailers);
   };
   createFilterElements = () => {
     // distance filter
@@ -764,8 +777,9 @@ export default class RetailFinder extends PageManager {
     // when we have a center retailer we are highlighting on an existing retailerInfo already
     // so no neeed to recreate - also creates infinite loop with event handling
     if (!centerRetailer && !skipRetailerInfo) {
-      this.addRetailerInfo(retailerData);
+      this.addRetailerInfo(retailerData, false);
     }
+    this.updateResultsInfo(retailerData);
   };
 
   openDetailsModal = (retailer) => {
