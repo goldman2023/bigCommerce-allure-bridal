@@ -45,6 +45,9 @@
     "Firefox ESR"
   ],
   "settings": {
+    "check_retailer_accepts_appointments_url": "https://allure-integration.azurewebsites.net/leads/stage/verify",
+    "request_appointment_url" : "https://allure-integration.azurewebsites.net/leads/stage/acknowledge",
+    "retail_finder_filter_url" : "https://allure-integration.azurewebsites.net/leads/stage",
     "the-brunswick": "/suits-and-tuxedos/the-brunswick/",
     "the-ridge": "/suits-and-tuxedos/the-ridge/",
     "the-tuxedo": "/suits-and-tuxedos/the-tuxedo/",
@@ -544,9 +547,6 @@
       },
       "images": {},
       "settings": {
-        "check_retailer_accepts_appointments_url": "https://allure-integration.azurewebsites.net/leads/verify",
-        "request_appointment_url" : "https://allure-integration.azurewebsites.net/leads/acknowledge",
-        "retail_finder_filter_url" : "https://allure-integration.azurewebsites.net/leads",
         "the-brunswick": "/suits-and-tuxedos/the-brunswick/",
         "the-ridge": "/suits-and-tuxedos/the-ridge/",
         "the-tuxedo": "/suits-and-tuxedos/the-tuxedo/",
@@ -1314,9 +1314,6 @@
       },
       "images": {},
       "settings": {
-        "check_retailer_accepts_appointments_url": "https://allure-integration.azurewebsites.net/leads/stage/verify",
-        "request_appointment_url" : "https://allure-integration.azurewebsites.net/leads/stage/acknowledge",
-        "retail_finder_filter_url" : "https://allure-integration.azurewebsites.net/leads/stage",
         "the-brunswick": "/suits-and-tuxedos/the-brunswick/",
         "the-ridge": "/suits-and-tuxedos/the-ridge/",
         "the-tuxedo": "/suits-and-tuxedos/the-tuxedo/",
