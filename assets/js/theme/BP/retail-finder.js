@@ -277,15 +277,21 @@ export default class RetailFinder extends PageManager {
       }
     });
     const self = this;
+   
     $("#appointmentFilter").change(function () {
       let availableAppointment = [...self.retailers];
 
       if(self.retailers.length)
        {
         availableAppointment = self.retailers.filter(item => $(this).is(':checked') ? item.requestAppointment === true : item )
-        self.addRetailerInfo(availableAppointment, true);
+        self.paintMapAndRetailers(availableAppointment,null, false, true);
       }
     });
+    $('#appointmentFilterLabel').click(function(){
+      $("#appointmentFilter").trigger('click');
+      $("#appointmentFilter").trigger('change');
+
+  });
   };
 
   createRetailerItem = (retailer, total, idx) => {
@@ -550,6 +556,7 @@ export default class RetailFinder extends PageManager {
     $("#distanceFilterSelect").val("25");
     $("#collectionFilters").jstree(true).check_all();
     $("#name-typeahead").val("");
+    $("#appointmentFilter").attr('checked','checked');
     $("#filterButton").attr("disabled", true);
     const selectedCollections = $('#collectionFilters').jstree('get_checked').map((id) => {
       return $('#' + id).text().trim();
@@ -751,7 +758,7 @@ export default class RetailFinder extends PageManager {
   // or if we want to center a specific marker, in the case of a hover event
   // so this method is called anytime the data to show changes or when a 
   // retailer marker needs to be centered and highlighted
-  paintMapAndRetailers = (retailerData, centerRetailer = null, skipRetailerInfo = false) => {
+  paintMapAndRetailers = (retailerData, centerRetailer = null, skipRetailerInfo = false, flag = false) => {
     const map = this.map || new google.maps.Map(document.getElementById('map'), INITIAL_MAP);
     if (!this.map) {
       this.map = map;
@@ -777,7 +784,7 @@ export default class RetailFinder extends PageManager {
     // when we have a center retailer we are highlighting on an existing retailerInfo already
     // so no neeed to recreate - also creates infinite loop with event handling
     if (!centerRetailer && !skipRetailerInfo) {
-      this.addRetailerInfo(retailerData, false);
+      this.addRetailerInfo(retailerData, flag);
     }
     this.updateResultsInfo(retailerData);
   };

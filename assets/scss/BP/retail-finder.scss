@@ -234,7 +234,7 @@
             font-size: 12px;
             line-height: 20px;
 
-            .collections-label, .appointment-filter-label {
+            .collections-label, .appointment-filter-header {
               font-family: stencilFontFamily('default-font-regular');
               font-style: normal;
               font-weight: 600;
@@ -311,8 +311,8 @@
               }
             }
             .appointment{
-              .appointment-filter-label{
-              padding: 10px 0px 10px 0px;
+              .appointment-filter-header{
+                padding: 10px 0px 10px 0px;
               }
               .appointment-filter-body{
                 display: flex;
@@ -322,6 +322,9 @@
                   width: 16px;
                   height: 16px;
                   margin-right: 10px;
+                }
+                .appointment-filter-label{
+                  cursor: pointer;
                 }
               }
               
