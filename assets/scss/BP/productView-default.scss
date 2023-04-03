@@ -91,7 +91,20 @@
                         float:none;
                     }
                     &.slider-nav {
-                        height: 100vh;
+                        @media screen and (min-width: 601px) {
+                            height: 100vh;
+                        }
+                        @media screen and (max-width: 1024px) {
+                            display: block;
+                            .slick-track {
+                                display: inline-block;
+                                .slick-slide {
+                                    display: inline-block;
+                                    vertical-align: middle;
+                                    float: none;
+                                }
+                            }
+                        }
                     }
                     .slick-next {
                         right: 0;
