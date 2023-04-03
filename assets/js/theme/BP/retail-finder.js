@@ -276,6 +276,22 @@ export default class RetailFinder extends PageManager {
         this.paintMapAndRetailers(this.retailers, null, true);
       }
     });
+    const self = this;
+   
+    $("#appointmentFilter").change(function () {
+      let availableAppointment = [...self.retailers];
+
+      if(self.retailers.length)
+       {
+        availableAppointment = self.retailers.filter(item => $(this).is(':checked') ? item.requestAppointment === true : item )
+        self.paintMapAndRetailers(availableAppointment,null, false, true);
+      }
+    });
+    $('#appointmentFilterLabel').click(function(){
+      $("#appointmentFilter").trigger('click');
+      $("#appointmentFilter").trigger('change');
+
+  });
   };
 
   createRetailerItem = (retailer, total, idx) => {
@@ -293,21 +309,15 @@ export default class RetailFinder extends PageManager {
       mainContainer.classList.add('bordered');
     }
 
-    const badgeCollections = document.createElement('div');
+    const badgeCollectionsForFeatured = document.createElement('div');
 
     if (retailer.featured) {
       const featuredCollections = document.createElement('span');
       featuredCollections.classList.add('featured');
-      badgeCollections.append(featuredCollections);
+      badgeCollectionsForFeatured.append(featuredCollections);
     }
 
-    if (retailer.disneyPlatinumCollection) {
-      const disneyCollections = document.createElement('span');
-      disneyCollections.classList.add('disney');
-      badgeCollections.append(disneyCollections);
-    };
-
-    container.append(badgeCollections)
+    container.append(badgeCollectionsForFeatured)
     mainContainer.append(container);
     const nameHeader = document.createElement('div');
     nameHeader.classList.add('retailer-title');
@@ -343,14 +353,23 @@ export default class RetailFinder extends PageManager {
     const collections = document.createElement('span');
     collections.classList.add('retailer-collections');
 
-    //retailer's collection array to simple array.
     let collectionItems = [];
     retailer.collectionsAvailableCollection.items.forEach(item => {
       collectionItems.push(item.collectionName)
     })
 
     collections.innerText = `${collectionItems.join(', ')}`;
-    container.append(collections)
+    container.append(collections);
+
+    const badgeCollectionsForDisney = document.createElement('div');
+
+    if (retailer.disneyPlatinumCollection) {
+      const disneyCollections = document.createElement('div');
+      disneyCollections.classList.add('disney');
+      badgeCollectionsForDisney.append(disneyCollections);
+    };
+
+    container.append(badgeCollectionsForDisney);
 
     const requestBtn = document.createElement('button');
     requestBtn.setAttribute('type', 'button');
@@ -388,23 +407,21 @@ export default class RetailFinder extends PageManager {
     return mainContainer;
   };
 
-  addRetailerInfo = (retailerData) => {
+  addRetailerInfo = (retailerData, flag) => {
     const retailFinderResults = document.getElementById('retail-finder-results');
     retailFinderResults.innerHTML = "";
     const total = retailerData.length;
-    this.retailers = retailerData;
+    // this.retailers = retailerData;
     retailerData.sort((a, b) => (a.sort_order > b.sort_order) ? 1 : -1)
-    let i = 1;
     let first_retailer = false;
     retailerData.forEach((retailerData, idx) => {
       const retailerItem = this.createRetailerItem(retailerData, total, idx);
       retailFinderResults.append(retailerItem);
-      if (retailerData && retailerData.requestAppointment && i == 1) {
+      if (retailerData && retailerData.requestAppointment && idx == 0) {
         first_retailer = retailerData;
       }
-      i = i + 1;
     });
-    if (first_retailer) {
+    if (first_retailer && !flag) {
       this.openDetailsModal(first_retailer);
     }
   }
@@ -517,16 +534,20 @@ export default class RetailFinder extends PageManager {
               self.retailers = res.retailers.filter((item) => item.Product_Type === 'Bridal');
             } else {
               self.retailers = res.retailers;
-            } 
+            }
           }
         }
-        self.updateResultsInfo()
-        self.paintMapAndRetailers(self.retailers);
+        let availableAppointment = [...self.retailers];
+        if($("#appointmentFilter").is(':checked')){
+          availableAppointment = [...self.retailers].filter(item => item.requestAppointment === true )
+        }
+        self.paintMapAndRetailers(availableAppointment);
+
     })}, debounceTimeOut);
 
-  updateResultsInfo = () => {
+  updateResultsInfo = (retailerData) => {
     const retailerInfoElem = document.getElementById('results-info');
-    const resultsInfoText = this.retailers.length ? 'PRODUCT STYLES AND AVAILABILITY VARY BY RETAILER' : 'No Results found. Try widening your search.';
+    const resultsInfoText = retailerData.length ? 'PRODUCT STYLES AND AVAILABILITY VARY BY RETAILER' : 'No Results found. Try widening your search.';
     retailerInfoElem.innerText = resultsInfoText;
   };
 
@@ -535,14 +556,16 @@ export default class RetailFinder extends PageManager {
     $("#distanceFilterSelect").val("25");
     $("#collectionFilters").jstree(true).check_all();
     $("#name-typeahead").val("");
+    $("#appointmentFilter").attr('checked','checked');
     $("#filterButton").attr("disabled", true);
     const selectedCollections = $('#collectionFilters').jstree('get_checked').map((id) => {
       return $('#' + id).text().trim();
     });
     this.applyFilters('collections', selectedCollections);
     this.map.setZoom(INITIAL_MAP.zoom);
-    this.map.setCenter({ lat: INITIAL_MAP.center.lat, lng: INITIAL_MAP.center.lng })
-    this.paintMapAndRetailers([]);
+    this.map.setCenter({ lat: INITIAL_MAP.center.lat, lng: INITIAL_MAP.center.lng });
+    this.retailers = [];
+    this.paintMapAndRetailers(this.retailers);
   };
   createFilterElements = () => {
     // distance filter
@@ -735,7 +758,7 @@ export default class RetailFinder extends PageManager {
   // or if we want to center a specific marker, in the case of a hover event
   // so this method is called anytime the data to show changes or when a 
   // retailer marker needs to be centered and highlighted
-  paintMapAndRetailers = (retailerData, centerRetailer = null, skipRetailerInfo = false) => {
+  paintMapAndRetailers = (retailerData, centerRetailer = null, skipRetailerInfo = false, flag = false) => {
     const map = this.map || new google.maps.Map(document.getElementById('map'), INITIAL_MAP);
     if (!this.map) {
       this.map = map;
@@ -761,8 +784,9 @@ export default class RetailFinder extends PageManager {
     // when we have a center retailer we are highlighting on an existing retailerInfo already
     // so no neeed to recreate - also creates infinite loop with event handling
     if (!centerRetailer && !skipRetailerInfo) {
-      this.addRetailerInfo(retailerData);
+      this.addRetailerInfo(retailerData, flag);
     }
+    this.updateResultsInfo(retailerData);
   };
 
   openDetailsModal = (retailer) => {
