@@ -121,8 +121,10 @@ export default class RequestAppointment extends PageManager {
       true,
     )
 
-    const form = document.getElementById('retail-finder-form')
-    form.addEventListener('submit', (event) => {
+    const form = document.getElementById('retail-finder-form');
+    const submitBtn = document.getElementById('appointment-submit');
+
+    submitBtn.addEventListener('click', (event) => {
       event.preventDefault();
 
       const firstName = form.elements.firstName.value;
@@ -141,7 +143,6 @@ export default class RequestAppointment extends PageManager {
       const preferredDates = form.elements.preferredDates.value;
       const retailerName = new URLSearchParams(window.location.search).get('name');
       const retailerId = new URLSearchParams(window.location.search).get('id');
-
       var unmaskedPhone = Inputmask.unmask(phone, { mask: '(999) 999-9999' });
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -161,6 +162,10 @@ export default class RequestAppointment extends PageManager {
                 }
               if (element.getAttribute('name') === "phoneNumber" && unmaskedPhone.toString().length < 10){
                 errorDiv.innerText = 'Invalid phone number';
+                element.parentNode.insertBefore(errorDiv,element.nextSibling);
+              }
+              if (element.getAttribute('name') === "noOfPeopleAttending" && Number(noOfPeopleAttending) < 1){
+                errorDiv.innerText = 'Invalid number';
                 element.parentNode.insertBefore(errorDiv,element.nextSibling);
               }
             } else if(!retailFinderFormError) {

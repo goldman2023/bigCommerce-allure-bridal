@@ -48,7 +48,7 @@ const TEMPDATA = [
     }
   },
   {
-    "id": "collection2", "parent": "#", "text": "Allure Bridals", 'state': {
+    "id": "collection2", "parent": "#", "text": "Allure Bridal", 'state': {
       'selected': true
     }
   },
@@ -58,7 +58,7 @@ const TEMPDATA = [
     }
   },
   {
-    "id": "collection4", "parent": "#", "text": "Allure Men", 'state': {
+    "id": "collection4", "parent": "#", "text": "Madison James", 'state': {
       'selected': true
     }
   },
@@ -73,17 +73,17 @@ const TEMPDATA = [
     }
   },
   {
-    "id": "collection7", "parent": "#", "text": "Allure Women", 'state': {
+    "id": "collection7", "parent": "#", "text": "Wilderly Bride", 'state': {
       'selected': true
     }
   },
   {
-    "id": "collection8", "parent": "#", "text": "Bridesmaids", 'state': {
+    "id": "collection8", "parent": "#", "text": "Bridesmaid", 'state': {
       'selected': true
     }
   },
   {
-    "id": "collection9", "parent": "#", "text": "Disney Fairy Tale Weddings", 'state': {
+    "id": "collection9", "parent": "#", "text": "Disney Fairy Tale Wedding", 'state': {
       'selected': true
     }
   },
@@ -95,9 +95,9 @@ const TEMPDATA = [
   },
   { "id": "collection11", "parent": "collection10", "text": "Ridge" },
   { "id": "collection12", "parent": "collection10", "text": "Brunswick" },
-  { "id": "collection13", "parent": "collection10", "text": "Vows" },
+  { "id": "collection13", "parent": "collection10", "text": "Vow" },
   { "id": "collection14", "parent": "collection10", "text": "Venice Velvet" },
-  { "id": "collection15", "parent": "collection10", "text": "The Tuxedo" },
+  { "id": "collection15", "parent": "collection10", "text": "Tuxedo" },
 ]
 
 const DEFAULT_ZOOM_LEVEL = 4;
@@ -556,7 +556,7 @@ export default class RetailFinder extends PageManager {
     $("#distanceFilterSelect").val("25");
     $("#collectionFilters").jstree(true).check_all();
     $("#name-typeahead").val("");
-    $("#appointmentFilter").attr('checked','checked');
+    $('#appointmentFilter').prop('checked', false);
     $("#filterButton").attr("disabled", true);
     const selectedCollections = $('#collectionFilters').jstree('get_checked').map((id) => {
       return $('#' + id).text().trim();
