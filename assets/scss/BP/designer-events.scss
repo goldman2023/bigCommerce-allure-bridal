@@ -281,7 +281,7 @@
                         line-height: 20px;
                         padding-top: 24px;
                         padding-bottom: 40px;
-                        padding-left: 24px;
+                        padding-left: 10px;
 
                         &:hover,
                         &.hovered {
@@ -447,6 +447,8 @@
                 font-weight: 600;
                 font-size: 12px;
                 line-height: 16px;
+                padding: 0 3px;
+                left: 9px;
             }
 
             padding-right: 0;
@@ -686,7 +688,7 @@
 
     span {
         padding: 14px 0;
-        font-family: 'Inter Regular';
+        font-family: stencilFontFamily('default-font-regular');
         font-style: normal;
         font-weight: 600;
         font-size: 12px;
