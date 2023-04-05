@@ -4,10 +4,7 @@
     data-event-type="product"
     data-entity-id="{{product.id}}"
     data-name="{{product.title}}"
-    data-product-category="
-    {{#each product.category}}
-        {{#if @last}}{{this}}{{else}}{{this}}, {{/if}}
-    {{/each}}"
+    data-product-category="{{#each product.category}}{{#if @last}}{{this}}{{else}}{{this}}, {{/if}}{{/each}}"
     data-product-brand="{{product.brand.name}}"
     data-product-variant="single-product-option"{{/if}}>
 
