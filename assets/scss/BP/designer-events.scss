@@ -674,7 +674,7 @@
 .event-schedule {
     color: stencilColor('color-allure-bridals-primary-1');
     border: 1px solid stencilColor('color-allure-bridals-primary-1');
-    width: 50%;
+    width: 250px;
     border-radius: 3px;
     padding: 2px;
     display: flex;
@@ -686,6 +686,11 @@
 
     span {
         padding: 14px 0;
+        font-family: 'Inter Regular';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 16px;
         width: 100%;
         border: 1px solid stencilColor('color-allure-bridals-primary-5');
         border-radius: 3px;
