@@ -63,5 +63,9 @@
     </div>
     {{/each}}
 
-    <div data-option-value class="color-selected-value"></div>
+    <div data-option-value class="color-selected-value">
+        {{#each this.values}}
+        {{#if selected}}{{this.label}}{{/if}}
+        {{/each}}
+    </div>
 </div>
