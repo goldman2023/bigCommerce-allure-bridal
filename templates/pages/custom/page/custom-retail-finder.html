@@ -223,7 +223,7 @@
                         <span class="form-label">{{lang 'request_appointment.peopleAttending'}} <span
                                 class="asterisk">*</span></span>
 
-                        <input class="form-input" type="number" min="1" name="noOfPeopleAttending"
+                        <input class="form-input required" type="number" min="1" name="noOfPeopleAttending"
                             placeholder="{{lang 'request_appointment.peopleAttending'}}"
                             onkeyup="this.value=this.value.replace(/[$&+,:;=?[\]@#|{}'<>.^*()%!-/]/,'');">
 
@@ -248,7 +248,7 @@
                             'request_appointment.agreeTerms'}}}*</label>
                     </div>
                 </div>
-                <button class="button submit-btn" type="submit">Submit</button>
+                <button class="button submit-btn" id="appointment-submit" type="button">Submit</button>
             </form>
             <div id="thank-you">
                 <h2 class="header-title">Thank You For Requesting An Appointment!</h2>

@@ -556,7 +556,7 @@ export default class RetailFinder extends PageManager {
     $("#distanceFilterSelect").val("25");
     $("#collectionFilters").jstree(true).check_all();
     $("#name-typeahead").val("");
-    $("#appointmentFilter").attr('checked','checked');
+    $('#appointmentFilter').prop('checked', false);
     $("#filterButton").attr("disabled", true);
     const selectedCollections = $('#collectionFilters').jstree('get_checked').map((id) => {
       return $('#' + id).text().trim();
