@@ -94,7 +94,7 @@
                     <span class="form-label">{{lang 'request_appointment.address1'}} <span
                             class="asterisk">*</span></span>
 
-                    <input id="address1" class="form-input" type="text" name="address1"
+                    <input id="address1" class="form-input required" type="text" name="address1"
                         placeholder="{{lang 'request_appointment.address1'}}">
 
                 </div>
@@ -110,7 +110,7 @@
                         <span class="form-label">{{lang 'request_appointment.city'}} <span
                                 class="asterisk">*</span></span>
 
-                        <input id="city" class="form-input" type="text" name="city"
+                        <input id="city" class="form-input required" type="text" name="city"
                             placeholder="{{lang 'request_appointment.city'}}">
 
                     </div>
@@ -118,7 +118,7 @@
 
                         <span class="form-label">{{lang 'request_appointment.state'}} <span
                                 class="asterisk">*</span></span>
-                        <select id="state" name="state" class="form-select selector-dropdown">
+                        <select id="state" name="state" class="form-select selector-dropdown form-input required">
                             <option hidden value="">Select one</option>
                             <option value="AL">AL</option>
                             <option value="AK">AK</option>
@@ -204,7 +204,7 @@
                         <span class="form-label">{{lang 'request_appointment.zip'}} <span
                                 class="asterisk">*</span></span>
 
-                        <input id="zip" maxlength="5" class="form-input" type="text" name="zip"
+                        <input id="zip" maxlength="5" class="form-input required" type="text" name="zip"
                             placeholder="{{lang 'request_appointment.zip'}}"
                             onkeyup="this.value=this.value.replace(/[a-zA-Z]/,'');">
 
@@ -242,10 +242,10 @@
                     </div>
                 </div>
                 <div class="checkbox-fields">
-                    <div class="checkbox-field">
-                        <label for="register_pass-news-terms"> <input name="termsAndCond" id="register_pass-news-terms"
-                                type="checkbox" class="register_pass-news">{{{lang
-                            'request_appointment.agreeTerms'}}}*</label>
+                    <div class="checkbox-field form-field">
+                        <label for="register_pass-news-terms" id="register_pass-news-terms">
+                            <input name="termsAndCond" type="checkbox" class="register_pass-news">{{{lang 'request_appointment.agreeTerms'}}}*
+                        </label>
                     </div>
                 </div>
                 <button class="button submit-btn" id="appointment-submit" type="button">Submit</button>
