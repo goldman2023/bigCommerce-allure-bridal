@@ -121,8 +121,9 @@ export default class RequestEventAppointment extends PageManager {
       true,
     )
 
-    const form = document.getElementById('event-appointment-form')
-    form.addEventListener('submit', (event) => {
+    const form = document.getElementById('event-appointment-form');
+    const submitBtn = document.getElementById('appointment-submit');
+    submitBtn.addEventListener('click', (event) => {
       event.preventDefault();
 
       const firstName = form.elements.firstName.value
@@ -146,20 +147,7 @@ export default class RequestEventAppointment extends PageManager {
 
       form.querySelectorAll('.error-message').forEach((element) =>  element.remove() );
 
-      if (
-        !firstName ||
-        !lastName ||
-        !email ||
-        !emailPattern.test(email) ||
-        !phone ||
-        unmaskedPhone.length < 10 ||
-        !address1 ||
-        !city ||
-        !state ||
-        !zip ||
-        !weddingDate ||
-        !noOfPeopleAttending
-      ) {
+      if (!firstName || !lastName || !email || !emailPattern.test(email) || !phone || unmaskedPhone.toString().length < 10 || !address1 || !city || !state || !zip || !weddingDate || !noOfPeopleAttending || Number(noOfPeopleAttending) < 1) {
         alert('Please fill out all the required fields.');
         form.querySelectorAll('.form-input').forEach(element => {
           if (element.classList.contains('required')) {
