@@ -203,6 +203,7 @@ export default class RequestEventAppointment extends PageManager {
         EventName: this.encodeString(eventName),
         id: eventId ? parseInt(eventId) : 0,
         DirectBook: 'true',
+        Type : "event"
       }
       fetch(url, {
         method: 'POST',
