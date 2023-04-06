@@ -143,6 +143,9 @@ export default class RequestEventAppointment extends PageManager {
       
       var unmaskedPhone = Inputmask.unmask(phone, { mask: '(999) 999-9999' });
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      form.querySelectorAll('.error-message').forEach((element) =>  element.remove() );
+
       if (
         !firstName ||
         !lastName ||
@@ -174,6 +177,10 @@ export default class RequestEventAppointment extends PageManager {
                 errorDiv.innerText = 'Invalid phone number';
                 element.parentNode.insertBefore(errorDiv,element.nextSibling);
               }
+              if (element.getAttribute('name') === "noOfPeopleAttending" && Number(noOfPeopleAttending) < 1){
+                errorDiv.innerText = 'Invalid number';
+                element.parentNode.insertBefore(errorDiv,element.nextSibling);
+              }
             } else if(!retailFinderFormError) {
               errorDiv.innerText = 'This Field is required';
               element.parentNode.insertBefore(errorDiv,element.nextSibling);
@@ -184,8 +191,13 @@ export default class RequestEventAppointment extends PageManager {
       }
 
       if (!terms) {
-        alert('You must agree to the terms and conditions to continue.')
-        return
+        alert('You must agree to the terms and conditions to continue.');
+        let element =  document.getElementById('register_pass-news-terms');
+        let errorDiv = document.createElement('span');
+        errorDiv.classList.add('error-message');
+        errorDiv.innerText = 'You must agree to the terms and conditions.';
+        element.parentNode.insertBefore(errorDiv,element.nextSibling);
+        return;
       }
       const formData = {
         FirstName: firstName,

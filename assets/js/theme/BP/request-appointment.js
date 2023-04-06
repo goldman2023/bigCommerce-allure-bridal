@@ -148,7 +148,7 @@ export default class RequestAppointment extends PageManager {
       
       form.querySelectorAll('.error-message').forEach((element) =>  element.remove() );
 
-      if (!firstName || !lastName || !email || !phone || unmaskedPhone.toString().length < 10 || !address1 || !city || !state || !zip || !eventDate || !noOfPeopleAttending || !preferredDates || !emailPattern.test(email)) {
+      if (!firstName || !lastName || !email || !phone || unmaskedPhone.toString().length < 10 || !address1 || !city || !state || !zip || !eventDate || !noOfPeopleAttending || Number(noOfPeopleAttending) < 1 || !preferredDates || !emailPattern.test(email)) {
         alert('Please fill out all the required fields.');
         form.querySelectorAll('.form-input').forEach(element => {
           if (element.classList.contains('required')) {
