@@ -1004,7 +1004,10 @@ export function featuredEvents(context,count) {
                             <label>Phone</label>
                             <p>${item.phone}</p>
                             <label>website</label>
-                            <a href="${item.website}" target="_blank" class="colored websitelink">Visit Retailer Website</a>
+                            <a href="${item.website}" target="_blank" class="colored websitelink"><svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.375 2.50006H2.5C1.39543 2.50006 0.5 3.39549 0.5 4.50006V10.5001C0.5 11.6046 1.39543 12.5001 2.5 12.5001H9.5C10.6046 12.5001 11.5 11.6046 11.5 10.5001V6.84789M9 0.500061H13.5M13.5 0.500061V5.00006M13.5 0.500061L7.5 6.50006" stroke="#AC634D" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Visit Retailer Website</a>
                         </div>
                     </div>
                     </div>`;
