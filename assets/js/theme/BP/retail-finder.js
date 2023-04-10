@@ -48,7 +48,7 @@ const TEMPDATA = [
     }
   },
   {
-    "id": "collection2", "parent": "#", "text": "Allure Bridal", 'state': {
+    "id": "collection2", "parent": "#", "text": "Allure Bridals", 'state': {
       'selected': true
     }
   },
@@ -78,12 +78,12 @@ const TEMPDATA = [
     }
   },
   {
-    "id": "collection8", "parent": "#", "text": "Bridesmaid", 'state': {
+    "id": "collection8", "parent": "#", "text": "Bridesmaids", 'state': {
       'selected': true
     }
   },
   {
-    "id": "collection9", "parent": "#", "text": "Disney Fairy Tale Wedding", 'state': {
+    "id": "collection9", "parent": "#", "text": "Disney Fairy Tale Weddings", 'state': {
       'selected': true
     }
   },
