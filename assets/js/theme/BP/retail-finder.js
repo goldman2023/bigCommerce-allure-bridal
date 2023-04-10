@@ -280,12 +280,13 @@ export default class RetailFinder extends PageManager {
    
     $("#appointmentFilter").change(function () {
       let availableAppointment = [...self.retailers];
-
-      if(self.retailers.length)
-       {
-        availableAppointment = self.retailers.filter(item => $(this).is(':checked') ? item.requestAppointment === true : item )
-        self.paintMapAndRetailers(availableAppointment,null, false, true);
+      if(self.retailers.length && $(this).is(':checked'))
+      {
+        availableAppointment = self.retailers.filter( item => item.requestAppointment === true);
       }
+
+      self.paintMapAndRetailers(availableAppointment,null, false, true);
+
     });
     $('#appointmentFilterLabel').click(function(){
       $("#appointmentFilter").trigger('click');
