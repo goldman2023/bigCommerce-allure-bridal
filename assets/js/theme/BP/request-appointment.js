@@ -145,8 +145,10 @@ export default class RequestAppointment extends PageManager {
       const retailerId = new URLSearchParams(window.location.search).get('id');
       var unmaskedPhone = Inputmask.unmask(phone, { mask: '(999) 999-9999' });
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      
+      form.querySelectorAll('.error-message').forEach((element) =>  element.remove() );
 
-      if (!firstName || !lastName || !email || !phone || unmaskedPhone.toString().length < 10 || !address1 || !city || !state || !zip || !eventDate || !noOfPeopleAttending || !preferredDates || !emailPattern.test(email)) {
+      if (!firstName || !lastName || !email || !phone || unmaskedPhone.toString().length < 10 || !address1 || !city || !state || !zip || !eventDate || !noOfPeopleAttending || Number(noOfPeopleAttending) < 1 || !preferredDates || !emailPattern.test(email)) {
         alert('Please fill out all the required fields.');
         form.querySelectorAll('.form-input').forEach(element => {
           if (element.classList.contains('required')) {
@@ -178,8 +180,13 @@ export default class RequestAppointment extends PageManager {
       }
 
       if (!terms) {
-        alert('You must agree to the terms and conditions to continue.')
-        return
+        alert('You must agree to the terms and conditions to continue.');
+        let element =  document.getElementById('register_pass-news-terms');
+        let errorDiv = document.createElement('span');
+        errorDiv.classList.add('error-message');
+        errorDiv.innerText = 'You must agree to the terms and conditions.';
+        element.parentNode.insertBefore(errorDiv,element.nextSibling);
+        return;
       }
       const formData = {
         FirstName: firstName,

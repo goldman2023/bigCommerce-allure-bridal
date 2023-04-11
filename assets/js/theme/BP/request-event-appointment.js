@@ -121,8 +121,9 @@ export default class RequestEventAppointment extends PageManager {
       true,
     )
 
-    const form = document.getElementById('event-appointment-form')
-    form.addEventListener('submit', (event) => {
+    const form = document.getElementById('event-appointment-form');
+    const submitBtn = document.getElementById('appointment-submit');
+    submitBtn.addEventListener('click', (event) => {
       event.preventDefault();
 
       const firstName = form.elements.firstName.value
@@ -143,20 +144,10 @@ export default class RequestEventAppointment extends PageManager {
       
       var unmaskedPhone = Inputmask.unmask(phone, { mask: '(999) 999-9999' });
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (
-        !firstName ||
-        !lastName ||
-        !email ||
-        !emailPattern.test(email) ||
-        !phone ||
-        unmaskedPhone.length < 10 ||
-        !address1 ||
-        !city ||
-        !state ||
-        !zip ||
-        !weddingDate ||
-        !noOfPeopleAttending
-      ) {
+
+      form.querySelectorAll('.error-message').forEach((element) =>  element.remove() );
+
+      if (!firstName || !lastName || !email || !emailPattern.test(email) || !phone || unmaskedPhone.toString().length < 10 || !address1 || !city || !state || !zip || !weddingDate || !noOfPeopleAttending || Number(noOfPeopleAttending) < 1) {
         alert('Please fill out all the required fields.');
         form.querySelectorAll('.form-input').forEach(element => {
           if (element.classList.contains('required')) {
@@ -174,6 +165,10 @@ export default class RequestEventAppointment extends PageManager {
                 errorDiv.innerText = 'Invalid phone number';
                 element.parentNode.insertBefore(errorDiv,element.nextSibling);
               }
+              if (element.getAttribute('name') === "noOfPeopleAttending" && Number(noOfPeopleAttending) < 1){
+                errorDiv.innerText = 'Invalid number';
+                element.parentNode.insertBefore(errorDiv,element.nextSibling);
+              }
             } else if(!retailFinderFormError) {
               errorDiv.innerText = 'This Field is required';
               element.parentNode.insertBefore(errorDiv,element.nextSibling);
@@ -184,8 +179,13 @@ export default class RequestEventAppointment extends PageManager {
       }
 
       if (!terms) {
-        alert('You must agree to the terms and conditions to continue.')
-        return
+        alert('You must agree to the terms and conditions to continue.');
+        let element =  document.getElementById('register_pass-news-terms');
+        let errorDiv = document.createElement('span');
+        errorDiv.classList.add('error-message');
+        errorDiv.innerText = 'You must agree to the terms and conditions.';
+        element.parentNode.insertBefore(errorDiv,element.nextSibling);
+        return;
       }
       const formData = {
         FirstName: firstName,
@@ -203,6 +203,7 @@ export default class RequestEventAppointment extends PageManager {
         EventName: this.encodeString(eventName),
         id: eventId ? parseInt(eventId) : 0,
         DirectBook: 'true',
+        Type : "event"
       }
       fetch(url, {
         method: 'POST',
