@@ -4,10 +4,7 @@
     data-event-type="product"
     data-entity-id="{{product.id}}"
     data-name="{{product.title}}"
-    data-product-category="
-    {{#each product.category}}
-        {{#if @last}}{{this}}{{else}}{{this}}, {{/if}}
-    {{/each}}"
+    data-product-category="{{#each product.category}}{{#if @last}}{{this}}{{else}}{{this}}, {{/if}}{{/each}}"
     data-product-brand="{{product.brand.name}}"
     data-product-variant="single-product-option"{{/if}}>
 
@@ -227,11 +224,13 @@
                     {{/each}}
                 </div>
                 <div id="pdpimagemodal" class="pdpimagemodal" >
+                    <div class="mobilecontainer">
                     <span class="close">&times;</span>
                     <div class="prodimageslider slider-nav" >
                         {{#each product.images}}
                             <div><img src="{{strReplace this.data '{:size}' '2500x2500'}}" style="width: 100%;"/></div>
                         {{/each}}
+                    </div>
                   </div>
             </section>
         </div>

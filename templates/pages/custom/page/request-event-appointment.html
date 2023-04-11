@@ -93,7 +93,7 @@
 
           <input
             id="address1"
-            class="form-input"
+            class="form-input required"
             type="text"
             name="address1"
             placeholder="{{lang 'request_event_appointment.address1'}}"
@@ -121,7 +121,7 @@
 
             <input
               id="city"
-              class="form-input"
+              class="form-input required"
               type="text"
               name="city"
               placeholder="{{lang 'request_event_appointment.city'}}"
@@ -135,7 +135,7 @@
             <select
               id="state"
               name="state"
-              class="form-select selector-dropdown"
+              class="form-select selector-dropdown form-input required"
             >
               <option hidden value="">Select one</option>
               <option value="AL">AL</option>
@@ -213,7 +213,7 @@
             <input
               id="zip"
               maxlength="5"
-              class="form-input"
+              class="form-input required"
               type="text"
               name="zip"
               placeholder="{{lang 'request_event_appointment.zip'}}"
@@ -229,7 +229,7 @@
             </span>
 
             <input
-              class="form-input"
+              class="form-input required"
               type="number"
               min="1"
               name="noOfPeopleAttending"
@@ -255,11 +255,10 @@
           </div>
         </div>
         <div class="checkbox-fields">
-          <div class="checkbox-field">
-            <label for="register_pass-news-terms">
+          <div class="checkbox-field form-field">
+            <label for="register_pass-news-terms" id="register_pass-news-terms">
               <input
                 name="termsAndCond"
-                id="register_pass-news-terms"
                 type="checkbox"
                 class="register_pass-news"
               />
@@ -268,7 +267,7 @@
             </label>
           </div>
         </div>
-        <button class="button submit-btn" type="submit">Submit</button>
+        <button class="button submit-btn" id="appointment-submit" type="button">Submit</button>
       </form>
       <div id="thank-you">
         <h2 class="header-title">

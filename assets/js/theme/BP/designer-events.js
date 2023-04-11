@@ -431,7 +431,7 @@ export default class DesignerEvents extends PageManager {
             requestBtn.setAttribute('type', 'button');
             requestBtn.classList.add('event-schedule');
             const requestBtnText = document.createElement('span');
-            requestBtnText.innerText = 'REQUEST AN APPOINTMENT'
+            requestBtnText.innerText = 'REQUEST AN EVENT APPOINTMENT'
             requestBtn.append(requestBtnText);
             requestBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -525,11 +525,8 @@ export default class DesignerEvents extends PageManager {
         const addr = document.getElementById("locationTypeahead");
         // Get geocoder instance
         const geocoder = new google.maps.Geocoder();
-
         // Geocode the address
-        geocoder.geocode({
-            'address': addr.value
-        }, async (results, status) => {
+        geocoder.geocode({'address': addr.value}, async (results, status) => {
             if (status === google.maps.GeocoderStatus.OK && results.length) {
                 let toRemove = [];
                 this.originalEvents.forEach(
@@ -544,7 +541,9 @@ export default class DesignerEvents extends PageManager {
                         } else {
                             const distanceAway = this.getDistanceBtwnTwoPts(selectedLocation, event.eventAddress);
                             event.distanceAway = distanceAway;
-                            if (distanceAway > this.appliedFilters.distance) {
+                            const appliedDistance = document.getElementById('distanceFilterSelect');
+
+                            if (distanceAway > appliedDistance.value) {
                                 toRemove.push(event.sys.id);
                             }
                         }

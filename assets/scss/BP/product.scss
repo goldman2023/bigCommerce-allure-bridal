@@ -59,13 +59,6 @@
         height: 100%;
       }
     }
-    .prodimageslider {
-      @media screen and (max-width: 1024px) {
-        display: flex;
-        align-items: center;
-        height: 100vh;
-      }
-    }
     .slick-next,.slick-prev ,.close {
       @include breakpoint("medium") {
         position: fixed;
@@ -73,6 +66,13 @@
     }
     .close {
       color: #bbb;
+    }
+    .mobilecontainer {
+      @media screen and (max-width: 600px) {
+        display: flex;
+        align-items: center;
+        height: 100vh;
+      }
     }
   }
   
@@ -131,5 +131,16 @@
       left: auto !important;
       right:40px;
       display: block;
+    }
+  }
+
+  .form-option-container {
+    display: flex;
+    .form-option-wrapper {
+      display: unset;
+      order: 2;
+      &.selected {
+        order: 1;
+      }
     }
   }

@@ -1092,7 +1092,9 @@
         "toggle_option_filter_label": "SHOW FILTER",
         "name_filter_label": "Store Name",
         "collection_filter_label": "COLLECTIONS:",
-        "result_info": "PRODUCT STYLES AND AVAILABILITY VARY BY RETAILER"
+        "result_info": "PRODUCT STYLES AND AVAILABILITY VARY BY RETAILER",
+        "appointment_filter_header":"APPOINTMENTS",
+        "appointment_filter_lable":"Direct Request Available"
     },
     "request_appointment": {
         "title": "Request an Appointment",

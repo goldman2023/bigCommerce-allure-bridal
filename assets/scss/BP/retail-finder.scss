@@ -234,7 +234,7 @@
             font-size: 12px;
             line-height: 20px;
 
-            .collections-label {
+            .collections-label, .appointment-filter-header {
               font-family: stencilFontFamily('default-font-regular');
               font-style: normal;
               font-weight: 600;
@@ -310,6 +310,26 @@
                 background: no-repeat;
               }
             }
+            .appointment{
+              .appointment-filter-header{
+                padding: 10px 0px 10px 0px;
+              }
+              .appointment-filter-body{
+                display: flex;
+                align-items: center;
+                .on-off-appointment{
+                  accent-color: stencilColor('color-default-primary-1');
+                  width: 16px;
+                  height: 16px;
+                  margin-right: 10px;
+                }
+                .appointment-filter-label{
+                  cursor: pointer;
+                }
+              }
+              
+            }
+            
           }
 
           .header-svg__border {
@@ -773,7 +793,7 @@
   }
 
   .disney {
-
+    margin: 8px 0px 0px 0px;
     &::before {
       content: url('../icons/platinum-collection.svg');
     }
