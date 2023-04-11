@@ -26,8 +26,11 @@
 
 
             #info {
-                line-height: 24px;
+                font-family: stencilFontFamily('default-font-regular');
                 white-space: pre-line;
+                font-size: 16px;
+                line-height: 134%;
+                width: 56.5%;
             }
 
 
