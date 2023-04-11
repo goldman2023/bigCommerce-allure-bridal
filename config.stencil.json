@@ -1,0 +1,63 @@
+{
+  "customLayouts": {
+    "brand": {},
+    "category": {
+      "bp-category.html": [
+        "/dresses/",
+        "/allure-bridals/",
+        "/collections/allure-bridals/",
+        "/dresses/bridesmaids-dresses/",
+        "/dresses/disney-fairy-tale-wedding-dresses/"
+      ],
+      "suits-bp-category.html": [
+        "/suits-and-tuxedos/the-venice-velvet/"
+      ],
+      "disney-fairy-tale-wedding-category-landing.html": [
+        "/collections/",
+        "/collections/disney-fairy-tale-weddings/",
+        "/hidden/disney-fairy-tale-weddings-test/"
+      ],
+      "madison-james-category-landing.html": [
+        "/collections/bridesmaids/",
+        "/collections/madison-james/"
+      ],
+      "madison-james-bp-category.html": [
+        "/dresses/madison-james-dresses/"
+      ],
+      "allure-bridals-category-listing.html": [
+        "/collections/bridal/"
+      ]
+    },
+    "page": {
+      "dressing-room.html": "/dressing-room/",
+      "manage-members.html": "/manage-members/",
+      "retail-finder.html": "/retail-finder/",
+      "custom-home-page.html": "/",
+      "custom-form.html": [
+        "/uk-designer-events/",
+        "/become-a-retailer/"
+      ],
+      "page-wilderly-bride.html": [
+        "/all-content-blocks/"
+      ],
+      "custom-retail-finder.html": "/request-appointment/",
+      "about.html": "/about/"
+    },
+    "product": {
+      "disney-fairy-tale-wedding.html": [
+        "/disney-fairy-tale-weddings/d286-rapunzel/"
+      ],
+      "men-design.html": [
+        "/allure-couture/c634/"
+      ],
+      "allure-bridals.html": "/allure-couture/c634l/",
+      "wilderly-bride.html": [
+        "/allure-couture/c631/"
+      ],
+      "abella-design.html": "/allure-romance/3000t/",
+      "suits-product.html": "/test-product/"
+    }
+  },
+  "normalStoreUrl": "https://store-p2787bt8c.mybigcommerce.com/",
+  "port": 3000
+}

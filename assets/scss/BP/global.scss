@@ -653,3 +653,21 @@ input[type="number"] {
 button[data-wishlist-delete] {
     display: none;
 }
+
+.become-a-retailer {
+    iframe {
+        height: 1650px !important;
+        @include breakpoint("medium") {
+            height: 1514px !important;
+        }
+    }
+}
+.submit-your-wedding {
+    iframe {
+        height: 1420px !important;
+
+        @include breakpoint("medium") {
+            height: 1315px !important;
+        }
+    }
+}
