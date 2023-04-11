@@ -40,15 +40,6 @@ $second_value: str-slice($value_of_swatch_size, $position_of_x + 1);
     visibility: hidden;
 }
 
-.form-option:hover {
-    .form-option-expanded {
-        // opacity: 1;
-        // transform: translate(-50%, 0);
-        // visibility: visible;
-        // z-index: 5000;
-    }
-}
-
 .form-option-image {
     display: block;
     height: 100px;
