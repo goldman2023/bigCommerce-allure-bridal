@@ -320,25 +320,31 @@ export default class RetailFinder extends PageManager {
 
     container.append(badgeCollectionsForFeatured)
     mainContainer.append(container);
-    const nameHeader = document.createElement('div');
-    nameHeader.classList.add('retailer-title');
-    nameHeader.innerText = retailer.retailerName;
-    container.append(nameHeader);
 
+    const itemHeader = document.createElement('div');
+    itemHeader.classList.add('retailer-item-header');
+
+    const title = document.createElement('span');
+    title.classList.add('retailer-title')
+    title.innerText = retailer.retailerName;
+    itemHeader.append(title);
+
+    const distance = document.createElement('span');
+    distance.classList.add('retailer-distance');
+    distance.innerText = parseInt(`${this.getDistanceBtwnTwoPts(this.selectedPlace, retailer.location)}`) + ` miles`;
+
+    itemHeader.append(distance);
+    container.append(itemHeader);
+
+    const location_direction = document.createElement('div');
+    location_direction.classList.add('retailer-location-direction')
     const locationInfo = document.createElement('div');
     locationInfo.classList.add('retailer-location');
     const cityState = document.createElement('span');
     cityState.classList.add('retailer-city-state');
     cityState.innerText = `${retailer.retailerCity}, ${retailer.state}`;
     locationInfo.append(cityState);
-    container.append(locationInfo);
-
-    const distanceDirection = document.createElement('div');
-    distanceDirection.classList.add('retailer-distanceDirection')
-    const distance = document.createElement('span');
-    distance.classList.add('retailer-distance');
-    distance.innerText = parseInt(`${this.getDistanceBtwnTwoPts(this.selectedPlace, retailer.location)}`) + ` miles`;
-    distanceDirection.append(distance)
+    location_direction.append(locationInfo);
 
     const directions = document.createElement('a');
     directions.classList.add('directions');
@@ -347,9 +353,9 @@ export default class RetailFinder extends PageManager {
     directions.setAttribute('href', `https://www.google.com/maps?daddr=${destination}`);
     directions.setAttribute('target', '_blank');
     directions.setAttribute('rel', 'noopener noreferrer');
-    distanceDirection.append(directions);
+    location_direction.append(directions);
 
-    container.append(distanceDirection);
+    container.append(location_direction);
 
     const collections = document.createElement('span');
     collections.classList.add('retailer-collections');
