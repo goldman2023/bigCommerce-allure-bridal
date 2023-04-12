@@ -2,22 +2,21 @@
 {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
 <section>
     <div class="content">
-        <div class="left">
-            <div class="events-header">
-                <div class="header-top">
-                    <h2 class="header-title">Designer Events</h2>
-                    <div class="map-toggle">
-                        <label class="toggle-label">SHOW MAP</label>
-                        <label class="switch">
-                            <input type="checkbox" id="mapToggle" checked>
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-
+        <div class="events-header">
+            <div class="header-top">
+                <h2 class="header-title">Designer Events</h2>
+                <div class="map-toggle">
+                    <label class="toggle-label">SHOW MAP</label>
+                    <label class="switch">
+                        <input type="checkbox" id="mapToggle" checked>
+                        <span class="slider round"></span>
+                    </label>
                 </div>
-                <span id="info">This is a brief description to explain what designer event is</span>
             </div>
+            <div id="info">{{lang 'designer_events.briefInfo'}}</div>
+        </div>
 
+        <div class="left">
             <div class="map-filters">
                 <div class="form">
                     <div class="geo-filters">
