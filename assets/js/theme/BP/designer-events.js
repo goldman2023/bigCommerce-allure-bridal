@@ -611,9 +611,6 @@ export default class DesignerEvents extends PageManager {
         if (events.length) {
             otherFiltersToggle.style.display = 'flex';
             sortBy.style.display = 'flex';
-        } else {
-            otherFiltersToggle.style.display = 'none';
-            sortBy.style.display = 'none';
         }
 
         const sortLabelDisplay = SORT_LABELS[this.sortBy];
@@ -629,8 +626,6 @@ export default class DesignerEvents extends PageManager {
             collectionsFilter.style.display = 'inherit';
         } else {
             eventInfoElem.innerText = 'No Results found. Try widening your search.';
-            // doesnt make sense to show a bare label
-            collectionsFilter.style.display = 'none';
         }
 
 
