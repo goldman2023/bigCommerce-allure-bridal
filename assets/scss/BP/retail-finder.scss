@@ -118,44 +118,46 @@
                   padding-right: 10px;
 
                 }
-
-                .retailer-title {
-                  font-family: stencilFontFamily('prata-font');
-                  font-weight: 400;
-                  font-size: 22px;
-                  line-height: 30px;
-                }
-
-                .retailer-location {
-                  margin: 5px 0px 0px 0px;
-
-                  .retailer-city-state {
-                    font-family: stencilFontFamily('default-font-regular');
-                    font-style: normal;
-                    font-weight: 500;
-                    font-size: 12px;
-                    line-height: 16px;
-                    letter-spacing: 0.1em;
-                    text-transform: uppercase;
-
-                  }
-                }
-
-                .retailer-distanceDirection {
+                .retailer-item-header{
                   display: flex;
                   align-items: center;
-                  margin: 5px 0px 5px 0px;
-
-                  .retailer-distance {
+                  justify-content: space-between;
+                  .retailer-title {
+                    font-family: stencilFontFamily('prata-font');
+                    font-weight: 400;
+                    font-size: 22px;
+                    line-height: 30px;
+                  }
+                  .retailer-distance{
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 14px;
                     color: stencilColor('color-allure-bridals-neutral-1');
+                  }
+                }
+              
+                .retailer-location-direction{
+                  display: flex;
+                  align-items: center;
 
-                    &::after {
-                      padding-left: 10px;
-                      padding-right: 10px;
-                      content: url('../icons/spot.svg');
+                  margin: 5px 0px 0px 0px;
+                  .retailer-location {
+  
+                    .retailer-city-state {
+                      font-family: stencilFontFamily('default-font-regular');
+                      font-style: normal;
+                      font-weight: 500;
+                      font-size: 12px;
+                      line-height: 16px;
+                      letter-spacing: 0.1em;
+                      text-transform: uppercase;
+                      &::after {
+                        padding-left: 10px;
+                        padding-right: 10px;
+                        content: url('../icons/spot.svg');
+                      }
                     }
                   }
-
                   .directions {
                     color: stencilColor('color-default-primary-1');
                     font-style: normal;
