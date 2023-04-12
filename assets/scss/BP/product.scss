@@ -133,14 +133,3 @@
       display: block;
     }
   }
-
-  .form-option-container {
-    display: flex;
-    .form-option-wrapper {
-      display: unset;
-      order: 2;
-      &.selected {
-        order: 1;
-      }
-    }
-  }
