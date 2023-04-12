@@ -318,22 +318,30 @@
                         &.websitelink{
                             font-size: 13px;
                             font-weight: 400;
-                            font-size: 14px;
-                            line-height: 22px;
+                            line-height: 1;
                             color: #AC634D;
                             padding: 0;
                             font-family: stencilFontFamily('default-font-light');
+                            display:flex;
+                            align-items: center;
+                            letter-spacing: normal;
                             @media only screen and (min-width: 1600px) {
+                                font-size: remCalc(14px);
+                            }
+                            @media only screen and (min-width: 1800px) {
+                                font-size: remCalc(15px);
+                            }
+                            @media only screen and (min-width: 1900px) {
                                 font-size: remCalc(16px);
-                                line-height: remCalc(18px);
                             }
                             @media only screen and (min-width: 2000px) {
+                                font-size: remCalc(18px);
+                            }
+                            @media only screen and (min-width: 2400px) {
                                 font-size: remCalc(20px);
-                                line-height: remCalc(24px);
                             }
                             @media only screen and (min-width: 2800px) {
                                 font-size: remCalc(22px);
-                                line-height: remCalc(28px);
                             }
                             text-transform: capitalize;
                             &::before {
@@ -341,17 +349,30 @@
                             }
 
                             svg {
+                                margin-right: 5px;
                                 @media only screen and (min-width: 1600px) {
+                                    width: 14px;
+                                    height: 13px;
+                                }
+                                @media only screen and (min-width: 1800px) {
                                     width: 15px;
+                                    height: 14px;
+                                }
+                                @media only screen and (min-width: 1900px) {
+                                    width: 16px;
                                     height: 15px;
                                 }
                                 @media only screen and (min-width: 2000px) {
                                     width: 18px;
-                                    height: 18px;
+                                    height: 17px;
+                                }
+                                @media only screen and (min-width: 2400px) {
+                                    width: 20px;
+                                    height: 19px;
                                 }
                                 @media only screen and (min-width: 2800px) {
-                                    width: 20px;
-                                    height: 20px;
+                                    width: 22px;
+                                    height: 21px;
                                 }
                             }
                         }
