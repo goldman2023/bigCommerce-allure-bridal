@@ -968,7 +968,8 @@ export function featuredEvents(context,count) {
     designerEventsData(context, response => {
         if (response !== undefined) {
             let datastru = response.data.sectionDesignerEventsCollection.items.filter((item)=> item.featured);
-            var sorteddatastru = datastru.sort((a,b) =>  new Date(a.eventStartDate) - new Date(b.eventStartDate));
+            let checkEnddata = datastru.filter((item)=> new Date() < new Date(item.eventEndDate));
+            var sorteddatastru = checkEnddata.sort((a,b) =>  new Date(a.eventStartDate) - new Date(b.eventStartDate));
             if(count) {
                 sorteddatastru = sorteddatastru.slice(0, count);
             }
