@@ -91,6 +91,8 @@ export default class DesignerEvents extends PageManager {
         this.setupCollections();
         this.initMap();
         this.addEventHandlers();
+        this.createCollectionListItems(this.originalEvents);
+
     };
 
     checkEventCanRequestAppt = async (event) => {
@@ -153,9 +155,7 @@ export default class DesignerEvents extends PageManager {
             collectionItemCheckbox.setAttribute('type', 'checkbox');
             collectionItemCheckbox.setAttribute('id', collection);
             collectionItemCheckbox.setAttribute('name', collection);
-            if (this.appliedFilters.collections.includes(collection)) {
                 collectionItemCheckbox.setAttribute('checked', true);
-            }
             collectionItem.append(collectionItemCheckbox);
 
             const collectionItemLabel = document.createElement('label');
@@ -464,11 +464,7 @@ export default class DesignerEvents extends PageManager {
     addEventInfo = (eventData) => {
         const eventFinderResults = document.getElementById('eventResults');
         eventFinderResults.innerHTML = "";
-        eventData.sort((a, b) => {
-            console.log(new Date(b.eventStartDate));
-            return new Date(a.eventStartDate) - new Date(b.eventStartDate);
-        }).forEach((eventData) => {
-            console.log("--",eventData)
+        eventData.forEach((eventData) => {
             const eventItem = this.createEventItem(eventData);
             eventFinderResults.append(eventItem);
         });
@@ -522,7 +518,6 @@ export default class DesignerEvents extends PageManager {
         this.paintEventMapMarkers(events);
         this.addEventInfo(events);
         this.updateFilters(events);
-        this.createCollectionListItems(events);
         if (updateResultText) {
             this.updateResultsInfo(events);
         }
@@ -565,6 +560,9 @@ export default class DesignerEvents extends PageManager {
                     const event = await this.checkEventCanRequestAppt(evt);
                     withApptData.push(event);
                 }
+                withApptData.sort((a, b) => {
+                    return new Date(a.eventStartDate) - new Date(b.eventStartDate);
+                })
                 this.eventsFilteredByLocation = withApptData;
                 this.sortEvents(withApptData);
                 this.updateEventUi(withApptData);
