@@ -275,7 +275,6 @@ export default class DesignerEvents extends PageManager {
             if (!e.target.value) {
                 this.selectedPlace = null;
                 searchButton.disabled = true;
-                locationTypeahead.classList.add('error');
             }
         });
 
@@ -397,7 +396,12 @@ export default class DesignerEvents extends PageManager {
         container.id = event.sys.id;
         const date = document.createElement('span');
         date.classList.add('event-date');
-        date.innerText = `${new Date(event.eventStartDate).toLocaleDateString()} - ${new Date(event.eventEndDate).toLocaleDateString()}`;
+        let monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        let startDate = `${ monthNames[new Date(event.eventStartDate).getMonth()]} ${new Date(event.eventStartDate).getDate()}, ${new Date(event.eventStartDate).getFullYear()}`;
+        let endDate = `${ monthNames[new Date(event.eventEndDate).getMonth()]} ${new Date(event.eventEndDate).getDate()}, ${new Date(event.eventEndDate).getFullYear()}`;
+
+        date.innerText = `${startDate} - ${endDate}`;
         container.append(date);
         const nameHeader = document.createElement('div');
         nameHeader.classList.add('event-title');
@@ -460,8 +464,11 @@ export default class DesignerEvents extends PageManager {
     addEventInfo = (eventData) => {
         const eventFinderResults = document.getElementById('eventResults');
         eventFinderResults.innerHTML = "";
-        // eventData.sort((a, b) => (a.sort_order > b.sort_order) ? 1 : -1)
-        eventData.forEach((eventData) => {
+        eventData.sort((a, b) => {
+            console.log(new Date(b.eventStartDate));
+            return new Date(a.eventStartDate) - new Date(b.eventStartDate);
+        }).forEach((eventData) => {
+            console.log("--",eventData)
             const eventItem = this.createEventItem(eventData);
             eventFinderResults.append(eventItem);
         });
@@ -864,7 +871,6 @@ export default class DesignerEvents extends PageManager {
         eventUrlLink.innerText = 'Visit Retailer Website';
         eventUrl.append(eventUrlLink);
         contentRight.append(eventUrl);
-
         if (event.canRequestAppt) {
             const scheduleBtn = document.createElement('button');
             scheduleBtn.setAttribute('type', 'button');
