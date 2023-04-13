@@ -797,7 +797,8 @@
   .disney {
     margin: 8px 0px 0px 0px;
     &::before {
-      content: url('../icons/platinum-collection.svg');
+      content: url('../icons/platinum-collection-phase1.3.svg');
+      height: 24px;
     }
   }
 

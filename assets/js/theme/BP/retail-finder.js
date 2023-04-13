@@ -104,6 +104,56 @@ const DEFAULT_ZOOM_LEVEL = 4;
 const INITIAL_MAP = {
   zoom: 2,
   center: { lat: 36, lng: -60 },
+  styles: [
+    {
+        "featureType": "all",
+        "elementType": "all",
+        "stylers": [
+            {
+                "hue": "#0f1216"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "all",
+        "stylers": [
+            {
+                "saturation": -70
+            }
+        ]
+    },
+    {
+        "featureType": "transit",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            },
+            {
+                "saturation": -60
+            }
+        ]
+    }
+]
 }
 const HOVER_DEFAULT_ZOOM_LEVEL = 10;
 
