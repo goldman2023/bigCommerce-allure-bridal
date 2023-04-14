@@ -91,6 +91,8 @@ export default class DesignerEvents extends PageManager {
         this.setupCollections();
         this.initMap();
         this.addEventHandlers();
+        this.createCollectionListItems(this.originalEvents);
+
     };
 
     checkEventCanRequestAppt = async (event) => {
@@ -153,9 +155,7 @@ export default class DesignerEvents extends PageManager {
             collectionItemCheckbox.setAttribute('type', 'checkbox');
             collectionItemCheckbox.setAttribute('id', collection);
             collectionItemCheckbox.setAttribute('name', collection);
-            if (this.appliedFilters.collections.includes(collection)) {
                 collectionItemCheckbox.setAttribute('checked', true);
-            }
             collectionItem.append(collectionItemCheckbox);
 
             const collectionItemLabel = document.createElement('label');
@@ -275,7 +275,6 @@ export default class DesignerEvents extends PageManager {
             if (!e.target.value) {
                 this.selectedPlace = null;
                 searchButton.disabled = true;
-                locationTypeahead.classList.add('error');
             }
         });
 
@@ -397,7 +396,12 @@ export default class DesignerEvents extends PageManager {
         container.id = event.sys.id;
         const date = document.createElement('span');
         date.classList.add('event-date');
-        date.innerText = `${new Date(event.eventStartDate).toLocaleDateString()} - ${new Date(event.eventEndDate).toLocaleDateString()}`;
+        let monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        let startDate = `${ monthNames[new Date(event.eventStartDate).getMonth()]} ${new Date(event.eventStartDate).getDate()}, ${new Date(event.eventStartDate).getFullYear()}`;
+        let endDate = `${ monthNames[new Date(event.eventEndDate).getMonth()]} ${new Date(event.eventEndDate).getDate()}, ${new Date(event.eventEndDate).getFullYear()}`;
+
+        date.innerText = `${startDate} - ${endDate}`;
         container.append(date);
         const nameHeader = document.createElement('div');
         nameHeader.classList.add('event-title');
@@ -460,7 +464,6 @@ export default class DesignerEvents extends PageManager {
     addEventInfo = (eventData) => {
         const eventFinderResults = document.getElementById('eventResults');
         eventFinderResults.innerHTML = "";
-        // eventData.sort((a, b) => (a.sort_order > b.sort_order) ? 1 : -1)
         eventData.forEach((eventData) => {
             const eventItem = this.createEventItem(eventData);
             eventFinderResults.append(eventItem);
@@ -515,7 +518,6 @@ export default class DesignerEvents extends PageManager {
         this.paintEventMapMarkers(events);
         this.addEventInfo(events);
         this.updateFilters(events);
-        this.createCollectionListItems(events);
         if (updateResultText) {
             this.updateResultsInfo(events);
         }
@@ -558,6 +560,9 @@ export default class DesignerEvents extends PageManager {
                     const event = await this.checkEventCanRequestAppt(evt);
                     withApptData.push(event);
                 }
+                withApptData.sort((a, b) => {
+                    return new Date(a.eventStartDate) - new Date(b.eventStartDate);
+                })
                 this.eventsFilteredByLocation = withApptData;
                 this.sortEvents(withApptData);
                 this.updateEventUi(withApptData);
@@ -606,9 +611,6 @@ export default class DesignerEvents extends PageManager {
         if (events.length) {
             otherFiltersToggle.style.display = 'flex';
             sortBy.style.display = 'flex';
-        } else {
-            otherFiltersToggle.style.display = 'none';
-            sortBy.style.display = 'none';
         }
 
         const sortLabelDisplay = SORT_LABELS[this.sortBy];
@@ -624,8 +626,6 @@ export default class DesignerEvents extends PageManager {
             collectionsFilter.style.display = 'inherit';
         } else {
             eventInfoElem.innerText = 'No Results found. Try widening your search.';
-            // doesnt make sense to show a bare label
-            collectionsFilter.style.display = 'none';
         }
 
 
@@ -979,7 +979,6 @@ export default class DesignerEvents extends PageManager {
         eventUrlLink.innerText = 'Visit Retailer Website';
         eventUrl.append(eventUrlLink);
         contentRight.append(eventUrl);
-
         if (event.canRequestAppt) {
             const scheduleBtn = document.createElement('button');
             scheduleBtn.setAttribute('type', 'button');
