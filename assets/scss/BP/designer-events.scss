@@ -145,8 +145,6 @@
                         cursor: pointer;
                         display: none;
                         align-items: center;
-                        flex: 65%;
-                        margin-right: 10px;
 
                         &:hover {
                             // lol love our designers
@@ -247,8 +245,21 @@
                         display: none;
                         align-items: center;
                         cursor: pointer;
-                        width: 25%;
+                        justify-content: flex-end;
+                        &::before {
+                            padding-right: 5px;
+                            padding-top: 2px;
+                            content: url('../icons/filter-show-hide.svg');
+                          }
+                        .option-filter-label{
+                            
+                            font-weight: 500;
+                            font-size: 12px;
+                            line-height: 14.52px;
+                            text-align: center;
 
+                            
+                        }
                         .menu-icon {
                             width: 20px;
                             height: 20px;
@@ -316,6 +327,7 @@
                             align-items: center;
                             margin-bottom: 2px;
                             margin-right: 25px;
+                            text-transform: uppercase;
                         }
 
                         .event-distance {
@@ -375,7 +387,6 @@
 
                     .other-filters {
                         display: none;
-
                         .collections-filter {
                             span {
                                 margin-bottom: 8px;

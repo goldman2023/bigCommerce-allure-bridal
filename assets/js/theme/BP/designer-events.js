@@ -306,7 +306,7 @@ export default class DesignerEvents extends PageManager {
         const otherFiltersToggle = document.getElementById('otherFiltersToggle');
         otherFiltersToggle.addEventListener('click', () => {
             const otherFilters = document.getElementById('otherFilters');
-            const otherFiltersToggleLabel = otherFiltersToggle.getElementsByClassName('filter-label')[0];
+            const otherFiltersToggleLabel = otherFiltersToggle.getElementsByClassName('option-filter-label')[0];
             if (otherFilters.style.display === 'none' || !otherFilters.style.display) {
                 otherFilters.style.display = 'block';
                 otherFiltersToggleLabel.innerHTML = 'HIDE FILTERS';
