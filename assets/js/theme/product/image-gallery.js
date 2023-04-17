@@ -2,8 +2,8 @@ import 'easyzoom';
 
 export default class ImageGallery {
     constructor($gallery) {
-        this.$mainImage = $gallery.find('[data-image-gallery-main]');
-        this.$mainImageNested = $gallery.find('[data-main-image]');
+        this.$mainImage = $gallery.find('.prodimageslider .pdpmainimage');
+        this.$mainImageNested = $gallery.find('.prodimageslider .slick-current img');
         this.$selectableImages = $gallery.find('[data-image-gallery-item]');
         this.currentImage = {};
     }
@@ -16,7 +16,7 @@ export default class ImageGallery {
     setMainImage(imgObj) {
         this.currentImage = { ...imgObj };
 
-        this.setActiveThumb();
+        //this.setActiveThumb();
         this.swapMainImage();
     }
 
@@ -60,37 +60,26 @@ export default class ImageGallery {
     }
 
     swapMainImage() {
-        const isBrowserIE = navigator.userAgent.includes('Trident');
-
-        this.easyzoom.data('easyZoom').swap(
-            this.currentImage.mainImageUrl,
-            this.currentImage.zoomImageUrl,
-            this.currentImage.mainImageSrcset,
-        );
-
-        this.$mainImage.attr({
-            'data-zoom-image': this.currentImage.zoomImageUrl,
-        });
-        this.$mainImageNested.attr({
-            alt: this.currentImage.mainImageAlt,
-            title: this.currentImage.mainImageAlt,
+        const mainImageSlider = document.querySelectorAll('.prodimageslider .pdpmainimage');
+        mainImageSlider.forEach(slider => {
+            if (slider.classList.contains('slick-current') && this.currentImage.zoomImageUrl !== undefined) {
+                slider.querySelector('img').setAttribute('data-src', this.currentImage.mainImageUrl);
+                slider.querySelector('img').setAttribute('src', this.currentImage.mainImageUrl);
+                slider.querySelector('img').setAttribute('srcset', this.currentImage.mainImageUrl);
+                slider.querySelector('img').setAttribute('data-srcset', this.currentImage.mainImageUrl);
+            }
         });
 
-        if (isBrowserIE) {
-            const fallbackStylesIE = {
-                'background-image': `url(${this.currentImage.mainImageUrl})`,
-                'background-position': 'center',
-                'background-repeat': 'no-repeat',
-                'background-origin': 'content-box',
-                'background-size': 'contain',
-            };
-
-            this.$mainImageNested.css(fallbackStylesIE);
-        }
+        const imageModalSlider = document.querySelectorAll('#pdpimagemodal .prodimageslider .slick-slide');
+        imageModalSlider.forEach(slider => {
+            if (slider.classList.contains('slick-current')) {
+                slider.querySelector('img').setAttribute('data-src', this.currentImage.mainImageUrl);
+            }
+        });
     }
 
     checkImage() {
-        const $imageContainer = $('.productView-image');
+        const $imageContainer = $('.pdpmainimage.slick-current');
         const containerHeight = $imageContainer.height();
         const containerWidth = $imageContainer.width();
 
