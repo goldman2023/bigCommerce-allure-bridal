@@ -151,12 +151,12 @@ export default class RequestEventAppointment extends PageManager {
         alert('Please fill out all the required fields.');
         form.querySelectorAll('.form-input').forEach(element => {
           if (element.classList.contains('required')) {
-            let retailFinderFormError = element.closest('.form-field').querySelector('.error-message');
+            let formError = element.closest('.form-field').querySelector('.error-message');
             let errorDiv = document.createElement('span');
             errorDiv.classList.add('error-message');
 
             if (element.value.length > 0) {
-              retailFinderFormError?.remove();
+              formError?.remove();
               if (element.getAttribute('name') === "email" && !emailPattern.test(email)){
                   errorDiv.innerText = 'Invalid email address';
                   element.parentNode.insertBefore(errorDiv,element.nextSibling);
@@ -169,7 +169,7 @@ export default class RequestEventAppointment extends PageManager {
                 errorDiv.innerText = 'Invalid number';
                 element.parentNode.insertBefore(errorDiv,element.nextSibling);
               }
-            } else if(!retailFinderFormError) {
+            } else if(!formError) {
               errorDiv.innerText = 'This Field is required';
               element.parentNode.insertBefore(errorDiv,element.nextSibling);
             }

@@ -133,13 +133,14 @@
                     font-weight: 400;
                     font-size: 14px;
                     color: stencilColor('color-allure-bridals-neutral-1');
+                    white-space: nowrap;
                   }
                 }
               
                 .retailer-location-direction{
                   display: flex;
                   align-items: center;
-
+                  flex-wrap: wrap;
                   margin: 5px 0px 0px 0px;
                   .retailer-location {
   
@@ -150,6 +151,7 @@
                       font-size: 12px;
                       line-height: 16px;
                       letter-spacing: 0.1em;
+                      white-space: nowrap;
                       text-transform: uppercase;
                       &::after {
                         padding-left: 10px;
