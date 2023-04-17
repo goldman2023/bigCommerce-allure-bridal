@@ -32,7 +32,6 @@
       "dressing-room.html": "/dressing-room/",
       "manage-members.html": "/manage-members/",
       "retail-finder.html": "/retail-finder/",
-      "designer-events.html": "/designer-events/",
       "custom-home-page.html": "/",
       "custom-form.html": [
         "/uk-designer-events/",
@@ -59,6 +58,6 @@
       "suits-product.html": "/test-product/"
     }
   },
-  "normalStoreUrl": "https://allurebridals.com/",
-  "port": 5000
+  "normalStoreUrl": "https://store-p2787bt8c.mybigcommerce.com/",
+  "port": 3000
 }
