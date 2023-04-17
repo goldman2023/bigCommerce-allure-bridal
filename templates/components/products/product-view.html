@@ -189,12 +189,10 @@
                     for variant/rule image replacement
                 --}}
                 {{#if product.images.length '>' 1 }}
-                {{> components/carousel-content-announcement}}
+                    {{> components/carousel-content-announcement}}
                 {{/if}} 
                 <figure class="productView-image"
                     data-image-gallery-main
-                    {{#if product.main_image}}
-                    {{/if}}
                     >
                     <div class="productView-img-container">
                         {{!-- Remove the surrounding a-element if there is no main image. --}}
@@ -228,10 +226,10 @@
                     <span class="close">&times;</span>
                     <div class="prodimageslider slider-nav" >
                         {{#each product.images}}
-                            <div><img src="{{strReplace this.data '{:size}' '2500x2500'}}" style="width: 100%;"/></div>
+                            <div><img class="lazyload" data-src="{{strReplace this.data '{:size}' '2500x2500'}}" style="width: 100%;"/></div>
                         {{/each}}
                     </div>
-                  </div>
+                </div>
             </section>
         </div>
     </div>

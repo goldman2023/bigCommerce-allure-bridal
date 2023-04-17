@@ -470,15 +470,17 @@ export default class ProductDetails extends ProductDetailsBase {
         }
 
         utils.api.productAttributes.optionChange(productId, $form.serialize(), 'products/bulk-discount-rates', (err, response) => {
-            const productAttributesData = response.data || {};
-            const productAttributesContent = response.content || {};
-            this.updateProductAttributes(productAttributesData);
-            this.updateView(productAttributesData, productAttributesContent);
-            bannerUtils.dispatchProductBannerEvent(productAttributesData);
+            if (response !== undefined) {
+                const productAttributesData = response.data || {};
+                const productAttributesContent = response.content || {};
+                this.updateProductAttributes(productAttributesData);
+                this.updateView(productAttributesData, productAttributesContent);
+                bannerUtils.dispatchProductBannerEvent(productAttributesData);
 
-            if (!this.checkIsQuickViewChild($form)) {
-                const $context = $form.parents('.productView').find('.productView-info');
-                modalFactory('[data-reveal]', { $context });
+                if (!this.checkIsQuickViewChild($form)) {
+                    const $context = $form.parents('.productView').find('.productView-info');
+                    modalFactory('[data-reveal]', { $context });
+                }
             }
         });
     }
