@@ -185,11 +185,14 @@
                                     margin-bottom: 12px;
                                     display: flex;
                                     align-items: center;
-
+                                    white-space: nowrap;
                                     &:last-child {
                                         margin-bottom: unset;
                                     }
-
+                                    label{
+                                        padding-top: 3px;
+                                        cursor: pointer;
+                                    }
                                     &:hover {
                                         color: stencilColor('color-default-primary-1');
                                     }

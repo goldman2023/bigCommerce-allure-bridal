@@ -141,8 +141,8 @@
                   display: flex;
                   align-items: center;
                   flex-wrap: wrap;
-                  margin: 5px 0px 0px 0px;
                   .retailer-location {
+                    margin: 5px 0px 0px 0px;
   
                     .retailer-city-state {
                       font-family: stencilFontFamily('default-font-regular');
@@ -156,11 +156,14 @@
                       &::after {
                         padding-left: 10px;
                         padding-right: 10px;
+                        top: -2px;
+                        position: relative;
                         content: url('../icons/spot.svg');
                       }
                     }
                   }
                   .directions {
+                    margin: 5px 0px 0px 0px;
                     color: stencilColor('color-default-primary-1');
                     font-style: normal;
                     font-weight: 500;
@@ -174,6 +177,7 @@
 
                     &::before {
                       content: url('../icons/location.svg');
+                      margin-left: -4px;
                     }
                   }
                 }
