@@ -170,11 +170,11 @@
                         .sort-dropdown {
                             z-index: 1;
                             display: none;
-                            border: 1px solid stencilColor('allure-bridals-neutral-2');
                             position: absolute;
                             padding: 24px 14px;
                             top: 2rem;
-                            background-color: white;
+                            border: 1px solid stencilColor('allure-bridals-neutral-2');
+                            background-color: stencilColor("color-white");;
 
                             ul {
                                 margin: unset;
@@ -185,11 +185,14 @@
                                     margin-bottom: 12px;
                                     display: flex;
                                     align-items: center;
-
+                                    white-space: nowrap;
                                     &:last-child {
                                         margin-bottom: unset;
                                     }
-
+                                    label{
+                                        padding-top: 1px;
+                                        cursor: pointer;
+                                    }
                                     &:hover {
                                         color: stencilColor('color-default-primary-1');
                                     }
@@ -388,15 +391,14 @@
                     .other-filters {
                         display: none;
                         .collections-filter {
-                            span {
-                                margin-bottom: 8px;
-                            }
 
                             .collections-list {
+                                margin-top: 8px;
+                                margin-left: 0px;
+
                                 .collection {
                                     display: flex;
                                     align-items: center;
-                                    margin-top: 8px;
                                     list-style: none;
 
                                     input[type="checkbox"] {
@@ -409,7 +411,13 @@
                                         border-top: none;
                                         margin-bottom: unset;
                                     }
-
+                                    label{
+                                        font-family: stencilFontFamily("default-font-regular");
+                                        font-size: 12px;
+                                        line-height: 28px;
+                                        cursor: pointer;
+                                        outline: none !important;
+                                    }
                                 }
                             }
                         }
@@ -778,9 +786,10 @@
             max-height: 100% !important;
             height: 100%;
             min-height: fit-content;
-            border: 1px solid #E2E2E2;
             padding-top: 48px;
             padding-left: 40px;
+            position: relative;
+            border: 1px solid #E2E2E2;
 
             .event-label {
                 display: block;
@@ -855,6 +864,9 @@
 
                         .street-address {
                             margin-bottom: 8px;
+                            div{
+                                margin-top: 5px;
+                            }
                         }
 
                         .directions {
