@@ -30,5 +30,11 @@
     >
         {{lang 'products.try_it_on'}}
     </button> -->
-    <a href='/retail-finder/{{#each product.category}}{{#startsWith "Collections" this}}{{#with (split (trim this) "/")}}?collection={{last this}}{{/with}}{{/startsWith}}{{/each}}' class="button button--primary custombuttontryon" >{{lang 'products.try_it_on'}}</a>
+    {{assignVar "collection" (last product.category)}}
+    {{#each product.category}}
+        {{#startsWith 'Collections' this}}
+            {{assignVar "collection" this}}
+        {{/startsWith}}
+    {{/each}}
+    <a href='/retail-finder/?collection={{#with (split (trim (getVar "collection")) "/")}}{{last this}}{{/with}}' class="button button--primary custombuttontryon" >{{lang 'products.try_it_on'}}</a>
 </div>
