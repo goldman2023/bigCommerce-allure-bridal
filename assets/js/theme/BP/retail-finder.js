@@ -102,8 +102,8 @@ const TEMPDATA = [
 
 const DEFAULT_ZOOM_LEVEL = 4;
 const INITIAL_MAP = {
-  zoom: 2,
-  center: { lat: 36, lng: -60 },
+  zoom: 2.2,
+  center: { lat: 10, lng: -60 },
   styles: [
     {
         "stylers": [
