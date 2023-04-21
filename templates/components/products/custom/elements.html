@@ -36,5 +36,10 @@
             {{assignVar "collection" this}}
         {{/startsWith}}
     {{/each}}
+    {{#each product.custom_fields}}
+        {{#startsWith 'Collection' name}}
+            {{assignVar 'collection' value}}
+        {{/startsWith}}
+    {{/each}}
     <a href='/retail-finder/?collection={{#with (split (trim (getVar "collection")) "/")}}{{last this}}{{/with}}' class="button button--primary custombuttontryon" >{{lang 'products.try_it_on'}}</a>
 </div>
