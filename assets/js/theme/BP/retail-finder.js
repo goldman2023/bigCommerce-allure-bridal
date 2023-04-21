@@ -923,12 +923,6 @@ export default class RetailFinder extends PageManager {
       header.append(featuredElement);
     }
 
-    if (retailer.disneyPlatinumCollection) {
-      const dpcElement = document.createElement('span');
-      dpcElement.classList.add('disney');
-      header.append(dpcElement);
-    }
-
     const nameElement = document.createElement('h2');
     nameElement.classList.add('header-title');
     nameElement.innerText = retailer.retailerName;
@@ -967,6 +961,12 @@ export default class RetailFinder extends PageManager {
     collections.append(collectionsList1);
     collections.append(collectionsList2);
     detailElement.append(collections);
+
+    if (retailer.disneyPlatinumCollection) {
+      const dpcElement = document.createElement('div');
+      dpcElement.classList.add('disney');
+      detailElement.append(dpcElement);
+    }
 
     const address = document.createElement('div');
     address.classList.add('retailer-address');
