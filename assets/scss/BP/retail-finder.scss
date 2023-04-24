@@ -650,7 +650,7 @@
 
         .collections {
           margin-top: 30px;
-          margin-bottom: 24px;
+          margin-bottom: 20px;
           display: flex;
           flex-wrap: wrap;
 
@@ -801,7 +801,7 @@
   }
 
   .disney {
-    margin: 8px 0px 0px 0px;
+    margin: 8px 0px 8px 0px;
     &::before {
       content: url('../icons/platinum-collection-phase1.3.svg');
       height: 24px;
