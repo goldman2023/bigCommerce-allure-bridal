@@ -27,6 +27,7 @@
 .suits-product,
 .pages-custom-page-about,
 .pages-custom-page-custom-form {
+    margin-bottom: 10px;
     .button {
         @media only screen and (min-width: 2800px) {
             font-size: remCalc(20px);
