@@ -877,6 +877,10 @@ export default class DesignerEvents extends PageManager {
         header.append(locationElement);
         detailElement.append(header);
 
+        const dot = document.querySelector('.header-svg__border');
+        const clone = dot.cloneNode(true)
+        detailElement.append(clone);
+
         const content = document.createElement('div');
         content.classList.add('event-content');
         if (event.brandFolderImage && event.brandFolderImage.length) {
@@ -974,11 +978,14 @@ export default class DesignerEvents extends PageManager {
         urlLabel.innerText = 'WEBSITE';
         eventUrl.append(urlLabel);
         const eventUrlLink = document.createElement('a');
+        eventUrlLink.classList.add('event-website');
         eventUrlLink.setAttribute("href", `${event.website}`);
         eventUrlLink.setAttribute("target", "_blank");
         eventUrlLink.innerText = 'Visit Retailer Website';
         eventUrl.append(eventUrlLink);
         contentRight.append(eventUrl);
+        const buttons = document.createElement('div');
+        buttons.classList.add('button-container');
         if (event.canRequestAppt) {
             const scheduleBtn = document.createElement('button');
             scheduleBtn.setAttribute('type', 'button');
@@ -988,7 +995,7 @@ export default class DesignerEvents extends PageManager {
             btnText.innerText = 'REQUEST AN EVENT APPOINTMENT'
             scheduleBtn.append(btnText);
             scheduleBtn.addEventListener('click', () => this.openRequestForm(event));
-            content.append(scheduleBtn);
+            buttons.append(scheduleBtn);
         }
 
         const modal = defaultModal({ size: 'normal', skipCache: true });
@@ -1000,7 +1007,8 @@ export default class DesignerEvents extends PageManager {
         requestBtnText.innerText = 'SEE MORE EVENTS';
         requestBtn.append(requestBtnText);
         requestBtn.addEventListener('click', () => modal.close());
-        content.append(requestBtn);
+        buttons.append(requestBtn);
+        content.append(buttons);
 
         modal.open();
 
