@@ -229,6 +229,32 @@ export default class RequestAppointment extends PageManager {
         .catch((error) => {
           alert(error);
         })
+    });
+
+    $('.form-input').on('keypress',function(e) {
+        const currentfield = e.target;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phone = form.elements.phoneNumber.value;
+        var unmaskedPhone = Inputmask.unmask(phone, { mask: '(999) 999-9999' });
+        const noOfPeopleAttending = form.elements.noOfPeopleAttending.value;
+
+        if (currentfield.classList.contains('required')) {
+          let formError = currentfield.closest('.form-field').querySelector('.error-message');
+          if (currentfield.value.trim().length > 0) {
+             formError?.remove();
+            if (currentfield.getAttribute('name') === "email" && !emailPattern.test(currentfield.value)){
+              $( "<span class='error-message'>Invalid email address</span>" ).insertAfter( currentfield);
+              }
+            if (currentfield.getAttribute('name') === "phoneNumber" && unmaskedPhone.toString().length < 10){
+              $( "<span class='error-message'>Invalid phone number</span>" ).insertAfter( currentfield);
+            }
+            if (currentfield.getAttribute('name') === "noOfPeopleAttending" && Number(noOfPeopleAttending) < 1){
+              $( "<span class='error-message'>Invalid number</span>" ).insertAfter( currentfield);
+            }
+          } else if(!formError) {
+            $( "<span class='error-message'>This Field is required</span>" ).insertAfter( currentfield);
+          }
+      }
     })
   };
 
