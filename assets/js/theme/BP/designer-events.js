@@ -403,10 +403,22 @@ export default class DesignerEvents extends PageManager {
 
         date.innerText = `${startDate} - ${endDate}`;
         container.append(date);
-        const nameHeader = document.createElement('div');
-        nameHeader.classList.add('event-title');
-        nameHeader.innerText = event.eventName;
-        container.append(nameHeader);
+
+        const itemHeader = document.createElement('div');
+        itemHeader.classList.add('event-item-header');
+
+        const title = document.createElement('div');
+        title.classList.add('event-title');
+        title.innerText = event.eventName;
+        itemHeader.append(title);
+
+        
+        const distance = document.createElement('div');
+        distance.classList.add('event-distance');
+        distance.innerText = parseFloat(event.distanceAway).toFixed(2) + ` miles`;
+        itemHeader.append(distance);
+
+        container.append(itemHeader);
 
         const retailerName = document.createElement('div');
         retailerName.classList.add('event-retailer');
@@ -415,13 +427,8 @@ export default class DesignerEvents extends PageManager {
 
         const cityState = document.createElement('span');
         cityState.classList.add('event-city-state');
-        cityState.innerText = `${event.city}, ${event.state}`;
+        cityState.innerHTML = `${event.city}, ${event.state} • <a class="directions" href="https://www.google.com/maps?daddr=${event.eventAddress}" target="_blank" rel="noopener noreferrer">DIRECTIONS</a>`;
         container.append(cityState);
-
-        const distanceAway = document.createElement('span');
-        distanceAway.classList.add('event-distance');
-        distanceAway.innerHTML = `${parseFloat(event.distanceAway).toFixed(2)} miles • <a class="directions" href="https://www.google.com/maps?daddr=${event.eventAddress}" target="_blank" rel="noopener noreferrer">DIRECTIONS</a>`;
-        container.append(distanceAway);
 
         const numCollections = document.createElement('span');
         numCollections.classList.add('event-collections');
