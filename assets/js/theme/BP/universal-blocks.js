@@ -683,12 +683,12 @@ export function renderHeaderFooter (context) {
                     }
                     navigationHtml += `
                         <div class="sub-site__navigation-image">
-                        ${topNav.megMenuImageUrl ? `<a href="${topNav.megMenuImageUrl}" ><img data-src="${topNav.megaMenuImage.url}" class="lazyload"></a>` : `<img data-src="${topNav.megaMenuImage.url}" class="lazyload">`}
+                        ${topNav.megMenuImageUrl ? `<a href="${topNav.megMenuImageUrl}" ><img data-src="${topNav.megaMenuImage.url}?fm=webp" class="lazyload"></a>` : `<img data-src="${topNav.megaMenuImage.url}?fm=webp" class="lazyload">`}
                         </div>
                     </div></div>`;
 
                     navigationHtmlMobile += `</ul><div class="sub-site__navigation-image">
-                    ${topNav.megMenuImageUrl ? `<a href="${topNav.megMenuImageUrl}" ><img data-src="${topNav.megaMenuImage.url}" class="lazyload"></a>` : `<img data-src="${topNav.megaMenuImage.url}" class="lazyload">`}
+                    ${topNav.megMenuImageUrl ? `<a href="${topNav.megMenuImageUrl}" ><img data-src="${topNav.megaMenuImage.url}?fm=webp" class="lazyload"></a>` : `<img data-src="${topNav.megaMenuImage.url}?fm=webp" class="lazyload">`}
                 </div></div>`
                 }
                 
@@ -874,9 +874,9 @@ export function blockElementFullscreenVideo(selectorID, element) {
     }
     if(element.__typename === "BlockElementFullscreenImage") {
         if (element?.bfBackgroundImage !== undefined && element?.bfBackgroundImage !== null) {
-            document.getElementById(selectorID).innerHTML = `<img data-src="${element?.bfBackgroundImage[0]?.cdn_url}" alt="${(element?.subheadline && element?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>`;
+            document.getElementById(selectorID).innerHTML = `<img data-src="${element?.bfBackgroundImage[0]?.cdn_url}?fm=webp" alt="${(element?.subheadline && element?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>`;
         } else if (element?.backgroundImage?.url && element?.backgroundImage?.url !== undefined) {
-            document.getElementById(selectorID).innerHTML = `<img alt="${element?.backgroundImage?.title}" data-src="${element?.backgroundImage?.url}" class="lazyload"/>`;
+            document.getElementById(selectorID).innerHTML = `<img alt="${element?.backgroundImage?.title}" data-src="${element?.backgroundImage?.url}?fm=webp" class="lazyload"/>`;
         }
     }
 }
@@ -894,7 +894,7 @@ export function globalblockElementFullscreenVideo(element) {
 }
 
 export function lookBookglobal(blockData) {
-    return `<div class="blockElementLookbook block-item full-size" id="blockElementLookbook"><div><h4 class="title">${(blockData?.blocktitle) ? blockData?.blocktitle : ''} - ${(blockData?.subheadline) ? blockData?.subheadline : ''}</h4><div class="contentSection"><img data-src="${(blockData?.imagesCollection?.items[0]?.url) ? blockData?.imagesCollection?.items[0]?.url : ''}" alt="${(blockData?.subheadline) ? blockData?.subheadline : ''}" class="lazyload"/><div class="caption">
+    return `<div class="blockElementLookbook block-item full-size" id="blockElementLookbook"><div><h4 class="title">${(blockData?.blocktitle) ? blockData?.blocktitle : ''} - ${(blockData?.subheadline) ? blockData?.subheadline : ''}</h4><div class="contentSection"><img data-src="${(blockData?.imagesCollection?.items[0]?.url) ? blockData?.imagesCollection?.items[0]?.url : ''}?fm=webp" alt="${(blockData?.subheadline) ? blockData?.subheadline : ''}" class="lazyload"/><div class="caption">
         ${(blockData?.bodyCopy == null || blockData?.bodyCopy == undefined) ? '' :
         `<p class="content">${blockData.bodyCopy}</p>`
         }   
@@ -904,7 +904,7 @@ export function lookBookglobal(blockData) {
 }
 
 export function lookBookglobal2(blockData) {
-    return `<div class="blockElementLookbook2 block-item full-size" id="blockElementLookbook2"><div><div class="caption"><h2>${(blockData.blocktitle) ? blockData.blocktitle : ''}</h2><div class="divider"></div><h4>${(blockData.subheadline) ? blockData.subheadline : ''}</h4><p class="content">${blockData?.bodyCopy}</p><a href="${blockData?.linkUrl}" class="button button-secondary">${blockData?.linkText}</a></div><div class="contentSection"><img data-src="${(blockData?.imagesCollection?.items[0]?.url) ? blockData?.imagesCollection?.items[0]?.url : ''}" alt="${blockData?.subheadline}" class="lazyload"/></div></div></div>`;
+    return `<div class="blockElementLookbook2 block-item full-size" id="blockElementLookbook2"><div><div class="caption"><h2>${(blockData.blocktitle) ? blockData.blocktitle : ''}</h2><div class="divider"></div><h4>${(blockData.subheadline) ? blockData.subheadline : ''}</h4><p class="content">${blockData?.bodyCopy}</p><a href="${blockData?.linkUrl}" class="button button-secondary">${blockData?.linkText}</a></div><div class="contentSection"><img data-src="${(blockData?.imagesCollection?.items[0]?.url) ? blockData?.imagesCollection?.items[0]?.url : ''}?fm=webp" alt="${blockData?.subheadline}" class="lazyload"/></div></div></div>`;
 }
 
 export function blockElementDivider() {
@@ -937,7 +937,7 @@ export function events(blockData,page) {
             
             return `<div class="eventsCard">
               <div class="block">
-                <div class="imageblock col"><img data-src="${item.eventImage.url}" alt="${item.retailerName}" class="lazyload"/></div>
+                <div class="imageblock col"><img data-src="${item.eventImage.url}?fm=webp" alt="${item.retailerName}" class="lazyload"/></div>
                 <div class="contentBlock col">
                     <h4>${item.retailerName}</h4>
                     <p class="addressp">${item.location}</p>
@@ -987,7 +987,7 @@ export function featuredEvents(context,count) {
                     let endDateFormatted = endDateObj.toLocaleDateString().replaceAll('/', '.');
                     return `<div class="eventsCard">
                     <div class="block">
-                        <div class="imageblock col"><img data-src="${item?.brandFolderImage[0]?.cdn_url}" alt="${item.retailerName}" class="lazyload"/></div>
+                        <div class="imageblock col"><img data-src="${item?.brandFolderImage[0]?.cdn_url}?fm=webp" alt="${item.retailerName}" class="lazyload"/></div>
                         <div class="contentBlock col">
                             <h4>${item.retailerName}</h4>
                             <p class="addressp">${item.city}, ${item.state}</p>
@@ -1023,9 +1023,9 @@ export function blockElementFullscreenImage(blockData) {
     let fullImageBlock = `<div class="blockElementFullscreenImage block-item ${(blockData?.contentOrScreenWidth === 'Screen Width') ? 'full-size' : ''}" id="blockElementFullscreenImage"><div class="mainImage">`;
 
     if (blockData?.bfBackgroundImage !== undefined && blockData?.bfBackgroundImage !== null) {
-        fullImageBlock += `<img data-src="${blockData?.bfBackgroundImage[0]?.cdn_url}" alt="${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>`;
+        fullImageBlock += `<img data-src="${blockData?.bfBackgroundImage[0]?.cdn_url}?fm=webp" alt="${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>`;
     } else {
-        fullImageBlock += `<img data-src="${blockData?.backgroundImage?.url}" alt="${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>`;
+        fullImageBlock += `<img data-src="${blockData?.backgroundImage?.url}?fm=webp" alt="${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}" class="lazyload"/>`;
     }
     
     fullImageBlock += `${ blockData?.bodyCopy !== null ? `<div class="homepageCaption"><div class="content"><div class="bannercap"><h4>${(blockData?.subheadline && blockData?.subheadline !== undefined) ? blockData?.subheadline : ''}</h4><p>${(blockData?.bodyCopy && blockData?.bodyCopy !== undefined) ? blockData?.bodyCopy : ''}</p><a href="${blockData?.linkUrl}">${blockData?.linkText}</a></div>` : '' }</div ></div ></div ></div >`;
@@ -1038,11 +1038,11 @@ export function blockElementCopyBlock(blockData) {
 }
 
 export function logoSliderBlock(blockData) {
-    return `<div class="logoSliderBlock block-item" id="logoSliderBlock"><div class="imgslider"> ${blockData?.logosCollection?.items.map((logo)=> `<div class="logo-item"><img data-src="${logo?.url}" alt="${logo?.title}" class="lazyload"/></div>` ).join('')}</div></div>`;
+    return `<div class="logoSliderBlock block-item" id="logoSliderBlock"><div class="imgslider"> ${blockData?.logosCollection?.items.map((logo) => `<div class="logo-item"><img data-src="${logo?.url}?fm=webp" alt="${logo?.title}" class="lazyload"/></div>` ).join('')}</div></div>`;
 }
 
 export function blockElement3ImagesScreenWidth(blockData) {
-    let imgthum = blockData?.imagesCollection?.items?.map((image) => `<div class="imageDiv"><img data-src="${image.url}" alt="${image.title}" class="lazyload"/></div>`);
+    let imgthum = blockData?.imagesCollection?.items?.map((image) => `<div class="imageDiv"><img data-src="${image.url}?fm=webp" alt="${image.title}" class="lazyload"/></div>`);
     return ` <div class="blockElement3ImagesScreenWidth block-item" id="blockElement3ImagesScreenWidth"><div class="thumbImg">${imgthum.join('')}</div></div>`;
 };
 
@@ -1050,9 +1050,9 @@ export function blockElementDiscover(blockData) {
     return `<div class="blockElementDiscover block-item" id="blockElementDiscover">
                 <div class="discovery-section">
                     <div class="imageflex">
-                        <div class="leftcol">${blockData?.imagesCollection?.items[0]?.url ? `<img class="first lazyload" data-src="${blockData?.imagesCollection?.items[0]?.url}" alt="${blockData?.imagesCollection?.items[0]?.title}" />` : ''}
-                        ${blockData?.imagesCollection?.items[1]?.url ? `<img class="lazyload second" data-src="${blockData?.imagesCollection?.items[1]?.url}" alt="${blockData?.imagesCollection?.items[1]?.title}"/>` : ''}</div>
-                        <div class="rightcol">${blockData?.imagesCollection?.items[2]?.url ? `<img  class="lazyload third" data-src="${blockData?.imagesCollection?.items[2]?.url}"  alt="${blockData?.imagesCollection?.items[2]?.title}" />` : '' }</div>
+                        <div class="leftcol">${blockData?.imagesCollection?.items[0]?.url ? `<img class="first lazyload" data-src="${blockData?.imagesCollection?.items[0]?.url}?fm=webp" alt="${blockData?.imagesCollection?.items[0]?.title}" />` : ''}
+                        ${blockData?.imagesCollection?.items[1]?.url ? `<img class="lazyload second" data-src="${blockData?.imagesCollection?.items[1]?.url}?fm=webp" alt="${blockData?.imagesCollection?.items[1]?.title}"/>` : ''}</div>
+                        <div class="rightcol">${blockData?.imagesCollection?.items[2]?.url ? `<img  class="lazyload third" data-src="${blockData?.imagesCollection?.items[2]?.url}?fm=webp"  alt="${blockData?.imagesCollection?.items[2]?.title}" />` : '' }</div>
                     </div>
                     <div class="caption">
                         ${(blockData?.blocktitle && blockData?.blocktitle !== undefined) ?
@@ -1069,25 +1069,25 @@ export function blockElementDiscover(blockData) {
 export function blockElementStory(blockData) {
     return `<div class="blockElementStory block-item" id="blockElementStory">
     <div class="flexdata"><div class="heading-section"><h1 class="title h1-italic">${blockData?.blockname}</h1>${(blockData?.displayedate != undefined && blockData?.displayedate != null) ? `<p class="date body-3"><span class="borderdate"></span><span class="originaldate">${blockData?.displayedate}</span></p>` : `<p></p></br>`}<div class="leftBottom">
-        <img data-src="${blockData?.imagesCollection?.items[0]?.url}" alt="${blockData?.imagesCollection?.items[0]?.title}" class="lazyload"/>
+        <img data-src="${blockData?.imagesCollection?.items[0]?.url}?fm=webp" alt="${blockData?.imagesCollection?.items[0]?.title}" class="lazyload"/>
         </div></div><div class="rightside-section"><div class="rightcol">
-        <img data-src="${(blockData?.imagesCollection?.items[1]?.url !== undefined) ? blockData?.imagesCollection?.items[1]?.url : ''}" class="topleft lazyload" alt="${(blockData?.imagesCollection?.items[1]?.title !== undefined) ? blockData?.imagesCollection?.items[1]?.title : ''}"/>
+        <img data-src="${(blockData?.imagesCollection?.items[1]?.url !== undefined) ? blockData?.imagesCollection?.items[1]?.url : ''}?fm=webp" class="topleft lazyload" alt="${(blockData?.imagesCollection?.items[1]?.title !== undefined) ? blockData?.imagesCollection?.items[1]?.title : ''}"/>
         <div class="caption"><p class="content body-2">${(blockData?.bodyCopy && blockData?.bodyCopy !== undefined) ? blockData?.bodyCopy : ''}</p>
         ${(blockData?.linkUrl && blockData?.linkUrl !== undefined && blockData?.linkText && blockData?.linkText !== undefined) ? 
         `<a href="${(blockData?.linkUrl) ? blockData?.linkUrl : ''}" class="button button--secondary buttonlink">${(blockData?.linkText) ? blockData?.linkText : ''}</a>` : ''}
         </div></div><div class="topright">
-        <img data-src="${(blockData?.imagesCollection?.items[2]?.url !== undefined) ? blockData?.imagesCollection?.items[2]?.url : ''}"  alt="${(blockData?.imagesCollection?.items[2]?.title !== undefined) ? blockData?.imagesCollection?.items[2]?.title : ''}" class="lazyload"/>
+        <img data-src="${(blockData?.imagesCollection?.items[2]?.url !== undefined) ? blockData?.imagesCollection?.items[2]?.url : ''}?fm=webp"  alt="${(blockData?.imagesCollection?.items[2]?.title !== undefined) ? blockData?.imagesCollection?.items[2]?.title : ''}" class="lazyload"/>
         </div></div><div class="mobilecaption"><p class="content body-2">${(blockData?.bodyCopy && blockData?.bodyCopy !== undefined) ? blockData?.bodyCopy : ''}</p>
         ${(blockData?.linkUrl && blockData?.linkUrl !== undefined && blockData?.linkText && blockData?.linkText !== undefined) ?
         `<a href="${(blockData?.linkUrl) ? blockData?.linkUrl : ''}" class="button button--secondary buttonlink">${(blockData?.linkText) ? blockData?.linkText : ''}</a>` : ''}
         </div>
-        <div class="mobilebanner"><img data-src="${blockData?.imagesCollection?.items[0]?.url}" alt="${blockData?.imagesCollection?.items[0]?.title}" class="lazyload"/></div></div></div>`;
+        <div class="mobilebanner"><img data-src="${blockData?.imagesCollection?.items[0]?.url}?fm=webp" alt="${blockData?.imagesCollection?.items[0]?.title}" class="lazyload"/></div></div></div>`;
 }
 
 export function BlockElementBigCarousel(blockData) {
     let sliderLi = blockData.imagesCollection.items.map((item) => {
         return `<li><div class="blockrow"><div class="leftblock block">
-        <img data-src="${item.url}" alt="image left block" class="lazyload"/>
+        <img data-src="${item.url}?fm=webp" alt="image left block" class="lazyload"/>
         </div><div class="rightblock block"><div class="caption">
         <h1 class="title h1-italic">${blockData.title}</h1><p class="content body-light-1">${(blockData.bodyCopy) ? blockData.bodyCopy : ''}</p>${blockData.linkUrl ? `<a href="${(blockData.linkUrl) ? blockData.linkUrl : ''}" class="buttonlink body-3">${(blockData.linkText) ? blockData.linkText : ''}</a>` : ''}
         </div></div></div></li>`
@@ -1098,7 +1098,7 @@ export function BlockElementBigCarousel(blockData) {
 export function imageWithContentSlider(blockData) {
     let sliderLi = blockData?.bigCarouselImagesCollection?.items?.map((item) => {
         return `<li><div class="blockrow"><div class="leftblock block">
-        <img data-src="${item?.imagesCollection?.items[0]?.url}" alt="image left block" class="lazyload"/>
+        <img data-src="${item?.imagesCollection?.items[0]?.url}?fm=webp" alt="image left block" class="lazyload"/>
         </div><div class="rightblock block"><div class="caption">
         <h1 class="title h1-italic">${item?.title}</h1><p class="content body-light-1">${(item.bodyCopy) ? item.bodyCopy : ''}</p>${item.linkUrl ? `<a href="${(item.linkUrl) ? item.linkUrl : ''}" class="buttonlink body-3">${(item.linkText) ? item.linkText : ''}</a>` : ''}
         </div></div></div></li>`
@@ -1111,24 +1111,24 @@ export function collectionPreview(blockData) {
         if (blockData.imagesCollection.items.length > 2) {
             return `<div class="blockElementCollectionPreview block-item" id="blockElementCollectionPreview"><div class="previewblock">
             <div class="caption"><h2>${blockData.title}</h2><p class="body-1">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="button button--secondary buttonlink">${blockData.linkText}</a></div>
-            <div class="imagesection"><div class="leftImg half"><img data-src="${blockData?.imagesCollection?.items[0]?.url}" class="lazyload" alt="${blockData?.imagesCollection?.items[0]?.description}"/>
+            <div class="imagesection"><div class="leftImg half"><img data-src="${blockData?.imagesCollection?.items[0]?.url}?fm=webp" class="lazyload" alt="${blockData?.imagesCollection?.items[0]?.description}"/>
             <div class="dateSection">
             ${blockData.photoCaption !== null ? `<p>${blockData.photoCaption}</p>` : ''}
             ${blockData.photoCaptionDate !== null ? `<p>${blockData.photoCaptionDate}</p>` : ''}
             </div>
             </div><div class="rightImg half">
-            <img data-src="${blockData?.imagesCollection?.items[1]?.url}" alt="${blockData?.imagesCollection?.items[1]?.description}" class="lazyload"/>
-            ${blockData?.imagesCollection?.items[2] ? `<img data-src="${blockData?.imagesCollection?.items[2]?.url}" alt="${blockData?.imagesCollection?.items[2]?.description}" class="lazyload"/>` : ''}
+            <img data-src="${blockData?.imagesCollection?.items[1]?.url}" alt="${blockData?.imagesCollection?.items[1]?.description}?fm=webp" class="lazyload"/>
+            ${blockData?.imagesCollection?.items[2] ? `<img data-src="${blockData?.imagesCollection?.items[2]?.url}?fm=webp" alt="${blockData?.imagesCollection?.items[2]?.description}" class="lazyload"/>` : ''}
             </div></div></div></div>`;
         } else {
             let leftImg = '';
             if (blockData?.imagesCollection?.items[0]) {
-                leftImg = `<span><img data-src="${blockData?.imagesCollection?.items[0]?.url}"  alt="${blockData?.imagesCollection?.items[0]?.description}" class="lazyload"/></span>`;
+                leftImg = `<span><img data-src="${blockData?.imagesCollection?.items[0]?.url}?fm=webp"  alt="${blockData?.imagesCollection?.items[0]?.description}" class="lazyload"/></span>`;
             }
             let rightImg = '';
             if (blockData?.imagesCollection?.items[1]) {
                 rightImg = `<div class="rightImg">
-                <span><img data-src="${blockData?.imagesCollection?.items[1]?.url}" alt="${blockData?.imagesCollection?.items[1]?.description}" class="lazyload"/></span>
+                <span><img data-src="${blockData?.imagesCollection?.items[1]?.url}?fm=webp" alt="${blockData?.imagesCollection?.items[1]?.description}" class="lazyload"/></span>
                 </div>`;
             }
             return `<div class="blockElementCollectionPreview block-item" id="blockElementCollectionPreview"><div class="previewblock">
@@ -1147,12 +1147,12 @@ export function collectionPreview(blockData) {
 
 export function leftTextBlockglobal(selectorId, blockData) {
 
-    return `<div id="${selectorId} block-item" class="${selectorId}"><img data-src="${blockData.backgroundImage.url}" alt="category banner" class="lazyload desktoponly"/><img data-src="${blockData?.mobileImage?.url}" alt="category banner" class="lazyload mobileonly"/>
+    return `<div id="${selectorId} block-item" class="${selectorId}"><img data-src="${blockData.backgroundImage.url}?fm=webp" alt="category banner" class="lazyload desktoponly"/><img data-src="${blockData?.mobileImage?.url}?fm=webp" alt="category banner" class="lazyload mobileonly"/>
         <div class="overlay"></div><div class="content-wrapper"><div class="caption"><h1 class="title h1-italic">${blockData.bannerTitle}</h1><p class="content body-light-2">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink body-3">${blockData.linkText}</a></div></div></div>`;
 };
 
 export function plpleftTextBlockglobal(selectorId, blockData) {
-    let contentStructure = `<div class="${selectorId} plpbanner" id="${selectorId}"><img data-src="${blockData.backgroundImage.url}" alt="category banner" class="lazyload desktoponly"/><img data-src="${blockData?.mobileImage?.url}" alt="category banner" class="lazyload mobileonly"/>
+    let contentStructure = `<div class="${selectorId} plpbanner" id="${selectorId}"><img data-src="${blockData.backgroundImage.url}?fm=webp" alt="category banner" class="lazyload desktoponly"/><img data-src="${blockData?.mobileImage?.url}?fm=webp" alt="category banner" class="lazyload mobileonly"/>
         <div class="overlay"></div><div class="content-wrapper"><div class="caption"><h1 class="title h1-italic">${blockData.bannerTitle}</h1><p class="content body-light-2">${blockData.bodyCopy}</p><a href="${blockData.linkUrl}" class="buttonlink body-3">${blockData.linkText}</a></div></div></div><div class="divider"></div>`;
         document.querySelector('.customBanner').innerHTML = contentStructure;
 };
@@ -1163,14 +1163,14 @@ export function blockElementVerticalGallery(blockData) {
         blockData?.imagesCollection?.items?.map((item,i) => {
             if(i % 2 === 0) {
                 if(item.description === '') {
-                    leftData += `<div class="contentDiv"><img data-src="${item.url}" alt="${item.title}" class="lazyload"/></div>`;
+                    leftData += `<div class="contentDiv"><img data-src="${item.url}?fm=webp" alt="${item.title}" class="lazyload"/></div>`;
                 } else {
                     let descriptionArr = (item.description) ? item.description.split('-') : '';
                     let descriptionHtml = '';
                     if (descriptionArr.length > 0) {
                         descriptionHtml = `<p class="caption body-1">${descriptionArr[0]} ${(descriptionArr[1] != null && descriptionArr[1] != undefined) ? `<span class="author body-light-2">-${descriptionArr[1]}</span>` : ''}</p>`;
                     }
-                    leftData +=  `<div class="contentDiv"><img data-src="${item.url}" alt="${item.title}" class="lazyload"/>${descriptionHtml}</div>`;
+                    leftData += `<div class="contentDiv"><img data-src="${item.url}?fm=webp" alt="${item.title}" class="lazyload"/>${descriptionHtml}</div>`;
                 }
             }
         });
@@ -1178,7 +1178,7 @@ export function blockElementVerticalGallery(blockData) {
         blockData?.imagesCollection?.items?.map((item, i) => {
             if (i % 2 !== 0) {
                 if(item.description === '') {
-                    rightData += `<div class="contentDiv"><img data-src="${item.url}" alt="${item.title}" class="lazyload"/></div>`;
+                    rightData += `<div class="contentDiv"><img data-src="${item.url}?fm=webp" alt="${item.title}" class="lazyload"/></div>`;
                 } else {
                     let descriptionHtml = '';
                     if (item.description) {
@@ -1186,7 +1186,7 @@ export function blockElementVerticalGallery(blockData) {
                         descriptionHtml = `<p class="caption body-1">${descriptionArr[0]} ${(descriptionArr[1] != null && descriptionArr[1] != undefined) ? `<span class="author body-light-2">-${descriptionArr[1]}</span>` : ''}</p>`;
                     }
                     
-                    rightData += `<div class="contentDiv"><img data-src="${item.url}" alt="${item.title}" class="lazyload"/>${descriptionHtml} </div>`;
+                    rightData += `<div class="contentDiv"><img data-src="${item.url}?fm=webp" alt="${item.title}" class="lazyload"/>${descriptionHtml} </div>`;
                 }
             }
         });
@@ -1199,10 +1199,10 @@ function productCard(context, products) {
         return `<li class="product"><article class="card" data-test="card-271"><figure class="card-figure">
                     <a href="${item?.node?.path}" class="card-figure__link"><div class="card-img-container">
                             ${ (item?.node?.defaultImage?.url && item?.node?.defaultImage?.url !== undefined) ? 
-                                `<img data-src="${item?.node?.defaultImage?.url}" alt="${item?.node?.name}" title="${item?.node?.name}" data-sizes="auto" 
+                            `<img data-src="${item?.node?.defaultImage?.url}?fm=webp" alt="${item?.node?.name}" title="${item?.node?.name}" data-sizes="auto" 
                                 srcset="${item?.node?.defaultImage?.url} 80w, ${item?.node?.defaultImage?.url} 160w, ${item?.node?.defaultImage?.url} 320w, ${item?.node?.defaultImage?.url} 640w, ${item?.node?.defaultImage?.url} 960w, ${item?.node?.defaultImage?.url} 1280w, ${item?.node?.defaultImage?.url} 1920w, ${item?.node?.defaultImage?.url} 2560w" 
                                 data-srcset="${item?.node?.defaultImage?.url} 80w, ${item?.node?.defaultImage?.url} 160w, ${item?.node?.defaultImage?.url} 320w, ${item?.node?.defaultImage?.url} 640w, ${item?.node?.defaultImage?.url} 960w, ${item?.node?.defaultImage?.url} 1280w, ${item?.node?.defaultImage?.url} 1920w,${item?.node?.defaultImage?.url} 2560w" class="card-image lazyautosizes lazyload">` : 
-                                `<img data-src="${context.notFoundImg}" title="${item?.node?.name}" class="card-image lazyautosizes lazyload" />` 
+                                `<img data-src="${context.notFoundImg}?fm=webp" title="${item?.node?.name}" class="card-image lazyautosizes lazyload" />` 
                             }
                         </div></a><div class="card-body"><h4 class="card-title"><a aria-label="${item?.node?.name}" "="" href="${item?.node?.path}" class="name h4">${item?.node?.name}</a>
                     <a href="/wishlist.php?action=addwishlist&product_id=${item?.node?.entityId}" data-id="${item?.node?.entityId}" class="titleIcon">
@@ -1212,17 +1212,17 @@ function productCard(context, products) {
 };
 
 export function blockElementImages2ColumnRight(blockData) {
-    let  contentStructure = `<div class="blockElementImages2ColumnRight block-item" id="blockElementImages2ColumnRight"><div class="col1"><img data-src="${blockData?.image1Column?.url}" alt="${blockData?.image1Column?.title}" class="lazyload"/></div><div class="col2"><img data-src="${blockData?.image2Column?.url}" src="${blockData?.image2Column?.title}" class="lazyload"/></div></div>`;
+    let contentStructure = `<div class="blockElementImages2ColumnRight block-item" id="blockElementImages2ColumnRight"><div class="col1"><img data-src="${blockData?.image1Column?.url}?fm=webp" alt="${blockData?.image1Column?.title}" class="lazyload"/></div><div class="col2"><img data-src="${blockData?.image2Column?.url}?fm=webp" alt="${blockData?.image2Column?.title}" class="lazyload"/></div></div>`;
     return contentStructure;
 };
 
 export function blockElementImageLeftCopyRight(blockData) {
-    let contentStructure = `<div class="blockElementImageLeftCopyRight block-item" id="blockElementImageLeftCopyRight"><div class="leftimageblock"><div class="leftImg"><img data-src="${blockData?.image?.url}" alt="${blockData?.blockName}" class="lazyload"/></div><div class="textSection"><div class="caption"><h1 class="h1-italic">${blockData?.blockName}</h1><p class="body-light-1">${blockData?.bodyCopy}</p><a  href="${blockData?.linkUrl}" class="button button--secondary">${blockData?.linkText}</a></div></div></div></div>`;
+    let contentStructure = `<div class="blockElementImageLeftCopyRight block-item" id="blockElementImageLeftCopyRight"><div class="leftimageblock"><div class="leftImg"><img data-src="${blockData?.image?.url}?fm=webp" alt="${blockData?.blockName}" class="lazyload"/></div><div class="textSection"><div class="caption"><h1 class="h1-italic">${blockData?.blockName}</h1><p class="body-light-1">${blockData?.bodyCopy}</p><a  href="${blockData?.linkUrl}" class="button button--secondary">${blockData?.linkText}</a></div></div></div></div>`;
     return contentStructure;
 };
 
 export function leftTextBlock(selectorId,blockData) {
-    let contentStructure = `<img data-src="${blockData?.backgroundImage?.url}" alt="category banner" class="lazyload"/>
+    let contentStructure = `<img data-src="${blockData?.backgroundImage?.url}?fm=webp" alt="category banner" class="lazyload"/>
         <div class="overlay"></div><div class="caption"><h2 class="title">${blockData?.bannerTitle}</h2><p class="content">${blockData?.bodyCopy}</p><a href="${blockData?.linkUrl}" class="buttonlink body-3">${blockData?.linkText}</a></div>`;
 
     document.getElementById(selectorId).innerHTML = contentStructure;
@@ -1241,12 +1241,12 @@ export function createProductSlider(context, block, blockData) {
 };
 
 export function blogpostTopBanner(selectorID, title, heading, imageHeading, date){
-    let contentStructure = `<div class="topbannerSection"><img data-src="${imageHeading?.url}" alt="${title}" class="lazyload"/><div class="overlay"></div><div class="caption"><h2>${title ? title : ''}</h2><span class="date body-3">${date ? date : ''}<div class="divider"></div></span><p class="subheading">${heading ? heading : ''}</p></div></div>`;
+    let contentStructure = `<div class="topbannerSection"><img data-src="${imageHeading?.url}?fm=webp" alt="${title}" class="lazyload"/><div class="overlay"></div><div class="caption"><h2>${title ? title : ''}</h2><span class="date body-3">${date ? date : ''}<div class="divider"></div></span><p class="subheading">${heading ? heading : ''}</p></div></div>`;
     document.getElementById(selectorID).innerHTML = contentStructure;
 };
 
 export function lookBook(selectorID, blockData) {
-    let blockItem = `<div><h4 class="title">${(blockData.blocktitle) ? blockData.blocktitle : ''} - ${(blockData.subheadline) ? blockData.subheadline : ''}</h4><div class="contentSection"><img data-src="${(blockData.imagesCollection.items[0].url) ? blockData.imagesCollection.items[0].url : ''}" alt="${(blockData.subheadline) ? blockData.subheadline : ''}" class="lazyload"/><div class="caption"><div class="caption">
+    let blockItem = `<div><h4 class="title">${(blockData.blocktitle) ? blockData.blocktitle : ''} - ${(blockData.subheadline) ? blockData.subheadline : ''}</h4><div class="contentSection"><img data-src="${(blockData.imagesCollection.items[0].url) ? blockData.imagesCollection.items[0].url : ''}?fm=webp" alt="${(blockData.subheadline) ? blockData.subheadline : ''}" class="lazyload"/><div class="caption"><div class="caption">
         ${(blockData?.bodyCopy == null || blockData?.bodyCopy == undefined) ? '' :
             `<p class="content">${blockData.bodyCopy}</p>`
         }   
@@ -1313,7 +1313,7 @@ export function collectionHeaderContent(element) {
 export function referencedBlockHomepageCollections(blockData) {
 
     let logoStructure = blockData.homepageCollectionsCollection?.items?.map((item,i) => {
-        return `<div class="tab ${item?.slug} ${i === 0 ? 'is-active' : ''}" role="presentation">${item?.logoImage.url ? `<img class="first" src="${item?.logoImage.url}" alt="${item?.logoImage.title}" />` : ''}</div>`;
+        return `<div class="tab ${item?.slug} ${i === 0 ? 'is-active' : ''}" role="presentation">${item?.logoImage.url ? `<img class="first" src="${item?.logoImage.url}?fm=webp" alt="${item?.logoImage.title}" />` : ''}</div>`;
     });
 
     let contentStructure = blockData.homepageCollectionsCollection?.items?.map((item,i) => {
@@ -1322,11 +1322,11 @@ export function referencedBlockHomepageCollections(blockData) {
                 <div class="discovery-section">
                     <div class="imageflex">
                         <div class="leftcol">
-                            ${(item?.imageLeft?.url && item?.imageLeft?.url !== undefined) ? `<img class="first" src="${item?.imageLeft?.url}" alt="${item?.imageLeft.title}" />` : ''}
-                            ${(item?.imageCenter?.url && item?.imageCenter?.url !== undefined) ? `<img class="second" src="${item?.imageCenter?.url}" alt="${item?.imageCenter?.title}"/>` : ''}
+                            ${(item?.imageLeft?.url && item?.imageLeft?.url !== undefined) ? `<img class="first" src="${item?.imageLeft?.url}?fm=webp" alt="${item?.imageLeft.title}" />` : ''}
+                            ${(item?.imageCenter?.url && item?.imageCenter?.url !== undefined) ? `<img class="second" src="${item?.imageCenter?.url}?fm=webp" alt="${item?.imageCenter?.title}"/>` : ''}
                         </div>
                         <div class="rightcol">
-                            ${(item?.imageRight.url && item?.imageRight.url !== undefined) ? `<img  class="third" src="${item?.imageRight.url}"  alt="${item?.imageRight.title}" />` : '' }
+                            ${(item?.imageRight.url && item?.imageRight.url !== undefined) ? `<img  class="third" src="${item?.imageRight.url}?fm=webp"  alt="${item?.imageRight.title}" />` : '' }
                         </div>
                     </div>
                     <div class="caption">
