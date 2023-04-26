@@ -433,7 +433,7 @@
       .form-field {
         padding: 10px 15px 0 0;
         margin: 0 0 1.5rem;
-
+        overflow: hidden;
         .form-label {
           color: stencilColor("color-allure-bridals-neutral-1");
           font-family: stencilFontFamily('default-font-regular');
@@ -444,7 +444,9 @@
           white-space: nowrap;
           left: 8px;
           padding: 0 3px 0 3px;
-          letter-spacing: 0.04em;
+          letter-spacing: 0.03em;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         padding-right: 0;

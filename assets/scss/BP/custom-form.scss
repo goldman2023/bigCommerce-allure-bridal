@@ -304,7 +304,9 @@
       outline-offset: 0;
     }
   }
-
+  .checkbox-field label[for="register_pass-news-terms"]{
+    display: flex;
+  }
   .checkbox-field label[for="register_pass-news-terms"] a {
     text-decoration: none;
     color: inherit;

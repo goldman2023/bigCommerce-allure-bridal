@@ -1113,7 +1113,7 @@
         "eventDate": "Date of Event",
         "preferedAppointment": "Preferred Appointment Dates (choose 3)",
         "peopleAttending": "# of Appointment Attendees",
-        "agreeTerms": "I accept the &nbsp;<a href=\"/privacy-policy/\">terms and conditions</a>"
+        "agreeTerms": "<a href=\"/privacy-policy/\">I accept the &nbsp;terms and conditions<span class='asterisk'>*</span> </a>"
     },
     "request_event_appointment": {
         "title": "Request an Event Appointment",
@@ -1131,7 +1131,7 @@
         "zip": "Zip Code",
         "weddingDate": "Wedding Date",
         "peopleAttending": "# of Appointment Attendees",
-        "agreeTerms": "I accept the &nbsp;<a href=\"/privacy-policy/\">terms and conditions</a>",
+        "agreeTerms": "<a href=\"/privacy-policy/\">I accept the &nbsp;terms and conditions<span class='asterisk'>*</span> </a>",
         "thankYou": "Thank You For Requesting An Event Appointment!"
     },
     "designer_events":{
