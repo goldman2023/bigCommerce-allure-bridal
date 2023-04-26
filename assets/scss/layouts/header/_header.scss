@@ -234,9 +234,11 @@
             height: 85px;
             display: flex;
             flex-flow: row;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
-            padding-left: 12%;
+            padding-left: 14%;
+            padding-right: remCalc(10);
+
         }
 
         height: 85px;
@@ -658,7 +660,7 @@ header.header{
     font-size: 0;
     left: 0;
     overflow: hidden;
-    padding: 0 remCalc(18);
+    padding: 0 remCalc(10);
     position: absolute;
     z-index: zIndex("high");
 

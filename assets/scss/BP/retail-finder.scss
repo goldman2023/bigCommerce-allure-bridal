@@ -152,14 +152,17 @@
                       line-height: 16px;
                       letter-spacing: 0.1em;
                       text-transform: uppercase;
-                      
-                      &::after {
-                        padding-left: 5px;
-                        padding-right: 5px;
-                        top: -2px;
-                        position: relative;
-                        content: url('../icons/spot.svg');
+                      .state{
+                        white-space: nowrap;
+                        &::after {
+                          padding-left: 5px;
+                          padding-right: 5px;
+                          top: -2px;
+                          position: relative;
+                          content: url('../icons/spot.svg');
+                        }
                       }
+                     
                     }
                   }
                   .directions {
