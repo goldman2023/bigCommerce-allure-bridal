@@ -166,6 +166,9 @@
     }
     #updatePro {
         display: none;
+        .alertBox .close {
+            z-index: 1;
+        }
         .back {
             float: right;
             color: stencilColor('color-neutral-normal');
