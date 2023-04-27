@@ -457,7 +457,13 @@ export default class RetailFinder extends PageManager {
     locationInfo.classList.add('retailer-location');
     const cityState = document.createElement('span');
     cityState.classList.add('retailer-city-state');
-    cityState.innerText = `${retailer.retailerCity}, ${retailer.state}`;
+    const city = document.createElement('span');
+    city.innerText = `${retailer.retailerCity}, `;
+    const state = document.createElement('span');
+    state.classList.add('state');
+    state.innerText = `${retailer.state}`;
+    cityState.append(city);
+    cityState.append(state);
     locationInfo.append(cityState);
     location_direction.append(locationInfo);
 

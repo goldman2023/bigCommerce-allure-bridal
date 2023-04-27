@@ -99,7 +99,7 @@
 
             .retailer-item-container {
               width: 100%;
-
+              overflow: hidden;
               .retailer-item {
                 display: flex;
                 padding: 24px;
@@ -151,15 +151,18 @@
                       font-size: 12px;
                       line-height: 16px;
                       letter-spacing: 0.1em;
-                      white-space: nowrap;
                       text-transform: uppercase;
-                      &::after {
-                        padding-left: 5px;
-                        padding-right: 5px;
-                        top: -2px;
-                        position: relative;
-                        content: url('../icons/spot.svg');
+                      .state{
+                        white-space: nowrap;
+                        &::after {
+                          padding-left: 5px;
+                          padding-right: 5px;
+                          top: -2px;
+                          position: relative;
+                          content: url('../icons/spot.svg');
+                        }
                       }
+                     
                     }
                   }
                   .directions {
@@ -430,7 +433,7 @@
       .form-field {
         padding: 10px 15px 0 0;
         margin: 0 0 1.5rem;
-
+        overflow: hidden;
         .form-label {
           color: stencilColor("color-allure-bridals-neutral-1");
           font-family: stencilFontFamily('default-font-regular');
@@ -441,7 +444,9 @@
           white-space: nowrap;
           left: 8px;
           padding: 0 3px 0 3px;
-          letter-spacing: 0.04em;
+          letter-spacing: 0.03em;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         padding-right: 0;
@@ -801,11 +806,25 @@
   }
 
   .disney {
-    margin: 8px 0px 8px 0px;
+    margin: 8px 0px 8px -2px;
+    display: flex;
+    align-content: center;
+    letter-spacing: 45%;
     &::before {
-      content: url('../icons/platinum-collection-phase1.3.svg');
+      content: url('../icons/star-disney.svg');
       height: 24px;
     }
+    &::after {
+      content: 'carries Disney Platinum collection';
+      font-family: stencilFontFamily("default-font-bold");
+      color: stencilColor("color-disney-neutral-2");
+      text-transform: uppercase;
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 500;
+      padding-top: 1px;
+      letter-spacing: 0.03rem;
+    }  
   }
 
 
@@ -840,15 +859,16 @@
 
       .map-toggle {
         display: flex !important;
+        white-space: nowrap;
+        justify-content: flex-end;
       }
 
       .map {
-        padding: 0px 13px 0px 13px;
         width: 100% !important;
         order: 1 !important;
 
         #map {
-          min-height: 300px !important;
+          min-height: 250px !important;
         }
 
         .top {
@@ -866,6 +886,8 @@
 
           .retailer-item-container {
             width: 100% !important;
+            overflow: hidden;
+
           }
         }
       }
