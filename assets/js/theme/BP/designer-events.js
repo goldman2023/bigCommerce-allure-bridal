@@ -36,6 +36,7 @@ const MARKER_HOVER_EVENT = 'markerHoverEvent';
 const RETAILER_ITEM_HOVER_EVENT = 'eventItemHoverEvent';
 
 const SORT_LABELS = {
+    'date' : 'Date',
     'asc': 'A to Z',
     'desc': 'Z to A',
     'nearest': 'Distance: Nearest',
@@ -80,7 +81,7 @@ export default class DesignerEvents extends PageManager {
         this.markerClusterer = null;
         this.page = 1;
         this.perPage = 9;
-        this.sortBy = 'asc';
+        this.sortBy = 'date';
         this.geocoder = new google.maps.Geocoder();
         this.autocomplete = null;
     };
@@ -566,9 +567,6 @@ export default class DesignerEvents extends PageManager {
                     const event = await this.checkEventCanRequestAppt(evt);
                     withApptData.push(event);
                 }
-                withApptData.sort((a, b) => {
-                    return new Date(a.eventStartDate) - new Date(b.eventStartDate);
-                })
 
                 let currentDate = new Date();
                 const events = [];
@@ -580,7 +578,7 @@ export default class DesignerEvents extends PageManager {
                 });
 
                 this.eventsFilteredByLocation = events;
-                this.updateEventUi(events);
+                this.sortEvents(events);
                 const otherFilters = document.getElementById('otherFilters');
                 if (!events) {
                     otherFilters.style.display = 'none';
@@ -596,7 +594,7 @@ export default class DesignerEvents extends PageManager {
                 Object.entries(this.appliedFilters).forEach(([filterName, value]) => {
                     // could make this more extensible with an object to function mapping
                     // but need to move faster
-                    if (filterName === 'collections' && value.length) {
+                    if (filterName === 'collections') {
                         let eventsWithCollections = []
                         for (const collection of value) {
                             eventsWithCollections = eventsWithCollections.concat(this.eventsByCollections[collection]);
@@ -617,7 +615,6 @@ export default class DesignerEvents extends PageManager {
             (event) => !toRemove.includes(event.sys.id)
         );
         this.sortEvents(this.events);
-        this.updateEventUi(this.events);
     };
 
     updateFilters = (events) => {
@@ -687,6 +684,8 @@ export default class DesignerEvents extends PageManager {
 
         } else if (this.sortBy === 'farthest') {
             events = events.sort((a, b) => parseFloat(b.distanceAway) - parseFloat(a.distanceAway));
+        } else if(this.sortBy === 'date'){
+            events = events.sort((a, b) => new Date(a.eventStartDate) - new Date(b.eventStartDate));
         }
         this.updateEventUi(events);
     };
