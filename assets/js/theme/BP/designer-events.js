@@ -69,7 +69,7 @@ export default class DesignerEvents extends PageManager {
         this.eventsById = {};
         this.eventsByCollections = {};
         this.originalFilters = {
-            distance: 10,
+            distance: 50,
             collections: [],
             retailerName: '',
         };
@@ -146,6 +146,7 @@ export default class DesignerEvents extends PageManager {
         const self = this;
         // create the filter for the collections
         const uniqueSortedCollections = Array.from(new Set(allCollectionFilters)).sort();
+        this.appliedFilters.collections = [...uniqueSortedCollections]
         const collectionFilterList = document.getElementById('collections');
         collectionFilterList.innerHTML = '';
         uniqueSortedCollections.forEach((collection) => {
@@ -165,7 +166,7 @@ export default class DesignerEvents extends PageManager {
             collectionFilterList.append(collectionItem);
             collectionItemCheckbox.addEventListener('change', function () {
                 const collections = [...self.appliedFilters.collections];
-                if (this.checked && collections.indexOf(collection) < 0) {
+                if (this.checked) {
                     collections.push(collection);
                     // we can assume it's in the list since it doesnt fire initially so it had to have been unchecked
                 } else {
@@ -329,7 +330,7 @@ export default class DesignerEvents extends PageManager {
 
         // distance filter
         const distanceFilterButtons = document.querySelectorAll('.custom-select__option:not(.custom-select__option--value)');
-        const allMiles = [10, 25, 50, 100, 500];
+        const allMiles = [50, 100, 250];
         const distanceFilterBtnHandler = (_, idx) => {
             // this is insanely hacky
             // but the css theme modifies the button in place before the event handler triggers
@@ -471,8 +472,8 @@ export default class DesignerEvents extends PageManager {
     addEventInfo = (eventData) => {
         const eventFinderResults = document.getElementById('eventResults');
         eventFinderResults.innerHTML = "";
-        eventData.forEach((eventData) => {
-            const eventItem = this.createEventItem(eventData);
+        eventData.forEach((event) => {
+            const eventItem = this.createEventItem(event);
             eventFinderResults.append(eventItem);
         });
     }
@@ -505,11 +506,9 @@ export default class DesignerEvents extends PageManager {
 
         // adjust zoom for convenience in distance changes  
         const distanceToZoomLevels = {
-            10: 10,
-            25: 10,
-            50: 8,
+            50: 10,
             100: 8,
-            500: 5,
+            250: 5,
         };
         if (filterType === 'distance') {
             const newZoomLevel = distanceToZoomLevels[value];
@@ -570,11 +569,20 @@ export default class DesignerEvents extends PageManager {
                 withApptData.sort((a, b) => {
                     return new Date(a.eventStartDate) - new Date(b.eventStartDate);
                 })
-                this.eventsFilteredByLocation = withApptData;
-                this.sortEvents(withApptData);
-                this.updateEventUi(withApptData);
+
+                let currentDate = new Date();
+                const events = [];
+                withApptData.forEach((event) => {
+                    let eventDate = new Date(event.eventEndDate);
+                    if(eventDate >= currentDate) {
+                        events.push(event);
+                    }
+                });
+
+                this.eventsFilteredByLocation = events;
+                this.updateEventUi(events);
                 const otherFilters = document.getElementById('otherFilters');
-                if (!withApptData) {
+                if (!events) {
                     otherFilters.style.display = 'none';
                 }
             }
