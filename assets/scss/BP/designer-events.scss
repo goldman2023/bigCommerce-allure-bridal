@@ -26,10 +26,12 @@
 
 
             #info {
-                font-family: stencilFontFamily('default-font-regular');
-                white-space: pre-line;
+                font-family: stencilFontFamily('default-font-light');
+                font-style: normal;
+                font-weight: 400;
                 font-size: 16px;
-                line-height: 134%;
+                line-height: 26px;
+                color: stencilColor('color-men-design-neutral-1');
                 width: 56.5%;
             }
 
