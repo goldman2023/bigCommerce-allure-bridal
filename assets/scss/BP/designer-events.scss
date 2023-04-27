@@ -310,13 +310,28 @@
                         &.hovered {
                             background-color: #FBF8F8;
                         }
+                        .event-item-header{
 
-                        .event-title {
-                            font-family: stencilFontFamily('prata-font');
-                            font-weight: 400;
-                            font-size: 22px;
-                            line-height: 30px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+
+                            .event-title {
+                                font-family: stencilFontFamily('prata-font');
+                                font-weight: 400;
+                                font-size: 22px;
+                                line-height: 30px;
+                            }
+
+                            .event-distance {
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 14px;
+                                color: stencilColor('color-allure-bridals-neutral-1');
+                                white-space: nowrap;
+                            }
                         }
+                       
 
                         .event-retailer {
                             font-weight: 400;
@@ -333,36 +348,28 @@
                             margin-bottom: 2px;
                             margin-right: 25px;
                             text-transform: uppercase;
+                            white-space: nowrap;
                         }
-
-                        .event-distance {
+                        .directions {
+                            color: stencilColor('color-default-primary-1');
+                            font-style: normal;
+                            font-weight: 500;
+                            font-size: 12px;
+                            line-height: 12px;
+                            text-align: center;
+                            letter-spacing: 0.1em;
+                            text-decoration: none;
                             display: flex;
-                            font-weight: 400;
-                            font-size: 14px;
-                            line-height: 22px;
-                            margin-bottom: 8px;
+                            align-items: center;
 
-                            .directions {
-                                color: stencilColor('color-default-primary-1');
-                                font-style: normal;
-                                font-weight: 500;
-                                font-size: 12px;
-                                line-height: 12px;
-                                text-align: center;
-                                letter-spacing: 0.1em;
-                                text-decoration: none;
-                                display: flex;
-                                align-items: center;
-
-                                &:hover {
-                                    font-weight: 600;
-                                }
-
-                                &::before {
-                                    content: url('../icons/location.svg');
-                                }
-
+                            &:hover {
+                                font-weight: 600;
                             }
+
+                            &::before {
+                                content: url('../icons/location.svg');
+                            }
+
                         }
 
                         .event-date {
