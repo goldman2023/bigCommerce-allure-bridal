@@ -407,6 +407,9 @@
                 color: stencilColor("color-allure-bridals-primary-1");
                 position: relative;
                 font-size: 50px;
+                @media screen and (max-width: 320px) {
+                    font-size: 25px;
+                }
                 @include breakpoint("small") { 
                     &::before {
                         position: absolute;

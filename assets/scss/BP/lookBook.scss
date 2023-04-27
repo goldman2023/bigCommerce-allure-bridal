@@ -198,6 +198,10 @@
                     line-height: remCalc(22px);
                     color: stencilColor("color-default-neutral-1");
                     word-break: break-word;
+                    @media screen and (max-width: 320px) {
+                        font-size: remCalc(12px);
+                        line-height: remCalc(18px);
+                    }
                     @media only screen and (min-width: 2000px) {
                         font-size: remCalc(20px);
                         line-height: remCalc(28px);
@@ -233,6 +237,10 @@
                         font-size: 12px;
                         line-height: 20px;
                         color: stencilColor("color-default-neutral-2");
+                        @media screen and (max-width: 320px) {
+                            font-size: 10px;
+                            line-height: 15px;
+                        }
                         @media only screen and (min-width: 2000px) {
                             font-size: remCalc(18px);
                             line-height: remCalc(28px);
@@ -278,6 +286,10 @@
                         line-height: remCalc(22px);
                         color: stencilColor("color-default-primary-1");
                         text-decoration: none;
+                        @media screen and (max-width: 320px) {
+                            font-size: remCalc(12px);
+                            line-height: remCalc(18px);
+                        }
                         @media only screen and (min-width: 2000px) {
                             font-size: remCalc(20px);
                             line-height: remCalc(30px);

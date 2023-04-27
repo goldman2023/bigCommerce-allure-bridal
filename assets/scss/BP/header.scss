@@ -104,6 +104,16 @@ header {
             }
         }
     }
+    @media screen and (max-width: 320px) {
+        svg {
+            width: 20px;
+            height: 18px;
+        }
+        .mobileMenu-toggle {
+            padding: 0 10px;
+            width: 40px;
+        }
+    }
 }
 .mobileMenu-toggle {
     .mobileMenu-toggleIcon,
