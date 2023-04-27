@@ -231,13 +231,13 @@ export default class RequestAppointment extends PageManager {
         })
     });
 
-    $('.form-input').on('keypress',function(e) {
+    $('.form-input,.form-select,.date-picker,.multiple-dates').on("change paste keyup", function(e) {
+
         const currentfield = e.target;
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const phone = form.elements.phoneNumber.value;
         var unmaskedPhone = Inputmask.unmask(phone, { mask: '(999) 999-9999' });
         const noOfPeopleAttending = form.elements.noOfPeopleAttending.value;
-
         if (currentfield.classList.contains('required')) {
           let formError = currentfield.closest('.form-field').querySelector('.error-message');
           if (currentfield.value.trim().length > 0) {
@@ -254,8 +254,20 @@ export default class RequestAppointment extends PageManager {
           } else if(!formError) {
             $( "<span class='error-message'>This Field is required</span>" ).insertAfter( currentfield);
           }
-      }
-    })
+        }
+    });
+
+    // $('.form-select,.date-picker,.multiple-dates').on("change paste keyup", function(e) {
+    //   const currentfield = e.target;
+    //   if (currentfield.classList.contains('required')) {
+    //     let formError = currentfield.closest('.form-field').querySelector('.error-message');
+    //     if (currentfield.value.trim().length > 0) {
+    //        formError?.remove();
+    //     } else if(!formError) {
+    //       $( "<span class='error-message'>This Field is required</span>" ).insertAfter( currentfield);
+    //     }
+    //   }
+    // });
   };
 
   encodeString(data) {
