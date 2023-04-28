@@ -845,10 +845,26 @@
                     color: stencilColor('color-default-primary-1');
                     margin-bottom: 4px;
                 }
+                .header-title-distance{
 
-                .header-title {
-                    margin-bottom: 4px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+
+                    .header-title {
+                        margin-bottom: 4px;
+                    }
+                    .event-distance {
+                        margin-bottom: 4px;
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 14px;
+                        color: stencilColor('color-allure-bridals-neutral-1');
+                        white-space: nowrap;
+                    }
                 }
+               
 
                 .location {
                     font-style: normal;
