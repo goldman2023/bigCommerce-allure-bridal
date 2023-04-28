@@ -86,6 +86,11 @@
         width: 52px;
         height: 52px;
         padding: 0 14px;
+        @media screen and (max-width: 320px) {
+            width: 35px;
+            height: 40px;
+            padding: 0 7px;
+        }
         &::before {
             @include nextIcon(stencilColor('color-default-primary-1'));
         }
@@ -96,6 +101,11 @@
         width: 52px;
         height: 52px;
         padding: 0 14px;
+        @media screen and (max-width: 320px) {
+            width: 35px;
+            height: 40px;
+            padding: 0 7px;
+        }
         &::before {
             @include prevIcon(stencilColor('color-default-primary-1'));
         }

@@ -306,6 +306,13 @@
   }
   .checkbox-field label[for="register_pass-news-terms"]{
     display: flex;
+    @media screen and (max-width: 320px) {
+      font-size: 10px;
+      display: inline;
+      input[type='checkbox'] {
+        display: inline-block;
+      }
+    }
   }
   .checkbox-field label[for="register_pass-news-terms"] a {
     text-decoration: none;
@@ -326,6 +333,9 @@
     /* Neutral/400 */
 
     color: stencilColor("color-allure-bridals-neutral-2");
+    @media screen and (max-width: 320px) {
+      font-size: 10px;
+    }
   }
 
   .form-retail-row {

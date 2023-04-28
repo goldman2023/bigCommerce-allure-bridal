@@ -40,7 +40,9 @@
             justify-content: space-between;
             border-bottom: 1px solid stencilColor('color-men-design-primary-2');
             padding: 22px 0px 22px 0px;
-
+            @media screen and (max-width: 320px) {
+              padding: 10px 0;
+            }
             .sort-dropdown {
               display: none;
             }
@@ -56,7 +58,9 @@
               letter-spacing: 0.1em;
               text-transform: uppercase;
               cursor: pointer;
-
+              @media screen and (max-width: 320px) {
+                font-size: 10px;
+              }
               &::before {
                 padding-right: 5px;
                 padding-top: 2px;
@@ -80,11 +84,18 @@
             font-size: 14px;
             line-height: 22px;
             margin: 10px 0px 10px 0px;
-
+            @media screen and (max-width: 320px) {
+              font-size: 12px;
+              line-height: 18px;
+            }
             .important-icon {
               width: 20px;
               height: 20px;
               margin-right: 11px;
+              @media screen and (max-width: 320px) {
+                font-size: 18px;
+                line-height: 26px;
+              }
             }
           }
 
@@ -127,6 +138,10 @@
                     font-weight: 400;
                     font-size: 22px;
                     line-height: 30px;
+                    @media screen and (max-width: 320px) {
+                      font-size: 18px;
+                      line-height: 26px;
+                    }
                   }
                   .retailer-distance{
                     font-style: normal;
@@ -134,6 +149,9 @@
                     font-size: 14px;
                     color: stencilColor('color-allure-bridals-neutral-1');
                     white-space: nowrap;
+                    @media screen and (max-width: 320px) {
+                      font-size: 12px;
+                    }
                   }
                 }
               
@@ -152,6 +170,10 @@
                       line-height: 16px;
                       letter-spacing: 0.1em;
                       text-transform: uppercase;
+                      @media screen and (max-width: 320px) {
+                        font-size: 10px;
+                        line-height: 14px;
+                      }
                       .state{
                         white-space: nowrap;
                         &::after {
@@ -177,7 +199,9 @@
                     text-decoration: none;
                     display: flex;
                     align-items: center;
-
+                    @media screen and (max-width: 320px) {
+                      font-size: 10px;
+                    }
                     &::before {
                       content: url('../icons/location.svg');
                       margin-left: -4px;
@@ -190,7 +214,10 @@
                   line-height: 22px;
                   margin: 8px 0px 0px 0px;
                   color: stencilColor('color-allure-bridals-neutral-2');
-
+                  @media screen and (max-width: 320px) {
+                    font-size: 12px;
+                    line-height: 18px;
+                  }
                   &::before {
                     content: "collections:  ";
                     color: stencilColor("color-allure-bridals-primary-1");
@@ -211,7 +238,10 @@
                   font-size: 12px;
                   line-height: 16px;
                   margin-top: 1rem;
-
+                  @media screen and (max-width: 320px) {
+                    font-size: 10px;
+                    line-height: 14px;
+                  }
                   &.book-appt {
                     display: none;
                   }
@@ -244,7 +274,10 @@
             font-weight: 400;
             font-size: 12px;
             line-height: 20px;
-
+            @media screen and (max-width: 320px) {
+              font-size: 10px;
+              line-height: 16px;
+            }
             .collections-label, .appointment-filter-header {
               font-family: stencilFontFamily('default-font-regular');
               font-style: normal;
@@ -253,6 +286,10 @@
               line-height: 16px;
               letter-spacing: 0.05em;
               text-transform: uppercase;
+              @media screen and (max-width: 320px) {
+                font-size: 10px;
+                line-height: 14px;
+              }
             }
 
             .jstree-icon {
@@ -333,6 +370,10 @@
                   width: 16px;
                   height: 16px;
                   margin-right: 10px;
+                  @media screen and (max-width: 320px) {
+                    width: 14px;
+                    height: 14px;
+                  }
                 }
                 .appointment-filter-label{
                   cursor: pointer;
@@ -423,7 +464,10 @@
           text-align: center;
           color: stencilColor("color-allure-bridals-primary-1");
           text-decoration: underline;
-
+          @media screen and (max-width: 320px) {
+            font-size: 10px;
+            line-height: 14px;
+          }
           &:focus {
             outline: none !important;
           }
@@ -447,6 +491,12 @@
           letter-spacing: 0.03em;
           overflow: hidden;
           text-overflow: ellipsis;
+          @media screen and (max-width: 320px) {
+            font-size: 8px;
+            line-height: 10px;
+            white-space: normal;
+            top: 9px;
+          }
         }
 
         padding-right: 0;
@@ -473,6 +523,10 @@
           font-size: 22px;
           line-height: 30px;
           margin: 0;
+          @media screen and (max-width: 320px) {
+            font-size: 16px;
+            line-height: 28px;
+          }
         }
 
         .map-toggle {
@@ -489,6 +543,10 @@
           letter-spacing: 0.1em;
           text-transform: uppercase;
           margin-right: 5px;
+          @media screen and (max-width: 320px) {
+            font-size: 10px;
+            line-height: 14px;
+          }
         }
 
         .switch {
@@ -634,7 +692,10 @@
             line-height: 20px;
             margin-bottom: 29px;
             letter-spacing: 0.1em;
-
+            @media screen and (max-width: 320px) {
+              font-size: 10px;
+              line-height: 14px;
+            }
           }
 
 
@@ -824,6 +885,10 @@
       font-weight: 500;
       padding-top: 1px;
       letter-spacing: 0.03rem;
+      @media screen and (max-width: 320px) {
+        font-size: 10px;
+        line-height: 14px;
+      }
     }  
   }
 

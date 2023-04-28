@@ -34,6 +34,10 @@
             line-height: remCalc(20px);
             max-width: 350px;
         }
+        @media screen and (max-width: 320px) {
+            padding: 10px 5px;
+            font-size: 10px;
+        }
     }
 
     .container {
@@ -50,7 +54,9 @@
         max-width: 91.71429rem;
         margin: 0 auto;
         padding: 0 1.5rem;
-
+        @media screen and (max-width: 320px) {
+            padding: 0 10px;
+        }
         @include breakpoint("medium") {
             margin: 0 auto;
         }

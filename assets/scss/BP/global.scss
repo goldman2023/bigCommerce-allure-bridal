@@ -4,6 +4,10 @@
     line-height: remCalc(70px);
     font-weight: 400;
     letter-spacing: -0.01em;
+    @media screen and (max-width: 320px) {
+        font-size: remCalc(48px);
+        line-height: remCalc(56px);
+    }
 }
 
 .h2-italic {
@@ -12,6 +16,10 @@
     line-height: remCalc(44px);
     font-weight: 400;
     letter-spacing: -0.01em;
+    @media screen and (max-width: 320px) {
+        font-size: remCalc(28px);
+        line-height: remCalc(40px);
+    }
 }
 
 .h3-italic {
@@ -20,6 +28,10 @@
     line-height: remCalc(34px);
     font-weight: 400;
     letter-spacing: -0.01em;
+    @media screen and (max-width: 320px) {
+        font-size: remCalc(24px);
+        line-height: remCalc(30px);
+    }
 }
 
 .h4-italic {
@@ -28,6 +40,10 @@
     line-height: remCalc(38px);
     font-weight: 400;
     letter-spacing: -0.01em;
+    @media screen and (max-width: 320px) {
+        font-size: remCalc(20px);
+        line-height: remCalc(30px);
+    }
 }
 
 h1, .h1 {
@@ -35,6 +51,10 @@ h1, .h1 {
     font-size: remCalc(66px);
     line-height: remCalc(70px);
     font-weight: 400;
+    @media screen and (max-width: 320px) {
+        font-size: remCalc(48px);
+        line-height: remCalc(56px);
+    }
 }
 
 h2, .h2 {
@@ -42,6 +62,10 @@ h2, .h2 {
     font-size: remCalc(34px);
     line-height: remCalc(44px);
     font-weight: 400;
+    @media screen and (max-width: 320px) {
+        font-size: remCalc(28px);
+        line-height: remCalc(40px);
+    }
 }
 
 h3, .h3 {
@@ -49,6 +73,10 @@ h3, .h3 {
     font-size: remCalc(28px);
     line-height: remCalc(34px);
     font-weight: 400;
+    @media screen and (max-width: 320px) {
+        font-size: remCalc(24px);
+        line-height: remCalc(30px);
+    }
 }
 
 h4, .h4 {
@@ -56,24 +84,40 @@ h4, .h4 {
     font-size: remCalc(22px);
     line-height: remCalc(30px);
     font-weight: 400;
+    @media screen and (max-width: 320px) {
+        font-size: remCalc(20px);
+        line-height: remCalc(30px);
+    }
 }
 
 .body-light-1 {
     font-family: stencilFontFamily('default-font-light');
     font-size: remCalc(16px);
     line-height: remCalc(26px);
+    @media screen and (max-width: 320px) {
+        font-size: remCalc(14px);
+        line-height: remCalc(21px);
+    }
 }
 
 .body-light-2 {
     font-family: stencilFontFamily('default-font-light');
     font-size: remCalc(14px);
     line-height: remCalc(22px);
+    @media screen and (max-width: 320px) {
+        font-size: remCalc(12px);
+        line-height: remCalc(18px);
+    }
 }
 
 .body-light-3 {
     font-family: stencilFontFamily('default-font-light');
     font-size: remCalc(12px);
     line-height: remCalc(20px);
+    @media screen and (max-width: 320px) {
+        font-size: remCalc(10px);
+        line-height: remCalc(15px);
+    }
 }
 
 .body-1 {
@@ -81,6 +125,10 @@ h4, .h4 {
     font-size: remCalc(16px);
     line-height: remCalc(26px);
     font-weight: 400;
+    @media screen and (max-width: 320px) {
+        font-size: remCalc(14px);
+        line-height: 1.5;
+    }
 }
 
 .body-2 {
@@ -88,6 +136,10 @@ h4, .h4 {
     font-size: remCalc(14px);
     line-height: remCalc(22px);
     font-weight: 400;
+    @media screen and (max-width: 320px) {
+        font-size: remCalc(12px);
+        line-height: remCalc(20px);
+    }
 }
 
 .body-3 {
@@ -95,6 +147,10 @@ h4, .h4 {
     font-size: remCalc(12px);
     line-height: remCalc(20px);
     font-weight: 400;
+    @media screen and (max-width: 320px) {
+        font-size: remCalc(10px);
+        line-height: remCalc(15px);
+    }
 }
 
 body {
