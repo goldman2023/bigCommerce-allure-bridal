@@ -267,8 +267,8 @@ export default class RetailFinder extends PageManager {
 
   onReady = () => {
     $('.on-off-map').prop('checked', true);
+    this.paintMapAndRetailers(this.retailers);
     this.createFilterElements();
-    this.addSortSelectOptions();
     this.addEventHandlers();
 
     const self = this;
@@ -539,14 +539,15 @@ export default class RetailFinder extends PageManager {
     const retailFinderResults = document.getElementById('retail-finder-results');
     retailFinderResults.innerHTML = "";
     const total = retailerData.length;
-    // this.retailers = retailerData;
-    retailerData.sort((a, b) => (a.sort_order > b.sort_order) ? 1 : -1)
+
+    const retailers = this.sortRetailers(retailerData, "distance");
+
     let first_retailer = false;
-    retailerData.forEach((retailerData, idx) => {
-      const retailerItem = this.createRetailerItem(retailerData, total, idx);
+    retailers.forEach((retailer, idx) => {
+      const retailerItem = this.createRetailerItem(retailer, total, idx);
       retailFinderResults.append(retailerItem);
-      if (retailerData && retailerData.requestAppointment && idx == 0) {
-        first_retailer = retailerData;
+      if (retailer && retailer.winningretailer) {
+        first_retailer = retailer;
       }
     });
     if (first_retailer && !flag) {
@@ -855,30 +856,14 @@ export default class RetailFinder extends PageManager {
     }
   };
 
-  sortRetailers = (evt, override = null) => {
-    const sortBy = override || evt?.target?.value || this.sortBy;
-    this.sortBy = sortBy;
-    if (sortBy === 'name') {
-      this.retailers = this.retailers.sort((a, b) => a.retailerName.localeCompare(b.retailerName));
-    } else if (sortBy === 'distance') {
-      this.retailers = this.retailers.sort((a, b) => parseFloat(a.distanceFromUser) - parseFloat(b.distanceFromUser));
+  sortRetailers = (retailers, type) => {
+    let sortedRetailers = [...retailers];
+    switch (type) {
+      default:
+        sortedRetailers.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
+        break;
     }
-    this.paintMapAndRetailers(this.retailers);
-  };
-
-  addSortSelectOptions = () => {
-    const sortSelect = document.getElementById('sortSelect');
-    sortSelect.addEventListener('change', this.sortRetailers);
-    this.SORTABLES.forEach((sortable) => {
-      const sortOption = document.createElement('option');
-      sortOption.value = sortable.value;
-      sortOption.innerText = sortable.display;
-      sortSelect.append(sortOption);
-    });
-    // default to distance
-    const initialSort = this.SORTABLES[1].value;
-    sortSelect.value = initialSort;
-    this.sortRetailers(null, initialSort);
+    return sortedRetailers;
   };
 
   // google maps api has no way to reference existing markers
