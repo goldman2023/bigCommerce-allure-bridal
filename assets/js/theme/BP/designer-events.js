@@ -220,7 +220,7 @@ export default class DesignerEvents extends PageManager {
                     }
             }}`
         const results = await fetch(
-            'https://graphql.contentful.com/content/v1/spaces/y49u4slmhh3t/environments/staging',
+            this.context.DesignerEventsLink,
             {
                 method: 'POST',
                 headers: {

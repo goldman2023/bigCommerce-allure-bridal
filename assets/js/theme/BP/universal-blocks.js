@@ -90,7 +90,7 @@ function eventsData(context,callback) {
     .catch(error => console.error(error));
 };
 
-function designerEventsData(context,callback) {
+function designerEventsData(context, callback) {
     const query = `
             query 
                 sectionDesignerEventsCollectionQuery {
@@ -121,7 +121,7 @@ function designerEventsData(context,callback) {
                     }
             }}`;
     fetch(
-    'https://graphql.contentful.com/content/v1/spaces/y49u4slmhh3t/environments/staging',
+        context.DesignerEventsLink,
       {
         method: 'POST',
         headers: {
