@@ -656,9 +656,10 @@ export default class DesignerEvents extends PageManager {
                 // custom select (.form-select) requires this hack since it's not an actual select in the display
                 if (element.classList.contains('form-select')) {
                     const formSelectElement = element.nextSibling;
-                    const displayElement = formSelectElement.getElementsByClassName('custom-select__option--value');
-                    const displayValue = element.options[element.selectedIndex].text;
-                    displayElement[0].innerHTML = displayValue;
+                    const displayElement = formSelectElement.getElementsByClassName('custom-select__option');
+                    for (let index = 0; index < element.options.length; index++) {
+                        displayElement[index].innerHTML = element.options[index].text;
+                    }
                 }
             }
         };
