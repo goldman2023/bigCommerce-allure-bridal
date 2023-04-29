@@ -42,6 +42,7 @@ const SORT_LABELS = {
     'nearest': 'Distance: Nearest',
     'farthest': 'Distance: Farthest'
 }
+const MONTHNAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 
 export default class DesignerEvents extends PageManager {
@@ -398,10 +399,9 @@ export default class DesignerEvents extends PageManager {
         container.id = event.sys.id;
         const date = document.createElement('span');
         date.classList.add('event-date');
-        let monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-        let startDate = `${ monthNames[new Date(event.eventStartDate).getMonth()]} ${new Date(event.eventStartDate).getDate()}, ${new Date(event.eventStartDate).getFullYear()}`;
-        let endDate = `${ monthNames[new Date(event.eventEndDate).getMonth()]} ${new Date(event.eventEndDate).getDate()}, ${new Date(event.eventEndDate).getFullYear()}`;
+        let startDate = `${ MONTHNAMES[new Date(event.eventStartDate).getMonth()]} ${new Date(event.eventStartDate).getDate()}, ${new Date(event.eventStartDate).getFullYear()}`;
+        let endDate = `${ MONTHNAMES[new Date(event.eventEndDate).getMonth()]} ${new Date(event.eventEndDate).getDate()}, ${new Date(event.eventEndDate).getFullYear()}`;
 
         date.innerText = `${startDate} - ${endDate}`;
         container.append(date);
@@ -656,9 +656,10 @@ export default class DesignerEvents extends PageManager {
                 // custom select (.form-select) requires this hack since it's not an actual select in the display
                 if (element.classList.contains('form-select')) {
                     const formSelectElement = element.nextSibling;
-                    const displayElement = formSelectElement.getElementsByClassName('custom-select__option--value');
-                    const displayValue = element.options[element.selectedIndex].text;
-                    displayElement[0].innerHTML = displayValue;
+                    const displayElement = formSelectElement.getElementsByClassName('custom-select__option');
+                    for (let index = 0; index < element.options.length; index++) {
+                        displayElement[index].innerHTML = element.options[index].text;
+                    }
                 }
             }
         };
@@ -880,10 +881,19 @@ export default class DesignerEvents extends PageManager {
         const header = document.createElement('div');
         header.classList.add('event-header');
 
+        const titleAndDistance = document.createElement('div');
+        titleAndDistance.classList.add("header-title-distance")
         const nameElement = document.createElement('h2');
         nameElement.classList.add('header-title');
         nameElement.innerText = event.eventName;
-        header.append(nameElement);
+        titleAndDistance.append(nameElement);
+
+        const distance = document.createElement('div');
+        distance.classList.add('event-distance');
+        distance.innerText = parseFloat(event.distanceAway).toFixed(2) + ` miles`;
+        titleAndDistance.append(distance);
+
+        header.append(titleAndDistance);
 
         const locationElement = document.createElement('span');
         locationElement.classList.add('location');
@@ -923,10 +933,12 @@ export default class DesignerEvents extends PageManager {
 
         const eventDateText = document.createElement('span');
         eventDateText.classList.add('event-detail');
-        eventDateText.innerText = `${new Date(event.eventStartDate).toLocaleDateString()} - ${new Date(event.eventEndDate).toLocaleDateString()}`;
+        let startDate = `${ MONTHNAMES[new Date(event.eventStartDate).getMonth()]} ${new Date(event.eventStartDate).getDate()}, ${new Date(event.eventStartDate).getFullYear()}`;
+        let endDate = `${ MONTHNAMES[new Date(event.eventEndDate).getMonth()]} ${new Date(event.eventEndDate).getDate()}, ${new Date(event.eventEndDate).getFullYear()}`;
+        
+        eventDateText.innerText = `${startDate} - ${endDate}`;
         eventDate.append(eventDateText);
         contentRight.append(eventDate);
-
 
         const collections = document.createElement('div');
         collections.classList.add('event-info');
