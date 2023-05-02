@@ -201,7 +201,7 @@ export default class RequestAppointment extends PageManager {
         EventDate: eventDate,
         NumberPeopleinAppointment: parseInt(noOfPeopleAttending),
         EmailOptin: emailAlerts,
-        RetailerName: retailerName,
+        RetailerName: this.encodeString(retailerName),
         id: retailerId ? parseInt(retailerId) : null,
         DirectBook: "true",
         AppointmentDates: preferredDates
@@ -219,7 +219,7 @@ export default class RequestAppointment extends PageManager {
               throw new Error(data.error.message)
             })
           }
-          window.location.href = "/thank-you-appointment/?name=" + retailerName;
+          window.location.href = "/thank-you-appointment/?name=" + this.encodeString(retailerName);
         })
         .catch((error) => {
           alert(error);

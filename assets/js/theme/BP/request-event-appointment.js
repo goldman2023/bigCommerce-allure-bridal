@@ -218,7 +218,7 @@ export default class RequestEventAppointment extends PageManager {
               throw new Error(data.error.message)
             })
           }
-          window.location.href = "/thank-you-events/?name=" + eventName;
+          window.location.href = "/thank-you-events/?name=" + this.encodeString(eventName);
         })
         .catch((error) => {
           alert(error);

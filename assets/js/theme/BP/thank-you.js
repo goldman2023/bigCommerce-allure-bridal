@@ -8,7 +8,6 @@ export default class ThankYou extends PageManager {
 
    onReady = () => {
       const retailerName = new URLSearchParams(window.location.search).get('name');
-      console.log(retailerName)
       document.getElementById('retailerName').innerText = this.decodeString(retailerName);
    }
 

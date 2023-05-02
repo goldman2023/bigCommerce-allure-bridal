@@ -1113,7 +1113,8 @@
         "eventDate": "Date of Event",
         "preferedAppointment": "Preferred Appointment Dates (choose 3)",
         "peopleAttending": "# of Appointment Attendees",
-        "agreeTerms": "<a href=\"/privacy-policy/\">I accept the &nbsp;terms and conditions<span class='asterisk'>*</span> </a>"
+        "agreeTerms": "<a href=\"/privacy-policy/\">I accept the &nbsp;terms and conditions<span class='asterisk'>*</span> </a>",
+        "thankYou": "Thank You For Requesting An Appointment!"
     },
     "request_event_appointment": {
         "title": "Request an Event Appointment",
