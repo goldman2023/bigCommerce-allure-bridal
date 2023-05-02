@@ -219,12 +219,7 @@ export default class RequestAppointment extends PageManager {
               throw new Error(data.error.message)
             })
           }
-          document.getElementById('retail-finder-form').style.display =
-            'none'
-          document.getElementById('retailerName').innerText = retailerName;
-          document.getElementById('thank-you').style.display = 'block';
-      
-          window.scrollTo(0, 0);
+          window.location.href = "/thank-you-appointment/?name=" + retailerName;
         })
         .catch((error) => {
           alert(error);

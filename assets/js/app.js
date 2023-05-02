@@ -85,6 +85,11 @@ const customClasses = {
     'pages\\custom\\page\\request-event-appointment': () => import('./theme/BP/request-event-appointment'), // Windows
     'pages/custom/page/custom-retail-finder': () => import('./theme/BP/request-appointment'), // Mac/Linux
     'pages\\custom\\page\\custom-retail-finder': () => import('./theme/BP/request-appointment'), // Windows
+    'pages/custom/page/thank-you-appointment': () => import('./theme/BP/thank-you'), // Mac/Linux
+    'pages\\custom\\page\\thank-you-appointment': () => import('./theme/BP/thank-you'), // Windows
+    'pages/custom/page/thank-you-events': () => import('./theme/BP/thank-you'), // Mac/Linux
+    'pages\\custom\\page\\thank-you-events': () => import('./theme/BP/thank-you'), // Windows
+    
 };
 
 /**

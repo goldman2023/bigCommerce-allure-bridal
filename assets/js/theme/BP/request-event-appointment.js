@@ -218,10 +218,7 @@ export default class RequestEventAppointment extends PageManager {
               throw new Error(data.error.message)
             })
           }
-          document.getElementById('event-appointment-form').style.display ='none';
-          document.getElementById('eventName').innerText = eventName;
-          document.getElementById('thank-you').style.display = 'block';
-          window.scrollTo(0, 0);
+          window.location.href = "/thank-you-events/?name=" + eventName;
         })
         .catch((error) => {
           alert(error);

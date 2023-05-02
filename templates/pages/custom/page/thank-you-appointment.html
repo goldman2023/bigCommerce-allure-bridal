@@ -1,22 +1,6 @@
 {{#partial "page"}}
 
-{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
-
 <section class="page pages-custom-appointment-submission-form">
-    {{#unless theme_settings.hide_page_heading }}
-        <h1 class="page-heading">{{ page.title }}</h1>
-    {{/unless}}
-
-    {{#if page.sub_pages}}
-    <nav class="navBar navBar--sub">
-        <ul class="navBar-section account-navigation">
-        {{#each page.sub_pages}}
-            <li class="navBar-item"><a class="navBar-action" href="{{url}}">{{title}}</a></li>
-        {{/each}}
-        </ul>
-    </nav>
-    {{/if}}
-
     {{{region name="page_builder_content"}}}
 
     <div class="page-content page-content--centered">
@@ -24,7 +8,7 @@
             {{> components/page/rss_feed}}
         {{else}}
             <div id="thank-you">
-                <!-- <h2 class="header-title">Thank You For Requesting An Appointment!</h2> -->
+                <h2 class="header-title">Thank You For Requesting An Appointment!</h2>
                 <p>
                     <span>Someone from <span id="retailerName"></span> will be in touch with you soon.</span>
                 </p>
